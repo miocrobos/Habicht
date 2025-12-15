@@ -10,11 +10,11 @@ export default function Home() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [showAuthPrompt, setShowAuthPrompt] = useState(false)
 
   const handleProtectedNavigation = (path: string) => {
     if (!session) {
-      setShowAuthPrompt(true)
+      // Redirect to register page with return URL
+      router.push(`/auth/register?returnUrl=${encodeURIComponent(path)}`)
     } else {
       router.push(path)
     }
@@ -63,7 +63,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Dynamic Background */}
-      <section className="relative h-[95vh] min-h-[700px] overflow-hidden">
+      <section className="relative h-screen min-h-[700px] max-h-[900px] overflow-hidden mb-0">
         {/* Animated Background */}
         <div className="absolute inset-0">
           {/* Base gradient */}
@@ -235,15 +235,28 @@ export default function Home() {
                     Alle Spieler durchsuchen
                   </span>
                 </button>
-                <Link
-                  href="/auth/register"
-                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl border-2 border-white"
-                >
-                  <span className="flex items-center gap-2 justify-center">
-                    <Star className="w-5 h-5" />
-                    Jetzt registrieren
-                  </span>
-                </Link>
+                {!session && (
+                  <>
+                    <Link
+                      href="/auth/login"
+                      className="bg-white text-gray-900 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl border-2 border-gray-300"
+                    >
+                      <span className="flex items-center gap-2 justify-center">
+                        <LogIn className="w-5 h-5" />
+                        Anmelden
+                      </span>
+                    </Link>
+                    <Link
+                      href="/auth/register"
+                      className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl border-2 border-white"
+                    >
+                      <span className="flex items-center gap-2 justify-center">
+                        <Star className="w-5 h-5" />
+                        Jetzt registrieren
+                      </span>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -273,9 +286,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Auth Prompt Modal */}
-      {showAuthPrompt && <AuthPromptModal onClose={() => setShowAuthPrompt(false)} />}
 
       {/* League Showcase Section */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">

@@ -94,22 +94,17 @@ export default function Header() {
             </Link>
             
             {session ? (
-              <div className="flex items-center space-x-4">
-                <Link href="/profile" className="text-gray-700 hover:text-swiss-red transition">
-                  <User className="w-5 h-5" />
-                </Link>
-                <button
-                  onClick={() => signOut()}
-                  className="text-gray-700 hover:text-swiss-red transition"
-                >
-                  Abmelden
-                </button>
-              </div>
+              <button
+                onClick={() => signOut()}
+                className="bg-swiss-red text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+              >
+                Abmelden
+              </button>
             ) : (
               <>
                 <Link 
                   href="/auth/login"
-                  className="text-gray-700 hover:text-swiss-red transition"
+                  className="text-gray-700 hover:text-swiss-red transition font-medium"
                 >
                   Anmelden
                 </Link>

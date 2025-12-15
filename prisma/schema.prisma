@@ -116,6 +116,8 @@ model Player {
   gender            Gender
   height            Float       // in cm
   weight            Float?      // in kg
+  blockReach        Float?      // in cm
+  spikeReach        Float?      // in cm
   nationality       String      @default("Swiss")
   canton            Canton
   city              String
@@ -144,10 +146,14 @@ model Player {
   bio               String?     @db.Text
   profileImage      String      // Required profile picture
   coverImage        String?     // Optional backdrop/banner image
+  achievements      String[]    @default([])        // Notable achievements list
   
-  // Visibility
+  // Visibility & Status
   isPublic          Boolean     @default(true)
   lookingForOffers  Boolean     @default(true)
+  isActive          Boolean     @default(true)      // Currently active player
+  lookingForClub    Boolean     @default(false)     // Actively seeking new club
+  isPlaceholder     Boolean     @default(false)     // Imported from Volleybox, can be claimed/removed
   
   // Stats
   views             Int         @default(0)
@@ -159,7 +165,7 @@ model Player {
   stats             PlayerStats[]
   videos            Video[]
   clubHistory       ClubHistory[]
-  achievements      Achievement[]
+  achievementRecords Achievement[]
   recruitmentNotes  RecruitmentNote[]
   favorites         Favorite[]
   teammates         Teammate[]  @relation("PlayerTeammates")
@@ -174,12 +180,12 @@ model Club {
   name              String
   shortName         String?
   logo              String?
-  websiteUrl        String?
+  website           String?
   swissVolleyId     String?     @unique
   
   // Location
   canton            Canton
-  city              String
+  town              String
   
   // Contact
   email             String?
@@ -187,7 +193,8 @@ model Club {
   
   // Info
   league            League
-  foundedYear       Int?
+  founded           Int?        // founding year
+  description       String?     @db.Text
   colors            String[]
   
   createdAt         DateTime    @default(now())

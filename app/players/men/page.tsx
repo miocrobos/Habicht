@@ -360,4 +360,3 @@ function PlayerCard({ player }: { player: any }) {
     </div>
   )
 }
-}

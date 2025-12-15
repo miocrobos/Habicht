@@ -201,12 +201,25 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
             <div className="flex-grow">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between">
                 <div>
-                  <h1 className="text-3xl font-bold text-gray-900">
+                  <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
                     {player.firstName} {player.lastName}
+                    {player.isPlaceholder && (
+                      <span className="px-3 py-1 bg-orange-100 text-orange-700 text-sm font-medium rounded-full border border-orange-300">
+                        ⚠️ Platzhalter
+                      </span>
+                    )}
                   </h1>
                   <p className="text-xl text-gray-600 mt-1">
                     {player.position.replace('_', ' ')} • #{player.jerseyNumber}
                   </p>
+                  {player.isPlaceholder && (
+                    <div className="mt-2 px-3 py-2 bg-orange-50 border border-orange-200 rounded-lg text-sm text-orange-800">
+                      <strong>📌 Hinweis:</strong> Dieses Profil wurde automatisch von Volleybox importiert. 
+                      <button className="ml-2 underline font-medium hover:text-orange-900">
+                        Profil beanspruchen →
+                      </button>
+                    </div>
+                  )}
                   <div className="flex items-center gap-4 mt-3 text-sm text-gray-600">
                     <span className="flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
@@ -220,16 +233,24 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 </div>
 
                 {/* Quick Stats */}
-                <div className="mt-4 md:mt-0 flex gap-6 text-center">
-                  <div>
+                <div className="mt-4 md:mt-0 flex gap-4 text-center">
+                  <div className="bg-gray-50 px-4 py-2 rounded-lg">
                     <div className="text-2xl font-bold text-habicht-600">{player.height}</div>
-                    <div className="text-xs text-gray-600">cm</div>
+                    <div className="text-xs text-gray-600">Grösse cm</div>
                   </div>
-                  <div>
-                    <div className="text-2xl font-bold text-habicht-600">{player.stats.points}</div>
-                    <div className="text-xs text-gray-600">Points</div>
-                  </div>
-                  <div>
+                  {player.blockReach && (
+                    <div className="bg-gray-50 px-4 py-2 rounded-lg">
+                      <div className="text-2xl font-bold text-blue-600">{player.blockReach}</div>
+                      <div className="text-xs text-gray-600">Block cm</div>
+                    </div>
+                  )}
+                  {player.spikeReach && (
+                    <div className="bg-gray-50 px-4 py-2 rounded-lg">
+                      <div className="text-2xl font-bold text-red-600">{player.spikeReach}</div>
+                      <div className="text-xs text-gray-600">Angriff cm</div>
+                    </div>
+                  )}
+                  <div className="bg-gray-50 px-4 py-2 rounded-lg">
                     <div className="text-2xl font-bold text-habicht-600">{player.currentLeague}</div>
                     <div className="text-xs text-gray-600">Liga</div>
                   </div>
@@ -392,20 +413,35 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">Achievements</h3>
-                  <div className="space-y-3">
-                    {player.achievements.map((achievement, index) => (
-                      <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                        <Award className="w-5 h-5 text-yellow-500 flex-shrink-0 mt-0.5" />
-                        <div>
-                          <div className="font-semibold">{achievement.title}</div>
-                          <div className="text-sm text-gray-600">
-                            {new Date(achievement.date).toLocaleDateString('de-CH')}
+                  <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                    <Award className="w-5 h-5 text-yellow-500" />
+                    Erfolge & Auszeichnungen
+                  </h3>
+                  {player.achievements && player.achievements.length > 0 ? (
+                    <div className="space-y-2">
+                      {player.achievements.map((achievement, index) => (
+                        <div key={index} className="flex items-start gap-3 p-3 bg-gradient-to-r from-yellow-50 to-amber-50 border border-yellow-200 rounded-lg">
+                          <Award className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+                          <div className="flex-1">
+                            {typeof achievement === 'string' ? (
+                              <div className="font-medium text-gray-900">{achievement}</div>
+                            ) : (
+                              <>
+                                <div className="font-semibold text-gray-900">{achievement.title}</div>
+                                <div className="text-sm text-gray-600">
+                                  {new Date(achievement.date).toLocaleDateString('de-CH')}
+                                </div>
+                              </>
+                            )}
                           </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-gray-500 italic p-4 bg-gray-50 rounded-lg">
+                      Keine Erfolge eingetragen
+                    </div>
+                  )}
                 </div>
               </div>
             )}

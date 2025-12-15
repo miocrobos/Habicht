@@ -195,12 +195,12 @@ export default function Home() {
                 </p>
               </div>
               
-              <p className="text-lg md:text-xl mb-12 text-gray-200 max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-3xl mx-auto">
                 Die moderne Scouting-Plattform für Schweizer Volleyball. Entdecke Talente von NLA bis 2. Liga – Herren und Damen.
               </p>
 
               {/* Main CTA Buttons */}
-              <div className="flex flex-wrap gap-4 justify-center mb-12">
+              <div className="flex flex-wrap gap-4 justify-center mb-8">
                 <button
                   onClick={() => handleProtectedNavigation('/players/men')}
                   className="group relative bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl overflow-hidden"

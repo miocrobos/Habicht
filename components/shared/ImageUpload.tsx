@@ -88,13 +88,13 @@ export default function ImageUpload({
 
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700">
-        {label} {required && <span className="text-red-600">*</span>}
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+        {label} {required && <span className="text-red-600 dark:text-red-400">*</span>}
       </label>
 
       {value ? (
         <div className="relative group">
-          <div className={`w-full ${aspectClasses} rounded-xl overflow-hidden border-2 border-gray-200`}>
+          <div className={`w-full ${aspectClasses} rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700`}>
             <img
               src={value}
               alt={label}
@@ -104,7 +104,7 @@ export default function ImageUpload({
           <button
             type="button"
             onClick={handleRemove}
-            className="absolute top-2 right-2 p-2 bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700"
+            className="absolute top-2 right-2 p-2 bg-red-600 dark:bg-red-700 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 dark:hover:bg-red-800"
           >
             <X className="w-4 h-4" />
           </button>
@@ -113,7 +113,7 @@ export default function ImageUpload({
             onClick={handleClick}
             className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
           >
-            <span className="bg-white px-4 py-2 rounded-lg font-medium text-gray-900 shadow-lg">
+            <span className="bg-white dark:bg-gray-800 px-4 py-2 rounded-lg font-medium text-gray-900 dark:text-gray-100 shadow-lg">
               Bild ändern
             </span>
           </button>
@@ -130,16 +130,16 @@ export default function ImageUpload({
             cursor-pointer transition-all
             flex flex-col items-center justify-center
             ${isDragging 
-              ? 'border-red-500 bg-red-50' 
-              : 'border-gray-300 hover:border-red-400 hover:bg-gray-50'
+              ? 'border-red-500 dark:border-red-400 bg-red-50 dark:bg-red-950/20' 
+              : 'border-gray-300 dark:border-gray-600 hover:border-red-400 dark:hover:border-red-500 hover:bg-gray-50 dark:hover:bg-gray-800/30'
             }
           `}
         >
-          <ImageIcon className={`w-12 h-12 mb-3 ${isDragging ? 'text-red-500' : 'text-gray-400'}`} />
-          <p className="text-sm font-medium text-gray-700 mb-1">
+          <ImageIcon className={`w-12 h-12 mb-3 ${isDragging ? 'text-red-500 dark:text-red-400' : 'text-gray-400 dark:text-gray-500'}`} />
+          <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             {isDragging ? 'Bild hier ablegen' : 'Klicke oder ziehe ein Bild hierher'}
           </p>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-gray-500 dark:text-gray-400">
             PNG, JPG oder WEBP (max. 5MB)
           </p>
         </div>
@@ -154,11 +154,11 @@ export default function ImageUpload({
       />
 
       {error && (
-        <p className="text-sm text-red-600">{error}</p>
+        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
       )}
 
       {helpText && !error && (
-        <p className="text-xs text-gray-500">{helpText}</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">{helpText}</p>
       )}
     </div>
   )

@@ -8,6 +8,53 @@ interface ClubBadgeProps {
   showName?: boolean
 }
 
+const EagleLogo = ({ size }: { size: 'sm' | 'md' | 'lg' }) => {
+  const svgSizes = {
+    sm: 'w-6 h-6',
+    md: 'w-8 h-8',
+    lg: 'w-12 h-12',
+  }
+
+  return (
+    <svg viewBox="0 0 100 100" className={svgSizes[size]} fill="white">
+      {/* Eagle body */}
+      <ellipse cx="50" cy="60" rx="18" ry="25" fill="white"/>
+      
+      {/* Eagle head */}
+      <circle cx="50" cy="35" r="12" fill="white"/>
+      
+      {/* Eagle beak */}
+      <path d="M 58 35 L 65 35 L 60 38 Z" fill="#FFA500"/>
+      
+      {/* Eagle eye */}
+      <circle cx="54" cy="33" r="2" fill="#000"/>
+      
+      {/* Left wing */}
+      <path d="M 32 55 Q 20 50 15 45 Q 18 48 22 52 Q 28 58 32 60 Z" fill="white"/>
+      <path d="M 28 58 Q 18 52 12 48 Q 15 50 20 54 Q 25 60 28 62 Z" fill="white" opacity="0.8"/>
+      <path d="M 25 62 Q 16 58 10 53 Q 13 55 18 59 Q 22 64 25 66 Z" fill="white" opacity="0.6"/>
+      
+      {/* Right wing */}
+      <path d="M 68 55 Q 80 50 85 45 Q 82 48 78 52 Q 72 58 68 60 Z" fill="white"/>
+      <path d="M 72 58 Q 82 52 88 48 Q 85 50 80 54 Q 75 60 72 62 Z" fill="white" opacity="0.8"/>
+      <path d="M 75 62 Q 84 58 90 53 Q 87 55 82 59 Q 78 64 75 66 Z" fill="white" opacity="0.6"/>
+      
+      {/* Tail feathers */}
+      <path d="M 45 82 Q 42 88 40 92 L 43 85 Z" fill="white" opacity="0.7"/>
+      <path d="M 50 85 Q 50 92 50 95 L 50 87 Z" fill="white" opacity="0.8"/>
+      <path d="M 55 82 Q 58 88 60 92 L 57 85 Z" fill="white" opacity="0.7"/>
+      
+      {/* Legs */}
+      <rect x="46" y="80" width="2" height="8" fill="#FFA500"/>
+      <rect x="52" y="80" width="2" height="8" fill="#FFA500"/>
+      
+      {/* Talons */}
+      <path d="M 45 88 L 43 90 M 46 88 L 46 91 M 47 88 L 49 90" stroke="#FFA500" strokeWidth="1" fill="none"/>
+      <path d="M 53 88 L 51 90 M 54 88 L 54 91 M 55 88 L 57 90" stroke="#FFA500" strokeWidth="1" fill="none"/>
+    </svg>
+  )
+}
+
 export default function ClubBadge({ clubName, size = 'md', showName = false }: ClubBadgeProps) {
   const clubInfo = getClubInfo(clubName)
   
@@ -23,8 +70,8 @@ export default function ClubBadge({ clubName, size = 'md', showName = false }: C
     lg: 'text-base',
   }
 
-  // Use volleyball icon if no club info found
-  const displayLogo = clubInfo.logo || '🏐'
+  // Use eagle logo if no club info found
+  const hasCustomLogo = clubInfo.logo && clubInfo.logo !== '🏐'
   const bgColor = clubInfo.colors?.primary || '#FF0000'
   const borderColor = clubInfo.colors?.secondary || '#FFFFFF'
 
@@ -38,7 +85,11 @@ export default function ClubBadge({ clubName, size = 'md', showName = false }: C
         }}
         title={clubName}
       >
-        <span className="filter drop-shadow-lg">{displayLogo}</span>
+        {hasCustomLogo ? (
+          <span className="filter drop-shadow-lg">{clubInfo.logo}</span>
+        ) : (
+          <EagleLogo size={size} />
+        )}
       </div>
       {showName && (
         <div>

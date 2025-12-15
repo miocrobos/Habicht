@@ -139,8 +139,6 @@ export default function ClubsPage() {
                     </span>
                   </div>
                   
-                  {club.description && <p className="text-gray-700 mb-4">{club.description}</p>}
-                  
                   <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
                     <span className="font-medium">{club.playerCount}</span>
                     <span>Spieler registriert</span>

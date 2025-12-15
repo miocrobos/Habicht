@@ -342,9 +342,13 @@ export default function Home() {
             <h3 className="text-3xl font-bold text-center mb-8">🇨🇭 Alle 26 Kantone</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 text-center">
               {['ZH', 'BE', 'VD', 'AG', 'SG', 'GE', 'LU', 'TG', 'TI', 'VS', 'BL', 'SO', 'FR', 'BS', 'GR', 'NE', 'ZG', 'SH', 'UR', 'SZ', 'JU', 'AR', 'AI', 'NW', 'GL', 'OW'].map(canton => (
-                <div key={canton} className="p-3 bg-gray-50 rounded-lg hover:bg-red-50 hover:shadow-md transition cursor-pointer">
+                <Link 
+                  key={canton} 
+                  href={`/clubs?canton=${canton}`}
+                  className="p-3 bg-gray-50 rounded-lg hover:bg-red-50 hover:shadow-md transition cursor-pointer"
+                >
                   <div className="text-2xl font-bold text-gray-800">{canton}</div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

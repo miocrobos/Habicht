@@ -1,8 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Filter } from 'lucide-react'
 import CantonFlag from '@/components/shared/CantonFlag'
+import Link from 'next/link'
+import axios from 'axios'
 
 const CANTONS = [
   'Alle',
@@ -11,69 +14,42 @@ const CANTONS = [
   'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH'
 ]
 
-const LEAGUES = ['Alle', 'NLA', 'NLB', '1. Liga', '2. Liga']
+const LEAGUES = ['Alle', 'NLA', 'NLB', '1. Liga', '2. Liga', '3. Liga', '4. Liga', 'U23', 'U19', 'U17']
 
 export default function ClubsPage() {
-  const [selectedCanton, setSelectedCanton] = useState('Alle')
-  const [selectedLeague, setSelectedLeague] = useState('Alle')
+  const searchParams = useSearchParams()
+  const cantonFromUrl = searchParams.get('canton')
   
-  const clubs = [
-    {
-      name: 'Volley Amriswil',
-      league: 'NLA',
-      canton: 'TG',
-      website: 'https://www.volley-amriswil.ch',
-      description: 'Top club in Nationalliga A'
-    },
-    {
-      name: 'Volley Schönenwerd',
-      league: 'NLA',
-      canton: 'SO',
-      website: 'https://www.volleyschoenenwerd.ch',
-      description: 'Elite club with strong youth program'
-    },
-    {
-      name: 'VC Kanti Schaffhausen',
-      league: 'NLB',
-      canton: 'SH',
-      website: 'https://www.vckanti.ch',
-      description: 'School-based volleyball excellence'
-    },
-    {
-      name: 'Volley Toggenburg',
-      league: 'NLA',
-      canton: 'SG',
-      website: 'https://www.volley-toggenburg.ch',
-      description: 'Regional powerhouse'
-    },
-    {
-      name: "SM'Aesch Pfeffingen",
-      league: 'NLA',
-      canton: 'BL',
-      website: 'https://www.smvolley.ch',
-      description: 'Championship contender'
-    },
-    {
-      name: 'VBC Cheseaux',
-      league: 'NLA',
-      canton: 'VD',
-      website: 'https://www.vbc-cheseaux.ch',
-      description: 'Romande volleyball leader'
-    },
-    {
-      name: 'Volley Alpnach',
-      league: 'NLB',
-      canton: 'OW',
-      website: 'https://www.volley-alpnach.ch',
-      description: 'Central Switzerland representative'
-    },
-  ]
+  const [selectedCanton, setSelectedCanton] = useState(cantonFromUrl || 'Alle')
+  const [selectedLeague, setSelectedLeague] = useState('Alle')
+  const [clubs, setClubs] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const filteredClubs = clubs.filter(club => {
-    const matchesCanton = selectedCanton === 'Alle' || club.canton === selectedCanton
-    const matchesLeague = selectedLeague === 'Alle' || club.league === selectedLeague
-    return matchesCanton && matchesLeague
-  })
+  useEffect(() => {
+    if (cantonFromUrl) {
+      setSelectedCanton(cantonFromUrl)
+    }
+  }, [cantonFromUrl])
+
+  useEffect(() => {
+    loadClubs()
+  }, [selectedCanton, selectedLeague])
+
+  const loadClubs = async () => {
+    try {
+      setLoading(true)
+      const params = new URLSearchParams()
+      if (selectedCanton !== 'Alle') params.append('canton', selectedCanton)
+      if (selectedLeague !== 'Alle') params.append('league', selectedLeague)
+      
+      const response = await axios.get(`/api/clubs?${params}`)
+      setClubs(response.data.clubs)
+    } catch (error) {
+      console.error('Error loading clubs:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -125,45 +101,69 @@ export default function ClubsPage() {
           </div>
 
           <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
-            <span className="font-medium">{filteredClubs.length}</span>
-            <span>Club{filteredClubs.length !== 1 ? 's' : ''} gefunden</span>
+            <span className="font-medium">{clubs.length}</span>
+            <span>Club{clubs.length !== 1 ? 's' : ''} gefunden</span>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredClubs.map((club, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">{club.name}</h3>
-                  <div className="flex items-center gap-2">
-                    <CantonFlag canton={club.canton} size="sm" />
-                    <p className="text-sm text-gray-600">{club.canton}</p>
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+            <p className="mt-4 text-gray-600">Lade Clubs...</p>
+          </div>
+        ) : (
+          <>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {clubs.map((club: any) => (
+                <div key={club.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-1">{club.name}</h3>
+                      <div className="flex items-center gap-2">
+                        <CantonFlag canton={club.canton} size="sm" />
+                        <p className="text-sm text-gray-600">{club.town}, {club.canton}</p>
+                      </div>
+                    </div>
+                    <span className="bg-habicht-100 text-habicht-700 px-3 py-1 rounded-full text-sm font-medium">
+                      {club.leagueDisplay}
+                    </span>
+                  </div>
+                  
+                  {club.description && <p className="text-gray-700 mb-4">{club.description}</p>}
+                  
+                  <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
+                    <span className="font-medium">{club.playerCount}</span>
+                    <span>Spieler registriert</span>
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    {club.website && (
+                      <a
+                        href={club.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block bg-habicht-600 text-white px-4 py-2 rounded-lg hover:bg-habicht-700 transition text-sm font-medium"
+                      >
+                        Website →
+                      </a>
+                    )}
+                    <Link
+                      href={`/players?club=${club.name}`}
+                      className="inline-block bg-gray-200 text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-300 transition text-sm font-medium"
+                    >
+                      Spieler →
+                    </Link>
                   </div>
                 </div>
-                <span className="bg-habicht-100 text-habicht-700 px-3 py-1 rounded-full text-sm font-medium">
-                  {club.league}
-                </span>
-              </div>
-              
-              <p className="text-gray-700 mb-4">{club.description}</p>
-              
-              <a
-                href={club.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-habicht-600 text-white px-4 py-2 rounded-lg hover:bg-habicht-700 transition text-sm font-medium"
-              >
-                Club Website →
-              </a>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {filteredClubs.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Keine Clubs gefunden. Bitte passe deine Filter an.</p>
-          </div>
+            {clubs.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-gray-500 text-lg">Keine Clubs gefunden. Bitte passe deine Filter an.</p>
+              </div>
+            )}
+          </>
         )}
 
         <div className="mt-12 bg-white rounded-lg shadow-md p-8">

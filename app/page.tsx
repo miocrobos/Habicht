@@ -1,36 +1,55 @@
 'use client'
 
 import Link from 'next/link'
-import { Search, TrendingUp, Users, Video, Award, MapPin, Star, Zap } from 'lucide-react'
+import { Search, TrendingUp, Users, Video, Award, MapPin, Star, Zap, LogIn, UserPlus } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const { data: session, status } = useSession()
+  const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [showAuthPrompt, setShowAuthPrompt] = useState(false)
+
+  const handleProtectedNavigation = (path: string) => {
+    if (!session) {
+      setShowAuthPrompt(true)
+    } else {
+      router.push(path)
+    }
+  }
   
   const slides = [
     {
-      title: "NLA Herren",
+      title: "NLA Herren & Damen",
       subtitle: "Schweizer Spitzenvolleyball",
       color: "from-blue-900/90 to-blue-700/90",
       emoji: "🏐"
     },
     {
-      title: "NLA Damen",
-      subtitle: "Power und Präzision",
-      color: "from-pink-900/90 to-pink-700/90",
+      title: "NLB",
+      subtitle: "Der Weg nach oben",
+      color: "from-indigo-900/90 to-indigo-700/90",
       emoji: "⚡"
     },
     {
-      title: "NLB Herren & Damen",
-      subtitle: "Der Weg nach oben",
-      color: "from-indigo-900/90 to-indigo-700/90",
+      title: "1. Liga",
+      subtitle: "Regionale Spitze",
+      color: "from-purple-900/90 to-purple-700/90",
       emoji: "🎯"
     },
     {
-      title: "1. & 2. Liga",
-      subtitle: "Talente von morgen",
+      title: "2. & 3. Liga",
+      subtitle: "Aufstrebende Talente",
       color: "from-red-900/90 to-red-700/90",
       emoji: "⭐"
+    },
+    {
+      title: "4. Liga",
+      subtitle: "Basis und Nachwuchs",
+      color: "from-green-900/90 to-green-700/90",
+      emoji: "🌱"
     }
   ]
 
@@ -77,8 +96,8 @@ export default function Home() {
               {/* Hawk Logo with Animation */}
               <div className="mb-8 flex justify-center animate-bounce-slow">
                 <div className="relative w-32 h-32 md:w-40 md:h-40">
-                  <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl transform hover:scale-110 transition-transform duration-300">
-                    {/* Red circular background with glow */}
+                  <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                    {/* Advanced filters for depth and glow */}
                     <defs>
                       <filter id="glow">
                         <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
@@ -87,37 +106,74 @@ export default function Home() {
                           <feMergeNode in="SourceGraphic"/>
                         </feMerge>
                       </filter>
+                      <radialGradient id="redGradient" cx="50%" cy="30%">
+                        <stop offset="0%" stopColor="#FF0000" />
+                        <stop offset="100%" stopColor="#CC0000" />
+                      </radialGradient>
+                      <linearGradient id="wingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FFFFFF" />
+                        <stop offset="100%" stopColor="#E8E8E8" />
+                      </linearGradient>
+                      <linearGradient id="beakGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FFD700" />
+                        <stop offset="100%" stopColor="#FFA500" />
+                      </linearGradient>
                     </defs>
                     
-                    <circle cx="50" cy="50" r="48" fill="#FF0000" filter="url(#glow)"/>
+                    {/* Red circular background with gradient */}
+                    <circle cx="50" cy="50" r="48" fill="url(#redGradient)" filter="url(#glow)"/>
                     
-                    {/* White hawk silhouette */}
-                    <path d="M 50 30 Q 45 35 45 40 L 45 50 Q 45 55 50 58 Q 55 55 55 50 L 55 40 Q 55 35 50 30 Z" 
-                          fill="white" stroke="white" strokeWidth="1"/>
+                    {/* Hawk head - more angular and fierce */}
+                    <path d="M 50 22 L 54 28 L 54 36 Q 54 42 50 46 Q 46 42 46 36 L 46 28 Z" 
+                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
                     
-                    {/* Sharp golden beak */}
-                    <path d="M 50 30 L 42 28 L 50 35 Z" fill="#FFD700" stroke="#FFA500" strokeWidth="0.5"/>
+                    {/* Sharp, hooked golden beak */}
+                    <path d="M 50 22 L 40 20 Q 38 22 40 24 L 48 28 Z" 
+                          fill="url(#beakGradient)" stroke="#CC8800" strokeWidth="0.5"/>
                     
-                    {/* Left wing spread */}
-                    <path d="M 45 50 Q 30 45 25 55 Q 28 58 35 55 Q 40 53 45 52 Z" 
-                          fill="white" stroke="white" strokeWidth="1"/>
+                    {/* Fierce eye with highlight */}
+                    <ellipse cx="48" cy="32" rx="2.5" ry="3" fill="#CC0000"/>
+                    <circle cx="48.5" cy="31" r="1" fill="#FFFF00"/>
+                    <circle cx="49" cy="30.5" r="0.4" fill="white"/>
                     
-                    {/* Right wing spread */}
-                    <path d="M 55 50 Q 70 45 75 55 Q 72 58 65 55 Q 60 53 55 52 Z" 
-                          fill="white" stroke="white" strokeWidth="1"/>
+                    {/* Neck and body - more muscular */}
+                    <path d="M 46 36 L 44 44 Q 44 48 46 50 L 50 52 L 54 50 Q 56 48 56 44 L 54 36 Q 54 40 50 42 Q 46 40 46 36 Z"
+                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
                     
-                    {/* Tail feathers */}
-                    <path d="M 48 58 L 45 70 L 48 68 Z" fill="white" opacity="0.9"/>
-                    <path d="M 50 58 L 50 72 L 50 68 Z" fill="white" opacity="0.9"/>
-                    <path d="M 52 58 L 55 70 L 52 68 Z" fill="white" opacity="0.9"/>
+                    {/* Left wing - dramatic spread with feather details */}
+                    <path d="M 46 48 Q 35 42 22 48 Q 20 50 22 54 Q 25 58 30 57 Q 36 55 42 52 Z" 
+                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
+                    <path d="M 40 50 Q 32 48 25 50 Q 23 52 25 54 Q 28 56 33 54 Z" 
+                          fill="white" opacity="0.6"/>
+                    <path d="M 35 51 Q 30 50 26 52" stroke="#CCCCCC" strokeWidth="0.5" fill="none"/>
                     
-                    {/* Sharp eye */}
-                    <circle cx="47" cy="38" r="2" fill="#FF0000"/>
-                    <circle cx="47" cy="38" r="1" fill="white"/>
+                    {/* Right wing - dramatic spread with feather details */}
+                    <path d="M 54 48 Q 65 42 78 48 Q 80 50 78 54 Q 75 58 70 57 Q 64 55 58 52 Z" 
+                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
+                    <path d="M 60 50 Q 68 48 75 50 Q 77 52 75 54 Q 72 56 67 54 Z" 
+                          fill="white" opacity="0.6"/>
+                    <path d="M 65 51 Q 70 50 74 52" stroke="#CCCCCC" strokeWidth="0.5" fill="none"/>
                     
-                    {/* Swiss cross on chest */}
-                    <rect x="48" y="48" width="4" height="2" fill="#FF0000"/>
-                    <rect x="49" y="47" width="2" height="4" fill="#FF0000"/>
+                    {/* Tail feathers - more dramatic and defined */}
+                    <path d="M 48 52 L 44 68 Q 44 70 46 69 L 49 54 Z" 
+                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
+                    <path d="M 50 52 L 48 72 Q 48 74 50 74 Q 52 74 52 72 L 52 54 Z" 
+                          fill="white" stroke="#CCCCCC" strokeWidth="0.5"/>
+                    <path d="M 52 52 L 56 68 Q 56 70 54 69 L 51 54 Z" 
+                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
+                    
+                    {/* Talons - sharp and menacing */}
+                    <path d="M 46 50 L 44 56 L 43 58" stroke="#FFA500" strokeWidth="1" strokeLinecap="round"/>
+                    <path d="M 48 51 L 47 57 L 46 59" stroke="#FFA500" strokeWidth="1" strokeLinecap="round"/>
+                    <path d="M 52 51 L 53 57 L 54 59" stroke="#FFA500" strokeWidth="1" strokeLinecap="round"/>
+                    <path d="M 54 50 L 56 56 L 57 58" stroke="#FFA500" strokeWidth="1" strokeLinecap="round"/>
+                    
+                    {/* Swiss cross on chest - more prominent */}
+                    <rect x="47.5" y="46" width="5" height="2.5" fill="#FF0000" rx="0.3"/>
+                    <rect x="48.75" y="44.75" width="2.5" height="5" fill="#FF0000" rx="0.3"/>
+                    
+                    {/* Chest highlight for depth */}
+                    <ellipse cx="50" cy="47" rx="3" ry="2" fill="white" opacity="0.2"/>
                   </svg>
                 </div>
               </div>
@@ -145,8 +201,8 @@ export default function Home() {
 
               {/* Main CTA Buttons */}
               <div className="flex flex-wrap gap-4 justify-center mb-12">
-                <Link
-                  href="/players/men"
+                <button
+                  onClick={() => handleProtectedNavigation('/players/men')}
                   className="group relative bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-10 py-5 rounded-2xl text-xl font-bold transition-all transform hover:scale-105 shadow-2xl overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-3">
@@ -154,10 +210,10 @@ export default function Home() {
                     Herren Volleyball
                   </span>
                   <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                </Link>
+                </button>
                 
-                <Link
-                  href="/players/women"
+                <button
+                  onClick={() => handleProtectedNavigation('/players/women')}
                   className="group relative bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white px-10 py-5 rounded-2xl text-xl font-bold transition-all transform hover:scale-105 shadow-2xl overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-3">
@@ -165,20 +221,20 @@ export default function Home() {
                     Damen Volleyball
                   </span>
                   <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                </Link>
+                </button>
               </div>
 
               {/* Secondary Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/players"
+                <button
+                  onClick={() => handleProtectedNavigation('/players')}
                   className="bg-white text-gray-900 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl"
                 >
                   <span className="flex items-center gap-2 justify-center">
                     <Search className="w-5 h-5" />
                     Alle Spieler durchsuchen
                   </span>
-                </Link>
+                </button>
                 <Link
                   href="/auth/register"
                   className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl border-2 border-white"
@@ -218,17 +274,20 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Auth Prompt Modal */}
+      {showAuthPrompt && <AuthPromptModal onClose={() => setShowAuthPrompt(false)} />}
+
       {/* League Showcase Section */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-gray-900 mb-4">Alle Ligen. Ein Ort.</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Von NLA Spitzenvolleyball bis zu aufstrebenden 2. Liga Talenten – entdecke Spieler aus der ganzen Schweiz.
+              Von NLA Spitzenvolleyball bis zur 4. Liga – entdecke Spieler aus der ganzen Schweiz.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <LeagueCard
               league="NLA"
               description="Nationalliga A"
@@ -256,6 +315,23 @@ export default function Home() {
               color="from-pink-600 to-pink-700"
               emoji="⭐"
               playerCount="400+"
+            />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-16">
+            <LeagueCard
+              league="3. Liga"
+              description="Dritte Liga"
+              color="from-green-600 to-green-700"
+              emoji="🌟"
+              playerCount="500+"
+            />
+            <LeagueCard
+              league="4. Liga"
+              description="Vierte Liga"
+              color="from-teal-600 to-teal-700"
+              emoji="🌱"
+              playerCount="600+"
             />
           </div>
 
@@ -467,6 +543,50 @@ function FeatureCard({ icon, title, description, color }: {
       </div>
       <h3 className="text-2xl font-bold mb-3 text-gray-900">{title}</h3>
       <p className="text-gray-600 leading-relaxed">{description}</p>
+    </div>
+  )
+}
+
+function AuthPromptModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={onClose}>
+      <div className="bg-white rounded-2xl p-8 max-w-md mx-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+        <div className="text-center">
+          <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <LogIn className="w-8 h-8 text-white" />
+          </div>
+          <h3 className="text-2xl font-bold text-gray-900 mb-3">Anmeldung erforderlich</h3>
+          <p className="text-gray-600 mb-6">
+            Bitte melde dich an oder registriere dich, um auf diese Seite zuzugreifen.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link
+              href="/auth/login"
+              className="flex-1 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold transition-all"
+            >
+              <span className="flex items-center justify-center gap-2">
+                <LogIn className="w-5 h-5" />
+                Anmelden
+              </span>
+            </Link>
+            <Link
+              href="/auth/register"
+              className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-900 px-6 py-3 rounded-xl font-bold transition-all"
+            >
+              <span className="flex items-center justify-center gap-2">
+                <UserPlus className="w-5 h-5" />
+                Registrieren
+              </span>
+            </Link>
+          </div>
+          <button
+            onClick={onClose}
+            className="mt-4 text-gray-500 hover:text-gray-700 font-medium"
+          >
+            Abbrechen
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

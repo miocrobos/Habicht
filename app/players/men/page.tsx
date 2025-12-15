@@ -87,6 +87,24 @@ export default function MenPlayersPage() {
               1. Liga
             </button>
             <button
+              onClick={() => handleFilterChange('league', 'SECOND_LEAGUE')}
+              className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition text-sm font-medium"
+            >
+              2. Liga
+            </button>
+            <button
+              onClick={() => handleFilterChange('league', 'THIRD_LEAGUE')}
+              className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition text-sm font-medium"
+            >
+              3. Liga
+            </button>
+            <button
+              onClick={() => handleFilterChange('league', 'FOURTH_LEAGUE')}
+              className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition text-sm font-medium"
+            >
+              4. Liga
+            </button>
+            <button
               onClick={() => handleFilterChange('league', '')}
               className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition text-sm font-medium"
             >
@@ -145,14 +163,32 @@ export default function MenPlayersPage() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
               >
                 <option value="">Alle</option>
-                <option value="ZH">Zürich</option>
-                <option value="BE">Bern</option>
-                <option value="VD">Vaud</option>
                 <option value="AG">Aargau</option>
-                <option value="SG">St. Gallen</option>
+                <option value="AI">Appenzell Innerrhoden</option>
+                <option value="AR">Appenzell Ausserrhoden</option>
+                <option value="BE">Bern</option>
+                <option value="BL">Basel-Landschaft</option>
+                <option value="BS">Basel-Stadt</option>
+                <option value="FR">Freiburg</option>
                 <option value="GE">Genève</option>
-                <option value="TG">Thurgau</option>
+                <option value="GL">Glarus</option>
+                <option value="GR">Graubünden</option>
+                <option value="JU">Jura</option>
+                <option value="LU">Luzern</option>
+                <option value="NE">Neuchâtel</option>
+                <option value="NW">Nidwalden</option>
+                <option value="OW">Obwalden</option>
+                <option value="SG">St. Gallen</option>
+                <option value="SH">Schaffhausen</option>
                 <option value="SO">Solothurn</option>
+                <option value="SZ">Schwyz</option>
+                <option value="TG">Thurgau</option>
+                <option value="TI">Ticino</option>
+                <option value="UR">Uri</option>
+                <option value="VD">Vaud</option>
+                <option value="VS">Valais</option>
+                <option value="ZG">Zug</option>
+                <option value="ZH">Zürich</option>
               </select>
             </div>
 
@@ -171,6 +207,8 @@ export default function MenPlayersPage() {
                 <option value="NLB">NLB</option>
                 <option value="FIRST_LEAGUE">1. Liga</option>
                 <option value="SECOND_LEAGUE">2. Liga</option>
+                <option value="THIRD_LEAGUE">3. Liga</option>
+                <option value="FOURTH_LEAGUE">4. Liga</option>
                 <option value="YOUTH_U19">U19</option>
                 <option value="YOUTH_U17">U17</option>
               </select>

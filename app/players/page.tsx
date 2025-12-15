@@ -233,17 +233,6 @@ function PlayerCard({ player }: { player: any }) {
                 </div>
               </div>
             </div>
-          )}  <div className="text-lg font-bold text-habicht-600">{player.graduationYear}</div>
-              <div className="text-xs text-gray-600">Jahr</div>
-            </div>
-          </div>
-
-          {/* Club */}
-          {player.currentClub && (
-            <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
-              <TrendingUp className="w-4 h-4" />
-              <span>{player.currentClub.name}</span>
-            </div>
           )}
 
           {/* Location */}

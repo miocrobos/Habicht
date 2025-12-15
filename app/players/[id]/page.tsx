@@ -114,21 +114,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     ],
     teammates: [
       {
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Cover Image with Canton Colors */}
-      <div 
-        className="relative h-64"
-        style={{
-          background: `linear-gradient(135deg, ${cantonInfo.colors.primary} 0%, ${cantonInfo.colors.secondary} 100%)`
-        }}
-      >
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        {/* Canton Flag Overlay */}
-        <div className="absolute top-4 right-4 z-10">
-          <CantonFlag canton={player.canton} size="lg" showName />
-        </div>
-      </div>on: '2023-2024',
+        id: '2',
+        firstName: 'Luca',
+        lastName: 'Weber',
+        position: 'SETTER',
+        jerseyNumber: 5,
+        season: '2023-2024',
         clubName: 'Volley Amriswil'
       },
       {
@@ -175,6 +166,22 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Cover Image with Canton Colors */}
+      <div 
+        className="h-48 relative"
+        style={{ 
+          background: `linear-gradient(135deg, ${cantonInfo.colors.primary} 0%, ${cantonInfo.colors.secondary} 100%)` 
+        }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <CantonFlag canton={player.canton} size="lg" showName />
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 pb-12">
+        {/* Profile Card */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="flex flex-col md:flex-row gap-6">
             {/* Profile Image */}
             <div className="flex-shrink-0">
               <div 
@@ -185,15 +192,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   className="w-full h-full flex items-center justify-center text-white text-4xl font-bold"
                   style={{ backgroundColor: cantonInfo.colors.primary }}
                 >
-                  {player.firstName[0]}{player.lastName[0]}
-                </div>
-              </div>
-            </div>Name="bg-white rounded-lg shadow-lg p-6">
-          <div className="flex flex-col md:flex-row gap-6">
-            {/* Profile Image */}
-            <div className="flex-shrink-0">
-              <div className="w-32 h-32 rounded-full bg-gray-300 border-4 border-white shadow-lg overflow-hidden">
-                <div className="w-full h-full bg-habicht-500 flex items-center justify-center text-white text-4xl font-bold">
                   {player.firstName[0]}{player.lastName[0]}
                 </div>
               </div>
@@ -230,7 +228,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   <div>
                     <div className="text-2xl font-bold text-habicht-600">{player.stats.points}</div>
                     <div className="text-xs text-gray-600">Points</div>
-                    <div className="text-xs text-gray-600">Points</div>
                   </div>
                   <div>
                     <div className="text-2xl font-bold text-habicht-600">{player.currentLeague}</div>
@@ -252,30 +249,23 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               )}
 
               {/* Current Club */}
-              <div className="mt-4 p-4 bg-gray-50 rounded-lg">een">
-                  <div className="flex items-center gap-3">
-                    <ClubBadge clubName={player.currentClub.name} size="md" />
-                    <div>
-                      <div className="text-sm text-gray-600">Aktueller Club</div>
-                      <div className="font-semibold">{player.currentClub.name}</div>
-                      <div className="text-sm text-gray-600">{player.currentLeague}</div>
-                    </div>
+              <div className="mt-4 p-4 bg-gray-50 rounded-lg flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <ClubBadge clubName={player.currentClub.name} size="md" />
+                  <div>
+                    <div className="text-sm text-gray-600">Aktueller Club</div>
+                    <div className="font-semibold">{player.currentClub.name}</div>
+                    <div className="text-sm text-gray-600">{player.currentLeague}</div>
                   </div>
-                  <a 
-                    href={player.currentClub.websiteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-habicht-600 hover:text-habicht-700"
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
                 </div>
-              </div>rel="noopener noreferrer"
-                    className="text-habicht-600 hover:text-habicht-700"
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                </div>
+                <a 
+                  href={player.currentClub.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-habicht-600 hover:text-habicht-700"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                </a>
               </div>
 
               {/* Social Media Links */}
@@ -342,8 +332,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               </TabButton>
               <TabButton 
                 active={activeTab === 'history'} 
-              <TabButton 
-                active={activeTab === 'history'} 
                 onClick={() => setActiveTab('history')}
               >
                 Karriere
@@ -361,7 +349,9 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 Coaches
               </TabButton>
             </nav>
-          </div>lassName="p-6">
+          </div>
+
+          <div className="p-6">
             {activeTab === 'overview' && (
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -391,16 +381,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       <span className="font-semibold">{player.schoolName}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Stufe:</span>
-                      <span className="font-semibold">{player.schoolLevel}</span>
+                      <span className="text-gray-600">Typ:</span>
+                      <span className="font-semibold">{player.schoolType}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Abschluss:</span>
                       <span className="font-semibold">{player.graduationYear}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Durchschnitt:</span>
-                      <span className="font-semibold">{player.gpa}</span>
                     </div>
                   </div>
                 </div>
@@ -442,8 +428,24 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           <span>{video.views} views</span>
                         </div>
                       </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'stats' && (
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Season Statistics</h3>
+                <StatsDisplay stats={player.stats} />
+              </div>
+            )}
+
             {activeTab === 'history' && (
-              <ClubHistory history={player.clubHistory} />
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Club History</h3>
+                <ClubHistory history={player.clubHistory} />
+              </div>
             )}
 
             {activeTab === 'teammates' && (
@@ -458,16 +460,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 <h3 className="text-lg font-semibold mb-4">Coaches</h3>
                 <CoachesList coaches={player.coaches} />
               </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}           )}
-
-            {activeTab === 'history' && (
-              <ClubHistory history={player.clubHistory} />
             )}
           </div>
         </div>

@@ -52,7 +52,7 @@ export async function GET(request: Request) {
     })
 
     // Map league enum back to display names
-    const clubsWithDisplayLeague = clubs.map(club => ({
+    const clubsWithDisplayLeague = clubs.map((club: any) => ({
       ...club,
       leagueDisplay: club.league
         .replace('FIRST_LEAGUE', '1. Liga')

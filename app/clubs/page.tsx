@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Filter } from 'lucide-react'
 import CantonFlag from '@/components/shared/CantonFlag'
+import ClubBadge from '@/components/shared/ClubBadge'
 import Link from 'next/link'
 import axios from 'axios'
 
@@ -116,14 +117,17 @@ export default function ClubsPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {clubs.map((club: any) => (
                 <div key={club.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
+                  <div className="flex items-center gap-4 mb-4">
+                    <ClubBadge clubName={club.name} size="lg" />
+                    <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900 mb-1">{club.name}</h3>
                       <div className="flex items-center gap-2">
                         <CantonFlag canton={club.canton} size="sm" />
                         <p className="text-sm text-gray-600">{club.town}, {club.canton}</p>
                       </div>
                     </div>
+                  </div>
+                  <div className="mb-4">
                     <span className="bg-habicht-100 text-habicht-700 px-3 py-1 rounded-full text-sm font-medium">
                       {club.leagueDisplay}
                     </span>

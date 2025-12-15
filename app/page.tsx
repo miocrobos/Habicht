@@ -5,6 +5,7 @@ import { Search, TrendingUp, Users, Video, Award, MapPin, Star, Zap, LogIn, User
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import CantonFlag from '@/components/shared/CantonFlag'
 
 export default function Home() {
   const { data: session, status } = useSession()
@@ -340,14 +341,15 @@ export default function Home() {
           {/* Swiss Regions Highlight */}
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
             <h3 className="text-3xl font-bold text-center mb-8">🇨🇭 Alle 26 Kantone</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {['ZH', 'BE', 'VD', 'AG', 'SG', 'GE', 'LU', 'TG', 'TI', 'VS', 'BL', 'SO', 'FR', 'BS', 'GR', 'NE', 'ZG', 'SH', 'UR', 'SZ', 'JU', 'AR', 'AI', 'NW', 'GL', 'OW'].map(canton => (
                 <Link 
                   key={canton} 
                   href={`/clubs?canton=${canton}`}
-                  className="p-3 bg-gray-50 rounded-lg hover:bg-red-50 hover:shadow-md transition cursor-pointer"
+                  className="p-3 bg-gray-50 rounded-lg hover:bg-red-50 hover:shadow-md transition cursor-pointer flex flex-col items-center gap-2"
                 >
-                  <div className="text-2xl font-bold text-gray-800">{canton}</div>
+                  <CantonFlag canton={canton as any} size="md" />
+                  <div className="text-xl font-bold text-gray-800">{canton}</div>
                 </Link>
               ))}
             </div>

@@ -203,10 +203,10 @@ export default function Home() {
               <div className="flex flex-wrap gap-4 justify-center mb-12">
                 <button
                   onClick={() => handleProtectedNavigation('/players/men')}
-                  className="group relative bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-10 py-5 rounded-2xl text-xl font-bold transition-all transform hover:scale-105 shadow-2xl overflow-hidden"
+                  className="group relative bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl overflow-hidden"
                 >
-                  <span className="relative z-10 flex items-center gap-3">
-                    <span className="text-2xl">♂</span>
+                  <span className="relative z-10 flex items-center gap-2">
+                    <span className="text-xl">♂</span>
                     Herren Volleyball
                   </span>
                   <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
@@ -214,10 +214,10 @@ export default function Home() {
                 
                 <button
                   onClick={() => handleProtectedNavigation('/players/women')}
-                  className="group relative bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white px-10 py-5 rounded-2xl text-xl font-bold transition-all transform hover:scale-105 shadow-2xl overflow-hidden"
+                  className="group relative bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white px-6 py-3 rounded-xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl overflow-hidden"
                 >
-                  <span className="relative z-10 flex items-center gap-3">
-                    <span className="text-2xl">♀</span>
+                  <span className="relative z-10 flex items-center gap-2">
+                    <span className="text-xl">♀</span>
                     Damen Volleyball
                   </span>
                   <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />

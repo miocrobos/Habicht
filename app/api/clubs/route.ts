@@ -9,6 +9,11 @@ export async function GET(request: Request) {
 
     const where: any = {}
 
+    // Only show clubs with websites
+    where.website = {
+      not: null
+    }
+
     if (canton && canton !== 'Alle') {
       where.canton = canton
     }

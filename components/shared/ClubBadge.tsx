@@ -23,17 +23,22 @@ export default function ClubBadge({ clubName, size = 'md', showName = false }: C
     lg: 'text-base',
   }
 
+  // Use volleyball icon if no club info found
+  const displayLogo = clubInfo.logo || '🏐'
+  const bgColor = clubInfo.colors?.primary || '#FF0000'
+  const borderColor = clubInfo.colors?.secondary || '#FFFFFF'
+
   return (
     <div className="flex items-center gap-3">
       <div 
         className={`${sizeClasses[size]} rounded-full shadow-md flex items-center justify-center font-bold relative border-4`}
         style={{ 
-          backgroundColor: clubInfo.colors.primary,
-          borderColor: clubInfo.colors.secondary,
+          backgroundColor: bgColor,
+          borderColor: borderColor,
         }}
         title={clubName}
       >
-        <span className="filter drop-shadow-lg">{clubInfo.logo}</span>
+        <span className="filter drop-shadow-lg">{displayLogo}</span>
       </div>
       {showName && (
         <div>
@@ -41,7 +46,7 @@ export default function ClubBadge({ clubName, size = 'md', showName = false }: C
             {clubName}
           </div>
           <div className="text-xs text-gray-500 font-medium">
-            {clubInfo.symbol}
+            {clubInfo.symbol || 'VB'}
           </div>
         </div>
       )}

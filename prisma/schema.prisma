@@ -35,6 +35,8 @@ enum League {
   FIRST_LEAGUE     // 1. Liga
   SECOND_LEAGUE    // 2. Liga
   THIRD_LEAGUE     // 3. Liga
+  FOURTH_LEAGUE    // 4. Liga
+  YOUTH_U23        // U23
   YOUTH_U19        // U19
   YOUTH_U17        // U17
   YOUTH_U15        // U15

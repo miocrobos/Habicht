@@ -63,7 +63,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Dynamic Background */}
-      <section className="relative h-screen min-h-[700px] max-h-[900px] overflow-hidden mb-0">
+      <section className="relative h-screen min-h-[700px] max-h-[900px] overflow-hidden mb-16">
         {/* Animated Background */}
         <div className="absolute inset-0">
           {/* Base gradient */}

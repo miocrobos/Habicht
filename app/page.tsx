@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { Search, TrendingUp, Users, Video, Award, MapPin, Star, Zap, LogIn, UserPlus } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
@@ -94,88 +95,16 @@ export default function Home() {
         <div className="relative z-10 h-full flex items-center">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto text-center text-white">
-              {/* Hawk Logo with Animation */}
+              {/* Eagle Logo with Animation */}
               <div className="mb-8 flex justify-center animate-bounce-slow">
-                <div className="relative w-32 h-32 md:w-40 md:h-40">
-                  <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl transform hover:scale-110 hover:rotate-3 transition-all duration-300">
-                    {/* Advanced filters for depth and glow */}
-                    <defs>
-                      <filter id="glow">
-                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                        <feMerge>
-                          <feMergeNode in="coloredBlur"/>
-                          <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
-                      </filter>
-                      <radialGradient id="redGradient" cx="50%" cy="30%">
-                        <stop offset="0%" stopColor="#FF0000" />
-                        <stop offset="100%" stopColor="#CC0000" />
-                      </radialGradient>
-                      <linearGradient id="wingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#FFFFFF" />
-                        <stop offset="100%" stopColor="#E8E8E8" />
-                      </linearGradient>
-                      <linearGradient id="beakGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#FFD700" />
-                        <stop offset="100%" stopColor="#FFA500" />
-                      </linearGradient>
-                    </defs>
-                    
-                    {/* Red circular background with gradient */}
-                    <circle cx="50" cy="50" r="48" fill="url(#redGradient)" filter="url(#glow)"/>
-                    
-                    {/* Hawk head - more angular and fierce */}
-                    <path d="M 50 22 L 54 28 L 54 36 Q 54 42 50 46 Q 46 42 46 36 L 46 28 Z" 
-                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
-                    
-                    {/* Sharp, hooked golden beak */}
-                    <path d="M 50 22 L 40 20 Q 38 22 40 24 L 48 28 Z" 
-                          fill="url(#beakGradient)" stroke="#CC8800" strokeWidth="0.5"/>
-                    
-                    {/* Fierce eye with highlight */}
-                    <ellipse cx="48" cy="32" rx="2.5" ry="3" fill="#CC0000"/>
-                    <circle cx="48.5" cy="31" r="1" fill="#FFFF00"/>
-                    <circle cx="49" cy="30.5" r="0.4" fill="white"/>
-                    
-                    {/* Neck and body - more muscular */}
-                    <path d="M 46 36 L 44 44 Q 44 48 46 50 L 50 52 L 54 50 Q 56 48 56 44 L 54 36 Q 54 40 50 42 Q 46 40 46 36 Z"
-                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
-                    
-                    {/* Left wing - dramatic spread with feather details */}
-                    <path d="M 46 48 Q 35 42 22 48 Q 20 50 22 54 Q 25 58 30 57 Q 36 55 42 52 Z" 
-                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
-                    <path d="M 40 50 Q 32 48 25 50 Q 23 52 25 54 Q 28 56 33 54 Z" 
-                          fill="white" opacity="0.6"/>
-                    <path d="M 35 51 Q 30 50 26 52" stroke="#CCCCCC" strokeWidth="0.5" fill="none"/>
-                    
-                    {/* Right wing - dramatic spread with feather details */}
-                    <path d="M 54 48 Q 65 42 78 48 Q 80 50 78 54 Q 75 58 70 57 Q 64 55 58 52 Z" 
-                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
-                    <path d="M 60 50 Q 68 48 75 50 Q 77 52 75 54 Q 72 56 67 54 Z" 
-                          fill="white" opacity="0.6"/>
-                    <path d="M 65 51 Q 70 50 74 52" stroke="#CCCCCC" strokeWidth="0.5" fill="none"/>
-                    
-                    {/* Tail feathers - more dramatic and defined */}
-                    <path d="M 48 52 L 44 68 Q 44 70 46 69 L 49 54 Z" 
-                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
-                    <path d="M 50 52 L 48 72 Q 48 74 50 74 Q 52 74 52 72 L 52 54 Z" 
-                          fill="white" stroke="#CCCCCC" strokeWidth="0.5"/>
-                    <path d="M 52 52 L 56 68 Q 56 70 54 69 L 51 54 Z" 
-                          fill="url(#wingGradient)" stroke="#CCCCCC" strokeWidth="0.5"/>
-                    
-                    {/* Talons - sharp and menacing */}
-                    <path d="M 46 50 L 44 56 L 43 58" stroke="#FFA500" strokeWidth="1" strokeLinecap="round"/>
-                    <path d="M 48 51 L 47 57 L 46 59" stroke="#FFA500" strokeWidth="1" strokeLinecap="round"/>
-                    <path d="M 52 51 L 53 57 L 54 59" stroke="#FFA500" strokeWidth="1" strokeLinecap="round"/>
-                    <path d="M 54 50 L 56 56 L 57 58" stroke="#FFA500" strokeWidth="1" strokeLinecap="round"/>
-                    
-                    {/* Swiss cross on chest - more prominent */}
-                    <rect x="47.5" y="46" width="5" height="2.5" fill="#FF0000" rx="0.3"/>
-                    <rect x="48.75" y="44.75" width="2.5" height="5" fill="#FF0000" rx="0.3"/>
-                    
-                    {/* Chest highlight for depth */}
-                    <ellipse cx="50" cy="47" rx="3" ry="2" fill="white" opacity="0.2"/>
-                  </svg>
+                <div className="relative w-32 h-32 md:w-40 md:h-40 drop-shadow-2xl transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                  <Image
+                    src="/eagle-logo.png"
+                    alt="Eagle Logo"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
                 </div>
               </div>
               

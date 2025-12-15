@@ -1,0 +1,6 @@
+Please save the eagle image as:
+eagle-logo.png
+
+in this directory (public/)
+
+The image should be the white eagle on red background that was provided.

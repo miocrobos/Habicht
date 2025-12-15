@@ -263,7 +263,7 @@ export default function Home() {
         </div>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
           {slides.map((_, idx) => (
             <button
               key={idx}

@@ -118,7 +118,13 @@ export default function ClubsPage() {
               {clubs.map((club: any) => (
                 <div key={club.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6">
                   <div className="flex items-center gap-4 mb-4">
-                    <ClubBadge clubName={club.name} size="lg" />
+                    {club.website ? (
+                      <a href={club.website} target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
+                        <ClubBadge clubName={club.name} size="lg" />
+                      </a>
+                    ) : (
+                      <ClubBadge clubName={club.name} size="lg" />
+                    )}
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900 mb-1">{club.name}</h3>
                       <div className="flex items-center gap-2">

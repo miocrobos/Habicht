@@ -73,6 +73,7 @@ export async function POST(request: NextRequest) {
               instagramHandle: playerData.instagram,
               profileImage: playerData.profileImage, // Required
               coverImage: playerData.coverImage, // Optional
+              bio: playerData.bio, // Player description
             },
           },
         },

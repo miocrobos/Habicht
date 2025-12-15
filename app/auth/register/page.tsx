@@ -37,6 +37,7 @@ export default function RegisterPage() {
     achievements: [] as string[], // Array of achievements
     profileImage: '', // NEW: Required profile picture
     coverImage: '', // NEW: Optional cover image
+    bio: '', // Player bio/description
     
     // Education
     schoolName: '',
@@ -150,6 +151,7 @@ export default function RegisterPage() {
           jerseyNumber: formData.jerseyNumber ? parseInt(formData.jerseyNumber) : undefined,
           profileImage: formData.profileImage,
           coverImage: formData.coverImage || undefined,
+          bio: formData.bio || undefined,
         } : undefined,
       }
 
@@ -394,7 +396,54 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
+                <div className="grid grid-cols-2 gap-4">                {/* Bio/Description */}
+                <div>
+                  <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-1">
+                    📝 Über mich
+                  </label>
+                  <textarea
+                    id="bio"
+                    name="bio"
+                    value={formData.bio || ''}
+                    onChange={handleChange}
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    placeholder="Erzähl etwas über dich, deine Spielweise, Ziele..."
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Diese Beschreibung wird auf deinem Profil angezeigt</p>
+                </div>
+
                 <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                      📱 Telefonnummer
+                    </label>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                      placeholder="+41 79 123 45 67"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      📧 Kontakt Email
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                      placeholder="dein@email.ch"
+                    />
+                  </div>
+                </div>
                   <div>
                     <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-1">
                       <Calendar className="w-4 h-4 inline mr-1" />

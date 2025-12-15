@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink } from 'lucide-react'
+import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye } from 'lucide-react'
 import VideoPlayer from '@/components/player/VideoPlayer'
 import StatsDisplay from '@/components/player/StatsDisplay'
 import ClubHistory from '@/components/player/ClubHistory'
@@ -13,6 +13,7 @@ import CantonFlag from '@/components/shared/CantonFlag'
 import ClubBadge from '@/components/shared/ClubBadge'
 import SchoolBadge from '@/components/shared/SchoolBadge'
 import { getCantonInfo } from '@/lib/swissData'
+import axios from 'axios'
 
 // This would come from API/database
 interface PlayerProfileProps {
@@ -23,6 +24,21 @@ interface PlayerProfileProps {
 
 export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [activeTab, setActiveTab] = useState('overview')
+  const [views, setViews] = useState(0)
+
+  // Increment view count when profile loads
+  useEffect(() => {
+    const incrementView = async () => {
+      try {
+        const response = await axios.post(`/api/players/${params.id}/view`)
+        setViews(response.data.views)
+      } catch (error) {
+        console.error('Error incrementing views:', error)
+      }
+    }
+    
+    incrementView()
+  }, [params.id])
 
   // Get canton info for dynamic theming
   const cantonInfo = getCantonInfo('ZH') // This would come from player data
@@ -214,6 +230,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   </p>
                   {player.isPlaceholder && (
                     <div className="mt-2 px-3 py-2 bg-orange-50 border border-orange-200 rounded-lg text-sm text-orange-800">
+                    <span className="flex items-center gap-1">
+                      <Eye className="w-4 h-4" />
+                      {views || 0} Profilaufrufe
+                    </span>
                       <strong>📌 Hinweis:</strong> Dieses Profil wurde automatisch von Volleybox importiert. 
                       <button className="ml-2 underline font-medium hover:text-orange-900">
                         Profil beanspruchen →

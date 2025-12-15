@@ -362,32 +362,32 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-gray-900 mb-4">Alles wo du brauchsch</h2>
-            <p className="text-xl text-gray-600">Professionelle Tools für Spieler und Scouts</p>
+            <p className="text-xl text-gray-600">Professionelli Tools für Spieler und Scouts</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <FeatureCard
               icon={<Users className="w-12 h-12" />}
-              title="Detaillierte Profile"
-              description="Stats, Achievements, Club-History und Teammates – alles an einem Ort"
+              title="Detaillierti Profile"
+              description="Stats, Erfolg, Club-Gschicht und Teamkollege – alles am gliiche Ort"
               color="blue"
             />
             <FeatureCard
               icon={<Video className="w-12 h-12" />}
               title="Multi-Platform Videos"
-              description="YouTube, Instagram, TikTok oder direkt upload – du entscheidest"
+              description="YouTube, Instagram, TikTok oder direkt ufelade – du entscheidsch"
               color="pink"
             />
             <FeatureCard
               icon={<MapPin className="w-12 h-12" />}
               title="Kantonal-Basiert"
-              description="Finde Spieler nach Kanton mit Flaggen und lokalen Clubs"
+              description="Find Spieler nach Kanton mit Fahne und lokale Clubs"
               color="red"
             />
             <FeatureCard
               icon={<Zap className="w-12 h-12" />}
               title="Pro Scouting"
-              description="Erweiterte Suche, Notizen und Favoriten für Recruiters"
+              description="Erwiitereti Suech, Notize und Favorite für Recruiters"
               color="yellow"
             />
           </div>

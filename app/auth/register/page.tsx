@@ -4,7 +4,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import axios from 'axios'
-import { Award, User, Mail, Lock, Calendar, MapPin, TrendingUp } from 'lucide-react'
+import { Award, User, Mail, Lock, Calendar, MapPin, TrendingUp, Target } from 'lucide-react'
+import ClubSelector from '@/components/shared/ClubSelector'
+import ImageUpload from '@/components/shared/ImageUpload'
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -28,7 +30,11 @@ export default function RegisterPage() {
     city: '',
     canton: '',
     currentLeague: '',
+    desiredLeague: '', // NEW: Target league level
+    interestedClubs: [] as string[], // NEW: Array of club IDs
     achievements: '',
+    profileImage: '', // NEW: Required profile picture
+    coverImage: '', // NEW: Optional cover image
     
     // Education
     schoolName: '',
@@ -104,6 +110,11 @@ export default function RegisterPage() {
         setError('Bitte wähle dein Geschlecht')
         return
       }
+
+      if (!formData.profileImage) {
+        setError('Bitte lade ein Profilbild hoch')
+        return
+      }
     }
 
     setLoading(true)
@@ -120,6 +131,8 @@ export default function RegisterPage() {
           dateOfBirth: formData.dateOfBirth,
           gender: formData.gender,
           currentLeague: formData.currentLeague,
+          desiredLeague: formData.desiredLeague || undefined,
+          interestedClubs: formData.interestedClubs,
           schoolName: formData.schoolName,
           schoolType: formData.schoolType,
           graduationYear: formData.graduationYear ? parseInt(formData.graduationYear) : undefined,
@@ -127,10 +140,12 @@ export default function RegisterPage() {
           instagram: formData.instagram,
           bio: formData.achievements,
           canton: formData.canton,
-          currentLeague: formData.currentLeague,
-          phone: formData.phone,
-          instagram: formData.instagram,
-          bio: formData.achievements,
+          city: formData.city,
+          position: formData.position,
+          height: formData.height ? parseFloat(formData.height) : undefined,
+          jerseyNumber: formData.jerseyNumber ? parseInt(formData.jerseyNumber) : undefined,
+          profileImage: formData.profileImage,
+          coverImage: formData.coverImage || undefined,
         } : undefined,
       }
 
@@ -351,6 +366,30 @@ export default function RegisterPage() {
                   </p>
                 </div>
 
+                {/* Profile & Cover Images */}
+                <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg p-5">
+                  <h3 className="font-semibold text-gray-900 mb-4">
+                    📸 Profilbilder (Erforderlich)
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <ImageUpload
+                      label="Profilbild"
+                      value={formData.profileImage}
+                      onChange={(base64) => setFormData({ ...formData, profileImage: base64 })}
+                      aspectRatio="square"
+                      required
+                      helpText="Zeig dein Gesicht! Wird auf deinem Profil angezeigt."
+                    />
+                    <ImageUpload
+                      label="Hintergrundbild"
+                      value={formData.coverImage}
+                      onChange={(base64) => setFormData({ ...formData, coverImage: base64 })}
+                      aspectRatio="banner"
+                      helpText="Optional: Ein Action-Shot oder Team-Foto als Banner."
+                    />
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-1">
@@ -453,7 +492,7 @@ export default function RegisterPage() {
 
                   <div>
                     <label htmlFor="currentLeague" className="block text-sm font-medium text-gray-700 mb-1">
-                      Liga
+                      Aktuelle Liga
                     </label>
                     <select
                       id="currentLeague"
@@ -465,12 +504,60 @@ export default function RegisterPage() {
                       <option value="">Wähle...</option>
                       <option value="NLA">NLA</option>
                       <option value="NLB">NLB</option>
-                      <option value="FIRST_LEAGUE">1. Liga</option>
-                      <option value="SECOND_LEAGUE">2. Liga</option>
-                      <option value="YOUTH_U19">U19</option>
-                      <option value="YOUTH_U17">U17</option>
+                      <option value="ERSTE_LIGA">1. Liga</option>
+                      <option value="ZWEITE_LIGA">2. Liga</option>
+                      <option value="DRITTE_LIGA">3. Liga</option>
+                      <option value="REGIONAL">Regional</option>
                     </select>
                   </div>
+                </div>
+
+                {/* NEW: Desired League & Club Interests */}
+                <div className="bg-gradient-to-r from-red-50 to-pink-50 border border-red-200 rounded-lg p-5">
+                  <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <Target className="w-5 h-5 text-red-600" />
+                    Wo möchtest du spielen?
+                  </h3>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="desiredLeague" className="block text-sm font-medium text-gray-700 mb-2">
+                        Ziel-Liga (optional)
+                      </label>
+                      <select
+                        id="desiredLeague"
+                        name="desiredLeague"
+                        value={formData.desiredLeague}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white"
+                      >
+                        <option value="">Wähle...</option>
+                        <option value="NLA">NLA</option>
+                        <option value="NLB">NLB</option>
+                        <option value="ERSTE_LIGA">1. Liga</option>
+                        <option value="ZWEITE_LIGA">2. Liga</option>
+                      </select>
+                    </div>
+
+                    {formData.gender && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Clubs von Interesse (optional, max. 10)
+                        </label>
+                        <ClubSelector
+                          gender={formData.gender === 'MALE' ? 'MEN' : 'WOMEN'}
+                          selectedClubs={formData.interestedClubs}
+                          onChange={(clubIds) => setFormData({ ...formData, interestedClubs: clubIds })}
+                          desiredLeague={formData.desiredLeague as any}
+                          maxSelections={10}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  
+                  <p className="text-xs text-gray-600 mt-3 italic">
+                    💡 Coaches dieser Clubs können dein Profil leichter finden und dich kontaktieren
+                  </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">

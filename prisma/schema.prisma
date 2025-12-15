@@ -78,6 +78,18 @@ enum SchoolType {
   OTHER           // Other education
 }
 
+enum MessageStatus {
+  SENT
+  DELIVERED
+  READ
+}
+
+enum ChatRequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
@@ -114,6 +126,8 @@ model Player {
   currentClubId     String?
   currentClub       Club?       @relation("CurrentClub", fields: [currentClubId], references: [id])
   currentLeague     League
+  desiredLeague     League?     // Target league level player wants to play in
+  interestedClubs   String[]    @default([]) // Array of club IDs player is interested in
   
   // Academic Information
   schoolName        String?
@@ -128,8 +142,8 @@ model Player {
   
   // Profile
   bio               String?     @db.Text
-  profileImage      String?
-  coverImage        String?
+  profileImage      String      // Required profile picture
+  coverImage        String?     // Optional backdrop/banner image
   
   // Visibility
   isPublic          Boolean     @default(true)
@@ -150,6 +164,9 @@ model Player {
   favorites         Favorite[]
   teammates         Teammate[]  @relation("PlayerTeammates")
   teamOf            Teammate[]  @relation("TeammatePlayer")
+  chatRequests      ChatRequest[]
+  conversations     Conversation[]
+  sentMessages      Message[]   @relation("PlayerMessages")
 }
 
 model Club {
@@ -181,6 +198,7 @@ model Club {
   clubHistory       ClubHistory[]
   managers          ClubManager[]
   coaches           Coach[]
+  recruiters        Recruiter[] @relation("RecruiterClub")
 }
 
 model ClubHistory {
@@ -365,21 +383,35 @@ model Recruiter {
   userId            String      @unique
   user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   
-  organization      String      // University, Club, or Agency name
+  // Must be associated with a club as coach
+  clubId            String
+  club              Club        @relation("RecruiterClub", fields: [clubId], references: [id])
+  coachRole         String      // Head Coach, Assistant Coach, Scout, etc.
+  
+  organization      String      // Club name or Agency
   position          String      // Title/Role
   phone             String?
+  bio               String?     @db.Text
+  profileImage      String      // Required profile picture
+  coverImage        String?     // Optional backdrop/banner image
   
   // Location
   canton            Canton?
   country           String      @default("Switzerland")
   
   verified          Boolean     @default(false)
+  canChat           Boolean     @default(true)
   
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
   
   notes             RecruitmentNote[]
   favorites         Favorite[]
+  sentMessages      Message[]   @relation("RecruiterMessages")
+  chatRequests      ChatRequest[]
+  conversations     Conversation[] @relation("RecruiterConversations")
+  
+  @@index([clubId])
 }
 
 model ClubManager {
@@ -427,4 +459,79 @@ model Favorite {
   @@unique([recruiterId, playerId])
   @@index([recruiterId])
   @@index([playerId])
+}
+// Chat System Models
+
+model ChatRequest {
+  id                String              @id @default(cuid())
+  
+  // Player initiates request to coach
+  playerId          String
+  player            Player              @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  
+  recruiterId       String
+  recruiter         Recruiter           @relation(fields: [recruiterId], references: [id], onDelete: Cascade)
+  
+  message           String              @db.Text  // Initial message from player
+  status            ChatRequestStatus   @default(PENDING)
+  
+  createdAt         DateTime            @default(now())
+  respondedAt       DateTime?
+  
+  @@index([playerId])
+  @@index([recruiterId])
+  @@index([status])
+}
+
+model Conversation {
+  id                String      @id @default(cuid())
+  
+  // Participants
+  playerId          String
+  player            Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  
+  recruiterId       String
+  recruiter         Recruiter   @relation("RecruiterConversations", fields: [recruiterId], references: [id], onDelete: Cascade)
+  
+  // Status
+  isActive          Boolean     @default(true)
+  lastMessageAt     DateTime?
+  
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  
+  messages          Message[]
+  
+  @@unique([playerId, recruiterId])
+  @@index([playerId])
+  @@index([recruiterId])
+}
+
+model Message {
+  id                String        @id @default(cuid())
+  conversationId    String
+  conversation      Conversation  @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  
+  // Sender can be either player or recruiter
+  senderId          String
+  senderType        UserRole      // PLAYER or RECRUITER
+  
+  // For player messages
+  playerId          String?
+  player            Player?       @relation("PlayerMessages", fields: [playerId], references: [id], onDelete: Cascade)
+  
+  // For recruiter messages
+  recruiterId       String?
+  recruiter         Recruiter?    @relation("RecruiterMessages", fields: [recruiterId], references: [id], onDelete: Cascade)
+  
+  content           String        @db.Text
+  status            MessageStatus @default(SENT)
+  
+  createdAt         DateTime      @default(now())
+  readAt            DateTime?
+  
+  @@index([conversationId])
+  @@index([playerId])
+  @@index([recruiterId])
+  @@index([createdAt])
 }

@@ -143,8 +143,17 @@ export async function POST(request: NextRequest) {
               if (leagueFieldToUpdate) {
                 const updateData: any = {}
                 updateData[leagueFieldToUpdate] = true
-                if (currentClubEntry.logo && (!existingClub.logo || existingClub.logo === '🏐')) {
-                  updateData.logo = currentClubEntry.logo
+                
+                // CRITICAL: NEVER overwrite an existing uploaded logo
+                // Only set logo if club has NO logo OR has the default volleyball emoji
+                // This protects logos uploaded via admin panel
+                if (currentClubEntry.logo && 
+                    (!existingClub.logo || existingClub.logo === '🏐' || existingClub.logo.length <= 2)) {
+                  // Only update if the new logo is a valid image URL (starts with http or data:)
+                  if (currentClubEntry.logo.startsWith('http') || currentClubEntry.logo.startsWith('data:')) {
+                    updateData.logo = currentClubEntry.logo
+                  }
+                  // Skip emoji logos from the static database file
                 }
 
                 await prisma.club.update({
@@ -250,11 +259,18 @@ export async function POST(request: NextRequest) {
 
                       if (existingClub) {
                         clubId = existingClub.id
-                        // Update club with logo if provided and club doesn't have one
+                        // CRITICAL: Only update logo if club has NO logo or only has volleyball emoji AND new logo is a valid URL
                         const updateData: any = {}
-                        if (club.logo && (!existingClub.logo || existingClub.logo === '🏐')) {
-                          updateData.logo = club.logo
+                        
+                        // Only update if club has no logo or only has volleyball emoji (never overwrite uploaded logos)
+                        if (club.logo && (!existingClub.logo || existingClub.logo === '🏐' || existingClub.logo.length <= 2)) {
+                          // Only update if new logo is a valid URL, not an emoji from static database
+                          if (club.logo.startsWith('http') || club.logo.startsWith('data:')) {
+                            updateData.logo = club.logo
+                          }
+                          // Skip emoji logos - they should never replace uploaded logos
                         }
+                        
                         // Mark that club has a team in this league/gender
                         if (leagueFieldToUpdate) {
                           updateData[leagueFieldToUpdate] = true

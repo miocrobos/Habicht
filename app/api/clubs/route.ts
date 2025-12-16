@@ -114,3 +114,35 @@ export async function GET(request: Request) {
     )
   }
 }
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json()
+    const { name, canton, town, website, logo } = body
+
+    if (!name || !canton) {
+      return NextResponse.json(
+        { error: 'Name and canton are required' },
+        { status: 400 }
+      )
+    }
+
+    const club = await prisma.club.create({
+      data: {
+        name,
+        canton,
+        town: town || null,
+        website: website || null,
+        logo: logo || null,
+      }
+    })
+
+    return NextResponse.json({ club }, { status: 201 })
+  } catch (error) {
+    console.error('Error creating club:', error)
+    return NextResponse.json(
+      { error: 'Failed to create club' },
+      { status: 500 }
+    )
+  }
+}

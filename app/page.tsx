@@ -27,31 +27,31 @@ export default function Home() {
       title: "NLA Herren & Damen",
       subtitle: "Schweizer Spitzenvolleyball",
       color: "from-blue-900/90 to-blue-700/90",
-      emoji: "🏐"
+      emoji: "�"
     },
     {
       title: "NLB",
       subtitle: "Der Weg nach oben",
       color: "from-indigo-900/90 to-indigo-700/90",
-      emoji: "⚡"
+      emoji: "🏐"
     },
     {
       title: "1. Liga",
       subtitle: "Regionale Spitze",
       color: "from-purple-900/90 to-purple-700/90",
-      emoji: "🎯"
+      emoji: "🔥"
     },
     {
       title: "2. & 3. Liga",
       subtitle: "Aufstrebende Talente",
       color: "from-red-900/90 to-red-700/90",
-      emoji: "⭐"
+      emoji: "💪"
     },
     {
       title: "4. Liga",
       subtitle: "Basis und Nachwuchs",
       color: "from-green-900/90 to-green-700/90",
-      emoji: "🌱"
+      emoji: "⭐"
     }
   ]
 
@@ -68,6 +68,17 @@ export default function Home() {
       <section className="relative min-h-[700px] pb-20 mb-24 overflow-visible">
         {/* Animated Background */}
         <div className="absolute inset-0">
+          {/* Volleyball Background Images */}
+          <div className="absolute inset-0">
+            <Image
+              src="/volleyball-bg-1.jpg"
+              alt="Volleyball action"
+              fill
+              className="object-cover opacity-30"
+              style={{ objectPosition: 'center 30%' }}
+              priority
+            />
+          </div>
           {/* Base gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
           
@@ -232,21 +243,21 @@ export default function Home() {
               league="NLB"
               description="Nationalliga B"
               color="from-indigo-600 to-indigo-700"
-              emoji="⚡"
+              emoji="🏐"
               playerCount="200+"
             />
             <LeagueCard
               league="1. Liga"
               description="Erste Liga"
               color="from-purple-600 to-purple-700"
-              emoji="🎯"
+              emoji="🔥"
               playerCount="300+"
             />
             <LeagueCard
               league="2. Liga"
               description="Zweite Liga"
               color="from-pink-600 to-pink-700"
-              emoji="⭐"
+              emoji="💪"
               playerCount="400+"
             />
           </div>
@@ -256,14 +267,14 @@ export default function Home() {
               league="3. Liga"
               description="Dritte Liga"
               color="from-green-600 to-green-700"
-              emoji="🌟"
+              emoji="⚡"
               playerCount="500+"
             />
             <LeagueCard
               league="4. Liga"
               description="Vierte Liga"
               color="from-teal-600 to-teal-700"
-              emoji="🌱"
+              emoji="⭐"
               playerCount="600+"
             />
           </div>

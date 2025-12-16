@@ -46,6 +46,7 @@ interface PlayerData {
   occupation: string | null
   schoolName: string | null
   profileImage: string | null
+  coverImage: string | null
   bio: string | null
   phone: string | null
   instagram: string | null
@@ -118,6 +119,9 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [showProfilePhotoModal, setShowProfilePhotoModal] = useState(false)
   const [newProfilePhoto, setNewProfilePhoto] = useState('')
   const [uploadingPhoto, setUploadingPhoto] = useState(false)
+  const [showBackgroundModal, setShowBackgroundModal] = useState(false)
+  const [newBackgroundImage, setNewBackgroundImage] = useState('')
+  const [uploadingBackground, setUploadingBackground] = useState(false)
 
   const isOwner = session?.user?.playerId === params.id
 
@@ -277,6 +281,78 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       setUploadingPhoto(false)
     }
   }
+
+  const handleBackgroundUpdate = async () => {
+    if (!newBackgroundImage) {
+      alert('Bitte wähl es Bild us')
+      return
+    }
+
+    try {
+      setUploadingBackground(true)
+      
+      // Get current player data first
+      const currentResponse = await axios.get(`/api/players/${params.id}`)
+      const currentPlayer = currentResponse.data.player
+      
+      // Update with cover image
+      await axios.put(`/api/players/${params.id}`, {
+        playerData: {
+          firstName: currentPlayer.firstName,
+          lastName: currentPlayer.lastName,
+          dateOfBirth: currentPlayer.dateOfBirth,
+          gender: currentPlayer.gender,
+          nationality: currentPlayer.nationality,
+          canton: currentPlayer.canton,
+          city: currentPlayer.city,
+          height: currentPlayer.height,
+          weight: currentPlayer.weight,
+          spikeHeight: currentPlayer.spikeHeight,
+          blockHeight: currentPlayer.blockHeight,
+          phone: currentPlayer.phone,
+          employmentStatus: currentPlayer.employmentStatus,
+          occupation: currentPlayer.occupation,
+          schoolName: currentPlayer.schoolName,
+          positions: currentPlayer.positions,
+          profileImage: currentPlayer.profileImage,
+          coverImage: newBackgroundImage,  // Update background
+          instagram: currentPlayer.instagram,
+          tiktok: currentPlayer.tiktok,
+          youtube: currentPlayer.youtube,
+          highlightVideo: currentPlayer.highlightVideo,
+          swissVolleyLicense: currentPlayer.swissVolleyLicense,
+          skillReceiving: currentPlayer.skillReceiving,
+          skillServing: currentPlayer.skillServing,
+          skillAttacking: currentPlayer.skillAttacking,
+          skillBlocking: currentPlayer.skillBlocking,
+          skillDefense: currentPlayer.skillDefense,
+          bio: currentPlayer.bio,
+          lookingForClub: currentPlayer.lookingForClub,
+          showEmail: currentPlayer.showEmail,
+          showPhone: currentPlayer.showPhone,
+        },
+        clubHistory: currentPlayer.clubHistory || [],
+        achievements: currentPlayer.achievements || [],
+      })
+
+      // Refresh player data
+      const playerResponse = await axios.get(`/api/players/${params.id}`)
+      setPlayer(playerResponse.data.player)
+      setCustomBgImage(newBackgroundImage)
+      
+      // Reset and close modal
+      setShowBackgroundModal(false)
+      setNewBackgroundImage('')
+      alert('Hintergrund erfolgriich gänderet!')
+    } catch (error: any) {
+      console.error('Error updating background:', error)
+      const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
+      alert(`Fehler bim Hintergrund Ändere: ${errorMsg}`)
+    } finally {
+      setUploadingBackground(false)
+    }
+  }
+  
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
@@ -309,8 +385,8 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       <div 
         className="h-64 relative"
         style={{ 
-          background: customBgImage ? 'transparent' : selectedBg.style,
-          backgroundImage: customBgImage ? `url(${customBgImage})` : 'none',
+          background: (customBgImage || player.coverImage) ? 'transparent' : selectedBg.style,
+          backgroundImage: (customBgImage || player.coverImage) ? `url(${customBgImage || player.coverImage})` : 'none',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -319,70 +395,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         {/* Background change button (owner only) */}
         {isOwner && (
           <button
-            onClick={() => setShowBgSelector(!showBgSelector)}
+            onClick={() => setShowBackgroundModal(true)}
             className="absolute top-4 right-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition flex items-center gap-2 z-10"
           >
             <Upload className="w-4 h-4" />
             Hintergrund Ändere
           </button>
-        )}
-
-        {/* Background selector dropdown */}
-        {showBgSelector && isOwner && (
-          <div className="absolute top-16 right-4 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 z-50 min-w-[250px]">
-            <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Wähl Es Hintergrund:</p>
-            
-            {/* Custom Image Upload */}
-            <div className="mb-4 pb-4 border-b border-gray-200 dark:border-gray-700">
-              <label className="block mb-2">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Eigeni Bild Ufelade:</span>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0]
-                    if (file) {
-                      const reader = new FileReader()
-                      reader.onloadend = () => {
-                        setCustomBgImage(reader.result as string)
-                        setShowBgSelector(false)
-                      }
-                      reader.readAsDataURL(file)
-                    }
-                  }}
-                  className="mt-2 block w-full text-sm text-gray-500 dark:text-gray-400
-                    file:mr-4 file:py-2 file:px-4
-                    file:rounded-lg file:border-0
-                    file:text-sm file:font-semibold
-                    file:bg-red-50 file:text-red-700
-                    hover:file:bg-red-100
-                    dark:file:bg-red-900/30 dark:file:text-red-300
-                    dark:hover:file:bg-red-900/50
-                    cursor-pointer"
-                />
-              </label>
-            </div>
-
-            <div className="space-y-2">
-              {BACKGROUND_OPTIONS.map((bg) => (
-                <button
-                  key={bg.id}
-                  onClick={() => {
-                    setSelectedBg(bg)
-                    setCustomBgImage(null)
-                    setShowBgSelector(false)
-                  }}
-                  className="w-full flex items-center gap-3 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-                >
-                  <div 
-                    className="w-8 h-8 rounded"
-                    style={{ background: bg.style }}
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">{bg.name}</span>
-                </button>
-              ))}
-            </div>
-          </div>
         )}
 
         {/* View counter */}
@@ -1042,6 +1060,70 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   ) : (
                     <>
                       <Camera className="w-4 h-4" />
+                      Speichere
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Background Image Modal */}
+      {showBackgroundModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Hintergrund Ändere</h3>
+              <button
+                onClick={() => {
+                  setShowBackgroundModal(false)
+                  setNewBackgroundImage('')
+                }}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <ImageUpload
+                label="Wähl Es Neus Hintergrundbild"
+                value={newBackgroundImage}
+                onChange={(base64) => setNewBackgroundImage(base64)}
+                aspectRatio="16:9"
+                helpText="Empfohlen: 1920x1080 Pixel"
+              />
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  onClick={() => {
+                    setShowBackgroundModal(false)
+                    setNewBackgroundImage('')
+                  }}
+                  className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-semibold"
+                >
+                  Abbreche
+                </button>
+                <button
+                  onClick={handleBackgroundUpdate}
+                  disabled={!newBackgroundImage || uploadingBackground}
+                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {uploadingBackground ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Updating...
+                    </>
+                  ) : (
+                    <>
+                      <Upload className="w-4 h-4" />
                       Speichere
                     </>
                   )}

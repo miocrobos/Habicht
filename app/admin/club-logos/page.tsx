@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Upload } from 'lucide-react'
+import { Upload, Plus, X } from 'lucide-react'
 import ImageUpload from '@/components/shared/ImageUpload'
 import ClubBadge from '@/components/shared/ClubBadge'
 import axios from 'axios'
@@ -12,6 +12,14 @@ export default function ManageClubLogosPage() {
   const [selectedClub, setSelectedClub] = useState<any>(null)
   const [newLogo, setNewLogo] = useState('')
   const [uploading, setUploading] = useState(false)
+  const [showAddClub, setShowAddClub] = useState(false)
+  const [newClub, setNewClub] = useState({
+    name: '',
+    canton: 'ZH',
+    town: '',
+    website: '',
+    logo: ''
+  })
 
   useEffect(() => {
     loadClubs()
@@ -33,7 +41,7 @@ export default function ManageClubLogosPage() {
 
     try {
       setUploading(true)
-      await axios.post(`/api/clubs/${selectedClub.id}/logo`, {
+      await axios.put(`/api/clubs/${selectedClub.id}`, {
         logo: newLogo
       })
       
@@ -53,6 +61,43 @@ export default function ManageClubLogosPage() {
     }
   }
 
+  const handleAddClub = async () => {
+    if (!newClub.name || !newClub.canton) {
+      alert('Bitte Name und Kanton eingeben')
+      return
+    }
+
+    try {
+      setUploading(true)
+      await axios.post('/api/clubs', newClub)
+      
+      // Refresh clubs list
+      await loadClubs()
+      
+      // Reset form
+      setNewClub({
+        name: '',
+        canton: 'ZH',
+        town: '',
+        website: '',
+        logo: ''
+      })
+      setShowAddClub(false)
+      
+      alert('Club erfolgreich hinzugefügt!')
+    } catch (error) {
+      console.error('Error adding club:', error)
+      alert('Fehler beim Hinzufügen des Clubs')
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  const cantons = [
+    'AG', 'AI', 'AR', 'BE', 'BL', 'BS', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU',
+    'NE', 'NW', 'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH'
+  ]
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 py-12">
@@ -67,12 +112,121 @@ export default function ManageClubLogosPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Club Logos verwalten</h1>
-          <p className="text-lg text-gray-600">
-            Lade Logos für die Volleyball Clubs hoch
-          </p>
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">Club Logos verwalten</h1>
+            <p className="text-lg text-gray-600">
+              Lade Logos für die Volleyball Clubs hoch
+            </p>
+          </div>
+          <button
+            onClick={() => setShowAddClub(true)}
+            className="flex items-center gap-2 bg-habicht-600 text-white px-6 py-3 rounded-lg hover:bg-habicht-700 transition font-medium"
+          >
+            <Plus className="w-5 h-5" />
+            Neuer Club
+          </button>
         </div>
+
+        {showAddClub && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900">Neuen Club hinzufügen</h2>
+                  <button
+                    onClick={() => setShowAddClub(false)}
+                    className="text-gray-400 hover:text-gray-600"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Club Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={newClub.name}
+                      onChange={(e) => setNewClub({ ...newClub, name: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
+                      placeholder="z.B. Volley Luzern"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Kanton *
+                    </label>
+                    <select
+                      value={newClub.canton}
+                      onChange={(e) => setNewClub({ ...newClub, canton: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
+                    >
+                      {cantons.map((canton) => (
+                        <option key={canton} value={canton}>{canton}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Stadt/Ort
+                    </label>
+                    <input
+                      type="text"
+                      value={newClub.town}
+                      onChange={(e) => setNewClub({ ...newClub, town: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
+                      placeholder="z.B. Luzern"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Website
+                    </label>
+                    <input
+                      type="url"
+                      value={newClub.website}
+                      onChange={(e) => setNewClub({ ...newClub, website: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
+                      placeholder="https://..."
+                    />
+                  </div>
+
+                  <div>
+                    <ImageUpload
+                      label="Club Logo"
+                      value={newClub.logo}
+                      onChange={(base64) => setNewClub({ ...newClub, logo: base64 })}
+                      aspectRatio="square"
+                      helpText="Logo wird als Profilbild für den Club verwendet"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex gap-3 mt-6">
+                  <button
+                    onClick={handleAddClub}
+                    disabled={!newClub.name || !newClub.canton || uploading}
+                    className="flex-1 bg-habicht-600 text-white px-6 py-3 rounded-lg hover:bg-habicht-700 transition disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                  >
+                    {uploading ? 'Wird hinzugefügt...' : 'Club hinzufügen'}
+                  </button>
+                  <button
+                    onClick={() => setShowAddClub(false)}
+                    className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium"
+                  >
+                    Abbrechen
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {selectedClub ? (
           <div className="bg-white rounded-lg shadow-md p-8">

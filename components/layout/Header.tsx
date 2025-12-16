@@ -98,7 +98,8 @@ export default function Header() {
                   Registrieren
                 </Link>
               </>
-            )}            </div>          </div>
+            )}
+          </div>
 
           {/* Mobile menu button */}
           <button

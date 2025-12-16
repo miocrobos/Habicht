@@ -46,6 +46,7 @@ interface PlayerData {
   achievements: string[]
   clubHistory: any[]
   videos: any[]
+  highlightVideo: string | null
   views: number
   lookingForClub: boolean
   showEmail: boolean
@@ -89,6 +90,11 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         setLoading(true)
         const playerResponse = await axios.get(`/api/players/${params.id}`)
         const playerData = playerResponse.data.player
+        
+        console.log('Player Data:', playerData)
+        console.log('Club History:', playerData?.clubHistory)
+        console.log('Videos:', playerData?.videos)
+        console.log('Highlight Video:', playerData?.highlightVideo)
         
         if (playerData) {
           setPlayer(playerData)
@@ -549,7 +555,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Vereinsgeschichte</h3>
                 {player.clubHistory && player.clubHistory.length > 0 ? (
-                  <ClubHistory clubHistory={player.clubHistory} />
+                  <ClubHistory history={player.clubHistory} />
                 ) : (
                   <div className="text-center py-12">
                     <p className="text-gray-500 dark:text-gray-400">Kei Vereinsgeschichte Verfüegbar</p>
@@ -575,9 +581,28 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     </Link>
                   )}
                 </div>
-                {player.videos && player.videos.length > 0 ? (
+                {(player.highlightVideo || (player.videos && player.videos.length > 0)) ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {player.videos.map((video, idx) => (
+                    {/* Show highlightVideo from registration if exists */}
+                    {player.highlightVideo && (
+                      <div className="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden shadow-md">
+                        <div className="aspect-video bg-gray-900 relative">
+                          <video
+                            controls
+                            className="w-full h-full"
+                          >
+                            <source src={player.highlightVideo} type="video/mp4" />
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                        <div className="p-4">
+                          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Registrierungs-Highlight Video</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">Video us de Erstregistrierig</p>
+                        </div>
+                      </div>
+                    )}
+                    {/* Show regular videos */}
+                    {player.videos && player.videos.map((video, idx) => (
                       <div key={idx} className="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden shadow-md">
                         <div className="aspect-video bg-gray-900 relative">
                           {video.url && (

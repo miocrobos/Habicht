@@ -4,12 +4,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import axios from 'axios'
-import { Award, User, Mail, Lock, Calendar, MapPin, TrendingUp, Target, Video, Shield, Globe } from 'lucide-react'
+import { Award, User, Mail, Lock, Calendar, MapPin, TrendingUp, Target } from 'lucide-react'
 import ClubSelector from '@/components/shared/ClubSelector'
 import ImageUpload from '@/components/shared/ImageUpload'
-import VideoUpload from '@/components/shared/VideoUpload'
-import StarRating from '@/components/shared/StarRating'
-import { SWISS_UNIVERSITIES, SWISS_FACHHOCHSCHULEN, SWISS_KANTONSSCHULEN, NATIONALITIES } from '@/lib/swissEducation'
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -27,7 +24,6 @@ export default function RegisterPage() {
     lastName: '',
     dateOfBirth: '',
     gender: '',
-    nationality: '',
     position: '',
     height: '',
     blockReach: '',
@@ -35,30 +31,13 @@ export default function RegisterPage() {
     jerseyNumber: '',
     city: '',
     canton: '',
-    currentClub: '',
     currentLeague: '',
-    desiredLeague: '',
-    interestedClubs: [] as string[],
-    achievements: [] as string[],
-    profileImage: '',
-    coverImage: '',
-    bio: '',
-    
-    // Social Media & Videos
-    instagram: '',
-    tiktok: '',
-    youtube: '',
-    highlightVideo: '',
-    
-    // Skills (1-5 stars)
-    skillReceiving: 0,
-    skillServing: 0,
-    skillAttacking: 0,
-    skillBlocking: 0,
-    skillDefense: 0,
-    
-    // Swiss Volley License
-    swissVolleyLicense: '',
+    desiredLeague: '', // NEW: Target league level
+    interestedClubs: [] as string[], // NEW: Array of club IDs
+    achievements: [] as string[], // Array of achievements
+    profileImage: '', // NEW: Required profile picture
+    coverImage: '', // NEW: Optional cover image
+    bio: '', // Player bio/description
     
     // Education
     schoolName: '',
@@ -67,27 +46,10 @@ export default function RegisterPage() {
     
     // Contact
     phone: '',
-    
-    // Scout/Recruiter Specific
-    scoutIdDocument: '',
-    scoutingLeagues: [] as string[],
-    clubAffiliation: '',
+    instagram: '',
   })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-
-  const validatePassword = (password: string): { valid: boolean; message: string } => {
-    if (password.length < 8) {
-      return { valid: false, message: 'Passwort muss mindestens 8 Zeichen lang sein' }
-    }
-    if (!/\d/.test(password)) {
-      return { valid: false, message: 'Passwort muss mindestens eine Zahl enthalten' }
-    }
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      return { valid: false, message: 'Passwort muss mindestens ein Sonderzeichen enthalten (!@#$%^&*...)' }
-    }
-    return { valid: true, message: '' }
-  }
 
   const calculateAge = (dateOfBirth: string) => {
     const today = new Date()
@@ -113,19 +75,13 @@ export default function RegisterPage() {
         return
       }
 
-      const passwordCheck = validatePassword(formData.password)
-      if (!passwordCheck.valid) {
-        setError(passwordCheck.message)
+      if (formData.password.length < 8) {
+        setError('Passwort muss mindestens 8 Zeichen lang sein')
         return
       }
 
       if (formData.role === 'PLAYER') {
         setStep(2)
-        return
-      }
-      
-      if (formData.role === 'RECRUITER') {
-        setStep(2) // Scout info step
         return
       }
     }
@@ -162,24 +118,6 @@ export default function RegisterPage() {
         setError('Bitte lade ein Profilbild hoch')
         return
       }
-      
-      if (!formData.nationality) {
-        setError('Bitte wähle deine Nationalität')
-        return
-      }
-    }
-    
-    // Step 2 validations (Scout/Recruiter info)
-    if (step === 2 && formData.role === 'RECRUITER') {
-      if (!formData.scoutIdDocument) {
-        setError('Bitte lade einen Ausweis zur Verifizierung hoch')
-        return
-      }
-      
-      if (formData.scoutingLeagues.length === 0) {
-        setError('Bitte wähle mindestens eine Liga aus')
-        return
-      }
     }
 
     setLoading(true)
@@ -195,8 +133,6 @@ export default function RegisterPage() {
           lastName: formData.lastName,
           dateOfBirth: formData.dateOfBirth,
           gender: formData.gender,
-          nationality: formData.nationality,
-          currentClub: formData.currentClub || undefined,
           currentLeague: formData.currentLeague,
           desiredLeague: formData.desiredLeague || undefined,
           interestedClubs: formData.interestedClubs,
@@ -205,10 +141,6 @@ export default function RegisterPage() {
           graduationYear: formData.graduationYear ? parseInt(formData.graduationYear) : undefined,
           phone: formData.phone,
           instagram: formData.instagram,
-          tiktok: formData.tiktok || undefined,
-          youtube: formData.youtube || undefined,
-          highlightVideo: formData.highlightVideo || undefined,
-          swissVolleyLicense: formData.swissVolleyLicense || undefined,
           achievements: formData.achievements,
           canton: formData.canton,
           city: formData.city,
@@ -217,33 +149,15 @@ export default function RegisterPage() {
           blockReach: formData.blockReach ? parseFloat(formData.blockReach) : undefined,
           spikeReach: formData.spikeReach ? parseFloat(formData.spikeReach) : undefined,
           jerseyNumber: formData.jerseyNumber ? parseInt(formData.jerseyNumber) : undefined,
-          skillReceiving: formData.skillReceiving,
-          skillServing: formData.skillServing,
-          skillAttacking: formData.skillAttacking,
-          skillBlocking: formData.skillBlocking,
-          skillDefense: formData.skillDefense,
           profileImage: formData.profileImage,
           coverImage: formData.coverImage || undefined,
           bio: formData.bio || undefined,
         } : undefined,
-        recruiterData: formData.role === 'RECRUITER' ? {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          scoutIdDocument: formData.scoutIdDocument,
-          scoutingLeagues: formData.scoutingLeagues,
-          clubAffiliation: formData.clubAffiliation || undefined,
-          canton: formData.canton,
-          phone: formData.phone,
-        } : undefined,
       }
 
-      const response = await axios.post('/api/auth/register', registrationData)
-      
-      // Send verification email
-      await axios.post('/api/auth/send-verification', { email: formData.email })
+      await axios.post('/api/auth/register', registrationData)
 
-      // Redirect to login with verification message
-      router.push('/auth/login?registered=true&verify=pending')
+      router.push('/auth/login?registered=true')
     } catch (error: any) {
       setError(error.response?.data?.error || 'Ein Fehler ist aufgetreten')
     } finally {

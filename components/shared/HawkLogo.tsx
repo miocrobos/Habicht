@@ -16,14 +16,14 @@ export default function HawkLogo({ size = 'md', animated = true, showText = fals
 
   return (
     <div className={`flex items-center gap-3 ${animated ? 'group' : ''}`}>
-      <div className={`relative ${sizes[size]} ${animated ? 'transition-transform group-hover:scale-110' : ''}`} style={{ isolation: 'isolate', colorScheme: 'light', mixBlendMode: 'normal' }}>
+      <div className={`relative ${sizes[size]} ${animated ? 'transition-transform group-hover:scale-110' : ''}`} style={{ isolation: 'isolate', colorScheme: 'only light', mixBlendMode: 'normal' }}>
         <Image
           src="/eagle-logo.png"
           alt="Eagle Logo"
           fill
           className={`object-contain ${animated ? 'group-hover:drop-shadow-2xl' : ''} no-invert`}
           priority
-          style={{ filter: 'none', WebkitFilter: 'none', colorScheme: 'light', mixBlendMode: 'normal' }}
+          style={{ filter: 'none', WebkitFilter: 'none', colorScheme: 'only light', mixBlendMode: 'normal' }}
         />
       </div>
       

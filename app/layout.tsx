@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: 'Scouting platform for Swiss volleyball athletes from high school to university. Find talented players, view highlights, and connect with recruits.',
   keywords: ['volleyball', 'swiss volleyball', 'scouting', 'recruitment', 'athletes', 'swiss volley'],
   other: {
-    'color-scheme': 'light',
+    'color-scheme': 'only light',
   },
 }
 
@@ -22,8 +22,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="de-CH">
-      <body className={inter.className}>
+    <html lang="de-CH" style={{ colorScheme: 'only light' }}>
+      <head>
+        <meta name="color-scheme" content="only light" />
+      </head>
+      <body className={inter.className} style={{ colorScheme: 'only light' }}>
         <AuthProvider>
           <div className="flex flex-col min-h-screen">
             <Header />

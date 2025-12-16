@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  color-scheme: only light;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,7 +14,12 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    color-scheme: only light;
   }
+}
+
+html {
+  color-scheme: only light;
 }
 
 body {
@@ -24,7 +30,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-  color-scheme: light;
+  color-scheme: only light;
 }
 
 @layer utilities {
@@ -46,10 +52,10 @@ body {
     filter: none !important;
     -webkit-filter: none !important;
     mix-blend-mode: normal !important;
-    color-scheme: light !important;
+    color-scheme: only light !important;
   }
   
-  /* Force no inversion in dark mode */
+  /* Force no inversion in dark mode and Opera GX */
   @media (prefers-color-scheme: dark) {
     .no-invert,
     .no-invert img,
@@ -58,7 +64,7 @@ body {
       filter: none !important;
       -webkit-filter: none !important;
       mix-blend-mode: normal !important;
-      color-scheme: light !important;
+      color-scheme: only light !important;
     }
   }
   

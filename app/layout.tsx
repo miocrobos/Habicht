@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/components/providers/AuthProvider'
+import { ThemeProvider } from '@/contexts/ThemeContext'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
@@ -11,9 +12,6 @@ export const metadata: Metadata = {
   title: 'Habicht - Swiss Volleyball Scouting Platform',
   description: 'Scouting platform for Swiss volleyball athletes from high school to university. Find talented players, view highlights, and connect with recruits.',
   keywords: ['volleyball', 'swiss volleyball', 'scouting', 'recruitment', 'athletes', 'swiss volley'],
-  other: {
-    'color-scheme': 'only light',
-  },
 }
 
 export default function RootLayout({
@@ -22,20 +20,19 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="de-CH" style={{ colorScheme: 'only light' }}>
-      <head>
-        <meta name="color-scheme" content="only light" />
-      </head>
-      <body className={inter.className} style={{ colorScheme: 'only light' }}>
-        <AuthProvider>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-grow">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </AuthProvider>
+    <html lang="de-CH">
+      <body className={inter.className}>
+        <ThemeProvider>
+          <AuthProvider>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

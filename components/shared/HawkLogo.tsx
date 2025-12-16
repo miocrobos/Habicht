@@ -23,6 +23,7 @@ export default function HawkLogo({ size = 'md', animated = true, showText = fals
           fill
           className={`object-contain ${animated ? 'group-hover:drop-shadow-2xl' : ''} no-invert`}
           priority
+          style={{ filter: 'none', WebkitFilter: 'none' }}
         />
       </div>
       

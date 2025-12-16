@@ -23,6 +23,7 @@ export default function Header() {
                 fill
                 className="object-contain group-hover:drop-shadow-lg no-invert"
                 priority
+                style={{ filter: 'none', WebkitFilter: 'none' }}
               />
             </div>
             <div className="flex flex-col">

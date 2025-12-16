@@ -44,8 +44,14 @@ body {
     -webkit-filter: none !important;
   }
   
+  /* Force no inversion in dark mode */
   @media (prefers-color-scheme: dark) {
     .no-invert {
+      filter: none !important;
+      -webkit-filter: none !important;
+    }
+    
+    img.no-invert {
       filter: none !important;
       -webkit-filter: none !important;
     }

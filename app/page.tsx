@@ -104,6 +104,7 @@ export default function Home() {
                     fill
                     className="object-contain no-invert"
                     priority
+                    style={{ filter: 'none', WebkitFilter: 'none' }}
                   />
                 </div>
               </div>

@@ -36,6 +36,7 @@ export default function CantonFlag({ canton, size = 'md', showName = false }: Ca
           fill
           className="object-contain no-invert"
           priority
+          style={{ filter: 'none', WebkitFilter: 'none' }}
         />
       </div>
       {showName && (

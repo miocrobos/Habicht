@@ -45,18 +45,18 @@ export default function PlayersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Spieler entdecken</h1>
-          <p className="text-lg text-gray-600">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Spieler entdecken</h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
             Finde talentierte Schweizer Volleyball-Spieler
           </p>
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* Search */}
             <div className="lg:col-span-2">
@@ -140,11 +140,11 @@ export default function PlayersPage() {
         {loading ? (
           <div className="text-center py-12">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-habicht-600"></div>
-            <p className="mt-4 text-gray-600">Lade Spieler...</p>
+            <p className="mt-4 text-gray-600 dark:text-gray-400">Lade Spieler...</p>
           </div>
         ) : (
           <>
-            <div className="mb-4 text-sm text-gray-600">
+            <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
               {players.length} Spieler gfunde
             </div>
 
@@ -155,8 +155,8 @@ export default function PlayersPage() {
             </div>
 
             {players.length === 0 && (
-              <div className="text-center py-12 bg-white rounded-lg">
-                <p className="text-gray-600">Kei Spieler gfunde mit dene Filter</p>
+              <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg">
+                <p className="text-gray-600 dark:text-gray-400">Kei Spieler gfunde mit dene Filter</p>
                 <button
                   onClick={() => setFilters({ search: '', position: '', canton: '', league: '', minHeight: '' })}
                   className="mt-4 text-habicht-600 hover:text-habicht-700 font-medium"
@@ -177,7 +177,7 @@ function PlayerCard({ player }: { player: any }) {
   
   return (
     <Link href={`/players/${player.id}`}>
-      <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition overflow-hidden cursor-pointer">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition overflow-hidden cursor-pointer">
         {/* Profile Image with Canton Colors */}
         <div 
           className="h-48 flex items-center justify-center relative"

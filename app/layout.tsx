@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: 'Habicht - Swiss Volleyball Scouting Platform',
   description: 'Scouting platform for Swiss volleyball athletes from high school to university. Find talented players, view highlights, and connect with recruits.',
   keywords: ['volleyball', 'swiss volleyball', 'scouting', 'recruitment', 'athletes', 'swiss volley'],
+  icons: {
+    icon: '/eagle-logo.png',
+  },
 }
 
 export default function RootLayout({

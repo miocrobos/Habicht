@@ -40,21 +40,25 @@ body {
     animation: fadeIn 0.5s ease-in;
   }
   
-  .no-invert {
+  .no-invert,
+  .no-invert img,
+  .no-invert > img {
     filter: none !important;
     -webkit-filter: none !important;
+    mix-blend-mode: normal !important;
+    color-scheme: light !important;
   }
   
   /* Force no inversion in dark mode */
   @media (prefers-color-scheme: dark) {
-    .no-invert {
-      filter: none !important;
-      -webkit-filter: none !important;
-    }
-    
+    .no-invert,
+    .no-invert img,
+    .no-invert > img,
     img.no-invert {
       filter: none !important;
       -webkit-filter: none !important;
+      mix-blend-mode: normal !important;
+      color-scheme: light !important;
     }
   }
   

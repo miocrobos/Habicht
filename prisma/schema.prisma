@@ -98,6 +98,9 @@ model User {
   password      String
   name          String
   role          UserRole  @default(PLAYER)
+  emailVerified Boolean   @default(false)
+  verificationToken String?  @unique
+  verificationTokenExpiry DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   
@@ -116,33 +119,56 @@ model Player {
   lastName          String
   dateOfBirth       DateTime
   gender            Gender
-  height            Float       // in cm
+  height            Float?      // in cm
   weight            Float?      // in kg
-  blockReach        Float?      // in cm
-  spikeReach        Float?      // in cm
+  spikeHeight       Float?      // spike reach in cm
+  blockHeight       Float?      // block reach in cm
+  blockReach        Float?      // in cm (legacy field)
+  spikeReach        Float?      // in cm (legacy field)
   nationality       String      @default("Swiss")
-  canton            Canton
+  canton            Canton      // Canton of residence
   city              String
   
+  // Employment/Education Status
+  employmentStatus  String?     // STUDENT_FULL_TIME, STUDENT_PART_TIME, WORKING_FULL_TIME, WORKING_PART_TIME
+  occupation        String?     // Job title if working
+  
   // Volleyball Information
-  position          Position
+  positions         Position[]  @default([]) // Multiple positions player can play
   jerseyNumber      Int?
+  hasClub           Boolean     @default(false) // Whether player is currently in a club
+  clubName          String?     // Name of current club (if not in our database)
   currentClubId     String?
   currentClub       Club?       @relation("CurrentClub", fields: [currentClubId], references: [id])
   currentLeague     League
   desiredLeague     League?     // Target league level player wants to play in
   interestedClubs   String[]    @default([]) // Array of club IDs player is interested in
   
+  // Skills Self-Assessment (1-5 stars)
+  skillReceiving    Int?        @default(0)
+  skillServing      Int?        @default(0)
+  skillAttacking    Int?        @default(0)
+  skillBlocking     Int?        @default(0)
+  skillDefense      Int?        @default(0)
+  
   // Academic Information
-  schoolName        String?
-  schoolType        String?     // GYMNASIUM, BERUFSSCHULE, FH, UNIVERSITY, OTHER
+  schoolName        String?     // Name of school/university
+  schoolType        SchoolType? // Type of educational institution
   graduationYear    Int?
+  isStudent         Boolean     @default(false) // Whether currently a student
   
   // Contact & Social Media
   phone             String?
-  instagramHandle   String?
-  tiktokHandle      String?
-  youtubeChannel    String?
+  instagram         String?     // Instagram handle
+  instagramHandle   String?     // Legacy field
+  tiktok            String?     // TikTok handle
+  tiktokHandle      String?     // Legacy field
+  youtube           String?     // YouTube channel
+  youtubeChannel    String?     // Legacy field
+  
+  // Media & Documents
+  highlightVideo    String?     // Base64 or URL to highlight video
+  swissVolleyLicense String?    // Swiss Volley license photo
   
   // Profile
   bio               String?     @db.Text
@@ -156,6 +182,10 @@ model Player {
   isActive          Boolean     @default(true)      // Currently active player
   lookingForClub    Boolean     @default(false)     // Actively seeking new club
   isPlaceholder     Boolean     @default(false)     // Imported from Volleybox, can be claimed/removed
+  
+  // Privacy Settings
+  showEmail         Boolean     @default(false)     // Show email publicly
+  showPhone         Boolean     @default(false)     // Show phone publicly
   
   // Stats
   views             Int         @default(0)
@@ -214,13 +244,20 @@ model ClubHistory {
   id                String      @id @default(cuid())
   playerId          String
   player            Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  clubId            String
-  club              Club        @relation(fields: [clubId], references: [id])
+  clubId            String?     // Optional - null if club not in database
+  club              Club?       @relation(fields: [clubId], references: [id])
+  
+  // For clubs not in database
+  clubName          String?     // Manual club name entry
+  clubLogo          String?     // Base64 or URL to uploaded club logo
+  clubCountry       String      @default("Switzerland") // Country if club outside Switzerland
+  clubWebsiteUrl    String?     // Club website URL - set once during registration, immutable
+  league            String?     // League/Division name
   
   startDate         DateTime
   endDate           DateTime?
-  league            League
   jerseyNumber      Int?
+  currentClub       Boolean     @default(false) // Is this the player's current club
   
   createdAt         DateTime    @default(now())
   
@@ -409,6 +446,7 @@ model Recruiter {
   
   verified          Boolean     @default(false)
   canChat           Boolean     @default(true)
+  lookingForMembers Boolean     @default(false) // Actively recruiting players
   
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt

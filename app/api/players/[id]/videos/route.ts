@@ -1,0 +1,72 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+
+// Get all videos for a player
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const videos = await prisma.video.findMany({
+      where: { playerId: params.id },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return NextResponse.json({ videos });
+  } catch (error) {
+    console.error('Error fetching videos:', error);
+    return NextResponse.json(
+      { error: 'Fehler Bim Lade Vo Videos' },
+      { status: 500 }
+    );
+  }
+}
+
+// Add a new video
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const session = await getServerSession();
+    
+    if (!session?.user) {
+      return NextResponse.json(
+        { error: 'Nid Aamäldet' },
+        { status: 401 }
+      );
+    }
+
+    const body = await request.json();
+    const { url, title, description, videoType } = body;
+
+    if (!url) {
+      return NextResponse.json(
+        { error: 'Video URL Isch Erforderlich' },
+        { status: 400 }
+      );
+    }
+
+    const video = await prisma.video.create({
+      data: {
+        playerId: params.id,
+        url,
+        title: title || '',
+        description: description || '',
+        videoType: videoType || 'HIGHLIGHT',
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      video,
+    });
+  } catch (error) {
+    console.error('Error adding video:', error);
+    return NextResponse.json(
+      { error: 'Fehler Bim Hinzuefüge Vo Video' },
+      { status: 500 }
+    );
+  }
+}

@@ -1,0 +1,132 @@
+﻿'use client'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import axios from 'axios'
+import { Award, User, Mail, Lock, Calendar, MapPin, TrendingUp, Target, Video, Shield, Globe } from 'lucide-react'
+import ClubSelector from '@/components/shared/ClubSelector'
+import ImageUpload from '@/components/shared/ImageUpload'
+import VideoUpload from '@/components/shared/VideoUpload'
+import StarRating from '@/components/shared/StarRating'
+import { SWISS_UNIVERSITIES, SWISS_FACHHOCHSCHULEN, SWISS_KANTONSSCHULEN, NATIONALITIES } from '@/lib/swissEducation'
+export default function RegisterPage() {
+  const router = useRouter()
+  const [step, setStep] = useState(1)
+  const [formData, setFormData] = useState({
+    name: '', email: '', password: '', confirmPassword: '', role: 'PLAYER',
+    firstName: '', lastName: '', dateOfBirth: '', gender: '', nationality: '', position: '',
+    height: '', blockReach: '', spikeReach: '', jerseyNumber: '', city: '', canton: '',
+    currentClub: '', currentLeague: '', desiredLeague: '', interestedClubs: [] as string[],
+    achievements: [] as string[], profileImage: '', coverImage: '', bio: '',
+    instagram: '', tiktok: '', youtube: '', highlightVideo: '',
+    skillReceiving: 0, skillServing: 0, skillAttacking: 0, skillBlocking: 0, skillDefense: 0,
+    swissVolleyLicense: '', schoolName: '', schoolType: '', graduationYear: '', phone: '',
+    scoutIdDocument: '', scoutingLeagues: [] as string[], clubAffiliation: '',
+  })
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const calculateAge = (dateOfBirth: string) => {
+    const today = new Date()
+    const birthDate = new Date(dateOfBirth)
+    let age = today.getFullYear() - birthDate.getFullYear()
+    const monthDiff = today.getMonth() - birthDate.getMonth()
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) { age-- }
+    return age
+  }
+  const validatePassword = (password: string) => {
+    if (password.length < 8) return { valid: false, message: 'Password Must Be At Least 8 Characters' }
+    if (!/\d/.test(password)) return { valid: false, message: 'Password Must Contain A Number' }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) return { valid: false, message: 'Password Must Contain A Special Character' }
+    return { valid: true, message: '' }
+  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError('')
+    if (step === 1) {
+      if (formData.password !== formData.confirmPassword) { setError('Passwords Do Not Match'); return }
+      const passwordCheck = validatePassword(formData.password)
+      if (!passwordCheck.valid) { setError(passwordCheck.message); return }
+      if (formData.role === 'PLAYER') { setStep(2); return }
+      if (formData.role === 'RECRUITER') { setStep(2); return }
+    }
+    if (step === 2 && formData.role === 'PLAYER') {
+      if (!formData.dateOfBirth) { setError('Please Enter Your Date Of Birth'); return }
+      const age = calculateAge(formData.dateOfBirth)
+      if (age > 26) { setError('This Platform Is For Players Up To 26 Years'); return }
+      if (age < 13) { setError('You Must Be At Least 13 Years Old'); return }
+      if (!formData.position) { setError('Please Select Your Position'); return }
+      if (!formData.gender) { setError('Please Select Your Gender'); return }
+      if (!formData.profileImage) { setError('Please Upload A Profile Image'); return }
+      if (!formData.nationality) { setError('Please Select Your Nationality'); return }
+    }
+    if (step === 2 && formData.role === 'RECRUITER') {
+      if (!formData.scoutIdDocument) { setError('Please Upload ID For Verification'); return }
+      if (formData.scoutingLeagues.length === 0) { setError('Please Select At Least One League'); return }
+    }
+    setLoading(true)
+    try {
+      const registrationData = {
+        name: `${formData.firstName} ${formData.lastName}`.trim() || formData.name,
+        email: formData.email, password: formData.password, role: formData.role,
+        playerData: formData.role === 'PLAYER' ? {
+          firstName: formData.firstName, lastName: formData.lastName, dateOfBirth: formData.dateOfBirth,
+          gender: formData.gender, nationality: formData.nationality, currentClub: formData.currentClub || undefined,
+          currentLeague: formData.currentLeague, desiredLeague: formData.desiredLeague || undefined,
+          interestedClubs: formData.interestedClubs, schoolName: formData.schoolName, schoolType: formData.schoolType,
+          graduationYear: formData.graduationYear ? parseInt(formData.graduationYear) : undefined,
+          phone: formData.phone, instagram: formData.instagram, tiktok: formData.tiktok || undefined,
+          youtube: formData.youtube || undefined, highlightVideo: formData.highlightVideo || undefined,
+          swissVolleyLicense: formData.swissVolleyLicense || undefined, achievements: formData.achievements,
+          canton: formData.canton, city: formData.city, position: formData.position,
+          height: formData.height ? parseFloat(formData.height) : undefined,
+          blockReach: formData.blockReach ? parseFloat(formData.blockReach) : undefined,
+          spikeReach: formData.spikeReach ? parseFloat(formData.spikeReach) : undefined,
+          jerseyNumber: formData.jerseyNumber ? parseInt(formData.jerseyNumber) : undefined,
+          skillReceiving: formData.skillReceiving, skillServing: formData.skillServing,
+          skillAttacking: formData.skillAttacking, skillBlocking: formData.skillBlocking, skillDefense: formData.skillDefense,
+          profileImage: formData.profileImage, coverImage: formData.coverImage || undefined, bio: formData.bio || undefined,
+        } : undefined,
+        recruiterData: formData.role === 'RECRUITER' ? {
+          firstName: formData.firstName, lastName: formData.lastName, scoutIdDocument: formData.scoutIdDocument,
+          scoutingLeagues: formData.scoutingLeagues, clubAffiliation: formData.clubAffiliation || undefined,
+          canton: formData.canton, phone: formData.phone,
+        } : undefined,
+      }
+      await axios.post('/api/auth/register', registrationData)
+      await axios.post('/api/auth/send-verification', { email: formData.email })
+      router.push('/auth/login?registered=true&verify=pending')
+    } catch (error: any) {
+      setError(error.response?.data?.error || 'An Error Occurred')
+    } finally {
+      setLoading(false)
+    }
+  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4">
+      <div className="max-w-2xl w-full space-y-8">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Registration</h2>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">Join The Swiss Volleyball Community</p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {error && (
+              <div className="rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4">
+                <p className="text-sm text-red-800 dark:text-red-200 font-medium">{error}</p>
+              </div>
+            )}
+            {step === 1 && (
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Account Information</h3>
+                <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"><Mail className="w-4 h-4 inline mr-1" />Email</label>
+                  <input name="email" type="email" required value={formData.email} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white" /></div>
+                <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"><Lock className="w-4 h-4 inline mr-1" />Password (8+ Chars, Number, Symbol)</label>
+                  <input name="password" type="password" required value={formData.password} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white" /></div>
+                <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Confirm Password</label>
+                  <input name="confirmPassword" type="password" required value={formData.confirmPassword} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white" /></div>
+                <button type="submit" disabled={loading} className="w-full bg-red-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-red-700 transition disabled:opacity-50">{loading ? 'Creating...' : 'Continue '}</button>
+              </div>
+            )}

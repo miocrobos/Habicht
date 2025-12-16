@@ -1,8 +1,9 @@
 'use client'
 
 import { useTheme } from '@/contexts/ThemeContext'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
+import axios from 'axios'
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme()
@@ -15,6 +16,44 @@ export default function SettingsPage() {
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [showEmail, setShowEmail] = useState(false)
+  const [showPhone, setShowPhone] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (session?.user?.playerId) {
+      fetchPrivacySettings()
+    }
+  }, [session])
+
+  const fetchPrivacySettings = async () => {
+    try {
+      const response = await axios.get(`/api/players/${session?.user?.playerId}`)
+      const player = response.data.player
+      setShowEmail(player.showEmail || false)
+      setShowPhone(player.showPhone || false)
+    } catch (error) {
+      console.error('Error fetching privacy settings:', error)
+    }
+  }
+
+  const updatePrivacySettings = async (field: 'showEmail' | 'showPhone', value: boolean) => {
+    try {
+      setLoading(true)
+      await axios.put(`/api/players/${session?.user?.playerId}`, {
+        playerData: {
+          [field]: value
+        }
+      })
+      if (field === 'showEmail') setShowEmail(value)
+      if (field === 'showPhone') setShowPhone(value)
+      showSaveConfirmation()
+    } catch (error) {
+      console.error('Error updating privacy settings:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleThemeChange = (newTheme: 'light' | 'dark') => {
     setTheme(newTheme)
@@ -208,13 +247,62 @@ export default function SettingsPage() {
                     <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">Login & Sicherheit</h2>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Verwalten Sie Ihr Passwort und Sicherheitseinstellungen</p>
                   </div>
-                  <div className="p-6">
-                    <div className="space-y-6">
+                  <div className="p-6 space-y-8">
+                    {/* Privacy Settings */}
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">Datenschutz</h3>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Steuern Sie, welche Informationen öffentlich sichtbar sind</p>
+                      
+                      {/* Email Toggle */}
+                      <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                        <div className="flex-1">
+                          <p className="font-medium text-gray-900 dark:text-white">E-Mail-Adresse Anzeige</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Ihre E-Mail-Adresse für andere sichtbar machen</p>
+                        </div>
+                        <button
+                          onClick={() => updatePrivacySettings('showEmail', !showEmail)}
+                          disabled={loading}
+                          className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 ${
+                            showEmail ? 'bg-red-600' : 'bg-gray-300 dark:bg-gray-600'
+                          } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        >
+                          <span
+                            className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                              showEmail ? 'translate-x-7' : 'translate-x-1'
+                            }`}
+                          />
+                        </button>
+                      </div>
+
+                      {/* Phone Toggle */}
+                      <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                        <div className="flex-1">
+                          <p className="font-medium text-gray-900 dark:text-white">Telefonnummer Anzeige</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Ihre Telefonnummer für andere sichtbar machen</p>
+                        </div>
+                        <button
+                          onClick={() => updatePrivacySettings('showPhone', !showPhone)}
+                          disabled={loading}
+                          className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 ${
+                            showPhone ? 'bg-red-600' : 'bg-gray-300 dark:bg-gray-600'
+                          } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        >
+                          <span
+                            className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                              showPhone ? 'translate-x-7' : 'translate-x-1'
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">E-Mail-Adresse</label>
                         <input type="email" value={session?.user?.email || ''} disabled className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 cursor-not-allowed" />
                       </div>
-                      <form onSubmit={handlePasswordChange} className="space-y-4">
+                      <form onSubmit={handlePasswordChange} className="space-y-4 mt-6">
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white">Passwort Ändern</h3>
                         <div>
                           <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">Aktuelles Passwort</label>
                           <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-red-500" placeholder="Aktuelles Passwort eingeben" />

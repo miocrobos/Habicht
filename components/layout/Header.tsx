@@ -56,8 +56,8 @@ export default function Header() {
                 Dashboard
               </Link>
             )}
-            {session?.user.role === 'PLAYER' && (
-              <Link href="/dashboard/player" className="text-gray-700 hover:text-swiss-red transition">
+            {session?.user.role === 'PLAYER' && session?.user.playerId && (
+              <Link href={`/players/${session.user.playerId}`} className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 Mein Profil
               </Link>
             )}
@@ -135,9 +135,11 @@ export default function Header() {
               </Link>
               {session ? (
                 <>
-                  <Link href="/profile" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                    Profil
-                  </Link>
+                  {session.user.role === 'PLAYER' && session.user.playerId && (
+                    <Link href={`/players/${session.user.playerId}`} className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
+                      Mein Profil
+                    </Link>
+                  )}
                   <button
                     onClick={() => signOut()}
                     className="text-left text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition"

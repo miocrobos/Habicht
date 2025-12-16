@@ -132,8 +132,29 @@ export const SWISS_SCHOOLS: Record<string, SchoolInfo> = {
     logo: '📘',
     website: 'https://hes-so.ch'
   },
+  'ZHDK': {
+    name: 'ZHdK - Zürcher Hochschule der Künste',
+    type: 'FH',
+    canton: 'ZH',
+    logo: '🎨',
+    website: 'https://zhdk.ch'
+  },
+  'FHO': {
+    name: 'FHO Fachhochschule Ostschweiz',
+    type: 'FH',
+    canton: 'SG',
+    logo: '📘',
+    website: 'https://fho.ch'
+  },
+  'FHGR': {
+    name: 'FH Graubünden',
+    type: 'FH',
+    canton: 'GR',
+    logo: '📘',
+    website: 'https://fhgr.ch'
+  },
 
-  // Kantonsschulen (Gymnasiums)
+  // Kantonsschulen (Gymnasiums) - Expanded
   'Kantonsschule Zürich Nord': {
     name: 'Kantonsschule Zürich Nord',
     type: 'GYMNASIUM',
@@ -224,6 +245,262 @@ export const SWISS_SCHOOLS: Record<string, SchoolInfo> = {
     canton: 'SG',
     logo: '🏫',
   },
+  'Kantonsschule Wettingen': {
+    name: 'Kantonsschule Wettingen',
+    type: 'GYMNASIUM',
+    canton: 'AG',
+    logo: '🏫',
+  },
+  'Kantonsschule Aarau': {
+    name: 'Kantonsschule Aarau',
+    type: 'GYMNASIUM',
+    canton: 'AG',
+    logo: '🏫',
+  },
+  'Kantonsschule Baden': {
+    name: 'Kantonsschule Baden',
+    type: 'GYMNASIUM',
+    canton: 'AG',
+    logo: '🏫',
+  },
+  'Kantonsschule Wohlen': {
+    name: 'Kantonsschule Wohlen',
+    type: 'GYMNASIUM',
+    canton: 'AG',
+    logo: '🏫',
+  },
+  'Kantonsschule Zug': {
+    name: 'Kantonsschule Zug',
+    type: 'GYMNASIUM',
+    canton: 'ZG',
+    logo: '🏫',
+  },
+  'Kantonsschule Menzingen': {
+    name: 'Kantonsschule Menzingen',
+    type: 'GYMNASIUM',
+    canton: 'ZG',
+    logo: '🏫',
+  },
+  'Kantonsschule Luzern': {
+    name: 'Kantonsschule Alpenquai Luzern',
+    type: 'GYMNASIUM',
+    canton: 'LU',
+    logo: '🏫',
+  },
+  'Kantonsschule Reussbühl': {
+    name: 'Kantonsschule Reussbühl Luzern',
+    type: 'GYMNASIUM',
+    canton: 'LU',
+    logo: '🏫',
+  },
+  'Kantonsschule Willisau': {
+    name: 'Kantonsschule Willisau',
+    type: 'GYMNASIUM',
+    canton: 'LU',
+    logo: '🏫',
+  },
+  'Kantonsschule Sursee': {
+    name: 'Kantonsschule Sursee',
+    type: 'GYMNASIUM',
+    canton: 'LU',
+    logo: '🏫',
+  },
+  'Stiftsschule Einsiedeln': {
+    name: 'Stiftsschule Einsiedeln',
+    type: 'GYMNASIUM',
+    canton: 'SZ',
+    logo: '🏫',
+  },
+  'Kollegium Schwyz': {
+    name: 'Kollegium Schwyz',
+    type: 'GYMNASIUM',
+    canton: 'SZ',
+    logo: '🏫',
+  },
+  'Kantonsschule Uri': {
+    name: 'Kantonsschule Uri Altdorf',
+    type: 'GYMNASIUM',
+    canton: 'UR',
+    logo: '🏫',
+  },
+  'Kollegi Uri': {
+    name: 'Kollegium Karl Borromäus Altdorf',
+    type: 'GYMNASIUM',
+    canton: 'UR',
+    logo: '🏫',
+  },
+  'Gymnasium Oberwil': {
+    name: 'Gymnasium Oberwil',
+    type: 'GYMNASIUM',
+    canton: 'BL',
+    logo: '🏫',
+  },
+  'Gymnasium Liestal': {
+    name: 'Gymnasium Liestal',
+    type: 'GYMNASIUM',
+    canton: 'BL',
+    logo: '🏫',
+  },
+  'Gymnasium Muttenz': {
+    name: 'Gymnasium Muttenz',
+    type: 'GYMNASIUM',
+    canton: 'BL',
+    logo: '🏫',
+  },
+  'Kantonsschule Frauenfeld': {
+    name: 'Kantonsschule Frauenfeld',
+    type: 'GYMNASIUM',
+    canton: 'TG',
+    logo: '🏫',
+  },
+  'Kantonsschule Kreuzlingen': {
+    name: 'Kantonsschule Kreuzlingen',
+    type: 'GYMNASIUM',
+    canton: 'TG',
+    logo: '🏫',
+  },
+  'Kantonsschule Romanshorn': {
+    name: 'Kantonsschule Romanshorn',
+    type: 'GYMNASIUM',
+    canton: 'TG',
+    logo: '🏫',
+  },
+  'Kantonsschule Chur': {
+    name: 'Bündner Kantonsschule Chur',
+    type: 'GYMNASIUM',
+    canton: 'GR',
+    logo: '🏫',
+  },
+  'Evangelische Mittelschule Schiers': {
+    name: 'Evangelische Mittelschule Schiers',
+    type: 'GYMNASIUM',
+    canton: 'GR',
+    logo: '🏫',
+  },
+  'Lyceum Alpinum Zuoz': {
+    name: 'Lyceum Alpinum Zuoz',
+    type: 'GYMNASIUM',
+    canton: 'GR',
+    logo: '🏫',
+  },
+  'Collège St-Michel Fribourg': {
+    name: 'Collège St-Michel Fribourg',
+    type: 'GYMNASIUM',
+    canton: 'FR',
+    logo: '🏫',
+  },
+  'Collège du Sud Bulle': {
+    name: 'Collège du Sud Bulle',
+    type: 'GYMNASIUM',
+    canton: 'FR',
+    logo: '🏫',
+  },
+  'Gymnase de Bulle': {
+    name: 'Gymnase de Bulle',
+    type: 'GYMNASIUM',
+    canton: 'FR',
+    logo: '🏫',
+  },
+  'Lycée Cantonal Porrentruy': {
+    name: 'Lycée Cantonal Porrentruy',
+    type: 'GYMNASIUM',
+    canton: 'JU',
+    logo: '🏫',
+  },
+  'Lycée Denis-de-Rougemont Neuchâtel': {
+    name: 'Lycée Denis-de-Rougemont Neuchâtel',
+    type: 'GYMNASIUM',
+    canton: 'NE',
+    logo: '🏫',
+  },
+  'Gymnase français de Bienne': {
+    name: 'Gymnase français de Bienne',
+    type: 'GYMNASIUM',
+    canton: 'BE',
+    logo: '🏫',
+  },
+  'Gymnase de Beaulieu Lausanne': {
+    name: 'Gymnase de Beaulieu Lausanne',
+    type: 'GYMNASIUM',
+    canton: 'VD',
+    logo: '🏫',
+  },
+  'Gymnase de Renens': {
+    name: 'Gymnase de Renens',
+    type: 'GYMNASIUM',
+    canton: 'VD',
+    logo: '🏫',
+  },
+  'Gymnase de Morges': {
+    name: 'Gymnase de Morges',
+    type: 'GYMNASIUM',
+    canton: 'VD',
+    logo: '🏫',
+  },
+  'Gymnase de Nyon': {
+    name: 'Gymnase de Nyon',
+    type: 'GYMNASIUM',
+    canton: 'VD',
+    logo: '🏫',
+  },
+  'Collège Voltaire Genève': {
+    name: 'Collège Voltaire Genève',
+    type: 'GYMNASIUM',
+    canton: 'GE',
+    logo: '🏫',
+  },
+  'Collège Rousseau Genève': {
+    name: 'Collège Rousseau Genève',
+    type: 'GYMNASIUM',
+    canton: 'GE',
+    logo: '🏫',
+  },
+  'Collège Sismondi Genève': {
+    name: 'Collège Sismondi Genève',
+    type: 'GYMNASIUM',
+    canton: 'GE',
+    logo: '🏫',
+  },
+  'Lycée Collège de la Planta Sion': {
+    name: 'Lycée Collège de la Planta Sion',
+    type: 'GYMNASIUM',
+    canton: 'VS',
+    logo: '🏫',
+  },
+  'Liceo Cantonale Lugano': {
+    name: 'Liceo Cantonale Lugano',
+    type: 'GYMNASIUM',
+    canton: 'TI',
+    logo: '🏫',
+  },
+  'Liceo Cantonale Bellinzona': {
+    name: 'Liceo Cantonale Bellinzona',
+    type: 'GYMNASIUM',
+    canton: 'TI',
+    logo: '🏫',
+  },
+  'Liceo Cantonale Locarno': {
+    name: 'Liceo Cantonale Locarno',
+    type: 'GYMNASIUM',
+    canton: 'TI',
+    logo: '🏫',
+  },
+  'Liceo Cantonale Mendrisio': {
+    name: 'Liceo Cantonale Mendrisio',
+    type: 'GYMNASIUM',
+    canton: 'TI',
+    logo: '🏫',
+  },
+}
+
+// Helper function to get all schools as an array for dropdowns
+export function getAllSchools(): { value: string; label: string; type: string; canton: string }[] {
+  return Object.entries(SWISS_SCHOOLS).map(([key, school]) => ({
+    value: school.name,
+    label: school.name,
+    type: school.type,
+    canton: school.canton,
+  })).sort((a, b) => a.label.localeCompare(b.label));
 }
 
 export function getSchoolInfo(schoolName: string): SchoolInfo | null {

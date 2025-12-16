@@ -8,6 +8,19 @@ export async function POST(
   try {
     const playerId = params.id
 
+    // Check if player exists first
+    const existingPlayer = await prisma.player.findUnique({
+      where: { id: playerId },
+      select: { id: true, views: true }
+    })
+
+    if (!existingPlayer) {
+      return NextResponse.json(
+        { error: 'Player not found' },
+        { status: 404 }
+      )
+    }
+
     // Increment view count
     const player = await prisma.player.update({
       where: { id: playerId },

@@ -47,8 +47,6 @@ interface PlayerData {
   clubHistory: any[]
   views: number
   lookingForClub: boolean
-  showEmail: boolean
-  showPhone: boolean
   createdAt: string
 }
 
@@ -77,7 +75,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [loading, setLoading] = useState(true)
   const [showBgSelector, setShowBgSelector] = useState(false)
   const [selectedBg, setSelectedBg] = useState(BACKGROUND_OPTIONS[0])
-  const [customBgImage, setCustomBgImage] = useState<string | null>(null)
   const { data: session } = useSession()
 
   const isOwner = session?.user?.playerId === params.id
@@ -86,11 +83,11 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     const fetchPlayer = async () => {
       try {
         setLoading(true)
-        const playerResponse = await axios.get(`/api/players/${params.id}`)
-        const playerData = playerResponse.data.player
+        const playerResponse = await axios.get(`/api/players?id=${params.id}`)
+        const playerData = playerResponse.data
         
-        if (playerData) {
-          setPlayer(playerData)
+        if (playerData && playerData.length > 0) {
+          setPlayer(playerData[0])
         }
 
         await axios.post(`/api/players/${params.id}/view`)
@@ -136,18 +133,14 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       <div 
         className="h-64 relative"
         style={{ 
-          background: customBgImage ? 'transparent' : selectedBg.style,
-          backgroundImage: customBgImage ? `url(${customBgImage})` : 'none',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
+          background: selectedBg.style
         }}
       >
         {/* Background change button (owner only) */}
         {isOwner && (
           <button
             onClick={() => setShowBgSelector(!showBgSelector)}
-            className="absolute top-4 right-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition flex items-center gap-2 z-10"
+            className="absolute top-4 right-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition flex items-center gap-2"
           >
             <Upload className="w-4 h-4" />
             Hintergrund Ändere
@@ -156,47 +149,14 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
         {/* Background selector dropdown */}
         {showBgSelector && isOwner && (
-          <div className="absolute top-16 right-4 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 z-50 min-w-[250px]">
+          <div className="absolute top-16 right-4 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 z-10 min-w-[200px]">
             <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Wähl Es Hintergrund:</p>
-            
-            {/* Custom Image Upload */}
-            <div className="mb-4 pb-4 border-b border-gray-200 dark:border-gray-700">
-              <label className="block mb-2">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Eigeni Bild Ufelade:</span>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0]
-                    if (file) {
-                      const reader = new FileReader()
-                      reader.onloadend = () => {
-                        setCustomBgImage(reader.result as string)
-                        setShowBgSelector(false)
-                      }
-                      reader.readAsDataURL(file)
-                    }
-                  }}
-                  className="mt-2 block w-full text-sm text-gray-500 dark:text-gray-400
-                    file:mr-4 file:py-2 file:px-4
-                    file:rounded-lg file:border-0
-                    file:text-sm file:font-semibold
-                    file:bg-red-50 file:text-red-700
-                    hover:file:bg-red-100
-                    dark:file:bg-red-900/30 dark:file:text-red-300
-                    dark:hover:file:bg-red-900/50
-                    cursor-pointer"
-                />
-              </label>
-            </div>
-
             <div className="space-y-2">
               {BACKGROUND_OPTIONS.map((bg) => (
                 <button
                   key={bg.id}
                   onClick={() => {
                     setSelectedBg(bg)
-                    setCustomBgImage(null)
                     setShowBgSelector(false)
                   }}
                   className="w-full flex items-center gap-3 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition"
@@ -213,16 +173,16 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         )}
 
         {/* View counter */}
-        <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 text-sm z-10">
+        <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 text-sm">
           <Eye className="w-4 h-4 text-gray-600 dark:text-gray-400" />
           <span className="font-semibold text-gray-900 dark:text-white">{player.views || 0}</span>
           <span className="text-gray-600 dark:text-gray-400">Profilufrufe</span>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 pb-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 pb-12">
         {/* Profile Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 mb-6 relative z-10">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 mb-6">
           <div className="flex flex-col md:flex-row gap-6">
             {/* Profile Image */}
             <div className="flex-shrink-0">
@@ -282,16 +242,16 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     )}
                   </div>
 
-                  {/* Contact Info */}
-                  {(isOwner || player.showEmail || player.showPhone) && (
+                  {/* Contact Info (owner only) */}
+                  {isOwner && (
                     <div className="flex flex-wrap gap-3 mb-4">
-                      {(isOwner || player.showPhone) && player.phone && (
+                      {player.phone && (
                         <a href={`tel:${player.phone}`} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400">
                           <Phone className="w-4 h-4" />
                           {player.phone}
                         </a>
                       )}
-                      {(isOwner || player.showEmail) && player.email && (
+                      {player.email && (
                         <a href={`mailto:${player.email}`} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400">
                           <Mail className="w-4 h-4" />
                           {player.email}
@@ -423,26 +383,30 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               >
                 Übersicht
               </button>
-              <button
-                onClick={() => setActiveTab('karriere')}
-                className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
-                  activeTab === 'karriere'
-                    ? 'border-red-600 text-red-600 dark:text-red-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
-                }`}
-              >
-                Karriere
-              </button>
-              <button
-                onClick={() => setActiveTab('erfolge')}
-                className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
-                  activeTab === 'erfolge'
-                    ? 'border-red-600 text-red-600 dark:text-red-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
-                }`}
-              >
-                Erfolge & Uszeichnunge
-              </button>
+              {player.clubHistory && player.clubHistory.length > 0 && (
+                <button
+                  onClick={() => setActiveTab('karriere')}
+                  className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
+                    activeTab === 'karriere'
+                      ? 'border-red-600 text-red-600 dark:text-red-400'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                  }`}
+                >
+                  Karriere
+                </button>
+              )}
+              {player.achievements && player.achievements.length > 0 && (
+                <button
+                  onClick={() => setActiveTab('erfolge')}
+                  className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
+                    activeTab === 'erfolge'
+                      ? 'border-red-600 text-red-600 dark:text-red-400'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                  }`}
+                >
+                  Erfolge & Uszeichnunge
+                </button>
+              )}
             </nav>
           </div>
 
@@ -534,41 +498,29 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               </div>
             )}
 
-            {activeTab === 'karriere' && (
+            {activeTab === 'karriere' && player.clubHistory && (
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Vereinsgeschichte</h3>
-                {player.clubHistory && player.clubHistory.length > 0 ? (
-                  <ClubHistory clubHistory={player.clubHistory} />
-                ) : (
-                  <div className="text-center py-12">
-                    <p className="text-gray-500 dark:text-gray-400">Kei Vereinsgeschichte Verfüegbar</p>
-                  </div>
-                )}
+                <ClubHistory clubHistory={player.clubHistory} />
               </div>
             )}
 
-            {activeTab === 'erfolge' && (
+            {activeTab === 'erfolge' && player.achievements && (
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                   <Award className="w-5 h-5 text-yellow-500" />
                   Erfolge & Uszeichnunge
                 </h3>
-                {player.achievements && player.achievements.length > 0 ? (
-                  <div className="space-y-3">
-                    {player.achievements.map((achievement, idx) => (
-                      <div key={idx} className="flex items-start gap-3 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-                        <Award className="w-5 h-5 text-yellow-600 dark:text-yellow-400 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-semibold text-gray-900 dark:text-white">{achievement}</p>
-                        </div>
+                <div className="space-y-3">
+                  {player.achievements.map((achievement, idx) => (
+                    <div key={idx} className="flex items-start gap-3 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                      <Award className="w-5 h-5 text-yellow-600 dark:text-yellow-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold text-gray-900 dark:text-white">{achievement}</p>
                       </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-12">
-                    <p className="text-gray-500 dark:text-gray-400">Kei Erfolge & Uszeichnunge Verfüegbar</p>
-                  </div>
-                )}
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>

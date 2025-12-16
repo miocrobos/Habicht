@@ -10,23 +10,39 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(new URL('/auth/login?error=invalid_token', request.url))
     }
 
-    // Find user with this token
+    // Find user with this verification token
     const user = await prisma.user.findFirst({
-      where: { verificationToken: token },
+      where: {
+        verificationToken: token,
+        verificationTokenExpiry: {
+          gt: new Date(), // Token not expired
+        },
+      },
+      include: {
+        player: true,
+      },
     })
 
     if (!user) {
-      return NextResponse.redirect(new URL('/auth/login?error=invalid_token', request.url))
+      return NextResponse.redirect(new URL('/auth/login?error=token_expired', request.url))
     }
 
-    // Update user as verified
+    // Mark email as verified and clear the token
     await prisma.user.update({
       where: { id: user.id },
       data: {
-        verified: true,
+        emailVerified: true,
         verificationToken: null,
+        verificationTokenExpiry: null,
       },
     })
+
+    // Redirect to player profile if player, otherwise to login with success
+    if (user.role === 'PLAYER' && user.player) {
+      return NextResponse.redirect(
+        new URL(`/players/${user.player.id}?verified=true`, request.url)
+      )
+    }
 
     return NextResponse.redirect(new URL('/auth/login?verified=true', request.url))
   } catch (error) {

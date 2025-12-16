@@ -9,11 +9,6 @@ export async function GET(request: Request) {
 
     const where: any = {}
 
-    // Only show clubs with websites
-    where.website = {
-      not: null
-    }
-
     if (canton && canton !== 'Alle') {
       where.canton = canton
     }
@@ -34,10 +29,10 @@ export async function GET(request: Request) {
       where.league = leagueMap[league] || league
     }
 
-    const clubs = await prisma.club.findMany({
+    // Get all clubs matching the filters
+    const allClubs = await prisma.club.findMany({
       where,
       orderBy: [
-        { league: 'asc' },
         { name: 'asc' }
       ],
       select: {
@@ -48,6 +43,7 @@ export async function GET(request: Request) {
         town: true,
         website: true,
         description: true,
+        logo: true,
         _count: {
           select: {
             currentPlayers: true
@@ -56,18 +52,61 @@ export async function GET(request: Request) {
       }
     })
 
-    // Map league enum back to display names
-    const clubsWithDisplayLeague = clubs.map((club: any) => ({
-      ...club,
-      leagueDisplay: club.league
-        .replace('FIRST_LEAGUE', '1. Liga')
-        .replace('SECOND_LEAGUE', '2. Liga')
-        .replace('THIRD_LEAGUE', '3. Liga')
-        .replace('FOURTH_LEAGUE', '4. Liga')
-        .replace('YOUTH_U23', 'U23')
-        .replace('YOUTH_U19', 'U19')
-        .replace('YOUTH_U17', 'U17'),
-      playerCount: club._count.currentPlayers
+    // Group clubs by name and combine leagues
+    const clubsMap = new Map<string, any>()
+    
+    for (const club of allClubs) {
+      if (clubsMap.has(club.name)) {
+        const existing = clubsMap.get(club.name)
+        // Add league to the leagues array if not already included
+        if (!existing.leagues.includes(club.league)) {
+          existing.leagues.push(club.league)
+        }
+        // Update logo if current club has one and existing doesn't
+        if (club.logo && !existing.logo) {
+          existing.logo = club.logo
+        }
+        // Update website if current club has one and existing doesn't
+        if (club.website && !existing.website) {
+          existing.website = club.website
+        }
+      } else {
+        clubsMap.set(club.name, {
+          ...club,
+          leagues: [club.league]
+        })
+      }
+    }
+
+    // Convert map to array and process each club
+    const clubs = Array.from(clubsMap.values())
+    
+    const clubsWithDisplayLeague = await Promise.all(clubs.map(async (club: any) => {
+      // Count players who have this club in their current club history
+      const playersWithClub = await prisma.clubHistory.count({
+        where: {
+          clubName: club.name,
+          currentClub: true
+        }
+      })
+      
+      // Map all leagues to display format
+      const leaguesDisplay = club.leagues.map((league: string) => 
+        league
+          .replace('FIRST_LEAGUE', '1. Liga')
+          .replace('SECOND_LEAGUE', '2. Liga')
+          .replace('THIRD_LEAGUE', '3. Liga')
+          .replace('FOURTH_LEAGUE', '4. Liga')
+          .replace('YOUTH_U23', 'U23')
+          .replace('YOUTH_U19', 'U19')
+          .replace('YOUTH_U17', 'U17')
+      )
+      
+      return {
+        ...club,
+        leaguesDisplay,
+        playerCount: playersWithClub
+      }
     }))
 
     return NextResponse.json({

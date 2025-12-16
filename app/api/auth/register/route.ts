@@ -96,9 +96,13 @@ export async function POST(request: NextRequest) {
               bio: playerData.bio, // Player description
               lookingForClub: playerData.lookingForClub || false,
               nationality: playerData.nationality || 'Swiss',
+              // Link to current club if applicable
+              currentClubId: undefined, // Will be set below if current club exists
               // Create club history entries and update clubs
               clubHistory: playerData.clubHistory && playerData.clubHistory.length > 0 ? {
                 create: await Promise.all(playerData.clubHistory.map(async (club: any) => {
+                  let clubId = null
+                  
                   // Try to find or create the club in the database
                   if (club.clubName && club.currentClub) {
                     try {
@@ -108,6 +112,7 @@ export async function POST(request: NextRequest) {
                       })
 
                       if (existingClub) {
+                        clubId = existingClub.id
                         // Update club with logo if provided and club doesn't have one
                         if (club.logo && (!existingClub.logo || existingClub.logo === '🏐')) {
                           await prisma.club.update({
@@ -136,6 +141,7 @@ export async function POST(request: NextRequest) {
                             website: club.clubWebsiteUrl || null,
                           }
                         })
+                        clubId = existingClub.id
                       }
                     } catch (error) {
                       console.error('Error creating/updating club:', error)
@@ -144,6 +150,7 @@ export async function POST(request: NextRequest) {
 
                   return {
                     clubName: club.clubName,
+                    clubId: clubId,
                     clubLogo: club.logo || null,
                     clubCountry: club.country || 'Switzerland',
                     clubWebsiteUrl: club.clubWebsiteUrl || null,
@@ -165,6 +172,22 @@ export async function POST(request: NextRequest) {
           },
         },
       })
+
+      // Update player's currentClubId if they have a current club
+      if (user.player && playerData.clubHistory && playerData.clubHistory.length > 0) {
+        const currentClubEntry = playerData.clubHistory.find((club: any) => club.currentClub)
+        if (currentClubEntry && currentClubEntry.clubName) {
+          const currentClub = await prisma.club.findFirst({
+            where: { name: currentClubEntry.clubName }
+          })
+          if (currentClub) {
+            await prisma.player.update({
+              where: { id: user.player.id },
+              data: { currentClubId: currentClub.id }
+            })
+          }
+        }
+      }
 
       // Send verification email
       const emailSent = await sendVerificationEmail({

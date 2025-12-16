@@ -120,10 +120,10 @@ export default function ClubsPage() {
                   <div className="flex items-center gap-4 mb-4">
                     {club.website ? (
                       <a href={club.website} target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
-                        <ClubBadge clubName={club.name} size="lg" />
+                        <ClubBadge clubName={club.name} size="lg" uploadedLogo={club.logo} />
                       </a>
                     ) : (
-                      <ClubBadge clubName={club.name} size="lg" />
+                      <ClubBadge clubName={club.name} size="lg" uploadedLogo={club.logo} />
                     )}
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{club.name}</h3>
@@ -131,6 +131,18 @@ export default function ClubsPage() {
                         <CantonFlag canton={club.canton} size="sm" />
                         <p className="text-sm text-gray-600 dark:text-gray-400">{club.town}, {club.canton}</p>
                       </div>
+                      {club.leaguesDisplay && club.leaguesDisplay.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          {club.leaguesDisplay.map((league: string, idx: number) => (
+                            <span
+                              key={idx}
+                              className="inline-block px-2 py-1 text-xs font-medium bg-habicht-100 dark:bg-habicht-900 text-habicht-800 dark:text-habicht-200 rounded"
+                            >
+                              {league}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                   

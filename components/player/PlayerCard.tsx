@@ -9,7 +9,6 @@ import { getCantonInfo } from '@/lib/swissData'
 export default function PlayerCard({ player }: { player: any }) {
   const cantonInfo = getCantonInfo(player.canton)
   const age = player.dateOfBirth ? Math.floor((new Date().getTime() - new Date(player.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : null
-  const league = player.currentLeague ? player.currentLeague.replace('_', ' ') : 'FIRST_LEAGUE'
   
   return (
     <Link href={`/players/${player.id}`}>
@@ -55,18 +54,12 @@ export default function PlayerCard({ player }: { player: any }) {
           </h3>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-3 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-4 mb-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                 {player.height || '-'}
               </div>
               <div className="text-xs text-gray-500 dark:text-gray-400">cm</div>
-            </div>
-            <div className="text-center">
-              <div className="text-sm font-bold text-red-600 dark:text-red-400 uppercase">
-                {league}
-              </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">Liga</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
@@ -79,7 +72,7 @@ export default function PlayerCard({ player }: { player: any }) {
           {/* Location */}
           <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
             <MapPin className="w-4 h-4" />
-            <span>{player.city || 'Unknown'}, {player.canton}</span>
+            <span>{player.municipality ? `${player.municipality}, ` : ''}{player.canton}</span>
           </div>
         </div>
       </div>

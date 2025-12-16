@@ -76,7 +76,7 @@ export default function PlayerRegisterPage() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     email: '', password: '', confirmPassword: '', firstName: '', lastName: '',
-    dateOfBirth: '', gender: '', nationality: '', canton: '', positions: [] as string[], height: '',
+    dateOfBirth: '', gender: '', nationality: '', canton: '', municipality: '', positions: [] as string[], height: '',
     weight: '', spikeHeight: '', blockHeight: '', 
     profileImage: '', instagram: '', tiktok: '', youtube: '', highlightVideo: '',
     skillReceiving: 0, skillServing: 0, skillAttacking: 0, skillBlocking: 0, skillDefense: 0,
@@ -190,6 +190,7 @@ export default function PlayerRegisterPage() {
           gender: formData.gender, 
           nationality: formData.nationality,
           canton: formData.canton,
+          municipality: formData.municipality || null,
           employmentStatus: formData.employmentStatus,
           occupation: formData.occupation,
           schoolName: formData.schoolName,
@@ -414,6 +415,16 @@ export default function PlayerRegisterPage() {
                     <option value="GE">Genève</option>
                     <option value="JU">Jura</option>
                   </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <MapPin className="w-4 h-4 inline mr-1" />Gemeinde/Municipality
+                  </label>
+                  <input name="municipality" type="text" value={formData.municipality} onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
+                    placeholder="z.B. Winterthur, Bern, etc." />
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Optional - Gmeind I Dim Kanton</p>
                 </div>
 
                 <div>

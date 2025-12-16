@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Search, Filter, MapPin, TrendingUp } from 'lucide-react'
 import axios from 'axios'
 import CantonFlag from '@/components/shared/CantonFlag'
@@ -254,109 +255,74 @@ export default function MenPlayersPage() {
 
 function PlayerCard({ player }: { player: any }) {
   const cantonInfo = getCantonInfo(player.canton)
+  const age = player.dateOfBirth ? Math.floor((new Date().getTime() - new Date(player.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : null
   
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition overflow-hidden border-t-4 border-blue-600">
-      {/* Cover Image or Gradient Background */}
-      <div 
-        className="h-32 relative"
-        style={{ 
-          background: player.coverImage 
-            ? `url(${player.coverImage})` 
-            : `linear-gradient(135deg, ${cantonInfo.colors.primary} 0%, ${cantonInfo.colors.secondary} 100%)`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
-        {/* Canton Flag Badge */}
-        <div className="absolute top-3 right-3">
-          <CantonFlag canton={player.canton} size="sm" />
-        </div>
-        {/* Gender Badge */}
-        <div className="absolute top-3 left-3 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-          ♂ HERREN
-        </div>
-      </div>
+    <Link href={`/players/${player.id}`}>
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden cursor-pointer">
+        {/* Header with gradient background */}
+        <div 
+          className="h-40 relative flex items-center justify-center"
+          style={{ 
+            background: `linear-gradient(135deg, ${cantonInfo.colors.primary} 0%, ${cantonInfo.colors.secondary} 100%)`
+          }}
+        >
+          {/* Gender Badge */}
+          <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center gap-2 text-sm font-semibold z-10">
+            <span>♂ HERREN</span>
+          </div>
+          {/* Canton Flag */}
+          <div className="absolute top-3 right-3 z-10">
+            <CantonFlag canton={player.canton} size="sm" />
+          </div>
 
-      {/* Profile Picture - Clickable */}
-      <div className="px-6 pb-4">
-        <div className="-mt-12 mb-4 relative z-10 flex items-end gap-4">
-          <ClickableProfilePicture
-            playerId={player.id}
-            imageUrl={player.profileImage || '/default-avatar.png'}
-            name={`${player.firstName} ${player.lastName}`}
-            size="xl"
-            showBorder={true}
-            className="bg-white dark:bg-gray-800 border-4 border-white dark:border-gray-700"
-          />
-          {player.jerseyNumber && (
-            <div className="bg-blue-600 text-white px-4 py-2 rounded-xl shadow-lg mb-2">
-              <span className="text-2xl font-bold">
-                #{player.jerseyNumber}
-              </span>
-            </div>
-          )}
+          {/* Profile Picture Centered in Header */}
+          <div className="w-32 h-32 rounded-full border-4 border-white dark:border-gray-800 shadow-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
+            {player.profileImage ? (
+              <Image
+                src={player.profileImage}
+                alt={`${player.firstName} ${player.lastName}`}
+                width={128}
+                height={128}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-blue-600 to-blue-800">
+                {player.firstName[0]}{player.lastName[0]}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Player Info */}
-        <Link href={`/players/${player.id}`}>
-          <h3 className="text-xl font-bold text-gray-900 mb-1 hover:text-blue-600 transition">
+        <div className="px-6 py-6 bg-gray-50 dark:bg-gray-900 text-center">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
             {player.firstName} {player.lastName}
           </h3>
-        </Link>
-        <p className="text-gray-600 mb-3">
-          {player.position?.replace('_', ' ')}
-        </p>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-3 gap-2 mb-4">
-          <div className="text-center">
-            <div 
-              className="text-lg font-bold"
-              style={{ color: cantonInfo.colors.primary }}
-            >
-              {player.height}
-            </div>
-            <div className="text-xs text-gray-600">cm</div>
-          </div>
-          <div className="text-center">
-            <div 
-              className="text-lg font-bold"
-              style={{ color: cantonInfo.colors.primary }}
-            >
-              {player.currentLeague}
-            </div>
-            <div className="text-xs text-gray-600">Liga</div>
-          </div>
-          <div className="text-center">
-            <div 
-              className="text-lg font-bold"
-              style={{ color: cantonInfo.colors.primary }}
-            >
-              {player.graduationYear}
-            </div>
-            <div className="text-xs text-gray-600">Jahr</div>
-          </div>
-        </div>
-
-        {/* Club with Badge */}
-        {player.currentClub && (
-          <div className="flex items-center gap-2 mb-2 p-2 bg-gray-50 dark:bg-gray-700 rounded">
-            <ClubBadge clubName={player.currentClub.name} size="sm" />
-            <div className="flex-1 min-w-0">
-              <div className="text-sm font-medium text-gray-900 truncate">
-                {player.currentClub.name}
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                {player.height || '-'}
               </div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">cm</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                {age || '-'}
+              </div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">Jahr</div>
             </div>
           </div>
-        )}
 
-        {/* Location */}
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <MapPin className="w-4 h-4" />
-          <span>{player.city}, {player.canton}</span>
+          {/* Location */}
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+            <MapPin className="w-4 h-4" />
+            <span>{player.municipality ? `${player.municipality}, ` : ''}{player.canton}</span>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

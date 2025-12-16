@@ -13,9 +13,9 @@ export default function CantonFlag({ canton, size = 'md', showName = false }: Ca
   const cantonInfo = getCantonInfo(canton)
   
   const sizeClasses = {
-    sm: 'w-8 h-6',
-    md: 'w-12 h-9',
-    lg: 'w-16 h-12',
+    sm: 'w-6 h-6',
+    md: 'w-9 h-9',
+    lg: 'w-12 h-12',
   }
 
   const textSizes = {

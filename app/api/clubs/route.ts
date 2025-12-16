@@ -73,14 +73,9 @@ export async function GET(request: Request) {
       }
     })
 
-    const clubsWithLeagues = await Promise.all(clubs.map(async (club: any) => {
-      // Count players who have this club in their current club history
-      const playersWithClub = await prisma.clubHistory.count({
-        where: {
-          clubName: club.name,
-          currentClub: true
-        }
-      })
+    const clubsWithLeagues = clubs.map((club: any) => {
+      // Use _count.currentPlayers which is already queried
+      const playerCount = club._count.currentPlayers
       
       // Build list of leagues club participates in
       const leagues: string[] = []
@@ -103,9 +98,9 @@ export async function GET(request: Request) {
         description: club.description,
         logo: club.logo,
         leaguesDisplay: leagues,
-        playerCount: playersWithClub
+        playerCount: playerCount
       }
-    }))
+    })
 
     return NextResponse.json({
       clubs: clubsWithLeagues,

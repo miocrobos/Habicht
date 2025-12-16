@@ -48,6 +48,100 @@ export async function POST(request: NextRequest) {
 
     // Create user with player data if applicable
     if (role === 'PLAYER' && playerData) {
+      // Normalize club name helper function
+      const normalizeClubName = (name: string): string => {
+        return name
+          .replace(/\s+\d+$/, '')  // Remove " 2", " 3", etc. at end
+          .replace(/\s+[IVX]+$/, '') // Remove Roman numerals at end
+          .replace(/\s+U\d{2}$/i, '') // Remove U19, U20, U21, U23 at end
+          .trim()
+      }
+
+      // Find current club and get its ID before creating player
+      let currentClubId: string | null = null
+      if (playerData.clubHistory && playerData.clubHistory.length > 0) {
+        const currentClubEntry = playerData.clubHistory.find((club: any) => club.currentClub)
+        if (currentClubEntry && currentClubEntry.clubName) {
+          const normalizedName = normalizeClubName(currentClubEntry.clubName)
+          
+          // Try to find or create the current club
+          let existingClub = await prisma.club.findFirst({
+            where: { name: normalizedName }
+          })
+
+          if (!existingClub && currentClubEntry.country === 'Switzerland') {
+            // Create club if it doesn't exist
+            const leagueFieldMap: Record<string, { men: string, women: string }> = {
+              'NLA': { men: 'hasNLAMen', women: 'hasNLAWomen' },
+              'NLB': { men: 'hasNLBMen', women: 'hasNLBWomen' },
+              '1. Liga': { men: 'has1LigaMen', women: 'has1LigaWomen' },
+              '2. Liga': { men: 'has2LigaMen', women: 'has2LigaWomen' },
+              '3. Liga': { men: 'has3LigaMen', women: 'has3LigaWomen' },
+              '4. Liga': { men: 'has4LigaMen', women: 'has4LigaWomen' },
+              'U23': { men: 'hasU23Men', women: 'hasU23Women' },
+              'U19': { men: 'hasU19Men', women: 'hasU19Women' },
+              'U17': { men: 'hasU17Men', women: 'hasU17Women' },
+            }
+
+            const isMale = playerData.gender === 'MALE'
+            const leagueFields = leagueFieldMap[currentClubEntry.league]
+            const leagueFieldToUpdate = leagueFields ? (isMale ? leagueFields.men : leagueFields.women) : null
+
+            const clubData: any = {
+              name: normalizedName,
+              canton: playerData.canton || 'ZH',
+              town: playerData.city || 'Unknown',
+              logo: currentClubEntry.logo || null,
+              website: currentClubEntry.clubWebsiteUrl || null,
+            }
+
+            if (leagueFieldToUpdate) {
+              clubData[leagueFieldToUpdate] = true
+            }
+
+            existingClub = await prisma.club.create({
+              data: clubData
+            })
+          }
+
+          if (existingClub) {
+            currentClubId = existingClub.id
+            
+            // Update club league flags if needed
+            if (currentClubEntry.league) {
+              const leagueFieldMap: Record<string, { men: string, women: string }> = {
+                'NLA': { men: 'hasNLAMen', women: 'hasNLAWomen' },
+                'NLB': { men: 'hasNLBMen', women: 'hasNLBWomen' },
+                '1. Liga': { men: 'has1LigaMen', women: 'has1LigaWomen' },
+                '2. Liga': { men: 'has2LigaMen', women: 'has2LigaWomen' },
+                '3. Liga': { men: 'has3LigaMen', women: 'has3LigaWomen' },
+                '4. Liga': { men: 'has4LigaMen', women: 'has4LigaWomen' },
+                'U23': { men: 'hasU23Men', women: 'hasU23Women' },
+                'U19': { men: 'hasU19Men', women: 'hasU19Women' },
+                'U17': { men: 'hasU17Men', women: 'hasU17Women' },
+              }
+
+              const isMale = playerData.gender === 'MALE'
+              const leagueFields = leagueFieldMap[currentClubEntry.league]
+              const leagueFieldToUpdate = leagueFields ? (isMale ? leagueFields.men : leagueFields.women) : null
+
+              if (leagueFieldToUpdate) {
+                const updateData: any = {}
+                updateData[leagueFieldToUpdate] = true
+                if (currentClubEntry.logo && (!existingClub.logo || existingClub.logo === '🏐')) {
+                  updateData.logo = currentClubEntry.logo
+                }
+
+                await prisma.club.update({
+                  where: { id: existingClub.id },
+                  data: updateData
+                })
+              }
+            }
+          }
+        }
+      }
+
       const user = await prisma.user.create({
         data: {
           name,
@@ -96,8 +190,8 @@ export async function POST(request: NextRequest) {
               bio: playerData.bio, // Player description
               lookingForClub: playerData.lookingForClub || false,
               nationality: playerData.nationality || 'Swiss',
-              // Link to current club if applicable
-              currentClubId: undefined, // Will be set below if current club exists
+              // Link to current club
+              currentClubId: currentClubId,
               // Create club history entries and update clubs
               clubHistory: playerData.clubHistory && playerData.clubHistory.length > 0 ? {
                 create: await Promise.all(playerData.clubHistory.map(async (club: any) => {
@@ -206,33 +300,6 @@ export async function POST(request: NextRequest) {
           },
         },
       })
-
-      // Update player's currentClubId if they have a current club
-      if (user.player && playerData.clubHistory && playerData.clubHistory.length > 0) {
-        const currentClubEntry = playerData.clubHistory.find((club: any) => club.currentClub)
-        if (currentClubEntry && currentClubEntry.clubName) {
-          // Normalize club name for lookup
-          const normalizeClubName = (name: string): string => {
-            return name
-              .replace(/\s+\d+$/, '')  // Remove " 2", " 3", etc. at end
-              .replace(/\s+[IVX]+$/, '') // Remove Roman numerals at end
-              .replace(/\s+U\d{2}$/i, '') // Remove U19, U20, U21, U23 at end
-              .trim()
-          }
-          
-          const normalizedName = normalizeClubName(currentClubEntry.clubName)
-          
-          const currentClub = await prisma.club.findFirst({
-            where: { name: normalizedName }
-          })
-          if (currentClub) {
-            await prisma.player.update({
-              where: { id: user.player.id },
-              data: { currentClubId: currentClub.id }
-            })
-          }
-        }
-      }
 
       // Send verification email
       const emailSent = await sendVerificationEmail({

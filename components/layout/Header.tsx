@@ -65,7 +65,14 @@ export default function Header() {
 
           {/* Right side buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/players" className="text-gray-700 hover:text-swiss-red transition">
+            <Link 
+              href="/settings" 
+              className="flex items-center justify-center w-10 h-10 text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"
+              title="Einstellungen"
+            >
+              <Settings className="w-5 h-5" />
+            </Link>
+            <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
               <Search className="w-5 h-5" />
             </Link>
             

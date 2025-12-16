@@ -103,12 +103,22 @@ export async function POST(request: NextRequest) {
                 create: await Promise.all(playerData.clubHistory.map(async (club: any) => {
                   let clubId = null
                   
+                  // Normalize club name - remove trailing numbers/suffixes like " 2", " 3", " II", " III"
+                  const normalizeClubName = (name: string): string => {
+                    return name
+                      .replace(/\s+\d+$/, '')  // Remove " 2", " 3", etc. at end
+                      .replace(/\s+[IVX]+$/, '') // Remove Roman numerals at end
+                      .trim()
+                  }
+                  
+                  const normalizedClubName = normalizeClubName(club.clubName)
+                  
                   // Try to find or create the club in the database
-                  if (club.clubName && club.currentClub) {
+                  if (normalizedClubName && club.currentClub) {
                     try {
-                      // Check if club exists
+                      // Check if club exists (using normalized name)
                       let existingClub = await prisma.club.findFirst({
-                        where: { name: club.clubName }
+                        where: { name: normalizedClubName }
                       })
 
                       // Determine which league field to update based on league and gender
@@ -147,9 +157,9 @@ export async function POST(request: NextRequest) {
                           })
                         }
                       } else if (club.league && club.country === 'Switzerland') {
-                        // Create new Swiss club with league flag set
+                        // Create new Swiss club with league flag set (using normalized name)
                         const clubData: any = {
-                          name: club.clubName,
+                          name: normalizedClubName,
                           canton: playerData.canton || 'ZH',
                           town: playerData.city || 'Unknown',
                           logo: club.logo || null,
@@ -172,7 +182,7 @@ export async function POST(request: NextRequest) {
                   }
 
                   return {
-                    clubName: club.clubName,
+                    clubName: normalizedClubName, // Store normalized name in clubHistory
                     clubId: clubId,
                     clubLogo: club.logo || null,
                     clubCountry: club.country || 'Switzerland',
@@ -200,8 +210,18 @@ export async function POST(request: NextRequest) {
       if (user.player && playerData.clubHistory && playerData.clubHistory.length > 0) {
         const currentClubEntry = playerData.clubHistory.find((club: any) => club.currentClub)
         if (currentClubEntry && currentClubEntry.clubName) {
+          // Normalize club name for lookup
+          const normalizeClubName = (name: string): string => {
+            return name
+              .replace(/\s+\d+$/, '')  // Remove " 2", " 3", etc. at end
+              .replace(/\s+[IVX]+$/, '') // Remove Roman numerals at end
+              .trim()
+          }
+          
+          const normalizedName = normalizeClubName(currentClubEntry.clubName)
+          
           const currentClub = await prisma.club.findFirst({
-            where: { name: currentClubEntry.clubName }
+            where: { name: normalizedName }
           })
           if (currentClub) {
             await prisma.player.update({

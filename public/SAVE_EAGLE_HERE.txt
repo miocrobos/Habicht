@@ -1,6 +1,17 @@
-Please save the eagle image as:
+IMPORTANT: Save the eagle logo image here!
+
+The eagle image (white eagle with volleyball on red background) needs to be saved as:
 eagle-logo.png
 
-in this directory (public/)
+Steps:
+1. Save the attached eagle image from the chat
+2. Name it exactly: eagle-logo.png
+3. Place it in this directory: c:\Users\adria\UniSports\public\
+4. The file should be: c:\Users\adria\UniSports\public\eagle-logo.png
 
-The image should be the white eagle on red background that was provided.
+Once saved, the eagle logo will automatically appear in:
+- Header navigation
+- Homepage hero section
+- HawkLogo component (used throughout the site)
+
+The application code has been updated to reference /eagle-logo.png

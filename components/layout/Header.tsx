@@ -21,9 +21,8 @@ export default function Header() {
                 src="/eagle-logo.png"
                 alt="Eagle Logo"
                 fill
-                className="object-contain group-hover:drop-shadow-lg"
+                className="object-contain group-hover:drop-shadow-lg dark:brightness-100 dark:contrast-100"
                 priority
-                style={{ filter: 'none' }}
               />
             </div>
             <div className="flex flex-col">

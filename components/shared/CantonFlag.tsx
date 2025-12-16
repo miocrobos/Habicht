@@ -34,9 +34,8 @@ export default function CantonFlag({ canton, size = 'md', showName = false }: Ca
           src={`/cantons/${canton}.svg`}
           alt={`${cantonInfo.name} flag`}
           fill
-          className="object-cover"
+          className="object-cover dark:brightness-100 dark:contrast-100"
           priority
-          style={{ filter: 'none' }}
         />
       </div>
       {showName && (

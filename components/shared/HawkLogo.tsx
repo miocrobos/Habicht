@@ -21,9 +21,8 @@ export default function HawkLogo({ size = 'md', animated = true, showText = fals
           src="/eagle-logo.png"
           alt="Eagle Logo"
           fill
-          className={`object-contain ${animated ? 'group-hover:drop-shadow-2xl' : ''}`}
+          className={`object-contain ${animated ? 'group-hover:drop-shadow-2xl' : ''} dark:brightness-100 dark:contrast-100`}
           priority
-          style={{ filter: 'none' }}
         />
       </div>
       

@@ -102,9 +102,8 @@ export default function Home() {
                     src="/eagle-logo.png"
                     alt="Eagle Logo"
                     fill
-                    className="object-contain"
+                    className="object-contain dark:brightness-100 dark:contrast-100"
                     priority
-                    style={{ filter: 'none' }}
                   />
                 </div>
               </div>

@@ -13,24 +13,28 @@ export async function GET(request: Request) {
       where.canton = canton
     }
 
+    // If filtering by league, only show clubs that have teams in that league
     if (league && league !== 'Alle') {
-      // Map display names to enum values
-      const leagueMap: Record<string, string> = {
-        'NLA': 'NLA',
-        'NLB': 'NLB',
-        '1. Liga': 'FIRST_LEAGUE',
-        '2. Liga': 'SECOND_LEAGUE',
-        '3. Liga': 'THIRD_LEAGUE',
-        '4. Liga': 'FOURTH_LEAGUE',
-        'U23': 'YOUTH_U23',
-        'U19': 'YOUTH_U19',
-        'U17': 'YOUTH_U17',
+      // Map display names to field names
+      const leagueFields: Record<string, string[]> = {
+        'NLA': ['hasNLAMen', 'hasNLAWomen'],
+        'NLB': ['hasNLBMen', 'hasNLBWomen'],
+        '1. Liga': ['has1LigaMen', 'has1LigaWomen'],
+        '2. Liga': ['has2LigaMen', 'has2LigaWomen'],
+        '3. Liga': ['has3LigaMen', 'has3LigaWomen'],
+        '4. Liga': ['has4LigaMen', 'has4LigaWomen'],
+        'U23': ['hasU23Men', 'hasU23Women'],
+        'U19': ['hasU19Men', 'hasU19Women'],
+        'U17': ['hasU17Men', 'hasU17Women'],
       }
-      where.league = leagueMap[league] || league
+      
+      const fields = leagueFields[league]
+      if (fields) {
+        where.OR = fields.map(field => ({ [field]: true }))
+      }
     }
 
-    // Get all clubs matching the filters
-    const allClubs = await prisma.club.findMany({
+    const clubs = await prisma.club.findMany({
       where,
       orderBy: [
         { name: 'asc' }
@@ -38,12 +42,29 @@ export async function GET(request: Request) {
       select: {
         id: true,
         name: true,
-        league: true,
         canton: true,
         town: true,
         website: true,
         description: true,
         logo: true,
+        hasNLAMen: true,
+        hasNLAWomen: true,
+        hasNLBMen: true,
+        hasNLBWomen: true,
+        has1LigaMen: true,
+        has1LigaWomen: true,
+        has2LigaMen: true,
+        has2LigaWomen: true,
+        has3LigaMen: true,
+        has3LigaWomen: true,
+        has4LigaMen: true,
+        has4LigaWomen: true,
+        hasU23Men: true,
+        hasU23Women: true,
+        hasU19Men: true,
+        hasU19Women: true,
+        hasU17Men: true,
+        hasU17Women: true,
         _count: {
           select: {
             currentPlayers: true
@@ -52,36 +73,7 @@ export async function GET(request: Request) {
       }
     })
 
-    // Group clubs by name and combine leagues
-    const clubsMap = new Map<string, any>()
-    
-    for (const club of allClubs) {
-      if (clubsMap.has(club.name)) {
-        const existing = clubsMap.get(club.name)
-        // Add league to the leagues array if not already included
-        if (!existing.leagues.includes(club.league)) {
-          existing.leagues.push(club.league)
-        }
-        // Update logo if current club has one and existing doesn't
-        if (club.logo && !existing.logo) {
-          existing.logo = club.logo
-        }
-        // Update website if current club has one and existing doesn't
-        if (club.website && !existing.website) {
-          existing.website = club.website
-        }
-      } else {
-        clubsMap.set(club.name, {
-          ...club,
-          leagues: [club.league]
-        })
-      }
-    }
-
-    // Convert map to array and process each club
-    const clubs = Array.from(clubsMap.values())
-    
-    const clubsWithDisplayLeague = await Promise.all(clubs.map(async (club: any) => {
+    const clubsWithLeagues = await Promise.all(clubs.map(async (club: any) => {
       // Count players who have this club in their current club history
       const playersWithClub = await prisma.clubHistory.count({
         where: {
@@ -90,27 +82,33 @@ export async function GET(request: Request) {
         }
       })
       
-      // Map all leagues to display format
-      const leaguesDisplay = club.leagues.map((league: string) => 
-        league
-          .replace('FIRST_LEAGUE', '1. Liga')
-          .replace('SECOND_LEAGUE', '2. Liga')
-          .replace('THIRD_LEAGUE', '3. Liga')
-          .replace('FOURTH_LEAGUE', '4. Liga')
-          .replace('YOUTH_U23', 'U23')
-          .replace('YOUTH_U19', 'U19')
-          .replace('YOUTH_U17', 'U17')
-      )
+      // Build list of leagues club participates in
+      const leagues: string[] = []
+      if (club.hasNLAMen || club.hasNLAWomen) leagues.push('NLA')
+      if (club.hasNLBMen || club.hasNLBWomen) leagues.push('NLB')
+      if (club.has1LigaMen || club.has1LigaWomen) leagues.push('1. Liga')
+      if (club.has2LigaMen || club.has2LigaWomen) leagues.push('2. Liga')
+      if (club.has3LigaMen || club.has3LigaWomen) leagues.push('3. Liga')
+      if (club.has4LigaMen || club.has4LigaWomen) leagues.push('4. Liga')
+      if (club.hasU23Men || club.hasU23Women) leagues.push('U23')
+      if (club.hasU19Men || club.hasU19Women) leagues.push('U19')
+      if (club.hasU17Men || club.hasU17Women) leagues.push('U17')
       
       return {
-        ...club,
-        leaguesDisplay,
+        id: club.id,
+        name: club.name,
+        canton: club.canton,
+        town: club.town,
+        website: club.website,
+        description: club.description,
+        logo: club.logo,
+        leaguesDisplay: leagues,
         playerCount: playersWithClub
       }
     }))
 
     return NextResponse.json({
-      clubs: clubsWithDisplayLeague,
+      clubs: clubsWithLeagues,
       total: clubs.length
     })
   } catch (error) {

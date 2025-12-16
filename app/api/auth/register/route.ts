@@ -111,35 +111,58 @@ export async function POST(request: NextRequest) {
                         where: { name: club.clubName }
                       })
 
+                      // Determine which league field to update based on league and gender
+                      const leagueFieldMap: Record<string, { men: string, women: string }> = {
+                        'NLA': { men: 'hasNLAMen', women: 'hasNLAWomen' },
+                        'NLB': { men: 'hasNLBMen', women: 'hasNLBWomen' },
+                        '1. Liga': { men: 'has1LigaMen', women: 'has1LigaWomen' },
+                        '2. Liga': { men: 'has2LigaMen', women: 'has2LigaWomen' },
+                        '3. Liga': { men: 'has3LigaMen', women: 'has3LigaWomen' },
+                        '4. Liga': { men: 'has4LigaMen', women: 'has4LigaWomen' },
+                        'U23': { men: 'hasU23Men', women: 'hasU23Women' },
+                        'U19': { men: 'hasU19Men', women: 'hasU19Women' },
+                        'U17': { men: 'hasU17Men', women: 'hasU17Women' },
+                      }
+
+                      const isMale = playerData.gender === 'MALE'
+                      const leagueFields = leagueFieldMap[club.league]
+                      const leagueFieldToUpdate = leagueFields ? (isMale ? leagueFields.men : leagueFields.women) : null
+
                       if (existingClub) {
                         clubId = existingClub.id
                         // Update club with logo if provided and club doesn't have one
+                        const updateData: any = {}
                         if (club.logo && (!existingClub.logo || existingClub.logo === '🏐')) {
+                          updateData.logo = club.logo
+                        }
+                        // Mark that club has a team in this league/gender
+                        if (leagueFieldToUpdate) {
+                          updateData[leagueFieldToUpdate] = true
+                        }
+                        
+                        if (Object.keys(updateData).length > 0) {
                           await prisma.club.update({
                             where: { id: existingClub.id },
-                            data: { logo: club.logo }
+                            data: updateData
                           })
                         }
                       } else if (club.league && club.country === 'Switzerland') {
-                        // Create new Swiss club with provided information
-                        const leagueMap: Record<string, string> = {
-                          'NLA': 'NLA',
-                          'NLB': 'NLB',
-                          '1. Liga': 'FIRST_LEAGUE',
-                          '2. Liga': 'SECOND_LEAGUE',
-                          '3. Liga': 'THIRD_LEAGUE',
-                          '4. Liga': 'FOURTH_LEAGUE',
+                        // Create new Swiss club with league flag set
+                        const clubData: any = {
+                          name: club.clubName,
+                          canton: playerData.canton || 'ZH',
+                          town: playerData.city || 'Unknown',
+                          logo: club.logo || null,
+                          website: club.clubWebsiteUrl || null,
+                        }
+                        
+                        // Set the appropriate league flag
+                        if (leagueFieldToUpdate) {
+                          clubData[leagueFieldToUpdate] = true
                         }
                         
                         existingClub = await prisma.club.create({
-                          data: {
-                            name: club.clubName,
-                            league: leagueMap[club.league] || 'FIRST_LEAGUE',
-                            canton: playerData.canton || 'ZH',
-                            town: playerData.city || 'Unknown',
-                            logo: club.logo || null,
-                            website: club.clubWebsiteUrl || null,
-                          }
+                          data: clubData
                         })
                         clubId = existingClub.id
                       }

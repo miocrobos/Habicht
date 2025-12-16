@@ -210,7 +210,7 @@ model Player {
 
 model Club {
   id                String      @id @default(cuid())
-  name              String
+  name              String      @unique
   shortName         String?
   logo              String?
   website           String?
@@ -225,10 +225,29 @@ model Club {
   phone             String?
   
   // Info
-  league            League
   founded           Int?        // founding year
   description       String?     @db.Text
   colors            String[]
+  
+  // League teams - boolean flags for which leagues/genders this club has teams in
+  hasNLAMen         Boolean     @default(false)
+  hasNLAWomen       Boolean     @default(false)
+  hasNLBMen         Boolean     @default(false)
+  hasNLBWomen       Boolean     @default(false)
+  has1LigaMen       Boolean     @default(false)
+  has1LigaWomen     Boolean     @default(false)
+  has2LigaMen       Boolean     @default(false)
+  has2LigaWomen     Boolean     @default(false)
+  has3LigaMen       Boolean     @default(false)
+  has3LigaWomen     Boolean     @default(false)
+  has4LigaMen       Boolean     @default(false)
+  has4LigaWomen     Boolean     @default(false)
+  hasU23Men         Boolean     @default(false)
+  hasU23Women       Boolean     @default(false)
+  hasU19Men         Boolean     @default(false)
+  hasU19Women       Boolean     @default(false)
+  hasU17Men         Boolean     @default(false)
+  hasU17Women       Boolean     @default(false)
   
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt

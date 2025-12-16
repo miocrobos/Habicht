@@ -13,7 +13,7 @@ import { SWISS_UNIVERSITIES, SWISS_FACHHOCHSCHULEN, SWISS_KANTONSSCHULEN, NATION
 
 export default function RegisterPage() {
   const router = useRouter()
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState<number>(1)
   const [formData, setFormData] = useState({
     // Basic Info
     name: '',
@@ -829,6 +829,9 @@ export default function RegisterPage() {
                       <option value="VD">Vaud</option>
                       <option value="VS">Valais</option>
                       <option value="NE">Neuchâtel</option>
+                      <option value="GE">Genève</option>
+                      <option value="JU">Jura</option>
+                    </select>
                   </div>
                 </div>
 
@@ -895,7 +898,7 @@ export default function RegisterPage() {
                     label="Lizenz-Foto hochladen"
                     value={formData.swissVolleyLicense}
                     onChange={(img) => setFormData({ ...formData, swissVolleyLicense: img })}
-                    aspectRatio="document"
+                    aspectRatio="banner"
                     helpText="Falls du eine Swiss Volley Spielerlizenz hast, lade hier ein Foto davon hoch"
                   />
                   <p className="text-xs text-gray-600 mt-3 italic">
@@ -1187,7 +1190,7 @@ export default function RegisterPage() {
                     label="Lade deinen Ausweis oder Club-Akkreditierung hoch"
                     value={formData.scoutIdDocument}
                     onChange={(img) => setFormData({ ...formData, scoutIdDocument: img })}
-                    aspectRatio="document"
+                    aspectRatio="banner"
                     required
                     helpText="Erforderlich zur Verifizierung deiner Identität als Scout"
                   />

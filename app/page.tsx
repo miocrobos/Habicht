@@ -211,11 +211,11 @@ export default function Home() {
       </section>
 
       {/* League Showcase Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Alle Ligen. Ein Ort.</h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Alle Ligen. Ein Ort.</h2>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               Von NLA Spitzenvolleyball bis zur 4. Liga – entdecke Spieler aus der ganzen Schweiz.
             </p>
           </div>
@@ -269,7 +269,7 @@ export default function Home() {
           </div>
 
           {/* Swiss Regions Highlight */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-12">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-12">
             <h3 className="text-2xl md:text-3xl font-bold text-center mb-8">🇨🇭 Alle 26 Kantone</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
               {['ZH', 'BE', 'VD', 'AG', 'SG', 'GE', 'LU', 'TG', 'TI', 'VS', 'BL', 'SO', 'FR', 'BS', 'GR', 'NE', 'ZG', 'SH', 'UR', 'SZ', 'JU', 'AR', 'AI', 'NW', 'GL', 'OW'].map(canton => (
@@ -288,11 +288,11 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-950">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Alles wo du brauchsch</h2>
-            <p className="text-lg md:text-xl text-gray-600">Professionelli Tools für Spieler und Scouts</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Alles wo du brauchsch</h2>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400">Professionelli Tools für Spieler und Scouts</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

@@ -353,7 +353,7 @@ export default function Home() {
       </section>
 
       {/* Gender-Specific Sections */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-pink-50">
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-pink-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {/* Men's Section */}
@@ -475,12 +475,12 @@ function FeatureCard({ icon, title, description, color }: {
   }[color]
 
   return (
-    <div className="group bg-white p-6 md:p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+    <div className="group bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
       <div className={`inline-block p-3 md:p-4 rounded-xl mb-3 md:mb-4 transition-all ${colorClasses}`}>
         {icon}
       </div>
-      <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-gray-900">{title}</h3>
-      <p className="text-sm md:text-base text-gray-600 leading-relaxed">{description}</p>
+      <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-gray-900 dark:text-white">{title}</h3>
+      <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed">{description}</p>
     </div>
   )
 }

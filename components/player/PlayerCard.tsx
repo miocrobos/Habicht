@@ -16,23 +16,21 @@ export default function PlayerCard({ player }: { player: any }) {
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden cursor-pointer">
         {/* Header with gradient background */}
         <div 
-          className="h-32 relative"
+          className="h-40 relative flex items-center justify-center"
           style={{ 
             background: `linear-gradient(135deg, ${cantonInfo.colors.primary} 0%, ${cantonInfo.colors.secondary} 100%)`
           }}
         >
           {/* Gender Badge */}
-          <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center gap-2 text-sm font-semibold">
+          <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center gap-2 text-sm font-semibold z-10">
             <span>{player.gender === 'MALE' ? '♂ HERREN' : '♀ DAMEN'}</span>
           </div>
           {/* Canton Flag */}
-          <div className="absolute top-3 right-3">
+          <div className="absolute top-3 right-3 z-10">
             <CantonFlag canton={player.canton} size="sm" />
           </div>
-        </div>
 
-        {/* Profile Picture - Overlapping header */}
-        <div className="flex justify-center -mt-16 mb-4">
+          {/* Profile Picture Centered in Header */}
           <div className="w-32 h-32 rounded-full border-4 border-white dark:border-gray-800 shadow-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
             {player.profileImage ? (
               <Image
@@ -51,7 +49,7 @@ export default function PlayerCard({ player }: { player: any }) {
         </div>
 
         {/* Player Info */}
-        <div className="px-6 pb-6 text-center">
+        <div className="px-6 py-6 bg-gray-50 dark:bg-gray-900 text-center">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
             {player.firstName} {player.lastName}
           </h3>
@@ -65,7 +63,7 @@ export default function PlayerCard({ player }: { player: any }) {
               <div className="text-xs text-gray-500 dark:text-gray-400">cm</div>
             </div>
             <div className="text-center">
-              <div className="text-lg font-bold text-red-600 dark:text-red-400">
+              <div className="text-sm font-bold text-red-600 dark:text-red-400 uppercase">
                 {league}
               </div>
               <div className="text-xs text-gray-500 dark:text-gray-400">Liga</div>

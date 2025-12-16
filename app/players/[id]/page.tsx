@@ -45,6 +45,7 @@ interface PlayerData {
   skillDefense: number
   achievements: string[]
   clubHistory: any[]
+  videos: any[]
   views: number
   lookingForClub: boolean
   showEmail: boolean
@@ -434,6 +435,16 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 Karriere
               </button>
               <button
+                onClick={() => setActiveTab('videos')}
+                className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
+                  activeTab === 'videos'
+                    ? 'border-red-600 text-red-600 dark:text-red-400'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                }`}
+              >
+                Videos
+              </button>
+              <button
                 onClick={() => setActiveTab('erfolge')}
                 className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
                   activeTab === 'erfolge'
@@ -542,6 +553,69 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 ) : (
                   <div className="text-center py-12">
                     <p className="text-gray-500 dark:text-gray-400">Kei Vereinsgeschichte Verfüegbar</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {activeTab === 'videos' && (
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                    <VideoIcon className="w-5 h-5 text-red-500" />
+                    Highlight Videos
+                  </h3>
+                  {isOwner && (
+                    <Link
+                      href={`/players/${params.id}/videos/upload`}
+                      className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold text-sm"
+                    >
+                      <Upload className="w-4 h-4" />
+                      Video Ufelade
+                    </Link>
+                  )}
+                </div>
+                {player.videos && player.videos.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {player.videos.map((video, idx) => (
+                      <div key={idx} className="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden shadow-md">
+                        <div className="aspect-video bg-gray-900 relative">
+                          {video.url && (
+                            <video
+                              controls
+                              className="w-full h-full"
+                              poster={video.thumbnail}
+                            >
+                              <source src={video.url} type="video/mp4" />
+                              Your browser does not support the video tag.
+                            </video>
+                          )}
+                        </div>
+                        <div className="p-4">
+                          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{video.title || 'Highlight Video'}</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{video.description}</p>
+                          {video.createdAt && (
+                            <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+                              {new Date(video.createdAt).toLocaleDateString('de-CH')}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <VideoIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">Kei Highlight Videos Verfüegbar</p>
+                    {isOwner && (
+                      <Link
+                        href={`/players/${params.id}/videos/upload`}
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold"
+                      >
+                        <Upload className="w-4 h-4" />
+                        Erste Video Ufelade
+                      </Link>
+                    )}
                   </div>
                 )}
               </div>

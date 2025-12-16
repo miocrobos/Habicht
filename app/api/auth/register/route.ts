@@ -59,10 +59,25 @@ export async function POST(request: NextRequest) {
 
       // Find current club and get its ID before creating player
       let currentClubId: string | null = null
+      let playerCurrentLeague: string | null = null
       if (playerData.clubHistory && playerData.clubHistory.length > 0) {
         const currentClubEntry = playerData.clubHistory.find((club: any) => club.currentClub)
         if (currentClubEntry && currentClubEntry.clubName) {
           const normalizedName = normalizeClubName(currentClubEntry.clubName)
+          
+          // Map display league name to database enum value
+          const leagueMap: Record<string, string> = {
+            'NLA': 'NLA',
+            'NLB': 'NLB',
+            '1. Liga': 'FIRST_LEAGUE',
+            '2. Liga': 'SECOND_LEAGUE',
+            '3. Liga': 'THIRD_LEAGUE',
+            '4. Liga': 'FOURTH_LEAGUE',
+            'U23': 'U23',
+            'U19': 'U19',
+            'U17': 'U17',
+          }
+          playerCurrentLeague = leagueMap[currentClubEntry.league] || null
           
           // Try to find or create the current club
           let existingClub = await prisma.club.findFirst({
@@ -164,7 +179,7 @@ export async function POST(request: NextRequest) {
               blockHeight: playerData.blockHeight,
               canton: playerData.canton,
               city: playerData.city || 'Unknown',
-              currentLeague: playerData.currentLeague || 'FIRST_LEAGUE',
+              currentLeague: playerCurrentLeague || playerData.currentLeague || 'FIRST_LEAGUE',
               desiredLeague: playerData.desiredLeague,
               interestedClubs: playerData.interestedClubs || [],
               achievements: playerData.achievements || [],

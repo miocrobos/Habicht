@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail } from 'lucide-react'
+import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
+import ImageUpload from '@/components/shared/ImageUpload'
 import axios from 'axios'
 
 interface PlayerProfileProps {
@@ -18,7 +19,12 @@ interface PlayerData {
   id: string
   firstName: string
   lastName: string
-  email: string
+  user: {
+    id: string
+    email: string
+    name: string | null
+    role: string
+  }
   dateOfBirth: string | null
   gender: string
   height: number | null
@@ -26,6 +32,16 @@ interface PlayerData {
   positions: string[]
   nationality: string
   canton: string
+  city: string | null
+  currentLeague: string | null
+  currentClub: {
+    id: string
+    name: string
+    logo: string | null
+    website: string | null
+    canton: string
+    town: string
+  } | null
   employmentStatus: string | null
   occupation: string | null
   schoolName: string | null
@@ -63,6 +79,18 @@ const POSITION_TRANSLATIONS: { [key: string]: string } = {
   'UNIVERSAL': 'Universalspieler'
 }
 
+const LEAGUE_TRANSLATIONS: { [key: string]: string } = {
+  'NLA': 'NLA',
+  'NLB': 'NLB',
+  'FIRST_LEAGUE': '1. Liga',
+  'SECOND_LEAGUE': '2. Liga',
+  'THIRD_LEAGUE': '3. Liga',
+  'FOURTH_LEAGUE': '4. Liga',
+  'U23': 'U23',
+  'U19': 'U19',
+  'U17': 'U17'
+}
+
 const BACKGROUND_OPTIONS = [
   { id: 'gradient1', name: 'Rot Gradient', style: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)' },
   { id: 'gradient2', name: 'Blau Gradient', style: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)' },
@@ -81,6 +109,15 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [selectedBg, setSelectedBg] = useState(BACKGROUND_OPTIONS[0])
   const [customBgImage, setCustomBgImage] = useState<string | null>(null)
   const { data: session } = useSession()
+  const [showVideoUpload, setShowVideoUpload] = useState(false)
+  const [uploadingVideo, setUploadingVideo] = useState(false)
+  const [videoFile, setVideoFile] = useState<File | null>(null)
+  const [videoTitle, setVideoTitle] = useState('')
+  const [videoDescription, setVideoDescription] = useState('')
+  const [deletingVideoId, setDeletingVideoId] = useState<string | null>(null)
+  const [showProfilePhotoModal, setShowProfilePhotoModal] = useState(false)
+  const [newProfilePhoto, setNewProfilePhoto] = useState('')
+  const [uploadingPhoto, setUploadingPhoto] = useState(false)
 
   const isOwner = session?.user?.playerId === params.id
 
@@ -111,6 +148,135 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     fetchPlayer()
   }, [params.id])
 
+  const handleVideoUpload = async () => {
+    if (!videoFile) {
+      alert('Bitte wähl es Video us')
+      return
+    }
+
+    try {
+      setUploadingVideo(true)
+      const formData = new FormData()
+      formData.append('file', videoFile)
+      formData.append('playerId', params.id)
+      formData.append('title', videoTitle || 'Highlight Video')
+      formData.append('description', videoDescription || '')
+      formData.append('highlightType', 'HIGHLIGHTS')
+
+      await axios.post(`/api/videos/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+
+      // Reload player data to show new video
+      const playerResponse = await axios.get(`/api/players/${params.id}`)
+      setPlayer(playerResponse.data.player)
+      
+      // Reset form and close modal
+      setShowVideoUpload(false)
+      setVideoFile(null)
+      setVideoTitle('')
+      setVideoDescription('')
+      alert('Video erfolgriich ufeglade!')
+    } catch (error: any) {
+      console.error('Error uploading video:', error)
+      const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
+      alert(`Fehler bim Video-Upload: ${errorMsg}`)
+    } finally {
+      setUploadingVideo(false)
+    }
+  }
+  const handleDeleteVideo = async (videoId: string) => {
+    if (!confirm('Bisch sicher, dass du das Video lösche möchtest?')) {
+      return
+    }
+
+    try {
+      setDeletingVideoId(videoId)
+      await axios.delete(`/api/videos/${videoId}`)
+      
+      // Refresh player data
+      const playerResponse = await axios.get(`/api/players/${params.id}`)
+      setPlayer(playerResponse.data.player)
+      
+      alert('Video erfolgriich glöscht!')
+    } catch (error) {
+      console.error('Error deleting video:', error)
+      alert('Fehler bim Video Lösche')
+    } finally {
+      setDeletingVideoId(null)
+    }
+  }
+
+  const handleProfilePhotoUpdate = async () => {
+    if (!newProfilePhoto) {
+      alert('Bitte wähl es Bild us')
+      return
+    }
+
+    try {
+      setUploadingPhoto(true)
+      
+      // Get current player data first
+      const currentResponse = await axios.get(`/api/players/${params.id}`)
+      const currentPlayer = currentResponse.data.player
+      
+      // Update with full player data structure
+      await axios.put(`/api/players/${params.id}`, {
+        playerData: {
+          firstName: currentPlayer.firstName,
+          lastName: currentPlayer.lastName,
+          dateOfBirth: currentPlayer.dateOfBirth,
+          gender: currentPlayer.gender,
+          nationality: currentPlayer.nationality,
+          canton: currentPlayer.canton,
+          city: currentPlayer.city,
+          height: currentPlayer.height,
+          weight: currentPlayer.weight,
+          spikeHeight: currentPlayer.spikeHeight,
+          blockHeight: currentPlayer.blockHeight,
+          phone: currentPlayer.phone,
+          employmentStatus: currentPlayer.employmentStatus,
+          occupation: currentPlayer.occupation,
+          schoolName: currentPlayer.schoolName,
+          positions: currentPlayer.positions,
+          profileImage: newProfilePhoto,  // Update this field
+          instagram: currentPlayer.instagram,
+          tiktok: currentPlayer.tiktok,
+          youtube: currentPlayer.youtube,
+          highlightVideo: currentPlayer.highlightVideo,
+          swissVolleyLicense: currentPlayer.swissVolleyLicense,
+          skillReceiving: currentPlayer.skillReceiving,
+          skillServing: currentPlayer.skillServing,
+          skillAttacking: currentPlayer.skillAttacking,
+          skillBlocking: currentPlayer.skillBlocking,
+          skillDefense: currentPlayer.skillDefense,
+          bio: currentPlayer.bio,
+          lookingForClub: currentPlayer.lookingForClub,
+          showEmail: currentPlayer.showEmail,
+          showPhone: currentPlayer.showPhone,
+        },
+        clubHistory: currentPlayer.clubHistory || [],
+        achievements: currentPlayer.achievements || [],
+      })
+
+      // Refresh player data
+      const playerResponse = await axios.get(`/api/players/${params.id}`)
+      setPlayer(playerResponse.data.player)
+      
+      // Reset and close modal
+      setShowProfilePhotoModal(false)
+      setNewProfilePhoto('')
+      alert('Profilbild erfolgriich gänderet!')
+    } catch (error: any) {
+      console.error('Error updating profile photo:', error)
+      const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
+      alert(`Fehler bim Profilbild Ändere: ${errorMsg}`)
+    } finally {
+      setUploadingPhoto(false)
+    }
+  }
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
@@ -232,7 +398,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 mb-6 relative z-10">
           <div className="flex flex-col md:flex-row gap-6">
             {/* Profile Image */}
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 relative group">
               <div className="w-40 h-40 rounded-full border-4 border-white dark:border-gray-700 shadow-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
                 {player.profileImage ? (
                   <Image
@@ -248,6 +414,18 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   </div>
                 )}
               </div>
+              {isOwner && (
+                <button
+                  onClick={() => setShowProfilePhotoModal(true)}
+                  className="absolute inset-0 w-40 h-40 rounded-full bg-black bg-opacity-0 hover:bg-opacity-60 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
+                  title="Profilbild ändere"
+                >
+                  <div className="text-white flex flex-col items-center gap-1">
+                    <Camera className="w-6 h-6" />
+                    <span className="text-xs font-medium">Ändere</span>
+                  </div>
+                </button>
+              )}
             </div>
 
             {/* Player Info */}
@@ -273,7 +451,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
                     <span className="flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
-                      {player.canton}
+                      {player.city ? `${player.city}, ${player.canton}` : player.canton}
                     </span>
                     {playerAge && (
                       <span className="flex items-center gap-1">
@@ -287,22 +465,42 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     {player.nationality && (
                       <span>🏳 Nationalität: {player.nationality}</span>
                     )}
+                    {player.currentLeague && (
+                      <span className="flex items-center gap-1">
+                        🏆 {LEAGUE_TRANSLATIONS[player.currentLeague] || player.currentLeague}
+                      </span>
+                    )}
+                    {player.currentClub && (
+                      <span className="flex items-center gap-1">
+                        🏐 {player.currentClub.name}
+                      </span>
+                    )}
                   </div>
 
                   {/* Contact Info */}
                   {(isOwner || player.showEmail || player.showPhone) && (
                     <div className="flex flex-wrap gap-3 mb-4">
                       {(isOwner || player.showPhone) && player.phone && (
-                        <a href={`tel:${player.phone}`} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400">
-                          <Phone className="w-4 h-4" />
-                          {player.phone}
-                        </a>
+                        <div className="flex items-center gap-2">
+                          <a href={`tel:${player.phone}`} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400">
+                            <Phone className="w-4 h-4" />
+                            {player.phone}
+                          </a>
+                          {isOwner && !player.showPhone && (
+                            <span className="text-xs text-gray-400 dark:text-gray-500">🔒</span>
+                          )}
+                        </div>
                       )}
-                      {(isOwner || player.showEmail) && player.email && (
-                        <a href={`mailto:${player.email}`} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400">
-                          <Mail className="w-4 h-4" />
-                          {player.email}
-                        </a>
+                      {(isOwner || player.showEmail) && player.user?.email && (
+                        <div className="flex items-center gap-2">
+                          <a href={`mailto:${player.user.email}`} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400">
+                            <Mail className="w-4 h-4" />
+                            {player.user.email}
+                          </a>
+                          {isOwner && !player.showEmail && (
+                            <span className="text-xs text-gray-400 dark:text-gray-500">🔒</span>
+                          )}
+                        </div>
                       )}
                     </div>
                   )}
@@ -356,12 +554,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   <div className="flex items-center gap-2 px-4 py-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded-lg">
                     <Briefcase className="w-5 h-5" />
                     <span className="font-medium">{player.occupation}</span>
-                  </div>
-                )}
-                {player.swissVolleyLicense && (
-                  <div className="flex items-center gap-2 px-4 py-2 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300 rounded-lg">
-                    <Award className="w-5 h-5" />
-                    <span className="font-medium">Swiss Volley: {player.swissVolleyLicense}</span>
                   </div>
                 )}
               </div>
@@ -548,6 +740,23 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     </div>
                   </div>
                 )}
+
+                {/* Swiss Volley License Section */}
+                {player.swissVolleyLicense && (
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                      <Award className="w-5 h-5 text-yellow-600" />
+                      Swiss Volley Lizenz
+                    </h3>
+                    <div className="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-gray-700 dark:to-gray-800 p-6 rounded-lg border-2 border-yellow-300 dark:border-yellow-600">
+                      <img 
+                        src={player.swissVolleyLicense} 
+                        alt="Swiss Volley License" 
+                        className="w-full max-w-2xl mx-auto rounded-lg shadow-xl border-2 border-white dark:border-gray-600"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
@@ -572,13 +781,13 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     Highlight Videos
                   </h3>
                   {isOwner && (
-                    <Link
-                      href={`/players/${params.id}/videos/upload`}
+                    <button
+                      onClick={() => setShowVideoUpload(true)}
                       className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold text-sm"
                     >
                       <Upload className="w-4 h-4" />
                       Video Ufelade
-                    </Link>
+                    </button>
                   )}
                 </div>
                 {(player.highlightVideo || (player.videos && player.videos.length > 0)) ? (
@@ -603,15 +812,32 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     )}
                     {/* Show regular videos */}
                     {player.videos && player.videos.map((video, idx) => (
-                      <div key={idx} className="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden shadow-md">
+                      <div key={idx} className="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden shadow-md relative group">
+                        {isOwner && (
+                          <button
+                            onClick={() => handleDeleteVideo(video.id)}
+                            disabled={deletingVideoId === video.id}
+                            className="absolute top-2 right-2 z-10 p-2 bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 disabled:opacity-50"
+                            title="Video Lösche"
+                          >
+                            {deletingVideoId === video.id ? (
+                              <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              </svg>
+                            ) : (
+                              <Trash2 className="w-4 h-4" />
+                            )}
+                          </button>
+                        )}
                         <div className="aspect-video bg-gray-900 relative">
-                          {video.url && (
+                          {video.videoUrl && (
                             <video
                               controls
                               className="w-full h-full"
-                              poster={video.thumbnail}
+                              poster={video.thumbnailUrl || undefined}
                             >
-                              <source src={video.url} type="video/mp4" />
+                              <source src={video.videoUrl} type="video/mp4" />
                               Your browser does not support the video tag.
                             </video>
                           )}
@@ -633,13 +859,13 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     <VideoIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                     <p className="text-gray-500 dark:text-gray-400 mb-4">Kei Highlight Videos Verfüegbar</p>
                     {isOwner && (
-                      <Link
-                        href={`/players/${params.id}/videos/upload`}
+                      <button
+                        onClick={() => setShowVideoUpload(true)}
                         className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold"
                       >
                         <Upload className="w-4 h-4" />
                         Erste Video Ufelade
-                      </Link>
+                      </button>
                     )}
                   </div>
                 )}
@@ -673,6 +899,158 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
           </div>
         </div>
       </div>
+
+      {/* Video Upload Modal */}
+      {showVideoUpload && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Video Ufelade</h3>
+              <button
+                onClick={() => setShowVideoUpload(false)}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Video Datei *
+                </label>
+                <input
+                  type="file"
+                  accept="video/*"
+                  onChange={(e) => setVideoFile(e.target.files?.[0] || null)}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 dark:file:bg-red-900/30 dark:file:text-red-300"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Titel
+                </label>
+                <input
+                  type="text"
+                  value={videoTitle}
+                  onChange={(e) => setVideoTitle(e.target.value)}
+                  placeholder="z.B. Highlight Reel 2024"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Beschriibig
+                </label>
+                <textarea
+                  value={videoDescription}
+                  onChange={(e) => setVideoDescription(e.target.value)}
+                  placeholder="Optional: Beschriib dis Video..."
+                  rows={3}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  onClick={() => setShowVideoUpload(false)}
+                  className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-semibold"
+                >
+                  Abbreche
+                </button>
+                <button
+                  onClick={handleVideoUpload}
+                  disabled={!videoFile || uploadingVideo}
+                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {uploadingVideo ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Uploading...
+                    </>
+                  ) : (
+                    <>
+                      <Upload className="w-4 h-4" />
+                      Ufelade
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Profile Photo Modal */}
+      {showProfilePhotoModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Profilbild Ändere</h3>
+              <button
+                onClick={() => {
+                  setShowProfilePhotoModal(false)
+                  setNewProfilePhoto('')
+                }}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <ImageUpload
+                label="Wähl Es Neus Profilbild"
+                value={newProfilePhoto}
+                onChange={(base64) => setNewProfilePhoto(base64)}
+                aspectRatio="square"
+                required
+              />
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  onClick={() => {
+                    setShowProfilePhotoModal(false)
+                    setNewProfilePhoto('')
+                  }}
+                  className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-semibold"
+                >
+                  Abbreche
+                </button>
+                <button
+                  onClick={handleProfilePhotoUpdate}
+                  disabled={!newProfilePhoto || uploadingPhoto}
+                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {uploadingPhoto ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Updating...
+                    </>
+                  ) : (
+                    <>
+                      <Camera className="w-4 h-4" />
+                      Speichere
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

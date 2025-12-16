@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Search, Filter, MapPin, TrendingUp } from 'lucide-react'
+import { Search, Filter, MapPin, TrendingUp, X, RefreshCw } from 'lucide-react'
 import axios from 'axios'
 import PlayerCard from '@/components/player/PlayerCard'
 
@@ -16,10 +16,19 @@ export default function PlayersPage() {
     league: '',
     minHeight: '',
   })
+  const [searchDebounce, setSearchDebounce] = useState('')
+
+  // Debounce search input
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearchDebounce(filters.search)
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [filters.search])
 
   useEffect(() => {
     loadPlayers()
-  }, [filters])
+  }, [searchDebounce, filters.position, filters.canton, filters.league, filters.minHeight])
 
   const loadPlayers = async () => {
     try {
@@ -42,6 +51,18 @@ export default function PlayersPage() {
     setFilters({ ...filters, [key]: value })
   }
 
+  const clearAllFilters = () => {
+    setFilters({
+      search: '',
+      position: '',
+      canton: '',
+      league: '',
+      minHeight: '',
+    })
+  }
+
+  const hasActiveFilters = filters.search || filters.position || filters.canton || filters.league || filters.minHeight
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-8">
@@ -55,10 +76,25 @@ export default function PlayersPage() {
 
         {/* Filters */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Filter className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Filter & Suche</h3>
+            </div>
+            {hasActiveFilters && (
+              <button
+                onClick={clearAllFilters}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition"
+              >
+                <X className="w-4 h-4" />
+                Alle Filter löschen
+              </button>
+            )}
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* Search */}
             <div className="lg:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Suche
               </label>
               <div className="relative">
@@ -67,21 +103,29 @@ export default function PlayersPage() {
                   type="text"
                   value={filters.search}
                   onChange={(e) => handleFilterChange('search', e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
+                  className="w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
                   placeholder="Name, Club, Schule..."
                 />
+                {filters.search && (
+                  <button
+                    onClick={() => handleFilterChange('search', '')}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Position */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Position
               </label>
               <select
                 value={filters.position}
                 onChange={(e) => handleFilterChange('position', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">Alle</option>
                 <option value="OUTSIDE_HITTER">Aussenspieler</option>
@@ -94,39 +138,61 @@ export default function PlayersPage() {
 
             {/* Canton */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Kanton
               </label>
               <select
                 value={filters.canton}
                 onChange={(e) => handleFilterChange('canton', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">Alle</option>
-                <option value="ZH">Zürich</option>
-                <option value="BE">Bern</option>
-                <option value="VD">Vaud</option>
                 <option value="AG">Aargau</option>
-                <option value="SG">St. Gallen</option>
+                <option value="AI">Appenzell Innerrhoden</option>
+                <option value="AR">Appenzell Ausserrhoden</option>
+                <option value="BE">Bern</option>
+                <option value="BL">Basel-Landschaft</option>
+                <option value="BS">Basel-Stadt</option>
+                <option value="FR">Freiburg</option>
                 <option value="GE">Genève</option>
-                {/* Add more cantons */}
+                <option value="GL">Glarus</option>
+                <option value="GR">Graubünden</option>
+                <option value="JU">Jura</option>
+                <option value="LU">Luzern</option>
+                <option value="NE">Neuchâtel</option>
+                <option value="NW">Nidwalden</option>
+                <option value="OW">Obwalden</option>
+                <option value="SG">St. Gallen</option>
+                <option value="SH">Schaffhausen</option>
+                <option value="SO">Solothurn</option>
+                <option value="SZ">Schwyz</option>
+                <option value="TG">Thurgau</option>
+                <option value="TI">Ticino</option>
+                <option value="UR">Uri</option>
+                <option value="VD">Vaud</option>
+                <option value="VS">Valais</option>
+                <option value="ZG">Zug</option>
+                <option value="ZH">Zürich</option>
               </select>
             </div>
 
             {/* League */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Liga
               </label>
               <select
                 value={filters.league}
                 onChange={(e) => handleFilterChange('league', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">Alle</option>
                 <option value="NLA">NLA</option>
                 <option value="NLB">NLB</option>
                 <option value="FIRST_LEAGUE">1. Liga</option>
+                <option value="SECOND_LEAGUE">2. Liga</option>
+                <option value="THIRD_LEAGUE">3. Liga</option>
+                <option value="FOURTH_LEAGUE">4. Liga</option>
                 <option value="YOUTH_U19">U19</option>
                 <option value="YOUTH_U17">U17</option>
               </select>

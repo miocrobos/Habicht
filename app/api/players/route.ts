@@ -9,6 +9,7 @@ export async function GET(request: NextRequest) {
     const canton = searchParams.get('canton') || ''
     const league = searchParams.get('league') || ''
     const minHeight = searchParams.get('minHeight') || ''
+    const gender = searchParams.get('gender') || ''
 
     // Build where clause
     const where: any = {
@@ -38,6 +39,10 @@ export async function GET(request: NextRequest) {
 
     if (minHeight) {
       where.height = { gte: parseInt(minHeight) }
+    }
+
+    if (gender) {
+      where.gender = gender
     }
 
     // Fetch players

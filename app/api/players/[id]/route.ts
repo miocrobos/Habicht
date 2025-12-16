@@ -18,6 +18,16 @@ export async function GET(
             role: true,
           },
         },
+        currentClub: {
+          select: {
+            id: true,
+            name: true,
+            logo: true,
+            website: true,
+            canton: true,
+            town: true,
+          },
+        },
         clubHistory: {
           orderBy: {
             startDate: 'desc',
@@ -71,6 +81,7 @@ export async function PUT(
         gender: playerData.gender,
         nationality: playerData.nationality,
         canton: playerData.canton,
+        city: playerData.city,
         height: playerData.height ? parseFloat(playerData.height) : undefined,
         weight: playerData.weight ? parseFloat(playerData.weight) : undefined,
         spikeHeight: playerData.spikeHeight ? parseFloat(playerData.spikeHeight) : undefined,
@@ -94,6 +105,8 @@ export async function PUT(
         bio: playerData.bio,
         achievements: achievements || [],
         lookingForClub: playerData.lookingForClub,
+        showEmail: playerData.showEmail !== undefined ? playerData.showEmail : undefined,
+        showPhone: playerData.showPhone !== undefined ? playerData.showPhone : undefined,
       },
       include: {
         clubHistory: true,

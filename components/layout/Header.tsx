@@ -11,7 +11,7 @@ export default function Header() {
   const { data: session } = useSession()
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+    <header className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -27,25 +27,25 @@ export default function Header() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-black text-gray-900 leading-none tracking-tight group-hover:text-red-600 transition">
+              <span className="text-2xl font-black text-gray-900 dark:text-white leading-none tracking-tight group-hover:text-red-600 dark:group-hover:text-red-400 transition">
                 Habicht
               </span>
-              <span className="text-xs text-gray-500 font-medium tracking-wide">SWISS VOLLEYBALL</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide">SWISS VOLLEYBALL</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/players" className="text-gray-700 hover:text-swiss-red transition">
+            <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
               Spieler
             </Link>
-            <Link href="/players/men" className="text-gray-700 hover:text-blue-600 transition font-medium">
+            <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium">
               ♂ Herren
             </Link>
-            <Link href="/players/women" className="text-gray-700 hover:text-pink-600 transition font-medium">
+            <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium">
               ♀ Damen
             </Link>
-            <Link href="/clubs" className="text-gray-700 hover:text-swiss-red transition">
+            <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
               Clubs
             </Link>
             <Link href="/about" className="text-gray-700 hover:text-swiss-red transition">
@@ -72,7 +72,7 @@ export default function Header() {
             {session ? (
               <button
                 onClick={() => signOut()}
-                className="bg-swiss-red text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                className="bg-swiss-red dark:bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 dark:hover:bg-red-700 transition"
               >
                 Abmelden
               </button>
@@ -80,13 +80,13 @@ export default function Header() {
               <>
                 <Link 
                   href="/auth/login"
-                  className="text-gray-700 hover:text-swiss-red transition font-medium"
+                  className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium"
                 >
                   Anmelden
                 </Link>
                 <Link 
                   href="/auth/register"
-                  className="bg-swiss-red text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                  className="bg-swiss-red dark:bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 dark:hover:bg-red-700 transition"
                 >
                   Registrieren
                 </Link>
@@ -96,7 +96,7 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden text-gray-700"
+            className="md:hidden text-gray-700 dark:text-gray-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -105,41 +105,44 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t">
+          <div className="md:hidden py-4 border-t dark:border-gray-700">
             <nav className="flex flex-col space-y-4">
-              <Link href="/players" className="text-gray-700 hover:text-swiss-red transition">
+              <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 Spieler
               </Link>
-              <Link href="/players/men" className="text-gray-700 hover:text-blue-600 transition font-medium">
+              <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium">
                 ♂ Herren
               </Link>
-              <Link href="/players/women" className="text-gray-700 hover:text-pink-600 transition font-medium">
+              <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium">
                 ♀ Damen
               </Link>
-              <Link href="/clubs" className="text-gray-700 hover:text-swiss-red transition">
+              <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 Clubs
               </Link>
-              <Link href="/about" className="text-gray-700 hover:text-swiss-red transition">
+              <Link href="/settings" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
+                Einstellungen
+              </Link>
+              <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 Über uns
               </Link>
               {session ? (
                 <>
-                  <Link href="/profile" className="text-gray-700 hover:text-swiss-red transition">
+                  <Link href="/profile" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                     Profil
                   </Link>
                   <button
                     onClick={() => signOut()}
-                    className="text-left text-gray-700 hover:text-swiss-red transition"
+                    className="text-left text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition"
                   >
                     Abmelden
                   </button>
                 </>
               ) : (
                 <>
-                  <Link href="/auth/login" className="text-gray-700 hover:text-swiss-red transition">
+                  <Link href="/auth/login" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                     Anmelden
                   </Link>
-                  <Link href="/auth/register" className="text-swiss-red font-semibold">
+                  <Link href="/auth/register" className="text-swiss-red dark:text-red-400 font-semibold">
                     Registrieren
                   </Link>
                 </>

@@ -5,8 +5,7 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  theme: {
+  ],  darkMode: 'class',  theme: {
     extend: {
       colors: {
         // Swiss flag colors

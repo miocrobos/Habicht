@@ -1,6 +1,8 @@
 'use client'
 
+import Image from 'next/image'
 import { getCantonInfo } from '@/lib/swissData'
+import { useState } from 'react'
 
 interface CantonFlagProps {
   canton: string
@@ -8,7 +10,7 @@ interface CantonFlagProps {
   showName?: boolean
 }
 
-// Actual Swiss Canton Flag SVG representations
+// Actual Swiss Canton Flag SVG representations (fallback)
 const CantonFlagSVG = ({ canton }: { canton: string }) => {
   const flags: Record<string, JSX.Element> = {
     ZH: ( // Zürich - Blue and white diagonal
@@ -220,13 +222,25 @@ export default function CantonFlag({ canton, size = 'md', showName = false }: Ca
     lg: 'text-base',
   }
 
+  const [useImage, setUseImage] = useState(true)
+
   return (
     <div className="flex items-center gap-2">
       <div 
-        className={`${sizeClasses[size]} rounded border border-gray-300 dark:border-gray-600 shadow-sm overflow-hidden`}
+        className={`${sizeClasses[size]} rounded border border-gray-300 dark:border-gray-600 shadow-sm overflow-hidden relative`}
         title={cantonInfo.name}
       >
-        <CantonFlagSVG canton={canton} />
+        {useImage ? (
+          <Image
+            src={`/cantons/${canton}.png`}
+            alt={`${cantonInfo.name} flag`}
+            fill
+            className="object-contain"
+            onError={() => setUseImage(false)}
+          />
+        ) : (
+          <CantonFlagSVG canton={canton} />
+        )}
       </div>
       {showName && (
         <span className={`${textSizes[size]} font-medium text-gray-700 dark:text-gray-300`}>

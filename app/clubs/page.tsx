@@ -133,11 +133,6 @@ export default function ClubsPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="mb-4">
-                    <span className="bg-habicht-100 text-habicht-700 px-3 py-1 rounded-full text-sm font-medium">
-                      {club.leagueDisplay}
-                    </span>
-                  </div>
                   
                   <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-4">
                     <span className="font-medium">{club.playerCount}</span>

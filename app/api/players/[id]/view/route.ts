@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { getServerSession } from 'next-auth'
 
 export async function POST(
   request: Request,
@@ -7,6 +8,8 @@ export async function POST(
 ) {
   try {
     const playerId = params.id
+    const session = await getServerSession()
+    const viewerId = session?.user?.playerId || session?.user?.recruiterId
 
     // Check if player exists first
     const existingPlayer = await prisma.player.findUnique({
@@ -21,7 +24,13 @@ export async function POST(
       )
     }
 
-    // Increment view count
+    // Don't increment if viewing your own profile
+    if (viewerId && viewerId === playerId) {
+      return NextResponse.json({ views: existingPlayer.views })
+    }
+
+    // For now, increment view count
+    // TODO: Implement proper unique viewer tracking with a separate table
     const player = await prisma.player.update({
       where: { id: playerId },
       data: {

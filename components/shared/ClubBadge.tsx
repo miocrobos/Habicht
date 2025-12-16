@@ -1,11 +1,13 @@
 'use client'
 
 import { getClubInfo } from '@/lib/swissData'
+import Image from 'next/image'
 
 interface ClubBadgeProps {
   clubName: string
   size?: 'sm' | 'md' | 'lg'
   showName?: boolean
+  uploadedLogo?: string | null
 }
 
 const EagleLogo = ({ size }: { size: 'sm' | 'md' | 'lg' }) => {
@@ -55,7 +57,7 @@ const EagleLogo = ({ size }: { size: 'sm' | 'md' | 'lg' }) => {
   )
 }
 
-export default function ClubBadge({ clubName, size = 'md', showName = false }: ClubBadgeProps) {
+export default function ClubBadge({ clubName, size = 'md', showName = false, uploadedLogo }: ClubBadgeProps) {
   const clubInfo = getClubInfo(clubName)
   
   const sizeClasses = {
@@ -70,22 +72,31 @@ export default function ClubBadge({ clubName, size = 'md', showName = false }: C
     lg: 'text-base',
   }
 
-  // Use eagle logo if no club info found
-  const hasCustomLogo = clubInfo.logo && clubInfo.logo !== '🏐'
+  // Prioritize uploaded logo, then custom logo, then eagle logo
+  const hasUploadedLogo = uploadedLogo && uploadedLogo !== ''
+  const hasCustomLogo = !hasUploadedLogo && clubInfo.logo && clubInfo.logo !== '🏐'
   const bgColor = clubInfo.colors?.primary || '#FF0000'
   const borderColor = clubInfo.colors?.secondary || '#FFFFFF'
 
   return (
     <div className="flex items-center gap-3">
       <div 
-        className={`${sizeClasses[size]} rounded-full shadow-md flex items-center justify-center font-bold relative border-4`}
+        className={`${sizeClasses[size]} rounded-full shadow-md flex items-center justify-center font-bold relative border-4 overflow-hidden`}
         style={{ 
           backgroundColor: bgColor,
           borderColor: borderColor,
         }}
         title={clubName}
       >
-        {hasCustomLogo ? (
+        {hasUploadedLogo ? (
+          <Image
+            src={uploadedLogo!}
+            alt={clubName}
+            width={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
+            height={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
+            className="w-full h-full object-cover"
+          />
+        ) : hasCustomLogo ? (
           <span className="filter drop-shadow-lg">{clubInfo.logo}</span>
         ) : (
           <EagleLogo size={size} />

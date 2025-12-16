@@ -96,17 +96,62 @@ export async function POST(request: NextRequest) {
               bio: playerData.bio, // Player description
               lookingForClub: playerData.lookingForClub || false,
               nationality: playerData.nationality || 'Swiss',
-              // Create club history entries
+              // Create club history entries and update clubs
               clubHistory: playerData.clubHistory && playerData.clubHistory.length > 0 ? {
-                create: playerData.clubHistory.map((club: any) => ({
-                  clubName: club.clubName,
-                  clubLogo: club.logo || null,
-                  clubCountry: club.country || 'Switzerland',
-                  clubWebsiteUrl: club.clubWebsiteUrl || null,
-                  league: club.league || null,
-                  startDate: club.yearFrom ? new Date(club.yearFrom, 0, 1) : new Date(),
-                  endDate: club.currentClub ? null : (club.yearTo ? new Date(club.yearTo, 11, 31) : null),
-                  currentClub: club.currentClub || false,
+                create: await Promise.all(playerData.clubHistory.map(async (club: any) => {
+                  // Try to find or create the club in the database
+                  if (club.clubName && club.currentClub) {
+                    try {
+                      // Check if club exists
+                      let existingClub = await prisma.club.findFirst({
+                        where: { name: club.clubName }
+                      })
+
+                      if (existingClub) {
+                        // Update club with logo if provided and club doesn't have one
+                        if (club.logo && (!existingClub.logo || existingClub.logo === '🏐')) {
+                          await prisma.club.update({
+                            where: { id: existingClub.id },
+                            data: { logo: club.logo }
+                          })
+                        }
+                      } else if (club.league && club.country === 'Switzerland') {
+                        // Create new Swiss club with provided information
+                        const leagueMap: Record<string, string> = {
+                          'NLA': 'NLA',
+                          'NLB': 'NLB',
+                          '1. Liga': 'FIRST_LEAGUE',
+                          '2. Liga': 'SECOND_LEAGUE',
+                          '3. Liga': 'THIRD_LEAGUE',
+                          '4. Liga': 'FOURTH_LEAGUE',
+                        }
+                        
+                        existingClub = await prisma.club.create({
+                          data: {
+                            name: club.clubName,
+                            league: leagueMap[club.league] || 'FIRST_LEAGUE',
+                            canton: playerData.canton || 'ZH',
+                            town: playerData.city || 'Unknown',
+                            logo: club.logo || null,
+                            website: club.clubWebsiteUrl || null,
+                          }
+                        })
+                      }
+                    } catch (error) {
+                      console.error('Error creating/updating club:', error)
+                    }
+                  }
+
+                  return {
+                    clubName: club.clubName,
+                    clubLogo: club.logo || null,
+                    clubCountry: club.country || 'Switzerland',
+                    clubWebsiteUrl: club.clubWebsiteUrl || null,
+                    league: club.league || null,
+                    startDate: club.yearFrom ? new Date(club.yearFrom, 0, 1) : new Date(),
+                    endDate: club.currentClub ? null : (club.yearTo ? new Date(club.yearTo, 11, 31) : null),
+                    currentClub: club.currentClub || false,
+                  }
                 }))
               } : undefined,
             },

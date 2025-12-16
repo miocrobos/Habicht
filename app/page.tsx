@@ -63,7 +63,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen dark:bg-gray-900">
+    <div className="min-h-screen">
       {/* Hero Section with Dynamic Background */}
       <section className="relative min-h-[700px] pb-20 mb-24 overflow-visible">
         {/* Animated Background */}
@@ -158,7 +158,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
                 <button
                   onClick={() => handleProtectedNavigation('/players')}
-                  className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-700 transition-all transform hover:scale-105 shadow-2xl"
+                  className="bg-white text-gray-900 px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl"
                 >
                   <span className="flex items-center gap-2 justify-center">
                     <Search className="w-5 h-5" />
@@ -169,7 +169,7 @@ export default function Home() {
                   <>
                     <Link
                       href="/auth/login"
-                      className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-700 transition-all transform hover:scale-105 shadow-2xl border-2 border-gray-300 dark:border-gray-600"
+                      className="bg-white text-gray-900 px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl border-2 border-gray-300"
                     >
                       <span className="flex items-center gap-2 justify-center">
                         <LogIn className="w-5 h-5" />
@@ -178,7 +178,7 @@ export default function Home() {
                     </Link>
                     <Link
                       href="/auth/register"
-                      className="bg-red-600 hover:bg-red-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold transition-all transform hover:scale-105 shadow-2xl border-2 border-white dark:border-gray-700"
+                      className="bg-red-600 hover:bg-red-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold transition-all transform hover:scale-105 shadow-2xl border-2 border-white"
                     >
                       <span className="flex items-center gap-2 justify-center">
                         <Star className="w-5 h-5" />
@@ -210,11 +210,11 @@ export default function Home() {
       </section>
 
       {/* League Showcase Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Alle Ligen. Ein Ort.</h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Alle Ligen. Ein Ort.</h2>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
               Von NLA Spitzenvolleyball bis zur 4. Liga – entdecke Spieler aus der ganzen Schweiz.
             </p>
           </div>
@@ -268,17 +268,17 @@ export default function Home() {
           </div>
 
           {/* Swiss Regions Highlight */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 dark:text-white">🇨🇭 Alle 26 Kantone</h3>
+          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-center mb-8">🇨🇭 Alle 26 Kantone</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
               {['ZH', 'BE', 'VD', 'AG', 'SG', 'GE', 'LU', 'TG', 'TI', 'VS', 'BL', 'SO', 'FR', 'BS', 'GR', 'NE', 'ZG', 'SH', 'UR', 'SZ', 'JU', 'AR', 'AI', 'NW', 'GL', 'OW'].map(canton => (
                 <Link 
                   key={canton} 
                   href={`/clubs?canton=${canton}`}
-                  className="p-2 md:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30 hover:shadow-md transition cursor-pointer flex flex-col items-center gap-2"
+                  className="p-2 md:p-3 bg-gray-50 rounded-lg hover:bg-red-50 hover:shadow-md transition cursor-pointer flex flex-col items-center gap-2"
                 >
                   <CantonFlag canton={canton as any} size="md" />
-                  <div className="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200">{canton}</div>
+                  <div className="text-lg md:text-xl font-bold text-gray-800">{canton}</div>
                 </Link>
               ))}
             </div>
@@ -287,11 +287,11 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Alles wo du brauchsch</h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300">Professionelli Tools für Spieler und Scouts</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Alles wo du brauchsch</h2>
+            <p className="text-lg md:text-xl text-gray-600">Professionelli Tools für Spieler und Scouts</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -352,7 +352,7 @@ export default function Home() {
       </section>
 
       {/* Gender-Specific Sections */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-pink-50 dark:from-gray-900 dark:to-gray-800">
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-pink-50">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {/* Men's Section */}
@@ -474,12 +474,12 @@ function FeatureCard({ icon, title, description, color }: {
   }[color]
 
   return (
-    <div className="group bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
+    <div className="group bg-white p-6 md:p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
       <div className={`inline-block p-3 md:p-4 rounded-xl mb-3 md:mb-4 transition-all ${colorClasses}`}>
         {icon}
       </div>
-      <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-gray-900 dark:text-white">{title}</h3>
-      <p className="text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed">{description}</p>
+      <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-gray-900">{title}</h3>
+      <p className="text-sm md:text-base text-gray-600 leading-relaxed">{description}</p>
     </div>
   )
 }

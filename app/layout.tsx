@@ -19,12 +19,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="de-CH" className="dark:bg-gray-900">
-      <body className={`${inter.className} dark:bg-gray-900`}>
+    <html lang="de-CH">
+      <body className={inter.className}>
         <AuthProvider>
-          <div className="flex flex-col min-h-screen dark:bg-gray-900">
+          <div className="flex flex-col min-h-screen">
             <Header />
-            <main className="flex-grow dark:bg-gray-900">
+            <main className="flex-grow">
               {children}
             </main>
             <Footer />

@@ -181,7 +181,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50">
       {/* Cover Image with Canton Colors */}
       <div 
         className="h-48 relative"
@@ -196,7 +196,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 pb-12">
         {/* Profile Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 md:p-6">
+        <div className="bg-white rounded-lg shadow-lg p-4 md:p-6">
           <div className="flex flex-col md:flex-row gap-4 md:gap-6">
             {/* Profile Image */}
             <div className="flex-shrink-0">
@@ -217,30 +217,30 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
             <div className="flex-grow">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between">
                 <div>
-                  <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white flex flex-wrap items-center gap-2 md:gap-3">
+                  <h1 className="text-2xl md:text-3xl font-bold text-gray-900 flex flex-wrap items-center gap-2 md:gap-3">
                     {player.firstName} {player.lastName}
                     {player.isPlaceholder && (
-                      <span className="px-2 md:px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 text-xs md:text-sm font-medium rounded-full border border-orange-300 dark:border-orange-700">
+                      <span className="px-2 md:px-3 py-1 bg-orange-100 text-orange-700 text-xs md:text-sm font-medium rounded-full border border-orange-300">
                         ⚠️ Platzhalter
                       </span>
                     )}
                   </h1>
-                  <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mt-1">
+                  <p className="text-lg md:text-xl text-gray-600 mt-1">
                     {player.position.replace('_', ' ')} • #{player.jerseyNumber}
                   </p>
                   {player.isPlaceholder && (
-                    <div className="mt-2 px-3 py-2 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg text-sm text-orange-800 dark:text-orange-300">
+                    <div className="mt-2 px-3 py-2 bg-orange-50 border border-orange-200 rounded-lg text-sm text-orange-800">
                     <span className="flex items-center gap-1">
                       <Eye className="w-4 h-4" />
                       {views || 0} Profilaufrufe
                     </span>
                       <strong>📌 Hinweis:</strong> Dieses Profil wurde automatisch von Volleybox importiert. 
-                      <button className="ml-2 underline font-medium hover:text-orange-900 dark:hover:text-orange-200">
+                      <button className="ml-2 underline font-medium hover:text-orange-900">
                         Profil beanspruchen →
                       </button>
                     </div>
                   )}
-                  <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-3 text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-3 text-xs md:text-sm text-gray-600">
                     <span className="flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
                       {player.city}, {player.canton}
@@ -254,25 +254,25 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
                 {/* Quick Stats */}
                 <div className="mt-4 md:mt-0 flex flex-wrap gap-2 md:gap-4 text-center">
-                  <div className="bg-gray-50 dark:bg-gray-700 px-3 md:px-4 py-2 rounded-lg">
-                    <div className="text-xl md:text-2xl font-bold text-habicht-600 dark:text-habicht-400">{player.height}</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Grösse cm</div>
+                  <div className="bg-gray-50 px-3 md:px-4 py-2 rounded-lg">
+                    <div className="text-xl md:text-2xl font-bold text-habicht-600">{player.height}</div>
+                    <div className="text-xs text-gray-600">Grösse cm</div>
                   </div>
                   {player.blockReach && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-3 md:px-4 py-2 rounded-lg">
-                      <div className="text-xl md:text-2xl font-bold text-blue-600 dark:text-blue-400">{player.blockReach}</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Block cm</div>
+                    <div className="bg-gray-50 px-3 md:px-4 py-2 rounded-lg">
+                      <div className="text-xl md:text-2xl font-bold text-blue-600">{player.blockReach}</div>
+                      <div className="text-xs text-gray-600">Block cm</div>
                     </div>
                   )}
                   {player.spikeReach && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-3 md:px-4 py-2 rounded-lg">
-                      <div className="text-xl md:text-2xl font-bold text-red-600 dark:text-red-400">{player.spikeReach}</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Angriff cm</div>
+                    <div className="bg-gray-50 px-3 md:px-4 py-2 rounded-lg">
+                      <div className="text-xl md:text-2xl font-bold text-red-600">{player.spikeReach}</div>
+                      <div className="text-xs text-gray-600">Angriff cm</div>
                     </div>
                   )}
-                  <div className="bg-gray-50 dark:bg-gray-700 px-3 md:px-4 py-2 rounded-lg">
-                    <div className="text-xl md:text-2xl font-bold text-habicht-600 dark:text-habicht-400">{player.currentLeague}</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Liga</div>
+                  <div className="bg-gray-50 px-3 md:px-4 py-2 rounded-lg">
+                    <div className="text-xl md:text-2xl font-bold text-habicht-600">{player.currentLeague}</div>
+                    <div className="text-xs text-gray-600">Liga</div>
                   </div>
                 </div>
               </div>
@@ -290,13 +290,13 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               )}
 
               {/* Current Club */}
-              <div className="mt-4 p-3 md:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="mt-4 p-3 md:p-4 bg-gray-50 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <ClubBadge clubName={player.currentClub.name} size="md" />
                   <div>
-                    <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Aktueller Club</div>
-                    <div className="font-semibold dark:text-white">{player.currentClub.name}</div>
-                    <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">{player.currentLeague}</div>
+                    <div className="text-xs md:text-sm text-gray-600">Aktueller Club</div>
+                    <div className="font-semibold">{player.currentClub.name}</div>
+                    <div className="text-xs md:text-sm text-gray-600">{player.currentLeague}</div>
                   </div>
                 </div>
                 <a 
@@ -350,8 +350,8 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         </div>
 
         {/* Tabs */}
-        <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-          <div className="border-b border-gray-200 dark:border-gray-700">
+        <div className="mt-6 bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="border-b border-gray-200">
             <nav className="flex flex-wrap">
               <TabButton 
                 active={activeTab === 'overview'} 
@@ -396,8 +396,8 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
             {activeTab === 'overview' && (
               <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                 <div>
-                  <h3 className="text-base md:text-lg font-semibold mb-3 dark:text-white">Über mich</h3>
-                  <p className="text-sm md:text-base text-gray-700 dark:text-gray-300">{player.bio}</p>
+                  <h3 className="text-base md:text-lg font-semibold mb-3">Über mich</h3>
+                  <p className="text-sm md:text-base text-gray-700">{player.bio}</p>
 
                   <h3 className="text-lg font-semibold mt-6 mb-3">Physische Daten</h3>
                   <div className="space-y-2">
@@ -499,21 +499,21 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
             {activeTab === 'history' && (
               <div>
-                <h3 className="text-base md:text-lg font-semibold mb-4 dark:text-white">Club History</h3>
+                <h3 className="text-base md:text-lg font-semibold mb-4">Club History</h3>
                 <ClubHistory history={player.clubHistory} />
               </div>
             )}
 
             {activeTab === 'teammates' && (
               <div>
-                <h3 className="text-base md:text-lg font-semibold mb-4 dark:text-white">Teammates</h3>
+                <h3 className="text-base md:text-lg font-semibold mb-4">Teammates</h3>
                 <TeammatesList teammates={player.teammates} />
               </div>
             )}
 
             {activeTab === 'coaches' && (
               <div>
-                <h3 className="text-base md:text-lg font-semibold mb-4 dark:text-white">Coaches</h3>
+                <h3 className="text-base md:text-lg font-semibold mb-4">Coaches</h3>
                 <CoachesList coaches={player.coaches} />
               </div>
             )}
@@ -538,8 +538,8 @@ function TabButton({
       onClick={onClick}
       className={`px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-medium transition ${
         active
-          ? 'text-habicht-600 dark:text-habicht-400 border-b-2 border-habicht-600 dark:border-habicht-400'
-          : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+          ? 'text-habicht-600 border-b-2 border-habicht-600'
+          : 'text-gray-600 hover:text-gray-900'
       }`}
     >
       {children}

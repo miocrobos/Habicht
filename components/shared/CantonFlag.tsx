@@ -34,7 +34,7 @@ export default function CantonFlag({ canton, size = 'md', showName = false }: Ca
           src={`/cantons/${canton}.svg`}
           alt={`${cantonInfo.name} flag`}
           fill
-          className="object-contain dark:brightness-100 dark:contrast-100"
+          className="object-contain no-invert"
           priority
         />
       </div>

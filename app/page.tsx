@@ -102,7 +102,7 @@ export default function Home() {
                     src="/eagle-logo.png"
                     alt="Eagle Logo"
                     fill
-                    className="object-contain dark:brightness-100 dark:contrast-100"
+                    className="object-contain no-invert"
                     priority
                   />
                 </div>

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
-import { Menu, X, User, Search } from 'lucide-react'
+import { Menu, X, User, Search, Settings } from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
 
 export default function Header() {
@@ -119,8 +119,9 @@ export default function Header() {
               <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 Clubs
               </Link>
-              <Link href="/settings" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                Einstellungen
+              <Link href="/settings" className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
+                <Settings className="w-5 h-5" />
+                <span>Einstellungen</span>
               </Link>
               <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 Über uns

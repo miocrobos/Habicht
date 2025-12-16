@@ -29,6 +29,7 @@ export default function CantonFlag({ canton, size = 'md', showName = false }: Ca
       <div 
         className={`${sizeClasses[size]} rounded border border-gray-300 dark:border-gray-600 shadow-sm overflow-hidden relative`}
         title={cantonInfo.name}
+        style={{ isolation: 'isolate', colorScheme: 'light' }}
       >
         <Image
           src={`/cantons/${canton}.svg`}
@@ -36,7 +37,7 @@ export default function CantonFlag({ canton, size = 'md', showName = false }: Ca
           fill
           className="object-contain no-invert"
           priority
-          style={{ filter: 'none', WebkitFilter: 'none' }}
+          style={{ filter: 'none', WebkitFilter: 'none', colorScheme: 'light' }}
         />
       </div>
       {showName && (

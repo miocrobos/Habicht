@@ -5,7 +5,7 @@ import { getCantonInfo } from '@/lib/swissData'
 
 interface CantonFlagProps {
   canton: string
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm'  | 'md' | 'lg'
   showName?: boolean
 }
 

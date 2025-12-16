@@ -6,11 +6,36 @@
  * Usage: npx ts-node scripts/import-volleybox-data.ts
  */
 
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Canton, League, Position } from '@prisma/client';
 import * as fs from 'fs'
 import * as path from 'path'
+import * as bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
+
+// Helper to map league strings to League enum
+function mapLeague(leagueStr: string): League | undefined {
+  const mapping: Record<string, League> = {
+    'NLA': League.NLA,
+    'NLB': League.NLB,
+    '1. Liga': League.FIRST_LEAGUE,
+    '2. Liga': League.SECOND_LEAGUE,
+    '3. Liga': League.THIRD_LEAGUE,
+    '4. Liga': League.FOURTH_LEAGUE,
+  }
+  return mapping[leagueStr]
+}
+
+// Helper to map position strings to Position enum
+function mapPosition(posStr: string): Position {
+  const normalized = posStr.toLowerCase().trim()
+  if (normalized.includes('setter') || normalized.includes('zuspieler')) return Position.SETTER
+  if (normalized.includes('outside') || normalized.includes('aussen')) return Position.OUTSIDE_HITTER
+  if (normalized.includes('middle') || normalized.includes('mittel')) return Position.MIDDLE_BLOCKER
+  if (normalized.includes('opposite') || normalized.includes('diagonal')) return Position.OPPOSITE
+  if (normalized.includes('libero')) return Position.LIBERO
+  return Position.UNIVERSAL
+}
 
 interface ImportPlayer {
   name: string
@@ -64,16 +89,16 @@ async function importData() {
       const club = await prisma.club.upsert({
         where: { name: teamData.name },
         update: {
-          league: teamData.league,
-          canton: teamData.canton,
-          websiteUrl: teamData.website || null,
+          canton: teamData.canton as Canton,
+          town: teamData.town,
+          website: teamData.website || null,
           description: `${teamData.name} from ${teamData.town}, founded ${teamData.founded || 'N/A'}`
         },
         create: {
           name: teamData.name,
-          league: teamData.league,
-          canton: teamData.canton,
-          websiteUrl: teamData.website || null,
+          canton: teamData.canton as Canton,
+          town: teamData.town,
+          website: teamData.website || null,
           description: `${teamData.name} from ${teamData.town}, founded ${teamData.founded || 'N/A'}`
         }
       })
@@ -94,39 +119,65 @@ async function importData() {
           
           if (existingPlayer) {
             // Update existing player
+            const mappedLeague = mapLeague(teamData.league) || League.NLB
             await prisma.player.update({
               where: { id: existingPlayer.id },
               data: {
                 height: playerData.height,
-                position: playerData.position,
+                positions: playerData.position ? [mapPosition(playerData.position)] : [],
                 jerseyNumber: playerData.jerseyNumber,
                 currentClubId: club.id,
-                currentLeague: teamData.league,
+                currentLeague: mappedLeague,
               }
             })
             console.log(`  ↻ Updated: ${playerData.name}`)
           } else {
-            // Create new player
+            // Create new player with User account
+            const mappedLeague = mapLeague(teamData.league) || League.NLB
+            
+            // Generate a unique email from player name
+            const emailUsername = `${playerData.firstName}.${playerData.lastName}`.toLowerCase().replace(/[^a-z.]/g, '')
+            const email = `${emailUsername}@volleybox-import.ch`
+            
+            // Check if user with this email already exists
+            let user = await prisma.user.findUnique({
+              where: { email }
+            })
+            
+            if (!user) {
+              // Create user account with default password
+              const hashedPassword = await bcrypt.hash('ChangeMe123!', 10)
+              user = await prisma.user.create({
+                data: {
+                  name: `${playerData.firstName} ${playerData.lastName}`,
+                  email,
+                  password: hashedPassword,
+                  role: 'PLAYER',
+                }
+              })
+            }
+            
+            // Create player linked to user
             await prisma.player.create({
               data: {
+                userId: user.id,
                 firstName: playerData.firstName,
                 lastName: playerData.lastName,
                 dateOfBirth: new Date(playerData.dateOfBirth),
                 gender: 'MALE', // Adjust if scraping women's teams
                 height: playerData.height,
-                position: playerData.position,
+                positions: playerData.position ? [mapPosition(playerData.position)] : [],
                 jerseyNumber: playerData.jerseyNumber,
-                canton: teamData.canton,
+                canton: teamData.canton as Canton,
                 city: teamData.town,
                 currentClubId: club.id,
-                currentLeague: teamData.league,
+                currentLeague: mappedLeague,
                 bio: `Professional volleyball player from ${playerData.nationality}`,
                 profileImage: '/players/default.jpg',
-                // You may need to create a user account first for authentication
               }
             })
             totalPlayersImported++
-            console.log(`  + Created: ${playerData.name}`)
+            console.log(`  + Created: ${playerData.name} (${email})`)
           }
         } catch (playerError) {
           console.error(`  ✗ Error importing ${playerData.name}:`, playerError)

@@ -35,13 +35,12 @@ export default function ClubSelector({
   ]
 
   useEffect(() => {
-    const leagueMap: Record<League, 'NLA' | 'NLB' | '1. Liga' | '2. Liga'> = {
+    const leagueMap: Partial<Record<League, 'NLA' | 'NLB' | '1. Liga' | '2. Liga'>> = {
       NLA: 'NLA',
       NLB: 'NLB',
-      ERSTE_LIGA: '1. Liga',
-      ZWEITE_LIGA: '2. Liga',
-      DRITTE_LIGA: '2. Liga',
-      REGIONAL: '2. Liga'
+      FIRST_LEAGUE: '1. Liga',
+      SECOND_LEAGUE: '2. Liga',
+      THIRD_LEAGUE: '2. Liga',
     }
     
     let filteredClubs: ClubInfo[]

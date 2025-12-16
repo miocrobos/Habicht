@@ -116,7 +116,10 @@ export function getAllClubs(): ClubInfo[] {
 }
 
 export function getClubsByGender(gender: 'MEN' | 'WOMEN' | 'BOTH'): ClubInfo[] {
-  return getAllClubs().filter(club => club.gender === gender || club.gender === 'BOTH')
+  if (gender === 'BOTH') {
+    return getAllClubs()
+  }
+  return getAllClubs().filter(club => club.gender === gender)
 }
 
 export function getClubsByCanton(canton: string): ClubInfo[] {

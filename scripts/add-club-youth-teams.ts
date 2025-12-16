@@ -227,8 +227,9 @@ async function addTeams() {
           name: team.name,
           town: team.town,
           canton: team.canton,
-          league: team.league,
           founded: team.founded,
+          // Note: League assignment moved to boolean flags in the schema
+          // You may want to set the appropriate has*Men/has*Women flag based on team.league
         },
       })
       

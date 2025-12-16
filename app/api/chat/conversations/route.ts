@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 // GET - Get all conversations for current user
 export async function GET(request: Request) {
@@ -11,7 +11,7 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
     }
 
-    let conversations = []
+    let conversations: any[] = []
 
     if (session.user.role === 'PLAYER') {
       const player = await prisma.player.findFirst({
@@ -70,7 +70,7 @@ export async function GET(request: Request) {
                 id: true,
                 firstName: true,
                 lastName: true,
-                position: true,
+                positions: true,
                 currentLeague: true,
                 profileImage: true
               }

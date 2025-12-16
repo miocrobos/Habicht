@@ -15,14 +15,13 @@ async function main() {
           name: true,
           canton: true,
           town: true,
-          league: true,
           website: true
         }
       })
       
       console.log('\nSample clubs:')
       sampleClubs.forEach(club => {
-        console.log(`- ${club.name} (${club.canton}, ${club.league})`)
+        console.log(`- ${club.name} (${club.canton}, ${club.town})`)
       })
     }
 

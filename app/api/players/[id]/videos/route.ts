@@ -39,7 +39,7 @@ export async function POST(
     }
 
     const body = await request.json();
-    const { url, title, description, videoType } = body;
+    const { url, title, description, highlightType } = body;
 
     if (!url) {
       return NextResponse.json(
@@ -51,10 +51,11 @@ export async function POST(
     const video = await prisma.video.create({
       data: {
         playerId: params.id,
-        url,
+        videoUrl: url,
+        videoType: 'UPLOADED',
         title: title || '',
         description: description || '',
-        videoType: videoType || 'HIGHLIGHT',
+        highlightType: highlightType || 'HIGHLIGHTS',
       },
     });
 

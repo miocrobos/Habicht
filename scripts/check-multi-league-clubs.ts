@@ -7,10 +7,14 @@ async function main() {
     select: {
       id: true,
       name: true,
-      league: true,
       canton: true,
       town: true,
-      website: true
+      website: true,
+      // Select league flags to check which leagues the club participates in
+      hasNLAMen: true,
+      hasNLAWomen: true,
+      hasNLBMen: true,
+      hasNLBWomen: true,
     },
     orderBy: { name: 'asc' }
   })

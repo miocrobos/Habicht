@@ -130,7 +130,7 @@ async function importPlayers() {
             nationality: player.nationality,
             canton: mapCanton(team.canton),
             city: team.town || 'Zürich',
-            position: mapPosition(player.position),
+            positions: [mapPosition(player.position)], // Changed from position to positions array
             jerseyNumber: player.jerseyNumber,
             currentClubId: club.id,
             currentLeague: mapLeague(team.league),

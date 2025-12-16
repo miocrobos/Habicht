@@ -14,12 +14,12 @@ export async function POST(request: NextRequest) {
       where: { email },
       data: {
         verificationToken,
-        verified: false,
+        emailVerified: false,
       },
     })
 
     // Send verification email
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       // Configure your email service
       host: process.env.EMAIL_HOST,
       port: parseInt(process.env.EMAIL_PORT || '587'),

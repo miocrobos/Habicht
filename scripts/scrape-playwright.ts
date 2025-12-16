@@ -89,7 +89,7 @@ async function scrapeTeamWithPlaywright(teamInfo: typeof teams[0]): Promise<Team
       '[class*="player"] [class*="row"]'
     ]
     
-    let playerRows = []
+    let playerRows: any[] = []
     for (const selector of selectors) {
       playerRows = await page.locator(selector).all()
       if (playerRows.length > 0) {
@@ -113,7 +113,7 @@ async function scrapeTeamWithPlaywright(teamInfo: typeof teams[0]): Promise<Team
         if (cells.length < 2) continue
         
         // Extract text from cells
-        const cellTexts = await Promise.all(cells.map(cell => cell.innerText()))
+        const cellTexts = await Promise.all(cells.map((cell: any) => cell.innerText()))
         
         // Try to find name, position, number, height
         const nameText = cellTexts.find(t => t && /[a-zA-Z]/.test(t) && t.length > 2)

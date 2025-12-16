@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, League } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -21,16 +21,16 @@ async function fixPlayerLeagues() {
     console.log(`Found ${players.length} players to check`);
 
     // Map display league name to database enum value
-    const leagueMap: Record<string, string> = {
-      'NLA': 'NLA',
-      'NLB': 'NLB',
-      '1. Liga': 'FIRST_LEAGUE',
-      '2. Liga': 'SECOND_LEAGUE',
-      '3. Liga': 'THIRD_LEAGUE',
-      '4. Liga': 'FOURTH_LEAGUE',
-      'U23': 'U23',
-      'U19': 'U19',
-      'U17': 'U17',
+    const leagueMap: Record<string, League> = {
+      'NLA': League.NLA,
+      'NLB': League.NLB,
+      '1. Liga': League.FIRST_LEAGUE,
+      '2. Liga': League.SECOND_LEAGUE,
+      '3. Liga': League.THIRD_LEAGUE,
+      '4. Liga': League.FOURTH_LEAGUE,
+      'U23': League.YOUTH_U23,
+      'U19': League.YOUTH_U19,
+      'U17': League.YOUTH_U17,
     };
 
     let updatedCount = 0;
@@ -39,6 +39,10 @@ async function fixPlayerLeagues() {
       if (player.clubHistory.length > 0) {
         const mostRecentClub = player.clubHistory[0];
         const leagueFromHistory = mostRecentClub.league;
+        
+        if (!leagueFromHistory) {
+          continue; // Skip if no league data
+        }
         
         // Map the league to the enum value
         const mappedLeague = leagueMap[leagueFromHistory];

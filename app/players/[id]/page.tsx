@@ -1094,7 +1094,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 label="Wähl Es Neus Hintergrundbild"
                 value={newBackgroundImage}
                 onChange={(base64) => setNewBackgroundImage(base64)}
-                aspectRatio="16:9"
+                aspectRatio="banner"
                 helpText="Empfohlen: 1920x1080 Pixel"
               />
 

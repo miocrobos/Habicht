@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 // POST - Create a chat request from player to coach
 export async function POST(request: Request) {
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
           select: {
             firstName: true,
             lastName: true,
-            position: true,
+            positions: true,
             currentLeague: true
           }
         },
@@ -95,7 +95,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const type = searchParams.get('type') // 'sent' or 'received'
 
-    let requests = []
+    let requests: any[] = []
 
     if (session.user.role === 'PLAYER') {
       // Get player's sent requests
@@ -137,7 +137,7 @@ export async function GET(request: Request) {
                 id: true,
                 firstName: true,
                 lastName: true,
-                position: true,
+                positions: true,
                 currentLeague: true,
                 height: true,
                 canton: true,

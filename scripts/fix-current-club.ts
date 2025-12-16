@@ -38,6 +38,11 @@ async function fixCurrentClub() {
             .trim();
         };
 
+        if (!mostRecentClub.clubName) {
+          console.log(`Skipping player ${player.firstName} ${player.lastName} - no club name`);
+          continue;
+        }
+
         const normalizedName = normalizeClubName(mostRecentClub.clubName);
         
         // Find the club by normalized name

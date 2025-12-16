@@ -9,16 +9,20 @@ export async function GET(request: Request) {
     const canton = searchParams.get('canton')
     
     // Get all clubs with their players
-    const clubs = await prisma.club.findMany({
-      where: {
-        ...(league && { league }),
-        ...(canton && { canton }),
-        currentPlayers: {
-          some: {
-            gender: gender as any
-          }
+    const where: any = {
+      currentPlayers: {
+        some: {
+          gender: gender as any
         }
-      },
+      }
+    }
+    
+    if (canton) {
+      where.canton = canton
+    }
+    
+    const clubs = await prisma.club.findMany({
+      where,
       include: {
         currentPlayers: {
           where: {
@@ -29,7 +33,7 @@ export async function GET(request: Request) {
             id: true,
             firstName: true,
             lastName: true,
-            position: true,
+            positions: true,
             jerseyNumber: true,
             height: true,
             profileImage: true,
@@ -50,7 +54,6 @@ export async function GET(request: Request) {
         }
       },
       orderBy: [
-        { league: 'asc' },
         { name: 'asc' }
       ]
     })

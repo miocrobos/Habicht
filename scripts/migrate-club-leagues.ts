@@ -23,7 +23,7 @@ async function main() {
   console.log(`Found ${clubsByName.size} unique club names`)
   
   // For each unique club name, merge all instances
-  for (const [name, clubInstances] of clubsByName.entries()) {
+  for (const [name, clubInstances] of Array.from(clubsByName.entries())) {
     console.log(`\nProcessing ${name} (${clubInstances.length} instances)`)
     
     // Pick the first instance as the base

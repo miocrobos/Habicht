@@ -501,7 +501,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
             {activeTab === 'karriere' && player.clubHistory && (
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Vereinsgeschichte</h3>
-                <ClubHistory clubHistory={player.clubHistory} />
+                <ClubHistory history={player.clubHistory} />
               </div>
             )}
 

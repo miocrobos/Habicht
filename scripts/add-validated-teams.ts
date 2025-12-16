@@ -94,7 +94,6 @@ async function addTeams() {
       await prisma.club.create({
         data: {
           name: team.name,
-          league: team.league,
           canton: team.canton,
           town: team.town,
           founded: team.founded,

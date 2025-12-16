@@ -36,6 +36,7 @@ export default function CantonFlag({ canton, size = 'md', showName = false }: Ca
           fill
           className="object-cover"
           priority
+          style={{ filter: 'none' }}
         />
       </div>
       {showName && (

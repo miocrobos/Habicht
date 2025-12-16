@@ -47,7 +47,7 @@ export default function MenPlayersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -114,7 +114,7 @@ export default function MenPlayersPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* Search */}
             <div className="lg:col-span-2">
@@ -235,7 +235,7 @@ export default function MenPlayersPage() {
             </div>
 
             {players.length === 0 && (
-              <div className="text-center py-12 bg-white rounded-lg">
+              <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg">
                 <p className="text-gray-600">Kei Spieler gfunde mit dene Filter</p>
                 <button
                   onClick={() => setFilters({ search: '', position: '', canton: '', league: '', minHeight: '', gender: 'MALE' })}
@@ -256,7 +256,7 @@ function PlayerCard({ player }: { player: any }) {
   const cantonInfo = getCantonInfo(player.canton)
   
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition overflow-hidden border-t-4 border-blue-600">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition overflow-hidden border-t-4 border-blue-600">
       {/* Cover Image or Gradient Background */}
       <div 
         className="h-32 relative"
@@ -287,7 +287,7 @@ function PlayerCard({ player }: { player: any }) {
             name={`${player.firstName} ${player.lastName}`}
             size="xl"
             showBorder={true}
-            className="bg-white border-4 border-white"
+            className="bg-white dark:bg-gray-800 border-4 border-white dark:border-gray-700"
           />
           {player.jerseyNumber && (
             <div className="bg-blue-600 text-white px-4 py-2 rounded-xl shadow-lg mb-2">
@@ -341,7 +341,7 @@ function PlayerCard({ player }: { player: any }) {
 
         {/* Club with Badge */}
         {player.currentClub && (
-          <div className="flex items-center gap-2 mb-2 p-2 bg-gray-50 rounded">
+          <div className="flex items-center gap-2 mb-2 p-2 bg-gray-50 dark:bg-gray-700 rounded">
             <ClubBadge clubName={player.currentClub.name} size="sm" />
             <div className="flex-1 min-w-0">
               <div className="text-sm font-medium text-gray-900 truncate">

@@ -225,7 +225,7 @@ function PlayerCard({ player }: { player: any }) {
 
           {/* Club with Badge */}
           {player.currentClub && (
-            <div className="flex items-center gap-2 mb-2 p-2 bg-gray-50 rounded">
+            <div className="flex items-center gap-2 mb-2 p-2 bg-gray-50 dark:bg-gray-700 rounded">
               <ClubBadge clubName={player.currentClub.name} size="sm" />
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium text-gray-900 truncate">

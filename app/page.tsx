@@ -159,7 +159,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
                 <button
                   onClick={() => handleProtectedNavigation('/players')}
-                  className="bg-white text-gray-900 px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl"
+                  className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 shadow-2xl"
                 >
                   <span className="flex items-center gap-2 justify-center">
                     <Search className="w-5 h-5" />
@@ -170,7 +170,7 @@ export default function Home() {
                   <>
                     <Link
                       href="/auth/login"
-                      className="bg-white text-gray-900 px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl border-2 border-gray-300"
+                      className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 shadow-2xl border-2 border-gray-300 dark:border-gray-600"
                     >
                       <span className="flex items-center gap-2 justify-center">
                         <LogIn className="w-5 h-5" />
@@ -276,10 +276,10 @@ export default function Home() {
                 <Link 
                   key={canton} 
                   href={`/clubs?canton=${canton}`}
-                  className="p-2 md:p-3 bg-gray-50 rounded-lg hover:bg-red-50 hover:shadow-md transition cursor-pointer flex flex-col items-center gap-2"
+                  className="p-2 md:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30 hover:shadow-md transition cursor-pointer flex flex-col items-center gap-2"
                 >
                   <CantonFlag canton={canton as any} size="md" />
-                  <div className="text-lg md:text-xl font-bold text-gray-800">{canton}</div>
+                  <div className="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200">{canton}</div>
                 </Link>
               ))}
             </div>
@@ -367,7 +367,7 @@ export default function Home() {
                   <p className="text-lg md:text-xl mb-4 md:mb-6 opacity-90 text-center">
                     NLA, NLB, 1. & 2. Liga Spieler
                   </p>
-                  <div className="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold group-hover:bg-blue-100 transition">
+                  <div className="bg-white dark:bg-gray-800 text-blue-600 px-8 py-3 rounded-xl font-bold group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition">
                     Herren entdecken →
                   </div>
                 </div>
@@ -385,7 +385,7 @@ export default function Home() {
                   <p className="text-lg md:text-xl mb-4 md:mb-6 opacity-90 text-center">
                     NLA, NLB, 1. & 2. Liga Spielerinnen
                   </p>
-                  <div className="bg-white text-pink-600 px-8 py-3 rounded-xl font-bold group-hover:bg-pink-100 transition">
+                  <div className="bg-white dark:bg-gray-800 text-pink-600 px-8 py-3 rounded-xl font-bold group-hover:bg-pink-100 dark:group-hover:bg-pink-900/30 transition">
                     Damen entdecken →
                   </div>
                 </div>
@@ -416,7 +416,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
             <Link 
               href="/auth/register"
-              className="bg-white text-red-600 px-8 md:px-10 py-4 md:py-5 rounded-2xl font-bold text-base md:text-lg hover:bg-gray-100 transition transform hover:scale-105 shadow-2xl"
+              className="bg-white dark:bg-gray-700 text-red-600 dark:text-red-400 px-8 md:px-10 py-4 md:py-5 rounded-2xl font-bold text-base md:text-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition transform hover:scale-105 shadow-2xl"
             >
               <span className="flex items-center gap-2 justify-center">
                 <Star className="w-6 h-6" />
@@ -425,7 +425,7 @@ export default function Home() {
             </Link>
             <Link 
               href="/players"
-              className="bg-transparent border-2 md:border-3 border-white text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl font-bold text-base md:text-lg hover:bg-white hover:text-red-600 transition transform hover:scale-105"
+              className="bg-transparent border-2 md:border-3 border-white dark:border-gray-300 text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl font-bold text-base md:text-lg hover:bg-white dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-white transition transform hover:scale-105"
             >
               <span className="flex items-center gap-2 justify-center">
                 <Search className="w-6 h-6" />
@@ -509,7 +509,7 @@ function AuthPromptModal({ onClose }: { onClose: () => void }) {
             </Link>
             <Link
               href="/auth/register"
-              className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-900 px-6 py-3 rounded-xl font-bold transition-all"
+              className="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-900 dark:text-white px-6 py-3 rounded-xl font-bold transition-all"
             >
               <span className="flex items-center justify-center gap-2">
                 <UserPlus className="w-5 h-5" />

@@ -235,7 +235,7 @@ export default function RegisterPage() {
         </div>
 
         {/* Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
               <div className="rounded-lg bg-red-50 border border-red-200 p-4">

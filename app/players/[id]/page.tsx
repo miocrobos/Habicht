@@ -181,7 +181,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Cover Image with Canton Colors */}
       <div 
         className="h-48 relative"
@@ -196,7 +196,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 pb-12">
         {/* Profile Card */}
-        <div className="bg-white rounded-lg shadow-lg p-4 md:p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 md:p-6">
           <div className="flex flex-col md:flex-row gap-4 md:gap-6">
             {/* Profile Image */}
             <div className="flex-shrink-0">
@@ -290,7 +290,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               )}
 
               {/* Current Club */}
-              <div className="mt-4 p-3 md:p-4 bg-gray-50 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="mt-4 p-3 md:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <ClubBadge clubName={player.currentClub.name} size="md" />
                   <div>
@@ -350,7 +350,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         </div>
 
         {/* Tabs */}
-        <div className="mt-6 bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
           <div className="border-b border-gray-200">
             <nav className="flex flex-wrap">
               <TabButton 
@@ -458,7 +458,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       ))}
                     </div>
                   ) : (
-                    <div className="text-gray-500 italic p-4 bg-gray-50 rounded-lg">
+                    <div className="text-gray-500 dark:text-gray-400 italic p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                       Keine Erfolge eingetragen
                     </div>
                   )}
@@ -471,7 +471,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 <h3 className="text-lg font-semibold mb-4">Video Highlights</h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {player.videos.map((video) => (
-                    <div key={video.id} className="bg-gray-50 rounded-lg overflow-hidden hover:shadow-lg transition">
+                    <div key={video.id} className="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition">
                       <div className="aspect-video bg-gray-300 relative">
                         <div className="absolute inset-0 flex items-center justify-center">
                           <VideoIcon className="w-12 h-12 text-white" />

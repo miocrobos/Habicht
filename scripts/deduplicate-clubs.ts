@@ -7,6 +7,7 @@ function normalizeClubName(name: string): string {
   return name
     .replace(/\s+\d+$/, '')  // Remove " 2", " 3", etc. at end
     .replace(/\s+[IVX]+$/, '') // Remove Roman numerals at end
+    .replace(/\s+U\d{2}$/i, '') // Remove U19, U20, U21, U23 at end
     .trim()
 }
 

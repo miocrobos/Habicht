@@ -16,14 +16,14 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="relative w-12 h-12 transition-transform group-hover:scale-110" style={{ isolation: 'isolate', colorScheme: 'light' }}>
+            <div className="relative w-12 h-12 transition-transform group-hover:scale-110" style={{ isolation: 'isolate', colorScheme: 'light', mixBlendMode: 'normal' }}>
               <Image
                 src="/eagle-logo.png"
                 alt="Eagle Logo"
                 fill
                 className="object-contain group-hover:drop-shadow-lg no-invert"
                 priority
-                style={{ filter: 'none', WebkitFilter: 'none', colorScheme: 'light' }}
+                style={{ filter: 'none', WebkitFilter: 'none', colorScheme: 'light', mixBlendMode: 'normal' }}
               />
             </div>
             <div className="flex flex-col">

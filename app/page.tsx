@@ -97,14 +97,14 @@ export default function Home() {
             <div className="max-w-5xl mx-auto text-center text-white">
               {/* Eagle Logo with Animation */}
               <div className="mb-8 flex justify-center animate-bounce-slow">
-                <div className="relative w-32 h-32 md:w-40 md:h-40 drop-shadow-2xl transform hover:scale-110 hover:rotate-3 transition-all duration-300" style={{ isolation: 'isolate', colorScheme: 'light' }}>
+                <div className="relative w-32 h-32 md:w-40 md:h-40 drop-shadow-2xl transform hover:scale-110 hover:rotate-3 transition-all duration-300" style={{ isolation: 'isolate', colorScheme: 'light', mixBlendMode: 'normal' }}>
                   <Image
                     src="/eagle-logo.png"
                     alt="Eagle Logo"
                     fill
                     className="object-contain no-invert"
                     priority
-                    style={{ filter: 'none', WebkitFilter: 'none', colorScheme: 'light' }}
+                    style={{ filter: 'none', WebkitFilter: 'none', colorScheme: 'light', mixBlendMode: 'normal' }}
                   />
                 </div>
               </div>

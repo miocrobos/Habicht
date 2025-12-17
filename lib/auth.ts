@@ -40,6 +40,11 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Ungültige Anmeldedaten')
         }
 
+        // Block login if email is not verified
+        if (!user.emailVerified) {
+          throw new Error('Bitte Verifizier Zerscht Dini E-Mail-Adresse. Lueg I Dim Postfach.')
+        }
+
         return {
           id: user.id,
           email: user.email,

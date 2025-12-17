@@ -184,14 +184,14 @@ export default function ClubsPage() {
         <div className="mt-12 bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
           <h2 className="text-2xl font-semibold dark:text-white mb-4">Din Club fehlt?</h2>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Mir sind am Erwiitern vo üsere Club-Datenbank. Wenn din Club fehlt, meld dich bi üs!
+            Mir sind am Erwiitern vo üsere Club-Datenbank. Wenn din Club fehlt, meld ihn üs!
           </p>
-          <a
-            href="mailto:info@habicht-volleyball.ch"
+          <Link
+            href="/clubs/submit"
             className="inline-block bg-swiss-red text-white px-6 py-3 rounded-lg hover:bg-red-700 transition font-medium"
           >
-            Club hinzufügen
-          </a>
+            Club Mälde →
+          </Link>
         </div>
       </div>
     </div>

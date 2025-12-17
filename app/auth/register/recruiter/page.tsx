@@ -96,7 +96,7 @@ export default function RecruiterRegisterPage() {
     province: '',
     clubName: '',
     coachRole: '',
-    genderCoached: '',
+    genderCoached: [] as string[],
     phone: '',
     bio: '',
     coachingLicense: '',
@@ -202,7 +202,7 @@ export default function RecruiterRegisterPage() {
       if (!formData.canton) { setError('Bitte Wähl Din Wohnkanton'); return; }
       if (!formData.clubName) { setError('Bitte Wähl Din Verein'); return; }
       if (!formData.coachRole) { setError('Bitte Wähl Dini Roll'); return; }
-      if (!formData.genderCoached) { setError('Bitte Wähl Welches Gschlecht Du Trainiersch'); return; }
+      if (formData.genderCoached.length === 0) { setError('Bitte Wähl Welches Gschlecht Du Trainiersch'); return; }
       setStep(3);
       return;
     }
@@ -433,27 +433,35 @@ export default function RecruiterRegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Team Gschlecht *</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Team Gschlecht * (Mehrfach Uuswahl Möglich)</label>
                   <div className="space-y-2">
                     <label className="flex items-center gap-3 p-3 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700">
                       <input
-                        type="radio"
-                        name="genderCoached"
-                        value="MALE"
-                        checked={formData.genderCoached === 'MALE'}
-                        onChange={(e) => setFormData({ ...formData, genderCoached: e.target.value })}
-                        className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                        type="checkbox"
+                        checked={formData.genderCoached.includes('MALE')}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setFormData({ ...formData, genderCoached: [...formData.genderCoached, 'MALE'] });
+                          } else {
+                            setFormData({ ...formData, genderCoached: formData.genderCoached.filter(g => g !== 'MALE') });
+                          }
+                        }}
+                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
                       <span className="text-gray-900 dark:text-white">♂ Männer</span>
                     </label>
                     <label className="flex items-center gap-3 p-3 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700">
                       <input
-                        type="radio"
-                        name="genderCoached"
-                        value="FEMALE"
-                        checked={formData.genderCoached === 'FEMALE'}
-                        onChange={(e) => setFormData({ ...formData, genderCoached: e.target.value })}
-                        className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                        type="checkbox"
+                        checked={formData.genderCoached.includes('FEMALE')}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setFormData({ ...formData, genderCoached: [...formData.genderCoached, 'FEMALE'] });
+                          } else {
+                            setFormData({ ...formData, genderCoached: formData.genderCoached.filter(g => g !== 'FEMALE') });
+                          }
+                        }}
+                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
                       <span className="text-gray-900 dark:text-white">♀ Fraue</span>
                     </label>

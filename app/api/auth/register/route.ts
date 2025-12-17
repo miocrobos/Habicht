@@ -416,7 +416,9 @@ export async function POST(request: NextRequest) {
               province: recruiterData.province || null,
               clubId: recruiterData.clubId,
               coachRole: recruiterData.coachRole,
-              genderCoached: recruiterData.genderCoached ? mapGenderToEnum(recruiterData.genderCoached) : null,
+              genderCoached: Array.isArray(recruiterData.genderCoached) 
+                ? recruiterData.genderCoached.map((g: string) => mapGenderToEnum(g)).filter(Boolean)
+                : (recruiterData.genderCoached ? [mapGenderToEnum(recruiterData.genderCoached)].filter(Boolean) : []),
               phone: recruiterData.phone || null,
               bio: recruiterData.bio || null,
               coachingLicense: recruiterData.coachingLicense || null,

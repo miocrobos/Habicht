@@ -1,9 +1,13 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Send, MessageCircle, X, CheckCheck, Check } from 'lucide-react'
+import { Send, MessageCircle, X, CheckCheck, Check, Smile } from 'lucide-react'
 import axios from 'axios'
 import { format } from 'date-fns'
+import dynamic from 'next/dynamic'
+
+// Dynamically import emoji picker to avoid SSR issues
+const EmojiPicker = dynamic(() => import('emoji-picker-react'), { ssr: false })
 
 interface Message {
   id: string
@@ -40,6 +44,7 @@ export default function ChatWindow({
   const [newMessage, setNewMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [sending, setSending] = useState(false)
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -158,7 +163,29 @@ export default function ChatWindow({
 
       {/* Input */}
       <form onSubmit={sendMessage} className="p-4 border-t bg-white rounded-b-2xl">
+        {/* Emoji Picker */}
+        {showEmojiPicker && (
+          <div className="absolute bottom-20 right-4 z-50">
+            <EmojiPicker
+              onEmojiClick={(emojiObject: any) => {
+                setNewMessage(prev => prev + emojiObject.emoji)
+                setShowEmojiPicker(false)
+              }}
+              width={300}
+              height={400}
+            />
+          </div>
+        )}
+        
         <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+            className="p-3 text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-xl transition"
+            title="Emoji hinzufügen"
+          >
+            <Smile className="w-5 h-5" />
+          </button>
           <input
             type="text"
             value={newMessage}

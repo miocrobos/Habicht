@@ -2,23 +2,57 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { MapPin, Users, Briefcase } from 'lucide-react'
+import { MapPin, Users, Briefcase, MessageCircle } from 'lucide-react'
 import CantonFlag from '@/components/shared/CantonFlag'
 import { getCantonInfo } from '@/lib/swissData'
+import { useSession } from 'next-auth/react'
+import { useState } from 'react'
+import axios from 'axios'
+import ChatWindow from '@/components/chat/ChatWindow'
 
 export default function RecruiterCard({ recruiter }: { recruiter: any }) {
+  const { data: session } = useSession()
+  const [showChat, setShowChat] = useState(false)
+  const [conversationId, setConversationId] = useState<string | null>(null)
   const cantonInfo = getCantonInfo(recruiter.canton)
   
   // Map gender coached to display text
-  const getGenderText = (gender: string | null) => {
-    if (!gender) return 'ALLE'
-    if (gender === 'MALE') return '♂ HERREN'
-    if (gender === 'FEMALE') return '♀ DAMEN'
+  const getGenderText = (genders: string[] | string | null) => {
+    if (!genders) return 'ALLE'
+    const genderArray = Array.isArray(genders) ? genders : [genders]
+    if (genderArray.length === 0) return 'ALLE'
+    if (genderArray.length === 2 || (genderArray.includes('MALE') && genderArray.includes('FEMALE'))) return '♂♀ BEIDE'
+    if (genderArray.includes('MALE')) return '♂ HERREN'
+    if (genderArray.includes('FEMALE')) return '♀ DAMEN'
     return 'ALLE'
+  }
+
+  const handleStartChat = async (e: React.MouseEvent) => {
+    e.preventDefault() // Prevent navigation to recruiter profile
+    e.stopPropagation()
+
+    if (!session?.user) {
+      alert('Bitte melde dich an, um eine Nachricht zu senden')
+      return
+    }
+
+    try {
+      const response = await axios.post('/api/chat/conversations', {
+        participantId: recruiter.user.id,
+        participantType: 'RECRUITER'
+      })
+
+      setConversationId(response.data.conversationId)
+      setShowChat(true)
+    } catch (error) {
+      console.error('Error starting chat:', error)
+      alert('Fehler bim Chat starte')
+    }
   }
   
   return (
-    <Link href={`/recruiters/${recruiter.id}`}>
+    <>
+      <Link href={`/recruiters/${recruiter.id}`}>
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden cursor-pointer">
         {/* Header with gradient background */}
         <div 
@@ -94,8 +128,39 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
             <MapPin className="w-4 h-4" />
             <span>{recruiter.province ? `${recruiter.province}, ` : ''}{cantonInfo.name}</span>
           </div>
+
+          {/* Chat Button */}
+          {session && session.user && (
+            <button
+              onClick={handleStartChat}
+              className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Nachricht sende
+            </button>
+          )}
         </div>
       </div>
     </Link>
+
+      {/* Chat Window */}
+      {showChat && conversationId && (
+        <div className="fixed bottom-4 right-4 z-50">
+          <ChatWindow
+            conversationId={conversationId}
+            otherParticipant={{
+              id: recruiter.user.id,
+              name: `${recruiter.firstName} ${recruiter.lastName}`,
+              type: 'RECRUITER',
+              club: recruiter.club?.name || recruiter.organization,
+              position: recruiter.coachRole
+            }}
+            currentUserId={session!.user!.id}
+            currentUserType={session!.user!.role as 'PLAYER' | 'RECRUITER'}
+            onClose={() => setShowChat(false)}
+          />
+        </div>
+      )}
+    </>
   )
 }

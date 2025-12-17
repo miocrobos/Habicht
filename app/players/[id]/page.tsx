@@ -3,10 +3,11 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera } from 'lucide-react'
+import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
 import ImageUpload from '@/components/shared/ImageUpload'
+import ChatWindow from '@/components/chat/ChatWindow'
 import axios from 'axios'
 
 interface PlayerProfileProps {
@@ -123,6 +124,8 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [showBackgroundModal, setShowBackgroundModal] = useState(false)
   const [newBackgroundImage, setNewBackgroundImage] = useState('')
   const [uploadingBackground, setUploadingBackground] = useState(false)
+  const [showChat, setShowChat] = useState(false)
+  const [conversationId, setConversationId] = useState<string | null>(null)
 
   const isOwner = session?.user?.playerId === params.id
 
@@ -211,6 +214,24 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       alert('Fehler bim Video Lösche')
     } finally {
       setDeletingVideoId(null)
+    }
+  }
+
+  const handleStartChat = async () => {
+    if (!session?.user || !player) return
+
+    try {
+      // Check if conversation already exists or create a new one
+      const response = await axios.post('/api/chat/conversations', {
+        participantId: player.user.id,
+        participantType: 'PLAYER'
+      })
+
+      setConversationId(response.data.conversationId)
+      setShowChat(true)
+    } catch (error) {
+      console.error('Error starting chat:', error)
+      alert('Fehler bim Chat starte')
     }
   }
 
@@ -589,6 +610,18 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     <Edit2 className="w-4 h-4" />
                     Profil Bearbeite
                   </Link>
+                )}
+
+                {/* Chat Button - Show to logged in users viewing someone else's profile */}
+                {!isOwner && session && player && (
+                  <button
+                    onClick={handleStartChat}
+                    className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"
+                    title="Nachricht sende"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    Nachricht sende
+                  </button>
                 )}
                 
                 {player.instagram && (
@@ -1134,6 +1167,25 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Chat Window */}
+      {showChat && conversationId && player && session?.user && (
+        <div className="fixed bottom-4 right-4 z-50">
+          <ChatWindow
+            conversationId={conversationId}
+            otherParticipant={{
+              id: player.user.id,
+              name: `${player.firstName} ${player.lastName}`,
+              type: 'PLAYER',
+              club: player.currentClub?.name,
+              position: player.positions[0] ? POSITION_TRANSLATIONS[player.positions[0]] : undefined
+            }}
+            currentUserId={session.user.id}
+            currentUserType={session.user.role as 'PLAYER' | 'RECRUITER'}
+            onClose={() => setShowChat(false)}
+          />
         </div>
       )}
     </div>

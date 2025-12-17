@@ -110,6 +110,7 @@ export default function RecruiterRegisterPage() {
   const [achievements, setAchievements] = useState<string[]>([]);
   const [newAchievement, setNewAchievement] = useState('');
   const [clubs, setClubs] = useState<any[]>([]);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -189,6 +190,10 @@ export default function RecruiterRegisterPage() {
     }
     
     if (step === 2) {
+      if (!agreedToTerms) {
+        setError('Du Muesch D Nutzigsbedingige Akzeptiere');
+        return;
+      }
       if (!formData.dateOfBirth) { 
         setError('Bitte Gib Din Geburtsdatum Ii'); 
         return; 
@@ -750,6 +755,27 @@ export default function RecruiterRegisterPage() {
                       </div>
                     </div>
                   ))}
+                </div>
+
+                {/* Terms and Conditions */}
+                <div className="bg-blue-50 dark:bg-gray-700 border-2 border-blue-200 dark:border-gray-600 rounded-lg p-5">
+                  <label className="flex items-start space-x-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={agreedToTerms}
+                      onChange={(e) => setAgreedToTerms(e.target.checked)}
+                      className="mt-1 w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      required
+                    />
+                    <div className="text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">Nutzigsbedingige Und Dateschutz *</p>
+                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        Ich Akzeptiere D <Link href="/terms" target="_blank" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">Nutzigsbedingige</Link> Und D <Link href="/privacy" target="_blank" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">Dateschutzerklärig</Link> Vo Habicht Volleyball. 
+                        Ich Verstönd, Dass Mini Date Gmäss Schwiizerischem Dateschutzgsetz (DSG) Verarbeitet Werde Und Zum Zweck Vo Dä Rekrutierig Und Kontaktufnahm Verwändet Werde Chöi. 
+                        Ich Cha Mini Iiwilligig Jederziit Widerüfe.
+                      </p>
+                    </div>
+                  </label>
                 </div>
 
                 <div className="flex gap-4 pt-4">

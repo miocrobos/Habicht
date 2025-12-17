@@ -21,6 +21,14 @@ export default function SettingsPage() {
   const [loading, setLoading] = useState(false)
   const [municipality, setMunicipality] = useState('')
 
+  // Load language from localStorage on mount
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language')
+    if (savedLanguage) {
+      setLanguage(savedLanguage)
+    }
+  }, [])
+
   useEffect(() => {
     if (session?.user?.playerId) {
       fetchPrivacySettings()
@@ -64,6 +72,7 @@ export default function SettingsPage() {
 
   const handleLanguageChange = (newLanguage: string) => {
     setLanguage(newLanguage)
+    localStorage.setItem('language', newLanguage)
     showSaveConfirmation()
   }
 
@@ -333,9 +342,11 @@ export default function SettingsPage() {
                   <div className="p-6">
                     <div className="space-y-3">
                       {[
+                        { code: 'gsw', name: 'Schwiizerdütsch', flag: '🇨🇭' },
                         { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
                         { code: 'fr', name: 'Français', flag: '🇫🇷' },
                         { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+                        { code: 'rm', name: 'Rumantsch', flag: '🇨🇭' },
                         { code: 'en', name: 'English', flag: '🇬🇧' }
                       ].map((lang) => (
                         <button key={lang.code} onClick={() => handleLanguageChange(lang.code)} className={`w-full p-4 rounded-lg border-2 transition-all ${language === lang.code ? 'border-red-500 bg-red-50 dark:bg-red-900/20' : 'border-gray-300 dark:border-gray-600 hover:border-gray-400'}`}>

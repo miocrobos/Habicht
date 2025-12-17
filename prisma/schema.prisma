@@ -258,6 +258,7 @@ model Club {
   managers          ClubManager[]
   coaches           Coach[]
   recruiters        Recruiter[] @relation("RecruiterClub")
+  recruiterHistory  RecruiterClubHistory[]
 }
 
 model ClubHistory {
@@ -448,22 +449,39 @@ model Recruiter {
   userId            String      @unique
   user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   
-  // Must be associated with a club as coach
+  // Personal Information
+  firstName         String
+  lastName          String
+  age               Int
+  nationality       String      @default("Swiss")
+  
+  // Location
+  canton            Canton
+  province          String?     // Municipality/Province within canton
+  country           String      @default("Switzerland")
+  
+  // Current Club Affiliation
   clubId            String
   club              Club        @relation("RecruiterClub", fields: [clubId], references: [id])
   coachRole         String      // Head Coach, Assistant Coach, Scout, etc.
   
+  // Coaching Details
+  genderCoached     Gender?     // Which gender team they coach (MALE/FEMALE)
+  positionsLookingFor Position[] @default([]) // Positions they're recruiting for
+  
+  // Licenses & Credentials (optional)
+  coachingLicense   String?     // Photo/document of coaching license
+  ausweiss          String?     // Swiss ID/permit photo
+  
+  // Professional Info
   organization      String      // Club name or Agency
   position          String      // Title/Role
   phone             String?
   bio               String?     @db.Text
-  profileImage      String      // Required profile picture
+  profileImage      String?     // Profile picture (optional for recruiters)
   coverImage        String?     // Optional backdrop/banner image
   
-  // Location
-  canton            Canton?
-  country           String      @default("Switzerland")
-  
+  // Status
   verified          Boolean     @default(false)
   canChat           Boolean     @default(true)
   lookingForMembers Boolean     @default(false) // Actively recruiting players
@@ -471,12 +489,38 @@ model Recruiter {
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
   
+  // Relations
+  clubHistory       RecruiterClubHistory[]
   notes             RecruitmentNote[]
   favorites         Favorite[]
   sentMessages      Message[]   @relation("RecruiterMessages")
   chatRequests      ChatRequest[]
   conversations     Conversation[] @relation("RecruiterConversations")
   
+  @@index([clubId])
+}
+
+model RecruiterClubHistory {
+  id                String      @id @default(cuid())
+  recruiterId       String
+  recruiter         Recruiter   @relation(fields: [recruiterId], references: [id], onDelete: Cascade)
+  clubId            String?     // Optional - null if club not in database
+  club              Club?       @relation(fields: [clubId], references: [id])
+  
+  // For clubs not in database
+  clubName          String?     // Manual club name entry
+  clubLogo          String?     // Base64 or URL to uploaded club logo
+  clubCountry       String      @default("Switzerland")
+  
+  role              String      // Head Coach, Assistant, Scout, etc.
+  genderCoached     Gender?     // Which gender team
+  startDate         DateTime
+  endDate           DateTime?
+  currentClub       Boolean     @default(false)
+  
+  createdAt         DateTime    @default(now())
+  
+  @@index([recruiterId])
   @@index([clubId])
 }
 

@@ -7,7 +7,7 @@ import crypto from 'crypto'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, password, role, playerData } = body
+    const { name, email, password, role, playerData, recruiterData } = body
 
     // Validate input
     if (!name || !email || !password) {
@@ -22,6 +22,28 @@ export async function POST(request: NextRequest) {
       if (!playerData.profileImage) {
         return NextResponse.json(
           { error: 'Profilbild Isch Erforderlich' },
+          { status: 400 }
+        )
+      }
+    }
+
+    // Validate recruiter data if role is RECRUITER
+    if (role === 'RECRUITER' && recruiterData) {
+      if (!recruiterData.firstName || !recruiterData.lastName) {
+        return NextResponse.json(
+          { error: 'Vorname Und Nachname Sin Erforderlich' },
+          { status: 400 }
+        )
+      }
+      if (!recruiterData.age || recruiterData.age < 18) {
+        return NextResponse.json(
+          { error: 'Alter Muss Mindestens 18 Si' },
+          { status: 400 }
+        )
+      }
+      if (!recruiterData.clubId) {
+        return NextResponse.json(
+          { error: 'Bitte Wähl En Verein' },
           { status: 400 }
         )
       }
@@ -349,6 +371,98 @@ export async function POST(request: NextRequest) {
           role: user.role,
         },
         playerId: user.player?.id,
+      })
+    }
+
+    // Create user with recruiter data if applicable
+    if (role === 'RECRUITER' && recruiterData) {
+      // Map gender coached to enum
+      const mapGenderToEnum = (gender: string): string | null => {
+        if (gender === 'MALE' || gender === 'FEMALE' || gender === 'OTHER') return gender
+        return null
+      }
+
+      // Map Swiss German position to enum
+      const mapPositionToEnum = (pos: string): string => {
+        const mapping: { [key: string]: string } = {
+          "Ausseagriffler": "OUTSIDE_HITTER",
+          "Diagonal": "OPPOSITE",
+          "Mittelblocker": "MIDDLE_BLOCKER",
+          "Zuespieler": "SETTER",
+          "Libero": "LIBERO",
+          "Universalspieler": "UNIVERSAL"
+        }
+        return mapping[pos] || pos
+      }
+
+      const user = await prisma.user.create({
+        data: {
+          name,
+          email,
+          password: hashedPassword,
+          role: 'RECRUITER',
+          verificationToken,
+          verificationTokenExpiry,
+          emailVerified: false,
+          recruiter: {
+            create: {
+              firstName: recruiterData.firstName,
+              lastName: recruiterData.lastName,
+              age: recruiterData.age,
+              nationality: recruiterData.nationality,
+              canton: recruiterData.canton,
+              province: recruiterData.province || null,
+              clubId: recruiterData.clubId,
+              coachRole: recruiterData.coachRole,
+              genderCoached: mapGenderToEnum(recruiterData.genderCoached),
+              phone: recruiterData.phone || null,
+              bio: recruiterData.bio || null,
+              coachingLicense: recruiterData.coachingLicense || null,
+              ausweiss: recruiterData.ausweiss || null,
+              organization: recruiterData.organization,
+              position: recruiterData.position,
+              positionsLookingFor: recruiterData.positionsLookingFor?.map(mapPositionToEnum) || [],
+              // Create club history if provided
+              clubHistory: recruiterData.clubHistory && recruiterData.clubHistory.length > 0 ? {
+                create: recruiterData.clubHistory.map((club: any) => ({
+                  clubName: club.clubName,
+                  clubLogo: club.logo || null,
+                  role: club.role,
+                  genderCoached: mapGenderToEnum(club.genderCoached),
+                  startDate: club.yearFrom ? new Date(club.yearFrom, 0, 1) : new Date(),
+                  endDate: club.currentClub ? null : (club.yearTo ? new Date(club.yearTo, 11, 31) : null),
+                  currentClub: club.currentClub || false,
+                }))
+              } : undefined,
+            },
+          },
+        },
+        include: {
+          recruiter: {
+            include: {
+              clubHistory: true,
+            },
+          },
+        },
+      })
+
+      // Send verification email
+      const emailSent = await sendVerificationEmail({
+        email: user.email,
+        name: user.name,
+        verificationToken,
+      })
+
+      return NextResponse.json({
+        success: true,
+        emailSent,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+        recruiterId: user.recruiter?.id,
       })
     }
 

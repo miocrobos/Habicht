@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import axios from 'axios';
@@ -108,17 +108,20 @@ export default function RecruiterRegisterPage() {
   const [loading, setLoading] = useState(false);
 
   // Fetch clubs on mount
-  useState(() => {
+  useEffect(() => {
     const fetchClubs = async () => {
       try {
         const res = await axios.get('/api/clubs');
-        setClubs(res.data);
+        // Handle both array and object responses
+        const clubsData = Array.isArray(res.data) ? res.data : (res.data.clubs || []);
+        setClubs(clubsData);
       } catch (err) {
         console.error('Error fetching clubs:', err);
+        setClubs([]); // Set empty array on error
       }
     };
     fetchClubs();
-  });
+  }, []);
 
   const validatePassword = (p: string) => {
     if (p.length < 8) return { valid: false, message: 'Passwort Muss Mindestens 8 Zeiche Ha' };

@@ -17,12 +17,36 @@ const CANTONS = [
 
 const LEAGUES = ['Alle', 'NLA', 'NLB', '1. Liga', '2. Liga', '3. Liga', '4. Liga', 'U23', 'U19', 'U17']
 
+const GENDERS = ['Alle', 'Männer', 'Frauen']
+
+const POSITIONS = [
+  'Alle',
+  'OUTSIDE_HITTER',
+  'OPPOSITE',
+  'MIDDLE_BLOCKER',
+  'SETTER',
+  'LIBERO',
+  'UNIVERSAL'
+]
+
+const POSITION_LABELS: Record<string, string> = {
+  'Alle': 'Alle',
+  'OUTSIDE_HITTER': 'Aussenspieler',
+  'OPPOSITE': 'Diagonal',
+  'MIDDLE_BLOCKER': 'Mittelblocker',
+  'SETTER': 'Zuspieler',
+  'LIBERO': 'Libero',
+  'UNIVERSAL': 'Universal'
+}
+
 export default function ClubsPage() {
   const searchParams = useSearchParams()
   const cantonFromUrl = searchParams.get('canton')
   
   const [selectedCanton, setSelectedCanton] = useState(cantonFromUrl || 'Alle')
   const [selectedLeague, setSelectedLeague] = useState('Alle')
+  const [selectedGender, setSelectedGender] = useState('Alle')
+  const [selectedPosition, setSelectedPosition] = useState('Alle')
   const [clubs, setClubs] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -34,7 +58,7 @@ export default function ClubsPage() {
 
   useEffect(() => {
     loadClubs()
-  }, [selectedCanton, selectedLeague])
+  }, [selectedCanton, selectedLeague, selectedGender, selectedPosition])
 
   const loadClubs = async () => {
     try {
@@ -42,6 +66,8 @@ export default function ClubsPage() {
       const params = new URLSearchParams()
       if (selectedCanton !== 'Alle') params.append('canton', selectedCanton)
       if (selectedLeague !== 'Alle') params.append('league', selectedLeague)
+      if (selectedGender !== 'Alle') params.append('gender', selectedGender === 'Männer' ? 'MALE' : 'FEMALE')
+      if (selectedPosition !== 'Alle') params.append('position', selectedPosition)
       
       const response = await axios.get(`/api/clubs?${params}`)
       setClubs(response.data.clubs)
@@ -67,7 +93,7 @@ export default function ClubsPage() {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Filter</h3>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Canton Filter */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -96,6 +122,40 @@ export default function ClubsPage() {
               >
                 {LEAGUES.map(league => (
                   <option key={league} value={league}>{league}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Gender Filter */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Geschlecht
+              </label>
+              <select
+                value={selectedGender}
+                onChange={(e) => setSelectedGender(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+              >
+                {GENDERS.map(gender => (
+                  <option key={gender} value={gender}>{gender}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Position Filter */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Position
+              </label>
+              <select
+                value={selectedPosition}
+                onChange={(e) => setSelectedPosition(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+              >
+                {POSITIONS.map(position => (
+                  <option key={position} value={position}>
+                    {POSITION_LABELS[position]}
+                  </option>
                 ))}
               </select>
             </div>

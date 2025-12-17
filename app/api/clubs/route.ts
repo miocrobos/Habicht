@@ -6,6 +6,8 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const canton = searchParams.get('canton')
     const league = searchParams.get('league')
+    const gender = searchParams.get('gender')
+    const position = searchParams.get('position')
 
     const where: any = {}
 
@@ -65,18 +67,42 @@ export async function GET(request: Request) {
         hasU19Women: true,
         hasU17Men: true,
         hasU17Women: true,
-        _count: {
+        currentPlayers: {
           select: {
-            currentPlayers: true
+            id: true,
+            gender: true,
+            positions: true,
           }
         }
       }
     })
 
-    const clubsWithLeagues = clubs.map((club: any) => {
-      // Use _count.currentPlayers which is already queried
-      const playerCount = club._count.currentPlayers
+    // Filter clubs based on gender and position
+    let filteredClubs = clubs.map((club: any) => {
+      let players = club.currentPlayers
       
+      // Apply gender filter
+      if (gender) {
+        players = players.filter((p: any) => p.gender === gender)
+      }
+      
+      // Apply position filter
+      if (position) {
+        players = players.filter((p: any) => p.positions && p.positions.includes(position))
+      }
+      
+      return {
+        ...club,
+        filteredPlayerCount: players.length
+      }
+    })
+
+    // Only show clubs that have players matching the filters
+    if (gender || position) {
+      filteredClubs = filteredClubs.filter((club: any) => club.filteredPlayerCount > 0)
+    }
+
+    const clubsWithLeagues = filteredClubs.map((club: any) => {
       // Build list of leagues club participates in
       const leagues: string[] = []
       if (club.hasNLAMen || club.hasNLAWomen) leagues.push('NLA')
@@ -98,7 +124,7 @@ export async function GET(request: Request) {
         description: club.description,
         logo: club.logo,
         leaguesDisplay: leagues,
-        playerCount: playerCount
+        playerCount: club.filteredPlayerCount || 0
       }
     })
 

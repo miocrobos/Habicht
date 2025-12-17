@@ -5,6 +5,7 @@ import { Send, MessageCircle, X, CheckCheck, Check, Smile } from 'lucide-react'
 import axios from 'axios'
 import { format } from 'date-fns'
 import dynamic from 'next/dynamic'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 // Dynamically import emoji picker to avoid SSR issues
 const EmojiPicker = dynamic(() => import('emoji-picker-react'), { ssr: false })
@@ -40,6 +41,7 @@ export default function ChatWindow({
   currentUserType,
   onClose
 }: ChatWindowProps) {
+  const { t } = useLanguage()
   const [messages, setMessages] = useState<Message[]>([])
   const [newMessage, setNewMessage] = useState('')
   const [loading, setLoading] = useState(false)
@@ -182,7 +184,7 @@ export default function ChatWindow({
             type="button"
             onClick={() => setShowEmojiPicker(!showEmojiPicker)}
             className="p-3 text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-xl transition"
-            title="Emoji hinzufügen"
+            title={t('chat.addEmoji')}
           >
             <Smile className="w-5 h-5" />
           </button>
@@ -190,7 +192,7 @@ export default function ChatWindow({
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Nachricht schreiben..."
+            placeholder={t('chat.writeMessage')}
             className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent"
             disabled={sending}
           />

@@ -66,7 +66,7 @@ export default function SettingsPage() {
   }
 
   const handleLanguageChange = (newLanguage: string) => {
-    setLanguageContext(newLanguage as 'de' | 'en')
+    setLanguageContext(newLanguage as 'gsw' | 'de' | 'fr' | 'it' | 'rm' | 'en')
     showSaveConfirmation()
   }
 

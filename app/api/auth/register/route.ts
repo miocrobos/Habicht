@@ -377,8 +377,10 @@ export async function POST(request: NextRequest) {
     // Create user with recruiter data if applicable
     if (role === 'RECRUITER' && recruiterData) {
       // Map gender coached to enum
-      const mapGenderToEnum = (gender: string): string | null => {
-        if (gender === 'MALE' || gender === 'FEMALE' || gender === 'OTHER') return gender
+      const mapGenderToEnum = (gender: string) => {
+        if (gender === 'MALE') return 'MALE' as const
+        if (gender === 'FEMALE') return 'FEMALE' as const
+        if (gender === 'OTHER') return 'OTHER' as const
         return null
       }
 

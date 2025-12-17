@@ -457,8 +457,9 @@ export default function RecruiterRegisterPage() {
                     <Upload className="w-4 h-4 inline mr-1" />Trainer-Lizenz (Optional)
                   </label>
                   <ImageUpload 
-                    onImageUpload={(base64) => setFormData({ ...formData, coachingLicense: base64 })}
-                    currentImage={formData.coachingLicense}
+                    label=""
+                    value={formData.coachingLicense}
+                    onChange={(base64) => setFormData({ ...formData, coachingLicense: base64 })}
                   />
                 </div>
 
@@ -467,8 +468,9 @@ export default function RecruiterRegisterPage() {
                     <Upload className="w-4 h-4 inline mr-1" />Ausweiss (Optional)
                   </label>
                   <ImageUpload 
-                    onImageUpload={(base64) => setFormData({ ...formData, ausweiss: base64 })}
-                    currentImage={formData.ausweiss}
+                    label=""
+                    value={formData.ausweiss}
+                    onChange={(base64) => setFormData({ ...formData, ausweiss: base64 })}
                   />
                 </div>
 
@@ -557,8 +559,9 @@ export default function RecruiterRegisterPage() {
                         <div>
                           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verein Logo</label>
                           <ImageUpload 
-                            onImageUpload={(base64) => updateClubAffiliation(club.id, 'logo', base64)}
-                            currentImage={club.logo}
+                            label=""
+                            value={club.logo}
+                            onChange={(base64) => updateClubAffiliation(club.id, 'logo', base64)}
                           />
                         </div>
                       </div>

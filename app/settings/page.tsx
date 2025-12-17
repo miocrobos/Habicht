@@ -1,16 +1,17 @@
 'use client'
 
 import { useTheme } from '@/contexts/ThemeContext'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import axios from 'axios'
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme()
+  const { language, setLanguage: setLanguageContext } = useLanguage()
   const { data: session } = useSession()
   const [saved, setSaved] = useState(false)
   const [activeTab, setActiveTab] = useState<'appearance' | 'security' | 'language' | 'account' | 'notifications'>('appearance')
-  const [language, setLanguage] = useState('de')
   const [emailNotifications, setEmailNotifications] = useState(true)
   const [recruiterMessages, setRecruiterMessages] = useState(true)
   const [currentPassword, setCurrentPassword] = useState('')
@@ -21,13 +22,7 @@ export default function SettingsPage() {
   const [loading, setLoading] = useState(false)
   const [municipality, setMunicipality] = useState('')
 
-  // Load language from localStorage on mount
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem('language')
-    if (savedLanguage) {
-      setLanguage(savedLanguage)
-    }
-  }, [])
+  // Language is now managed by LanguageContext, no need for local state
 
   useEffect(() => {
     if (session?.user?.playerId) {
@@ -71,8 +66,7 @@ export default function SettingsPage() {
   }
 
   const handleLanguageChange = (newLanguage: string) => {
-    setLanguage(newLanguage)
-    localStorage.setItem('language', newLanguage)
+    setLanguageContext(newLanguage as 'de' | 'en')
     showSaveConfirmation()
   }
 

@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
 import ImageUpload from '@/components/shared/ImageUpload'
 import ChatWindow from '@/components/chat/ChatWindow'
+import { useLanguage } from '@/contexts/LanguageContext'
 import axios from 'axios'
 
 interface PlayerProfileProps {
@@ -112,6 +113,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [selectedBg, setSelectedBg] = useState(BACKGROUND_OPTIONS[0])
   const [customBgImage, setCustomBgImage] = useState<string | null>(null)
   const { data: session } = useSession()
+  const { t } = useLanguage()
   const [showVideoUpload, setShowVideoUpload] = useState(false)
   const [uploadingVideo, setUploadingVideo] = useState(false)
   const [videoFile, setVideoFile] = useState<File | null>(null)
@@ -502,7 +504,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       </span>
                     )}
                     <span className="flex items-center gap-1">
-                      {player.gender === 'MALE' ? '♂' : '♀'} {player.gender === 'MALE' ? 'Männlich' : 'Wiiblich'}
+                      {player.gender === 'MALE' ? '♂' : '♀'} {t(player.gender === 'MALE' ? 'gender.male' : 'gender.female')}
                     </span>
                     {player.nationality && (
                       <span>🏳 Nationalität: {player.nationality}</span>

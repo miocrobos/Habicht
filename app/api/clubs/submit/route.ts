@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Admin email to receive submissions
-    const adminEmail = process.env.ADMIN_EMAIL || submitterEmail;
+    const adminEmail = process.env.ADMIN_EMAIL || 'habichtinfo@gmail.com';
 
     // In development, just log
     if (process.env.NODE_ENV === 'development') {

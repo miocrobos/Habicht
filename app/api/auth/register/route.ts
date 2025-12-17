@@ -416,7 +416,9 @@ export async function POST(request: NextRequest) {
               province: recruiterData.province || null,
               clubId: recruiterData.clubId,
               coachRole: recruiterData.coachRole,
-              genderCoached: mapGenderToEnum(recruiterData.genderCoached),
+              genderCoached: Array.isArray(recruiterData.genderCoached) 
+                ? recruiterData.genderCoached.map((g: string) => mapGenderToEnum(g)).filter(Boolean)
+                : (recruiterData.genderCoached ? [mapGenderToEnum(recruiterData.genderCoached)].filter(Boolean) : []),
               phone: recruiterData.phone || null,
               bio: recruiterData.bio || null,
               coachingLicense: recruiterData.coachingLicense || null,
@@ -424,6 +426,7 @@ export async function POST(request: NextRequest) {
               organization: recruiterData.organization,
               position: recruiterData.position,
               positionsLookingFor: recruiterData.positionsLookingFor?.map(mapPositionToEnum) || [],
+              achievements: recruiterData.achievements || [],
               // Create club history if provided
               clubHistory: recruiterData.clubHistory && recruiterData.clubHistory.length > 0 ? {
                 create: recruiterData.clubHistory.map((club: any) => ({

@@ -10,9 +10,13 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
   const cantonInfo = getCantonInfo(recruiter.canton)
   
   // Map gender coached to display text
-  const getGenderText = (gender: string | null) => {
-    if (gender === 'MALE') return '♂ HERREN'
-    if (gender === 'FEMALE') return '♀ DAMEN'
+  const getGenderText = (genders: string[] | string | null) => {
+    if (!genders) return 'ALLE'
+    const genderArray = Array.isArray(genders) ? genders : [genders]
+    if (genderArray.length === 0) return 'ALLE'
+    if (genderArray.length === 2 || (genderArray.includes('MALE') && genderArray.includes('FEMALE'))) return '♂♀ BEIDE'
+    if (genderArray.includes('MALE')) return '♂ HERREN'
+    if (genderArray.includes('FEMALE')) return '♀ DAMEN'
     return 'ALLE'
   }
   
@@ -91,7 +95,7 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
           {/* Location */}
           <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
             <MapPin className="w-4 h-4" />
-            <span>{recruiter.province ? `${recruiter.province}, ` : ''}{recruiter.canton}</span>
+            <span>{recruiter.province ? `${recruiter.province}, ` : ''}{cantonInfo.name}</span>
           </div>
         </div>
       </div>

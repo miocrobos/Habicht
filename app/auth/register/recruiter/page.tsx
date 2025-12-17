@@ -90,19 +90,21 @@ export default function RecruiterRegisterPage() {
     confirmPassword: '',
     firstName: '',
     lastName: '',
-    age: '',
+    dateOfBirth: '',
     nationality: '',
     canton: '',
     province: '',
     clubName: '',
     coachRole: '',
-    genderCoached: '',
+    genderCoached: [] as string[],
     phone: '',
     bio: '',
     coachingLicense: '',
     ausweiss: ''
   });
   const [clubHistory, setClubHistory] = useState<ClubAffiliation[]>([]);
+  const [achievements, setAchievements] = useState<string[]>([]);
+  const [newAchievement, setNewAchievement] = useState('');
   const [clubs, setClubs] = useState<any[]>([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -153,6 +155,17 @@ export default function RecruiterRegisterPage() {
     ));
   };
 
+  const addAchievement = () => {
+    if (newAchievement.trim()) {
+      setAchievements([...achievements, newAchievement.trim()]);
+      setNewAchievement('');
+    }
+  };
+
+  const removeAchievement = (index: number) => {
+    setAchievements(achievements.filter((_, i) => i !== index));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -172,7 +185,12 @@ export default function RecruiterRegisterPage() {
     }
     
     if (step === 2) {
-      if (!formData.age || parseInt(formData.age) < 18) { 
+      if (!formData.dateOfBirth) { 
+        setError('Bitte Gib Din Geburtsdatum Ii'); 
+        return; 
+      }
+      const age = Math.floor((new Date().getTime() - new Date(formData.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+      if (age < 18) { 
         setError('Alter Muss Mindestens 18 Si'); 
         return; 
       }
@@ -180,7 +198,7 @@ export default function RecruiterRegisterPage() {
       if (!formData.canton) { setError('Bitte Wähl Din Wohnkanton'); return; }
       if (!formData.clubName) { setError('Bitte Wähl Din Verein'); return; }
       if (!formData.coachRole) { setError('Bitte Wähl Dini Roll'); return; }
-      if (!formData.genderCoached) { setError('Bitte Wähl Welches Gschlecht Du Trainiersch'); return; }
+      if (formData.genderCoached.length === 0) { setError('Bitte Wähl Welches Gschlecht Du Trainiersch'); return; }
       setStep(3);
       return;
     }
@@ -193,6 +211,8 @@ export default function RecruiterRegisterPage() {
       // Find the selected club
       const selectedClub = clubs.find(c => c.name === formData.clubName);
       
+      const age = Math.floor((new Date().getTime() - new Date(formData.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+      
       const response = await axios.post('/api/auth/register', {
         email: formData.email,
         password: formData.password,
@@ -201,7 +221,8 @@ export default function RecruiterRegisterPage() {
         recruiterData: {
           firstName: formData.firstName,
           lastName: formData.lastName,
-          age: parseInt(formData.age),
+          age: age,
+          dateOfBirth: formData.dateOfBirth,
           nationality: formData.nationality,
           canton: formData.canton,
           province: formData.province || null,
@@ -213,6 +234,7 @@ export default function RecruiterRegisterPage() {
           coachingLicense: formData.coachingLicense || null,
           ausweiss: formData.ausweiss || null,
           clubHistory: clubHistory,
+          achievements: achievements,
           organization: formData.clubName,
           position: formData.coachRole
         }
@@ -332,16 +354,17 @@ export default function RecruiterRegisterPage() {
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <User className="w-4 h-4 inline mr-1" />Alter *
+                    <Calendar className="w-4 h-4 inline mr-1" />Geburtsdatum *
                   </label>
                   <input 
-                    name="age" 
-                    type="number" 
-                    min="18" 
+                    name="dateOfBirth" 
+                    type="date" 
                     required 
-                    value={formData.age} 
+                    value={formData.dateOfBirth} 
                     onChange={handleChange}
+                    lang="de-CH"
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
+                    placeholder="tt.mm.jjjj"
                   />
                 </div>
 
@@ -369,16 +392,16 @@ export default function RecruiterRegisterPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Provinz/Gemeinde *
+                    <MapPin className="w-4 h-4 inline mr-1" />Gemeinde/Municipality
                   </label>
                   <input 
                     name="province" 
-                    required 
                     value={formData.province} 
                     onChange={handleChange}
-                    placeholder="z.B. Stadt Zürich, Bern-Mittelland"
+                    placeholder="z.B. Winterthur, Bern, etc."
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
                   />
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Optional - Gmeind I Dim Kanton</p>
                 </div>
 
                 <div>
@@ -402,13 +425,39 @@ export default function RecruiterRegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Team Gschlecht *</label>
-                  <select name="genderCoached" required value={formData.genderCoached} onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
-                    <option value="">Wähl Gschlecht</option>
-                    <option value="MALE">Männer</option>
-                    <option value="FEMALE">Fraue</option>
-                  </select>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Team Gschlecht * (Mehrfach Uuswahl Möglich)</label>
+                  <div className="space-y-2">
+                    <label className="flex items-center gap-3 p-3 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700">
+                      <input
+                        type="checkbox"
+                        checked={formData.genderCoached.includes('MALE')}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setFormData({ ...formData, genderCoached: [...formData.genderCoached, 'MALE'] });
+                          } else {
+                            setFormData({ ...formData, genderCoached: formData.genderCoached.filter(g => g !== 'MALE') });
+                          }
+                        }}
+                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <span className="text-gray-900 dark:text-white">♂ Männer</span>
+                    </label>
+                    <label className="flex items-center gap-3 p-3 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700">
+                      <input
+                        type="checkbox"
+                        checked={formData.genderCoached.includes('FEMALE')}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setFormData({ ...formData, genderCoached: [...formData.genderCoached, 'FEMALE'] });
+                          } else {
+                            setFormData({ ...formData, genderCoached: formData.genderCoached.filter(g => g !== 'FEMALE') });
+                          }
+                        }}
+                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <span className="text-gray-900 dark:text-white">♀ Fraue</span>
+                    </label>
+                  </div>
                 </div>
 
                 <div className="flex gap-4">
@@ -477,6 +526,49 @@ export default function RecruiterRegisterPage() {
                   />
                 </div>
 
+                {/* Achievements */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Erfolge & Uszeichnige (Optional)
+                  </label>
+                  <div className="space-y-2">
+                    <div className="flex gap-2">
+                      <input 
+                        type="text"
+                        value={newAchievement}
+                        onChange={(e) => setNewAchievement(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addAchievement())}
+                        placeholder="z.B. Schwizer Meischter 2023, NLA Uffstig..."
+                        className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
+                      />
+                      <button 
+                        type="button"
+                        onClick={addAchievement}
+                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-1 text-sm font-medium"
+                      >
+                        <Plus className="w-4 h-4" /> Hinzuefüege
+                      </button>
+                    </div>
+                    
+                    {achievements.length > 0 && (
+                      <div className="space-y-2 mt-3">
+                        {achievements.map((achievement, index) => (
+                          <div key={index} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600">
+                            <span className="text-sm text-gray-900 dark:text-white">{achievement}</span>
+                            <button 
+                              type="button"
+                              onClick={() => removeAchievement(index)}
+                              className="text-red-600 dark:text-red-400 hover:text-red-700 p-1"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 {/* Club History */}
                 <div>
                   <div className="flex justify-between items-center mb-3">
@@ -533,30 +625,59 @@ export default function RecruiterRegisterPage() {
                         </div>
 
                         <div className="grid grid-cols-2 gap-3">
-                          <input 
-                            type="number"
-                            value={club.yearFrom}
-                            onChange={(e) => updateClubAffiliation(club.id, 'yearFrom', e.target.value)}
-                            placeholder="Vo Jahr"
-                            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
-                          />
-                          <input 
-                            type="number"
-                            value={club.yearTo}
-                            onChange={(e) => updateClubAffiliation(club.id, 'yearTo', e.target.value)}
-                            placeholder="Bis Jahr (leer = aktuell)"
-                            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
-                          />
+                          <div>
+                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Jahr Vo</label>
+                            <input 
+                              type="number"
+                              value={club.yearFrom}
+                              onChange={(e) => updateClubAffiliation(club.id, 'yearFrom', e.target.value)}
+                              placeholder="2020"
+                              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Jahr Bis</label>
+                            {club.currentClub ? (
+                              <div className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
+                                <span className="text-green-600 dark:text-green-400 font-semibold flex items-center gap-1 text-sm">
+                                  ✓ Aktuell
+                                </span>
+                              </div>
+                            ) : (
+                              <input 
+                                type="number"
+                                value={club.yearTo}
+                                onChange={(e) => updateClubAffiliation(club.id, 'yearTo', e.target.value)}
+                                placeholder="2023"
+                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
+                              />
+                            )}
+                          </div>
                         </div>
 
-                        <label className="flex items-center gap-2 text-sm">
+                        <label className={`flex items-center space-x-2 cursor-pointer p-3 rounded-lg border-2 transition ${
+                          club.currentClub 
+                            ? 'bg-green-50 dark:bg-green-900/20 border-green-500 dark:border-green-600' 
+                            : 'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
+                        }`}>
                           <input 
                             type="checkbox"
                             checked={club.currentClub}
-                            onChange={(e) => updateClubAffiliation(club.id, 'currentClub', e.target.checked)}
-                            className="rounded border-gray-300"
+                            onChange={(e) => {
+                              updateClubAffiliation(club.id, 'currentClub', e.target.checked);
+                              if (e.target.checked) {
+                                updateClubAffiliation(club.id, 'yearTo', '');
+                              }
+                            }}
+                            className="w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
                           />
-                          <span className="text-gray-700 dark:text-gray-300">Aktuell Da</span>
+                          <span className={`text-sm font-medium flex items-center gap-2 ${
+                            club.currentClub 
+                              ? 'text-green-700 dark:text-green-300' 
+                              : 'text-gray-700 dark:text-gray-300'
+                          }`}>
+                            Schaff Aktuell Do
+                          </span>
                         </label>
 
                         <div>

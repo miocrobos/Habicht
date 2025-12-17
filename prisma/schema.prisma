@@ -466,7 +466,7 @@ model Recruiter {
   coachRole         String      // Head Coach, Assistant Coach, Scout, etc.
   
   // Coaching Details
-  genderCoached     Gender?     // Which gender team they coach (MALE/FEMALE)
+  genderCoached     Gender[]    @default([]) // Which gender teams they coach (MALE/FEMALE) - can coach both
   positionsLookingFor Position[] @default([]) // Positions they're recruiting for
   
   // Licenses & Credentials (optional)
@@ -480,6 +480,7 @@ model Recruiter {
   bio               String?     @db.Text
   profileImage      String?     // Profile picture (optional for recruiters)
   coverImage        String?     // Optional backdrop/banner image
+  achievements      String[]    @default([]) // Achievements and awards
   
   // Status
   verified          Boolean     @default(false)

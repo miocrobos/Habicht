@@ -33,6 +33,7 @@ interface PlayerData {
   nationality: string
   canton: string
   city: string | null
+  municipality: string | null
   currentLeague: string | null
   currentClub: {
     id: string
@@ -469,7 +470,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
                     <span className="flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
-                      {player.city ? `${player.city}, ${player.canton}` : player.canton}
+                      {player.municipality ? `${player.municipality}, ${player.canton}` : player.canton}
                     </span>
                     {playerAge && (
                       <span className="flex items-center gap-1">

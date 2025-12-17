@@ -72,7 +72,7 @@ export default function PlayerCard({ player }: { player: any }) {
           {/* Location */}
           <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
             <MapPin className="w-4 h-4" />
-            <span>{player.municipality ? `${player.municipality}, ` : ''}{player.canton}</span>
+            <span>{player.municipality ? `${player.municipality}, ` : ''}{cantonInfo.name}</span>
           </div>
         </div>
       </div>

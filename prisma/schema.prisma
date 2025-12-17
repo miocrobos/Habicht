@@ -170,6 +170,7 @@ model Player {
   // Media & Documents
   highlightVideo    String?     // Base64 or URL to highlight video
   swissVolleyLicense String?    // Swiss Volley license photo
+  ausweiss          String?     // Swiss ID/permit photo
   
   // Profile
   bio               String?     @db.Text
@@ -466,7 +467,7 @@ model Recruiter {
   coachRole         String      // Head Coach, Assistant Coach, Scout, etc.
   
   // Coaching Details
-  genderCoached     Gender[]    @default([]) // Which gender teams they coach (MALE/FEMALE) - can coach both
+  genderCoached     Gender?     // Which gender team they coach (MALE/FEMALE)
   positionsLookingFor Position[] @default([]) // Positions they're recruiting for
   
   // Licenses & Credentials (optional)
@@ -481,6 +482,12 @@ model Recruiter {
   profileImage      String?     // Profile picture (optional for recruiters)
   coverImage        String?     // Optional backdrop/banner image
   achievements      String[]    @default([]) // Achievements and awards
+  
+  // Social Media
+  facebook          String?     // Facebook profile/page
+  instagram         String?     // Instagram handle
+  tiktok            String?     // TikTok handle
+  youtube           String?     // YouTube channel
   
   // Status
   verified          Boolean     @default(false)

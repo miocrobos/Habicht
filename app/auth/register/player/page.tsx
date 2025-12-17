@@ -82,7 +82,7 @@ export default function PlayerRegisterPage() {
     weight: '', spikeHeight: '', blockHeight: '', 
     profileImage: '', instagram: '', tiktok: '', youtube: '', highlightVideo: '',
     skillReceiving: 0, skillServing: 0, skillAttacking: 0, skillBlocking: 0, skillDefense: 0,
-    swissVolleyLicense: '', phone: '', bio: '',
+    swissVolleyLicense: '', ausweiss: '', phone: '', bio: '',
     employmentStatus: '', occupation: '', schoolName: '',
     lookingForClub: false
   });
@@ -207,6 +207,7 @@ export default function PlayerRegisterPage() {
           youtube: formData.youtube,
           highlightVideo: formData.highlightVideo, 
           swissVolleyLicense: formData.swissVolleyLicense,
+          ausweiss: formData.ausweiss || null,
           skillReceiving: formData.skillReceiving, 
           skillServing: formData.skillServing,
           skillAttacking: formData.skillAttacking, 
@@ -640,6 +641,14 @@ export default function PlayerRegisterPage() {
                   </h4>
                   <ImageUpload label="Lad Lizenz-Foto Ufe" value={formData.swissVolleyLicense}
                     onChange={(v) => setFormData({ ...formData, swissVolleyLicense: v })} aspectRatio="banner" />
+                </div>
+
+                <div className="bg-blue-50 dark:bg-gray-700 border border-blue-200 dark:border-gray-600 rounded-lg p-5">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                    <Award className="w-5 h-5" />Ausweiss/ID (Optional)
+                  </h4>
+                  <ImageUpload label="Lad Ausweiss-Foto Ufe" value={formData.ausweiss}
+                    onChange={(v) => setFormData({ ...formData, ausweiss: v })} aspectRatio="banner" />
                 </div>
 
                 <div className="flex gap-3">

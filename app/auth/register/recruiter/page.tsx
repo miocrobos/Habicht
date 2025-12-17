@@ -100,7 +100,11 @@ export default function RecruiterRegisterPage() {
     phone: '',
     bio: '',
     coachingLicense: '',
-    ausweiss: ''
+    ausweiss: '',
+    facebook: '',
+    instagram: '',
+    tiktok: '',
+    youtube: ''
   });
   const [clubHistory, setClubHistory] = useState<ClubAffiliation[]>([]);
   const [achievements, setAchievements] = useState<string[]>([]);
@@ -233,6 +237,10 @@ export default function RecruiterRegisterPage() {
           bio: formData.bio || null,
           coachingLicense: formData.coachingLicense || null,
           ausweiss: formData.ausweiss || null,
+          facebook: formData.facebook || null,
+          instagram: formData.instagram || null,
+          tiktok: formData.tiktok || null,
+          youtube: formData.youtube || null,
           clubHistory: clubHistory,
           achievements: achievements,
           organization: formData.clubName,
@@ -524,6 +532,57 @@ export default function RecruiterRegisterPage() {
                     value={formData.ausweiss}
                     onChange={(base64) => setFormData({ ...formData, ausweiss: base64 })}
                   />
+                </div>
+
+                {/* Social Media */}
+                <div className="bg-purple-50 dark:bg-gray-700 border border-purple-200 dark:border-gray-600 rounded-lg p-5">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Social Media (Optional)</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Facebook</label>
+                      <input 
+                        name="facebook" 
+                        type="text" 
+                        value={formData.facebook} 
+                        onChange={handleChange}
+                        placeholder="Facebook Profil/Site URL"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm" 
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Instagram</label>
+                      <input 
+                        name="instagram" 
+                        type="text" 
+                        value={formData.instagram} 
+                        onChange={handleChange}
+                        placeholder="@username"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm" 
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">TikTok</label>
+                      <input 
+                        name="tiktok" 
+                        type="text" 
+                        value={formData.tiktok} 
+                        onChange={handleChange}
+                        placeholder="@username"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm" 
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">YouTube</label>
+                      <input 
+                        name="youtube" 
+                        type="text" 
+                        value={formData.youtube} 
+                        onChange={handleChange}
+                        placeholder="Channel URL"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm" 
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 {/* Achievements */}

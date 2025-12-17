@@ -93,6 +93,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         nationality: player.nationality || '',
         canton: player.canton || '',
         city: player.city || '',
+        municipality: player.municipality || '',
         employmentStatus: player.employmentStatus || '',
         occupation: player.occupation || '',
         schoolName: player.schoolName || '',
@@ -108,6 +109,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         youtube: player.youtube || '',
         highlightVideo: player.highlightVideo || '',
         swissVolleyLicense: player.swissVolleyLicense || '',
+        ausweiss: player.ausweiss || '',
         skillReceiving: player.skillReceiving || 0,
         skillServing: player.skillServing || 0,
         skillAttacking: player.skillAttacking || 0,
@@ -392,13 +394,13 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Gmaind / Stadt
+                Gmaind / Municipality
               </label>
               <input
                 type="text"
-                value={formData.city || ''}
-                onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                placeholder="z.B. Zürich, Bern, Luzern"
+                value={formData.municipality || ''}
+                onChange={(e) => setFormData({ ...formData, municipality: e.target.value })}
+                placeholder="z.B. Winterthur, Bern, Luzern"
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
@@ -748,6 +750,39 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
               ))}
             </div>
           )}
+        </div>
+
+        {/* Documents */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Dokumänt
+          </h2>
+
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Swiss Volley Lizenz (Optional)
+              </label>
+              <ImageUpload
+                label="Lad Lizenz-Foto Ufe"
+                value={formData.swissVolleyLicense}
+                onChange={(v: string) => setFormData({ ...formData, swissVolleyLicense: v })}
+                aspectRatio="banner"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Ausweiss/ID (Optional)
+              </label>
+              <ImageUpload
+                label="Lad Ausweiss-Foto Ufe"
+                value={formData.ausweiss}
+                onChange={(v: string) => setFormData({ ...formData, ausweiss: v })}
+                aspectRatio="banner"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Social Media */}

@@ -30,6 +30,29 @@ const translations = {
     // Chat
     'chat.writeMessage': 'Nachricht Schriihe...',
     'chat.addEmoji': 'Emoji Hinzuefüege',
+    // Common
+    'common.save': 'Speichere',
+    'common.cancel': 'Abbräche',
+    'common.delete': 'Lösche',
+    'common.edit': 'Bearbeite',
+    'common.search': 'Sueche',
+    'common.filter': 'Filtere',
+    'common.loading': 'Lade...',
+    'common.error': 'Fehler',
+    'common.success': 'Erfolg',
+    'common.back': 'Zrugg',
+    'common.next': 'Wiiter',
+    'common.submit': 'Abschicke',
+    // Navigation
+    'nav.home': 'Hei',
+    'nav.players': 'Spieler',
+    'nav.recruiters': 'Rekrutierer',
+    'nav.clubs': 'Verein',
+    'nav.about': 'Über Üs',
+    'nav.settings': 'Iistellige',
+    'nav.logout': 'Abmelde',
+    'nav.login': 'Aamelde',
+    'nav.register': 'Registriere',
   },
   de: {
     // Gender
@@ -48,6 +71,29 @@ const translations = {
     // Chat
     'chat.writeMessage': 'Nachricht schreiben...',
     'chat.addEmoji': 'Emoji hinzufügen',
+    // Common
+    'common.save': 'Speichern',
+    'common.cancel': 'Abbrechen',
+    'common.delete': 'Löschen',
+    'common.edit': 'Bearbeiten',
+    'common.search': 'Suchen',
+    'common.filter': 'Filtern',
+    'common.loading': 'Lädt...',
+    'common.error': 'Fehler',
+    'common.success': 'Erfolg',
+    'common.back': 'Zurück',
+    'common.next': 'Weiter',
+    'common.submit': 'Absenden',
+    // Navigation
+    'nav.home': 'Startseite',
+    'nav.players': 'Spieler',
+    'nav.recruiters': 'Rekrutierer',
+    'nav.clubs': 'Vereine',
+    'nav.about': 'Über uns',
+    'nav.settings': 'Einstellungen',
+    'nav.logout': 'Abmelden',
+    'nav.login': 'Anmelden',
+    'nav.register': 'Registrieren',
   },
   fr: {
     // Gender
@@ -66,6 +112,29 @@ const translations = {
     // Chat
     'chat.writeMessage': 'Écrire un message...',
     'chat.addEmoji': 'Ajouter un emoji',
+    // Common
+    'common.save': 'Enregistrer',
+    'common.cancel': 'Annuler',
+    'common.delete': 'Supprimer',
+    'common.edit': 'Modifier',
+    'common.search': 'Rechercher',
+    'common.filter': 'Filtrer',
+    'common.loading': 'Chargement...',
+    'common.error': 'Erreur',
+    'common.success': 'Succès',
+    'common.back': 'Retour',
+    'common.next': 'Suivant',
+    'common.submit': 'Soumettre',
+    // Navigation
+    'nav.home': 'Accueil',
+    'nav.players': 'Joueurs',
+    'nav.recruiters': 'Recruteurs',
+    'nav.clubs': 'Clubs',
+    'nav.about': 'À propos',
+    'nav.settings': 'Paramètres',
+    'nav.logout': 'Déconnexion',
+    'nav.login': 'Connexion',
+    'nav.register': 'S\'inscrire',
   },
   it: {
     // Gender
@@ -84,6 +153,29 @@ const translations = {
     // Chat
     'chat.writeMessage': 'Scrivi un messaggio...',
     'chat.addEmoji': 'Aggiungi emoji',
+    // Common
+    'common.save': 'Salva',
+    'common.cancel': 'Annulla',
+    'common.delete': 'Elimina',
+    'common.edit': 'Modifica',
+    'common.search': 'Cerca',
+    'common.filter': 'Filtra',
+    'common.loading': 'Caricamento...',
+    'common.error': 'Errore',
+    'common.success': 'Successo',
+    'common.back': 'Indietro',
+    'common.next': 'Avanti',
+    'common.submit': 'Invia',
+    // Navigation
+    'nav.home': 'Home',
+    'nav.players': 'Giocatori',
+    'nav.recruiters': 'Reclutatori',
+    'nav.clubs': 'Club',
+    'nav.about': 'Chi siamo',
+    'nav.settings': 'Impostazioni',
+    'nav.logout': 'Disconnetti',
+    'nav.login': 'Accedi',
+    'nav.register': 'Registrati',
   },
   rm: {
     // Gender
@@ -102,6 +194,29 @@ const translations = {
     // Chat
     'chat.writeMessage': 'Scriver in messadi...',
     'chat.addEmoji': 'Agiuntar emoji',
+    // Common
+    'common.save': 'Memorisar',
+    'common.cancel': 'Interrumper',
+    'common.delete': 'Stizzar',
+    'common.edit': 'Modifitgar',
+    'common.search': 'Tschertgar',
+    'common.filter': 'Filtrar',
+    'common.loading': 'Chargiar...',
+    'common.error': 'Errur',
+    'common.success': 'Success',
+    'common.back': 'Enavos',
+    'common.next': 'Vinavant',
+    'common.submit': 'Trametter',
+    // Navigation
+    'nav.home': 'Pagina principala',
+    'nav.players': 'Giugaders',
+    'nav.recruiters': 'Recrutaders',
+    'nav.clubs': 'Clubs',
+    'nav.about': 'Davart nus',
+    'nav.settings': 'Parameters',
+    'nav.logout': 'S\'annunziar ora',
+    'nav.login': 'S\'annunziar',
+    'nav.register': 'S\'annunziar',
   },
   en: {
     // Gender
@@ -120,6 +235,29 @@ const translations = {
     // Chat
     'chat.writeMessage': 'Write a message...',
     'chat.addEmoji': 'Add emoji',
+    // Common
+    'common.save': 'Save',
+    'common.cancel': 'Cancel',
+    'common.delete': 'Delete',
+    'common.edit': 'Edit',
+    'common.search': 'Search',
+    'common.filter': 'Filter',
+    'common.loading': 'Loading...',
+    'common.error': 'Error',
+    'common.success': 'Success',
+    'common.back': 'Back',
+    'common.next': 'Next',
+    'common.submit': 'Submit',
+    // Navigation
+    'nav.home': 'Home',
+    'nav.players': 'Players',
+    'nav.recruiters': 'Recruiters',
+    'nav.clubs': 'Clubs',
+    'nav.about': 'About',
+    'nav.settings': 'Settings',
+    'nav.logout': 'Logout',
+    'nav.login': 'Login',
+    'nav.register': 'Register',
   }
 }
 

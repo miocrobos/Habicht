@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     // In production, send email to admin
     try {
       await resend.emails.send({
-        from: 'Habicht <onboarding@resend.dev>',
+        from: 'Habicht <noreply@habicht-volleyball.ch>',
         to: adminEmail,
         replyTo: submitterEmail,
         subject: `Neue Club Mäldig: ${clubName}`,

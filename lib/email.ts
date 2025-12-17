@@ -37,7 +37,7 @@ export async function sendVerificationEmail({
 
     try {
       await resend.emails.send({
-        from: 'Habicht <onboarding@resend.dev>',
+        from: 'Habicht <noreply@habicht-volleyball.ch>',
         to: email,
         subject: '🏐 Willkomme Bi Habicht - Verifizier Dini E-Mail',
         html: `
@@ -177,7 +177,7 @@ export async function sendPasswordResetEmail(email: string, resetToken: string):
 
     try {
       await resend.emails.send({
-        from: 'Habicht <onboarding@resend.dev>',
+        from: 'Habicht <noreply@habicht-volleyball.ch>',
         to: email,
         subject: 'Passwort Zruggsetze - Habicht',
         html: `

@@ -27,8 +27,12 @@ export default function LoginPage() {
 
   useEffect(() => {
     // If already logged in, redirect to profile
-    if (session?.user?.playerId) {
-      router.push(`/players/${session.user.playerId}`)
+    if (session?.user) {
+      if (session.user.playerId) {
+        router.push(`/players/${session.user.playerId}`)
+      } else if (session.user.recruiterId) {
+        router.push(`/recruiters`)
+      }
     }
   }, [session, router])
 
@@ -54,13 +58,19 @@ export default function LoginPage() {
           localStorage.removeItem('rememberedEmail')
         }
 
-        // After successful login, fetch user ID and redirect to their profile
+        // After successful login, fetch user session and redirect to their profile
         const response = await fetch('/api/auth/session')
         const data = await response.json()
+        
         if (data?.user?.playerId) {
+          // Redirect player to their profile
           router.push(`/players/${data.user.playerId}`)
+        } else if (data?.user?.recruiterId) {
+          // Redirect recruiter to recruiters page
+          router.push(`/recruiters`)
         } else {
-          router.push('/players')
+          // Fallback to home page if no profile found
+          router.push('/')
         }
         router.refresh()
       }

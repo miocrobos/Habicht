@@ -64,6 +64,22 @@ export const authOptions: NextAuthOptions = {
         token.playerId = (user as any).playerId
         token.recruiterId = (user as any).recruiterId
       }
+      // If token doesn't have playerId/recruiterId, fetch from database
+      if (token.id && (!token.playerId && !token.recruiterId)) {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.id as string },
+          include: {
+            player: true,
+            recruiter: true,
+          }
+        })
+        if (dbUser?.player) {
+          token.playerId = dbUser.player.id
+        }
+        if (dbUser?.recruiter) {
+          token.recruiterId = dbUser.recruiter.id
+        }
+      }
       return token
     },
     async session({ session, token }) {

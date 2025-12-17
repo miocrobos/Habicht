@@ -20,6 +20,7 @@ export async function GET(request: NextRequest) {
       },
       include: {
         player: true,
+        recruiter: true,
       },
     })
 
@@ -37,10 +38,14 @@ export async function GET(request: NextRequest) {
       },
     })
 
-    // Redirect to player profile if player, otherwise to login with success
+    // Redirect to appropriate profile based on role
     if (user.role === 'PLAYER' && user.player) {
       return NextResponse.redirect(
         new URL(`/players/${user.player.id}?verified=true`, request.url)
+      )
+    } else if (user.role === 'RECRUITER' && user.recruiter) {
+      return NextResponse.redirect(
+        new URL(`/recruiters?verified=true`, request.url)
       )
     }
 

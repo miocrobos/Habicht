@@ -6,11 +6,13 @@ on:
       - main
 
 jobs:
-  coderabbit-review:
+  coderabbit-review-and-apply:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Request CodeRabbit Review
         uses: actions/github-script@v7
@@ -25,17 +27,26 @@ jobs:
             });
             console.log('CodeRabbit review requested');
 
-      - name: Wait for CodeRabbit Analysis
+      - name: Wait for CodeRabbit Analysis and Auto-Apply
         run: |
-          echo "⏳ Waiting 60 seconds for CodeRabbit to analyze code..."
-          sleep 60
+          echo "⏳ Waiting 3 minutes for CodeRabbit to analyze and apply suggestions..."
+          sleep 180
+
+      - name: Pull latest changes (if auto-apply pushed commits)
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git pull origin main
+          echo "✅ Pulled latest changes including any CodeRabbit auto-applied suggestions"
 
   deploy:
-    needs: coderabbit-review
+    needs: coderabbit-review-and-apply
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout latest code with all applied suggestions
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest

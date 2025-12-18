@@ -95,9 +95,14 @@ export async function sendPasswordResetVerification({ email, name, token }: Send
 // Email utility for sending verification emails using Resend
 // Lazy initialize Resend to avoid build-time errors when API key isn't available
 function getResendClient() {
+  // Skip initialization during build or when API key is missing
+  if (!process.env.RESEND_API_KEY || process.env.NEXT_PHASE === 'phase-production-build') {
+    return null;
+  }
+  
   try {
     const { Resend } = require('resend');
-    return new Resend(process.env.RESEND_API_KEY || '');
+    return new Resend(process.env.RESEND_API_KEY);
   } catch (error) {
     console.error('Failed to initialize Resend:', error);
     return null;

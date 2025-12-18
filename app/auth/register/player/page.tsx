@@ -158,11 +158,8 @@ export default function PlayerRegisterPage() {
       return;
     }
     
+
     if (step === 2) {
-      if (!agreedToTerms) {
-        setError('Du Muesch D Nutzigsbedingige Akzeptiere');
-        return;
-      }
       if (!formData.gender) { setError('Bitte Wähl Dis Gschlecht'); return; }
       if (!formData.nationality) { setError('Bitte Wähl Dini Nationalität'); return; }
       if (!formData.canton) { setError('Bitte Wähl Din Wohnkanton'); return; }
@@ -178,6 +175,12 @@ export default function PlayerRegisterPage() {
       if (formData.positions.length === 0) { setError('Bitte Wähl Mindeschtens Ei Position'); return; }
       if (!formData.profileImage) { setError('Bitte Lad Es Profilbild Ufe'); return; }
       setStep(3);
+      return;
+    }
+
+    // Step 3 - Final submission
+    if (!agreedToTerms) {
+      setError('Du Muesch D Nutzigsbedingige Akzeptiere');
       return;
     }
 

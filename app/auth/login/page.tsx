@@ -2,30 +2,46 @@
 
 import { useState, useEffect } from 'react'
 import { signIn, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function LoginPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const { data: session } = useSession()
   const { t } = useLanguage()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
 
   useEffect(() => {
+    // Check for success/error messages from password reset
+    const successParam = searchParams.get('success')
+    const errorParam = searchParams.get('error')
+    
+    if (successParam === 'password_reset') {
+      setSuccess('Passwort erfolgreich zurückgesetzt! Du kannst dich jetzt anmelden.')
+    } else if (errorParam === 'invalid_token') {
+      setError('Ungültiger oder abgelaufener Link.')
+    } else if (errorParam === 'token_expired') {
+      setError('Link ist abgelaufen. Bitte fordere einen neuen an.')
+    } else if (errorParam === 'server_error') {
+      setError('Ein Fehler ist aufgetreten. Bitte versuche es erneut.')
+    }
+
     // Load saved credentials if remember me was checked
     const savedEmail = localStorage.getItem('rememberedEmail')
     if (savedEmail) {
       setEmail(savedEmail)
       setRememberMe(true)
     }
-  }, [])
+  }, [searchParams])
 
   useEffect(() => {
     // If already logged in, redirect to profile
@@ -103,8 +119,13 @@ export default function LoginPage() {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <p className="text-sm text-red-800">{error}</p>
+            <div className="rounded-md bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4">
+              <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
+            </div>
+          )}
+          {success && (
+            <div className="rounded-md bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4">
+              <p className="text-sm text-green-800 dark:text-green-200">{success}</p>
             </div>
           )}
 

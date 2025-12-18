@@ -107,6 +107,7 @@ model User {
   player        Player?
   recruiter     Recruiter?
   clubManager   ClubManager?
+  passwordResetRequests PasswordResetRequest[]
 }
 
 model Player {
@@ -652,4 +653,17 @@ model Message {
   @@index([playerId])
   @@index([recruiterId])
   @@index([createdAt])
+}
+
+model PasswordResetRequest {
+  id                Int       @id @default(autoincrement())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  email             String
+  token             String    @unique
+  newPasswordHash   String
+  createdAt         DateTime  @default(now())
+  
+  @@index([userId])
+  @@index([token])
 }

@@ -10,6 +10,8 @@
   },
   "github": {
     "silent": false,
-    "autoAlias": true
-  }
+    "autoAlias": true,
+    "autoJobCancelation": false
+  },
+  "ignoreCommand": "exit 0"
 }

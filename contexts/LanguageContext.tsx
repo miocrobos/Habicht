@@ -301,7 +301,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }
 
   // Dynamic translation using Google Translate API
-  const translate = async (text: string, sourceLanguage: string = 'en'): Promise<string> => {
+  const translate = async (text: string, sourceLanguage: string = 'gsw'): Promise<string> => {
     const targetLanguageCode = getGoogleLanguageCode(language)
     return await translateText(text, targetLanguageCode, sourceLanguage)
   }

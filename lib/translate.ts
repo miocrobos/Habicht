@@ -10,14 +10,8 @@ const translationCache = new Map<string, string>();
 export async function translateText(
   text: string,
   targetLanguage: string,
-  sourceLanguage: string = 'en'
+  sourceLanguage: string = 'gsw'
 ): Promise<string> {
-  // Return original text if no API key
-  if (!GOOGLE_TRANSLATE_API_KEY) {
-    console.warn('Google Translate API key not configured');
-    return text;
-  }
-
   // Create cache key
   const cacheKey = `${sourceLanguage}:${targetLanguage}:${text}`;
   
@@ -32,28 +26,25 @@ export async function translateText(
   }
 
   try {
-    const response = await fetch(
-      `${GOOGLE_TRANSLATE_API_URL}?key=${GOOGLE_TRANSLATE_API_KEY}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          q: text,
-          source: sourceLanguage,
-          target: targetLanguage,
-          format: 'text'
-        }),
-      }
-    );
+    // Call our API route instead of directly calling Google
+    const response = await fetch('/api/translate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        text,
+        sourceLanguage,
+        targetLanguage,
+      }),
+    });
 
     if (!response.ok) {
       throw new Error(`Translation API error: ${response.statusText}`);
     }
 
     const data = await response.json();
-    const translatedText = data.data.translations[0].translatedText;
+    const translatedText = data.translatedText;
 
     // Cache the result
     translationCache.set(cacheKey, translatedText);

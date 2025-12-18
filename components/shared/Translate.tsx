@@ -15,10 +15,11 @@ interface TranslateProps {
  * Auto-translate component using Google Translate API
  * Usage: <Translate text="Hello World" />
  * Or: <Translate text="Hello" as="h1" className="text-xl" />
+ * Default source language is Swiss German (gsw)
  */
 export default function Translate({ 
   text, 
-  sourceLanguage = 'en', 
+  sourceLanguage = 'gsw', 
   as: Component = 'span',
   className 
 }: TranslateProps) {
@@ -30,8 +31,8 @@ export default function Translate({
     let isMounted = true
 
     const performTranslation = async () => {
-      // Skip if language is English (source)
-      if (language === 'en') {
+      // Skip translation if Swiss German (default language)
+      if (language === 'gsw') {
         setTranslatedText(text)
         return
       }

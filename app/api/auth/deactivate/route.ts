@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,12 +11,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
 
-    // Deactivate user account
+    // Deactivate by setting emailVerified to false
     await prisma.user.update({
       where: { email: session.user.email },
       data: { 
-        active: false,
-        emailVerified: null // Prevent login
+        emailVerified: false
       }
     });
 

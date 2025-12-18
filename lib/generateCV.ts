@@ -4,39 +4,37 @@ import autoTable from 'jspdf-autotable';
 interface PlayerData {
   firstName: string;
   lastName: string;
-  dateOfBirth: Date;
+  dateOfBirth: string | Date | null;
   gender: string;
-  height?: number;
-  weight?: number;
-  spikeHeight?: number;
-  blockHeight?: number;
+  height?: number | null;
+  weight?: number | null;
+  spikeHeight?: number | null;
+  blockHeight?: number | null;
   nationality: string;
   canton: string;
-  municipality?: string;
-  phone?: string;
-  position: string;
-  preferredFoot?: string;
-  experience: string;
-  bio?: string;
-  achievements?: string;
+  municipality?: string | null;
+  phone?: string | null;
+  positions: string[];
+  currentLeague?: string | null;
+  bio?: string | null;
+  achievements?: string[];
   user: {
     email: string;
   };
   currentClub?: {
     name: string;
-    league?: string;
-  };
+    logo?: string | null;
+  } | null;
   clubHistory?: Array<{
     clubName: string;
-    position: string;
-    startDate: Date;
-    endDate?: Date;
+    league?: string | null;
+    startDate: Date | string;
+    endDate?: Date | string | null;
+    currentClub?: boolean;
   }>;
-  education?: {
-    school?: string;
-    degree?: string;
-    graduationYear?: number;
-  };
+  schoolName?: string | null;
+  occupation?: string | null;
+  employmentStatus?: string | null;
 }
 
 export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
@@ -75,7 +73,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   doc.setFontSize(14);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(255, 255, 255);
-  const positionText = playerData.position || 'Volleyball Player';
+  const positionText = playerData.positions?.join(', ') || 'Volleyball Player';
   const positionWidth = doc.getTextWidth(positionText);
   doc.text(positionText, 210 - positionWidth - 15, 33);
 
@@ -92,11 +90,11 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
 
-  const age = new Date().getFullYear() - new Date(playerData.dateOfBirth).getFullYear();
+  const age = playerData.dateOfBirth ? new Date().getFullYear() - new Date(playerData.dateOfBirth).getFullYear() : null;
   
   const personalInfo = [
-    ['Date of Birth:', new Date(playerData.dateOfBirth).toLocaleDateString('de-CH')],
-    ['Age:', `${age} years`],
+    ...(playerData.dateOfBirth ? [['Date of Birth:', new Date(playerData.dateOfBirth).toLocaleDateString('de-CH')]] : []),
+    ...(age ? [['Age:', `${age} years`]] : []),
     ['Gender:', playerData.gender === 'MALE' ? 'Male' : 'Female'],
     ['Nationality:', playerData.nationality],
     ['Canton:', playerData.canton],
@@ -131,7 +129,6 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
       ...(playerData.weight ? [['Weight:', `${playerData.weight} kg`]] : []),
       ...(playerData.spikeHeight ? [['Spike Reach:', `${playerData.spikeHeight} cm`]] : []),
       ...(playerData.blockHeight ? [['Block Reach:', `${playerData.blockHeight} cm`]] : []),
-      ...(playerData.preferredFoot ? [['Preferred Foot:', playerData.preferredFoot]] : []),
     ];
 
     autoTable(doc, {
@@ -162,11 +159,11 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     doc.text(playerData.currentClub.name, 15, yPos);
     yPos += 5;
 
-    if (playerData.currentClub.league) {
+    if (playerData.currentLeague) {
       doc.setFontSize(10);
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(lightGray[0], lightGray[1], lightGray[2]);
-      doc.text(playerData.currentClub.league, 15, yPos);
+      doc.text(playerData.currentLeague, 15, yPos);
       yPos += 10;
     }
   }
@@ -186,18 +183,18 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
 
     const clubHistoryData = playerData.clubHistory.map(club => [
       club.clubName,
-      club.position,
+      club.league || 'N/A',
       `${new Date(club.startDate).getFullYear()} - ${club.endDate ? new Date(club.endDate).getFullYear() : 'Present'}`
     ]);
 
     autoTable(doc, {
       startY: yPos,
-      head: [['Club', 'Position', 'Period']],
+      head: [['Club', 'League', 'Period']],
       body: clubHistoryData,
       theme: 'striped',
       headStyles: {
-        fillColor: primaryColor,
-        textColor: [255, 255, 255],
+        fillColor: [220, 38, 38] as [number, number, number],
+        textColor: [255, 255, 255] as [number, number, number],
         fontSize: 10,
         fontStyle: 'bold'
       },
@@ -207,8 +204,8 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     yPos = (doc as any).lastAutoTable.finalY + 10;
   }
 
-  // Experience
-  if (playerData.experience) {
+  // Education/Employment
+  if (playerData.schoolName || playerData.occupation) {
     if (yPos > 240) {
       doc.addPage();
       yPos = 20;
@@ -217,18 +214,33 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('EXPERIENCE', 15, yPos);
+    doc.text('EDUCATION & EMPLOYMENT', 15, yPos);
     yPos += 8;
 
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
-    doc.text(playerData.experience, 15, yPos);
-    yPos += 10;
+    
+    const educationText = [];
+    if (playerData.schoolName) {
+      educationText.push(`School: ${playerData.schoolName}`);
+    }
+    if (playerData.occupation) {
+      educationText.push(`Occupation: ${playerData.occupation}`);
+    }
+    if (playerData.employmentStatus) {
+      educationText.push(`Status: ${playerData.employmentStatus}`);
+    }
+    
+    educationText.forEach((text, index) => {
+      doc.text(text, 15, yPos + (index * 5));
+    });
+    
+    yPos += educationText.length * 5 + 10;
   }
 
   // Achievements
-  if (playerData.achievements) {
+  if (playerData.achievements && playerData.achievements.length > 0) {
     if (yPos > 240) {
       doc.addPage();
       yPos = 20;
@@ -243,7 +255,8 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
-    const lines = doc.splitTextToSize(playerData.achievements, 180);
+    const achievementText = playerData.achievements.join('\n');
+    const lines = doc.splitTextToSize(achievementText, 180);
     doc.text(lines, 15, yPos);
     yPos += lines.length * 5 + 10;
   }

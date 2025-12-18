@@ -3,6 +3,7 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "nextjs",
+  "alias": ["www.habicht-volleyball.ch", "habicht-volleyball.ch"],
   "git": {
     "deploymentEnabled": {
       "main": true

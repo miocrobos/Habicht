@@ -98,10 +98,10 @@ export default function SettingsPage() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-            Einstellungen
+            Iistellige
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Verwalten Sie Ihre Präferenzen und Kontoeinstellungen
+            Verwalte Dini Präferenzä Und Konto Iistellige
           </p>
         </div>
 
@@ -120,7 +120,7 @@ export default function SettingsPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                   </svg>
-                  <span>Erscheinungsbild</span>
+                  <span>Uussehe</span>
                 </div>
               </button>
               
@@ -449,46 +449,45 @@ export default function SettingsPage() {
                       </div>
                     </div>
                     <div className="border border-orange-300 dark:border-orange-700 rounded-lg p-6">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Konto deaktivieren</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Ihr Profil wird ausgeblendet und Sie können sich nicht mehr anmelden. Sie können Ihr Konto jederzeit wieder aktivieren.</p>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Konto Deaktiviere</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Dis Profil Wird Uusblendet Und Du Chasch Di Nöd Meh Aamelde. Du Chasch Dis Konto Jederzit Wieder Aktiviere.</p>
                       <button 
                         onClick={async () => {
-                          if (confirm('Möchten Sie Ihr Konto wirklich deaktivieren?')) {
+                          if (confirm('Möchtsch Dis Konto Würkli Deaktiviere?')) {
                             try {
                               await axios.post('/api/auth/deactivate')
-                              alert('Ihr Konto wurde deaktiviert')
+                              alert('Dis Konto Isch Deaktiviert Worde')
                               window.location.href = '/'
                             } catch (error) {
-                              alert('Fehler beim Deaktivieren des Kontos')
+                              alert('Fehler Bim Deaktiviere Vom Konto')
                             }
                           }
                         }}
                         className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors font-medium"
                       >
-                        Konto deaktivieren
+                        Konto Deaktiviere
                       </button>
                     </div>
                     <div className="border border-red-300 dark:border-red-700 rounded-lg p-6">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Konto löschen</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Diese Aktion kann nicht rückgängig gemacht werden. Alle Ihre Daten, Videos und Nachrichten werden dauerhaft gelöscht.</p>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Konto Lösche</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">WARNUNG: Alli Dini Date, Videos Und Nachrichtä Werdet Dauerhaft Glöscht. Das Cha Nöd Rückgängig Gmacht Werde!</p>
                       <button 
                         onClick={async () => {
-                          if (confirm('WARNUNG: Diese Aktion kann nicht rückgängig gemacht werden! Möchten Sie Ihr Konto wirklich dauerhaft löschen?')) {
-                            const confirmDelete = prompt('Geben Sie "LÖSCHEN" ein, um zu bestätigen:');
-                            if (confirmDelete === 'LÖSCHEN') {
+                          if (confirm('⚠️ ACHTUNG: Das Löschit Alli Dini Date Dauerhaft!\n\nDis Profil, Alli Videos, Alli Nachrichtä Und Di E-Mail Adresse Werdet Komplett Glöscht.\n\nBisch Sicher?')) {
+                            if (confirm('🔴 LETSCHT WARNUNG: Das Cha Würkli Nöd Rückgängig Gmacht Werde!\n\nKlick OK Zum Dis Konto Dauerhaft Lösche.')) {
                               try {
                                 await axios.delete('/api/auth/delete-account')
-                                alert('Ihr Konto wurde gelöscht')
+                                alert('✓ Dis Konto Isch Dauerhaft Glöscht Worde')
                                 window.location.href = '/'
                               } catch (error) {
-                                alert('Fehler beim Löschen des Kontos')
+                                alert('Fehler Bim Lösche Vom Konto')
                               }
                             }
                           }
                         }}
                         className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium"
                       >
-                        Konto dauerhaft löschen
+                        Konto Dauerhaft Lösche
                       </button>
                     </div>
                   </div>

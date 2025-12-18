@@ -6,6 +6,7 @@ import axios from 'axios'
 import Image from 'next/image'
 import ImageUpload from '@/components/shared/ImageUpload'
 
+// Admin panel for managing clubs - includes add new club feature
 export default function ClubAdminPage() {
   const [clubs, setClubs] = useState<any[]>([])
   const [loading, setLoading] = useState(true)

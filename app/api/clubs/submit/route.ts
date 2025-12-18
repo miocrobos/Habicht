@@ -48,6 +48,85 @@ export async function POST(request: NextRequest) {
 
     // In production, send email to admin
     try {
+      // Send confirmation email to submitter
+      await resend.emails.send({
+        from: 'Habicht <noreply@habicht-volleyball.ch>',
+        to: submitterEmail,
+        subject: `✓ Danke Für Dini Club Mäldig - ${clubName}`,
+        html: `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          </head>
+          <body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: Arial, Helvetica, sans-serif;">
+            <table role="presentation" style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td align="center" style="padding: 0;">
+                  <table role="presentation" style="width: 600px; max-width: 100%; border-collapse: collapse; background-color: #ffffff;">
+                    <!-- Logo Header -->
+                    <tr>
+                      <td style="background-color: #DC2626; padding: 40px 20px; text-align: center;">
+                        <img src="https://habicht-volleyball.ch/eagle-logo.png" alt="Habicht Logo" width="100" height="100" style="display: block; margin: 0 auto 20px auto; border: 0;" />
+                        <h1 style="color: #ffffff; margin: 0; font-size: 32px; font-weight: bold;">
+                          Danke Für Dini Mäldig! 🏐
+                        </h1>
+                      </td>
+                    </tr>
+                    
+                    <!-- Main Content -->
+                    <tr>
+                      <td style="padding: 40px 30px;">
+                        <h2 style="color: #1f2937; margin-top: 0; font-size: 24px;">Hallo ${submitterName}!</h2>
+                        
+                        <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">
+                          <strong>Dini Mäldig Isch Üs Erreicht!</strong> 🎉
+                        </p>
+                        
+                        <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">
+                          Mir Ha Dini Aafroog Zum Hinzuefüege Vo <strong>${clubName}</strong> Erhalte. 
+                          Üsi Team Wird D Informatione Prüefe Und De Club So Schnell Wie Möglich Zü Üsere Plattform Hinzuefüege.
+                        </p>
+
+                        <div style="background-color: #f0fdf4; border-left: 4px solid #10b981; padding: 15px; margin: 25px 0;">
+                          <p style="color: #065f46; margin: 0; font-size: 14px;">
+                            <strong>Dini Iigräichti Informatione:</strong><br><br>
+                            <strong>Club:</strong> ${clubName}<br>
+                            ${league ? `<strong>Liga:</strong> ${league}<br>` : ''}
+                            ${canton ? `<strong>Kanton:</strong> ${canton}<br>` : ''}
+                            ${website ? `<strong>Websiite:</strong> ${website}<br>` : ''}
+                          </p>
+                        </div>
+
+                        <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">
+                          Falls Mir Zuesätzlechi Informatione Brüched, Werde Mir Üs Bi Dir Mälde.
+                        </p>
+
+                        <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">
+                          Merci Für Din Biitrag Zum Ufbau Vo De Grösste Schweizer Volleyball-Community! 🙌
+                        </p>
+                      </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                      <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+                        <p style="color: #9ca3af; font-size: 12px; margin: 0;">
+                          © 2025 Habicht | Swiss Volleyball Scouting Platform
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </body>
+          </html>
+        `,
+      });
+
+      // Send notification email to admin
       await resend.emails.send({
         from: 'Habicht <noreply@habicht-volleyball.ch>',
         to: adminEmail,

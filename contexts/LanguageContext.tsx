@@ -1,6 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { translateText, getGoogleLanguageCode } from '@/lib/translate'
 
 type Language = 'gsw' | 'de' | 'fr' | 'it' | 'rm' | 'en'
 
@@ -8,6 +9,7 @@ interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
   t: (key: string) => string
+  translate: (text: string, sourceLanguage?: string) => Promise<string>
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
@@ -293,8 +295,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     return typeof value === 'string' ? value : key
   }
 
+  // Dynamic translation using Google Translate API
+  const translate = async (text: string, sourceLanguage: string = 'en'): Promise<string> => {
+    const targetLanguageCode = getGoogleLanguageCode(language)
+    return await translateText(text, targetLanguageCode, sourceLanguage)
+  }
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t, translate }}>
       {children}
     </LanguageContext.Provider>
   )

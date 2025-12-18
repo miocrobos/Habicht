@@ -21,7 +21,7 @@ export async function sendPasswordResetVerification({ email, name, token }: Send
       return true;
     }
     try {
-      await resend.emails.send({
+      await getResendClient().emails.send({
         from: 'Habicht <noreply@habicht-volleyball.ch>',
         to: email,
         subject: 'Bestätige Passwortänderig - Habicht',
@@ -95,8 +95,10 @@ export async function sendPasswordResetVerification({ email, name, token }: Send
 // Email utility for sending verification emails using Resend
 import { Resend } from 'resend';
 
-// Initialize Resend with API key, handling undefined case
-const resend = new Resend(process.env.RESEND_API_KEY || '');
+// Lazy initialize Resend to avoid build-time errors when API key isn't available
+function getResendClient() {
+  return new Resend(process.env.RESEND_API_KEY || '');
+}
 
 interface SendVerificationEmailParams {
   email: string;
@@ -130,7 +132,7 @@ export async function sendVerificationEmail({
     }
 
     try {
-      await resend.emails.send({
+      await getResendClient().emails.send({
         from: 'Habicht <noreply@habicht-volleyball.ch>',
         to: email,
         subject: '🏐 Willkomme Bi Habicht - Verifizier Dini E-Mail',
@@ -270,7 +272,7 @@ export async function sendPasswordResetEmail(email: string, resetToken: string):
     }
 
     try {
-      await resend.emails.send({
+      await getResendClient().emails.send({
         from: 'Habicht <noreply@habicht-volleyball.ch>',
         to: email,
         subject: 'Passwort Zruggsetze - Habicht',

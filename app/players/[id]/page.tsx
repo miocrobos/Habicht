@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle } from 'lucide-react'
+import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
 import ImageUpload from '@/components/shared/ImageUpload'
 import ChatWindow from '@/components/chat/ChatWindow'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { generatePlayerCV } from '@/lib/generateCV'
 import axios from 'axios'
 
 interface PlayerProfileProps {
@@ -234,6 +235,28 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     } catch (error) {
       console.error('Error starting chat:', error)
       alert('Fehler bim Chat starte')
+    }
+  }
+
+  const handleExportCV = async () => {
+    if (!player) return
+
+    try {
+      // Generate PDF using the utility function
+      const pdfBlob = await generatePlayerCV(player)
+      
+      // Create download link
+      const url = URL.createObjectURL(pdfBlob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `${player.firstName}_${player.lastName}_CV.pdf`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    } catch (error) {
+      console.error('Error exporting CV:', error)
+      alert('Fehler bim CV Export')
     }
   }
 
@@ -510,14 +533,27 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       <span>🏳 Nationalität: {player.nationality}</span>
                     )}
                     {player.currentClub && (
-                      <span className="flex items-center gap-1">
-                        🏐 {player.currentClub.name}
+                      <Link 
+                        href={`/clubs/${player.currentClub.id}`}
+                        className="flex items-center gap-2 hover:text-red-600 dark:hover:text-red-400 transition"
+                      >
+                        {player.currentClub.logo && (
+                          <Image
+                            src={player.currentClub.logo}
+                            alt={player.currentClub.name}
+                            width={24}
+                            height={24}
+                            className="w-6 h-6 rounded object-contain bg-white"
+                          />
+                        )}
+                        {!player.currentClub.logo && <span>🏐</span>}
+                        <span>{player.currentClub.name}</span>
                         {player.currentLeague && (
                           <span className="text-xs px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full ml-1">
                             {LEAGUE_TRANSLATIONS[player.currentLeague] || player.currentLeague}
                           </span>
                         )}
-                      </span>
+                      </Link>
                     )}
                     {!player.currentClub && player.currentLeague && (
                       <span className="flex items-center gap-1">
@@ -610,13 +646,24 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               {/* Action Buttons */}
               <div className="mt-6 flex flex-wrap gap-3">
                 {isOwner && (
-                  <Link
-                    href={`/players/${params.id}/edit`}
-                    className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold"
-                  >
-                    <Edit2 className="w-4 h-4" />
-                    Profil Bearbeite
-                  </Link>
+                  <>
+                    <Link
+                      href={`/players/${params.id}/edit`}
+                      className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold"
+                    >
+                      <Edit2 className="w-4 h-4" />
+                      Profil Bearbeite
+                    </Link>
+                    
+                    <button
+                      onClick={handleExportCV}
+                      className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold"
+                      title="CV als PDF exportiere"
+                    >
+                      <FileDown className="w-4 h-4" />
+                      CV Exportiere
+                    </button>
+                  </>
                 )}
 
                 {/* Chat Button - Show to logged in users viewing someone else's profile */}

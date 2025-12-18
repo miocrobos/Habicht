@@ -275,8 +275,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)
     localStorage.setItem('language', lang)
-    // Reload the page to apply language changes immediately
-    window.location.reload()
+    // Language changes dynamically without reload, similar to browser translate extension
   }
 
   const t = (key: string): string => {

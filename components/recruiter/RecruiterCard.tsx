@@ -102,7 +102,17 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
               <span>{recruiter.coachRole}</span>
             </div>
             <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-              <Users className="w-4 h-4" />
+              {recruiter.club?.logo ? (
+                <Image
+                  src={recruiter.club.logo}
+                  alt={recruiter.club.name}
+                  width={16}
+                  height={16}
+                  className="w-4 h-4 rounded object-contain bg-white"
+                />
+              ) : (
+                <Users className="w-4 h-4" />
+              )}
               <span>{recruiter.club?.name || recruiter.organization}</span>
             </div>
           </div>

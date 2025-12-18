@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { prisma } from '@/lib/prisma'
+import { sendChatNotification } from '@/lib/email'
 
 // GET - Get all messages in a conversation
 export async function GET(
@@ -176,6 +177,65 @@ export async function POST(
       where: { id: params.id },
       data: { lastMessageAt: new Date() }
     })
+
+    // Send email notification to recipient
+    try {
+      const conversation = await prisma.conversation.findUnique({
+        where: { id: params.id },
+        include: {
+          player: {
+            include: {
+              user: true
+            }
+          },
+          recruiter: {
+            include: {
+              user: true
+            }
+          }
+        }
+      })
+
+      if (conversation) {
+        // Determine sender and recipient
+        let recipientEmail = ''
+        let recipientName = ''
+        let senderName = ''
+        let senderRoleText = ''
+        let notifyEnabled = false
+
+        if (senderType === 'PLAYER' && conversation.recruiter?.user) {
+          // Sender is player, recipient is recruiter
+          recipientEmail = conversation.recruiter.user.email || ''
+          recipientName = conversation.recruiter.user.name || 'Recruiter'
+          senderName = conversation.player ? `${conversation.player.firstName} ${conversation.player.lastName}` : 'Spieler'
+          senderRoleText = 'Spieler'
+          notifyEnabled = conversation.recruiter.user.notifyChatMessages
+        } else if (senderType === 'RECRUITER' && conversation.player?.user) {
+          // Sender is recruiter, recipient is player
+          recipientEmail = conversation.player.user.email || ''
+          recipientName = `${conversation.player.firstName} ${conversation.player.lastName}`
+          senderName = conversation.recruiter?.user?.name || 'Recruiter'
+          senderRoleText = 'Recruiter'
+          notifyEnabled = conversation.player.user.notifyChatMessages
+        }
+
+        // Send notification if recipient email exists and notifications enabled
+        if (recipientEmail && notifyEnabled) {
+          await sendChatNotification({
+            recipientEmail,
+            recipientName,
+            senderName,
+            senderRole: senderRoleText,
+            messagePreview: content.trim(),
+            conversationId: params.id
+          })
+        }
+      }
+    } catch (emailError) {
+      console.error('Error sending chat notification email:', emailError)
+      // Don't fail the request if email fails
+    }
 
     return NextResponse.json({ message }, { status: 201 })
   } catch (error) {

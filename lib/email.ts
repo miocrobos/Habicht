@@ -379,3 +379,309 @@ export async function sendPasswordResetEmail(email: string, resetToken: string):
     return false;
   }
 }
+
+interface SendChatNotificationParams {
+  recipientEmail: string;
+  recipientName: string;
+  senderName: string;
+  senderRole: string;
+  messagePreview: string;
+  conversationId: string;
+}
+
+export async function sendChatNotification({
+  recipientEmail,
+  recipientName,
+  senderName,
+  senderRole,
+  messagePreview,
+  conversationId,
+}: SendChatNotificationParams): Promise<boolean> {
+  try {
+    const chatUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/settings?tab=messages&conversation=${conversationId}`;
+    
+    if (process.env.NODE_ENV === 'development') {
+      console.log('\n=================================');
+      console.log('💬 CHAT NOTIFICATION EMAIL');
+      console.log('=================================');
+      console.log(`To: ${recipientEmail}`);
+      console.log(`From: ${senderName}`);
+      console.log(`Preview: ${messagePreview}`);
+      console.log('=================================\n');
+    }
+
+    if (!process.env.RESEND_API_KEY) {
+      console.log('⚠️ RESEND_API_KEY not configured. Email not sent.');
+      return true;
+    }
+
+    const resendClient = getResendClient();
+    if (!resendClient) {
+      console.log('⚠️ Resend client not available');
+      return false;
+    }
+
+    await resendClient.emails.send({
+      from: 'Habicht <noreply@habicht-volleyball.ch>',
+      to: recipientEmail,
+      subject: `Neui Nachricht vo ${senderName} - Habicht`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: Arial, Helvetica, sans-serif;">
+          <table role="presentation" style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td align="center" style="padding: 0;">
+                <table role="presentation" style="width: 600px; max-width: 100%; border-collapse: collapse; background-color: #ffffff;">
+                  <tr>
+                    <td style="background-color: #DC2626; padding: 40px 20px; text-align: center;">
+                      <h1 style="color: #ffffff; margin: 0; font-size: 32px; font-weight: bold;">💬 Neui Nachricht</h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 40px 30px;">
+                      <h2 style="color: #1f2937; margin-top: 0; font-size: 24px;">Hallo ${recipientName}!</h2>
+                      <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">
+                        <strong>${senderName}</strong> (${senderRole}) het dir e Nachricht gschickt:
+                      </p>
+                      <div style="background-color: #f9fafb; border-left: 4px solid #DC2626; padding: 20px; margin: 20px 0; border-radius: 4px;">
+                        <p style="color: #6b7280; font-size: 14px; margin: 0; font-style: italic;">"${messagePreview.substring(0, 150)}${messagePreview.length > 150 ? '...' : ''}"</p>
+                      </div>
+                      <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 35px 0;">
+                        <tr>
+                          <td align="center">
+                            <table role="presentation" style="border-collapse: collapse;">
+                              <tr>
+                                <td style="background-color: #DC2626; border-radius: 8px;">
+                                  <a href="${chatUrl}" style="display: inline-block; color: #ffffff; padding: 16px 40px; text-decoration: none; font-size: 18px; font-weight: bold;">
+                                    💬 Nachricht Aaluege
+                                  </a>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+                      <p style="color: #9ca3af; font-size: 12px; margin: 0;">© 2025 Habicht | Swiss Volleyball Scouting Platform</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+        </html>
+      `,
+    });
+
+    console.log('✅ Chat notification email sent to:', recipientEmail);
+    return true;
+  } catch (error) {
+    console.error('❌ Error sending chat notification:', error);
+    return false;
+  }
+}
+
+interface SendPlayerStatusNotificationParams {
+  recipientEmail: string;
+  recipientName: string;
+  playerName: string;
+  playerPosition: string;
+  playerLeague: string;
+  playerId: string;
+}
+
+export async function sendPlayerLookingNotification({
+  recipientEmail,
+  recipientName,
+  playerName,
+  playerPosition,
+  playerLeague,
+  playerId,
+}: SendPlayerStatusNotificationParams): Promise<boolean> {
+  try {
+    const playerUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/players/${playerId}`;
+    
+    if (!process.env.RESEND_API_KEY) {
+      return true;
+    }
+
+    const resendClient = getResendClient();
+    if (!resendClient) {
+      return false;
+    }
+
+    await resendClient.emails.send({
+      from: 'Habicht <noreply@habicht-volleyball.ch>',
+      to: recipientEmail,
+      subject: `Neue Spieler suecht Club: ${playerName} - Habicht`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: Arial, Helvetica, sans-serif;">
+          <table role="presentation" style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td align="center" style="padding: 0;">
+                <table role="presentation" style="width: 600px; max-width: 100%; border-collapse: collapse; background-color: #ffffff;">
+                  <tr>
+                    <td style="background-color: #16a34a; padding: 40px 20px; text-align: center;">
+                      <h1 style="color: #ffffff; margin: 0; font-size: 32px; font-weight: bold;">🏐 Spieler Suecht Club</h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 40px 30px;">
+                      <h2 style="color: #1f2937; margin-top: 0; font-size: 24px;">Hallo ${recipientName}!</h2>
+                      <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">
+                        <strong>${playerName}</strong> suecht aktiv e neue Club!
+                      </p>
+                      <div style="background-color: #f0fdf4; border-left: 4px solid #16a34a; padding: 20px; margin: 20px 0; border-radius: 4px;">
+                        <p style="color: #166534; font-size: 14px; margin: 5px 0;"><strong>Position:</strong> ${playerPosition}</p>
+                        <p style="color: #166534; font-size: 14px; margin: 5px 0;"><strong>Liga:</strong> ${playerLeague}</p>
+                      </div>
+                      <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 35px 0;">
+                        <tr>
+                          <td align="center">
+                            <table role="presentation" style="border-collapse: collapse;">
+                              <tr>
+                                <td style="background-color: #16a34a; border-radius: 8px;">
+                                  <a href="${playerUrl}" style="display: inline-block; color: #ffffff; padding: 16px 40px; text-decoration: none; font-size: 18px; font-weight: bold;">
+                                    👤 Profil Aaluege
+                                  </a>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+                      <p style="color: #9ca3af; font-size: 12px; margin: 0;">© 2025 Habicht | Swiss Volleyball Scouting Platform</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+        </html>
+      `,
+    });
+
+    return true;
+  } catch (error) {
+    console.error('❌ Error sending player status notification:', error);
+    return false;
+  }
+}
+
+interface SendRecruiterStatusNotificationParams {
+  recipientEmail: string;
+  recipientName: string;
+  recruiterName: string;
+  recruiterClub: string;
+  recruiterRole: string;
+  recruiterId: string;
+}
+
+export async function sendRecruiterSearchingNotification({
+  recipientEmail,
+  recipientName,
+  recruiterName,
+  recruiterClub,
+  recruiterRole,
+  recruiterId,
+}: SendRecruiterStatusNotificationParams): Promise<boolean> {
+  try {
+    const recruiterUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/recruiters/${recruiterId}`;
+    
+    if (!process.env.RESEND_API_KEY) {
+      return true;
+    }
+
+    const resendClient = getResendClient();
+    if (!resendClient) {
+      return false;
+    }
+
+    await resendClient.emails.send({
+      from: 'Habicht <noreply@habicht-volleyball.ch>',
+      to: recipientEmail,
+      subject: `${recruiterClub} suecht Spieler - Habicht`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: Arial, Helvetica, sans-serif;">
+          <table role="presentation" style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td align="center" style="padding: 0;">
+                <table role="presentation" style="width: 600px; max-width: 100%; border-collapse: collapse; background-color: #ffffff;">
+                  <tr>
+                    <td style="background-color: #2563eb; padding: 40px 20px; text-align: center;">
+                      <h1 style="color: #ffffff; margin: 0; font-size: 32px; font-weight: bold;">🔍 Club Suecht Spieler</h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 40px 30px;">
+                      <h2 style="color: #1f2937; margin-top: 0; font-size: 24px;">Hallo ${recipientName}!</h2>
+                      <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">
+                        <strong>${recruiterName}</strong> vo ${recruiterClub} suecht aktiv Spieler!
+                      </p>
+                      <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 20px; margin: 20px 0; border-radius: 4px;">
+                        <p style="color: #1e40af; font-size: 14px; margin: 5px 0;"><strong>Club:</strong> ${recruiterClub}</p>
+                        <p style="color: #1e40af; font-size: 14px; margin: 5px 0;"><strong>Rolle:</strong> ${recruiterRole}</p>
+                      </div>
+                      <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 35px 0;">
+                        <tr>
+                          <td align="center">
+                            <table role="presentation" style="border-collapse: collapse;">
+                              <tr>
+                                <td style="background-color: #2563eb; border-radius: 8px;">
+                                  <a href="${recruiterUrl}" style="display: inline-block; color: #ffffff; padding: 16px 40px; text-decoration: none; font-size: 18px; font-weight: bold;">
+                                    👤 Profil Aaluege
+                                  </a>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+                      <p style="color: #9ca3af; font-size: 12px; margin: 0;">© 2025 Habicht | Swiss Volleyball Scouting Platform</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+        </html>
+      `,
+    });
+
+    return true;
+  } catch (error) {
+    console.error('❌ Error sending recruiter status notification:', error);
+    return false;
+  }
+}

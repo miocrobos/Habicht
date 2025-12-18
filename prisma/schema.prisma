@@ -104,6 +104,11 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   
+  // Notification Preferences
+  notifyChatMessages Boolean @default(true)
+  notifyPlayerLooking Boolean @default(true)
+  notifyRecruiterSearching Boolean @default(true)
+  
   player        Player?
   recruiter     Recruiter?
   clubManager   ClubManager?

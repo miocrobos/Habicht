@@ -21,12 +21,18 @@ export default function SettingsPage() {
   const [showPhone, setShowPhone] = useState(false)
   const [loading, setLoading] = useState(false)
   const [municipality, setMunicipality] = useState('')
+  const [notifyChatMessages, setNotifyChatMessages] = useState(true)
+  const [notifyPlayerLooking, setNotifyPlayerLooking] = useState(true)
+  const [notifyRecruiterSearching, setNotifyRecruiterSearching] = useState(true)
 
   // Language is now managed by LanguageContext, no need for local state
 
   useEffect(() => {
     if (session?.user?.playerId) {
       fetchPrivacySettings()
+    }
+    if (session?.user) {
+      fetchNotificationSettings()
     }
   }, [session])
 
@@ -39,6 +45,18 @@ export default function SettingsPage() {
       setMunicipality(player.municipality || '')
     } catch (error) {
       console.error('Error fetching privacy settings:', error)
+    }
+  }
+
+  const fetchNotificationSettings = async () => {
+    try {
+      const response = await axios.get('/api/auth/user')
+      const user = response.data
+      setNotifyChatMessages(user.notifyChatMessages ?? true)
+      setNotifyPlayerLooking(user.notifyPlayerLooking ?? true)
+      setNotifyRecruiterSearching(user.notifyRecruiterSearching ?? true)
+    } catch (error) {
+      console.error('Error fetching notification settings:', error)
     }
   }
 
@@ -74,6 +92,24 @@ export default function SettingsPage() {
     if (type === 'email') setEmailNotifications(value)
     if (type === 'recruiter') setRecruiterMessages(value)
     showSaveConfirmation()
+  }
+
+  const updateNotificationSettings = async (field: 'notifyChatMessages' | 'notifyPlayerLooking' | 'notifyRecruiterSearching', value: boolean) => {
+    try {
+      setLoading(true)
+      await axios.put('/api/auth/user/notifications', { [field]: value })
+      
+      if (field === 'notifyChatMessages') setNotifyChatMessages(value)
+      if (field === 'notifyPlayerLooking') setNotifyPlayerLooking(value)
+      if (field === 'notifyRecruiterSearching') setNotifyRecruiterSearching(value)
+      
+      showSaveConfirmation()
+    } catch (error) {
+      console.error('Error updating notification settings:', error)
+      alert('Fehler bim Speichere vo de Benachrichtigungsiistellige')
+    } finally {
+      setLoading(false)
+    }
   }
 
   const showSaveConfirmation = () => {
@@ -388,6 +424,80 @@ export default function SettingsPage() {
                       <button onClick={() => handleNotificationChange('recruiter', !recruiterMessages)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${recruiterMessages ? 'bg-red-600' : 'bg-gray-300 dark:bg-gray-600'}`}>
                         <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${recruiterMessages ? 'translate-x-6' : 'translate-x-1'}`} />
                       </button>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {activeTab === 'notifications' && (
+                <>
+                  <div className="border-b border-gray-200 dark:border-gray-700 p-6">
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">Benachrichtigungen</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Leg fest, welli E-Mail Benachrichtigunge du empfange möchtsch</p>
+                  </div>
+                  <div className="p-6 space-y-6">
+                    {/* Chat Messages */}
+                    <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <div className="flex-1">
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">💬 Chat Nachrichtä</h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Erhalt E-Mail Benachrichtigunge für neui Chat Nachrichtä</p>
+                      </div>
+                      <label className="relative inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={notifyChatMessages}
+                          onChange={(e) => updateNotificationSettings('notifyChatMessages', e.target.checked)}
+                          disabled={loading}
+                          className="sr-only peer"
+                        />
+                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
+                      </label>
+                    </div>
+
+                    {/* Player Looking for Club */}
+                    {session?.user?.role === 'RECRUITER' && (
+                      <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">🏐 Spieler Suecht Club</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">Benachrichtigunge wenn e Spieler aktiv e Club suecht</p>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={notifyPlayerLooking}
+                            onChange={(e) => updateNotificationSettings('notifyPlayerLooking', e.target.checked)}
+                            disabled={loading}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
+                        </label>
+                      </div>
+                    )}
+
+                    {/* Recruiter Searching */}
+                    {session?.user?.role === 'PLAYER' && (
+                      <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">🔍 Recruiter Suecht Spieler</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">Benachrichtigunge wenn Recruiters aktiv Spieler sueched</p>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={notifyRecruiterSearching}
+                            onChange={(e) => updateNotificationSettings('notifyRecruiterSearching', e.target.checked)}
+                            disabled={loading}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
+                        </label>
+                      </div>
+                    )}
+
+                    <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+                      <p className="text-sm text-blue-700 dark:text-blue-300">
+                        <strong>ℹ️ Hinweis:</strong> Du chasch die Benachrichtigunge jederzit wieder aktiviere oder deaktiviere.
+                      </p>
                     </div>
                   </div>
                 </>

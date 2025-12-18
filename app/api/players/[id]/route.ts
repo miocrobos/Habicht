@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
+import { sendPlayerLookingNotification } from '@/lib/email';
 
 export async function GET(
   request: NextRequest,
@@ -70,6 +71,16 @@ export async function PUT(
 
     const body = await request.json();
     const { playerData, clubHistory, achievements } = body;
+
+    // Check if lookingForClub status is changing to true
+    const existingPlayer = await prisma.player.findUnique({
+      where: { id: params.id },
+      include: {
+        user: true
+      }
+    });
+
+    const isNewlyLooking = playerData.lookingForClub === true && existingPlayer?.lookingForClub === false;
 
     // Update player
     const player = await prisma.player.update({
@@ -150,6 +161,44 @@ export async function PUT(
             currentClub: club.currentClub || false,
           })),
         });
+      }
+    }
+
+    // Send notifications to recruiters if player is newly looking for club
+    if (isNewlyLooking) {
+      try {
+        // Get all recruiters with notifications enabled
+        const recruiters = await prisma.recruiter.findMany({
+          include: {
+            user: {
+              select: {
+                email: true,
+                name: true,
+                notifyPlayerLooking: true
+              }
+            }
+          }
+        });
+
+        // Send notification to each recruiter who has notifications enabled
+        const positionText = playerData.positions?.join(', ') || 'Unknown';
+        const leagueText = existingPlayer?.currentLeague || 'N/A';
+
+        for (const recruiter of recruiters) {
+          if (recruiter.user.notifyPlayerLooking && recruiter.user.email) {
+            await sendPlayerLookingNotification({
+              recipientEmail: recruiter.user.email,
+              recipientName: recruiter.user.name || recruiter.firstName + ' ' + recruiter.lastName,
+              playerName: `${playerData.firstName} ${playerData.lastName}`,
+              playerPosition: positionText,
+              playerLeague: leagueText,
+              playerId: params.id
+            });
+          }
+        }
+      } catch (emailError) {
+        console.error('Error sending player looking notifications:', emailError);
+        // Don't fail the request if email fails
       }
     }
 

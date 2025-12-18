@@ -48,7 +48,7 @@ export default function Home() {
       emoji: "💪"
     },
     {
-      title: "4. Liga",
+      title: "4. & 5. Liga",
       subtitle: "Basis und Nachwuchs",
       color: "from-green-900/90 to-green-700/90",
       emoji: "⭐"
@@ -138,7 +138,7 @@ export default function Home() {
               </div>
               
               <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-3xl mx-auto">
-                Die moderne Scouting-Plattform für Schweizer Volleyball. Entdecke Talente von NLA bis 4. Liga – Herren und Damen.
+                Die moderne Scouting-Plattform für Schweizer Volleyball. Entdecke Talente von NLA bis 5. Liga – Herren und Damen.
               </p>
 
               {/* Main CTA Buttons */}

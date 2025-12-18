@@ -28,13 +28,16 @@ export async function GET(req: NextRequest) {
     }
 
     // Update user's password
+    console.log('🔑 Updating password for user:', resetRequest.user.email);
     await prisma.user.update({
       where: { id: resetRequest.userId },
       data: { password: resetRequest.newPasswordHash },
     });
+    console.log('✅ Password updated successfully in database');
 
     // Delete the reset request
     await prisma.passwordResetRequest.delete({ where: { id: resetRequest.id } });
+    console.log('✅ Password reset request deleted');
 
     // Redirect to login with success message
     return NextResponse.redirect(new URL("/auth/login?success=password_reset", req.url));

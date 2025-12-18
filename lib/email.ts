@@ -21,7 +21,13 @@ export async function sendPasswordResetVerification({ email, name, token }: Send
       return true;
     }
     try {
-      await getResendClient().emails.send({
+      const resendClient = getResendClient();
+      if (!resendClient) {
+        console.log('⚠️ Resend client not available');
+        return false;
+      }
+      
+      await resendClient.emails.send({
         from: 'Habicht <noreply@habicht-volleyball.ch>',
         to: email,
         subject: 'Bestätige Passwortänderig - Habicht',
@@ -140,8 +146,14 @@ export async function sendVerificationEmail({
       return true; // Return true in development even without API key
     }
 
+    const resendClient = getResendClient();
+    if (!resendClient) {
+      console.log('⚠️ Resend client not available');
+      return false;
+    }
+
     try {
-      await getResendClient().emails.send({
+      await resendClient.emails.send({
         from: 'Habicht <noreply@habicht-volleyball.ch>',
         to: email,
         subject: '🏐 Willkomme Bi Habicht - Verifizier Dini E-Mail',
@@ -280,8 +292,14 @@ export async function sendPasswordResetEmail(email: string, resetToken: string):
       return true;
     }
 
+    const resendClient = getResendClient();
+    if (!resendClient) {
+      console.log('⚠️ Resend client not available');
+      return false;
+    }
+
     try {
-      await getResendClient().emails.send({
+      await resendClient.emails.send({
         from: 'Habicht <noreply@habicht-volleyball.ch>',
         to: email,
         subject: 'Passwort Zruggsetze - Habicht',

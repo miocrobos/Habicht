@@ -6,7 +6,7 @@ interface SendPasswordResetVerificationParams {
 
 export async function sendPasswordResetVerification({ email, name, token }: SendPasswordResetVerificationParams): Promise<boolean> {
   try {
-    const verifyUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/auth/verify-password-reset?token=${token}`;
+    const verifyUrl = `https://www.habicht-volleyball.ch/auth/verify-password-reset?token=${token}`;
     if (process.env.NODE_ENV === 'development') {
       console.log('\n=================================');
       console.log('🔑 PASSWORD RESET VERIFICATION EMAIL');
@@ -127,7 +127,7 @@ export async function sendVerificationEmail({
   verificationToken,
 }: SendVerificationEmailParams): Promise<boolean> {
   try {
-    const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/auth/verify?token=${verificationToken}`;
+    const verificationUrl = `https://www.habicht-volleyball.ch/api/auth/verify?token=${verificationToken}`;
     
     // For development, log AND send email if API key is present
     if (process.env.NODE_ENV === 'development') {

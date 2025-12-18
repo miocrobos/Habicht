@@ -183,6 +183,23 @@ export async function POST(request: NextRequest) {
                           <p>Dä Club Cha Über Dis Admin-Panel Dezue Gfüegt Wärde.</p>
                           <p>Um Direkt Z Antworte, Eifach Uf Dä E-Mail Antwort.</p>
                         </div>
+                        
+                        <!-- Admin Button -->
+                        <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 30px 0;">
+                          <tr>
+                            <td align="center">
+                              <table role="presentation" style="border-collapse: collapse;">
+                                <tr>
+                                  <td style="background-color: #DC2626; border-radius: 8px;">
+                                    <a href="https://www.habicht-volleyball.ch/admin/clubs" style="display: inline-block; color: #ffffff; padding: 16px 40px; text-decoration: none; font-size: 18px; font-weight: bold; font-family: Arial, Helvetica, sans-serif;">
+                                      🏐 Zum Admin Panel
+                                    </a>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
                       </td>
                     </tr>
                     

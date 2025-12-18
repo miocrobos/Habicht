@@ -451,12 +451,45 @@ export default function SettingsPage() {
                     <div className="border border-orange-300 dark:border-orange-700 rounded-lg p-6">
                       <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Konto deaktivieren</h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Ihr Profil wird ausgeblendet und Sie können sich nicht mehr anmelden. Sie können Ihr Konto jederzeit wieder aktivieren.</p>
-                      <button className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors font-medium">Konto deaktivieren</button>
+                      <button 
+                        onClick={async () => {
+                          if (confirm('Möchten Sie Ihr Konto wirklich deaktivieren?')) {
+                            try {
+                              await axios.post('/api/auth/deactivate')
+                              alert('Ihr Konto wurde deaktiviert')
+                              window.location.href = '/'
+                            } catch (error) {
+                              alert('Fehler beim Deaktivieren des Kontos')
+                            }
+                          }
+                        }}
+                        className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors font-medium"
+                      >
+                        Konto deaktivieren
+                      </button>
                     </div>
                     <div className="border border-red-300 dark:border-red-700 rounded-lg p-6">
                       <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Konto löschen</h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Diese Aktion kann nicht rückgängig gemacht werden. Alle Ihre Daten, Videos und Nachrichten werden dauerhaft gelöscht.</p>
-                      <button className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium">Konto dauerhaft löschen</button>
+                      <button 
+                        onClick={async () => {
+                          if (confirm('WARNUNG: Diese Aktion kann nicht rückgängig gemacht werden! Möchten Sie Ihr Konto wirklich dauerhaft löschen?')) {
+                            const confirmDelete = prompt('Geben Sie "LÖSCHEN" ein, um zu bestätigen:');
+                            if (confirmDelete === 'LÖSCHEN') {
+                              try {
+                                await axios.delete('/api/auth/delete-account')
+                                alert('Ihr Konto wurde gelöscht')
+                                window.location.href = '/'
+                              } catch (error) {
+                                alert('Fehler beim Löschen des Kontos')
+                              }
+                            }
+                          }
+                        }}
+                        className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium"
+                      >
+                        Konto dauerhaft löschen
+                      </button>
                     </div>
                   </div>
                 </>

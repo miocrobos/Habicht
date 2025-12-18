@@ -5,14 +5,10 @@
   "framework": "nextjs",
   "alias": ["www.habicht-volleyball.ch", "habicht-volleyball.ch"],
   "git": {
-    "deploymentEnabled": {
-      "main": true
-    }
+    "deploymentEnabled": true
   },
   "github": {
     "silent": false,
-    "autoAlias": true,
-    "autoJobCancelation": false
-  },
-  "ignoreCommand": "exit 0"
+    "autoAlias": true
+  }
 }

@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy load Resend client to avoid build-time initialization
+function getResendClient() {
+  if (process.env.NEXT_PHASE === 'phase-production-build' || !process.env.RESEND_API_KEY) {
+    return null;
+  }
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -48,6 +54,15 @@ export async function POST(request: NextRequest) {
 
     // In production, send email to admin
     try {
+      const resend = getResendClient();
+      if (!resend) {
+        console.warn('Resend client not available, skipping email');
+        return NextResponse.json({ 
+          success: true,
+          message: 'Submission received (email unavailable during build)'
+        });
+      }
+      
       // Send confirmation email to submitter
       await resend.emails.send({
         from: 'Habicht <noreply@habicht-volleyball.ch>',

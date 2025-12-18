@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "Habicht - Swiss Volleyball Scouting Platform for High School to University Athletes",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev.js",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
-    "resend-verifications": "tsx scripts/resend-verification-emails.ts"
+    "resend-verifications": "tsx scripts/resend-verification-emails.ts",
+    "check-deployment": "node scripts/check-deployment.js",
+    "deploy": "git add -A && git commit -m \"Deploy changes\" && git push && node scripts/check-deployment.js"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",

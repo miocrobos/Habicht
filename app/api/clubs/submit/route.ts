@@ -54,10 +54,30 @@ export async function POST(request: NextRequest) {
         replyTo: submitterEmail,
         subject: `Neue Club Mäldig: ${clubName}`,
         html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h1 style="color: #DC2626; border-bottom: 3px solid #DC2626; padding-bottom: 10px;">
-              🏐 Neue Club Mäldig
-            </h1>
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          </head>
+          <body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: Arial, Helvetica, sans-serif;">
+            <table role="presentation" style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td align="center" style="padding: 0;">
+                  <table role="presentation" style="width: 600px; max-width: 100%; border-collapse: collapse; background-color: #ffffff;">
+                    <!-- Logo Header -->
+                    <tr>
+                      <td style="background-color: #DC2626; padding: 40px 20px; text-align: center;">
+                        <img src="https://habicht-volleyball.ch/eagle-logo.png" alt="Habicht Logo" width="80" height="80" style="display: block; margin: 0 auto 15px auto; border: 0;" />
+                        <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;">
+                          🏐 Neue Club Mäldig
+                        </h1>
+                      </td>
+                    </tr>
+                    
+                    <!-- Main Content -->
+                    <tr>
+                      <td style="padding: 30px;">
             
             <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h2 style="color: #374151; margin-top: 0;">Kontaktperson</h2>
@@ -80,11 +100,27 @@ export async function POST(request: NextRequest) {
               </div>
             ` : ''}
 
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px;">
-              <p>Dä Club Cha Über Dis Admin-Panel Dezue Gfüegt Wärde.</p>
-              <p>Um Direkt Z Antworte, Eifach Uf Dä E-Mail Antwort.</p>
-            </div>
-          </div>
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px;">
+                          <p>Dä Club Cha Über Dis Admin-Panel Dezue Gfüegt Wärde.</p>
+                          <p>Um Direkt Z Antworte, Eifach Uf Dä E-Mail Antwort.</p>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                      <td style="background-color: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #e5e7eb;">
+                        <p style="color: #9ca3af; font-size: 12px; margin: 0;">
+                          © 2025 Habicht | Swiss Volleyball Scouting Platform
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </body>
+          </html>
         `,
       });
 

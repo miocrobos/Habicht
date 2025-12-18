@@ -58,7 +58,7 @@ export async function sendVerificationEmail({
                         <table role="presentation" style="width: 100%; border-collapse: collapse;">
                           <tr>
                             <td align="center">
-                              <img src="https://uni-sports-pvx6buiuj-miocrobos-projects.vercel.app/eagle-logo.png" alt="Habicht Logo" width="100" height="100" style="display: block; margin: 0 auto 20px auto; border: 0; max-width: 100px;" />
+                              <img src="https://habicht-volleyball.ch/eagle-logo.png" alt="Habicht Logo" width="100" height="100" style="display: block; margin: 0 auto 20px auto; border: 0; max-width: 100px;" />
                             </td>
                           </tr>
                           <tr>
@@ -181,11 +181,38 @@ export async function sendPasswordResetEmail(email: string, resetToken: string):
         to: email,
         subject: 'Passwort Zruggsetze - Habicht',
         html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="text-align: center; margin-bottom: 30px;">
-              <img src="https://uni-sports-two.vercel.app/habicht-logo.png" alt="Habicht Logo" style="width: 120px; height: auto;" />
-            </div>
-            <h1 style="color: #DC2626;">Passwort Zruggsetze</h1>
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          </head>
+          <body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: Arial, Helvetica, sans-serif;">
+            <table role="presentation" style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td align="center" style="padding: 0;">
+                  <table role="presentation" style="width: 600px; max-width: 100%; border-collapse: collapse; background-color: #ffffff;">
+                    <!-- Logo Header -->
+                    <tr>
+                      <td style="background-color: #DC2626; padding: 40px 20px; text-align: center;">
+                        <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                          <tr>
+                            <td align="center">
+                              <img src="https://habicht-volleyball.ch/eagle-logo.png" alt="Habicht Logo" width="100" height="100" style="display: block; margin: 0 auto 20px auto; border: 0; max-width: 100px;" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <h1 style="color: #ffffff; margin: 0; font-size: 32px; font-weight: bold; font-family: Arial, Helvetica, sans-serif;">Passwort Zruggsetze</h1>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    
+                    <!-- Main Content -->
+                    <tr>
+                      <td style="padding: 40px 30px;">
             <p>Hallo,</p>
             <p>Du Hesch Es Passwort-Reset Aagfragt. Klick Uf De Button Um Din Passwort Z Ändere:</p>
             <a href="${resetUrl}" style="display: inline-block; background-color: #DC2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">
@@ -195,10 +222,26 @@ export async function sendPasswordResetEmail(email: string, resetToken: string):
             <p style="background-color: #f3f4f6; padding: 12px; border-radius: 4px; word-break: break-all;">
               ${resetUrl}
             </p>
-            <p style="color: #6b7280; font-size: 14px; margin-top: 30px;">
-              Falls Du Kei Reset Aagfragt Hesch, Ignorier Die E-Mail.
-            </p>
-          </div>
+                        <p style="color: #6b7280; font-size: 14px; margin-top: 30px;">
+                          Falls Du Kei Reset Aagfragt Hesch, Ignorier Die E-Mail.
+                        </p>
+                      </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                      <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+                        <p style="color: #9ca3af; font-size: 12px; margin: 0; font-family: Arial, Helvetica, sans-serif;">
+                          © 2025 Habicht | Swiss Volleyball Scouting Platform
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </body>
+          </html>
         `,
       });
 

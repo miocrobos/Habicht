@@ -188,59 +188,10 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      const user = await prisma.user.create({
-        data: {
-          name,
-          email,
-          password: hashedPassword,
-          role: 'PLAYER',
-          verificationToken,
-          verificationTokenExpiry,
-          emailVerified: false,
-          player: {
-            create: {
-              firstName: playerData.firstName,
-              lastName: playerData.lastName,
-              dateOfBirth: new Date(playerData.dateOfBirth),
-              gender: playerData.gender,
-              positions: playerData.positions || [],
-              height: playerData.height,
-              weight: playerData.weight,
-              spikeHeight: playerData.spikeHeight,
-              blockHeight: playerData.blockHeight,
-              canton: playerData.canton,
-              city: playerData.city || 'Unknown',
-              currentLeague: playerCurrentLeague || playerData.currentLeague || 'FIRST_LEAGUE',
-              desiredLeague: playerData.desiredLeague,
-              interestedClubs: playerData.interestedClubs || [],
-              achievements: playerData.achievements || [],
-              employmentStatus: playerData.employmentStatus,
-              occupation: playerData.occupation,
-              schoolName: playerData.schoolName,
-              schoolType: playerData.schoolType,
-              isStudent: playerData.employmentStatus === 'STUDENT_FULL_TIME' || playerData.employmentStatus === 'STUDENT_PART_TIME',
-              graduationYear: playerData.graduationYear,
-              phone: playerData.phone,
-              instagram: playerData.instagram,
-              tiktok: playerData.tiktok,
-              youtube: playerData.youtube,
-              highlightVideo: playerData.highlightVideo,
-              swissVolleyLicense: playerData.swissVolleyLicense,
-              skillReceiving: playerData.skillReceiving || 0,
-              skillServing: playerData.skillServing || 0,
-              skillAttacking: playerData.skillAttacking || 0,
-              skillBlocking: playerData.skillBlocking || 0,
-              skillDefense: playerData.skillDefense || 0,
-              profileImage: playerData.profileImage, // Required
-              coverImage: playerData.coverImage, // Optional
-              bio: playerData.bio, // Player description
-              lookingForClub: playerData.lookingForClub || false,
-              nationality: playerData.nationality || 'Swiss',
-              // Link to current club
-              currentClubId: currentClubId,
-              // Create club history entries and update clubs
-              clubHistory: playerData.clubHistory && playerData.clubHistory.length > 0 ? {
-                create: await Promise.all(playerData.clubHistory.map(async (club: any) => {
+      // Process club history BEFORE creating user to avoid async issues in nested create
+      let processedClubHistory: any[] = []
+      if (playerData.clubHistory && playerData.clubHistory.length > 0) {
+        processedClubHistory = await Promise.all(playerData.clubHistory.map(async (club: any) => {
                   let clubId = null
                   
                   // Normalize club name - remove trailing numbers/suffixes like " 2", " 3", " II", " III"
@@ -341,6 +292,62 @@ export async function POST(request: NextRequest) {
                     currentClub: club.currentClub || false,
                   }
                 }))
+      }
+
+      // Now create the user with the processed club history
+      const user = await prisma.user.create({
+        data: {
+          name,
+          email,
+          password: hashedPassword,
+          role: 'PLAYER',
+          verificationToken,
+          verificationTokenExpiry,
+          emailVerified: false,
+          player: {
+            create: {
+              firstName: playerData.firstName,
+              lastName: playerData.lastName,
+              dateOfBirth: new Date(playerData.dateOfBirth),
+              gender: playerData.gender,
+              positions: playerData.positions || [],
+              height: playerData.height,
+              weight: playerData.weight,
+              spikeHeight: playerData.spikeHeight,
+              blockHeight: playerData.blockHeight,
+              canton: playerData.canton,
+              city: playerData.city || 'Unknown',
+              currentLeague: playerCurrentLeague || playerData.currentLeague || 'FIRST_LEAGUE',
+              desiredLeague: playerData.desiredLeague,
+              interestedClubs: playerData.interestedClubs || [],
+              achievements: playerData.achievements || [],
+              employmentStatus: playerData.employmentStatus,
+              occupation: playerData.occupation,
+              schoolName: playerData.schoolName,
+              schoolType: playerData.schoolType,
+              isStudent: playerData.employmentStatus === 'STUDENT_FULL_TIME' || playerData.employmentStatus === 'STUDENT_PART_TIME',
+              graduationYear: playerData.graduationYear,
+              phone: playerData.phone,
+              instagram: playerData.instagram,
+              tiktok: playerData.tiktok,
+              youtube: playerData.youtube,
+              highlightVideo: playerData.highlightVideo,
+              swissVolleyLicense: playerData.swissVolleyLicense,
+              skillReceiving: playerData.skillReceiving || 0,
+              skillServing: playerData.skillServing || 0,
+              skillAttacking: playerData.skillAttacking || 0,
+              skillBlocking: playerData.skillBlocking || 0,
+              skillDefense: playerData.skillDefense || 0,
+              profileImage: playerData.profileImage, // Required
+              coverImage: playerData.coverImage, // Optional
+              bio: playerData.bio, // Player description
+              lookingForClub: playerData.lookingForClub || false,
+              nationality: playerData.nationality || 'Swiss',
+              // Link to current club
+              currentClubId: currentClubId,
+              // Create club history from processed data
+              clubHistory: processedClubHistory.length > 0 ? {
+                create: processedClubHistory
               } : undefined,
             },
           },

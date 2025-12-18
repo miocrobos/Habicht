@@ -28,7 +28,7 @@ export async function sendPasswordResetVerification({ email, name, token }: Send
       }
       
       await resendClient.emails.send({
-        from: 'Habicht <noreply@habicht-volleyball.ch>',
+        from: 'Habicht <onboarding@resend.dev>',
         to: email,
         subject: 'Bestätige Passwortänderig - Habicht',
         html: `
@@ -154,7 +154,7 @@ export async function sendVerificationEmail({
 
     try {
       await resendClient.emails.send({
-        from: 'Habicht <noreply@habicht-volleyball.ch>',
+        from: 'Habicht <onboarding@resend.dev>',
         to: email,
         subject: '🏐 Willkomme Bi Habicht - Verifizier Dini E-Mail',
         html: `
@@ -300,7 +300,7 @@ export async function sendPasswordResetEmail(email: string, resetToken: string):
 
     try {
       await resendClient.emails.send({
-        from: 'Habicht <noreply@habicht-volleyball.ch>',
+        from: 'Habicht <onboarding@resend.dev>',
         to: email,
         subject: 'Passwort Zruggsetze - Habicht',
         html: `
@@ -422,7 +422,7 @@ export async function sendChatNotification({
     }
 
     await resendClient.emails.send({
-      from: 'Habicht <noreply@habicht-volleyball.ch>',
+      from: 'Habicht <onboarding@resend.dev>',
       to: recipientEmail,
       subject: `Neui Nachricht vo ${senderName} - Habicht`,
       html: `
@@ -520,7 +520,7 @@ export async function sendPlayerLookingNotification({
     }
 
     await resendClient.emails.send({
-      from: 'Habicht <noreply@habicht-volleyball.ch>',
+      from: 'Habicht <onboarding@resend.dev>',
       to: recipientEmail,
       subject: `Neue Spieler suecht Club: ${playerName} - Habicht`,
       html: `
@@ -618,7 +618,7 @@ export async function sendRecruiterSearchingNotification({
     }
 
     await resendClient.emails.send({
-      from: 'Habicht <noreply@habicht-volleyball.ch>',
+      from: 'Habicht <onboarding@resend.dev>',
       to: recipientEmail,
       subject: `${recruiterClub} suecht Spieler - Habicht`,
       html: `

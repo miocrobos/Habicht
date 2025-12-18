@@ -6,7 +6,32 @@ on:
       - main
 
 jobs:
+  coderabbit-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Request CodeRabbit Review
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const commit = context.sha;
+            await github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: commit,
+              body: '@coderabbitai review'
+            });
+            console.log('CodeRabbit review requested');
+
+      - name: Wait for CodeRabbit Analysis
+        run: |
+          echo "⏳ Waiting 60 seconds for CodeRabbit to analyze code..."
+          sleep 60
+
   deploy:
+    needs: coderabbit-review
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

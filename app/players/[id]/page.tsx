@@ -509,14 +509,19 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     {player.nationality && (
                       <span>🏳 Nationalität: {player.nationality}</span>
                     )}
-                    {player.currentLeague && (
-                      <span className="flex items-center gap-1">
-                        🏆 {LEAGUE_TRANSLATIONS[player.currentLeague] || player.currentLeague}
-                      </span>
-                    )}
                     {player.currentClub && (
                       <span className="flex items-center gap-1">
                         🏐 {player.currentClub.name}
+                        {player.currentLeague && (
+                          <span className="text-xs px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full ml-1">
+                            {LEAGUE_TRANSLATIONS[player.currentLeague] || player.currentLeague}
+                          </span>
+                        )}
+                      </span>
+                    )}
+                    {!player.currentClub && player.currentLeague && (
+                      <span className="flex items-center gap-1">
+                        🏆 {LEAGUE_TRANSLATIONS[player.currentLeague] || player.currentLeague}
                       </span>
                     )}
                   </div>

@@ -87,8 +87,8 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <div className="mx-auto w-16 h-16 bg-swiss-red rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-2xl">H</span>
+          <div className="mx-auto w-20 h-20 flex items-center justify-center">
+            <img src="/eagle-logo.png" alt="Habicht Logo" className="w-full h-full object-contain" />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
             {t('login.title')}

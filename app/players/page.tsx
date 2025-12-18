@@ -15,6 +15,7 @@ export default function PlayersPage() {
     canton: '',
     league: '',
     minHeight: '',
+    gender: '',
   })
   const [searchDebounce, setSearchDebounce] = useState('')
 
@@ -28,7 +29,7 @@ export default function PlayersPage() {
 
   useEffect(() => {
     loadPlayers()
-  }, [searchDebounce, filters.position, filters.canton, filters.league, filters.minHeight])
+  }, [searchDebounce, filters.position, filters.canton, filters.league, filters.minHeight, filters.gender])
 
   const loadPlayers = async () => {
     try {
@@ -58,10 +59,11 @@ export default function PlayersPage() {
       canton: '',
       league: '',
       minHeight: '',
+      gender: '',
     })
   }
 
-  const hasActiveFilters = filters.search || filters.position || filters.canton || filters.league || filters.minHeight
+  const hasActiveFilters = filters.search || filters.position || filters.canton || filters.league || filters.minHeight || filters.gender
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -91,7 +93,7 @@ export default function PlayersPage() {
               </button>
             )}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
             {/* Search */}
             <div className="lg:col-span-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -133,6 +135,22 @@ export default function PlayersPage() {
                 <option value="MIDDLE_BLOCKER">Mittelblocker</option>
                 <option value="SETTER">Zuspieler</option>
                 <option value="LIBERO">Libero</option>
+              </select>
+            </div>
+
+            {/* Gender */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Geschlecht
+              </label>
+              <select
+                value={filters.gender}
+                onChange={(e) => handleFilterChange('gender', e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+              >
+                <option value="">Alle</option>
+                <option value="MALE">Männer</option>
+                <option value="FEMALE">Frauen</option>
               </select>
             </div>
 
@@ -222,7 +240,7 @@ export default function PlayersPage() {
               <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg">
                 <p className="text-gray-600 dark:text-gray-400">Kei Spieler gfunde mit dene Filter</p>
                 <button
-                  onClick={() => setFilters({ search: '', position: '', canton: '', league: '', minHeight: '' })}
+                  onClick={() => setFilters({ search: '', position: '', canton: '', league: '', minHeight: '', gender: '' })}
                   className="mt-4 text-habicht-600 hover:text-habicht-700 font-medium"
                 >
                   Filter zurücksetzen

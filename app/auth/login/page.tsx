@@ -69,11 +69,13 @@ export default function LoginPage() {
       if (result?.error) {
         setError('Ungültige Anmeldedaten')
       } else {
-        // Save email if remember me is checked
+        // Save email and remember me preference
         if (rememberMe) {
           localStorage.setItem('rememberedEmail', email)
+          localStorage.setItem('rememberMe', 'true')
         } else {
           localStorage.removeItem('rememberedEmail')
+          localStorage.removeItem('rememberMe')
         }
 
         // After successful login, fetch user session and redirect to their profile

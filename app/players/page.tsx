@@ -211,6 +211,7 @@ export default function PlayersPage() {
                 <option value="SECOND_LEAGUE">2. Liga</option>
                 <option value="THIRD_LEAGUE">3. Liga</option>
                 <option value="FOURTH_LEAGUE">4. Liga</option>
+                <option value="FIFTH_LEAGUE">5. Liga</option>
                 <option value="YOUTH_U19">U19</option>
                 <option value="YOUTH_U17">U17</option>
               </select>

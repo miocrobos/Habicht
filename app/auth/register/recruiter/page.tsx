@@ -72,7 +72,7 @@ interface ClubAffiliation {
   id: string;
   clubName: string;
   logo: string;
-  role: string;
+  role: string[];  // Changed to array to support multiple roles
   genderCoached: string;
   yearFrom: string;
   yearTo: string;
@@ -95,7 +95,7 @@ export default function RecruiterRegisterPage() {
     canton: '',
     province: '',
     clubName: '',
-    coachRole: '',
+    coachRole: [] as string[],  // Changed to array to support multiple roles
     genderCoached: [] as string[],
     phone: '',
     bio: '',
@@ -142,7 +142,7 @@ export default function RecruiterRegisterPage() {
       id: Date.now().toString(),
       clubName: '',
       logo: '',
-      role: '',
+      role: [],  // Initialize as empty array
       genderCoached: '',
       yearFrom: '',
       yearTo: '',
@@ -206,7 +206,7 @@ export default function RecruiterRegisterPage() {
       if (!formData.nationality) { setError('Bitte Wähl Dini Nationalität'); return; }
       if (!formData.canton) { setError('Bitte Wähl Din Wohnkanton'); return; }
       if (!formData.clubName) { setError('Bitte Wähl Din Verein'); return; }
-      if (!formData.coachRole) { setError('Bitte Wähl Dini Roll'); return; }
+      if (formData.coachRole.length === 0) { setError('Bitte Wähl Mindeschtens Ei Roll'); return; }
       if (formData.genderCoached.length === 0) { setError('Bitte Wähl Welches Gschlecht Du Trainiersch'); return; }
       setStep(3);
       return;
@@ -429,12 +429,28 @@ export default function RecruiterRegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Roll Im Verein *</label>
-                  <select name="coachRole" required value={formData.coachRole} onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
-                    <option value="">Wähl Roll</option>
-                    {COACH_ROLES.map(role => <option key={role} value={role}>{role}</option>)}
-                  </select>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Rolle(n) Im Verein * (Mehrfach Uuswahl Möglich)
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {COACH_ROLES.map(roleOption => (
+                      <label key={roleOption} className="flex items-center space-x-2 cursor-pointer p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <input
+                          type="checkbox"
+                          checked={formData.coachRole.includes(roleOption)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setFormData({ ...formData, coachRole: [...formData.coachRole, roleOption] });
+                            } else {
+                              setFormData({ ...formData, coachRole: formData.coachRole.filter(r => r !== roleOption) });
+                            }
+                          }}
+                          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        />
+                        <span className="text-sm text-gray-900 dark:text-white">{roleOption}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
 
                 <div>
@@ -667,16 +683,31 @@ export default function RecruiterRegisterPage() {
                           className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
                         />
                         
-                        <div className="grid grid-cols-2 gap-3">
-                          <select 
-                            value={club.role}
-                            onChange={(e) => updateClubAffiliation(club.id, 'role', e.target.value)}
-                            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
-                          >
-                            <option value="">Roll</option>
-                            {COACH_ROLES.map(role => <option key={role} value={role}>{role}</option>)}
-                          </select>
-                          
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Rolle(n) Im Verein
+                          </label>
+                          <div className="grid grid-cols-2 gap-2">
+                            {COACH_ROLES.map(roleOption => (
+                              <label key={roleOption} className="flex items-center space-x-2 cursor-pointer p-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+                                <input
+                                  type="checkbox"
+                                  checked={club.role.includes(roleOption)}
+                                  onChange={(e) => {
+                                    const newRoles = e.target.checked
+                                      ? [...club.role, roleOption]
+                                      : club.role.filter(r => r !== roleOption);
+                                    updateClubAffiliation(club.id, 'role', newRoles);
+                                  }}
+                                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                />
+                                <span className="text-sm text-gray-900 dark:text-white">{roleOption}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 gap-3">
                           <select 
                             value={club.genderCoached}
                             onChange={(e) => updateClubAffiliation(club.id, 'genderCoached', e.target.value)}

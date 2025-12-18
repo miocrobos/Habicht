@@ -227,7 +227,7 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Alle Ligen. Ein Ort.</h2>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Von NLA Spitzenvolleyball bis zur 4. Liga – entdecke Spieler aus der ganzen Schweiz.
+              Von NLA Spitzenvolleyball bis zur 5. Liga – entdecke Spieler aus der ganzen Schweiz.
             </p>
           </div>
 
@@ -276,6 +276,16 @@ export default function Home() {
               color="from-teal-600 to-teal-700"
               emoji="⭐"
               playerCount="600+"
+            />
+          </div>
+
+          <div className="grid md:grid-cols-1 gap-6 mb-16">
+            <LeagueCard
+              league="5. Liga"
+              description="Fünfte Liga"
+              color="from-indigo-600 to-purple-700"
+              emoji="🌟"
+              playerCount="300+"
             />
           </div>
 

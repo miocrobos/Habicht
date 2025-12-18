@@ -36,6 +36,7 @@ enum League {
   SECOND_LEAGUE    // 2. Liga
   THIRD_LEAGUE     // 3. Liga
   FOURTH_LEAGUE    // 4. Liga
+  FIFTH_LEAGUE     // 5. Liga
   YOUTH_U23        // U23
   YOUTH_U19        // U19
   YOUTH_U17        // U17
@@ -526,7 +527,7 @@ model RecruiterClubHistory {
   clubLogo          String?     // Base64 or URL to uploaded club logo
   clubCountry       String      @default("Switzerland")
   
-  role              String      // Head Coach, Assistant, Scout, etc.
+  role              String[]    // Head Coach, Assistant, Scout, etc. - can have multiple roles
   genderCoached     Gender?     // Which gender team
   startDate         DateTime
   endDate           DateTime?

@@ -95,6 +95,7 @@ export async function POST(request: NextRequest) {
             '2. Liga': 'SECOND_LEAGUE',
             '3. Liga': 'THIRD_LEAGUE',
             '4. Liga': 'FOURTH_LEAGUE',
+            '5. Liga': 'FIFTH_LEAGUE',
             'U23': 'U23',
             'U19': 'U19',
             'U17': 'U17',

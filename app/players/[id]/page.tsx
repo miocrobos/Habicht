@@ -91,6 +91,7 @@ const LEAGUE_TRANSLATIONS: { [key: string]: string } = {
   'SECOND_LEAGUE': '2. Liga',
   'THIRD_LEAGUE': '3. Liga',
   'FOURTH_LEAGUE': '4. Liga',
+  'FIFTH_LEAGUE': '5. Liga',
   'U23': 'U23',
   'U19': 'U19',
   'U17': 'U17'

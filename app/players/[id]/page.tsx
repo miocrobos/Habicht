@@ -1262,10 +1262,65 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   {BACKGROUND_OPTIONS.map((option) => (
                     <button
                       key={option.id}
-                      onClick={() => {
+                      onClick={async () => {
                         setSelectedBg(option)
                         setCustomBgImage(null)
                         setShowBackgroundModal(false)
+                        
+                        // Save gradient/color to database by clearing coverImage
+                        try {
+                          const currentResponse = await axios.get(`/api/players/${params.id}`)
+                          const currentPlayer = currentResponse.data.player
+                          
+                          await axios.put(`/api/players/${params.id}`, {
+                            playerData: {
+                              firstName: currentPlayer.firstName,
+                              lastName: currentPlayer.lastName,
+                              dateOfBirth: currentPlayer.dateOfBirth,
+                              gender: currentPlayer.gender,
+                              nationality: currentPlayer.nationality,
+                              canton: currentPlayer.canton,
+                              city: currentPlayer.city,
+                              municipality: currentPlayer.municipality,
+                              currentLeague: currentPlayer.currentLeague,
+                              height: currentPlayer.height,
+                              weight: currentPlayer.weight,
+                              spikeHeight: currentPlayer.spikeHeight,
+                              blockHeight: currentPlayer.blockHeight,
+                              phone: currentPlayer.phone,
+                              employmentStatus: currentPlayer.employmentStatus,
+                              occupation: currentPlayer.occupation,
+                              schoolName: currentPlayer.schoolName,
+                              positions: currentPlayer.positions,
+                              profileImage: currentPlayer.profileImage,
+                              coverImage: null,  // Clear cover image to use gradient
+                              instagram: currentPlayer.instagram,
+                              tiktok: currentPlayer.tiktok,
+                              youtube: currentPlayer.youtube,
+                              highlightVideo: currentPlayer.highlightVideo,
+                              swissVolleyLicense: currentPlayer.swissVolleyLicense,
+                              skillReceiving: currentPlayer.skillReceiving,
+                              skillServing: currentPlayer.skillServing,
+                              skillAttacking: currentPlayer.skillAttacking,
+                              skillBlocking: currentPlayer.skillBlocking,
+                              skillDefense: currentPlayer.skillDefense,
+                              bio: currentPlayer.bio,
+                              lookingForClub: currentPlayer.lookingForClub,
+                              showEmail: currentPlayer.showEmail,
+                              showPhone: currentPlayer.showPhone,
+                            },
+                            clubHistory: currentPlayer.clubHistory || [],
+                            achievements: currentPlayer.achievements || [],
+                          })
+                          
+                          // Refresh player data
+                          const playerResponse = await axios.get(`/api/players/${params.id}`)
+                          setPlayer(playerResponse.data.player)
+                          alert('Hintergrund erfolgriich gänderet!')
+                        } catch (error) {
+                          console.error('Error updating background:', error)
+                          alert('Fehler bim Hintergrund Ändere')
+                        }
                       }}
                       className={`h-20 rounded-lg transition-all hover:scale-105 hover:shadow-lg border-2 ${
                         selectedBg.id === option.id && !customBgImage && !player.coverImage

@@ -168,15 +168,13 @@ export default function NotificationPopup() {
             </div>
 
             {/* Footer */}
-            {notifications.length > 0 && (
-              <Link
-                href="/notifications"
-                className="block p-3 text-center text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-700 font-semibold text-sm transition"
-                onClick={() => setShowPopup(false)}
-              >
-                Alli Benachrichtigunge aaluege
-              </Link>
-            )}
+            <Link
+              href="/notifications"
+              className="block p-3 text-center text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-700 font-semibold text-sm transition border-t border-gray-200 dark:border-gray-700"
+              onClick={() => setShowPopup(false)}
+            >
+              Alli Benachrichtigunge aaluege
+            </Link>
           </div>
         </>
       )}

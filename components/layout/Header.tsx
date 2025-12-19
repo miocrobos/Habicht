@@ -88,7 +88,7 @@ export default function Header() {
           </nav>
 
           {/* Right side buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-6">
             {session && <NotificationPopup />}
             <Link 
               href="/settings" 

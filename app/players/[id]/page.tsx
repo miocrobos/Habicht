@@ -410,6 +410,8 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       const currentResponse = await axios.get(`/api/players/${params.id}`)
       const currentPlayer = currentResponse.data.player
       
+      console.log('Updating background with image:', newBackgroundImage.substring(0, 50))
+      
       // Update with cover image
       await axios.put(`/api/players/${params.id}`, {
         playerData: {
@@ -494,6 +496,17 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   }
 
   const playerAge = player.dateOfBirth ? new Date().getFullYear() - new Date(player.dateOfBirth).getFullYear() : null
+  
+  // Format birth date with zero-padding (e.g., 06.03.2006)
+  const formatBirthDate = (dateString: string | null) => {
+    if (!dateString) return null
+    const date = new Date(dateString)
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}.${month}.${year}`
+  }
+  const formattedBirthDate = formatBirthDate(player.dateOfBirth)
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -587,10 +600,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       <MapPin className="w-4 h-4" />
                       {player.municipality ? `${player.municipality}, ${player.canton}` : player.canton}
                     </span>
-                    {playerAge && (
-                      <span className="flex items-center gap-1">
+                    {playerAge && formattedBirthDate && (
+                      <span className="flex items-center gap-1" title={`Geburtsdatum: ${formattedBirthDate}`}>
                         <Calendar className="w-4 h-4" />
-                        {playerAge} Jahr
+                        {playerAge} Jahr (Geb. {formattedBirthDate})
                       </span>
                     )}
                     <span className="flex items-center gap-1">

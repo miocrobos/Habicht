@@ -189,7 +189,16 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   
   // Build narrative text instead of table
   const genderText = playerData.gender === 'MALE' ? 'Männlich' : 'Weiblich';
-  const birthText = playerData.dateOfBirth ? new Date(playerData.dateOfBirth).toLocaleDateString('de-CH') : 'Unbekannt';
+  // Format birth date with zero-padding (e.g., 06.03.2006)
+  const formatBirthDate = (dateString: string | Date | null) => {
+    if (!dateString) return 'Unbekannt';
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  };
+  const birthText = formatBirthDate(playerData.dateOfBirth);
   const locationText = playerData.municipality ? `${playerData.municipality}, ${playerData.canton}` : playerData.canton;
   
   let narrativeLines = [

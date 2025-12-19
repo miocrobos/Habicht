@@ -105,11 +105,11 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
 
   yPos = 50;
 
-  // Personal Information Section with Profile Image
+  // Personal Profile Section with Photo (more human, narrative style)
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.text('PERSÖNLICHI INFORMATIONE', 15, yPos);
+  doc.text('PERSÖNLICHS PROFIL', 15, yPos);
   yPos += 8;
 
   // Add profile photo beside personal information (right side)
@@ -154,85 +154,84 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     console.log('No profile image provided in player data');
   }
 
+  // Create a more narrative, human-readable personal section
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
 
   const age = playerData.dateOfBirth ? new Date().getFullYear() - new Date(playerData.dateOfBirth).getFullYear() : null;
   
-  const personalInfo = [
-    ...(playerData.dateOfBirth ? [['Date of Birth:', new Date(playerData.dateOfBirth).toLocaleDateString('de-CH')]] : []),
-    ...(age ? [['Age:', `${age} years`]] : []),
-    ['Gender:', playerData.gender === 'MALE' ? 'Male' : 'Female'],
-    ['Nationality:', playerData.nationality],
-    ['Canton:', playerData.canton],
-    ...(playerData.municipality ? [['Municipality:', playerData.municipality]] : []),
-    ['Email:', playerData.user.email],
-    ...(playerData.phone ? [['Phone:', playerData.phone]] : []),
+  // Build narrative text instead of table
+  const genderText = playerData.gender === 'MALE' ? 'Männlich' : 'Weiblich';
+  const birthText = playerData.dateOfBirth ? new Date(playerData.dateOfBirth).toLocaleDateString('de-CH') : 'Unbekannt';
+  const locationText = playerData.municipality ? `${playerData.municipality}, ${playerData.canton}` : playerData.canton;
+  
+  let narrativeLines = [
+    `Geburtsdatum: ${birthText}${age ? ` (${age} Jahr)` : ''}`,
+    `Geschlecht: ${genderText}`,
+    `Nationalität: ${playerData.nationality}`,
+    `Wohnort: ${locationText}`,
+    '',
+    `Email: ${playerData.user.email}`,
   ];
-
-  autoTable(doc, {
-    startY: yPos,
-    body: personalInfo,
-    theme: 'plain',
-    styles: { fontSize: 10, cellPadding: 2 },
-    columnStyles: {
-      0: { fontStyle: 'bold', cellWidth: 50 },
-      1: { cellWidth: 'auto' }
-    }
+  
+  if (playerData.phone) {
+    narrativeLines.push(`Telefon: ${playerData.phone}`);
+  }
+  
+  narrativeLines.forEach((line, index) => {
+    doc.text(line, 15, yPos + (index * 6));
   });
+  
+  yPos += narrativeLines.length * 6 + 5;
 
-  yPos = (doc as any).lastAutoTable.finalY + 10;
-
-  // Physical Stats
+  // Physical Stats (more human format)
   if (playerData.height || playerData.weight || playerData.spikeHeight || playerData.blockHeight) {
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('PHYSISCHI EIGESCHAFTE', 15, yPos);
+    doc.text('ATHLETISCHI DATE', 15, yPos);
     yPos += 8;
 
-    const physicalStats = [
-      ...(playerData.height ? [['Height:', `${playerData.height} cm`]] : []),
-      ...(playerData.weight ? [['Weight:', `${playerData.weight} kg`]] : []),
-      ...(playerData.spikeHeight ? [['Spike Reach:', `${playerData.spikeHeight} cm`]] : []),
-      ...(playerData.blockHeight ? [['Block Reach:', `${playerData.blockHeight} cm`]] : []),
-    ];
-
-    autoTable(doc, {
-      startY: yPos,
-      body: physicalStats,
-      theme: 'plain',
-      styles: { fontSize: 10, cellPadding: 2 },
-      columnStyles: {
-        0: { fontStyle: 'bold', cellWidth: 50 },
-        1: { cellWidth: 'auto' }
-      }
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
+    
+    const statsLines = [];
+    if (playerData.height) statsLines.push(`Körpergrösse: ${playerData.height} cm`);
+    if (playerData.weight) statsLines.push(`Gewicht: ${playerData.weight} kg`);
+    if (playerData.spikeHeight) statsLines.push(`Angriffsreichhöhe: ${playerData.spikeHeight} cm`);
+    if (playerData.blockHeight) statsLines.push(`Blockhöhe: ${playerData.blockHeight} cm`);
+    
+    statsLines.forEach((line, index) => {
+      doc.text(line, 15, yPos + (index * 6));
     });
-
-    yPos = (doc as any).lastAutoTable.finalY + 10;
+    
+    yPos += statsLines.length * 6 + 5;
   }
 
-  // Current Club
+  // Current Club (more professional presentation)
   if (playerData.currentClub) {
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('AKTUELLÄ CLUB', 15, yPos);
+    doc.text('AKTUELLÄ VEREIN', 15, yPos);
     yPos += 8;
 
-    doc.setFontSize(12);
+    doc.setFontSize(11);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
     doc.text(playerData.currentClub.name, 15, yPos);
-    yPos += 5;
+    yPos += 6;
 
     if (playerData.currentLeague) {
       doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
+      doc.setFont('helvetica', 'italic');
       doc.setTextColor(lightGray[0], lightGray[1], lightGray[2]);
-      doc.text(playerData.currentLeague, 15, yPos);
-      yPos += 10;
+      doc.text(`Liga: ${playerData.currentLeague}`, 15, yPos);
+      yPos += 8;
+    } else {
+      yPos += 3;
     }
   }
 
@@ -272,7 +271,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     yPos = (doc as any).lastAutoTable.finalY + 10;
   }
 
-  // Education/Employment
+  // Education/Employment (more narrative style)
   if (playerData.schoolName || playerData.occupation) {
     if (yPos > 240) {
       doc.addPage();
@@ -282,32 +281,32 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('EDUCATION & EMPLOYMENT', 15, yPos);
+    doc.text('USBILDIG & BERUF', 15, yPos);
     yPos += 8;
 
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
     
-    const educationText = [];
+    const educationLines = [];
     if (playerData.schoolName) {
-      educationText.push(`School: ${playerData.schoolName}`);
+      educationLines.push(`Schule: ${playerData.schoolName}`);
     }
     if (playerData.occupation) {
-      educationText.push(`Occupation: ${playerData.occupation}`);
+      educationLines.push(`Beruf: ${playerData.occupation}`);
     }
     if (playerData.employmentStatus) {
-      educationText.push(`Status: ${playerData.employmentStatus}`);
+      educationLines.push(`Status: ${playerData.employmentStatus}`);
     }
     
-    educationText.forEach((text, index) => {
-      doc.text(text, 15, yPos + (index * 5));
+    educationLines.forEach((line, index) => {
+      doc.text(line, 15, yPos + (index * 6));
     });
     
-    yPos += educationText.length * 5 + 10;
+    yPos += educationLines.length * 6 + 5;
   }
 
-  // Achievements
+  // Achievements (more professional presentation)
   if (playerData.achievements && playerData.achievements.length > 0) {
     if (yPos > 240) {
       doc.addPage();
@@ -317,16 +316,24 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('ACHIEVEMENTS', 15, yPos);
+    doc.text('ERFOLGE & AUSZEICHNUNGE', 15, yPos);
     yPos += 8;
 
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
-    const achievementText = playerData.achievements.join('\n');
-    const lines = doc.splitTextToSize(achievementText, 180);
-    doc.text(lines, 15, yPos);
-    yPos += lines.length * 5 + 10;
+    
+    playerData.achievements.forEach((achievement, index) => {
+      const bulletText = `• ${achievement}`;
+      const lines = doc.splitTextToSize(bulletText, 175);
+      lines.forEach((line: string) => {
+        doc.text(line, 15, yPos);
+        yPos += 5;
+      });
+      yPos += 1; // Extra space between achievements
+    });
+    
+    yPos += 5;
   }
 
   // Footer with page numbers only

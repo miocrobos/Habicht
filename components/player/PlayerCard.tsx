@@ -18,12 +18,6 @@ export default function PlayerCard({ player }: { player: any }) {
     return 'linear-gradient(135deg, #2563eb 0%, #dbeafe 50%, #ffffff 100%)' // Blue gradient for HERREN
   }
   
-  // Log to verify this version is running
-  if (typeof window !== 'undefined' && !window.__playerCardLogged) {
-    console.log('🎯 PlayerCard v3.0 loaded - Dec 19 2025 - Gradients Active');
-    window.__playerCardLogged = true;
-  }
-  
   return (
     <Link href={`/players/${player.id}`}>
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden cursor-pointer">

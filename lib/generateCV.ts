@@ -19,6 +19,9 @@ interface PlayerData {
   bio?: string | null;
   achievements?: string[];
   profileImage?: string | null;
+  instagram?: string | null;
+  tiktok?: string | null;
+  youtube?: string | null;
   user: {
     email: string;
   };
@@ -323,6 +326,41 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     });
 
     yPos = (doc as any).lastAutoTable.finalY + 10;
+  }
+
+  // Social Media Section
+  if (playerData.instagram || playerData.tiktok || playerData.youtube) {
+    if (yPos > 240) {
+      doc.addPage();
+      yPos = 20;
+    }
+
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+    doc.text('SOCIAL MEDIA', 15, yPos);
+    yPos += 8;
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
+    
+    const socialMediaLines = [];
+    if (playerData.instagram) {
+      socialMediaLines.push(`Instagram: ${playerData.instagram.startsWith('@') ? playerData.instagram : '@' + playerData.instagram}`);
+    }
+    if (playerData.tiktok) {
+      socialMediaLines.push(`TikTok: ${playerData.tiktok.startsWith('@') ? playerData.tiktok : '@' + playerData.tiktok}`);
+    }
+    if (playerData.youtube) {
+      socialMediaLines.push(`YouTube: ${playerData.youtube}`);
+    }
+    
+    socialMediaLines.forEach((line, index) => {
+      doc.text(line, 15, yPos + (index * 6));
+    });
+    
+    yPos += socialMediaLines.length * 6 + 10;
   }
 
   // Achievements (more professional presentation) - kept at the end

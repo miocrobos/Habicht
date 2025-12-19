@@ -10,6 +10,7 @@ datasource db {
 enum UserRole {
   PLAYER
   RECRUITER
+  HYBRID
   ADMIN
   CLUB_MANAGER
 }

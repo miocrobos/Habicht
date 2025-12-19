@@ -5,6 +5,10 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import axios from 'axios'
+import { FileDown } from 'lucide-react'
+import CVTypeModal from '@/components/shared/CVTypeModal'
+import { generatePlayerCV } from '@/lib/generateCV'
+import { generateRecruiterCV } from '@/lib/generateRecruiterCV'
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme()
@@ -24,12 +28,19 @@ export default function SettingsPage() {
   const [notifyChatMessages, setNotifyChatMessages] = useState(true)
   const [notifyPlayerLooking, setNotifyPlayerLooking] = useState(true)
   const [notifyRecruiterSearching, setNotifyRecruiterSearching] = useState(true)
+  const [showCVModal, setShowCVModal] = useState(false)
+  const [playerData, setPlayerData] = useState<any>(null)
+  const [recruiterData, setRecruiterData] = useState<any>(null)
 
   // Language is now managed by LanguageContext, no need for local state
 
   useEffect(() => {
     if (session?.user?.playerId) {
       fetchPrivacySettings()
+      fetchPlayerData()
+    }
+    if (session?.user?.recruiterId) {
+      fetchRecruiterData()
     }
     if (session?.user) {
       fetchNotificationSettings()
@@ -57,6 +68,55 @@ export default function SettingsPage() {
       setNotifyRecruiterSearching(user.notifyRecruiterSearching ?? true)
     } catch (error) {
       console.error('Error fetching notification settings:', error)
+    }
+  }
+
+  const fetchPlayerData = async () => {
+    try {
+      const response = await axios.get(`/api/players/${session?.user?.playerId}`)
+      setPlayerData(response.data.player)
+    } catch (error) {
+      console.error('Error fetching player data:', error)
+    }
+  }
+
+  const fetchRecruiterData = async () => {
+    try {
+      const response = await axios.get(`/api/recruiters/${session?.user?.recruiterId}`)
+      setRecruiterData(response.data)
+    } catch (error) {
+      console.error('Error fetching recruiter data:', error)
+    }
+  }
+
+  const handleExportCV = async (type: 'player' | 'recruiter') => {
+    try {
+      if (type === 'player' && playerData) {
+        const pdfBlob = await generatePlayerCV(playerData)
+        const url = URL.createObjectURL(pdfBlob)
+        const link = document.createElement('a')
+        link.href = url
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
+        link.download = `${playerData.firstName}_${playerData.lastName}_Spieler_CV_${timestamp}.pdf`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+      } else if (type === 'recruiter' && recruiterData) {
+        const pdfBlob = await generateRecruiterCV(recruiterData)
+        const url = URL.createObjectURL(pdfBlob)
+        const link = document.createElement('a')
+        link.href = url
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
+        link.download = `${recruiterData.firstName}_${recruiterData.lastName}_Recruiter_CV_${timestamp}.pdf`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+      }
+    } catch (error) {
+      console.error('Error exporting CV:', error)
+      alert('Fehler bim CV Export')
     }
   }
 
@@ -517,6 +577,52 @@ export default function SettingsPage() {
                         <p className="text-gray-600 dark:text-gray-400"><span className="font-medium">Kontotyp:</span> {session?.user?.role || 'Gast'}</p>
                       </div>
                     </div>
+
+                    {/* CV Export Section */}
+                    {(session?.user?.role === 'RECRUITER' || session?.user?.role === 'HYBRID' || (session?.user?.role === 'PLAYER' && session?.user?.playerId)) && (
+                      <div className="border border-green-300 dark:border-green-700 rounded-lg p-6 bg-green-50 dark:bg-green-900/20">
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                          <FileDown className="w-5 h-5" />
+                          Läbeslaauf Exportiere
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                          {session?.user?.role === 'HYBRID' 
+                            ? 'Download din professionelle Läbeslaauf als PDF. Du chasch wähle zwüsched Spieler oder Recruiter CV.'
+                            : session?.user?.role === 'RECRUITER'
+                            ? 'Download din professionelle Recruiter Läbeslaauf als PDF.'
+                            : 'Download din professionelle Spieler Läbeslaauf als PDF.'}
+                        </p>
+                        
+                        {session?.user?.role === 'HYBRID' ? (
+                          <div className="flex flex-wrap gap-3">
+                            <button
+                              onClick={() => setShowCVModal(true)}
+                              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-red-600 text-white rounded-lg hover:from-blue-700 hover:to-red-700 transition font-semibold shadow-md"
+                            >
+                              <FileDown className="w-4 h-4" />
+                              CV Typ Wähle & Exportiere
+                            </button>
+                          </div>
+                        ) : session?.user?.role === 'RECRUITER' ? (
+                          <button
+                            onClick={() => handleExportCV('recruiter')}
+                            className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold shadow-md"
+                          >
+                            <FileDown className="w-4 h-4" />
+                            Recruiter Läbeslaauf Exportiere
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handleExportCV('player')}
+                            className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold shadow-md"
+                          >
+                            <FileDown className="w-4 h-4" />
+                            Spieler Läbeslaauf Exportiere
+                          </button>
+                        )}
+                      </div>
+                    )}
+
                     <div className="border border-orange-300 dark:border-orange-700 rounded-lg p-6">
                       <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Konto Deaktiviere</h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Dis Profil Wird Uusblendet Und Du Chasch Di Nöd Meh Aamelde. Du Chasch Dis Konto Jederzit Wieder Aktiviere.</p>
@@ -573,6 +679,17 @@ export default function SettingsPage() {
             </svg>
             <span className="text-green-800 dark:text-green-200 font-medium">Einstellungen gespeichert</span>
           </div>
+        )}
+
+        {/* CV Type Modal for Hybrid Users */}
+        {showCVModal && playerData && recruiterData && (
+          <CVTypeModal
+            isOpen={showCVModal}
+            onClose={() => setShowCVModal(false)}
+            playerData={playerData}
+            recruiterData={recruiterData}
+            userName={session?.user?.name || `${playerData.firstName} ${playerData.lastName}`}
+          />
         )}
       </div>
     </div>

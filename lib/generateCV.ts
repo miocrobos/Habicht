@@ -184,7 +184,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   const locationText = playerData.municipality ? `${playerData.municipality}, ${playerData.canton}` : playerData.canton;
   
   let narrativeLines = [
-    `Geburtsdatum: ${birthText}${age ? ` (${age} Jahr)` : ''}`,
+    `Geburtsdatum: ${birthText}`,
     `Geschlecht: ${genderText}`,
     `Nationalität: ${playerData.nationality}`,
     `Wohnort: ${locationText}`,
@@ -242,10 +242,12 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     yPos += 6;
 
     if (playerData.currentLeague) {
+      // Remove underscores and format league text
+      const formattedLeague = playerData.currentLeague.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, (l: string) => l.toUpperCase());
       doc.setFontSize(10);
-      doc.setFont('helvetica', 'italic');
-      doc.setTextColor(lightGray[0], lightGray[1], lightGray[2]);
-      doc.text(`Liga: ${playerData.currentLeague}`, 15, yPos);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(0, 0, 0); // Pure black color
+      doc.text(`Liga: ${formattedLeague}`, 15, yPos);
       yPos += 8;
     } else {
       yPos += 3;

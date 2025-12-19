@@ -10,12 +10,12 @@ export default function PlayerCard({ player }: { player: any }) {
   const cantonInfo = getCantonInfo(player.canton)
   const age = player.dateOfBirth ? Math.floor((new Date().getTime() - new Date(player.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : null
   
-  // Get gradient based on gender
+  // Get gradient based on gender - v2.0
   const getGradient = () => {
     if (player.gender === 'FEMALE') {
-      return 'linear-gradient(135deg, #ec4899 0%, #ffffff 100%)' // Pink to white
+      return 'linear-gradient(135deg, #ec4899 0%, #fce7f3 50%, #ffffff 100%)' // Pink gradient for DAMEN
     }
-    return 'linear-gradient(135deg, #2563eb 0%, #ffffff 100%)' // Blue to white for male
+    return 'linear-gradient(135deg, #2563eb 0%, #dbeafe 50%, #ffffff 100%)' // Blue gradient for HERREN
   }
   
   return (

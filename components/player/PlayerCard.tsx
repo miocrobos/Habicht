@@ -17,7 +17,7 @@ export default function PlayerCard({ player }: { player: any }) {
       return 'linear-gradient(135deg, #f97316 0%, #fed7aa 50%, #ffffff 100%)' // Orange for HYBRID
     }
     if (player.user?.role === 'RECRUITER') {
-      return 'linear-gradient(135deg, #dc2626 0%, #fecaca 50%, #ffffff 100%)' // Red for RECRUITER
+      return 'linear-gradient(135deg, #9333ea 0%, #e9d5ff 50%, #ffffff 100%)' // Purple for RECRUITER
     }
     // Then check gender for regular players
     if (player.gender === 'FEMALE') {

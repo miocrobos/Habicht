@@ -58,7 +58,7 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
         <div 
           className="h-40 relative flex items-center justify-center"
           style={{ 
-            background: 'linear-gradient(135deg, #dc2626 0%, #fecaca 50%, #ffffff 100%)' // Red for all RECRUITERS
+            background: 'linear-gradient(135deg, #9333ea 0%, #e9d5ff 50%, #ffffff 100%)' // Purple for all RECRUITERS
           }}
         >
           {/* Gender Coached Badge */}

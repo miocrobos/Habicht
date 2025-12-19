@@ -702,64 +702,84 @@ export async function sendProfileViewNotification({
   profileUrl
 }: SendProfileViewNotificationParams): Promise<boolean> {
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY)
+    if (process.env.NODE_ENV === 'development') {
+      console.log('\n=================================');
+      console.log('👁️ PROFILE VIEW NOTIFICATION EMAIL');
+      console.log('=================================');
+      console.log(`To: ${recipientEmail}`);
+      console.log(`Recipient: ${recipientName}`);
+      console.log(`Viewer: ${viewerName}`);
+      console.log('=================================\n');
+    }
+
+    if (!process.env.RESEND_API_KEY) {
+      console.log('⚠️ RESEND_API_KEY not configured. Email not sent.');
+      return true;
+    }
+
+    const resendClient = getResendClient();
+    if (!resendClient) {
+      console.log('⚠️ Resend client not available');
+      return false;
+    }
     
-    await resend.emails.send({
+    await resendClient.emails.send({
       from: 'Habicht Volleyball <noreply@habicht-volleyball.ch>',
       to: recipientEmail,
-      subject: ${viewerName} het din Profil aagluegt | Habicht,
-      html: 
+      subject: `${viewerName} het din Profil aagluegt | Habicht`,
+      html: `
         <!DOCTYPE html>
         <html>
           <head>
-            <meta charset=\"utf-8\">
-            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Profil View</title>
           </head>
-          <body style=\"margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;\">
-            <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">
-              <div style=\"background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); padding: 40px 30px; text-align: center;\">
-                <h1 style=\"color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;\">Profil Aagluegt </h1>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+            <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
+              <div style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); padding: 40px 30px; text-align: center;">
+                <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;">Profil Aagluegt 👁️</h1>
               </div>
               
-              <div style=\"padding: 40px 30px;\">
-                <h2 style=\"color: #1f2937; margin-top: 0; font-size: 24px;\">Hallo !</h2>
-                <p style=\"color: #4b5563; font-size: 16px; line-height: 1.6;\">
-                  <strong></strong> het din Profil uf Habicht Volleyball aagluegt.
+              <div style="padding: 40px 30px;">
+                <h2 style="color: #1f2937; margin-top: 0; font-size: 24px;">Hallo ${recipientName}!</h2>
+                <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">
+                  <strong>${viewerName}</strong> het din Profil uf Habicht Volleyball aagluegt.
                 </p>
                 
-                <div style=\"background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 20px; margin: 20px 0; border-radius: 4px;\">
-                  <p style=\"margin: 0; color: #1e40af; font-size: 14px;\">
-                     Das isch e Zeiche dass din Profil Ufmerksamkeit bechunnt!
+                <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 20px; margin: 20px 0; border-radius: 4px;">
+                  <p style="margin: 0; color: #1e40af; font-size: 14px;">
+                    Das isch e Zeiche dass din Profil Ufmerksamkeit bechunnt!
                   </p>
                 </div>
                 
-                <div style=\"margin: 30px 0; text-align: center;\">
-                  <a href=\"https://www.habicht-volleyball.ch\" style=\"display: inline-block; background-color: #dc2626; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 10px;\">
-                     aazeige
+                <div style="margin: 30px 0; text-align: center;">
+                  <a href="https://www.habicht-volleyball.ch${viewerProfileUrl}" style="display: inline-block; background-color: #dc2626; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 10px;">
+                    ${viewerName} aazeige
                   </a>
-                  <a href=\"https://www.habicht-volleyball.ch\" style=\"display: inline-block; background-color: #1f2937; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 10px;\">
+                  <a href="https://www.habicht-volleyball.ch${profileUrl}" style="display: inline-block; background-color: #1f2937; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 10px;">
                     Din Profil aazeige
                   </a>
                 </div>
                 
-                <p style=\"color: #6b7280; font-size: 14px; line-height: 1.6; margin-top: 30px;\">
-                  Viel Erfolg mit dinere Sportkarriere! 
+                <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin-top: 30px;">
+                  Viel Erfolg mit dinere Sportkarriere! 🏐
                 </p>
               </div>
               
-              <div style=\"background-color: #f9fafb; padding: 20px 30px; border-top: 1px solid #e5e7eb;\">
-                <p style=\"color: #9ca3af; font-size: 12px; line-height: 1.5; margin: 0;\">
-                    Habicht Volleyball. Alli R�cht vorbehalte.<br>
+              <div style="background-color: #f9fafb; padding: 20px 30px; border-top: 1px solid #e5e7eb;">
+                <p style="color: #9ca3af; font-size: 12px; line-height: 1.5; margin: 0;">
+                  © ${new Date().getFullYear()} Habicht Volleyball. Alli Rächt vorbehalte.<br>
                   Du hesch die E-Mail becho, will di Konto Benachrichtigungen aktiviert het.
                 </p>
               </div>
             </div>
           </body>
         </html>
-      
+      `
     })
 
+    console.log('✅ Profile view notification email sent successfully to:', recipientEmail);
     return true
   } catch (error) {
     console.error('Error sending profile view notification:', error)

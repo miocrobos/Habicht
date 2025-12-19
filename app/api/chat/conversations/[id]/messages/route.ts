@@ -221,7 +221,7 @@ export async function POST(
           recipientName = `${conversation.player.firstName} ${conversation.player.lastName}`
           recipientUserId = conversation.player.user.id
           senderName = conversation.recruiter?.user?.name || 'Recruiter'
-          senderImage = conversation.recruiter?.user?.image || ''
+          senderImage = conversation.recruiter?.profileImage || ''
           senderRoleText = 'Recruiter'
           notifyEnabled = conversation.player.user.notifyChatMessages
         }

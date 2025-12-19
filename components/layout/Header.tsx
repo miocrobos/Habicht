@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { Menu, X, User, Search, Settings, Bell } from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
 import axios from 'axios'
+import NotificationPopup from '@/components/shared/NotificationPopup'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -102,6 +103,7 @@ export default function Header() {
                 )}
               </Link>
             )}
+            {session && <NotificationPopup />}
             <Link 
               href="/settings" 
               className="flex items-center justify-center w-10 h-10 text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"

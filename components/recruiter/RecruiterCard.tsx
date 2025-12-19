@@ -58,11 +58,7 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
         <div 
           className="h-40 relative flex items-center justify-center"
           style={{ 
-            background: recruiter.genderCoached && Array.isArray(recruiter.genderCoached) && recruiter.genderCoached.includes('MALE') && !recruiter.genderCoached.includes('FEMALE')
-              ? 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)' // Blue for male
-              : recruiter.genderCoached && Array.isArray(recruiter.genderCoached) && recruiter.genderCoached.includes('FEMALE') && !recruiter.genderCoached.includes('MALE')
-              ? 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)' // Pink for female
-              : `linear-gradient(135deg, ${cantonInfo.colors.primary} 0%, ${cantonInfo.colors.secondary} 100%)` // Canton colors for both or none
+            background: 'linear-gradient(135deg, #dc2626 0%, #fecaca 50%, #ffffff 100%)' // Red for all RECRUITERS
           }}
         >
           {/* Gender Coached Badge */}

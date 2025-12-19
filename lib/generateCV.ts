@@ -120,24 +120,37 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   let profileImageAdded = false;
   if (playerData.profileImage) {
     try {
-      console.log('Attempting to load profile image:', playerData.profileImage);
-      const imageUrl = playerData.profileImage.startsWith('http') 
-        ? playerData.profileImage 
-        : `${typeof window !== 'undefined' ? window.location.origin : 'https://www.habicht-volleyball.ch'}${playerData.profileImage.startsWith('/') ? '' : '/'}${playerData.profileImage}`;
+      console.log('🖼️ Attempting to load profile image:', playerData.profileImage);
       
-      console.log('Profile image URL:', imageUrl);
-      const profileResponse = await fetch(imageUrl);
+      let profileBase64: string;
       
-      if (!profileResponse.ok) {
-        throw new Error(`Failed to fetch profile image: ${profileResponse.status}`);
+      // Check if image is already base64
+      if (playerData.profileImage.startsWith('data:image')) {
+        console.log('✅ Image is already base64');
+        profileBase64 = playerData.profileImage;
+      } else {
+        // Image is a URL, need to fetch it
+        const imageUrl = playerData.profileImage.startsWith('http') 
+          ? playerData.profileImage 
+          : `${typeof window !== 'undefined' ? window.location.origin : 'https://www.habicht-volleyball.ch'}${playerData.profileImage.startsWith('/') ? '' : '/'}${playerData.profileImage}`;
+        
+        console.log('📥 Fetching profile image from URL:', imageUrl);
+        const profileResponse = await fetch(imageUrl, {
+          mode: 'cors',
+          credentials: 'same-origin'
+        });
+        
+        if (!profileResponse.ok) {
+          throw new Error(`Failed to fetch profile image: ${profileResponse.status}`);
+        }
+        
+        const profileBlob = await profileResponse.blob();
+        profileBase64 = await new Promise<string>((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result as string);
+          reader.readAsDataURL(profileBlob);
+        });
       }
-      
-      const profileBlob = await profileResponse.blob();
-      const profileBase64 = await new Promise<string>((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result as string);
-        reader.readAsDataURL(profileBlob);
-      });
       
       // Detect format from base64 string
       let imageFormat: 'PNG' | 'JPEG' = 'JPEG';
@@ -150,12 +163,12 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
       // Add professional profile photo beside personal info (35x45mm professional size)
       doc.addImage(profileBase64, imageFormat, 155, yPos - 5, 35, 45);
       profileImageAdded = true;
-      console.log('Profile image added successfully');
+      console.log('✅ Profile image added successfully to PDF');
     } catch (error) {
-      console.error('Could not load profile photo for personal info:', error);
+      console.error('❌ Could not load profile photo:', error);
     }
   } else {
-    console.log('No profile image provided in player data');
+    console.log('⚠️ No profile image provided in player data');
   }
 
   // Create a more narrative, human-readable personal section

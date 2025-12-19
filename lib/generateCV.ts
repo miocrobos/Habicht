@@ -245,33 +245,6 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     yPos += statsLines.length * 6 + 5;
   }
 
-  // Current Club (more professional presentation)
-  if (playerData.currentClub) {
-    doc.setFontSize(16);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('AKTUELLÄ VEREIN', 15, yPos);
-    yPos += 8;
-
-    doc.setFontSize(11);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(0, 0, 0); // Pure black color
-    doc.text(playerData.currentClub.name, 15, yPos);
-    yPos += 6;
-
-    if (playerData.currentLeague) {
-      // Remove underscores and format league text
-      const formattedLeague = playerData.currentLeague.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, (l: string) => l.toUpperCase());
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(0, 0, 0); // Pure black color
-      doc.text(`Liga: ${formattedLeague}`, 15, yPos);
-      yPos += 8;
-    } else {
-      yPos += 3;
-    }
-  }
-
   // Education/Employment - moved before club history for better CV flow
   if (playerData.schoolName || playerData.occupation) {
     if (yPos > 240) {

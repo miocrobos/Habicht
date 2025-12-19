@@ -33,6 +33,15 @@ export async function GET(
           orderBy: {
             startDate: 'desc',
           },
+          include: {
+            club: {
+              select: {
+                id: true,
+                name: true,
+                logo: true,
+              },
+            },
+          },
         },
         videos: true,
       },
@@ -155,9 +164,37 @@ export async function PUT(
         where: { playerId: params.id },
       });
 
+      // Find current club ID from database if club exists
+      let currentClubId: string | null = null;
+      const currentClubEntry = clubHistory.find((club: any) => club.currentClub === true);
+      
+      if (currentClubEntry) {
+        // Try to find the club in the database by name
+        const clubInDb = await prisma.club.findFirst({
+          where: {
+            name: {
+              equals: currentClubEntry.clubName,
+              mode: 'insensitive'
+            }
+          }
+        });
+        
+        if (clubInDb) {
+          currentClubId = clubInDb.id;
+        }
+      }
+
+      // Update player's currentClubId
+      await prisma.player.update({
+        where: { id: params.id },
+        data: {
+          currentClubId: currentClubId
+        }
+      });
+
       // Create new club history entries, preserving existing website URLs
       if (clubHistory.length > 0) {
-        const clubHistoryData = clubHistory.map((club: any) => {
+        const clubHistoryData = await Promise.all(clubHistory.map(async (club: any) => {
           // Parse year from string, handling formats like "2023" or "2023-2024"
           const parseYear = (yearStr: string) => {
             if (!yearStr) return null;
@@ -168,8 +205,24 @@ export async function PUT(
           const yearFrom = parseYear(club.yearFrom);
           const yearTo = parseYear(club.yearTo);
 
+          // Try to find the club ID in database
+          let clubId: string | null = null;
+          const clubInDb = await prisma.club.findFirst({
+            where: {
+              name: {
+                equals: club.clubName,
+                mode: 'insensitive'
+              }
+            }
+          });
+          
+          if (clubInDb) {
+            clubId = clubInDb.id;
+          }
+
           console.log('Processing club history entry:', {
             clubName: club.clubName,
+            clubId,
             league: club.league,
             yearFrom,
             yearTo,
@@ -180,6 +233,7 @@ export async function PUT(
 
           return {
             playerId: params.id,
+            clubId: clubId,
             clubName: club.clubName,
             clubLogo: club.logo || null,
             clubCountry: club.country || 'Switzerland',
@@ -190,7 +244,7 @@ export async function PUT(
             endDate: club.currentClub ? null : (yearTo ? new Date(yearTo, 11, 31) : null),
             currentClub: club.currentClub || false,
           };
-        });
+        }));
 
         await prisma.clubHistory.createMany({
           data: clubHistoryData,

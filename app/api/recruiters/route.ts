@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
 
     // Build where clause
     const where: any = {
+      isActive: true,
       user: {
         emailVerified: true, // Only show verified recruiters
       },

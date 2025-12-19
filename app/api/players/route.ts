@@ -16,6 +16,7 @@ export async function GET(request: NextRequest) {
     // Build where clause
     const where: any = {
       isPublic: true,
+      isActive: true,
     }
 
     const andConditions: any[] = []

@@ -100,6 +100,14 @@ export async function PUT(
       }
     }
 
+    // Update user name to match player name
+    await prisma.user.update({
+      where: { id: existingPlayer.userId },
+      data: {
+        name: `${playerData.firstName} ${playerData.lastName}`
+      }
+    });
+
     // Update player
     const player = await prisma.player.update({
       where: { id: params.id },

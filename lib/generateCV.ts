@@ -160,8 +160,8 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
         imageFormat = 'JPEG';
       }
       
-      // Add professional profile photo beside personal info (35x45mm professional size)
-      doc.addImage(profileBase64, imageFormat, 155, yPos - 5, 35, 45);
+      // Add professional profile photo beside personal info (45x55mm professional size)
+      doc.addImage(profileBase64, imageFormat, 150, yPos - 5, 45, 55);
       profileImageAdded = true;
       console.log('✅ Profile image added successfully to PDF');
     } catch (error) {
@@ -237,7 +237,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
 
     doc.setFontSize(11);
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]); // Black color
+    doc.setTextColor(0, 0, 0); // Pure black color
     doc.text(playerData.currentClub.name, 15, yPos);
     yPos += 6;
 
@@ -285,10 +285,10 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
       styles: { 
         fontSize: 10, 
         cellPadding: 3,
-        textColor: [31, 41, 55] as [number, number, number] // Dark gray/black for club names
+        textColor: [0, 0, 0] as [number, number, number] // Pure black for all text
       },
       columnStyles: {
-        0: { fontStyle: 'bold' } // Make club names bold
+        0: { fontStyle: 'bold', textColor: [0, 0, 0] as [number, number, number] } // Pure black bold for club names
       }
     });
 

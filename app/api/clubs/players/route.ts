@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic'
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
-    const clubId = searchParams.get('clubId')
+    const club = searchParams.get('club')
     const gender = searchParams.get('gender')
     const league = searchParams.get('league')
     const canton = searchParams.get('canton')
@@ -14,9 +14,9 @@ export async function GET(request: Request) {
     // Build where clause for clubs
     const where: any = {}
     
-    // If clubId is specified, only get that club
-    if (clubId) {
-      where.id = clubId
+    // If club is specified, only get that club
+    if (club) {
+      where.id = club
     }
     
     // Filter by canton if specified
@@ -84,15 +84,15 @@ export async function GET(request: Request) {
       ]
     })
     
-    // If clubId was specified, return just the players
-    if (clubId) {
-      const club = clubs[0]
-      if (!club) {
+    // If club was specified, return just the players
+    if (club) {
+      const clubData = clubs[0]
+      if (!clubData) {
         return NextResponse.json({ players: [], total: 0 })
       }
       return NextResponse.json({
-        players: club.currentPlayers,
-        total: club.currentPlayers.length
+        players: clubData.currentPlayers,
+        total: clubData.currentPlayers.length
       })
     }
     

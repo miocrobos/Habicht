@@ -57,7 +57,7 @@ export default function ClubProfilePage() {
   const loadPlayers = async () => {
     try {
       const params = new URLSearchParams({
-        clubId,
+        club: clubId,
         ...playerFilters
       })
       const response = await axios.get(`/api/clubs/players?${params}`)

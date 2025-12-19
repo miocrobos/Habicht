@@ -53,17 +53,17 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-8">
             <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium">
               Spieler
             </Link>
-            <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium flex flex-col items-center">
+            <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium flex flex-col items-center text-center gap-1">
               <span>Herren</span>
-              <span className="text-xl">♂</span>
+              <span className="text-2xl">♂</span>
             </Link>
-            <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium flex flex-col items-center">
+            <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium flex flex-col items-center text-center gap-1">
               <span>Damen</span>
-              <span className="text-xl">♀</span>
+              <span className="text-2xl">♀</span>
             </Link>
             <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium">
               Clubs
@@ -154,13 +154,13 @@ export default function Header() {
               <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 Spieler
               </Link>
-              <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium flex flex-col items-center">
+              <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium flex flex-col items-center text-center gap-1">
                 <span>Herren</span>
-                <span className="text-xl">♂</span>
+                <span className="text-2xl">♂</span>
               </Link>
-              <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium flex flex-col items-center">
+              <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium flex flex-col items-center text-center gap-1">
                 <span>Damen</span>
-                <span className="text-xl">♀</span>
+                <span className="text-2xl">♀</span>
               </Link>
               <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 Clubs

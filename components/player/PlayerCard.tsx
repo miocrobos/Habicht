@@ -10,6 +10,14 @@ export default function PlayerCard({ player }: { player: any }) {
   const cantonInfo = getCantonInfo(player.canton)
   const age = player.dateOfBirth ? Math.floor((new Date().getTime() - new Date(player.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : null
   
+  // Get gradient based on gender
+  const getGradient = () => {
+    if (player.gender === 'FEMALE') {
+      return 'linear-gradient(135deg, #ec4899 0%, #ffffff 100%)' // Pink to white
+    }
+    return 'linear-gradient(135deg, #2563eb 0%, #ffffff 100%)' // Blue to white for male
+  }
+  
   return (
     <Link href={`/players/${player.id}`}>
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden cursor-pointer">
@@ -17,7 +25,7 @@ export default function PlayerCard({ player }: { player: any }) {
         <div 
           className="h-40 relative flex items-center justify-center"
           style={{ 
-            background: `linear-gradient(135deg, ${cantonInfo.colors.primary} 0%, ${cantonInfo.colors.secondary} 100%)`
+            background: getGradient()
           }}
         >
           {/* Gender Badge */}

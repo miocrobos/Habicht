@@ -692,6 +692,8 @@ interface SendProfileViewNotificationParams {
   viewerName: string
   viewerProfileUrl: string
   profileUrl: string
+  viewerImage?: string | null
+  viewerRole?: 'player' | 'recruiter' | null
 }
 
 export async function sendProfileViewNotification({
@@ -699,7 +701,9 @@ export async function sendProfileViewNotification({
   recipientName,
   viewerName,
   viewerProfileUrl,
-  profileUrl
+  profileUrl,
+  viewerImage,
+  viewerRole
 }: SendProfileViewNotificationParams): Promise<boolean> {
   try {
     if (process.env.NODE_ENV === 'development') {
@@ -723,6 +727,10 @@ export async function sendProfileViewNotification({
       return false;
     }
     
+    const roleLabel = viewerRole === 'player' ? 'Spieler' : viewerRole === 'recruiter' ? 'Scout' : 'Benutzer';
+    const defaultAvatar = 'https://www.habicht-volleyball.ch/default-avatar.png';
+    const avatarUrl = viewerImage || defaultAvatar;
+
     await resendClient.emails.send({
       from: 'Habicht Volleyball <noreply@habicht-volleyball.ch>',
       to: recipientEmail,
@@ -747,18 +755,39 @@ export async function sendProfileViewNotification({
                   <strong>${viewerName}</strong> het din Profil uf Habicht Volleyball aagluegt.
                 </p>
                 
+                <!-- User Card -->
+                <a href="https://www.habicht-volleyball.ch${viewerProfileUrl}" style="text-decoration: none; display: block; margin: 30px 0;">
+                  <div style="background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%); border: 2px solid #e5e7eb; border-radius: 12px; padding: 24px; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);">
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                      <div style="flex-shrink: 0;">
+                        <img src="${avatarUrl}" alt="${viewerName}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #dc2626; box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);" />
+                      </div>
+                      <div style="flex-grow: 1; text-align: left;">
+                        <h3 style="margin: 0 0 8px 0; color: #1f2937; font-size: 22px; font-weight: 700;">${viewerName}</h3>
+                        <p style="margin: 0; color: #dc2626; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">${roleLabel}</p>
+                        <p style="margin: 8px 0 0 0; color: #6b7280; font-size: 14px;">📍 Profil aaluege</p>
+                      </div>
+                      <div style="flex-shrink: 0;">
+                        <div style="width: 40px; height: 40px; background-color: #dc2626; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                          <span style="color: #ffffff; font-size: 20px;">→</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                
                 <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 20px; margin: 20px 0; border-radius: 4px;">
                   <p style="margin: 0; color: #1e40af; font-size: 14px;">
-                    Das isch e Zeiche dass din Profil Ufmerksamkeit bechunnt!
+                    💡 Das isch e Zeiche dass din Profil Ufmerksamkeit bechunnt!
                   </p>
                 </div>
                 
                 <div style="margin: 30px 0; text-align: center;">
-                  <a href="https://www.habicht-volleyball.ch${viewerProfileUrl}" style="display: inline-block; background-color: #dc2626; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 10px;">
+                  <a href="https://www.habicht-volleyball.ch${viewerProfileUrl}" style="display: inline-block; background-color: #dc2626; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 10px; box-shadow: 0 4px 6px rgba(220, 38, 38, 0.3);">
                     ${viewerName} aazeige
                   </a>
-                  <a href="https://www.habicht-volleyball.ch${profileUrl}" style="display: inline-block; background-color: #1f2937; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 10px;">
-                    Din Profil aazeige
+                  <a href="https://www.habicht-volleyball.ch/notifications" style="display: inline-block; background-color: #1f2937; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 10px; box-shadow: 0 4px 6px rgba(31, 41, 55, 0.3);">
+                    Zu Benachrichtigunge
                   </a>
                 </div>
                 

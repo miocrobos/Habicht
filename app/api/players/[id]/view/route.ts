@@ -133,7 +133,9 @@ export async function POST(
             recipientName: `${existingPlayer.firstName} ${existingPlayer.lastName}`,
             viewerName,
             viewerProfileUrl: viewerProfileUrl || '#',
-            profileUrl: `/players/${playerId}`
+            profileUrl: `/players/${playerId}`,
+            viewerImage: viewerImage,
+            viewerRole: viewer.player ? 'player' : viewer.recruiter ? 'recruiter' : null
           })
         } catch (emailError) {
           console.error('Error sending profile view email:', emailError)

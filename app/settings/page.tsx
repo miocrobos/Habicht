@@ -586,11 +586,16 @@ export default function SettingsPage() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                           </svg>
-                          Profil-Aaluege Zrucksetze
+                          Profil-Aaluege Zrucksetze (Nur Spieler)
                         </h3>
                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                          Setz alli Profil-Aaluege zruck uf 0. Das lösch alli Informatione über wer din Profil aagluegt het.
+                          Setz alli Profil-Aaluege zruck uf 0. Das lösch alli Informatione über wer din Spieler-Profil aagluegt het. Aaluege werdet nur für registrierti Benutzer gezählt und jede Benutzer zählt nur einmal.
                         </p>
+                        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg mb-4">
+                          <p className="text-sm text-blue-700 dark:text-blue-300">
+                            <strong>ℹ️ Hinweis:</strong> Recruiter-Profile händ kei Aaluege-Zähler. Nur Spieler-Profile werdet aagluegt und gezählt.
+                          </p>
+                        </div>
                         <button
                           onClick={async () => {
                             if (confirm('Möchtsch würkli alli Profil-Aaluege zrucksetze?')) {

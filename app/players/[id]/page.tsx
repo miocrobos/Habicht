@@ -10,6 +10,7 @@ import ImageUpload from '@/components/shared/ImageUpload'
 import ChatWindow from '@/components/chat/ChatWindow'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { generatePlayerCV } from '@/lib/generateCV'
+import { formatViewCount } from '@/lib/formatViewCount'
 import axios from 'axios'
 
 interface PlayerProfileProps {
@@ -533,7 +534,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         {/* View counter */}
         <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 text-sm z-10">
           <Eye className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-          <span className="font-semibold text-gray-900 dark:text-white">{player.views || 0}</span>
+          <span className="font-semibold text-gray-900 dark:text-white">{formatViewCount(player.views || 0)}</span>
           <span className="text-gray-600 dark:text-gray-400">Profilufrufe</span>
         </div>
       </div>

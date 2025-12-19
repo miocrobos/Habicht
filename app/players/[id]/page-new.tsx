@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
+import { formatViewCount } from '@/lib/formatViewCount'
 import axios from 'axios'
 
 interface PlayerProfileProps {
@@ -175,7 +176,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         {/* View counter */}
         <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 text-sm">
           <Eye className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-          <span className="font-semibold text-gray-900 dark:text-white">{player.views || 0}</span>
+          <span className="font-semibold text-gray-900 dark:text-white">{formatViewCount(player.views || 0)}</span>
           <span className="text-gray-600 dark:text-gray-400">Profilufrufe</span>
         </div>
       </div>

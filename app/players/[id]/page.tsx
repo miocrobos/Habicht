@@ -1263,12 +1263,13 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     <button
                       key={option.id}
                       onClick={async () => {
-                        setSelectedBg(option)
-                        setCustomBgImage(null)
-                        setShowBackgroundModal(false)
-                        
-                        // Save gradient/color to database by clearing coverImage
                         try {
+                          // Update UI immediately for instant feedback
+                          setSelectedBg(option)
+                          setCustomBgImage(null)
+                          setShowBackgroundModal(false)
+                          
+                          // Save gradient/color to database by clearing coverImage
                           const currentResponse = await axios.get(`/api/players/${params.id}`)
                           const currentPlayer = currentResponse.data.player
                           
@@ -1313,13 +1314,18 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                             achievements: currentPlayer.achievements || [],
                           })
                           
-                          // Refresh player data
+                          // Refresh player data to ensure consistency
                           const playerResponse = await axios.get(`/api/players/${params.id}`)
                           setPlayer(playerResponse.data.player)
+                          
+                          // Show success message
                           alert('Hintergrund erfolgriich gänderet!')
                         } catch (error) {
                           console.error('Error updating background:', error)
                           alert('Fehler bim Hintergrund Ändere')
+                          // Revert changes on error
+                          const playerResponse = await axios.get(`/api/players/${params.id}`)
+                          setPlayer(playerResponse.data.player)
                         }
                       }}
                       className={`h-20 rounded-lg transition-all hover:scale-105 hover:shadow-lg border-2 ${

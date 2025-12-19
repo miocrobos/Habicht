@@ -35,20 +35,23 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
+          <nav className="hidden md:flex items-center space-x-6">
+            <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium">
               Spieler
             </Link>
-            <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium">
+            <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
               ♂ Herren
             </Link>
-            <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium">
+            <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition">
               ♀ Damen
             </Link>
-            <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
+            <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium">
               Clubs
             </Link>
-            <Link href="/about" className="text-gray-700 hover:text-swiss-red transition">
+            <Link href="/recruiters" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition font-medium">
+              Rekrutierer
+            </Link>
+            <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
               Über uns
             </Link>
             {session?.user.role === 'RECRUITER' && (
@@ -125,6 +128,9 @@ export default function Header() {
               </Link>
               <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 Clubs
+              </Link>
+              <Link href="/recruiters" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition font-medium">
+                👥 Rekrutierer
               </Link>
               <Link href="/settings" className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 <Settings className="w-5 h-5" />

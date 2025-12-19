@@ -148,7 +148,7 @@ model Player {
   clubName          String?     // Name of current club (if not in our database)
   currentClubId     String?
   currentClub       Club?       @relation("CurrentClub", fields: [currentClubId], references: [id])
-  currentLeague     League
+  currentLeague     League?     // Current league - only set if player has current club
   desiredLeague     League?     // Target league level player wants to play in
   interestedClubs   String[]    @default([]) // Array of club IDs player is interested in
   
@@ -227,15 +227,24 @@ model Club {
   // Location
   canton            Canton
   town              String
+  municipality      String?     // Gemeinde/Municipality within canton
   
   // Contact
   email             String?
   phone             String?
   
+  // Social Media
+  facebook          String?     // Facebook page URL
+  instagram         String?     // Instagram handle
+  tiktok            String?     // TikTok handle
+  twitter           String?     // Twitter/X handle
+  youtube           String?     // YouTube channel URL
+  
   // Info
   founded           Int?        // founding year
   description       String?     @db.Text
   colors            String[]
+  achievements      String[]    @default([]) // Club achievements and titles
   
   // League teams - boolean flags for which leagues/genders this club has teams in
   hasNLAMen         Boolean     @default(false)

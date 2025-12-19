@@ -10,13 +10,32 @@ export default function SubmitClubPage() {
     submitterName: '',
     submitterEmail: '',
     clubName: '',
-    league: '',
+    leagues: [] as string[], // Changed to array for multiple leagues
     canton: '',
+    municipality: '',
     website: '',
+    facebook: '',
+    instagram: '',
+    tiktok: '',
+    twitter: '',
+    youtube: '',
+    founded: '',
+    achievements: '',
     additionalInfo: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const AVAILABLE_LEAGUES = ['NLA', 'NLB', '1. Liga', '2. Liga', '3. Liga', '4. Liga', 'U23', 'U19', 'U17'];
+
+  const handleLeagueToggle = (league: string) => {
+    setFormData(prev => ({
+      ...prev,
+      leagues: prev.leagues.includes(league)
+        ? prev.leagues.filter(l => l !== league)
+        : [...prev.leagues, league]
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,9 +49,17 @@ export default function SubmitClubPage() {
         submitterName: '',
         submitterEmail: '',
         clubName: '',
-        league: '',
+        leagues: [],
         canton: '',
+        municipality: '',
         website: '',
+        facebook: '',
+        instagram: '',
+        tiktok: '',
+        twitter: '',
+        youtube: '',
+        founded: '',
+        achievements: '',
         additionalInfo: '',
       });
     } catch (error) {
@@ -128,15 +155,29 @@ export default function SubmitClubPage() {
 
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Liga
+                    Ligen (Wähl Alli Wo Dr Club Spielt)
                   </label>
-                  <input
-                    type="text"
-                    value={formData.league}
-                    onChange={(e) => setFormData({ ...formData, league: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
-                    placeholder="z.B. NLA, NLB, 1. Liga"
-                  />
+                  <div className="grid grid-cols-3 gap-2">
+                    {AVAILABLE_LEAGUES.map((league) => (
+                      <label
+                        key={league}
+                        className={`flex items-center justify-center px-3 py-2 border rounded-lg cursor-pointer transition ${
+                          formData.leagues.includes(league)
+                            ? 'bg-red-600 text-white border-red-600'
+                            : 'bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 hover:border-red-400'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={formData.leagues.includes(league)}
+                          onChange={() => handleLeagueToggle(league)}
+                          className="sr-only"
+                        />
+                        <span className="text-sm font-medium">{league}</span>
+                      </label>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">Mehrfachauswahl möglich</p>
                 </div>
 
                 <div>
@@ -149,7 +190,135 @@ export default function SubmitClubPage() {
                     onChange={(e) => setFormData({ ...formData, canton: e.target.value })}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
                     placeholder="z.B. Bern, Zürich"
+                    required
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Gemeinde
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.municipality}
+                    onChange={(e) => setFormData({ ...formData, municipality: e.target.value })}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                    placeholder="z.B. Interlaken, Winterthur"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Gründigsjahr
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.founded}
+                    onChange={(e) => setFormData({ ...formData, founded: e.target.value })}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                    placeholder="z.B. 1995"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Websiite
+                  </label>
+                  <input
+                    type="url"
+                    value={formData.website}
+                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                    placeholder="https://example.ch"
+                  />
+                </div>
+
+                {/* Social Media Section */}
+                <div className="border-t pt-4 mt-4">
+                  <h3 className="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
+                    Social Media
+                  </h3>
+                  
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        Facebook
+                      </label>
+                      <input
+                        type="url"
+                        value={formData.facebook}
+                        onChange={(e) => setFormData({ ...formData, facebook: e.target.value })}
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                        placeholder="https://facebook.com/clubname"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        Instagram
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.instagram}
+                        onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                        placeholder="@clubname"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        TikTok
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.tiktok}
+                        onChange={(e) => setFormData({ ...formData, tiktok: e.target.value })}
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                        placeholder="@clubname"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        Twitter/X
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.twitter}
+                        onChange={(e) => setFormData({ ...formData, twitter: e.target.value })}
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                        placeholder="@clubname"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        YouTube
+                      </label>
+                      <input
+                        type="url"
+                        value={formData.youtube}
+                        onChange={(e) => setFormData({ ...formData, youtube: e.target.value })}
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                        placeholder="https://youtube.com/@clubname"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Erfolg & Titel
+                  </label>
+                  <textarea
+                    value={formData.achievements}
+                    onChange={(e) => setFormData({ ...formData, achievements: e.target.value })}
+                    rows={3}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                    placeholder="z.B. Schwiizermeister 2020, NLA Uffstig 2019 (Ei Erfolg Pro Linie)"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Ei Erfolg Pro Linie</p>
                 </div>
 
                 <div>

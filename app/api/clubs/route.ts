@@ -77,32 +77,8 @@ export async function GET(request: Request) {
       }
     })
 
-    // Filter clubs based on gender and position
-    let filteredClubs = clubs.map((club: any) => {
-      let players = club.currentPlayers
-      
-      // Apply gender filter
-      if (gender) {
-        players = players.filter((p: any) => p.gender === gender)
-      }
-      
-      // Apply position filter
-      if (position) {
-        players = players.filter((p: any) => p.positions && p.positions.includes(position))
-      }
-      
-      return {
-        ...club,
-        filteredPlayerCount: players.length
-      }
-    })
-
-    // Only show clubs that have players matching the filters
-    if (gender || position) {
-      filteredClubs = filteredClubs.filter((club: any) => club.filteredPlayerCount > 0)
-    }
-
-    const clubsWithLeagues = filteredClubs.map((club: any) => {
+    // Process clubs and apply filters
+    const clubsWithLeagues = clubs.map((club: any) => {
       // Build list of leagues club participates in
       const leagues: string[] = []
       if (club.hasNLAMen || club.hasNLAWomen) leagues.push('NLA')
@@ -115,6 +91,17 @@ export async function GET(request: Request) {
       if (club.hasU19Men || club.hasU19Women) leagues.push('U19')
       if (club.hasU17Men || club.hasU17Women) leagues.push('U17')
       
+      // Filter players based on gender and position
+      let filteredPlayers = club.currentPlayers || []
+      
+      if (gender) {
+        filteredPlayers = filteredPlayers.filter((p: any) => p.gender === gender)
+      }
+      
+      if (position) {
+        filteredPlayers = filteredPlayers.filter((p: any) => p.positions && p.positions.includes(position))
+      }
+      
       return {
         id: club.id,
         name: club.name,
@@ -124,12 +111,19 @@ export async function GET(request: Request) {
         description: club.description,
         logo: club.logo,
         leaguesDisplay: leagues,
-        playerCount: club.filteredPlayerCount || 0
+        // Always show total player count, not filtered count
+        playerCount: club.currentPlayers?.length || 0,
+        filteredPlayerCount: filteredPlayers.length
       }
     })
+    
+    // Only show clubs that have players matching the filters (if filters are applied)
+    const finalClubs = (gender || position) 
+      ? clubsWithLeagues.filter((club: any) => club.filteredPlayerCount > 0)
+      : clubsWithLeagues
 
     return NextResponse.json({
-      clubs: clubsWithLeagues,
+      clubs: finalClubs,
       total: clubs.length
     })
   } catch (error) {

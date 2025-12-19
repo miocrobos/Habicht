@@ -109,12 +109,12 @@ export default function LoginPage() {
             <img src="/eagle-logo.png" alt="Habicht Logo" className="w-full h-full object-contain" />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
-            {t('login.title')}
+            Aamelde
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-            {t('login.or')}{' '}
+            Oder{' '}
             <Link href="/auth/register" className="font-medium text-habicht-600 hover:text-habicht-500">
-              {t('login.register')}
+              erstell es neus Konto
             </Link>
           </p>
         </div>
@@ -145,7 +145,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
-                placeholder={t('login.email')}
+                placeholder="E-Mail"
               />
             </div>
             <div className="relative">
@@ -161,7 +161,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                placeholder={t('login.password')}
+                placeholder="Passwort"
               />
               <button
                 type="button"
@@ -188,13 +188,13 @@ export default function LoginPage() {
                 className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 dark:border-gray-600 rounded"
               />
               <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-white">
-                {t('login.rememberMe')}
+                Aameldet Bliibe
               </label>
             </div>
 
             <div className="text-sm">
               <Link href="/auth/forgot-password" className="font-medium text-habicht-600 hover:text-habicht-500">
-                {t('login.forgotPassword')}
+                Passwort Vergässe?
               </Link>
             </div>
           </div>
@@ -205,7 +205,7 @@ export default function LoginPage() {
               disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-habicht-600 hover:bg-habicht-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-habicht-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? t('login.loading') : t('login.button')}
+              {loading ? 'Lade...' : 'Aamelde'}
             </button>
           </div>
         </form>

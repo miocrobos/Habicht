@@ -510,47 +510,6 @@ export default function SettingsPage() {
                     <p className="text-sm text-gray-500 dark:text-gray-400">Verwalten Sie Ihr Konto oder löschen Sie es</p>
                   </div>
                   <div className="p-6 space-y-6">
-                    {/* Profile Information */}
-                    <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <h3 className="font-medium text-gray-900 dark:text-white mb-4">Profilinformationen</h3>
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Gemeinde/Municipality
-                          </label>
-                          <div className="flex gap-2">
-                            <input
-                              type="text"
-                              value={municipality}
-                              onChange={(e) => setMunicipality(e.target.value)}
-                              placeholder="z.B. Winterthur, Bern, etc."
-                              className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                            />
-                            <button
-                              onClick={async () => {
-                                try {
-                                  setLoading(true)
-                                  await axios.put(`/api/players/${session?.user?.playerId}`, {
-                                    playerData: { municipality: municipality || null }
-                                  })
-                                  showSaveConfirmation()
-                                } catch (error) {
-                                  console.error('Error updating municipality:', error)
-                                } finally {
-                                  setLoading(false)
-                                }
-                              }}
-                              disabled={loading}
-                              className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50"
-                            >
-                              Speichern
-                            </button>
-                          </div>
-                          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Gmeind I Dim Kanton</p>
-                        </div>
-                      </div>
-                    </div>
-
                     <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                       <h3 className="font-medium text-gray-900 dark:text-white mb-2">Kontoinformationen</h3>
                       <div className="space-y-2 text-sm">

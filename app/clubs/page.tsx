@@ -178,31 +178,18 @@ export default function ClubsPage() {
               {clubs.map((club: any) => (
                 <div key={club.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition p-6">
                   <div className="flex items-center gap-4 mb-4">
-                    {club.website ? (
-                      <a href={club.website} target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
-                        <ClubBadge clubName={club.name} size="lg" uploadedLogo={club.logo} />
-                      </a>
-                    ) : (
+                    {/* Club badge links to profile page */}
+                    <Link href={`/clubs/${club.id}`} className="hover:scale-110 transition-transform">
                       <ClubBadge clubName={club.name} size="lg" uploadedLogo={club.logo} />
-                    )}
+                    </Link>
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{club.name}</h3>
+                      <Link href={`/clubs/${club.id}`} className="hover:underline">
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{club.name}</h3>
+                      </Link>
                       <div className="flex items-center gap-2">
                         <CantonFlag canton={club.canton} size="sm" />
                         <p className="text-sm text-gray-600 dark:text-gray-400">{club.town}, {club.canton}</p>
                       </div>
-                      {club.leaguesDisplay && club.leaguesDisplay.length > 0 && (
-                        <div className="flex flex-wrap gap-1 mt-2">
-                          {club.leaguesDisplay.map((league: string, idx: number) => (
-                            <span
-                              key={idx}
-                              className="inline-block px-2 py-1 text-xs font-medium bg-habicht-100 dark:bg-habicht-900 text-habicht-800 dark:text-habicht-200 rounded"
-                            >
-                              {league}
-                            </span>
-                          ))}
-                        </div>
-                      )}
                     </div>
                   </div>
                   
@@ -212,22 +199,22 @@ export default function ClubsPage() {
                   </div>
                   
                   <div className="flex gap-2">
+                    <Link
+                      href={`/clubs/${club.id}`}
+                      className="flex-1 inline-block bg-habicht-600 text-white px-4 py-2 rounded-lg hover:bg-habicht-700 transition text-sm font-medium text-center"
+                    >
+                      Spieler →
+                    </Link>
                     {club.website && (
                       <a
                         href={club.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block bg-habicht-600 text-white px-4 py-2 rounded-lg hover:bg-habicht-700 transition text-sm font-medium"
+                        className="flex-1 inline-block bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white px-4 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition text-sm font-medium text-center"
                       >
                         Website →
                       </a>
                     )}
-                    <Link
-                      href={`/players?club=${club.name}`}
-                      className="inline-block bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white px-4 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition text-sm font-medium"
-                    >
-                      Spieler →
-                    </Link>
                   </div>
                 </div>
               ))}

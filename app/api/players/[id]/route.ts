@@ -82,6 +82,15 @@ export async function PUT(
 
     const isNewlyLooking = playerData.lookingForClub === true && existingPlayer?.lookingForClub === false;
 
+    // Find current club league from club history if available
+    let currentLeague = playerData.currentLeague;
+    if (clubHistory && clubHistory.length > 0) {
+      const currentClubHistory = clubHistory.find((club: any) => club.currentClub === true);
+      if (currentClubHistory && currentClubHistory.league) {
+        currentLeague = currentClubHistory.league;
+      }
+    }
+
     // Update player
     const player = await prisma.player.update({
       where: { id: params.id },
@@ -103,6 +112,7 @@ export async function PUT(
         occupation: playerData.occupation,
         schoolName: playerData.schoolName,
         positions: playerData.positions || [],
+        currentLeague: currentLeague,
         profileImage: playerData.profileImage,
         instagram: playerData.instagram,
         tiktok: playerData.tiktok,

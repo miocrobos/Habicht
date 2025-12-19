@@ -107,6 +107,21 @@ const BACKGROUND_OPTIONS = [
   { id: 'solid-dark', name: 'Dunkel', style: '#1f2937' },
 ]
 
+// Get default gradient based on gender and role
+const getDefaultGradient = (gender: string, role: string) => {
+  if (role === 'HYBRID') {
+    return 'linear-gradient(135deg, #f97316 0%, #ffffff 100%)' // Orange to white
+  }
+  if (role === 'RECRUITER') {
+    return 'linear-gradient(135deg, #dc2626 0%, #ffffff 100%)' // Red to white
+  }
+  // Player role
+  if (gender === 'FEMALE') {
+    return 'linear-gradient(135deg, #ec4899 0%, #ffffff 100%)' // Pink to white
+  }
+  return 'linear-gradient(135deg, #2563eb 0%, #ffffff 100%)' // Blue to white for male
+}
+
 export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [activeTab, setActiveTab] = useState('overview')
   const [player, setPlayer] = useState<PlayerData | null>(null)
@@ -147,6 +162,14 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         
         if (playerData) {
           setPlayer(playerData)
+          
+          // Set gradient based on player gender and user role
+          const defaultGradient = getDefaultGradient(playerData.gender, session?.user?.role || 'PLAYER')
+          setSelectedBg({
+            id: 'dynamic',
+            name: 'Dynamic',
+            style: defaultGradient
+          })
         }
 
         await axios.post(`/api/players/${params.id}/view`)
@@ -528,7 +551,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       </span>
                     )}
                     <span className="flex items-center gap-1">
-                      {player.gender === 'MALE' ? '♂' : '♀'} {t(player.gender === 'MALE' ? 'gender.male' : 'gender.female')}
+                      {player.gender === 'MALE' ? '♂' : '♀'} {player.gender === 'MALE' ? 'Männlich' : 'Weiblich'}
                     </span>
                     {player.nationality && (
                       <span>🏳 Nationalität: {player.nationality}</span>
@@ -555,11 +578,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           </span>
                         )}
                       </Link>
-                    )}
-                    {!player.currentClub && player.currentLeague && (
-                      <span className="flex items-center gap-1">
-                        🏆 {LEAGUE_TRANSLATIONS[player.currentLeague] || player.currentLeague}
-                      </span>
                     )}
                   </div>
 
@@ -692,7 +710,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 )}
                 {player.tiktok && (
                   <a
-                    href={`https://tiktok.com/${player.tiktok.replace('@', '')}`}
+                    href={`https://www.tiktok.com/@${player.tiktok.replace('@', '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg hover:opacity-90 transition font-semibold"

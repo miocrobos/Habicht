@@ -201,6 +201,7 @@ export default function WomenPlayersPage() {
                 <option value="MIDDLE_BLOCKER">Mittelblocker</option>
                 <option value="SETTER">Zuspieler</option>
                 <option value="LIBERO">Libero</option>
+                <option value="UNIVERSAL">Universal</option>
               </select>
             </div>
 

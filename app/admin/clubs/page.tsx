@@ -21,8 +21,48 @@ export default function ClubAdminPage() {
     town: '',
     website: '',
     logo: '',
-    leagues: []
+    leagues: {
+      hasNLAMen: false,
+      hasNLAWomen: false,
+      hasNLBMen: false,
+      hasNLBWomen: false,
+      has1LigaMen: false,
+      has1LigaWomen: false,
+      has2LigaMen: false,
+      has2LigaWomen: false,
+      has3LigaMen: false,
+      has3LigaWomen: false,
+      has4LigaMen: false,
+      has4LigaWomen: false,
+      hasU23Men: false,
+      hasU23Women: false,
+      hasU19Men: false,
+      hasU19Women: false,
+      hasU17Men: false,
+      hasU17Women: false,
+    }
   })
+
+  const LEAGUE_OPTIONS = [
+    { value: 'hasNLAMen', label: 'NLA Männer' },
+    { value: 'hasNLAWomen', label: 'NLA Frauen' },
+    { value: 'hasNLBMen', label: 'NLB Männer' },
+    { value: 'hasNLBWomen', label: 'NLB Frauen' },
+    { value: 'has1LigaMen', label: '1. Liga Männer' },
+    { value: 'has1LigaWomen', label: '1. Liga Frauen' },
+    { value: 'has2LigaMen', label: '2. Liga Männer' },
+    { value: 'has2LigaWomen', label: '2. Liga Frauen' },
+    { value: 'has3LigaMen', label: '3. Liga Männer' },
+    { value: 'has3LigaWomen', label: '3. Liga Frauen' },
+    { value: 'has4LigaMen', label: '4. Liga Männer' },
+    { value: 'has4LigaWomen', label: '4. Liga Frauen' },
+    { value: 'hasU23Men', label: 'U23 Männer' },
+    { value: 'hasU23Women', label: 'U23 Frauen' },
+    { value: 'hasU19Men', label: 'U19 Männer' },
+    { value: 'hasU19Women', label: 'U19 Frauen' },
+    { value: 'hasU17Men', label: 'U17 Männer' },
+    { value: 'hasU17Women', label: 'U17 Frauen' },
+  ];
 
   useEffect(() => {
     loadClubs()
@@ -48,6 +88,7 @@ export default function ClubAdminPage() {
       await axios.put(`/api/clubs/${editingClub.id}`, {
         website: editingClub.website,
         logo: editingClub.logo,
+        leagues: editingClub.leagues
       })
       
       setSuccessMessage(`${editingClub.name} erfolgreich aktualisiert!`)
@@ -76,7 +117,26 @@ export default function ClubAdminPage() {
       setSuccessMessage(`${newClub.name} erfolgreich hinzugefügt!`)
       setTimeout(() => setSuccessMessage(''), 3000)
       
-      setNewClub({ name: '', canton: '', town: '', website: '', logo: '', leagues: [] })
+      setNewClub({ name: '', canton: '', town: '', website: '', logo: '', leagues: {
+        hasNLAMen: false,
+        hasNLAWomen: false,
+        hasNLBMen: false,
+        hasNLBWomen: false,
+        has1LigaMen: false,
+        has1LigaWomen: false,
+        has2LigaMen: false,
+        has2LigaWomen: false,
+        has3LigaMen: false,
+        has3LigaWomen: false,
+        has4LigaMen: false,
+        has4LigaWomen: false,
+        hasU23Men: false,
+        hasU23Women: false,
+        hasU19Men: false,
+        hasU19Women: false,
+        hasU17Men: false,
+        hasU17Women: false,
+      } })
       setShowAddForm(false)
       loadClubs()
     } catch (error) {
@@ -232,7 +292,26 @@ export default function ClubAdminPage() {
               <button
                 onClick={() => {
                   setShowAddForm(false)
-                  setNewClub({ name: '', canton: '', town: '', website: '', logo: '', leagues: [] })
+                  setNewClub({ name: '', canton: '', town: '', website: '', logo: '', leagues: {
+                    hasNLAMen: false,
+                    hasNLAWomen: false,
+                    hasNLBMen: false,
+                    hasNLBWomen: false,
+                    has1LigaMen: false,
+                    has1LigaWomen: false,
+                    has2LigaMen: false,
+                    has2LigaWomen: false,
+                    has3LigaMen: false,
+                    has3LigaWomen: false,
+                    has4LigaMen: false,
+                    has4LigaWomen: false,
+                    hasU23Men: false,
+                    hasU23Women: false,
+                    hasU19Men: false,
+                    hasU19Women: false,
+                    hasU17Men: false,
+                    hasU17Women: false,
+                  } })
                 }}
                 disabled={saving}
                 className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition font-medium disabled:opacity-50"
@@ -345,6 +424,32 @@ export default function ClubAdminPage() {
                             className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
                             placeholder="https://club-website.ch"
                           />
+                        </div>
+
+                        {/* League Management */}
+                        <div className="mb-4">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Ligen (Wähl Alli Teams Vom Club)
+                          </label>
+                          <div className="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto border border-gray-300 dark:border-gray-600 rounded-lg p-3">
+                            {LEAGUE_OPTIONS.map(({ value, label }) => (
+                              <label
+                                key={value}
+                                className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={editingClub.leagues?.[value] || false}
+                                  onChange={(e) => setEditingClub({ 
+                                    ...editingClub, 
+                                    leagues: { ...editingClub.leagues, [value]: e.target.checked }
+                                  })}
+                                  className="rounded border-gray-300 text-red-600 focus:ring-red-500"
+                                />
+                                <span className="text-sm">{label}</span>
+                              </label>
+                            ))}
+                          </div>
                         </div>
 
                         {/* Action Buttons */}

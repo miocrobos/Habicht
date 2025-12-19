@@ -18,33 +18,59 @@ export async function GET(request: NextRequest) {
       isPublic: true,
     }
 
+    const andConditions: any[] = []
+
     if (search) {
-      where.OR = [
-        { firstName: { contains: search, mode: 'insensitive' } },
-        { lastName: { contains: search, mode: 'insensitive' } },
-        { schoolName: { contains: search, mode: 'insensitive' } },
-        { currentClub: { name: { contains: search, mode: 'insensitive' } } },
-      ]
+      andConditions.push({
+        OR: [
+          { firstName: { contains: search, mode: 'insensitive' } },
+          { lastName: { contains: search, mode: 'insensitive' } },
+          { schoolName: { contains: search, mode: 'insensitive' } },
+          { currentClub: { name: { contains: search, mode: 'insensitive' } } },
+        ]
+      })
     }
 
     if (position) {
-      where.position = position
+      // Check if positions array contains the specified position
+      andConditions.push({
+        positions: {
+          has: position
+        }
+      })
     }
 
     if (canton) {
-      where.canton = canton
+      andConditions.push({ canton })
     }
 
     if (league) {
-      where.currentLeague = league
+      // Check both currentLeague and clubHistory for league filter
+      andConditions.push({
+        OR: [
+          { currentLeague: league },
+          {
+            clubHistory: {
+              some: {
+                league: league,
+                currentClub: true
+              }
+            }
+          }
+        ]
+      })
     }
 
     if (minHeight) {
-      where.height = { gte: parseInt(minHeight) }
+      andConditions.push({ height: { gte: parseInt(minHeight) } })
     }
 
     if (gender) {
-      where.gender = gender
+      andConditions.push({ gender })
+    }
+
+    if (andConditions.length > 0) {
+      where.AND = andConditions
     }
 
     // Fetch players

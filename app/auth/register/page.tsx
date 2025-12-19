@@ -14,7 +14,7 @@ export default function RegisterPage() {
           <p className="mt-3 text-lg text-gray-600 dark:text-gray-400">Bisch Du Spieler Oder Rekrutierer?</p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           {/* Player Card */}
           <button
             onClick={() => router.push('/auth/register/player')}
@@ -31,6 +31,31 @@ export default function RegisterPage() {
               <div className="pt-4">
                 <span className="inline-flex items-center text-red-600 dark:text-red-400 font-semibold group-hover:gap-2 transition-all">
                   Als Spieler Registriere
+                  <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                </span>
+              </div>
+            </div>
+          </button>
+
+          {/* Hybrid Card */}
+          <button
+            onClick={() => router.push('/auth/register/hybrid')}
+            className="group bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all hover:scale-105 border-2 border-transparent hover:border-orange-500"
+          >
+            <div className="flex flex-col items-center text-center space-y-4">
+              <div className="w-24 h-24 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center group-hover:bg-orange-200 dark:group-hover:bg-orange-900/50 transition">
+                <div className="flex items-center justify-center">
+                  <Trophy className="w-8 h-8 text-orange-600 dark:text-orange-400 -mr-2" />
+                  <Users className="w-8 h-8 text-orange-600 dark:text-orange-400 -ml-2" />
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Hybrid</h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Meld Dich Als Spieler UND Rekrutierer Aa. Kombinier Beidi Rolle Und Häb Volli Möglichkeite.
+              </p>
+              <div className="pt-4">
+                <span className="inline-flex items-center text-orange-600 dark:text-orange-400 font-semibold group-hover:gap-2 transition-all">
+                  Als Hybrid Registriere
                   <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
                 </span>
               </div>

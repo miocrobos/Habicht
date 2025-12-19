@@ -3,6 +3,63 @@ import { prisma } from '@/lib/prisma'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const club = await prisma.club.findUnique({
+      where: { id: params.id },
+      include: {
+        currentPlayers: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                email: true,
+                emailVerified: true,
+              }
+            }
+          }
+        },
+        recruiters: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                email: true,
+                emailVerified: true,
+              }
+            },
+            club: {
+              select: {
+                id: true,
+                name: true,
+                logo: true,
+              }
+            }
+          }
+        }
+      }
+    })
+
+    if (!club) {
+      return NextResponse.json(
+        { error: 'Club not found' },
+        { status: 404 }
+      )
+    }
+
+    return NextResponse.json(club)
+  } catch (error) {
+    console.error('Error fetching club:', error)
+    return NextResponse.json(
+      { error: 'Failed to fetch club' },
+      { status: 500 }
+    )
+  }
+}
+
 export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
@@ -19,7 +76,7 @@ export async function PUT(
     }
 
     const data = await req.json()
-    const { website, logo } = data
+    const { website, logo, leagues } = data
 
     // Get current club to check if logo already exists
     const currentClub = await prisma.club.findUnique({
@@ -42,6 +99,15 @@ export async function PUT(
     }
     // If trying to set logo to null/empty but club already has a logo, keep the existing logo
     // This prevents accidental logo deletion
+    
+    // Update league flags if provided
+    if (leagues) {
+      Object.keys(leagues).forEach(key => {
+        if (key.startsWith('has')) {
+          updateData[key] = leagues[key]
+        }
+      })
+    }
 
     const updatedClub = await prisma.club.update({
       where: { id: params.id },

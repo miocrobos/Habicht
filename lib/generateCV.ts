@@ -18,6 +18,7 @@ interface PlayerData {
   currentLeague?: string | null;
   bio?: string | null;
   achievements?: string[];
+  profileImage?: string | null;
   user: {
     email: string;
   };
@@ -47,44 +48,111 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
 
   let yPos = 20;
 
-  // Header with logo placeholder and title
+  // Header with logo and title
   doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
   doc.rect(0, 0, 210, 40, 'F');
   
-  // Add "VERIFIED BY HABICHT" stamp
-  doc.setFontSize(10);
+  // Player name on the left
+  doc.setFontSize(22);
+  doc.setFont('helvetica', 'bold');
   doc.setTextColor(255, 255, 255);
-  doc.text('VERIFIED BY', 15, 15);
-  doc.setFontSize(24);
-  doc.setFont('helvetica', 'bold');
-  doc.text('HABICHT', 15, 25);
-  doc.setFontSize(8);
-  doc.setFont('helvetica', 'normal');
-  doc.text('Swiss Volleyball Scouting Platform', 15, 32);
-  
-  // Player name on the right
-  doc.setFontSize(28);
-  doc.setFont('helvetica', 'bold');
   const fullName = `${playerData.firstName} ${playerData.lastName}`.toUpperCase();
-  const nameWidth = doc.getTextWidth(fullName);
-  doc.text(fullName, 210 - nameWidth - 15, 25);
+  doc.text(fullName, 15, 25);
   
-  // Position subtitle
+  // Position subtitle on the left
   doc.setFontSize(14);
   doc.setFont('helvetica', 'normal');
-  doc.setTextColor(255, 255, 255);
   const positionText = playerData.positions?.join(', ') || 'Volleyball Player';
-  const positionWidth = doc.getTextWidth(positionText);
-  doc.text(positionText, 210 - positionWidth - 15, 33);
+  doc.text(positionText, 15, 33);
+  
+  // Add logo and "VERIFIED BY HABICHT" stamp at top right
+  try {
+    // Load eagle logo - use absolute URL
+    const logoUrl = typeof window !== 'undefined' 
+      ? `${window.location.origin}/eagle-logo.png` 
+      : 'https://www.habicht-volleyball.ch/eagle-logo.png';
+    
+    const logoResponse = await fetch(logoUrl);
+    const logoBlob = await logoResponse.blob();
+    const logoBase64 = await new Promise<string>((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.readAsDataURL(logoBlob);
+    });
+    
+    // Add logo image at top right
+    doc.addImage(logoBase64, 'PNG', 185, 8, 15, 15);
+    
+    // Add "VERIFIED BY HABICHT" text next to logo
+    doc.setFontSize(5);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(255, 255, 255);
+    doc.text('VERIFIED BY', 182, 11, { align: 'right' });
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'bold');
+    doc.text('HABICHT', 182, 16, { align: 'right' });
+  } catch (error) {
+    console.log('Could not add logo, using text only');
+    // Fallback to text-based verification if logo fails
+    doc.setFontSize(6);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(255, 255, 255);
+    doc.text('VERIFIED BY', 195, 12, { align: 'right' });
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'bold');
+    doc.text('HABICHT', 195, 17, { align: 'right' });
+  }
 
   yPos = 50;
 
-  // Personal Information Section
+  // Personal Information Section with Profile Image
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
   doc.text('PERSONAL INFORMATION', 15, yPos);
   yPos += 8;
+
+  // Add profile photo beside personal information (right side)
+  let profileImageAdded = false;
+  if (playerData.profileImage) {
+    try {
+      console.log('Attempting to load profile image:', playerData.profileImage);
+      const imageUrl = playerData.profileImage.startsWith('http') 
+        ? playerData.profileImage 
+        : `${typeof window !== 'undefined' ? window.location.origin : 'https://www.habicht-volleyball.ch'}${playerData.profileImage.startsWith('/') ? '' : '/'}${playerData.profileImage}`;
+      
+      console.log('Profile image URL:', imageUrl);
+      const profileResponse = await fetch(imageUrl);
+      
+      if (!profileResponse.ok) {
+        throw new Error(`Failed to fetch profile image: ${profileResponse.status}`);
+      }
+      
+      const profileBlob = await profileResponse.blob();
+      const profileBase64 = await new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.readAsDataURL(profileBlob);
+      });
+      
+      // Detect format from base64 string
+      let imageFormat: 'PNG' | 'JPEG' = 'JPEG';
+      if (profileBase64.includes('image/png')) {
+        imageFormat = 'PNG';
+      } else if (profileBase64.includes('image/jpg') || profileBase64.includes('image/jpeg')) {
+        imageFormat = 'JPEG';
+      }
+      
+      // Add professional profile photo beside personal info (35x45mm professional size)
+      doc.addImage(profileBase64, imageFormat, 155, yPos - 5, 35, 45);
+      profileImageAdded = true;
+      console.log('Profile image added successfully');
+    } catch (error) {
+      console.error('Could not load profile photo for personal info:', error);
+    }
+  } else {
+    console.log('No profile image provided in player data');
+  }
 
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
@@ -261,27 +329,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     yPos += lines.length * 5 + 10;
   }
 
-  // Bio/About
-  if (playerData.bio) {
-    if (yPos > 240) {
-      doc.addPage();
-      yPos = 20;
-    }
-
-    doc.setFontSize(16);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('ABOUT', 15, yPos);
-    yPos += 8;
-
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
-    const lines = doc.splitTextToSize(playerData.bio, 180);
-    doc.text(lines, 15, yPos);
-  }
-
-  // Footer
+  // Footer with page numbers only
   const pageCount = (doc as any).internal.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);

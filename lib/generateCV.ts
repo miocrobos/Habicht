@@ -39,6 +39,9 @@ interface PlayerData {
 }
 
 export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
+  console.log('🎯 CV Generation v2.0 - Professional Format Starting...');
+  console.log('Player:', playerData.firstName, playerData.lastName);
+  
   const doc = new jsPDF();
   
   // Colors - Habicht red theme
@@ -106,6 +109,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   yPos = 50;
 
   // Personal Profile Section with Photo (more human, narrative style)
+  console.log('✅ Using NEW Professional Format (PERSÖNLICHS PROFIL)');
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);

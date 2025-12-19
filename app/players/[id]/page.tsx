@@ -301,18 +301,26 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     if (!player) return
 
     try {
+      console.log('=== CV EXPORT v2.0 (Professional Format) ===')
+      console.log('Player data:', player)
+      
       // Generate PDF using the utility function
       const pdfBlob = await generatePlayerCV(player)
       
-      // Create download link
+      console.log('PDF generated, size:', pdfBlob.size, 'bytes')
+      
+      // Create download link with timestamp to prevent caching
       const url = URL.createObjectURL(pdfBlob)
       const link = document.createElement('a')
       link.href = url
-      link.download = `${player.firstName}_${player.lastName}_CV.pdf`
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
+      link.download = `${player.firstName}_${player.lastName}_CV_${timestamp}.pdf`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
       URL.revokeObjectURL(url)
+      
+      console.log('CV downloaded successfully')
     } catch (error) {
       console.error('Error exporting CV:', error)
       alert('Fehler bim CV Export')

@@ -89,20 +89,6 @@ export default function Header() {
 
           {/* Right side buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            {session && (
-              <Link 
-                href="/messages" 
-                className={`flex items-center justify-center w-10 h-10 text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition relative ${unreadCount > 0 ? 'animate-bounce' : ''}`}
-                title="Nachrichten"
-              >
-                <Bell className={`w-5 h-5 ${unreadCount > 0 ? 'text-red-600 dark:text-red-400' : ''}`} />
-                {unreadCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                    {unreadCount > 9 ? '9+' : unreadCount}
-                  </span>
-                )}
-              </Link>
-            )}
             {session && <NotificationPopup />}
             <Link 
               href="/settings" 

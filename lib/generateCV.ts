@@ -237,7 +237,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
 
     doc.setFontSize(11);
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
+    doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]); // Black color
     doc.text(playerData.currentClub.name, 15, yPos);
     yPos += 6;
 
@@ -268,12 +268,12 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     const clubHistoryData = playerData.clubHistory.map(club => [
       club.clubName,
       club.league || 'N/A',
-      `${new Date(club.startDate).getFullYear()} - ${club.endDate ? new Date(club.endDate).getFullYear() : 'Present'}`
+      `${new Date(club.startDate).getFullYear()} - ${club.endDate ? new Date(club.endDate).getFullYear() : 'Aktuell'}`
     ]);
 
     autoTable(doc, {
       startY: yPos,
-      head: [['Club', 'League', 'Period']],
+      head: [['Club', 'Liga', 'Periode']],
       body: clubHistoryData,
       theme: 'striped',
       headStyles: {
@@ -282,7 +282,14 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
         fontSize: 10,
         fontStyle: 'bold'
       },
-      styles: { fontSize: 10, cellPadding: 3 }
+      styles: { 
+        fontSize: 10, 
+        cellPadding: 3,
+        textColor: [31, 41, 55] as [number, number, number] // Dark gray/black for club names
+      },
+      columnStyles: {
+        0: { fontStyle: 'bold' } // Make club names bold
+      }
     });
 
     yPos = (doc as any).lastAutoTable.finalY + 10;
@@ -313,7 +320,9 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
       educationLines.push(`Beruf: ${playerData.occupation}`);
     }
     if (playerData.employmentStatus) {
-      educationLines.push(`Status: ${playerData.employmentStatus}`);
+      // Remove underscores and capitalize properly
+      const formattedStatus = playerData.employmentStatus.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, (l: string) => l.toUpperCase());
+      educationLines.push(`Status: ${formattedStatus}`);
     }
     
     educationLines.forEach((line, index) => {

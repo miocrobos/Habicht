@@ -195,6 +195,7 @@ model Player {
   bio               String?     @db.Text
   profileImage      String      // Required profile picture
   coverImage        String?     // Optional backdrop/banner image
+  backgroundGradient String?     // Selected background gradient ID (e.g., 'gradient1', 'solid-red')
   achievements      String[]    @default([])        // Notable achievements list
   
   // Visibility & Status

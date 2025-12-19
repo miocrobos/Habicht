@@ -52,6 +52,7 @@ interface PlayerData {
   schoolName: string | null
   profileImage: string | null
   coverImage: string | null
+  backgroundGradient: string | null
   bio: string | null
   phone: string | null
   instagram: string | null
@@ -195,21 +196,19 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     fetchPlayer()
   }, [params.id])
 
-  // Set gradient based on player gender and user role
+  // Set gradient based on saved preference or default based on gender/role
   useEffect(() => {
     if (player && session) {
-      const defaultGradient = getDefaultGradient(player.gender, session.user?.role || 'PLAYER')
-      setSelectedBg({
-        id: 'dynamic',
-        name: 'Dynamic',
-        style: defaultGradient
-      })
-    }
-  }, [player, session])
-
-  // Set gradient based on player gender and user role
-  useEffect(() => {
-    if (player && session) {
+      // If player has a saved background gradient, use it
+      if (player.backgroundGradient) {
+        const savedBg = BACKGROUND_OPTIONS.find(bg => bg.id === player.backgroundGradient)
+        if (savedBg) {
+          setSelectedBg(savedBg)
+          return
+        }
+      }
+      
+      // Otherwise use default gradient based on gender and role
       const defaultGradient = getDefaultGradient(player.gender, session.user?.role || 'PLAYER')
       setSelectedBg({
         id: 'dynamic',
@@ -434,6 +433,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
           positions: currentPlayer.positions,
           profileImage: currentPlayer.profileImage,
           coverImage: newBackgroundImage,  // Update background
+          backgroundGradient: null,  // Clear gradient when using custom image
           instagram: currentPlayer.instagram,
           tiktok: currentPlayer.tiktok,
           youtube: currentPlayer.youtube,
@@ -1269,9 +1269,9 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           setShowBackgroundModal(false)
                           
                           // Update player state immediately to show gradient
-                          setPlayer(prev => prev ? { ...prev, coverImage: null } : prev)
+                          setPlayer(prev => prev ? { ...prev, coverImage: null, backgroundGradient: option.id } : prev)
                           
-                          // Save gradient/color to database by clearing coverImage
+                          // Save gradient/color to database
                           const currentResponse = await axios.get(`/api/players/${params.id}`)
                           const currentPlayer = currentResponse.data.player
                           
@@ -1297,6 +1297,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                               positions: currentPlayer.positions,
                               profileImage: currentPlayer.profileImage,
                               coverImage: null,  // Clear cover image to use gradient
+                              backgroundGradient: option.id,  // Save selected gradient ID
                               instagram: currentPlayer.instagram,
                               tiktok: currentPlayer.tiktok,
                               youtube: currentPlayer.youtube,

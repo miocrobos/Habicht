@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import { sendProfileViewNotification } from '@/lib/email'
 
 export async function POST(
   request: Request,
@@ -21,7 +22,19 @@ export async function POST(
     // Check if player exists first
     const existingPlayer = await prisma.player.findUnique({
       where: { id: playerId },
-      select: { id: true, userId: true }
+      select: { 
+        id: true, 
+        userId: true,
+        firstName: true,
+        lastName: true,
+        profileImage: true,
+        user: {
+          select: {
+            email: true,
+            name: true
+          }
+        }
+      }
     })
 
     if (!existingPlayer) {
@@ -49,8 +62,9 @@ export async function POST(
       }
     })
 
-    // Only create a new view if this user hasn't viewed before
+    // Only create notification and send email on first view
     if (!existingView) {
+      // Create view record
       await prisma.playerView.create({
         data: {
           playerId,
@@ -58,6 +72,74 @@ export async function POST(
           viewedAt: new Date()
         }
       })
+
+      // Get viewer info
+      const viewer = await prisma.user.findUnique({
+        where: { id: viewerUserId },
+        select: {
+          name: true,
+          email: true,
+          player: {
+            select: {
+              firstName: true,
+              lastName: true,
+              profileImage: true,
+              id: true
+            }
+          },
+          recruiter: {
+            select: {
+              firstName: true,
+              lastName: true,
+              profileImage: true,
+              id: true
+            }
+          }
+        }
+      })
+
+      if (viewer) {
+        const viewerName = viewer.player 
+          ? `${viewer.player.firstName} ${viewer.player.lastName}`
+          : viewer.recruiter
+          ? `${viewer.recruiter.firstName} ${viewer.recruiter.lastName}`
+          : viewer.name
+
+        const viewerImage = viewer.player?.profileImage || viewer.recruiter?.profileImage || null
+        const viewerProfileUrl = viewer.player
+          ? `/players/${viewer.player.id}`
+          : viewer.recruiter
+          ? `/recruiters/${viewer.recruiter.id}`
+          : null
+
+        // Create notification
+        await prisma.notification.create({
+          data: {
+            userId: existingPlayer.userId,
+            type: 'PROFILE_VIEW',
+            title: 'Profil Aagluegt',
+            message: `${viewerName} het din Profil aagluegt`,
+            senderId: viewerUserId,
+            senderName: viewerName,
+            senderImage: viewerImage,
+            actionUrl: viewerProfileUrl
+          }
+        })
+
+        // Send email notification
+        try {
+          await sendProfileViewNotification({
+            recipientEmail: existingPlayer.user.email,
+            recipientName: `${existingPlayer.firstName} ${existingPlayer.lastName}`,
+            viewerName,
+            viewerProfileUrl: viewerProfileUrl || '#',
+            profileUrl: `/players/${playerId}`
+          })
+        } catch (emailError) {
+          console.error('Error sending profile view email:', emailError)
+          // Don't fail the request if email fails
+        }
+      }
     }
 
     // Get total unique view count

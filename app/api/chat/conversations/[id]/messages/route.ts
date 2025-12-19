@@ -200,7 +200,9 @@ export async function POST(
         // Determine sender and recipient
         let recipientEmail = ''
         let recipientName = ''
+        let recipientUserId = ''
         let senderName = ''
+        let senderImage = ''
         let senderRoleText = ''
         let notifyEnabled = false
 
@@ -208,19 +210,41 @@ export async function POST(
           // Sender is player, recipient is recruiter
           recipientEmail = conversation.recruiter.user.email || ''
           recipientName = conversation.recruiter.user.name || 'Recruiter'
+          recipientUserId = conversation.recruiter.user.id
           senderName = conversation.player ? `${conversation.player.firstName} ${conversation.player.lastName}` : 'Spieler'
+          senderImage = conversation.player?.profileImage || ''
           senderRoleText = 'Spieler'
           notifyEnabled = conversation.recruiter.user.notifyChatMessages
         } else if (senderType === 'RECRUITER' && conversation.player?.user) {
           // Sender is recruiter, recipient is player
           recipientEmail = conversation.player.user.email || ''
           recipientName = `${conversation.player.firstName} ${conversation.player.lastName}`
+          recipientUserId = conversation.player.user.id
           senderName = conversation.recruiter?.user?.name || 'Recruiter'
+          senderImage = conversation.recruiter?.user?.image || ''
           senderRoleText = 'Recruiter'
           notifyEnabled = conversation.player.user.notifyChatMessages
         }
 
-        // Send notification if recipient email exists and notifications enabled
+        // Create notification for recipient
+        if (recipientUserId) {
+          await prisma.notification.create({
+            data: {
+              userId: recipientUserId,
+              type: 'MESSAGE',
+              title: `Nachricht vo ${senderName}`,
+              message: content.trim().substring(0, 100) + (content.trim().length > 100 ? '...' : ''),
+              senderId: session.user.id,
+              senderName,
+              senderImage,
+              actionUrl: `/chat/${params.id}`,
+              read: false,
+              emailSent: notifyEnabled && !!recipientEmail
+            }
+          })
+        }
+
+        // Send email notification if recipient email exists and notifications enabled
         if (recipientEmail && notifyEnabled) {
           await sendChatNotification({
             recipientEmail,

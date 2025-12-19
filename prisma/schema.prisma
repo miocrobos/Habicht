@@ -94,6 +94,14 @@ enum ChatRequestStatus {
   REJECTED
 }
 
+enum NotificationType {
+  PROFILE_VIEW
+  MESSAGE
+  CHAT_REQUEST
+  CLUB_INTEREST
+  RECRUITER_INTEREST
+}
+
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
@@ -116,6 +124,8 @@ model User {
   clubManager   ClubManager?
   passwordResetRequests PasswordResetRequest[]
   viewedProfiles PlayerView[] @relation("ViewerViews")
+  notifications Notification[] @relation("UserNotifications")
+  sentNotifications Notification[] @relation("NotificationSender")
 }
 
 model Player {
@@ -699,4 +709,33 @@ model PlayerView {
   @@unique([playerId, viewerUserId])
   @@index([playerId])
   @@index([viewerUserId])
+}
+
+// Notification system
+model Notification {
+  id              String           @id @default(cuid())
+  userId          String           
+  user            User             @relation("UserNotifications", fields: [userId], references: [id], onDelete: Cascade)
+  
+  type            NotificationType
+  title           String
+  message         String           @db.Text
+  
+  senderId        String?
+  sender          User?            @relation("NotificationSender", fields: [senderId], references: [id], onDelete: SetNull)
+  senderName      String?          
+  senderImage     String?          
+  
+  actionUrl       String?
+  
+  read            Boolean          @default(false)
+  emailSent       Boolean          @default(false)
+  
+  createdAt       DateTime         @default(now())
+  readAt          DateTime?
+  
+  @@index([userId])
+  @@index([type])
+  @@index([read])
+  @@index([createdAt])
 }

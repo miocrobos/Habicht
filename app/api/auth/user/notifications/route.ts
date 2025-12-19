@@ -3,6 +3,32 @@ import { getServerSession } from 'next-auth'
 import { prisma } from '@/lib/prisma'
 import { authOptions } from '@/lib/auth'
 
+// GET - Fetch user's notifications
+export async function GET(request: Request) {
+  try {
+    const session = await getServerSession(authOptions)
+    
+    if (!session?.user) {
+      return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
+    }
+
+    const notifications = await prisma.notification.findMany({
+      where: { userId: session.user.id },
+      orderBy: { createdAt: 'desc' },
+      take: 100
+    })
+
+    return NextResponse.json({ notifications })
+  } catch (error) {
+    console.error('Error fetching notifications:', error)
+    return NextResponse.json(
+      { error: 'Fehler beim Laden der Benachrichtigungen' },
+      { status: 500 }
+    )
+  }
+}
+
+// PUT - Update notification preferences
 export async function PUT(request: Request) {
   try {
     const session = await getServerSession(authOptions)
@@ -14,7 +40,6 @@ export async function PUT(request: Request) {
     const data = await request.json()
     const { notifyChatMessages, notifyPlayerLooking, notifyRecruiterSearching } = data
 
-    // Update user notification preferences
     await prisma.user.update({
       where: { id: session.user.id },
       data: {
@@ -28,7 +53,7 @@ export async function PUT(request: Request) {
   } catch (error) {
     console.error('Error updating notification settings:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Aktualisieren der Benachrichtigungseinstellungen' },
+      { error: 'Fehler beim Aktualisieren der Einstellungen' },
       { status: 500 }
     )
   }

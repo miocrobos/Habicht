@@ -22,6 +22,7 @@ export default function NotificationsPage() {
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<'all' | 'unread'>('all')
+  const [typeFilter, setTypeFilter] = useState<'all' | 'PROFILE_VIEW' | 'MESSAGE'>('all')
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -75,22 +76,23 @@ export default function NotificationsPage() {
 
   const getIcon = (type: string) => {
     switch (type) {
-      case 'profile_view':
+      case 'PROFILE_VIEW':
         return <Eye className="w-5 h-5" />
-      case 'message':
+      case 'MESSAGE':
         return <MessageCircle className="w-5 h-5" />
-      case 'connection':
+      case 'CHAT_REQUEST':
         return <UserPlus className="w-5 h-5" />
-      case 'achievement':
+      case 'CLUB_INTEREST':
+      case 'RECRUITER_INTEREST':
         return <Award className="w-5 h-5" />
       default:
         return <Bell className="w-5 h-5" />
     }
   }
 
-  const filteredNotifications = filter === 'unread'
-    ? notifications.filter(n => !n.read)
-    : notifications
+  const filteredNotifications = notifications
+    .filter(n => filter === 'unread' ? !n.read : true)
+    .filter(n => typeFilter === 'all' ? true : n.type === typeFilter)
 
   const unreadCount = notifications.filter(n => !n.read).length
 
@@ -134,27 +136,66 @@ export default function NotificationsPage() {
           </div>
 
           {/* Filter */}
-          <div className="flex gap-2">
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-lg transition ${
-                filter === 'all'
-                  ? 'bg-red-600 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
-              }`}
-            >
-              Alli ({notifications.length})
-            </button>
-            <button
-              onClick={() => setFilter('unread')}
-              className={`px-4 py-2 rounded-lg transition ${
-                filter === 'unread'
-                  ? 'bg-red-600 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
-              }`}
-            >
-              Ungleseni ({unreadCount})
-            </button>
+          <div className="flex flex-col gap-3">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setFilter('all')}
+                className={`px-4 py-2 rounded-lg transition ${
+                  filter === 'all'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                }`}
+              >
+                Alli ({notifications.length})
+              </button>
+              <button
+                onClick={() => setFilter('unread')}
+                className={`px-4 py-2 rounded-lg transition ${
+                  filter === 'unread'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                }`}
+              >
+                Ungleseni ({unreadCount})
+              </button>
+            </div>
+
+            {/* Type Filter */}
+            <div className="flex gap-2 flex-wrap">
+              <button
+                onClick={() => setTypeFilter('all')}
+                className={`px-4 py-2 rounded-lg transition flex items-center gap-2 ${
+                  typeFilter === 'all'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                }`}
+              >
+                <Bell className="w-4 h-4" />
+                Alli
+              </button>
+              <button
+                onClick={() => setTypeFilter('PROFILE_VIEW')}
+                className={`px-4 py-2 rounded-lg transition flex items-center gap-2 ${
+                  typeFilter === 'PROFILE_VIEW'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                }`}
+              >
+                <Eye className="w-4 h-4" />
+                Profil-Aaluege ({notifications.filter(n => n.type === 'PROFILE_VIEW').length})
+              </button>
+              <button
+                onClick={() => setTypeFilter('MESSAGE')}
+                className={`px-4 py-2 rounded-lg transition flex items-center gap-2 ${
+                  typeFilter === 'MESSAGE'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                }`}
+              >
+                <MessageCircle className="w-4 h-4" />
+                Nachrichta ({notifications.filter(n => n.type === 'MESSAGE').length})
+              </button>
+            </div>
           </div>
         </div>
 

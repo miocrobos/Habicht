@@ -1,11 +1,22 @@
-import { PrismaClient } from '@prisma/client';
+import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
 
-const prisma = new PrismaClient();
-
-async function syncCurrentClubs() {
-  console.log('🔄 Syncing current clubs for all players...\n');
-
+// Admin-only endpoint to sync current clubs for all players
+export async function POST(request: NextRequest) {
   try {
+    const session = await getServerSession();
+    
+    // Only allow admin users to run this sync
+    if (!session?.user || session.user.role !== 'ADMIN') {
+      return NextResponse.json(
+        { error: 'Unauthorized - Admin access required' },
+        { status: 401 }
+      );
+    }
+
+    console.log('🔄 Starting club sync via API...');
+
     // Get all players with their club history
     const players = await prisma.player.findMany({
       include: {
@@ -16,8 +27,6 @@ async function syncCurrentClubs() {
         }
       }
     });
-
-    console.log(`Found ${players.length} players to check\n`);
 
     let playersUpdated = 0;
     let playersCleared = 0;
@@ -36,7 +45,6 @@ async function syncCurrentClubs() {
             where: { id: player.id },
             data: { currentClubId: null }
           });
-          console.log(`🧹 Cleared currentClubId for ${player.firstName} ${player.lastName} (no current club)`);
           playersCleared++;
         } else {
           playersSkipped++;
@@ -53,7 +61,6 @@ async function syncCurrentClubs() {
         });
 
         if (!club) {
-          console.log(`⚠️  Club not found in DB: "${currentClubHistory.clubName}" for ${player.firstName} ${player.lastName}`);
           clubsNotFound++;
           
           // Clear currentClubId if club not found in database
@@ -70,7 +77,6 @@ async function syncCurrentClubs() {
               where: { id: player.id },
               data: { currentClubId: club.id }
             });
-            console.log(`✅ Updated player: ${player.firstName} ${player.lastName} -> ${club.name}`);
           }
 
           // Update current club history entry with clubId if not set
@@ -98,32 +104,40 @@ async function syncCurrentClubs() {
             }
           });
 
-          if (club) {
+          if (club && history.clubId !== club.id) {
             await prisma.clubHistory.update({
               where: { id: history.id },
               data: { clubId: club.id }
             });
-            console.log(`🔗 Linked history: ${player.firstName} ${player.lastName} -> ${club.name} (${history.startDate.getFullYear()})`);
             historyLinksUpdated++;
           }
         }
       }
     }
 
-    console.log('\n📊 Summary:');
-    console.log(`✅ Players updated/verified: ${playersUpdated}`);
-    console.log(`🧹 Players cleared (no current club): ${playersCleared}`);
-    console.log(`⏭️  Players skipped (already null): ${playersSkipped}`);
-    console.log(`🔗 Club history links created: ${historyLinksUpdated}`);
-    console.log(`⚠️  Clubs not found in DB: ${clubsNotFound}`);
-    console.log('\n✨ Sync complete!');
+    const summary = {
+      totalPlayers: players.length,
+      playersUpdated,
+      playersCleared,
+      playersSkipped,
+      historyLinksUpdated,
+      clubsNotFound,
+      success: true
+    };
+
+    console.log('✨ Club sync complete:', summary);
+
+    return NextResponse.json(summary);
 
   } catch (error) {
-    console.error('❌ Error syncing current clubs:', error);
-    throw error;
-  } finally {
-    await prisma.$disconnect();
+    console.error('❌ Error syncing clubs:', error);
+    return NextResponse.json(
+      { 
+        error: 'Internal server error',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        success: false
+      },
+      { status: 500 }
+    );
   }
 }
-
-syncCurrentClubs();

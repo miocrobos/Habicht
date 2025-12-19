@@ -114,6 +114,7 @@ model User {
   recruiter     Recruiter?
   clubManager   ClubManager?
   passwordResetRequests PasswordResetRequest[]
+  viewedProfiles PlayerView[] @relation("ViewerViews")
 }
 
 model Player {
@@ -214,6 +215,7 @@ model Player {
   chatRequests      ChatRequest[]
   conversations     Conversation[]
   sentMessages      Message[]   @relation("PlayerMessages")
+  profileViews      PlayerView[] @relation("ProfileViews")
 }
 
 model Club {
@@ -681,4 +683,18 @@ model PasswordResetRequest {
   
   @@index([userId])
   @@index([token])
+}
+
+// Track unique profile views
+model PlayerView {
+  id              String    @id @default(cuid())
+  playerId        String
+  player          Player    @relation("ProfileViews", fields: [playerId], references: [id], onDelete: Cascade)
+  viewerUserId    String
+  viewerUser      User      @relation("ViewerViews", fields: [viewerUserId], references: [id], onDelete: Cascade)
+  viewedAt        DateTime  @default(now())
+  
+  @@unique([playerId, viewerUserId])
+  @@index([playerId])
+  @@index([viewerUserId])
 }

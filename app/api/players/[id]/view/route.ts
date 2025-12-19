@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
 export async function POST(
   request: Request,
@@ -8,13 +9,19 @@ export async function POST(
 ) {
   try {
     const playerId = params.id
-    const session = await getServerSession()
-    const viewerId = session?.user?.playerId || session?.user?.recruiterId
+    const session = await getServerSession(authOptions)
+    
+    // Only count views from registered users
+    if (!session?.user?.id) {
+      return NextResponse.json({ views: 0 })
+    }
+
+    const viewerUserId = session.user.id
 
     // Check if player exists first
     const existingPlayer = await prisma.player.findUnique({
       where: { id: playerId },
-      select: { id: true, views: true }
+      select: { id: true, userId: true }
     })
 
     if (!existingPlayer) {
@@ -24,30 +31,42 @@ export async function POST(
       )
     }
 
-    // Don't increment if viewing your own profile
-    if (viewerId && viewerId === playerId) {
-      return NextResponse.json({ views: existingPlayer.views })
+    // Don't track if viewing your own profile
+    if (viewerUserId === existingPlayer.userId) {
+      const viewCount = await prisma.playerView.count({
+        where: { playerId }
+      })
+      return NextResponse.json({ views: viewCount })
     }
 
-    // For now, increment view count
-    // TODO: Implement proper unique viewer tracking with a separate table
-    const player = await prisma.player.update({
-      where: { id: playerId },
-      data: {
-        views: {
-          increment: 1
+    // Create or update view record (upsert ensures uniqueness)
+    await prisma.playerView.upsert({
+      where: {
+        playerId_viewerUserId: {
+          playerId,
+          viewerUserId
         }
       },
-      select: {
-        views: true
+      create: {
+        playerId,
+        viewerUserId,
+        viewedAt: new Date()
+      },
+      update: {
+        viewedAt: new Date()
       }
     })
 
-    return NextResponse.json({ views: player.views })
+    // Get total unique view count
+    const viewCount = await prisma.playerView.count({
+      where: { playerId }
+    })
+
+    return NextResponse.json({ views: viewCount })
   } catch (error) {
-    console.error('Error incrementing views:', error)
+    console.error('Error tracking view:', error)
     return NextResponse.json(
-      { error: 'Failed to increment views' },
+      { error: 'Failed to track view' },
       { status: 500 }
     )
   }

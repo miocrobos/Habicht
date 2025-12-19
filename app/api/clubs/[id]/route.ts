@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
@@ -114,6 +115,11 @@ export async function PUT(
       data: updateData,
     })
 
+    // Revalidate club pages to show updates immediately
+    revalidatePath('/clubs')
+    revalidatePath(`/clubs/${params.id}`)
+    revalidatePath('/admin/clubs')
+
     return NextResponse.json({ club: updatedClub })
   } catch (error) {
     console.error('Error updating club:', error)
@@ -148,6 +154,12 @@ export async function DELETE(
         where: { id: params.id },
         data: { logo: null },
       })
+      
+      // Revalidate club pages after logo removal
+      revalidatePath('/clubs')
+      revalidatePath(`/clubs/${params.id}`)
+      revalidatePath('/admin/clubs')
+      
       return NextResponse.json({ club: updatedClub, message: 'Logo removed' })
     }
 

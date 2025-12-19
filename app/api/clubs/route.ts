@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 
 export async function GET(request: Request) {
@@ -156,6 +157,10 @@ export async function POST(request: Request) {
         logo: logo || null,
       }
     })
+
+    // Revalidate club pages to show new club immediately
+    revalidatePath('/clubs')
+    revalidatePath('/admin/clubs')
 
     return NextResponse.json({ club }, { status: 201 })
   } catch (error) {

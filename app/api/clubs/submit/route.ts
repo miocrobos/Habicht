@@ -33,7 +33,10 @@ export async function POST(request: NextRequest) {
     // Admin email to receive submissions
     const adminEmail = process.env.ADMIN_EMAIL || 'habichtinfo@gmail.com';
 
-    // In development, just log
+    // Get Resend client
+    const resend = getResendClient();
+    
+    // In development, log to console
     if (process.env.NODE_ENV === 'development') {
       console.log('\n=================================');
       console.log('🏐 NEW CLUB SUBMISSION');
@@ -45,24 +48,11 @@ export async function POST(request: NextRequest) {
       console.log(`Website: ${website || 'N/A'}`);
       console.log(`Additional Info: ${additionalInfo || 'N/A'}`);
       console.log('=================================\n');
-      
-      return NextResponse.json({ 
-        success: true,
-        message: 'Submission logged to console (development mode)'
-      });
     }
 
-    // In production, send email to admin
-    try {
-      const resend = getResendClient();
-      if (!resend) {
-        console.warn('Resend client not available, skipping email');
-        return NextResponse.json({ 
-          success: true,
-          message: 'Submission received (email unavailable during build)'
-        });
-      }
-      
+    // Send emails if Resend is available
+    if (resend) {
+      try {
       // Send confirmation email to submitter
       await resend.emails.send({
         from: 'Habicht <noreply@habicht-volleyball.ch>',
@@ -235,9 +225,10 @@ export async function POST(request: NextRequest) {
         `,
       });
 
+      console.log('✅ Club submission emails sent successfully');
       return NextResponse.json({ 
         success: true,
-        message: 'Club submission received and admin notified'
+        message: 'Club submission received and admin notified via email'
       });
     } catch (emailError) {
       console.error('Error sending email:', emailError);
@@ -245,6 +236,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ 
         success: true,
         message: 'Submission received but email notification failed'
+      });
+    }
+    } else {
+      console.warn('Resend client not available');
+      return NextResponse.json({ 
+        success: true,
+        message: 'Submission received (email service unavailable)'
       });
     }
   } catch (error) {

@@ -72,7 +72,6 @@ export default function SubmitClubPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
       <main className="flex-grow container mx-auto px-4 py-8 max-w-2xl">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 md:p-8">
           <h1 className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">

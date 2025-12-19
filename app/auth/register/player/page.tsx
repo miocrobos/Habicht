@@ -748,13 +748,22 @@ export default function PlayerRegisterPage() {
                     <h4 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                       <Trophy className="w-5 h-5" />Vereinserfahrig I Dä Schwiiz
                     </h4>
-                    <button
-                      type="button"
-                      onClick={addClubExperience}
-                      className="flex items-center gap-1 px-3 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-sm font-medium"
-                    >
-                      <Plus className="w-4 h-4" />Verein Hinzuefüge
-                    </button>
+                    <div className="flex gap-2">
+                      <Link
+                        href="/clubs/submit"
+                        target="_blank"
+                        className="flex items-center gap-1 px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-sm font-medium"
+                      >
+                        Club Mälde
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={addClubExperience}
+                        className="flex items-center gap-1 px-3 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-sm font-medium"
+                      >
+                        <Plus className="w-4 h-4" />Verein Hinzuefüge
+                      </button>
+                    </div>
                   </div>
 
                   {clubHistory.length === 0 ? (

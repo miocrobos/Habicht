@@ -653,13 +653,22 @@ export default function RecruiterRegisterPage() {
                 <div>
                   <div className="flex justify-between items-center mb-3">
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Verein-Gschicht (Optional)</label>
-                    <button 
-                      type="button"
-                      onClick={addClubAffiliation}
-                      className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm font-medium"
-                    >
-                      <Plus className="w-4 h-4" /> Verein Hinzuefüege
-                    </button>
+                    <div className="flex gap-2">
+                      <Link
+                        href="/clubs/submit"
+                        target="_blank"
+                        className="flex items-center gap-1 px-3 py-1.5 bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-sm font-medium"
+                      >
+                        Club Mälde
+                      </Link>
+                      <button 
+                        type="button"
+                        onClick={addClubAffiliation}
+                        className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm font-medium"
+                      >
+                        <Plus className="w-4 h-4" /> Verein Hinzuefüege
+                      </button>
+                    </div>
                   </div>
 
                   {clubHistory.map((club) => (

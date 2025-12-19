@@ -149,6 +149,12 @@ export async function POST(
       where: { playerId }
     })
 
+    // Update the player's views field to match the count
+    await prisma.player.update({
+      where: { id: playerId },
+      data: { views: viewCount }
+    })
+
     return NextResponse.json({ views: viewCount })
   } catch (error) {
     console.error('Error tracking view:', error)

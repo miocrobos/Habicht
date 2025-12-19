@@ -29,6 +29,12 @@ export async function POST(
       where: { playerId: params.id }
     })
 
+    // Also reset the views count on the Player model to 0
+    await prisma.player.update({
+      where: { id: params.id },
+      data: { views: 0 }
+    })
+
     return NextResponse.json({ success: true, message: 'Profil-Aaluege zruckgsetzt' })
   } catch (error) {
     console.error('Error resetting views:', error)

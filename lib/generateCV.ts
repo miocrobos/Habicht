@@ -298,7 +298,17 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     doc.text('CLUB GSCHICHT', 15, yPos);
     yPos += 8;
 
-    const clubHistoryData = playerData.clubHistory.map(club => [
+    // Remove duplicates and sort by start date (most recent first)
+    const uniqueClubHistory = playerData.clubHistory
+      .filter((club, index, self) => 
+        index === self.findIndex((c) => 
+          c.clubName === club.clubName && 
+          new Date(c.startDate).getTime() === new Date(club.startDate).getTime()
+        )
+      )
+      .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+
+    const clubHistoryData = uniqueClubHistory.map(club => [
       club.clubName,
       club.league || 'N/A',
       `${new Date(club.startDate).getFullYear()} - ${club.endDate ? new Date(club.endDate).getFullYear() : 'Aktuell'}`

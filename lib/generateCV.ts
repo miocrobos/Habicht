@@ -118,7 +118,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   yPos = 50;
 
   // Personal Profile Section with Photo (more human, narrative style)
-  console.log('✅ Using NEW Professional Format (PERSÖNLICHS PROFIL)');
+  console.log('✅ Using Professional Format (PERSÖNLICHS PROFIL)');
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
@@ -272,7 +272,44 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     }
   }
 
-  // Club History
+  // Education/Employment - moved before club history for better CV flow
+  if (playerData.schoolName || playerData.occupation) {
+    if (yPos > 240) {
+      doc.addPage();
+      yPos = 20;
+    }
+
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+    doc.text('USBILDIG & BERUF', 15, yPos);
+    yPos += 8;
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
+    
+    const educationLines = [];
+    if (playerData.schoolName) {
+      educationLines.push(`Schule: ${playerData.schoolName}`);
+    }
+    if (playerData.occupation) {
+      educationLines.push(`Beruf: ${playerData.occupation}`);
+    }
+    if (playerData.employmentStatus) {
+      // Remove underscores and capitalize properly
+      const formattedStatus = playerData.employmentStatus.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, (l: string) => l.toUpperCase());
+      educationLines.push(`Status: ${formattedStatus}`);
+    }
+    
+    educationLines.forEach((line, index) => {
+      doc.text(line, 15, yPos + (index * 6));
+    });
+    
+    yPos += educationLines.length * 6 + 10;
+  }
+
+  // Club History - moved after education
   if (playerData.clubHistory && playerData.clubHistory.length > 0) {
     if (yPos > 240) {
       doc.addPage();
@@ -315,44 +352,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     yPos = (doc as any).lastAutoTable.finalY + 10;
   }
 
-  // Education/Employment (more narrative style)
-  if (playerData.schoolName || playerData.occupation) {
-    if (yPos > 240) {
-      doc.addPage();
-      yPos = 20;
-    }
-
-    doc.setFontSize(16);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('USBILDIG & BERUF', 15, yPos);
-    yPos += 8;
-
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
-    
-    const educationLines = [];
-    if (playerData.schoolName) {
-      educationLines.push(`Schule: ${playerData.schoolName}`);
-    }
-    if (playerData.occupation) {
-      educationLines.push(`Beruf: ${playerData.occupation}`);
-    }
-    if (playerData.employmentStatus) {
-      // Remove underscores and capitalize properly
-      const formattedStatus = playerData.employmentStatus.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, (l: string) => l.toUpperCase());
-      educationLines.push(`Status: ${formattedStatus}`);
-    }
-    
-    educationLines.forEach((line, index) => {
-      doc.text(line, 15, yPos + (index * 6));
-    });
-    
-    yPos += educationLines.length * 6 + 5;
-  }
-
-  // Achievements (more professional presentation)
+  // Achievements (more professional presentation) - kept at the end
   if (playerData.achievements && playerData.achievements.length > 0) {
     if (yPos > 240) {
       doc.addPage();

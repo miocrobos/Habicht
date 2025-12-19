@@ -1217,7 +1217,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       {/* Background Image Modal */}
       {showBackgroundModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Hintergrund Ändere</h3>
               <button
@@ -1233,14 +1233,53 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               </button>
             </div>
 
-            <div className="space-y-4">
-              <ImageUpload
-                label="Wähl Es Neus Hintergrundbild"
-                value={newBackgroundImage}
-                onChange={(base64) => setNewBackgroundImage(base64)}
-                aspectRatio="banner"
-                helpText="Empfohlen: 1920x1080 Pixel"
-              />
+            <div className="space-y-6">
+              {/* Color Selector */}
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Farb Wähle</h4>
+                <div className="grid grid-cols-4 gap-3">
+                  {BACKGROUND_OPTIONS.map((option) => (
+                    <button
+                      key={option.id}
+                      onClick={() => {
+                        setSelectedBg(option)
+                        setCustomBgImage(null)
+                        setShowBackgroundModal(false)
+                      }}
+                      className={`h-20 rounded-lg transition-all hover:scale-105 hover:shadow-lg border-2 ${
+                        selectedBg.id === option.id && !customBgImage && !player.coverImage
+                          ? 'border-red-600 ring-2 ring-red-600 ring-offset-2 dark:ring-offset-gray-800'
+                          : 'border-gray-300 dark:border-gray-600'
+                      }`}
+                      style={{ background: option.style }}
+                      title={option.name}
+                    >
+                      <span className="sr-only">{option.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">Oder</span>
+                </div>
+              </div>
+
+              {/* Image Upload */}
+              <div>
+                <ImageUpload
+                  label="Wähl Es Neus Hintergrundbild"
+                  value={newBackgroundImage}
+                  onChange={(base64) => setNewBackgroundImage(base64)}
+                  aspectRatio="banner"
+                  helpText="Empfohlen: 1920x1080 Pixel"
+                />
+              </div>
 
               <div className="flex gap-3 pt-4">
                 <button
@@ -1268,7 +1307,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   ) : (
                     <>
                       <Upload className="w-4 h-4" />
-                      Speichere
+                      Bild Speichere
                     </>
                   )}
                 </button>

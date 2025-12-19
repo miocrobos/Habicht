@@ -62,10 +62,19 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   const fullName = `${playerData.firstName} ${playerData.lastName}`.toUpperCase();
   doc.text(fullName, 15, 25);
   
-  // Position subtitle on the left
+  // Position subtitle on the left - translate positions to Swiss German
   doc.setFontSize(14);
   doc.setFont('helvetica', 'normal');
-  const positionText = playerData.positions?.join(', ') || 'Volleyball Player';
+  const positionTranslations: { [key: string]: string } = {
+    'SETTER': 'Zuespieler/in',
+    'OUTSIDE_HITTER': 'Aussenagreifer/in',
+    'MIDDLE_BLOCKER': 'Mittelblöcker/in',
+    'OPPOSITE': 'Diagonal',
+    'LIBERO': 'Libero',
+    'UNIVERSAL': 'Universal'
+  };
+  const translatedPositions = playerData.positions?.map(pos => positionTranslations[pos] || pos) || [];
+  const positionText = translatedPositions.join(', ') || 'Volleyball Spieler/in';
   doc.text(positionText, 15, 33);
   
   // Add logo and "VERIFIED BY HABICHT" stamp at top right
@@ -86,11 +95,11 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     // Add logo image at top right
     doc.addImage(logoBase64, 'PNG', 185, 8, 15, 15);
     
-    // Add "VERIFIED BY HABICHT" text next to logo
+    // Add "VERIFIZIERT VON HABICHT" text next to logo
     doc.setFontSize(5);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(255, 255, 255);
-    doc.text('VERIFIED BY', 182, 11, { align: 'right' });
+    doc.text('VERIFIZIERT VON', 182, 11, { align: 'right' });
     doc.setFontSize(7);
     doc.setFont('helvetica', 'bold');
     doc.text('HABICHT', 182, 16, { align: 'right' });
@@ -100,7 +109,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     doc.setFontSize(6);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(255, 255, 255);
-    doc.text('VERIFIED BY', 195, 12, { align: 'right' });
+    doc.text('VERIFIZIERT VON', 195, 12, { align: 'right' });
     doc.setFontSize(8);
     doc.setFont('helvetica', 'bold');
     doc.text('HABICHT', 195, 17, { align: 'right' });

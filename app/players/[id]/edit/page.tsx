@@ -150,6 +150,12 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     setSuccess(false);
 
     try {
+      console.log('Saving player data...', {
+        playerData: formData,
+        clubHistory,
+        achievements: achievements.map(a => a.text).filter((text: string) => text.trim() !== ''),
+      });
+
       await axios.put(`/api/players/${params.id}`, {
         playerData: formData,
         clubHistory,
@@ -161,6 +167,8 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         router.push(`/players/${params.id}`);
       }, 1500);
     } catch (err: any) {
+      console.error('Save error:', err);
+      console.error('Error response:', err.response?.data);
       setError(err.response?.data?.error || 'Fehler Bim Speichere');
     } finally {
       setSaving(false);

@@ -157,31 +157,43 @@ export async function PUT(
 
       // Create new club history entries, preserving existing website URLs
       if (clubHistory.length > 0) {
+        const clubHistoryData = clubHistory.map((club: any) => {
+          // Parse year from string, handling formats like "2023" or "2023-2024"
+          const parseYear = (yearStr: string) => {
+            if (!yearStr) return null;
+            const match = yearStr.match(/(\d{4})/);
+            return match ? parseInt(match[1], 10) : null;
+          };
+
+          const yearFrom = parseYear(club.yearFrom);
+          const yearTo = parseYear(club.yearTo);
+
+          console.log('Processing club history entry:', {
+            clubName: club.clubName,
+            league: club.league,
+            yearFrom,
+            yearTo,
+            currentClub: club.currentClub,
+            rawYearFrom: club.yearFrom,
+            rawYearTo: club.yearTo
+          });
+
+          return {
+            playerId: params.id,
+            clubName: club.clubName,
+            clubLogo: club.logo || null,
+            clubCountry: club.country || 'Switzerland',
+            // Preserve existing website URL if it was already set, otherwise use new one
+            clubWebsiteUrl: existingWebsiteUrls.get(club.clubName) || club.clubWebsiteUrl || null,
+            league: club.league || null,
+            startDate: yearFrom ? new Date(yearFrom, 0, 1) : new Date(),
+            endDate: club.currentClub ? null : (yearTo ? new Date(yearTo, 11, 31) : null),
+            currentClub: club.currentClub || false,
+          };
+        });
+
         await prisma.clubHistory.createMany({
-          data: clubHistory.map((club: any) => {
-            // Parse year from string, handling formats like "2023" or "2023-2024"
-            const parseYear = (yearStr: string) => {
-              if (!yearStr) return null;
-              const match = yearStr.match(/(\d{4})/);
-              return match ? parseInt(match[1], 10) : null;
-            };
-
-            const yearFrom = parseYear(club.yearFrom);
-            const yearTo = parseYear(club.yearTo);
-
-            return {
-              playerId: params.id,
-              clubName: club.clubName,
-              clubLogo: club.logo || null,
-              clubCountry: club.country || 'Switzerland',
-              // Preserve existing website URL if it was already set, otherwise use new one
-              clubWebsiteUrl: existingWebsiteUrls.get(club.clubName) || club.clubWebsiteUrl || null,
-              league: club.league || null,
-              startDate: yearFrom ? new Date(yearFrom, 0, 1) : new Date(),
-              endDate: club.currentClub ? null : (yearTo ? new Date(yearTo, 11, 31) : null),
-              currentClub: club.currentClub || false,
-            };
-          }),
+          data: clubHistoryData,
         });
       }
     }
@@ -230,6 +242,11 @@ export async function PUT(
     });
   } catch (error) {
     console.error('Error updating player:', error);
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      body: error
+    });
     return NextResponse.json(
       { error: 'Fehler Bim Aktualisiere Vo Spieler-Date' },
       { status: 500 }

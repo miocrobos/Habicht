@@ -89,6 +89,13 @@ export async function PUT(
       }
     });
 
+    if (!existingPlayer) {
+      return NextResponse.json(
+        { error: 'Player not found' },
+        { status: 404 }
+      );
+    }
+
     const isNewlyLooking = playerData.lookingForClub === true && existingPlayer?.lookingForClub === false;
 
     // Find current club league from club history if available

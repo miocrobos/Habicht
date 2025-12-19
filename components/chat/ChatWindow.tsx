@@ -96,7 +96,7 @@ export default function ChatWindow({
   }
 
   return (
-    <div className="fixed bottom-4 right-4 w-96 h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border-2 border-gray-200 z-50">
+    <div className="fixed bottom-4 right-4 w-96 max-w-[calc(100vw-2rem)] h-[600px] max-h-[calc(100vh-2rem)] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl flex flex-col border-2 border-gray-200 dark:border-gray-700" style={{ zIndex: 9999 }}>
       {/* Header */}
       <div className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-4 rounded-t-2xl flex items-center justify-between">
         <div className="flex items-center gap-3">

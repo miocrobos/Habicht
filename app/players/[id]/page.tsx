@@ -162,14 +162,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         
         if (playerData) {
           setPlayer(playerData)
-          
-          // Set gradient based on player gender and user role
-          const defaultGradient = getDefaultGradient(playerData.gender, session?.user?.role || 'PLAYER')
-          setSelectedBg({
-            id: 'dynamic',
-            name: 'Dynamic',
-            style: defaultGradient
-          })
         }
 
         await axios.post(`/api/players/${params.id}/view`)
@@ -182,6 +174,30 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     
     fetchPlayer()
   }, [params.id])
+
+  // Set gradient based on player gender and user role
+  useEffect(() => {
+    if (player && session) {
+      const defaultGradient = getDefaultGradient(player.gender, session.user?.role || 'PLAYER')
+      setSelectedBg({
+        id: 'dynamic',
+        name: 'Dynamic',
+        style: defaultGradient
+      })
+    }
+  }, [player, session])
+
+  // Set gradient based on player gender and user role
+  useEffect(() => {
+    if (player && session) {
+      const defaultGradient = getDefaultGradient(player.gender, session.user?.role || 'PLAYER')
+      setSelectedBg({
+        id: 'dynamic',
+        name: 'Dynamic',
+        style: defaultGradient
+      })
+    }
+  }, [player, session])
 
   const handleVideoUpload = async () => {
     if (!videoFile) {
@@ -677,10 +693,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     <button
                       onClick={handleExportCV}
                       className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold"
-                      title="CV als PDF exportiere"
+                      title="Läbeslaauf als PDF exportiere"
                     >
                       <FileDown className="w-4 h-4" />
-                      CV Exportiere
+                      Läbeslaauf Exportiere
                     </button>
                   </>
                 )}

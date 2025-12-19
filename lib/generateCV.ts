@@ -109,7 +109,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.text('PERSONAL INFORMATION', 15, yPos);
+  doc.text('PERSÖNLICHI INFORMATIONE', 15, yPos);
   yPos += 8;
 
   // Add profile photo beside personal information (right side)
@@ -189,7 +189,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('PHYSICAL ATTRIBUTES', 15, yPos);
+    doc.text('PHYSISCHI EIGESCHAFTE', 15, yPos);
     yPos += 8;
 
     const physicalStats = [
@@ -218,7 +218,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('CURRENT CLUB', 15, yPos);
+    doc.text('AKTUELLÄ CLUB', 15, yPos);
     yPos += 8;
 
     doc.setFontSize(12);
@@ -246,7 +246,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('CLUB HISTORY', 15, yPos);
+    doc.text('CLUB GSCHICHT', 15, yPos);
     yPos += 8;
 
     const clubHistoryData = playerData.clubHistory.map(club => [

@@ -667,18 +667,26 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Bis Jahr
                       </label>
-                      <input
-                        type="text"
-                        value={club.yearTo}
-                        onChange={(e) => {
-                          const updated = clubHistory.map((c) =>
-                            c.id === club.id ? { ...c, yearTo: e.target.value } : c
-                          );
-                          setClubHistory(updated);
-                        }}
-                        placeholder="Leer lah für aktuell"
-                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                      />
+                      {club.currentClub ? (
+                        <div className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
+                          <span className="text-green-600 dark:text-green-400 font-semibold flex items-center gap-1">
+                            ✓ Aktuell
+                          </span>
+                        </div>
+                      ) : (
+                        <input
+                          type="text"
+                          value={club.yearTo}
+                          onChange={(e) => {
+                            const updated = clubHistory.map((c) =>
+                              c.id === club.id ? { ...c, yearTo: e.target.value } : c
+                            );
+                            setClubHistory(updated);
+                          }}
+                          placeholder="z.B. 2023"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        />
+                      )}
                     </div>
                   </div>
 
@@ -689,7 +697,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                         checked={club.currentClub}
                         onChange={(e) => {
                           const updated = clubHistory.map((c) =>
-                            c.id === club.id ? { ...c, currentClub: e.target.checked } : c
+                            c.id === club.id ? { ...c, currentClub: e.target.checked, yearTo: e.target.checked ? '' : c.yearTo } : c
                           );
                           setClubHistory(updated);
                         }}

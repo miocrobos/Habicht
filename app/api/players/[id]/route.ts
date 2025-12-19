@@ -158,18 +158,30 @@ export async function PUT(
       // Create new club history entries, preserving existing website URLs
       if (clubHistory.length > 0) {
         await prisma.clubHistory.createMany({
-          data: clubHistory.map((club: any) => ({
-            playerId: params.id,
-            clubName: club.clubName,
-            clubLogo: club.logo || null,
-            clubCountry: club.country || 'Switzerland',
-            // Preserve existing website URL if it was already set, otherwise use new one
-            clubWebsiteUrl: existingWebsiteUrls.get(club.clubName) || club.clubWebsiteUrl || null,
-            league: club.league || null,
-            startDate: club.yearFrom ? new Date(club.yearFrom, 0, 1) : new Date(),
-            endDate: club.currentClub ? null : (club.yearTo ? new Date(club.yearTo, 11, 31) : null),
-            currentClub: club.currentClub || false,
-          })),
+          data: clubHistory.map((club: any) => {
+            // Parse year from string, handling formats like "2023" or "2023-2024"
+            const parseYear = (yearStr: string) => {
+              if (!yearStr) return null;
+              const match = yearStr.match(/(\d{4})/);
+              return match ? parseInt(match[1], 10) : null;
+            };
+
+            const yearFrom = parseYear(club.yearFrom);
+            const yearTo = parseYear(club.yearTo);
+
+            return {
+              playerId: params.id,
+              clubName: club.clubName,
+              clubLogo: club.logo || null,
+              clubCountry: club.country || 'Switzerland',
+              // Preserve existing website URL if it was already set, otherwise use new one
+              clubWebsiteUrl: existingWebsiteUrls.get(club.clubName) || club.clubWebsiteUrl || null,
+              league: club.league || null,
+              startDate: yearFrom ? new Date(yearFrom, 0, 1) : new Date(),
+              endDate: club.currentClub ? null : (yearTo ? new Date(yearTo, 11, 31) : null),
+              currentClub: club.currentClub || false,
+            };
+          }),
         });
       }
     }

@@ -39,23 +39,26 @@ export async function POST(
       return NextResponse.json({ views: viewCount })
     }
 
-    // Create or update view record (upsert ensures uniqueness)
-    await prisma.playerView.upsert({
+    // Check if this user has already viewed this profile
+    const existingView = await prisma.playerView.findUnique({
       where: {
         playerId_viewerUserId: {
           playerId,
           viewerUserId
         }
-      },
-      create: {
-        playerId,
-        viewerUserId,
-        viewedAt: new Date()
-      },
-      update: {
-        viewedAt: new Date()
       }
     })
+
+    // Only create a new view if this user hasn't viewed before
+    if (!existingView) {
+      await prisma.playerView.create({
+        data: {
+          playerId,
+          viewerUserId,
+          viewedAt: new Date()
+        }
+      })
+    }
 
     // Get total unique view count
     const viewCount = await prisma.playerView.count({

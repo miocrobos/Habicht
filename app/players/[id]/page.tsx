@@ -399,7 +399,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
   const handleBackgroundUpdate = async () => {
     if (!newBackgroundImage) {
-      alert('Bitte wähl es Bild us')
       return
     }
 
@@ -461,7 +460,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       // Reset and close modal
       setShowBackgroundModal(false)
       setNewBackgroundImage('')
-      alert('Hintergrund erfolgriich gänderet!')
     } catch (error: any) {
       console.error('Error updating background:', error)
       const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
@@ -1269,6 +1267,9 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           setCustomBgImage(null)
                           setShowBackgroundModal(false)
                           
+                          // Update player state immediately to show gradient
+                          setPlayer(prev => prev ? { ...prev, coverImage: null } : prev)
+                          
                           // Save gradient/color to database by clearing coverImage
                           const currentResponse = await axios.get(`/api/players/${params.id}`)
                           const currentPlayer = currentResponse.data.player
@@ -1317,12 +1318,8 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           // Refresh player data to ensure consistency
                           const playerResponse = await axios.get(`/api/players/${params.id}`)
                           setPlayer(playerResponse.data.player)
-                          
-                          // Show success message
-                          alert('Hintergrund erfolgriich gänderet!')
                         } catch (error) {
                           console.error('Error updating background:', error)
-                          alert('Fehler bim Hintergrund Ändere')
                           // Revert changes on error
                           const playerResponse = await axios.get(`/api/players/${params.id}`)
                           setPlayer(playerResponse.data.player)

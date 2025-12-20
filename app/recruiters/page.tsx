@@ -5,8 +5,10 @@ import Link from 'next/link'
 import { Search, Filter, MapPin, Users, X } from 'lucide-react'
 import axios from 'axios'
 import RecruiterCard from '@/components/recruiter/RecruiterCard'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function RecruitersPage() {
+  const { t } = useLanguage()
   const [recruiters, setRecruiters] = useState([])
   const [loading, setLoading] = useState(true)
   const [filters, setFilters] = useState({
@@ -69,9 +71,9 @@ export default function RecruitersPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Rekrutierer & Trainer</h1>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">{t('recruiters.title')}</h1>
           <p className="text-lg text-gray-600 dark:text-gray-400">
-            Finde erfahrene Trainer und Scouts in der Schweiz
+            {t('recruiters.subtitle')}
           </p>
         </div>
 
@@ -80,7 +82,7 @@ export default function RecruitersPage() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Filter className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Filter & Suche</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('recruiters.filtersTitle')}</h3>
             </div>
             {hasActiveFilters && (
               <button
@@ -88,7 +90,7 @@ export default function RecruitersPage() {
                 className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition"
               >
                 <X className="w-4 h-4" />
-                Alle Filter Löschen
+                {t('recruiters.clearAllFilters')}
               </button>
             )}
           </div>
@@ -97,7 +99,7 @@ export default function RecruitersPage() {
             {/* Search */}
             <div className="lg:col-span-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Suche
+                {t('recruiters.searchLabel')}
               </label>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -106,7 +108,7 @@ export default function RecruitersPage() {
                   value={filters.search}
                   onChange={(e) => handleFilterChange('search', e.target.value)}
                   className="w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
-                  placeholder="Name, Club, Rolle..."
+                  placeholder={t('recruiters.searchPlaceholder')}
                 />
                 {filters.search && (
                   <button
@@ -122,7 +124,7 @@ export default function RecruitersPage() {
             {/* Canton */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Kanton
+                {t('recruiters.cantonLabel')}
               </label>
               <select
                 value={filters.canton}
@@ -162,7 +164,7 @@ export default function RecruitersPage() {
             {/* Gender Coached */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Team Geschlecht
+                {t('recruiters.teamGenderLabel')}
               </label>
               <select
                 value={filters.genderCoached}
@@ -178,7 +180,7 @@ export default function RecruitersPage() {
             {/* Position Looking For */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Sucht Position
+                {t('recruiters.lookingForPositionLabel')}
               </label>
               <select
                 value={filters.positionLookingFor}
@@ -206,7 +208,7 @@ export default function RecruitersPage() {
                 className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
               />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Nur Aktiv Rekrutierende
+                {t('recruiters.activeRecruitingOnly')}
               </span>
             </label>
           </div>
@@ -215,7 +217,7 @@ export default function RecruitersPage() {
         {/* Results */}
         <div className="mb-6">
           <p className="text-gray-600 dark:text-gray-400">
-            {loading ? 'Lade...' : `${recruiters.length} Rekrutierer gefunden`}
+            {loading ? t('recruiters.loading') : `${recruiters.length} ${t('recruiters.recruitersFound')}`}
           </p>
         </div>
 
@@ -242,17 +244,17 @@ export default function RecruitersPage() {
           <div className="text-center py-12">
             <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              Keine Rekrutierer Gefunden
+              {t('recruiters.noRecruitersFound')}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              Versuche andere Filter oder lösche die aktuellen Filter
+              {t('recruiters.noRecruitersText')}
             </p>
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
                 className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
               >
-                Alle Filter Zurücksetzen
+                {t('recruiters.resetAllFilters')}
               </button>
             )}
           </div>

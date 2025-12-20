@@ -9,8 +9,10 @@ import CantonFlag from '@/components/shared/CantonFlag'
 import ClubBadge from '@/components/shared/ClubBadge'
 import ClickableProfilePicture from '@/components/profile/ClickableProfilePicture'
 import { getCantonInfo } from '@/lib/swissData'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function WomenPlayersPage() {
+  const { t } = useLanguage()
   const [players, setPlayers] = useState([])
   const [loading, setLoading] = useState(true)
   const [filters, setFilters] = useState({
@@ -76,7 +78,7 @@ export default function WomenPlayersPage() {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">Damen Volleyball</h1>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">{t('players.womenTitle')}</h1>
               <p className="text-lg text-gray-600">
                 Schweizer Frauen Volleyball Spieler
               </p>

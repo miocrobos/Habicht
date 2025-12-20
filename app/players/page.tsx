@@ -5,8 +5,10 @@ import Link from 'next/link'
 import { Search, Filter, MapPin, TrendingUp, X, RefreshCw } from 'lucide-react'
 import axios from 'axios'
 import PlayerCard from '@/components/player/PlayerCard'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function PlayersPage() {
+  const { t } = useLanguage()
   const [players, setPlayers] = useState([])
   const [loading, setLoading] = useState(true)
   const [filters, setFilters] = useState({
@@ -70,9 +72,9 @@ export default function PlayersPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Spieler entdecken</h1>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">{t('players.title')}</h1>
           <p className="text-lg text-gray-600 dark:text-gray-400">
-            Finde talentierte Schweizer Volleyball-Spieler
+            {t('players.subtitle')}
           </p>
         </div>
 
@@ -81,7 +83,7 @@ export default function PlayersPage() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Filter className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Filter & Suche</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('players.filtersTitle')}</h3>
             </div>
             {hasActiveFilters && (
               <button
@@ -89,7 +91,7 @@ export default function PlayersPage() {
                 className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition"
               >
                 <X className="w-4 h-4" />
-                Alle Filter löschen
+                {t('players.clearAllFilters')}
               </button>
             )}
           </div>
@@ -97,7 +99,7 @@ export default function PlayersPage() {
             {/* Search */}
             <div className="lg:col-span-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Suche
+                {t('players.searchLabel')}
               </label>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -106,7 +108,7 @@ export default function PlayersPage() {
                   value={filters.search}
                   onChange={(e) => handleFilterChange('search', e.target.value)}
                   className="w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
-                  placeholder="Name, Club, Schule..."
+                  placeholder={t('players.searchPlaceholder')}
                 />
                 {filters.search && (
                   <button
@@ -122,50 +124,50 @@ export default function PlayersPage() {
             {/* Position */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Position
+                {t('players.positionLabel')}
               </label>
               <select
                 value={filters.position}
                 onChange={(e) => handleFilterChange('position', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
-                <option value="OUTSIDE_HITTER">Aussenspieler</option>
-                <option value="OPPOSITE">Diagonalspieler</option>
-                <option value="MIDDLE_BLOCKER">Mittelblocker</option>
-                <option value="SETTER">Zuspieler</option>
-                <option value="LIBERO">Libero</option>
-                <option value="UNIVERSAL">Universal</option>
+                <option value="">{t('players.positionAll')}</option>
+                <option value="OUTSIDE_HITTER">{t('players.positionOutsideHitter')}</option>
+                <option value="OPPOSITE">{t('players.positionOpposite')}</option>
+                <option value="MIDDLE_BLOCKER">{t('players.positionMiddleBlocker')}</option>
+                <option value="SETTER">{t('players.positionSetter')}</option>
+                <option value="LIBERO">{t('players.positionLibero')}</option>
+                <option value="UNIVERSAL">{t('players.positionUniversal')}</option>
               </select>
             </div>
 
             {/* Gender */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Geschlecht
+                {t('players.genderLabel')}
               </label>
               <select
                 value={filters.gender}
                 onChange={(e) => handleFilterChange('gender', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
-                <option value="MALE">Männer</option>
-                <option value="FEMALE">Frauen</option>
+                <option value="">{t('players.genderAll')}</option>
+                <option value="MALE">{t('players.genderMale')}</option>
+                <option value="FEMALE">{t('players.genderFemale')}</option>
               </select>
             </div>
 
             {/* Canton */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Kanton
+                {t('players.cantonLabel')}
               </label>
               <select
                 value={filters.canton}
                 onChange={(e) => handleFilterChange('canton', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
+                <option value="">{t('players.cantonAll')}</option>
                 <option value="AG">Aargau</option>
                 <option value="AI">Appenzell Innerrhoden</option>
                 <option value="AR">Appenzell Ausserrhoden</option>
@@ -198,14 +200,14 @@ export default function PlayersPage() {
             {/* League */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Liga
+                {t('players.leagueLabel')}
               </label>
               <select
                 value={filters.league}
                 onChange={(e) => handleFilterChange('league', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
+                <option value="">{t('players.leagueAll')}</option>
                 <option value="NLA">NLA</option>
                 <option value="NLB">NLB</option>
                 <option value="FIRST_LEAGUE">1. Liga</option>
@@ -224,12 +226,12 @@ export default function PlayersPage() {
         {loading ? (
           <div className="text-center py-12">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-habicht-600"></div>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">Lade Spieler...</p>
+            <p className="mt-4 text-gray-600 dark:text-gray-400">{t('players.loading')}</p>
           </div>
         ) : (
           <>
             <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-              {players.length} Spieler gfunde
+              {players.length} {t('players.playersFound')}
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -240,12 +242,12 @@ export default function PlayersPage() {
 
             {players.length === 0 && (
               <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg">
-                <p className="text-gray-600 dark:text-gray-400">Kei Spieler gfunde mit dene Filter</p>
+                <p className="text-gray-600 dark:text-gray-400">{t('players.noPlayersFound')}</p>
                 <button
                   onClick={() => setFilters({ search: '', position: '', canton: '', league: '', minHeight: '', gender: '' })}
                   className="mt-4 text-habicht-600 hover:text-habicht-700 font-medium"
                 >
-                  Filter zurücksetzen
+                  {t('players.resetFilters')}
                 </button>
               </div>
             )}

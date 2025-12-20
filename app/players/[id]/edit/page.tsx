@@ -150,10 +150,13 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     setSuccess(false);
 
     // Filter club history: only include clubs that have a name
-    // Even if marked as current, they still need a club name
+    // AND either currentClub is checked OR yearTo is filled
     const validClubHistory = clubHistory.filter(club => {
       const hasClubName = club.clubName && club.clubName.trim() !== '';
-      return hasClubName;
+      const hasYearTo = club.yearTo && club.yearTo.trim() !== '';
+      const isCurrentClub = club.currentClub === true;
+      // Include club if: has name AND (is current OR has end year)
+      return hasClubName && (isCurrentClub || hasYearTo);
     }).map(club => ({
       ...club,
       // Clean up empty strings to null/undefined for proper database handling

@@ -83,6 +83,7 @@ export async function PUT(
     const { playerData, clubHistory, achievements } = body;
 
     console.log('=== SAVE PLAYER DATA ===');
+    console.log('Received playerData:', JSON.stringify(playerData, null, 2));
     console.log('Received clubHistory:', JSON.stringify(clubHistory, null, 2));
     console.log('Current clubs in request:', clubHistory?.filter((c: any) => c.currentClub === true));
 
@@ -123,6 +124,12 @@ export async function PUT(
         name: `${playerData.firstName} ${playerData.lastName}`
       }
     });
+
+    console.log('=== UPDATING PLAYER ===');
+    console.log('Current league value:', currentLeague, 'Type:', typeof currentLeague);
+    console.log('Gender:', playerData.gender);
+    console.log('Positions:', playerData.positions);
+    console.log('Employment status:', playerData.employmentStatus);
 
     // Update player
     const player = await prisma.player.update({

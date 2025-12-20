@@ -586,12 +586,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-3 md:mb-4">
                     {player.positions.map((pos, idx) => (
                       <span key={idx} className="px-2.5 py-1 md:px-3 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs md:text-sm font-semibold rounded-full">
-                        {POSITION_TRANSLATIONS[pos] || pos}
+                        {t(`playerProfile.position${pos.charAt(0) + pos.slice(1).toLowerCase().replace(/_([a-z])/g, (m, c) => c.toUpperCase())}`) || pos}
                       </span>
                     ))}
                     {player.lookingForClub && (
                       <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-sm font-semibold rounded-full flex items-center gap-1">
-                        ✓ Suecht Club
+                        ✓ {t('playerProfile.lookingForClubBadge')}
                       </span>
                     )}
                   </div>
@@ -602,16 +602,16 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       {player.municipality ? `${player.municipality}, ${player.canton}` : player.canton}
                     </span>
                     {playerAge && formattedBirthDate && (
-                      <span className="flex items-center gap-1" title={`Geburtsdatum: ${formattedBirthDate}`}>
+                      <span className="flex items-center gap-1" title={`${t('playerProfile.bornAbbrev')} ${formattedBirthDate}`}>
                         <Calendar className="w-4 h-4" />
-                        {playerAge} Jahr (Geb. {formattedBirthDate})
+                        {playerAge} {t('playerProfile.yearsOld')} ({t('playerProfile.bornAbbrev')} {formattedBirthDate})
                       </span>
                     )}
                     <span className="flex items-center gap-1">
-                      {player.gender === 'MALE' ? '♂' : '♀'} {player.gender === 'MALE' ? 'Männlich' : 'Weiblich'}
+                      {player.gender === 'MALE' ? '♂' : '♀'} {player.gender === 'MALE' ? t('playerProfile.male') : t('playerProfile.female')}
                     </span>
                     {player.nationality && (
-                      <span>🏳 Nationalität: {player.nationality}</span>
+                      <span>🏳 {t('playerProfile.nationality')} {player.nationality}</span>
                     )}
                     {player.currentClub && (
                       <Link 
@@ -672,25 +672,25 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   {player.height && (
                     <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
                       <div className="text-xl md:text-2xl font-bold text-red-600 dark:text-red-400">{player.height}</div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">Grössi cm</div>
+                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.heightLabel')}</div>
                     </div>
                   )}
                   {player.weight && (
                     <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
                       <div className="text-xl md:text-2xl font-bold text-blue-600 dark:text-blue-400">{player.weight}</div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">Gwicht kg</div>
+                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.weightLabel')}</div>
                     </div>
                   )}
                   {player.spikeHeight && (
                     <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
                       <div className="text-xl md:text-2xl font-bold text-orange-600 dark:text-orange-400">{player.spikeHeight}</div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">Schlag cm</div>
+                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.spikeLabel')}</div>
                     </div>
                   )}
                   {player.blockHeight && (
                     <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
                       <div className="text-xl md:text-2xl font-bold text-purple-600 dark:text-purple-400">{player.blockHeight}</div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">Block cm</div>
+                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.blockLabel')}</div>
                     </div>
                   )}
                 </div>

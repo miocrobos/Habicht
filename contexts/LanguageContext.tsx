@@ -109,6 +109,32 @@ const translations = {
         registerRecruiter: 'Als Scout registriere',
       },
     },
+    // About Page
+    about: {
+      title: 'Über Habicht',
+      what: {
+        title: 'Was isch Habicht?',
+        description1: 'Habicht isch d\'Plattform für Schweizer Volleyball-Talente. Mir verbinde Spieler mit Recruiters und Scouts us de ganze Schwiiz.',
+        description2: 'Inspiriert vo Volleybox, aber speziell für d\'Schwiizer Volleyball-Landschaft entwicklet, mit direkter Integration zu Swiss Volley und de wichtigste Clubs.',
+      },
+      mission: {
+        title: 'Mission',
+        description: 'Mir wönd es einfachs und professionells Tool schaffe, wo Schweizer Volleyball-Talente ihri Fähigkeite chönd zeige und sich mit Scouts und Clubs chönd vernetze.',
+      },
+      features: {
+        title: 'Features',
+        item1: 'Vollständigi Spieler-Profile mit Stats und persönliche Infos',
+        item2: 'Video-Highlights hochlade oder vo YouTube, Instagram & TikTok verlinke',
+        item3: 'Automatischi Verlinkig zu Swiss Volley und Club-Websites',
+        item4: 'Suchfunktion für Recruiters mit umfassende Filter',
+        item5: 'Karriere-Timeline ähnlich wie bi Volleybox',
+      },
+      contact: {
+        title: 'Kontakt',
+        description: 'Häsch Frage oder Vorschläg? Mir wönd vo dir ghöre!',
+        email: 'Email',
+      },
+    },
     // Settings
     settings: {
       title: 'Iistellige',
@@ -216,6 +242,32 @@ const translations = {
         subtitle: 'Tritt der grössten Schweizer Volleyball Community bei',
         registerPlayer: 'Als Spieler registrieren',
         registerRecruiter: 'Als Scout registrieren',
+      },
+    },
+    // About Page
+    about: {
+      title: 'Über Habicht',
+      what: {
+        title: 'Was ist Habicht?',
+        description1: 'Habicht ist die Plattform für Schweizer Volleyball-Talente. Wir verbinden Spieler mit Recruiters und Scouts aus der ganzen Schweiz.',
+        description2: 'Inspiriert von Volleybox, aber speziell für die Schweizer Volleyball-Landschaft entwickelt, mit direkter Integration zu Swiss Volley und den wichtigsten Clubs.',
+      },
+      mission: {
+        title: 'Mission',
+        description: 'Wir wollen ein einfaches und professionelles Tool schaffen, mit dem Schweizer Volleyball-Talente ihre Fähigkeiten zeigen und sich mit Scouts und Clubs vernetzen können.',
+      },
+      features: {
+        title: 'Features',
+        item1: 'Vollständige Spieler-Profile mit Statistiken und persönlichen Infos',
+        item2: 'Video-Highlights hochladen oder von YouTube, Instagram & TikTok verlinken',
+        item3: 'Automatische Verlinkung zu Swiss Volley und Club-Websites',
+        item4: 'Suchfunktion für Recruiters mit umfassenden Filtern',
+        item5: 'Karriere-Timeline ähnlich wie bei Volleybox',
+      },
+      contact: {
+        title: 'Kontakt',
+        description: 'Haben Sie Fragen oder Vorschläge? Wir möchten von Ihnen hören!',
+        email: 'E-Mail',
       },
     },
     // Settings
@@ -327,6 +379,32 @@ const translations = {
         registerRecruiter: 'S\'inscrire comme scout',
       },
     },
+    // About Page
+    about: {
+      title: 'À propos de Habicht',
+      what: {
+        title: 'Qu\'est-ce que Habicht?',
+        description1: 'Habicht est la plateforme pour les talents du volleyball suisse. Nous connectons les joueurs avec des recruteurs et scouts de toute la Suisse.',
+        description2: 'Inspiré de Volleybox, mais développé spécifiquement pour le paysage du volleyball suisse, avec une intégration directe à Swiss Volley et aux clubs les plus importants.',
+      },
+      mission: {
+        title: 'Mission',
+        description: 'Nous voulons créer un outil simple et professionnel permettant aux talents du volleyball suisse de montrer leurs compétences et de se connecter avec des scouts et des clubs.',
+      },
+      features: {
+        title: 'Fonctionnalités',
+        item1: 'Profils de joueurs complets avec statistiques et informations personnelles',
+        item2: 'Télécharger des vidéos highlights ou les lier depuis YouTube, Instagram & TikTok',
+        item3: 'Lien automatique vers Swiss Volley et les sites web des clubs',
+        item4: 'Fonction de recherche pour recruteurs avec filtres complets',
+        item5: 'Chronologie de carrière similaire à Volleybox',
+      },
+      contact: {
+        title: 'Contact',
+        description: 'Vous avez des questions ou des suggestions? Nous aimerions vous entendre!',
+        email: 'Email',
+      },
+    },
     // Settings
     settings: {
       title: 'Paramètres',
@@ -434,6 +512,32 @@ const translations = {
         subtitle: 'Unisciti alla più grande comunità di pallavolo svizzera',
         registerPlayer: 'Registrati come giocatore',
         registerRecruiter: 'Registrati come scout',
+      },
+    },
+    // About Page
+    about: {
+      title: 'Informazioni su Habicht',
+      what: {
+        title: 'Cos\'è Habicht?',
+        description1: 'Habicht è la piattaforma per i talenti della pallavolo svizzera. Connettiamo i giocatori con reclutatori e scout da tutta la Svizzera.',
+        description2: 'Ispirato a Volleybox, ma sviluppato specificamente per il panorama della pallavolo svizzera, con integrazione diretta a Swiss Volley e ai club più importanti.',
+      },
+      mission: {
+        title: 'Missione',
+        description: 'Vogliamo creare uno strumento semplice e professionale che permetta ai talenti della pallavolo svizzera di mostrare le loro capacità e connettersi con scout e club.',
+      },
+      features: {
+        title: 'Funzionalità',
+        item1: 'Profili completi dei giocatori con statistiche e informazioni personali',
+        item2: 'Carica video highlights o collegali da YouTube, Instagram & TikTok',
+        item3: 'Collegamento automatico a Swiss Volley e ai siti web dei club',
+        item4: 'Funzione di ricerca per reclutatori con filtri completi',
+        item5: 'Cronologia di carriera simile a Volleybox',
+      },
+      contact: {
+        title: 'Contatto',
+        description: 'Hai domande o suggerimenti? Ci piacerebbe sentirti!',
+        email: 'Email',
       },
     },
     // Settings
@@ -545,6 +649,32 @@ const translations = {
         registerRecruiter: 'S\'annunziar sco scout',
       },
     },
+    // About Page
+    about: {
+      title: 'Davart Habicht',
+      what: {
+        title: 'Tge è Habicht?',
+        description1: 'Habicht è la plattafurma per talents da volleyball svizzers. Nòs connectain giugaders cun recruiters e scouts da tutta la Svizra.',
+        description2: 'Inspirà da Volleybox, ma sviluppà spezialmain per il pajsaž da volleyball svizzer, cun integraziun directa a Swiss Volley ed als clubs pli impurtants.',
+      },
+      mission: {
+        title: 'Missiun',
+        description: 'Nòs vulain crear in tool simpel e professiunàl che pussibilitescha als talents da volleyball svizzers da mussar lur capacitàs e da sa connectar cun scouts e clubs.',
+      },
+      features: {
+        title: 'Funcziuns',
+        item1: 'Profils cumplains da giugaders cun statisticas ed infurmaziuns persunalas',
+        item2: 'Chargiar video highlights u colliar els da YouTube, Instagram & TikTok',
+        item3: 'Colliaziun automatica a Swiss Volley ed als websites dals clubs',
+        item4: 'Funcziun da tschertga per recruiters cun filters cumplains',
+        item5: 'Cronologia da carriera sco tar Volleybox',
+      },
+      contact: {
+        title: 'Contact',
+        description: 'Has dumondas u propostas? Nòs vulain tadlar da tai!',
+        email: 'Email',
+      },
+    },
     // Settings
     settings: {
       title: 'Parameters',
@@ -652,6 +782,32 @@ const translations = {
         subtitle: 'Join the largest Swiss volleyball community',
         registerPlayer: 'Register as player',
         registerRecruiter: 'Register as scout',
+      },
+    },
+    // About Page
+    about: {
+      title: 'About Habicht',
+      what: {
+        title: 'What is Habicht?',
+        description1: 'Habicht is the platform for Swiss volleyball talents. We connect players with recruiters and scouts from all over Switzerland.',
+        description2: 'Inspired by Volleybox, but developed specifically for the Swiss volleyball landscape, with direct integration to Swiss Volley and the most important clubs.',
+      },
+      mission: {
+        title: 'Mission',
+        description: 'We want to create a simple and professional tool that allows Swiss volleyball talents to showcase their skills and connect with scouts and clubs.',
+      },
+      features: {
+        title: 'Features',
+        item1: 'Complete player profiles with statistics and personal information',
+        item2: 'Upload video highlights or link them from YouTube, Instagram & TikTok',
+        item3: 'Automatic linking to Swiss Volley and club websites',
+        item4: 'Search function for recruiters with comprehensive filters',
+        item5: 'Career timeline similar to Volleybox',
+      },
+      contact: {
+        title: 'Contact',
+        description: 'Do you have questions or suggestions? We would love to hear from you!',
+        email: 'Email',
       },
     },
     // Settings

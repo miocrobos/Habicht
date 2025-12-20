@@ -1128,12 +1128,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Beschriibig
+                  {t('playerProfile.description')}
                 </label>
                 <textarea
                   value={videoDescription}
                   onChange={(e) => setVideoDescription(e.target.value)}
-                  placeholder="Optional: Beschriib dis Video..."
+                  placeholder={`${t('playerProfile.optional')}: ${t('playerProfile.describeVideo')}...`}
                   rows={3}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
@@ -1144,7 +1144,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   onClick={() => setShowVideoUpload(false)}
                   className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-semibold"
                 >
-                  Abbreche
+                  {t('playerProfile.cancel')}
                 </button>
                 <button
                   onClick={handleVideoUpload}
@@ -1177,7 +1177,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full p-6">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Profilbild Ändere</h3>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('playerProfile.changeProfilePhoto')}</h3>
               <button
                 onClick={() => {
                   setShowProfilePhotoModal(false)
@@ -1193,7 +1193,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
             <div className="space-y-4">
               <ImageUpload
-                label="Wähl Es Neus Profilbild"
+                label={t('playerProfile.selectNewProfilePhoto')}
                 value={newProfilePhoto}
                 onChange={(base64) => setNewProfilePhoto(base64)}
                 aspectRatio="square"
@@ -1208,7 +1208,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   }}
                   className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-semibold"
                 >
-                  Abbreche
+                  {t('playerProfile.cancel')}
                 </button>
                 <button
                   onClick={handleProfilePhotoUpdate}
@@ -1221,12 +1221,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Updating...
+                      {t('playerProfile.uploading')}
                     </>
                   ) : (
                     <>
                       <Camera className="w-4 h-4" />
-                      Speichere
+                      {t('playerProfile.save')}
                     </>
                   )}
                 </button>
@@ -1241,7 +1241,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Hintergrund Ändere</h3>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('playerProfile.changeBackground')}</h3>
               <button
                 onClick={() => {
                   setShowBackgroundModal(false)
@@ -1258,7 +1258,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
             <div className="space-y-6">
               {/* Color Selector */}
               <div>
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Farb Wähle</h4>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('playerProfile.selectColor')}</h4>
                 <div className="grid grid-cols-4 gap-3">
                   {BACKGROUND_OPTIONS.map((option) => (
                     <button
@@ -1349,18 +1349,18 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">Oder</span>
+                  <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">{t('playerProfile.or')}</span>
                 </div>
               </div>
 
               {/* Image Upload */}
               <div>
                 <ImageUpload
-                  label="Wähl Es Neus Hintergrundbild"
+                  label={t('playerProfile.selectNewBackground')}
                   value={newBackgroundImage}
                   onChange={(base64) => setNewBackgroundImage(base64)}
                   aspectRatio="banner"
-                  helpText="Empfohlen: 1920x1080 Pixel"
+                  helpText={`${t('playerProfile.recommended')}: 1920x1080 Pixel`}
                 />
               </div>
 
@@ -1372,7 +1372,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   }}
                   className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-semibold"
                 >
-                  Abbreche
+                  {t('playerProfile.cancel')}
                 </button>
                 <button
                   onClick={handleBackgroundUpdate}

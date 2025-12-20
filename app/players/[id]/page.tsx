@@ -323,13 +323,13 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       console.log('CV downloaded successfully')
     } catch (error) {
       console.error('Error exporting CV:', error)
-      alert('Fehler bim CV Export')
+      alert(t('playerProfile.errorExportingCV'))
     }
   }
 
   const handleProfilePhotoUpdate = async () => {
     if (!newProfilePhoto) {
-      alert('Bitte wähl es Bild us')
+      alert(t('playerProfile.selectImage'))
       return
     }
 
@@ -387,11 +387,11 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       // Reset and close modal
       setShowProfilePhotoModal(false)
       setNewProfilePhoto('')
-      alert('Profilbild erfolgriich gänderet!')
+      alert(t('playerProfile.photoUpdated'))
     } catch (error: any) {
       console.error('Error updating profile photo:', error)
       const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
-      alert(`Fehler bim Profilbild Ändere: ${errorMsg}`)
+      alert(`${t('playerProfile.errorUpdatingPhoto')}: ${errorMsg}`)
     } finally {
       setUploadingPhoto(false)
     }
@@ -728,16 +728,16 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold"
                     >
                       <Edit2 className="w-4 h-4" />
-                      Profil Bearbeite
+                      {t('playerProfile.editProfile')}
                     </Link>
                     
                     <button
                       onClick={handleExportCV}
                       className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold"
-                      title="Läbeslaauf als PDF exportiere"
+                      title={t('playerProfile.exportCV')}
                     >
                       <FileDown className="w-4 h-4" />
-                      Läbeslaauf Exportiere
+                      {t('playerProfile.exportCV')}
                     </button>
                   </>
                 )}
@@ -747,10 +747,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   <button
                     onClick={handleStartChat}
                     className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"
-                    title="Nachricht sende"
+                    title={t('playerProfile.sendMessage')}
                   >
                     <MessageCircle className="w-4 h-4" />
-                    Nachricht sende
+                    {t('playerProfile.sendMessage')}
                   </button>
                 )}
                 
@@ -804,7 +804,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
-                Übersicht
+                {t('playerProfile.tabOverview')}
               </button>
               <button
                 onClick={() => setActiveTab('karriere')}
@@ -814,7 +814,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
-                Karriere
+                {t('playerProfile.tabCareer')}
               </button>
               <button
                 onClick={() => setActiveTab('videos')}
@@ -824,7 +824,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
-                Videos
+                {t('playerProfile.tabVideos')}
               </button>
               <button
                 onClick={() => setActiveTab('erfolge')}
@@ -834,7 +834,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
-                Erfolge
+                {t('playerProfile.tabAchievements')}
               </button>
             </nav>
           </div>
@@ -848,13 +848,13 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                       <TrendingUp className="w-5 h-5" />
-                      Fähigkeite
+                      {t('playerProfile.skills')}
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {player.skillReceiving > 0 && (
                         <div>
                           <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Annahme</span>
+                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillReceiving')}</span>
                             <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillReceiving}/5</span>
                           </div>
                           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
@@ -868,7 +868,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       {player.skillServing > 0 && (
                         <div>
                           <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Ufschlag</span>
+                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillServing')}</span>
                             <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillServing}/5</span>
                           </div>
                           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
@@ -882,7 +882,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       {player.skillAttacking > 0 && (
                         <div>
                           <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Agriff</span>
+                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillAttacking')}</span>
                             <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillAttacking}/5</span>
                           </div>
                           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
@@ -896,7 +896,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       {player.skillBlocking > 0 && (
                         <div>
                           <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Block</span>
+                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillBlocking')}</span>
                             <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillBlocking}/5</span>
                           </div>
                           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">

@@ -7,10 +7,12 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import CantonFlag from '@/components/shared/CantonFlag'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Home() {
   const { data: session, status } = useSession()
   const router = useRouter()
+  const { t } = useLanguage()
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const handleProtectedNavigation = (path: string) => {
@@ -123,7 +125,7 @@ export default function Home() {
               {/* Main Title */}
               <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-6 tracking-tighter leading-none">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-white">
-                  Habicht
+                  {t('home.hero.title')}
                 </span>
               </h1>
               
@@ -138,7 +140,7 @@ export default function Home() {
               </div>
               
               <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-3xl mx-auto">
-                Die moderne Scouting-Plattform für Schweizer Volleyball. Entdecke Talente, lueg Highlights a und vernetze dich mit Scouts.
+                {t('home.hero.description')}
               </p>
 
               {/* Main CTA Buttons */}
@@ -149,7 +151,7 @@ export default function Home() {
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     <span className="text-lg md:text-xl">♂</span>
-                    Herren Volleyball
+                    {t('home.hero.menVolleyball')}
                   </span>
                   <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </button>
@@ -160,7 +162,7 @@ export default function Home() {
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     <span className="text-lg md:text-xl">♀</span>
-                    Damen Volleyball
+                    {t('home.hero.womenVolleyball')}
                   </span>
                   <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </button>
@@ -174,7 +176,7 @@ export default function Home() {
                 >
                   <span className="flex items-center gap-2 justify-center">
                     <Search className="w-5 h-5" />
-                    Alle Spieler durchsuchen
+                    {t('home.hero.searchAllPlayers')}
                   </span>
                 </button>
                 {!session && (
@@ -185,7 +187,7 @@ export default function Home() {
                     >
                       <span className="flex items-center gap-2 justify-center">
                         <LogIn className="w-5 h-5" />
-                        Anmelden
+                        {t('home.hero.login')}
                       </span>
                     </Link>
                     <Link
@@ -194,7 +196,7 @@ export default function Home() {
                     >
                       <span className="flex items-center gap-2 justify-center">
                         <Star className="w-5 h-5" />
-                        Jetzt registrieren
+                        {t('home.hero.registerNow')}
                       </span>
                     </Link>
                   </>
@@ -225,37 +227,37 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Alle Ligen. Ein Ort.</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">{t('home.leagues.title')}</h2>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Von NLA Spitzenvolleyball bis zur 5. Liga – entdecke Spieler aus der ganzen Schweiz.
+              {t('home.leagues.subtitle')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <LeagueCard
               league="NLA"
-              description="Nationalliga A"
+              description={t('home.leagues.nla')}
               color="from-blue-600 to-blue-700"
               emoji="🏆"
               playerCount="120+"
             />
             <LeagueCard
               league="NLB"
-              description="Nationalliga B"
+              description={t('home.leagues.nlb')}
               color="from-indigo-600 to-indigo-700"
               emoji="🏐"
               playerCount="200+"
             />
             <LeagueCard
-              league="1. Liga"
-              description="Erste Liga"
+              league={t('home.leagues.firstLeague')}
+              description={t('home.leagues.firstLeague')}
               color="from-purple-600 to-purple-700"
               emoji="🔥"
               playerCount="300+"
             />
             <LeagueCard
-              league="2. Liga"
-              description="Zweite Liga"
+              league={t('home.leagues.secondLeague')}
+              description={t('home.leagues.secondLeague')}
               color="from-pink-600 to-pink-700"
               emoji="💪"
               playerCount="400+"
@@ -264,15 +266,15 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-6 mb-16">
             <LeagueCard
-              league="3. Liga"
-              description="Dritte Liga"
+              league={t('home.leagues.thirdLeague')}
+              description={t('home.leagues.thirdLeague')}
               color="from-green-600 to-green-700"
               emoji="⚡"
               playerCount="500+"
             />
             <LeagueCard
-              league="4. Liga"
-              description="Vierte Liga"
+              league={t('home.leagues.fourthLeague')}
+              description={t('home.leagues.fourthLeague')}
               color="from-teal-600 to-teal-700"
               emoji="⭐"
               playerCount="600+"
@@ -281,8 +283,8 @@ export default function Home() {
 
           <div className="grid md:grid-cols-1 gap-6 mb-16">
             <LeagueCard
-              league="5. Liga"
-              description="Fünfte Liga"
+              league={t('home.leagues.fifthLeague')}
+              description={t('home.leagues.fifthLeague')}
               color="from-indigo-600 to-purple-700"
               emoji="🌟"
               playerCount="300+"
@@ -312,33 +314,33 @@ export default function Home() {
       <section className="py-20 bg-white dark:bg-gray-950">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Alles wo du brauchsch</h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400">Professionelli Tools für Spieler und Scouts</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">{t('home.features.title')}</h2>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400">{t('home.features.subtitle')}</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <FeatureCard
               icon={<Users className="w-12 h-12" />}
-              title="Detaillierti Profile"
-              description="Stats, Erfolg, Club-Gschicht und Teamkollege – alles am gliiche Ort"
+              title={t('home.features.search.title')}
+              description={t('home.features.search.description')}
               color="blue"
             />
             <FeatureCard
               icon={<Video className="w-12 h-12" />}
-              title="Multi-Platform Videos"
-              description="YouTube, Instagram, TikTok oder direkt ufelade – du entscheidsch"
+              title={t('home.features.highlights.title')}
+              description={t('home.features.highlights.description')}
               color="pink"
             />
             <FeatureCard
               icon={<MapPin className="w-12 h-12" />}
-              title="Kantonal-Basiert"
-              description="Find Spieler nach Kanton mit Fahne und lokale Clubs"
+              title={t('home.features.network.title')}
+              description={t('home.features.network.description')}
               color="red"
             />
             <FeatureCard
               icon={<Zap className="w-12 h-12" />}
-              title="Pro Scouting"
-              description="Erwiitereti Suech, Notize und Favorite für Recruiters"
+              title={t('home.features.stats.title')}
+              description={t('home.features.stats.description')}
               color="yellow"
             />
           </div>
@@ -429,10 +431,10 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="text-5xl md:text-6xl mb-4 md:mb-6">🏐</div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
-            Bisch du bereit?
+            {t('home.cta.title')}
           </h2>
           <p className="text-lg md:text-xl lg:text-2xl mb-8 md:mb-10 opacity-90 max-w-2xl mx-auto px-4">
-            Werd Teil vo de grösste Schweizer Volleyball Community und zeig was du drauf hesch!
+            {t('home.cta.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
             <Link 
@@ -441,7 +443,7 @@ export default function Home() {
             >
               <span className="flex items-center gap-2 justify-center">
                 <Star className="w-6 h-6" />
-                Profil erstellen
+                {t('home.cta.registerPlayer')}
               </span>
             </Link>
             <Link 
@@ -467,6 +469,7 @@ function LeagueCard({ league, description, color, emoji, playerCount }: {
   emoji: string
   playerCount: string
 }) {
+  const { t } = useLanguage()
   return (
     <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
       <div className={`absolute inset-0 bg-gradient-to-br ${color}`} />
@@ -475,7 +478,7 @@ function LeagueCard({ league, description, color, emoji, playerCount }: {
         <h3 className="text-3xl font-bold mb-2">{league}</h3>
         <p className="text-lg opacity-90 mb-4">{description}</p>
         <div className="text-2xl font-bold">{playerCount}</div>
-        <p className="text-sm opacity-75">Spieler</p>
+        <p className="text-sm opacity-75">{t('home.leagues.players')}</p>
       </div>
       <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300" />
     </div>

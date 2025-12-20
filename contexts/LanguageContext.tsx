@@ -59,6 +59,56 @@ const translations = {
     'nav.register': 'Registriere',
     'nav.myProfile': 'Mis Profil',
     'nav.dashboard': 'Dashboard',
+    // Home Page
+    home: {
+      hero: {
+        title: 'Habicht',
+        description: 'Di modärni Scouting-Plattform für Schwiizer Volleyball. Entdeck Talänt, lueg Highlights a und vernetze dich mit Scouts.',
+        menVolleyball: 'Herren Volleyball',
+        womenVolleyball: 'Damen Volleyball',
+        searchAllPlayers: 'Alli Spieler duresueche',
+        login: 'Aamelde',
+        registerNow: 'Jetzt registriere',
+      },
+      leagues: {
+        title: 'Alli Lige. Ein Ort.',
+        subtitle: 'Vo NLA Spitzenvolleyball bis zur 5. Liga – entdeck Spieler us dr ganzä Schwiiz.',
+        nla: 'Nationalliga A',
+        nlb: 'Nationalliga B',
+        firstLeague: '1. Liga',
+        secondLeague: 'Zweit Liga',
+        thirdLeague: 'Dritt Liga',
+        fourthLeague: 'Viert Liga',
+        fifthLeague: 'Fünft Liga',
+        players: 'Spieler',
+      },
+      features: {
+        title: 'Warum Habicht?',
+        subtitle: 'Di modärni Lösig für Schweizer Volleyball Scouting',
+        search: {
+          title: 'Intelligenti Suech',
+          description: 'Finde Spieler nach Liga, Position, Canton und viel meh',
+        },
+        highlights: {
+          title: 'Video Highlights',
+          description: 'Lueg dir di beschte Aktione vo de Spieler direkt a',
+        },
+        network: {
+          title: 'Vernetzig',
+          description: 'Verbinde dich mit Scouts, Trainers und Spieler',
+        },
+        stats: {
+          title: 'Statistike',
+          description: 'Umfassendi Spieler-Profile mit detaillierte Statistike',
+        },
+      },
+      cta: {
+        title: 'Bereit zum Starte?',
+        subtitle: 'Tritt dr grösste Schwiizer Volleyball Community bi',
+        registerPlayer: 'Als Spieler registriere',
+        registerRecruiter: 'Als Scout registriere',
+      },
+    },
     // Settings
     settings: {
       title: 'Iistellige',
@@ -118,6 +168,56 @@ const translations = {
     'nav.register': 'Registrieren',
     'nav.myProfile': 'Mein Profil',
     'nav.dashboard': 'Dashboard',
+    // Home Page
+    home: {
+      hero: {
+        title: 'Habicht',
+        description: 'Die moderne Scouting-Plattform für Schweizer Volleyball. Entdecke Talente, schaue Highlights an und vernetze dich mit Scouts.',
+        menVolleyball: 'Herren Volleyball',
+        womenVolleyball: 'Damen Volleyball',
+        searchAllPlayers: 'Alle Spieler durchsuchen',
+        login: 'Anmelden',
+        registerNow: 'Jetzt registrieren',
+      },
+      leagues: {
+        title: 'Alle Ligen. Ein Ort.',
+        subtitle: 'Von NLA Spitzenvolleyball bis zur 5. Liga – entdecke Spieler aus der ganzen Schweiz.',
+        nla: 'Nationalliga A',
+        nlb: 'Nationalliga B',
+        firstLeague: '1. Liga',
+        secondLeague: '2. Liga',
+        thirdLeague: '3. Liga',
+        fourthLeague: '4. Liga',
+        fifthLeague: '5. Liga',
+        players: 'Spieler',
+      },
+      features: {
+        title: 'Warum Habicht?',
+        subtitle: 'Die moderne Lösung für Schweizer Volleyball Scouting',
+        search: {
+          title: 'Intelligente Suche',
+          description: 'Finde Spieler nach Liga, Position, Kanton und vielem mehr',
+        },
+        highlights: {
+          title: 'Video Highlights',
+          description: 'Schaue dir die besten Aktionen der Spieler direkt an',
+        },
+        network: {
+          title: 'Vernetzung',
+          description: 'Verbinde dich mit Scouts, Trainern und Spielern',
+        },
+        stats: {
+          title: 'Statistiken',
+          description: 'Umfassende Spieler-Profile mit detaillierten Statistiken',
+        },
+      },
+      cta: {
+        title: 'Bereit zum Starten?',
+        subtitle: 'Tritt der grössten Schweizer Volleyball Community bei',
+        registerPlayer: 'Als Spieler registrieren',
+        registerRecruiter: 'Als Scout registrieren',
+      },
+    },
     // Settings
     settings: {
       title: 'Einstellungen',
@@ -177,6 +277,56 @@ const translations = {
     'nav.register': 'S\'inscrire',
     'nav.myProfile': 'Mon Profil',
     'nav.dashboard': 'Tableau de bord',
+    // Home Page
+    home: {
+      hero: {
+        title: 'Habicht',
+        description: 'La plateforme de scouting moderne pour le volleyball suisse. Découvre des talents, regarde des highlights et connecte-toi avec des scouts.',
+        menVolleyball: 'Volleyball Hommes',
+        womenVolleyball: 'Volleyball Femmes',
+        searchAllPlayers: 'Rechercher tous les joueurs',
+        login: 'Connexion',
+        registerNow: 'S\'inscrire maintenant',
+      },
+      leagues: {
+        title: 'Toutes les ligues. Un endroit.',
+        subtitle: 'De la LNA volleyball d\'élite à la 5e ligue – découvre des joueurs de toute la Suisse.',
+        nla: 'Ligue nationale A',
+        nlb: 'Ligue nationale B',
+        firstLeague: '1ère Ligue',
+        secondLeague: '2e Ligue',
+        thirdLeague: '3e Ligue',
+        fourthLeague: '4e Ligue',
+        fifthLeague: '5e Ligue',
+        players: 'Joueurs',
+      },
+      features: {
+        title: 'Pourquoi Habicht?',
+        subtitle: 'La solution moderne pour le scouting de volleyball suisse',
+        search: {
+          title: 'Recherche Intelligente',
+          description: 'Trouve des joueurs par ligue, position, canton et bien plus',
+        },
+        highlights: {
+          title: 'Vidéos Highlights',
+          description: 'Regarde les meilleures actions des joueurs directement',
+        },
+        network: {
+          title: 'Réseau',
+          description: 'Connecte-toi avec des scouts, entraîneurs et joueurs',
+        },
+        stats: {
+          title: 'Statistiques',
+          description: 'Profils de joueurs complets avec statistiques détaillées',
+        },
+      },
+      cta: {
+        title: 'Prêt à commencer?',
+        subtitle: 'Rejoins la plus grande communauté de volleyball suisse',
+        registerPlayer: 'S\'inscrire comme joueur',
+        registerRecruiter: 'S\'inscrire comme scout',
+      },
+    },
     // Settings
     settings: {
       title: 'Paramètres',
@@ -236,6 +386,56 @@ const translations = {
     'nav.register': 'Registrati',
     'nav.myProfile': 'Il Mio Profilo',
     'nav.dashboard': 'Pannello di controllo',
+    // Home Page
+    home: {
+      hero: {
+        title: 'Habicht',
+        description: 'La piattaforma moderna di scouting per la pallavolo svizzera. Scopri talenti, guarda highlights e connettiti con scout.',
+        menVolleyball: 'Pallavolo Maschile',
+        womenVolleyball: 'Pallavolo Femminile',
+        searchAllPlayers: 'Cerca tutti i giocatori',
+        login: 'Accedi',
+        registerNow: 'Registrati ora',
+      },
+      leagues: {
+        title: 'Tutte le leghe. Un posto.',
+        subtitle: 'Dalla LNA pallavolo d\'élite alla 5a lega – scopri giocatori da tutta la Svizzera.',
+        nla: 'Lega nazionale A',
+        nlb: 'Lega nazionale B',
+        firstLeague: '1a Lega',
+        secondLeague: '2a Lega',
+        thirdLeague: '3a Lega',
+        fourthLeague: '4a Lega',
+        fifthLeague: '5a Lega',
+        players: 'Giocatori',
+      },
+      features: {
+        title: 'Perché Habicht?',
+        subtitle: 'La soluzione moderna per lo scouting della pallavolo svizzera',
+        search: {
+          title: 'Ricerca Intelligente',
+          description: 'Trova giocatori per lega, posizione, cantone e molto altro',
+        },
+        highlights: {
+          title: 'Video Highlights',
+          description: 'Guarda le migliori azioni dei giocatori direttamente',
+        },
+        network: {
+          title: 'Rete',
+          description: 'Connettiti con scout, allenatori e giocatori',
+        },
+        stats: {
+          title: 'Statistiche',
+          description: 'Profili completi dei giocatori con statistiche dettagliate',
+        },
+      },
+      cta: {
+        title: 'Pronto per iniziare?',
+        subtitle: 'Unisciti alla più grande comunità di pallavolo svizzera',
+        registerPlayer: 'Registrati come giocatore',
+        registerRecruiter: 'Registrati come scout',
+      },
+    },
     // Settings
     settings: {
       title: 'Impostazioni',
@@ -295,6 +495,56 @@ const translations = {
     'nav.register': 'S\'annunziar',
     'nav.myProfile': 'Mes profil',
     'nav.dashboard': 'Pannel da gestiun',
+    // Home Page
+    home: {
+      hero: {
+        title: 'Habicht',
+        description: 'La plattafurma moderna da scouting per il volleyball svizzer. Scuvra talents, guarda highlights e connect cun scouts.',
+        menVolleyball: 'Volleyball Umens',
+        womenVolleyball: 'Volleyball Dunnas',
+        searchAllPlayers: 'Tschertgar tuts giugaders',
+        login: 'S\'annunziar',
+        registerNow: 'S\'annunziar ussa',
+      },
+      leagues: {
+        title: 'Tut las ligas. In lieu.',
+        subtitle: 'Da la LNA volleyball d\'elite a la 5avla liga – scuvra giugaders da tutta la Svizra.',
+        nla: 'Liga naziunala A',
+        nlb: 'Liga naziunala B',
+        firstLeague: '1avla Liga',
+        secondLeague: '2avla Liga',
+        thirdLeague: '3avla Liga',
+        fourthLeague: '4avla Liga',
+        fifthLeague: '5avla Liga',
+        players: 'Giugaders',
+      },
+      features: {
+        title: 'Pertge Habicht?',
+        subtitle: 'La soluziun moderna per il scouting da volleyball svizzer',
+        search: {
+          title: 'Tschertga Intelligenta',
+          description: 'Chattapasser giugaders tenor liga, posiziun, chantun e bler dapli',
+        },
+        highlights: {
+          title: 'Video Highlights',
+          description: 'Guarda las meglras acziuns dals giugaders directamain',
+        },
+        network: {
+          title: 'Rait',
+          description: 'Connect cun scouts, trenaders e giugaders',
+        },
+        stats: {
+          title: 'Statisticas',
+          description: 'Profils cumplets da giugaders cun statisticas detagliadas',
+        },
+      },
+      cta: {
+        title: 'Pront per cumenzar?',
+        subtitle: 'Participescha a la pli gronda communitad da volleyball svizzer',
+        registerPlayer: 'S\'annunziar sco giugader',
+        registerRecruiter: 'S\'annunziar sco scout',
+      },
+    },
     // Settings
     settings: {
       title: 'Parameters',
@@ -354,6 +604,56 @@ const translations = {
     'nav.register': 'Register',
     'nav.myProfile': 'My Profile',
     'nav.dashboard': 'Dashboard',
+    // Home Page
+    home: {
+      hero: {
+        title: 'Habicht',
+        description: 'The modern scouting platform for Swiss volleyball. Discover talents, watch highlights and connect with scouts.',
+        menVolleyball: 'Men\'s Volleyball',
+        womenVolleyball: 'Women\'s Volleyball',
+        searchAllPlayers: 'Search all players',
+        login: 'Login',
+        registerNow: 'Register now',
+      },
+      leagues: {
+        title: 'All Leagues. One Place.',
+        subtitle: 'From NLA elite volleyball to 5th league – discover players from all of Switzerland.',
+        nla: 'National League A',
+        nlb: 'National League B',
+        firstLeague: '1st League',
+        secondLeague: '2nd League',
+        thirdLeague: '3rd League',
+        fourthLeague: '4th League',
+        fifthLeague: '5th League',
+        players: 'Players',
+      },
+      features: {
+        title: 'Why Habicht?',
+        subtitle: 'The modern solution for Swiss volleyball scouting',
+        search: {
+          title: 'Smart Search',
+          description: 'Find players by league, position, canton and much more',
+        },
+        highlights: {
+          title: 'Video Highlights',
+          description: 'Watch the best actions of players directly',
+        },
+        network: {
+          title: 'Network',
+          description: 'Connect with scouts, coaches and players',
+        },
+        stats: {
+          title: 'Statistics',
+          description: 'Comprehensive player profiles with detailed statistics',
+        },
+      },
+      cta: {
+        title: 'Ready to start?',
+        subtitle: 'Join the largest Swiss volleyball community',
+        registerPlayer: 'Register as player',
+        registerRecruiter: 'Register as scout',
+      },
+    },
     // Settings
     settings: {
       title: 'Settings',

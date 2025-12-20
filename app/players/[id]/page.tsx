@@ -527,7 +527,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
             className="absolute top-4 right-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition flex items-center gap-2 z-10"
           >
             <Upload className="w-4 h-4" />
-            Hintergrund Ändere
+            {t('playerProfile.changeBackgroundButton')}
           </button>
         )}
 
@@ -536,7 +536,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
           <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 text-sm z-10">
             <Eye className="w-4 h-4 text-gray-600 dark:text-gray-400" />
             <span className="font-semibold text-gray-900 dark:text-white">{formatViewCount(player.views || 0)}</span>
-            <span className="text-gray-600 dark:text-gray-400">Profilufrufe</span>
+            <span className="text-gray-600 dark:text-gray-400">{t('playerProfile.profileViews')}</span>
           </div>
         )}
       </div>

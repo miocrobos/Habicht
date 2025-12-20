@@ -414,6 +414,8 @@ const translations = {
       menPlayersFound: 'Männer Spieler gfunde',
       womenPlayersFound: 'Fraue Spieler gfunde',
       swissVolleyball: 'SWISS VOLLEYBALL',
+      changeBackgroundButton: 'Hindergrund Ändere',
+      all: 'Alle',
     },
     // Settings
     settings: {
@@ -877,6 +879,8 @@ const translations = {
       menPlayersFound: 'Männer Spieler gefunden',
       womenPlayersFound: 'Frauen Spieler gefunden',
       swissVolleyball: 'SCHWEIZER VOLLEYBALL',
+      changeBackgroundButton: 'Hintergrund Ändern',
+      all: 'Alle',
     },
     // Settings
     settings: {
@@ -1340,6 +1344,8 @@ const translations = {
       menPlayersFound: 'joueurs masculins trouvés',
       womenPlayersFound: 'joueuses féminines trouvées',
       swissVolleyball: 'VOLLEYBALL SUISSE',
+      changeBackgroundButton: 'Changer l\'arrière-plan',
+      all: 'Tous',
     },
     // Settings
     settings: {
@@ -1803,6 +1809,8 @@ const translations = {
       menPlayersFound: 'giocatori maschili trovati',
       womenPlayersFound: 'giocatrici femminili trovate',
       swissVolleyball: 'PALLAVOLO SVIZZERA',
+      changeBackgroundButton: 'Cambia sfondo',
+      all: 'Tutti',
     },
     // Settings
     settings: {
@@ -2266,6 +2274,8 @@ const translations = {
       menPlayersFound: 'giugaders umens chatàs',
       womenPlayersFound: 'giugadras dunnas chatàs',
       swissVolleyball: 'VOLLEYBALL SVIZZER',
+      changeBackgroundButton: 'Midar fund',
+      all: 'Tuts',
     },
     // Settings
     settings: {
@@ -2729,6 +2739,8 @@ const translations = {
       menPlayersFound: 'male players found',
       womenPlayersFound: 'female players found',
       swissVolleyball: 'SWISS VOLLEYBALL',
+      changeBackgroundButton: 'Change background',
+      all: 'All',
     },
     // Settings
     settings: {

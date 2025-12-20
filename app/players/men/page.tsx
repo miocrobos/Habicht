@@ -190,34 +190,34 @@ export default function MenPlayersPage() {
             {/* Position */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Position
+                {t('playerProfile.position')}
               </label>
               <select
                 value={filters.position}
                 onChange={(e) => handleFilterChange('position', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
-                <option value="OUTSIDE_HITTER">Aussenspieler</option>
-                <option value="OPPOSITE">Diagonalspieler</option>
-                <option value="MIDDLE_BLOCKER">Mittelblocker</option>
-                <option value="SETTER">Zuspieler</option>
-                <option value="LIBERO">Libero</option>
-                <option value="UNIVERSAL">Universal</option>
+                <option value="">{t('playerProfile.all')}</option>
+                <option value="OUTSIDE_HITTER">{t('playerProfile.positionOutsideHitter')}</option>
+                <option value="OPPOSITE">{t('playerProfile.positionOpposite')}</option>
+                <option value="MIDDLE_BLOCKER">{t('playerProfile.positionMiddleBlocker')}</option>
+                <option value="SETTER">{t('playerProfile.positionSetter')}</option>
+                <option value="LIBERO">{t('playerProfile.positionLibero')}</option>
+                <option value="UNIVERSAL">{t('playerProfile.positionUniversal')}</option>
               </select>
             </div>
 
             {/* Canton */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Kanton
+                {t('playerProfile.canton')}
               </label>
               <select
                 value={filters.canton}
                 onChange={(e) => handleFilterChange('canton', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
+                <option value="">{t('playerProfile.all')}</option>
                 <option value="AG">Aargau</option>
                 <option value="AI">Appenzell Innerrhoden</option>
                 <option value="AR">Appenzell Ausserrhoden</option>
@@ -250,14 +250,14 @@ export default function MenPlayersPage() {
             {/* League */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Liga
+                {t('playerProfile.league')}
               </label>
               <select
                 value={filters.league}
                 onChange={(e) => handleFilterChange('league', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
+                <option value="">{t('playerProfile.all')}</option>
                 <option value="NLA">NLA</option>
                 <option value="NLB">NLB</option>
                 <option value="FIRST_LEAGUE">1. Liga</option>

@@ -250,14 +250,14 @@ export default function WomenPlayersPage() {
             {/* League */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Liga
+                {t('playerProfile.league')}
               </label>
               <select
                 value={filters.league}
                 onChange={(e) => handleFilterChange('league', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
+                <option value="">{t('playerProfile.all')}</option>
                 <option value="NLA">NLA</option>
                 <option value="NLB">NLB</option>
                 <option value="FIRST_LEAGUE">1. Liga</option>

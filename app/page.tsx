@@ -138,7 +138,7 @@ export default function Home() {
               </div>
               
               <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-3xl mx-auto">
-                Die moderne Scouting-Plattform für Schweizer Volleyball. Entdecke Talente von NLA bis 5. Liga – Herren und Damen.
+                Die moderne Scouting-Plattform für Schweizer Volleyball. Entdecke Talente, lueg Highlights a und vernetze dich mit Scouts.
               </p>
 
               {/* Main CTA Buttons */}

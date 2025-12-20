@@ -676,8 +676,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Liga *
                       </label>
-                      <input
-                        type="text"
+                      <select
                         value={club.league}
                         onChange={(e) => {
                           const updated = clubHistory.map((c) =>
@@ -685,9 +684,24 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                           );
                           setClubHistory(updated);
                         }}
-                        placeholder="z.B. NLA, 1. Liga, U19 Elite"
                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                      />
+                      >
+                        <option value="">Wähl Liga üs</option>
+                        <option value="NLA">NLA</option>
+                        <option value="NLB">NLB</option>
+                        <option value="1. Liga">1. Liga</option>
+                        <option value="2. Liga">2. Liga</option>
+                        <option value="3. Liga">3. Liga</option>
+                        <option value="4. Liga">4. Liga</option>
+                        <option value="5. Liga">5. Liga</option>
+                        <option value="U19 Elite">U19 Elite</option>
+                        <option value="U17 Elite">U17 Elite</option>
+                        <option value="U15 Elite">U15 Elite</option>
+                        <option value="U19">U19</option>
+                        <option value="U17">U17</option>
+                        <option value="U15">U15</option>
+                        <option value="U13">U13</option>
+                      </select>
                     </div>
                   </div>
 

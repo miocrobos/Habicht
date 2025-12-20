@@ -149,6 +149,23 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     setError('');
     setSuccess(false);
 
+    // Validate club history: check if any club has a name but neither currentClub nor yearTo
+    const invalidClubs = clubHistory.filter(club => {
+      const hasClubName = club.clubName && club.clubName.trim() !== '';
+      const hasYearTo = club.yearTo && club.yearTo.trim() !== '';
+      const isCurrentClub = club.currentClub === true;
+      // Invalid if: has name BUT neither is current NOR has end year
+      return hasClubName && !isCurrentClub && !hasYearTo;
+    });
+
+    if (invalidClubs.length > 0) {
+      setError('Bitte füll "Bis Jahr" für alli Clubs üs, wo nid als "Aktuellä Club" markiert sind.');
+      setSaving(false);
+      // Scroll to error message
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
     // Filter club history: only include clubs that have a name
     // AND either currentClub is checked OR yearTo is filled
     const validClubHistory = clubHistory.filter(club => {
@@ -621,8 +638,12 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
             <p className="text-gray-500 dark:text-gray-400 italic">Kei Club-Gschicht hinzugefüegt</p>
           ) : (
             <div className="space-y-4">
-              {clubHistory.map((club, index) => (
-                <div key={club.id} className="border border-gray-300 dark:border-gray-600 rounded-lg p-4">
+              {clubHistory.map((club, index) => {
+                // Check if this club is invalid (has name but no yearTo and not current)
+                const isInvalid = club.clubName && club.clubName.trim() !== '' && !club.currentClub && (!club.yearTo || club.yearTo.trim() === '');
+                
+                return (
+                <div key={club.id} className={`border rounded-lg p-4 ${isInvalid ? 'border-red-500 dark:border-red-400 bg-red-50 dark:bg-red-900/10' : 'border-gray-300 dark:border-gray-600'}`}>
                   <div className="flex items-start justify-between mb-4">
                     <h3 className="font-semibold text-gray-900 dark:text-white">Club {index + 1}</h3>
                     <button
@@ -691,7 +712,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Bis Jahr
+                        Bis Jahr {!club.currentClub && <span className="text-red-600">*</span>}
                       </label>
                       {club.currentClub ? (
                         <div className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
@@ -710,7 +731,9 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                             setClubHistory(updated);
                           }}
                           placeholder="z.B. 2023"
-                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                            isInvalid ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
+                          }`}
                         />
                       )}
                     </div>
@@ -736,8 +759,17 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                       </span>
                     </label>
                   </div>
+
+                  {isInvalid && (
+                    <div className="mt-3 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-lg p-3">
+                      <p className="text-sm text-red-800 dark:text-red-200">
+                        ⚠️ Bitte füll "Bis Jahr" üs oder markier dä Club als "Aktuellä Club"
+                      </p>
+                    </div>
+                  )}
                 </div>
-              ))}
+              );
+              })}
             </div>
           )}
         </div>

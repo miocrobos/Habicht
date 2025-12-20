@@ -7,7 +7,7 @@
 ### For Players
 - **Complete Player Profiles** - Showcase your volleyball career with detailed stats, physical attributes, and academic information
 - **Video Highlights** - Upload gameplay videos directly or link from YouTube, Instagram, and TikTok
-- **Club Integration** - Automatic linking to Swiss Volley and club websites (Volley Amriswil, Volley Schönenwerd, etc.)
+- **Club Integration** - Automatic linking to  club websites (Volley Amriswil, Volley Schönenwerd, etc.)
 - **Social Media Integration** - Connect your Instagram, TikTok, and YouTube accounts
 - **Career Timeline** - Display your club history similar to Volleybox
 - **Stats Tracking** - Track points, kills, aces, blocks, and more by season

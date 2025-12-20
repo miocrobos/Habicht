@@ -65,6 +65,8 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
   const [formData, setFormData] = useState<any>(null);
   const [clubHistory, setClubHistory] = useState<any[]>([]);
   const [achievements, setAchievements] = useState<any[]>([]);
+  const [allClubs, setAllClubs] = useState<any[]>([]);
+  const [clubSuggestions, setClubSuggestions] = useState<Record<string, any[]>>({});
 
   const schools = getAllSchools();
 
@@ -76,8 +78,18 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
     if (status === 'authenticated') {
       loadPlayerData();
+      loadClubs();
     }
   }, [status, params.id]);
+
+  const loadClubs = async () => {
+    try {
+      const response = await axios.get('/api/clubs?all=true');
+      setAllClubs(response.data.clubs || []);
+    } catch (err) {
+      console.error('Error loading clubs:', err);
+    }
+  };
 
   const loadPlayerData = async () => {
     try {
@@ -655,7 +667,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
-                    <div>
+                    <div className="relative">
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Club Name *
                       </label>
@@ -663,13 +675,63 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                         type="text"
                         value={club.clubName}
                         onChange={(e) => {
+                          const value = e.target.value;
                           const updated = clubHistory.map((c) =>
-                            c.id === club.id ? { ...c, clubName: e.target.value } : c
+                            c.id === club.id ? { ...c, clubName: value } : c
                           );
                           setClubHistory(updated);
+                          
+                          // Show suggestions if typing
+                          if (value.length >= 2) {
+                            const suggestions = allClubs.filter(c => 
+                              c.name.toLowerCase().includes(value.toLowerCase()) ||
+                              (c.shortName && c.shortName.toLowerCase().includes(value.toLowerCase()))
+                            ).slice(0, 5);
+                            setClubSuggestions({ ...clubSuggestions, [club.id]: suggestions });
+                          } else {
+                            setClubSuggestions({ ...clubSuggestions, [club.id]: [] });
+                          }
+                        }}
+                        onBlur={() => {
+                          // Delay to allow click on suggestion
+                          setTimeout(() => {
+                            setClubSuggestions({ ...clubSuggestions, [club.id]: [] });
+                          }, 200);
                         }}
                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        placeholder="z.B. Volley Amriswil"
                       />
+                      {clubSuggestions[club.id]?.length > 0 && (
+                        <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                          {clubSuggestions[club.id].map((suggestion) => (
+                            <button
+                              key={suggestion.id}
+                              type="button"
+                              onClick={() => {
+                                const updated = clubHistory.map((c) =>
+                                  c.id === club.id ? { 
+                                    ...c, 
+                                    clubName: suggestion.name,
+                                    logo: suggestion.logo || c.logo
+                                  } : c
+                                );
+                                setClubHistory(updated);
+                                setClubSuggestions({ ...clubSuggestions, [club.id]: [] });
+                              }}
+                              className="w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600 transition flex items-center gap-2"
+                            >
+                              {suggestion.logo && <span className="text-lg">{suggestion.logo}</span>}
+                              <div>
+                                <div className="font-medium text-gray-900 dark:text-white">{suggestion.name}</div>
+                                {suggestion.shortName && (
+                                  <div className="text-sm text-gray-600 dark:text-gray-400">{suggestion.shortName}</div>
+                                )}
+                                <div className="text-xs text-gray-500 dark:text-gray-500">{suggestion.town}, {suggestion.canton}</div>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
 
                     <div>

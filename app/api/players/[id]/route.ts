@@ -242,6 +242,7 @@ export async function PUT(
             yearFrom,
             yearTo,
             currentClub: club.currentClub,
+            currentClubType: typeof club.currentClub,
             rawYearFrom: club.yearFrom,
             rawYearTo: club.yearTo
           });
@@ -256,8 +257,8 @@ export async function PUT(
             clubWebsiteUrl: existingWebsiteUrls.get(club.clubName) || club.clubWebsiteUrl || null,
             league: club.league || null,
             startDate: yearFrom ? new Date(yearFrom, 0, 1) : new Date(),
-            endDate: club.currentClub ? null : (yearTo ? new Date(yearTo, 11, 31) : null),
-            currentClub: club.currentClub || false,
+            endDate: club.currentClub === true ? null : (yearTo ? new Date(yearTo, 11, 31) : null),
+            currentClub: club.currentClub === true,
           };
         }));
 

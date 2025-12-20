@@ -531,12 +531,14 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
           </button>
         )}
 
-        {/* View counter */}
-        <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 text-sm z-10">
-          <Eye className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-          <span className="font-semibold text-gray-900 dark:text-white">{formatViewCount(player.views || 0)}</span>
-          <span className="text-gray-600 dark:text-gray-400">Profilufrufe</span>
-        </div>
+        {/* View counter (owner only) */}
+        {isOwner && (
+          <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 text-sm z-10">
+            <Eye className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+            <span className="font-semibold text-gray-900 dark:text-white">{formatViewCount(player.views || 0)}</span>
+            <span className="text-gray-600 dark:text-gray-400">Profilufrufe</span>
+          </div>
+        )}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 pb-12 relative z-10">

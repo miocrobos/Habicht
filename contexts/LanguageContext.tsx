@@ -135,6 +135,21 @@ const translations = {
         email: 'Email',
       },
     },
+    // Notifications Page
+    notifications: {
+      title: 'Benachrichtigunge',
+      loading: 'Lädt Benachrichtigunge...',
+      unread: 'ungleseni Benachrichtigunge',
+      markAllRead: 'Alli als gläse markiere',
+      all: 'Alli',
+      unreadOnly: 'Ungleseni',
+      profileViews: 'Profil-Aaluege',
+      messages: 'Nachrichta',
+      noNotifications: 'Keini Benachrichtigunge',
+      noUnread: 'Keini ungleseni Benachrichtigunge',
+      markRead: 'Als gläse markiere',
+      delete: 'Lösche',
+    },
     // Settings
     settings: {
       title: 'Iistellige',
@@ -317,6 +332,21 @@ const translations = {
         checkEmail: 'Bitte prüfe deine E-Mails, um die Passwortänderung zu bestätigen.',
         error: 'Fehler beim Senden der Anfrage.',
       },
+    },
+    // Notifications Page
+    notifications: {
+      title: 'Benachrichtigungen',
+      loading: 'Lade Benachrichtigungen...',
+      unread: 'ungelesene Benachrichtigungen',
+      markAllRead: 'Alle als gelesen markieren',
+      all: 'Alle',
+      unreadOnly: 'Ungelesen',
+      profileViews: 'Profil-Ansichten',
+      messages: 'Nachrichten',
+      noNotifications: 'Keine Benachrichtigungen',
+      noUnread: 'Keine ungelesenen Benachrichtigungen',
+      markRead: 'Als gelesen markieren',
+      delete: 'Löschen',
     },
     // Settings
     settings: {
@@ -501,6 +531,21 @@ const translations = {
         error: 'Erreur lors de l\'envoi de la demande.',
       },
     },
+    // Notifications Page
+    notifications: {
+      title: 'Notifications',
+      loading: 'Chargement des notifications...',
+      unread: 'notifications non lues',
+      markAllRead: 'Tout marquer comme lu',
+      all: 'Toutes',
+      unreadOnly: 'Non lues',
+      profileViews: 'Vues du profil',
+      messages: 'Messages',
+      noNotifications: 'Aucune notification',
+      noUnread: 'Aucune notification non lue',
+      markRead: 'Marquer comme lu',
+      delete: 'Supprimer',
+    },
     // Settings
     settings: {
       title: 'Paramètres',
@@ -683,6 +728,21 @@ const translations = {
         checkEmail: 'Controlla le tue email per confermare il cambio di password.',
         error: 'Errore durante l\'invio della richiesta.',
       },
+    },
+    // Notifications Page
+    notifications: {
+      title: 'Notifiche',
+      loading: 'Caricamento notifiche...',
+      unread: 'notifiche non lette',
+      markAllRead: 'Segna tutto come letto',
+      all: 'Tutte',
+      unreadOnly: 'Non lette',
+      profileViews: 'Visualizzazioni profilo',
+      messages: 'Messaggi',
+      noNotifications: 'Nessuna notifica',
+      noUnread: 'Nessuna notifica non letta',
+      markRead: 'Segna come letto',
+      delete: 'Elimina',
     },
     // Settings
     settings: {
@@ -867,6 +927,21 @@ const translations = {
         error: 'Errur cun trametter la dumonda.',
       },
     },
+    // Notifications Page
+    notifications: {
+      title: 'Communicaziuns',
+      loading: 'Chargiar communicaziuns...',
+      unread: 'communicaziuns betg legidas',
+      markAllRead: 'Marcar tut sco legid',
+      all: 'Tut',
+      unreadOnly: 'Betg legidas',
+      profileViews: 'Vistas dal profil',
+      messages: 'Messadis',
+      noNotifications: 'Naginas communicaziuns',
+      noUnread: 'Naginas communicaziuns betg legidas',
+      markRead: 'Marcar sco legid',
+      delete: 'Stizzar',
+    },
     // Settings
     settings: {
       title: 'Parameters',
@@ -1049,6 +1124,21 @@ const translations = {
         checkEmail: 'Please check your emails to confirm the password change.',
         error: 'Error sending request.',
       },
+    },
+    // Notifications Page
+    notifications: {
+      title: 'Notifications',
+      loading: 'Loading notifications...',
+      unread: 'unread notifications',
+      markAllRead: 'Mark all as read',
+      all: 'All',
+      unreadOnly: 'Unread',
+      profileViews: 'Profile views',
+      messages: 'Messages',
+      noNotifications: 'No notifications',
+      noUnread: 'No unread notifications',
+      markRead: 'Mark as read',
+      delete: 'Delete',
     },
     // Settings
     settings: {

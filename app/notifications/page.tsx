@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { Bell, Check, X, Eye, MessageCircle, UserPlus, Award } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Notification {
   id: string
@@ -19,6 +20,7 @@ interface Notification {
 export default function NotificationsPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
+  const { t } = useLanguage()
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<'all' | 'unread'>('all')
@@ -101,7 +103,7 @@ export default function NotificationsPage() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">Lädt Benachrichtigunge...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">{t('notifications.loading')}</p>
         </div>
       </div>
     )
@@ -117,10 +119,10 @@ export default function NotificationsPage() {
               <Bell className="w-8 h-8 text-red-600" />
               <div>
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Benachrichtigunge
+                  {t('notifications.title')}
                 </h1>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {unreadCount} ungleseni Benachrichtigunge
+                  {unreadCount} {t('notifications.unread')}
                 </p>
               </div>
             </div>
@@ -130,7 +132,7 @@ export default function NotificationsPage() {
                 className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition flex items-center gap-2"
               >
                 <Check className="w-4 h-4" />
-                Alli als gläse markiere
+                {t('notifications.markAllRead')}
               </button>
             )}
           </div>
@@ -146,7 +148,7 @@ export default function NotificationsPage() {
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                 }`}
               >
-                Alli ({notifications.length})
+                {t('notifications.all')} ({notifications.length})
               </button>
               <button
                 onClick={() => setFilter('unread')}
@@ -156,7 +158,7 @@ export default function NotificationsPage() {
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                 }`}
               >
-                Ungleseni ({unreadCount})
+                {t('notifications.unreadOnly')} ({unreadCount})
               </button>
             </div>
 
@@ -171,7 +173,7 @@ export default function NotificationsPage() {
                 }`}
               >
                 <Bell className="w-4 h-4" />
-                Alli
+                {t('notifications.all')}
               </button>
               <button
                 onClick={() => setTypeFilter('PROFILE_VIEW')}
@@ -182,7 +184,7 @@ export default function NotificationsPage() {
                 }`}
               >
                 <Eye className="w-4 h-4" />
-                Profil-Aaluege ({notifications.filter(n => n.type === 'PROFILE_VIEW').length})
+                {t('notifications.profileViews')} ({notifications.filter(n => n.type === 'PROFILE_VIEW').length})
               </button>
               <button
                 onClick={() => setTypeFilter('MESSAGE')}
@@ -193,7 +195,7 @@ export default function NotificationsPage() {
                 }`}
               >
                 <MessageCircle className="w-4 h-4" />
-                Nachrichta ({notifications.filter(n => n.type === 'MESSAGE').length})
+                {t('notifications.messages')} ({notifications.filter(n => n.type === 'MESSAGE').length})
               </button>
             </div>
           </div>
@@ -204,7 +206,7 @@ export default function NotificationsPage() {
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12 text-center">
             <Bell className="w-16 h-16 text-gray-400 mx-auto mb-4" />
             <p className="text-gray-600 dark:text-gray-400 text-lg">
-              {filter === 'unread' ? 'Keini ungleseni Benachrichtigunge' : 'Keini Benachrichtigunge'}
+              {filter === 'unread' ? t('notifications.noUnread') : t('notifications.noNotifications')}
             </p>
           </div>
         ) : (
@@ -244,7 +246,7 @@ export default function NotificationsPage() {
                       <button
                         onClick={() => markAsRead(notification.id)}
                         className="p-2 text-green-600 hover:bg-green-50 dark:hover:bg-green-900 rounded-lg transition"
-                        title="Als gläse markiere"
+                        title={t('notifications.markRead')}
                       >
                         <Check className="w-5 h-5" />
                       </button>
@@ -252,7 +254,7 @@ export default function NotificationsPage() {
                     <button
                       onClick={() => deleteNotification(notification.id)}
                       className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900 rounded-lg transition"
-                      title="Lösche"
+                      title={t('notifications.delete')}
                     >
                       <X className="w-5 h-5" />
                     </button>

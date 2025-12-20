@@ -48,6 +48,8 @@ const translations = {
     // Navigation
     'nav.home': 'Hei',
     'nav.players': 'Spieler',
+    'nav.men': 'Herren',
+    'nav.women': 'Damen',
     'nav.recruiters': 'Rekrutierer',
     'nav.clubs': 'Verein',
     'nav.about': 'Über Üs',
@@ -55,6 +57,8 @@ const translations = {
     'nav.logout': 'Abmelde',
     'nav.login': 'Aamelde',
     'nav.register': 'Registriere',
+    'nav.myProfile': 'Mis Profil',
+    'nav.dashboard': 'Dashboard',
     // Settings
     settings: {
       title: 'Iistellige',
@@ -103,6 +107,8 @@ const translations = {
     // Navigation
     'nav.home': 'Startseite',
     'nav.players': 'Spieler',
+    'nav.men': 'Herren',
+    'nav.women': 'Damen',
     'nav.recruiters': 'Rekrutierer',
     'nav.clubs': 'Vereine',
     'nav.about': 'Über uns',
@@ -110,6 +116,8 @@ const translations = {
     'nav.logout': 'Abmelden',
     'nav.login': 'Anmelden',
     'nav.register': 'Registrieren',
+    'nav.myProfile': 'Mein Profil',
+    'nav.dashboard': 'Dashboard',
     // Settings
     settings: {
       title: 'Einstellungen',
@@ -158,6 +166,8 @@ const translations = {
     // Navigation
     'nav.home': 'Accueil',
     'nav.players': 'Joueurs',
+    'nav.men': 'Hommes',
+    'nav.women': 'Femmes',
     'nav.recruiters': 'Recruteurs',
     'nav.clubs': 'Clubs',
     'nav.about': 'À propos',
@@ -165,6 +175,8 @@ const translations = {
     'nav.logout': 'Déconnexion',
     'nav.login': 'Connexion',
     'nav.register': 'S\'inscrire',
+    'nav.myProfile': 'Mon Profil',
+    'nav.dashboard': 'Tableau de bord',
     // Settings
     settings: {
       title: 'Paramètres',
@@ -213,6 +225,8 @@ const translations = {
     // Navigation
     'nav.home': 'Home',
     'nav.players': 'Giocatori',
+    'nav.men': 'Uomini',
+    'nav.women': 'Donne',
     'nav.recruiters': 'Reclutatori',
     'nav.clubs': 'Club',
     'nav.about': 'Chi siamo',
@@ -220,6 +234,8 @@ const translations = {
     'nav.logout': 'Disconnetti',
     'nav.login': 'Accedi',
     'nav.register': 'Registrati',
+    'nav.myProfile': 'Il Mio Profilo',
+    'nav.dashboard': 'Pannello di controllo',
     // Settings
     settings: {
       title: 'Impostazioni',
@@ -268,6 +284,8 @@ const translations = {
     // Navigation
     'nav.home': 'Pagina principala',
     'nav.players': 'Giugaders',
+    'nav.men': 'Umens',
+    'nav.women': 'Dunnas',
     'nav.recruiters': 'Recrutaders',
     'nav.clubs': 'Clubs',
     'nav.about': 'Davart nus',
@@ -275,6 +293,8 @@ const translations = {
     'nav.logout': 'S\'annunziar ora',
     'nav.login': 'S\'annunziar',
     'nav.register': 'S\'annunziar',
+    'nav.myProfile': 'Mes profil',
+    'nav.dashboard': 'Pannel da gestiun',
     // Settings
     settings: {
       title: 'Parameters',
@@ -323,6 +343,8 @@ const translations = {
     // Navigation
     'nav.home': 'Home',
     'nav.players': 'Players',
+    'nav.men': 'Men',
+    'nav.women': 'Women',
     'nav.recruiters': 'Recruiters',
     'nav.clubs': 'Clubs',
     'nav.about': 'About',
@@ -330,6 +352,8 @@ const translations = {
     'nav.logout': 'Logout',
     'nav.login': 'Login',
     'nav.register': 'Register',
+    'nav.myProfile': 'My Profile',
+    'nav.dashboard': 'Dashboard',
     // Settings
     settings: {
       title: 'Settings',

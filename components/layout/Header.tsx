@@ -7,11 +7,13 @@ import { Menu, X, User, Search, Settings, Bell } from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
 import axios from 'axios'
 import NotificationPopup from '@/components/shared/NotificationPopup'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { data: session } = useSession()
   const [unreadCount, setUnreadCount] = useState(0)
+  const { t } = useLanguage()
 
   useEffect(() => {
     if (session) {
@@ -56,33 +58,33 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium">
-              Spieler
+              {t('nav.players')}
             </Link>
             <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium flex flex-col items-center text-center gap-1">
-              <span>Herren</span>
+              <span>{t('nav.men')}</span>
               <span className="text-2xl">♂</span>
             </Link>
             <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium flex flex-col items-center text-center gap-1">
-              <span>Damen</span>
+              <span>{t('nav.women')}</span>
               <span className="text-2xl">♀</span>
             </Link>
             <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium">
-              Clubs
+              {t('nav.clubs')}
             </Link>
             <Link href="/recruiters" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition font-medium">
-              Rekrutierer
+              {t('nav.recruiters')}
             </Link>
             <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-              Über uns
+              {t('nav.about')}
             </Link>
             {session?.user.role === 'RECRUITER' && (
               <Link href="/dashboard/recruiter" className="text-gray-700 hover:text-swiss-red transition">
-                Dashboard
+                {t('nav.dashboard')}
               </Link>
             )}
             {session?.user.role === 'PLAYER' && session?.user.playerId && (
               <Link href={`/players/${session.user.playerId}`} className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                Mein Profil
+                {t('nav.myProfile')}
               </Link>
             )}
           </nav>
@@ -93,7 +95,7 @@ export default function Header() {
             <Link 
               href="/settings" 
               className="flex items-center justify-center w-10 h-10 text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"
-              title="Einstellungen"
+              title={t('nav.settings')}
             >
               <Settings className="w-5 h-5" />
             </Link>
@@ -106,7 +108,7 @@ export default function Header() {
                 onClick={() => signOut()}
                 className="bg-swiss-red dark:bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 dark:hover:bg-red-700 transition"
               >
-                Abmelden
+                {t('nav.logout')}
               </button>
             ) : (
               <>
@@ -114,13 +116,13 @@ export default function Header() {
                   href="/auth/login"
                   className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium"
                 >
-                  Anmelden
+                  {t('nav.login')}
                 </Link>
                 <Link 
                   href="/auth/register"
                   className="bg-swiss-red dark:bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 dark:hover:bg-red-700 transition"
                 >
-                  Registrieren
+                  {t('nav.register')}
                 </Link>
               </>
             )}
@@ -140,50 +142,50 @@ export default function Header() {
           <div className="md:hidden py-4 border-t dark:border-gray-700">
             <nav className="flex flex-col space-y-4">
               <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                Spieler
+                {t('nav.players')}
               </Link>
               <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium flex flex-col items-center text-center gap-1">
-                <span>Herren</span>
+                <span>{t('nav.men')}</span>
                 <span className="text-2xl">♂</span>
               </Link>
               <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium flex flex-col items-center text-center gap-1">
-                <span>Damen</span>
+                <span>{t('nav.women')}</span>
                 <span className="text-2xl">♀</span>
               </Link>
               <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                Clubs
+                {t('nav.clubs')}
               </Link>
               <Link href="/recruiters" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition font-medium">
-                👥 Rekrutierer
+                👥 {t('nav.recruiters')}
               </Link>
               <Link href="/settings" className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 <Settings className="w-5 h-5" />
-                <span>Einstellungen</span>
+                <span>{t('nav.settings')}</span>
               </Link>
               <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                Über uns
+                {t('nav.about')}
               </Link>
               {session ? (
                 <>
                   {session.user.role === 'PLAYER' && session.user.playerId && (
                     <Link href={`/players/${session.user.playerId}`} className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                      Mein Profil
+                      {t('nav.myProfile')}
                     </Link>
                   )}
                   <button
                     onClick={() => signOut()}
                     className="text-left text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition"
                   >
-                    Abmelden
+                    {t('nav.logout')}
                   </button>
                 </>
               ) : (
                 <>
                   <Link href="/auth/login" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                    Anmelden
+                    {t('nav.login')}
                   </Link>
                   <Link href="/auth/register" className="text-swiss-red dark:text-red-400 font-semibold">
-                    Registrieren
+                    {t('nav.register')}
                   </Link>
                 </>
               )}

@@ -80,14 +80,14 @@ export default function MenPlayersPage() {
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-2">{t('players.menTitle')}</h1>
               <p className="text-lg text-gray-600">
-                Schweizer Männer Volleyball Spieler
+                {t('players.menPlayers')}
               </p>
             </div>
             <Link 
               href="/players/women"
               className="bg-pink-600 text-white px-6 py-3 rounded-lg hover:bg-pink-700 transition font-semibold"
             >
-              Zu Damen →
+              {t('players.toWomen')}
             </Link>
           </div>
           
@@ -97,13 +97,13 @@ export default function MenPlayersPage() {
               onClick={() => handleFilterChange('league', 'NLA')}
               className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition text-sm font-medium"
             >
-              NLA Herren
+              {t('players.nlaMen')}
             </button>
             <button
               onClick={() => handleFilterChange('league', 'NLB')}
               className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition text-sm font-medium"
             >
-              NLB Herren
+              {t('players.nlbMen')}
             </button>
             <button
               onClick={() => handleFilterChange('league', 'FIRST_LEAGUE')}

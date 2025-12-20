@@ -104,12 +104,16 @@ export async function PUT(
     const isNewlyLooking = playerData.lookingForClub === true && existingPlayer?.lookingForClub === false;
 
     // Find current club league from club history if available
-    let currentLeague = playerData.currentLeague;
+    let currentLeague = playerData.currentLeague || undefined;
     if (clubHistory && clubHistory.length > 0) {
       const currentClubHistory = clubHistory.find((club: any) => club.currentClub === true);
       if (currentClubHistory && currentClubHistory.league) {
         currentLeague = currentClubHistory.league;
       }
+    }
+    // Ensure currentLeague is undefined if empty string or null
+    if (!currentLeague || currentLeague === '') {
+      currentLeague = undefined;
     }
 
     // Update user name to match player name

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { X, FileDown } from 'lucide-react'
 import { generatePlayerCV } from '@/lib/generateCV'
 import { generateRecruiterCV } from '@/lib/generateRecruiterCV'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface CVTypeModalProps {
   isOpen: boolean
@@ -14,7 +15,9 @@ interface CVTypeModalProps {
 }
 
 export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData, userName }: CVTypeModalProps) {
+  const { t } = useLanguage()
   const [exporting, setExporting] = useState(false)
+  const [selectedLanguage, setSelectedLanguage] = useState('gsw') // Default to Swiss German
 
   if (!isOpen) return null
 
@@ -90,11 +93,30 @@ export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData
         <div className="text-center mb-6">
           <FileDown className="w-16 h-16 mx-auto text-red-600 mb-3" />
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            CV Exportiere
+            {t('playerProfile.cvExport')}
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Wähl us, welli Art vo CV du hesch möchtest:
+            {t('playerProfile.cvChooseType')}
           </p>
+        </div>
+
+        {/* Language Selection */}
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            {t('playerProfile.cvLanguageSelect')}
+          </label>
+          <select
+            value={selectedLanguage}
+            onChange={(e) => setSelectedLanguage(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+          >
+            <option value="gsw">{t('playerProfile.cvLanguageSwissGerman')}</option>
+            <option value="de">{t('playerProfile.cvLanguageGerman')}</option>
+            <option value="fr">{t('playerProfile.cvLanguageFrench')}</option>
+            <option value="it">{t('playerProfile.cvLanguageItalian')}</option>
+            <option value="rm">{t('playerProfile.cvLanguageRomansh')}</option>
+            <option value="en">{t('playerProfile.cvLanguageEnglish')}</option>
+          </select>
         </div>
 
         {/* CV Type Options */}
@@ -111,10 +133,10 @@ export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData
               </div>
               <div className="flex-1 text-left">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                  Spieler CV
+                  {t('playerProfile.cvPlayerTitle')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Zeigt dini Spieler-Profile, Positione, Stats, Club-Gschicht, und Erfolge
+                  {t('playerProfile.cvPlayerDesc')}
                 </p>
               </div>
             </div>
@@ -132,10 +154,10 @@ export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData
               </div>
               <div className="flex-1 text-left">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                  Recruiter CV
+                  {t('playerProfile.cvRecruiterTitle')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Zeigt dini Coaching-Rolle, Club-Affilierung, Positione wo du suechsch, und Erfahrig
+                  {t('playerProfile.cvRecruiterDesc')}
                 </p>
               </div>
             </div>
@@ -147,7 +169,7 @@ export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData
           <div className="mt-4 text-center">
             <div className="inline-block w-6 h-6 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              CV wird exportiert...
+              {t('playerProfile.cvExporting')}
             </p>
           </div>
         )}

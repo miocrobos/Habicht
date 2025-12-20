@@ -131,7 +131,7 @@ export default function RecruitersPage() {
                 onChange={(e) => handleFilterChange('canton', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
+                <option value="">{t('playerProfile.all')}</option>
                 <option value="AG">Aargau</option>
                 <option value="AI">Appenzell Innerrhoden</option>
                 <option value="AR">Appenzell Ausserrhoden</option>
@@ -171,9 +171,9 @@ export default function RecruitersPage() {
                 onChange={(e) => handleFilterChange('genderCoached', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
-                <option value="MALE">Männer</option>
-                <option value="FEMALE">Frauen</option>
+                <option value="">{t('playerProfile.all')}</option>
+                <option value="MALE">{t('playerProfile.men')}</option>
+                <option value="FEMALE">{t('playerProfile.women')}</option>
               </select>
             </div>
 
@@ -187,13 +187,13 @@ export default function RecruitersPage() {
                 onChange={(e) => handleFilterChange('positionLookingFor', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
-                <option value="OUTSIDE_HITTER">Aussenspieler</option>
-                <option value="OPPOSITE">Diagonalspieler</option>
-                <option value="MIDDLE_BLOCKER">Mittelblocker</option>
-                <option value="SETTER">Zuspieler</option>
-                <option value="LIBERO">Libero</option>
-                <option value="UNIVERSAL">Universal</option>
+                <option value="">{t('playerProfile.all')}</option>
+                <option value="OUTSIDE_HITTER">{t('playerProfile.positionOutsideHitter')}</option>
+                <option value="OPPOSITE">{t('playerProfile.positionOpposite')}</option>
+                <option value="MIDDLE_BLOCKER">{t('playerProfile.positionMiddleBlocker')}</option>
+                <option value="SETTER">{t('playerProfile.positionSetter')}</option>
+                <option value="LIBERO">{t('playerProfile.positionLibero')}</option>
+                <option value="UNIVERSAL">{t('playerProfile.positionUniversal')}</option>
               </select>
             </div>
           </div>

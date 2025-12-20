@@ -18,8 +18,6 @@ const CANTONS = [
 
 const LEAGUES = ['Alle', 'NLA', 'NLB', '1. Liga', '2. Liga', '3. Liga', '4. Liga', 'U23', 'U19', 'U17']
 
-const GENDERS = ['Alle', 'Männer', 'Frauen']
-
 const POSITIONS = [
   'Alle',
   'OUTSIDE_HITTER',
@@ -30,16 +28,6 @@ const POSITIONS = [
   'UNIVERSAL'
 ]
 
-const POSITION_LABELS: Record<string, string> = {
-  'Alle': 'Alle',
-  'OUTSIDE_HITTER': 'Aussenspieler',
-  'OPPOSITE': 'Diagonal',
-  'MIDDLE_BLOCKER': 'Mittelblocker',
-  'SETTER': 'Zuspieler',
-  'LIBERO': 'Libero',
-  'UNIVERSAL': 'Universal'
-}
-
 export default function ClubsPage() {
   const { t } = useLanguage()
   const searchParams = useSearchParams()
@@ -47,7 +35,7 @@ export default function ClubsPage() {
   
   const [selectedCanton, setSelectedCanton] = useState(cantonFromUrl || 'Alle')
   const [selectedLeague, setSelectedLeague] = useState('Alle')
-  const [selectedGender, setSelectedGender] = useState('Alle')
+  const [selectedGender, setSelectedGender] = useState('ALL')
   const [selectedPosition, setSelectedPosition] = useState('Alle')
   const [clubs, setClubs] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -68,7 +56,9 @@ export default function ClubsPage() {
       const params = new URLSearchParams()
       if (selectedCanton !== 'Alle') params.append('canton', selectedCanton)
       if (selectedLeague !== 'Alle') params.append('league', selectedLeague)
-      if (selectedGender !== 'Alle') params.append('gender', selectedGender === 'Männer' ? 'MALE' : 'FEMALE')
+      if (selectedGender !== 'ALL') {
+        params.append('gender', selectedGender)
+      }
       if (selectedPosition !== 'Alle') params.append('position', selectedPosition)
       
       const response = await axios.get(`/api/clubs?${params}`)
@@ -106,7 +96,8 @@ export default function ClubsPage() {
                 onChange={(e) => setSelectedCanton(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                {CANTONS.map(canton => (
+                <option value="Alle">{t('playerProfile.all')}</option>
+                {CANTONS.slice(1).map(canton => (
                   <option key={canton} value={canton}>{canton}</option>
                 ))}
               </select>
@@ -122,7 +113,8 @@ export default function ClubsPage() {
                 onChange={(e) => setSelectedLeague(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                {LEAGUES.map(league => (
+                <option value="Alle">{t('playerProfile.all')}</option>
+                {LEAGUES.slice(1).map(league => (
                   <option key={league} value={league}>{league}</option>
                 ))}
               </select>
@@ -138,9 +130,9 @@ export default function ClubsPage() {
                 onChange={(e) => setSelectedGender(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                {GENDERS.map(gender => (
-                  <option key={gender} value={gender}>{gender}</option>
-                ))}
+                <option value="ALL">{t('playerProfile.all')}</option>
+                <option value="MALE">{t('playerProfile.men')}</option>
+                <option value="FEMALE">{t('playerProfile.women')}</option>
               </select>
             </div>
 
@@ -154,11 +146,13 @@ export default function ClubsPage() {
                 onChange={(e) => setSelectedPosition(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                {POSITIONS.map(position => (
-                  <option key={position} value={position}>
-                    {POSITION_LABELS[position]}
-                  </option>
-                ))}
+                <option value="Alle">{t('playerProfile.all')}</option>
+                <option value="OUTSIDE_HITTER">{t('playerProfile.positionOutsideHitter')}</option>
+                <option value="OPPOSITE">{t('playerProfile.positionOpposite')}</option>
+                <option value="MIDDLE_BLOCKER">{t('playerProfile.positionMiddleBlocker')}</option>
+                <option value="SETTER">{t('playerProfile.positionSetter')}</option>
+                <option value="LIBERO">{t('playerProfile.positionLibero')}</option>
+                <option value="UNIVERSAL">{t('playerProfile.positionUniversal')}</option>
               </select>
             </div>
           </div>

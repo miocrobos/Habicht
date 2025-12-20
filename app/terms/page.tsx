@@ -1,107 +1,105 @@
+'use client'
+
 import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function TermsOfService() {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4">
       <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
         <Link href="/" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 mb-6 inline-block">
-          ← Zrugg Zu Homepage
+          {t('terms.backToHome')}
         </Link>
         
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-          Nutzigsbedingige
+          {t('terms.title')}
         </h1>
         
         <div className="prose dark:prose-invert max-w-none">
           <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Letschti Aktualisierig: {new Date().toLocaleDateString('de-CH')}
+            {t('terms.lastUpdated')} {new Date().toLocaleDateString('de-CH')}
           </p>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              1. Geltungsbereich
+              {t('terms.section1Title')}
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Die Nutzigsbedingige Reglä D Verwendig Vo Dä Plattform Habicht Volleyball (habicht-volleyball.ch). 
-              Mit Dä Registrierig Akzeptiersch Du Dini Bedingige.
+              {t('terms.section1Text')}
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              2. Registrierig Und Benutzerkonto
+              {t('terms.section2Title')}
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Du Muesch Dichtig Und Vollständigi Informatione Aagä. Du Bisch Verantw\u00f6rtlich Für D Sicherheit Vo Dim Passwort. 
-              Du Darfsch Nur E Konto Erstelle Und Muesch Mindestens 13 Jahr Alt Si.
+              {t('terms.section2Text')}
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              3. Nutzung Vo Dä Plattform
+              {t('terms.section3Title')}
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              D Plattform Dient Zum Zweck Vo D\u00e4 Vernetzung Zwüsche Volleyballspielere Und Rekrutierer. 
-              Du Verpflichtesch Dich, Kei Beleidigendi, Diskriminierendi Oder Illegali Inhalt Z Teile.
+              {t('terms.section3Text')}
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              4. Dateschutz
+              {t('terms.section4Title')}
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Dini Persönliche Date Werde Gmäss Dä <Link href="/privacy" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">Dateschutzerklärig</Link> Verarbeitet. 
-              Dini Profilinformatione Sind Für Anderi Registrierti Benutzer Sichtbar.
+              {t('terms.section4Text')} <Link href="/privacy" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">{t('terms.section4Link')}</Link> {t('terms.section4Text2')}
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              5. Haftungsausschluss
+              {t('terms.section5Title')}
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Habicht Volleyball Übernimmt Kei Haftung Für D Richtigkeit Vo Benutzer-Inhalte Oder Für Schäde, 
-              Wo Durch D Nutzung Vo D\u00e4 Plattform Entstönd. D Nutzung Erfolgt Uf Eigni Gfahre.
+              {t('terms.section5Text')}
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              6. Kündigg Und Löschig
+              {t('terms.section6Title')}
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Du Chasch Di Konto Jederziit Lösche. Mir Behälte Üs S Rächt Vor, Konten Z Sperr\u00e4, 
-              Wo Gäge Dini Bedingige Verstosse.
+              {t('terms.section6Text')}
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              7. Änderigen
+              {t('terms.section7Title')}
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Mir Chöi Dini Nutzigsbedingige Jederziit Aapasse. Änderige Werde Per E-Mail Mitteilt 
-              Oder Uf D\u00e4 Plattform Veröffentlicht.
+              {t('terms.section7Text')}
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              8. Anwendbares Rächt
+              {t('terms.section8Title')}
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Es Gilt Schwiizerisches Rächt. Gerichtsstand Isch Zürich, Schwiiz.
+              {t('terms.section8Text')}
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              9. Kontakt
+              {t('terms.section9Title')}
             </h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Bi Froge Zu Dä Nutzigsbedingige Chasch Du Üs Kontaktiere: <br />
+              {t('terms.section9Text')} <br />
               <a href="mailto:support@habicht-volleyball.ch" className="text-blue-600 hover:text-blue-700 dark:text-blue-400">
                 support@habicht-volleyball.ch
               </a>

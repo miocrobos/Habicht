@@ -544,10 +544,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 pb-12 relative z-10">
         {/* Profile Card */}
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 mb-6 relative z-10">
-          <div className="flex flex-col md:flex-row gap-6">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6">
             {/* Profile Image */}
-            <div className="flex-shrink-0 relative group">
-              <div className="w-40 h-40 rounded-full border-4 border-white dark:border-gray-700 shadow-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
+            <div className="flex-shrink-0 relative group mx-auto md:mx-0">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-gray-700 shadow-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
                 {player.profileImage ? (
                   <Image
                     src={player.profileImage}
@@ -565,7 +565,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               {isOwner && (
                 <button
                   onClick={() => setShowProfilePhotoModal(true)}
-                  className="absolute inset-0 w-40 h-40 rounded-full bg-black bg-opacity-0 hover:bg-opacity-60 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
+                  className="absolute inset-0 w-32 h-32 md:w-40 md:h-40 rounded-full bg-black bg-opacity-0 hover:bg-opacity-60 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 active:opacity-100"
                   title="Profilbild ändere"
                 >
                   <div className="text-white flex flex-col items-center gap-1">
@@ -578,14 +578,14 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
             {/* Player Info */}
             <div className="flex-grow">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 md:gap-4">
                 <div className="flex-grow">
-                  <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 text-center md:text-left">
                     {player.firstName} {player.lastName}
                   </h1>
-                  <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-3 md:mb-4">
                     {player.positions.map((pos, idx) => (
-                      <span key={idx} className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-sm font-semibold rounded-full">
+                      <span key={idx} className="px-2.5 py-1 md:px-3 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs md:text-sm font-semibold rounded-full">
                         {POSITION_TRANSLATIONS[pos] || pos}
                       </span>
                     ))}
@@ -596,7 +596,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     )}
                   </div>
                   
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 md:gap-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 md:mb-4">
                     <span className="flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
                       {player.municipality ? `${player.municipality}, ${player.canton}` : player.canton}
@@ -668,29 +668,29 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 </div>
 
                 {/* Quick Stats */}
-                <div className="flex flex-wrap gap-3">
+                <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 md:gap-3 justify-center md:justify-start">
                   {player.height && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3 rounded-lg text-center min-w-[90px]">
-                      <div className="text-2xl font-bold text-red-600 dark:text-red-400">{player.height}</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Grössi cm</div>
+                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
+                      <div className="text-xl md:text-2xl font-bold text-red-600 dark:text-red-400">{player.height}</div>
+                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">Grössi cm</div>
                     </div>
                   )}
                   {player.weight && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3 rounded-lg text-center min-w-[90px]">
-                      <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{player.weight}</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Gwicht kg</div>
+                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
+                      <div className="text-xl md:text-2xl font-bold text-blue-600 dark:text-blue-400">{player.weight}</div>
+                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">Gwicht kg</div>
                     </div>
                   )}
                   {player.spikeHeight && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3 rounded-lg text-center min-w-[90px]">
-                      <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">{player.spikeHeight}</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Schlag cm</div>
+                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
+                      <div className="text-xl md:text-2xl font-bold text-orange-600 dark:text-orange-400">{player.spikeHeight}</div>
+                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">Schlag cm</div>
                     </div>
                   )}
                   {player.blockHeight && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3 rounded-lg text-center min-w-[90px]">
-                      <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{player.blockHeight}</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Block cm</div>
+                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
+                      <div className="text-xl md:text-2xl font-bold text-purple-600 dark:text-purple-400">{player.blockHeight}</div>
+                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">Block cm</div>
                     </div>
                   )}
                 </div>
@@ -794,11 +794,11 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
         {/* Tabs Navigation */}
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-          <div className="border-b border-gray-200 dark:border-gray-700">
-            <nav className="flex flex-wrap -mb-px">
+          <div className="border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
+            <nav className="flex -mb-px min-w-max">
               <button
                 onClick={() => setActiveTab('overview')}
-                className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
+                className={`px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition whitespace-nowrap ${
                   activeTab === 'overview'
                     ? 'border-red-600 text-red-600 dark:text-red-400'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
@@ -808,7 +808,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               </button>
               <button
                 onClick={() => setActiveTab('karriere')}
-                className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
+                className={`px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition whitespace-nowrap ${
                   activeTab === 'karriere'
                     ? 'border-red-600 text-red-600 dark:text-red-400'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
@@ -818,7 +818,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               </button>
               <button
                 onClick={() => setActiveTab('videos')}
-                className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
+                className={`px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition whitespace-nowrap ${
                   activeTab === 'videos'
                     ? 'border-red-600 text-red-600 dark:text-red-400'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
@@ -828,19 +828,19 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               </button>
               <button
                 onClick={() => setActiveTab('erfolge')}
-                className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
+                className={`px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition whitespace-nowrap ${
                   activeTab === 'erfolge'
                     ? 'border-red-600 text-red-600 dark:text-red-400'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
-                Erfolge & Uszeichnunge
+                Erfolge
               </button>
             </nav>
           </div>
 
           {/* Tab Content */}
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {activeTab === 'overview' && (
               <div className="space-y-6">
                 {/* Skills Section */}

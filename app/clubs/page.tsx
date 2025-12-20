@@ -174,9 +174,9 @@ export default function ClubsPage() {
           </div>
         ) : (
           <>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {clubs.map((club: any) => (
-                <div key={club.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition p-6">
+                <div key={club.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition p-4 sm:p-6">
                   <div className="flex items-center gap-4 mb-4">
                     {/* Club badge links to profile page */}
                     <Link href={`/clubs/${club.id}`} className="hover:scale-110 transition-transform">

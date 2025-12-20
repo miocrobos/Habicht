@@ -282,53 +282,53 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
             <Link
               href={`/players/${params.id}`}
-              className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition"
+              className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition text-sm sm:text-base"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               Zurück Zum Profil
             </Link>
             <button
               onClick={handleSave}
               disabled={saving}
-              className="flex items-center gap-2 bg-habicht-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-habicht-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-habicht-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-habicht-700 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
             >
               {saving ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
                   Speichere...
                 </>
               ) : (
                 <>
-                  <Save className="w-5 h-5" />
+                  <Save className="w-4 h-4 sm:w-5 sm:h-5" />
                   Änderige Speichere
                 </>
               )}
             </button>
           </div>
 
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
             Profil Bearbeite
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
+          <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm sm:text-base">
             Aktualisier Dini Informatione
           </p>
 
           {error && (
-            <div className="mt-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-              <p className="text-red-800 dark:text-red-200">{error}</p>
+            <div className="mt-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 sm:p-4">
+              <p className="text-red-800 dark:text-red-200 text-sm sm:text-base">{error}</p>
             </div>
           )}
 
           {success && (
-            <div className="mt-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-              <p className="text-green-800 dark:text-green-200">
+            <div className="mt-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3 sm:p-4">
+              <p className="text-green-800 dark:text-green-200 text-sm sm:text-base">
                 ✓ Erfolgriich Gespeichert! Wiiterläitig...
               </p>
             </div>
@@ -336,7 +336,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         </div>
 
         {/* Personal Information */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
             <User className="w-6 h-6 text-habicht-600" />
             Persönlichi Informatione

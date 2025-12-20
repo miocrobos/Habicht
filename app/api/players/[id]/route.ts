@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { sendPlayerLookingNotification } from '@/lib/email';
+import { authOptions } from '@/lib/auth';
 
 export async function GET(
   request: NextRequest,
@@ -69,7 +70,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     
     if (!session?.user) {
       return NextResponse.json(
@@ -315,14 +316,16 @@ export async function PUT(
       player,
     });
   } catch (error) {
+    console.error('===== ERROR UPDATING PLAYER =====');
     console.error('Error updating player:', error);
     console.error('Error details:', {
       message: error instanceof Error ? error.message : 'Unknown error',
       stack: error instanceof Error ? error.stack : undefined,
-      body: error
+      name: error instanceof Error ? error.name : undefined,
+      cause: error instanceof Error ? error.cause : undefined
     });
     return NextResponse.json(
-      { error: 'Fehler Bim Aktualisiere Vo Spieler-Date' },
+      { error: 'Fehler Bim Aktualisiere Vo Spieler-Date', details: error instanceof Error ? error.message : 'Unknown' },
       { status: 500 }
     );
   }

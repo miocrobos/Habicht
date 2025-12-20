@@ -37,16 +37,20 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
     }
 
     try {
+      console.log('Starting chat with recruiter:', recruiter.user.id)
       const response = await axios.post('/api/chat/conversations', {
         participantId: recruiter.user.id,
         participantType: 'RECRUITER'
       })
+      console.log('Chat conversation created:', response.data)
 
       setConversationId(response.data.conversationId)
       setShowChat(true)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error starting chat:', error)
-      alert('Fehler bim Chat starte')
+      console.error('Error response:', error.response?.data)
+      const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
+      alert(`Fehler bim Chat starte: ${errorMsg}`)
     }
   }
   

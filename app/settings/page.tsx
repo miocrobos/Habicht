@@ -600,11 +600,14 @@ export default function SettingsPage() {
                           onClick={async () => {
                             if (confirm('Möchtsch würkli alli Profil-Aaluege zrucksetze?')) {
                               try {
-                                await axios.post(`/api/players/${session?.user?.playerId}/reset-views`)
+                                const response = await axios.post(`/api/players/${session?.user?.playerId}/reset-views`)
+                                console.log('Reset views response:', response.data)
                                 alert('Profil-Aaluege erfolgriich zruckgsetzt!')
-                                window.location.reload()
-                              } catch (error) {
-                                alert('Fehler bim Zrucksetze vo de Aaluege')
+                                // Force reload to clear all caches
+                                window.location.href = window.location.href
+                              } catch (error: any) {
+                                console.error('Reset views error:', error)
+                                alert(`Fehler bim Zrucksetze: ${error.response?.data?.error || error.message}`)
                               }
                             }
                           }}

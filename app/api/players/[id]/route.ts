@@ -81,6 +81,10 @@ export async function PUT(
     const body = await request.json();
     const { playerData, clubHistory, achievements } = body;
 
+    console.log('=== SAVE PLAYER DATA ===');
+    console.log('Received clubHistory:', JSON.stringify(clubHistory, null, 2));
+    console.log('Current clubs in request:', clubHistory?.filter((c: any) => c.currentClub === true));
+
     // Check if lookingForClub status is changing to true
     const existingPlayer = await prisma.player.findUnique({
       where: { id: params.id },

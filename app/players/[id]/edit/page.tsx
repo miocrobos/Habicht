@@ -150,17 +150,19 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     setSuccess(false);
 
     try {
-      console.log('Saving player data...', {
+      const saveData = {
         playerData: formData,
         clubHistory,
         achievements: achievements.map(a => a.text).filter((text: string) => text.trim() !== ''),
-      });
+      };
+      
+      console.log('Saving player data...');
+      console.log('Club History being saved:', JSON.stringify(clubHistory, null, 2));
+      console.log('Current clubs:', clubHistory.filter(c => c.currentClub));
 
-      await axios.put(`/api/players/${params.id}`, {
-        playerData: formData,
-        clubHistory,
-        achievements: achievements.map(a => a.text).filter((text: string) => text.trim() !== ''),
-      });
+      const response = await axios.put(`/api/players/${params.id}`, saveData);
+      
+      console.log('Save response:', response.data);
 
       setSuccess(true);
       setTimeout(() => {

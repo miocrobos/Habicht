@@ -51,7 +51,7 @@ export default function Header() {
               <span className="text-2xl font-black text-gray-900 dark:text-white leading-none tracking-tight group-hover:text-red-600 dark:group-hover:text-red-400 transition">
                 Habicht
               </span>
-              <span className="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide">SWISS VOLLEYBALL</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide">{t('playerProfile.swissVolleyball')}</span>
             </div>
           </Link>
 

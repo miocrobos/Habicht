@@ -406,6 +406,14 @@ const translations = {
       optional: 'Optional',
       men: 'HERREN',
       women: 'DAME',
+      search: 'Suche',
+      searchPlaceholder: 'Name, Club, Schule...',
+      clearFilters: 'Alli Filter lösche',
+      filtersActive: 'Filter aktiv',
+      loadingPlayers: 'Lade Spieler...',
+      menPlayersFound: 'Männer Spieler gfunde',
+      womenPlayersFound: 'Fraue Spieler gfunde',
+      swissVolleyball: 'SWISS VOLLEYBALL',
     },
     // Settings
     settings: {
@@ -861,6 +869,14 @@ const translations = {
       optional: 'Optional',
       men: 'HERREN',
       women: 'DAMEN',
+      search: 'Suche',
+      searchPlaceholder: 'Name, Verein, Schule...',
+      clearFilters: 'Alle Filter löschen',
+      filtersActive: 'Filter aktiv',
+      loadingPlayers: 'Lade Spieler...',
+      menPlayersFound: 'Männer Spieler gefunden',
+      womenPlayersFound: 'Frauen Spieler gefunden',
+      swissVolleyball: 'SCHWEIZER VOLLEYBALL',
     },
     // Settings
     settings: {
@@ -1316,6 +1332,14 @@ const translations = {
       optional: 'Optionnel',
       men: 'HOMMES',
       women: 'FEMMES',
+      search: 'Recherche',
+      searchPlaceholder: 'Nom, club, école...',
+      clearFilters: 'Effacer tous les filtres',
+      filtersActive: 'Filtres actifs',
+      loadingPlayers: 'Chargement des joueurs...',
+      menPlayersFound: 'joueurs masculins trouvés',
+      womenPlayersFound: 'joueuses féminines trouvées',
+      swissVolleyball: 'VOLLEYBALL SUISSE',
     },
     // Settings
     settings: {
@@ -1771,6 +1795,14 @@ const translations = {
       optional: 'Opzionale',
       men: 'UOMINI',
       women: 'DONNE',
+      search: 'Ricerca',
+      searchPlaceholder: 'Nome, club, scuola...',
+      clearFilters: 'Cancella tutti i filtri',
+      filtersActive: 'Filtri attivi',
+      loadingPlayers: 'Caricamento giocatori...',
+      menPlayersFound: 'giocatori maschili trovati',
+      womenPlayersFound: 'giocatrici femminili trovate',
+      swissVolleyball: 'PALLAVOLO SVIZZERA',
     },
     // Settings
     settings: {
@@ -2226,6 +2258,14 @@ const translations = {
       optional: 'Opziunal',
       men: 'UMENS',
       women: 'DUNNAS',
+      search: 'Tschertgar',
+      searchPlaceholder: 'Num, club, scola...',
+      clearFilters: 'Stizzar tut ils filters',
+      filtersActive: 'Filters activs',
+      loadingPlayers: 'Chargiar giugaders...',
+      menPlayersFound: 'giugaders umens chatàs',
+      womenPlayersFound: 'giugadras dunnas chatàs',
+      swissVolleyball: 'VOLLEYBALL SVIZZER',
     },
     // Settings
     settings: {
@@ -2681,6 +2721,14 @@ const translations = {
       optional: 'Optional',
       men: 'MEN',
       women: 'WOMEN',
+      search: 'Search',
+      searchPlaceholder: 'Name, club, school...',
+      clearFilters: 'Clear all filters',
+      filtersActive: 'Filters active',
+      loadingPlayers: 'Loading players...',
+      menPlayersFound: 'male players found',
+      womenPlayersFound: 'female players found',
+      swissVolleyball: 'SWISS VOLLEYBALL',
     },
     // Settings
     settings: {

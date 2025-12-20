@@ -149,16 +149,23 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     setError('');
     setSuccess(false);
 
+    // Filter club history: only include clubs that have a name OR are marked as current club
+    const validClubHistory = clubHistory.filter(club => {
+      const hasClubName = club.clubName && club.clubName.trim() !== '';
+      const isCurrentClub = club.currentClub === true;
+      return hasClubName || isCurrentClub;
+    });
+
     try {
       const saveData = {
         playerData: formData,
-        clubHistory,
+        clubHistory: validClubHistory,
         achievements: achievements.map(a => a.text).filter((text: string) => text.trim() !== ''),
       };
       
       console.log('Saving player data...');
-      console.log('Club History being saved:', JSON.stringify(clubHistory, null, 2));
-      console.log('Current clubs:', clubHistory.filter(c => c.currentClub));
+      console.log('Club History being saved:', JSON.stringify(validClubHistory, null, 2));
+      console.log('Current clubs:', validClubHistory.filter(c => c.currentClub));
 
       const response = await axios.put(`/api/players/${params.id}`, saveData);
       

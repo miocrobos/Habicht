@@ -11,8 +11,10 @@ import CantonFlag from '@/components/shared/CantonFlag'
 import PlayerCard from '@/components/player/PlayerCard'
 import RecruiterCard from '@/components/recruiter/RecruiterCard'
 import { getCantonInfo } from '@/lib/swissData'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function ClubProfilePage() {
+  const { t } = useLanguage()
   const params = useParams()
   const clubId = params.id as string
   const [club, setClub] = useState<any>(null)
@@ -119,7 +121,7 @@ export default function ClubProfilePage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">Lade Verein...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">{t('clubProfile.loading')}</p>
         </div>
       </div>
     )
@@ -129,7 +131,7 @@ export default function ClubProfilePage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
-          <p className="text-gray-600 dark:text-gray-400">Verein Nid Gfunde</p>
+          <p className="text-gray-600 dark:text-gray-400">{t('clubProfile.notFound')}</p>
         </div>
       </div>
     )
@@ -180,7 +182,7 @@ export default function ClubProfilePage() {
                 {club.founded && (
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
-                    <span>Gründet {club.founded}</span>
+                    <span>{t('clubProfile.founded')} {club.founded}</span>
                   </div>
                 )}
               </div>
@@ -203,7 +205,7 @@ export default function ClubProfilePage() {
             >
               <div className="flex items-center gap-2">
                 <Trophy className="w-5 h-5" />
-                Verein Info
+                {t('clubProfile.clubInfo')}
               </div>
             </button>
             <button
@@ -216,7 +218,7 @@ export default function ClubProfilePage() {
             >
               <div className="flex items-center gap-2">
                 <Users className="w-5 h-5" />
-                Spieler
+                {t('clubProfile.players')}
               </div>
             </button>
             <button
@@ -229,7 +231,7 @@ export default function ClubProfilePage() {
             >
               <div className="flex items-center gap-2">
                 <Users className="w-5 h-5" />
-                Recruiters
+                {t('clubProfile.recruiters')}
               </div>
             </button>
           </div>
@@ -244,7 +246,7 @@ export default function ClubProfilePage() {
             {/* Description */}
             {club.description && (
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Über Üs</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('clubProfile.about')}</h2>
                 <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line">{club.description}</p>
               </div>
             )}
@@ -252,7 +254,7 @@ export default function ClubProfilePage() {
             <div className="grid md:grid-cols-2 gap-6">
               {/* Contact & Social Media */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Kontakt & Social Media</h2>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('clubProfile.contactSocial')}</h2>
                 <div className="space-y-3">
                   {club.website && (
                     <a 
@@ -286,7 +288,7 @@ export default function ClubProfilePage() {
                   
                   {/* Social Media Links */}
                   <div className="pt-3 border-t border-gray-200 dark:border-gray-700">
-                    <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">Social Media</h3>
+                    <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">{t('clubProfile.socialMedia')}</h3>
                     <div className="flex flex-wrap gap-3">
                       {club.facebook && (
                         <a 
@@ -345,7 +347,7 @@ export default function ClubProfilePage() {
 
               {/* Club Leagues/Teams */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Teams & Ligen</h2>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('clubProfile.teamsLeagues')}</h2>
                 {getClubLeagues().length > 0 ? (
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {getClubLeagues().map((league, index) => (
@@ -362,13 +364,13 @@ export default function ClubProfilePage() {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-gray-500 dark:text-gray-400">Nonig Ligen Erfasst</p>
+                  <p className="text-gray-500 dark:text-gray-400">{t('clubProfile.noLeagues')}</p>
                 )}
               </div>
 
               {/* Achievements */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Erfolg & Titel</h2>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('clubProfile.achievements')}</h2>
                 {club.achievements && club.achievements.length > 0 ? (
                   <ul className="space-y-2">
                     {club.achievements.map((achievement: string, index: number) => (
@@ -379,7 +381,7 @@ export default function ClubProfilePage() {
                     ))}
                   </ul>
                 ) : (
-                  <p className="text-gray-500 dark:text-gray-400">Nonig Erfolg Erfasst</p>
+                  <p className="text-gray-500 dark:text-gray-400">{t('clubProfile.noAchievements')}</p>
                 )}
               </div>
             </div>
@@ -391,7 +393,7 @@ export default function ClubProfilePage() {
                 className="flex-1 bg-red-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-red-700 transition flex items-center justify-center gap-2"
               >
                 <Users className="w-5 h-5" />
-                Spieler Azeige
+                {t('clubProfile.viewPlayers')}
               </button>
               {club.website && (
                 <a
@@ -434,36 +436,36 @@ export default function ClubProfilePage() {
                   onChange={(e) => setPlayerFilters({ ...playerFilters, gender: e.target.value })}
                   className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                 >
-                  <option value="">Gschlecht</option>
-                  <option value="MALE">Herren</option>
-                  <option value="FEMALE">Damen</option>
+                  <option value="">{t('clubProfile.gender')}</option>
+                  <option value="MALE">{t('clubProfile.men')}</option>
+                  <option value="FEMALE">{t('clubProfile.women')}</option>
                 </select>
                 <select
                   value={playerFilters.position}
                   onChange={(e) => setPlayerFilters({ ...playerFilters, position: e.target.value })}
                   className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                 >
-                  <option value="">Position</option>
-                  <option value="OUTSIDE_HITTER">Ausseagriffler</option>
-                  <option value="OPPOSITE">Diagonal</option>
-                  <option value="MIDDLE_BLOCKER">Mittelblocker</option>
-                  <option value="SETTER">Zuespieler</option>
-                  <option value="LIBERO">Libero</option>
-                  <option value="UNIVERSAL">Universal</option>
+                  <option value="">{t('clubProfile.position')}</option>
+                  <option value="OUTSIDE_HITTER">{t('playerProfile.positionOutsideHitter')}</option>
+                  <option value="OPPOSITE">{t('playerProfile.positionOpposite')}</option>
+                  <option value="MIDDLE_BLOCKER">{t('playerProfile.positionMiddleBlocker')}</option>
+                  <option value="SETTER">{t('playerProfile.positionSetter')}</option>
+                  <option value="LIBERO">{t('playerProfile.positionLibero')}</option>
+                  <option value="UNIVERSAL">{t('playerProfile.positionUniversal')}</option>
                 </select>
                 <select
                   value={playerFilters.league}
                   onChange={(e) => setPlayerFilters({ ...playerFilters, league: e.target.value })}
                   className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                 >
-                  <option value="">Liga</option>
+                  <option value="">{t('clubProfile.league')}</option>
                   <option value="NLA">NLA</option>
                   <option value="NLB">NLB</option>
-                  <option value="FIRST_LEAGUE">1. Liga</option>
-                  <option value="SECOND_LEAGUE">2. Liga</option>
-                  <option value="THIRD_LEAGUE">3. Liga</option>
-                  <option value="FOURTH_LEAGUE">4. Liga</option>
-                  <option value="FIFTH_LEAGUE">5. Liga</option>
+                  <option value="FIRST_LEAGUE">{t('players.league1')}</option>
+                  <option value="SECOND_LEAGUE">{t('players.league2')}</option>
+                  <option value="THIRD_LEAGUE">{t('players.league3')}</option>
+                  <option value="FOURTH_LEAGUE">{t('players.league4')}</option>
+                  <option value="FIFTH_LEAGUE">{t('players.league5')}</option>
                 </select>
               </div>
             </div>
@@ -477,7 +479,7 @@ export default function ClubProfilePage() {
 
             {players.length === 0 && (
               <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg">
-                <p className="text-gray-600 dark:text-gray-400">Kei Spieler Gfunde</p>
+                <p className="text-gray-600 dark:text-gray-400">{t('clubProfile.noPlayers')}</p>
               </div>
             )}
           </div>
@@ -491,7 +493,7 @@ export default function ClubProfilePage() {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Filter className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Filter</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('clubProfile.filter')}</h3>
                 </div>
                 {(recruiterFilters.role || recruiterFilters.gender) && (
                   <button
@@ -499,7 +501,7 @@ export default function ClubProfilePage() {
                     className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 transition"
                   >
                     <X className="w-4 h-4" />
-                    Filter Lösche
+                    {t('clubProfile.clearFilters')}
                   </button>
                 )}
               </div>
@@ -521,9 +523,9 @@ export default function ClubProfilePage() {
                   onChange={(e) => setRecruiterFilters({ ...recruiterFilters, gender: e.target.value })}
                   className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                 >
-                  <option value="">Team Gschlecht</option>
-                  <option value="MALE">Herren</option>
-                  <option value="FEMALE">Damen</option>
+                  <option value="">{t('recruiters.teamGenderLabel')}</option>
+                  <option value="MALE">{t('clubProfile.men')}</option>
+                  <option value="FEMALE">{t('clubProfile.women')}</option>
                 </select>
               </div>
             </div>
@@ -537,7 +539,7 @@ export default function ClubProfilePage() {
 
             {recruiters.length === 0 && (
               <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg">
-                <p className="text-gray-600 dark:text-gray-400">Kei Recruiters Gfunde</p>
+                <p className="text-gray-600 dark:text-gray-400">{t('clubProfile.noRecruiters')}</p>
               </div>
             )}
           </div>

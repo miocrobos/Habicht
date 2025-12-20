@@ -109,37 +109,37 @@ export default function WomenPlayersPage() {
               onClick={() => handleFilterChange('league', 'FIRST_LEAGUE')}
               className="px-4 py-2 bg-pink-100 text-pink-700 rounded-lg hover:bg-pink-200 transition text-sm font-medium"
             >
-              1. Liga
+              {t('players.league1')}
             </button>
             <button
               onClick={() => handleFilterChange('league', 'SECOND_LEAGUE')}
               className="px-4 py-2 bg-pink-100 text-pink-700 rounded-lg hover:bg-pink-200 transition text-sm font-medium"
             >
-              2. Liga
+              {t('players.league2')}
             </button>
             <button
               onClick={() => handleFilterChange('league', 'THIRD_LEAGUE')}
               className="px-4 py-2 bg-pink-100 text-pink-700 rounded-lg hover:bg-pink-200 transition text-sm font-medium"
             >
-              3. Liga
+              {t('players.league3')}
             </button>
             <button
               onClick={() => handleFilterChange('league', 'FOURTH_LEAGUE')}
               className="px-4 py-2 bg-pink-100 text-pink-700 rounded-lg hover:bg-pink-200 transition text-sm font-medium"
             >
-              4. Liga
+              {t('players.league4')}
             </button>
             <button
               onClick={() => handleFilterChange('league', 'FIFTH_LEAGUE')}
               className="px-4 py-2 bg-pink-100 text-pink-700 rounded-lg hover:bg-pink-200 transition text-sm font-medium"
             >
-              5. Liga
+              {t('players.league5')}
             </button>
             <button
               onClick={() => handleFilterChange('league', '')}
               className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition text-sm font-medium"
             >
-              Alle zeigen
+              {t('players.showAll')}
             </button>
           </div>
         </div>

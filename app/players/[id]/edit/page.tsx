@@ -149,12 +149,18 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     setError('');
     setSuccess(false);
 
-    // Filter club history: only include clubs that have a name OR are marked as current club
+    // Filter club history: only include clubs that have a name
+    // Even if marked as current, they still need a club name
     const validClubHistory = clubHistory.filter(club => {
       const hasClubName = club.clubName && club.clubName.trim() !== '';
-      const isCurrentClub = club.currentClub === true;
-      return hasClubName || isCurrentClub;
-    });
+      return hasClubName;
+    }).map(club => ({
+      ...club,
+      // Clean up empty strings to null/undefined for proper database handling
+      league: club.league && club.league.trim() !== '' ? club.league : '',
+      yearFrom: club.yearFrom && club.yearFrom.trim() !== '' ? club.yearFrom : '',
+      yearTo: club.currentClub ? '' : (club.yearTo && club.yearTo.trim() !== '' ? club.yearTo : ''),
+    }));
 
     try {
       const saveData = {

@@ -404,6 +404,8 @@ const translations = {
       description: 'Beschriibig',
       describeVideo: 'Beschriib dis Video',
       optional: 'Optional',
+      men: 'HERREN',
+      women: 'DAME',
     },
     // Settings
     settings: {
@@ -857,6 +859,8 @@ const translations = {
       description: 'Beschreibung',
       describeVideo: 'Beschreiben Sie Ihr Video',
       optional: 'Optional',
+      men: 'HERREN',
+      women: 'DAMEN',
     },
     // Settings
     settings: {
@@ -1310,6 +1314,8 @@ const translations = {
       description: 'Description',
       describeVideo: 'Décrivez votre vidéo',
       optional: 'Optionnel',
+      men: 'HOMMES',
+      women: 'FEMMES',
     },
     // Settings
     settings: {
@@ -1763,6 +1769,8 @@ const translations = {
       description: 'Descrizione',
       describeVideo: 'Descrivi il tuo video',
       optional: 'Opzionale',
+      men: 'UOMINI',
+      women: 'DONNE',
     },
     // Settings
     settings: {
@@ -2216,6 +2224,8 @@ const translations = {
       description: 'Descripziun',
       describeVideo: 'Descriva tes video',
       optional: 'Opziunal',
+      men: 'UMENS',
+      women: 'DUNNAS',
     },
     // Settings
     settings: {
@@ -2669,6 +2679,8 @@ const translations = {
       description: 'Description',
       describeVideo: 'Describe your video',
       optional: 'Optional',
+      men: 'MEN',
+      women: 'WOMEN',
     },
     // Settings
     settings: {

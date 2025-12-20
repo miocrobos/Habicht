@@ -9,8 +9,10 @@ import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import axios from 'axios'
 import ChatWindow from '@/components/chat/ChatWindow'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function RecruiterCard({ recruiter }: { recruiter: any }) {
+  const { t } = useLanguage()
   const { data: session } = useSession()
   const [showChat, setShowChat] = useState(false)
   const [conversationId, setConversationId] = useState<string | null>(null)
@@ -22,8 +24,8 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
     const genderArray = Array.isArray(genders) ? genders : [genders]
     if (genderArray.length === 0) return 'ALLE'
     if (genderArray.length === 2 || (genderArray.includes('MALE') && genderArray.includes('FEMALE'))) return '♂♀ BEIDE'
-    if (genderArray.includes('MALE')) return '♂ HERREN'
-    if (genderArray.includes('FEMALE')) return '♀ DAMEN'
+    if (genderArray.includes('MALE')) return `♂ ${t('playerProfile.men')}`
+    if (genderArray.includes('FEMALE')) return `♀ ${t('playerProfile.women')}`
     return 'ALLE'
   }
 

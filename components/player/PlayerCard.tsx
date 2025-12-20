@@ -5,8 +5,10 @@ import Image from 'next/image'
 import { MapPin } from 'lucide-react'
 import CantonFlag from '@/components/shared/CantonFlag'
 import { getCantonInfo } from '@/lib/swissData'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function PlayerCard({ player }: { player: any }) {
+  const { t } = useLanguage()
   const cantonInfo = getCantonInfo(player.canton)
   const age = player.dateOfBirth ? Math.floor((new Date().getTime() - new Date(player.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : null
   
@@ -38,7 +40,7 @@ export default function PlayerCard({ player }: { player: any }) {
         >
           {/* Gender Badge */}
           <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center gap-2 text-sm font-semibold z-10">
-            <span>{player.gender === 'MALE' ? '♂ HERREN' : '♀ DAMEN'}</span>
+            <span>{player.gender === 'MALE' ? `♂ ${t('playerProfile.men')}` : `♀ ${t('playerProfile.women')}`}</span>
           </div>
           {/* Canton Flag */}
           <div className="absolute top-3 right-3 z-10">

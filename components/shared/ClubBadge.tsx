@@ -1,6 +1,7 @@
 'use client'
 
 import { getClubInfo } from '@/lib/swissData'
+import { getCountryFlagUrlByName, isSwissClub } from '@/lib/countryFlags'
 import Image from 'next/image'
 
 interface ClubBadgeProps {
@@ -8,6 +9,7 @@ interface ClubBadgeProps {
   size?: 'sm' | 'md' | 'lg'
   showName?: boolean
   uploadedLogo?: string | null
+  country?: string | null
 }
 
 const EagleLogo = ({ size }: { size: 'sm' | 'md' | 'lg' }) => {
@@ -57,8 +59,9 @@ const EagleLogo = ({ size }: { size: 'sm' | 'md' | 'lg' }) => {
   )
 }
 
-export default function ClubBadge({ clubName, size = 'md', showName = false, uploadedLogo }: ClubBadgeProps) {
+export default function ClubBadge({ clubName, size = 'md', showName = false, uploadedLogo, country }: ClubBadgeProps) {
   const clubInfo = getClubInfo(clubName)
+  const isSwiss = isSwissClub(country)
   
   const sizeClasses = {
     sm: 'w-10 h-10 text-lg',
@@ -72,9 +75,10 @@ export default function ClubBadge({ clubName, size = 'md', showName = false, upl
     lg: 'text-base',
   }
 
-  // Prioritize uploaded logo, then custom logo, then eagle logo
+  // Prioritize uploaded logo, then for non-Swiss clubs use country flag, then custom logo, then eagle logo
   const hasUploadedLogo = uploadedLogo && uploadedLogo !== ''
-  const hasCustomLogo = !hasUploadedLogo && clubInfo.logo && clubInfo.logo !== '🏐'
+  const useCountryFlag = !hasUploadedLogo && !isSwiss
+  const hasCustomLogo = !hasUploadedLogo && !useCountryFlag && clubInfo.logo && clubInfo.logo !== '🏐'
   const bgColor = clubInfo.colors?.primary || '#FF0000'
   const borderColor = clubInfo.colors?.secondary || '#FFFFFF'
 
@@ -83,10 +87,10 @@ export default function ClubBadge({ clubName, size = 'md', showName = false, upl
       <div 
         className={`${sizeClasses[size]} rounded-full shadow-md flex items-center justify-center font-bold relative border-4 overflow-hidden`}
         style={{ 
-          backgroundColor: bgColor,
-          borderColor: borderColor,
+          backgroundColor: useCountryFlag ? '#FFFFFF' : bgColor,
+          borderColor: useCountryFlag ? '#CCCCCC' : borderColor,
         }}
-        title={clubName}
+        title={`${clubName}${!isSwiss && country ? ` (${country})` : ''}`}
       >
         {hasUploadedLogo ? (
           <Image
@@ -95,6 +99,15 @@ export default function ClubBadge({ clubName, size = 'md', showName = false, upl
             width={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
             height={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
             className="w-full h-full object-cover"
+          />
+        ) : useCountryFlag ? (
+          <Image
+            src={getCountryFlagUrlByName(country)}
+            alt={`${country} flag`}
+            width={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
+            height={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
+            className="w-full h-full object-cover"
+            unoptimized
           />
         ) : hasCustomLogo ? (
           <span className="filter drop-shadow-lg">{clubInfo.logo}</span>
@@ -108,7 +121,7 @@ export default function ClubBadge({ clubName, size = 'md', showName = false, upl
             {clubName}
           </div>
           <div className="text-xs text-gray-500 font-medium">
-            {clubInfo.symbol || 'VB'}
+            {!isSwiss && country ? country : (clubInfo.symbol || 'VB')}
           </div>
         </div>
       )}

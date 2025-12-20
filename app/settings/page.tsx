@@ -12,7 +12,7 @@ import { generateRecruiterCV } from '@/lib/generateRecruiterCV'
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme()
-  const { language, setLanguage: setLanguageContext } = useLanguage()
+  const { language, setLanguage: setLanguageContext, t } = useLanguage()
   const { data: session } = useSession()
   const [saved, setSaved] = useState(false)
   const [activeTab, setActiveTab] = useState<'appearance' | 'security' | 'language' | 'account' | 'notifications'>('appearance')
@@ -194,10 +194,10 @@ export default function SettingsPage() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-            Iistellige
+            {t('settings.title')}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Verwalte Dini Präferenzä Und Konto Iistellige
+            {t('settings.subtitle')}
           </p>
         </div>
 
@@ -216,7 +216,7 @@ export default function SettingsPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                   </svg>
-                  <span>Uussehe</span>
+                  <span>{t('settings.appearance')}</span>
                 </div>
               </button>
               
@@ -232,7 +232,7 @@ export default function SettingsPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
-                  <span>Login & Sicherheit</span>
+                  <span>{t('settings.security')}</span>
                 </div>
               </button>
 
@@ -248,7 +248,7 @@ export default function SettingsPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                   </svg>
-                  <span>Sprache</span>
+                  <span>{t('settings.language')}</span>
                 </div>
               </button>
 
@@ -264,7 +264,7 @@ export default function SettingsPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                   </svg>
-                  <span>Benachrichtigungen</span>
+                  <span>{t('settings.notifications')}</span>
                 </div>
               </button>
 
@@ -280,7 +280,7 @@ export default function SettingsPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                  <span>Kontoverwaltung</span>
+                  <span>{t('settings.account')}</span>
                 </div>
               </button>
             </div>
@@ -291,11 +291,11 @@ export default function SettingsPage() {
               {activeTab === 'appearance' && (
                 <>
                   <div className="border-b border-gray-200 dark:border-gray-700 p-6">
-                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">Erscheinungsbild</h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Passen Sie an, wie Habicht für Sie aussieht</p>
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">{t('settings.appearance.title')}</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.appearance.subtitle')}</p>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Theme-Modus</h3>
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">{t('settings.theme')}</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <button onClick={() => handleThemeChange('light')} className={`relative p-6 rounded-lg border-2 transition-all duration-200 ${theme === 'light' ? 'border-red-500 bg-red-50 dark:bg-red-900/20' : 'border-gray-300 dark:border-gray-600 hover:border-gray-400'}`}>
                         <div className="flex items-center justify-between mb-3">
@@ -305,7 +305,7 @@ export default function SettingsPage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                               </svg>
                             </div>
-                            <span className="font-semibold text-gray-900 dark:text-white">Hell</span>
+                            <span className="font-semibold text-gray-900 dark:text-white">{t('settings.theme.light')}</span>
                           </div>
                           {theme === 'light' && (
                             <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
@@ -315,7 +315,7 @@ export default function SettingsPage() {
                             </div>
                           )}
                         </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 text-left">Helles Design mit traditioneller Farbgebung</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 text-left">{t('settings.theme.light.description')}</p>
                       </button>
                       <button onClick={() => handleThemeChange('dark')} className={`relative p-6 rounded-lg border-2 transition-all duration-200 ${theme === 'dark' ? 'border-red-500 bg-red-50 dark:bg-red-900/20' : 'border-gray-300 dark:border-gray-600 hover:border-gray-400'}`}>
                         <div className="flex items-center justify-between mb-3">
@@ -325,7 +325,7 @@ export default function SettingsPage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                               </svg>
                             </div>
-                            <span className="font-semibold text-gray-900 dark:text-white">Dunkel</span>
+                            <span className="font-semibold text-gray-900 dark:text-white">{t('settings.theme.dark')}</span>
                           </div>
                           {theme === 'dark' && (
                             <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
@@ -335,7 +335,7 @@ export default function SettingsPage() {
                             </div>
                           )}
                         </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 text-left">Dunkles Design für komfortables Arbeiten bei wenig Licht</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 text-left">{t('settings.theme.dark.description')}</p>
                       </button>
                     </div>
                   </div>
@@ -345,20 +345,20 @@ export default function SettingsPage() {
               {activeTab === 'security' && (
                 <>
                   <div className="border-b border-gray-200 dark:border-gray-700 p-6">
-                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">Login & Sicherheit</h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Verwalten Sie Ihr Passwort und Sicherheitseinstellungen</p>
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">{t('settings.security.title')}</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.security.subtitle')}</p>
                   </div>
                   <div className="p-6 space-y-8">
                     {/* Privacy Settings */}
                     <div className="space-y-4">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">Datenschutz</h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Steuern Sie, welche Informationen öffentlich sichtbar sind</p>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">{t('settings.privacy')}</h3>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.privacy.subtitle')}</p>
                       
                       {/* Email Toggle */}
                       <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                         <div className="flex-1">
-                          <p className="font-medium text-gray-900 dark:text-white">E-Mail-Adresse Anzeige</p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">Ihre E-Mail-Adresse für andere sichtbar machen</p>
+                          <p className="font-medium text-gray-900 dark:text-white">{t('settings.email.show')}</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.email.show.description')}</p>
                         </div>
                         <button
                           onClick={() => updatePrivacySettings('showEmail', !showEmail)}
@@ -378,8 +378,8 @@ export default function SettingsPage() {
                       {/* Phone Toggle */}
                       <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                         <div className="flex-1">
-                          <p className="font-medium text-gray-900 dark:text-white">Telefonnummer Anzeige</p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">Ihre Telefonnummer für andere sichtbar machen</p>
+                          <p className="font-medium text-gray-900 dark:text-white">{t('settings.phone.show')}</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.phone.show.description')}</p>
                         </div>
                         <button
                           onClick={() => updatePrivacySettings('showPhone', !showPhone)}
@@ -403,20 +403,20 @@ export default function SettingsPage() {
                         <input type="email" value={session?.user?.email || ''} disabled className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 cursor-not-allowed" />
                       </div>
                       <form onSubmit={handlePasswordChange} className="space-y-4 mt-6">
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-white">Passwort Ändern</h3>
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white">{t('settings.password.change')}</h3>
                         <div>
-                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">Aktuelles Passwort</label>
-                          <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-red-500" placeholder="Aktuelles Passwort eingeben" />
+                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.password.current')}</label>
+                          <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-red-500" placeholder={t('settings.password.current.placeholder')} />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">Neues Passwort</label>
-                          <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-red-500" placeholder="Neues Passwort eingeben" />
+                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.password.new')}</label>
+                          <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-red-500" placeholder={t('settings.password.new.placeholder')} />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">Passwort bestätigen</label>
-                          <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-red-500" placeholder="Passwort erneut eingeben" />
+                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.password.confirm')}</label>
+                          <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-red-500" placeholder={t('settings.password.confirm.placeholder')} />
                         </div>
-                        <button type="submit" className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium">Passwort ändern</button>
+                        <button type="submit" className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium">{t('settings.password.change')}</button>
                       </form>
                     </div>
                   </div>
@@ -426,8 +426,8 @@ export default function SettingsPage() {
               {activeTab === 'language' && (
                 <>
                   <div className="border-b border-gray-200 dark:border-gray-700 p-6">
-                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">Sprache</h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Wählen Sie Ihre bevorzugte Sprache</p>
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">{t('settings.language.title')}</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.language.subtitle')}</p>
                   </div>
                   <div className="p-6">
                     <div className="space-y-3">
@@ -464,43 +464,14 @@ export default function SettingsPage() {
                 <>
                   <div className="border-b border-gray-200 dark:border-gray-700 p-6">
                     <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">Benachrichtigungen</h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Verwalten Sie, wie Sie Benachrichtigungen erhalten</p>
-                  </div>
-                  <div className="p-6 space-y-6">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">E-Mail-Benachrichtigungen</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Erhalten Sie wichtige Updates und Informationen per E-Mail</p>
-                      </div>
-                      <button onClick={() => handleNotificationChange('email', !emailNotifications)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${emailNotifications ? 'bg-red-600' : 'bg-gray-300 dark:bg-gray-600'}`}>
-                        <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${emailNotifications ? 'translate-x-6' : 'translate-x-1'}`} />
-                      </button>
-                    </div>
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">Nachrichten von Recruitern</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Erhalten Sie eine E-Mail, wenn ein Recruiter Ihnen eine Nachricht sendet oder an Ihrem Profil interessiert ist</p>
-                      </div>
-                      <button onClick={() => handleNotificationChange('recruiter', !recruiterMessages)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${recruiterMessages ? 'bg-red-600' : 'bg-gray-300 dark:bg-gray-600'}`}>
-                        <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${recruiterMessages ? 'translate-x-6' : 'translate-x-1'}`} />
-                      </button>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {activeTab === 'notifications' && (
-                <>
-                  <div className="border-b border-gray-200 dark:border-gray-700 p-6">
-                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">Benachrichtigungen</h2>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Leg fest, welli E-Mail Benachrichtigunge du empfange möchtsch</p>
                   </div>
                   <div className="p-6 space-y-6">
                     {/* Chat Messages */}
                     <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                       <div className="flex-1">
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">💬 Chat Nachrichtä</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Erhalt E-Mail Benachrichtigunge für neui Chat Nachrichtä</p>
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.chat')}</h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.notifications.chat.description')}</p>
                       </div>
                       <label className="relative inline-flex items-center cursor-pointer">
                         <input
@@ -518,8 +489,8 @@ export default function SettingsPage() {
                     {session?.user?.role === 'RECRUITER' && (
                       <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                         <div className="flex-1">
-                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">🏐 Spieler Suecht Club</h3>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">Benachrichtigunge wenn e Spieler aktiv e Club suecht</p>
+                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.playerLooking')}</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.notifications.playerLooking.description')}</p>
                         </div>
                         <label className="relative inline-flex items-center cursor-pointer">
                           <input
@@ -538,8 +509,8 @@ export default function SettingsPage() {
                     {session?.user?.role === 'PLAYER' && (
                       <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                         <div className="flex-1">
-                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">🔍 Recruiter Suecht Spieler</h3>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">Benachrichtigunge wenn Recruiters aktiv Spieler sueched</p>
+                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.recruiterSearching')}</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.notifications.recruiterSearching.description')}</p>
                         </div>
                         <label className="relative inline-flex items-center cursor-pointer">
                           <input
@@ -556,7 +527,7 @@ export default function SettingsPage() {
 
                     <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
                       <p className="text-sm text-blue-700 dark:text-blue-300">
-                        <strong>ℹ️ Hinweis:</strong> Du chasch die Benachrichtigunge jederzit wieder aktiviere oder deaktiviere.
+                        <strong>ℹ️ {t('settings.notifications.note.title')}</strong> {t('settings.notifications.note.description')}
                       </p>
                     </div>
                   </div>
@@ -566,8 +537,8 @@ export default function SettingsPage() {
               {activeTab === 'account' && (
                 <>
                   <div className="border-b border-gray-200 dark:border-gray-700 p-6">
-                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">Kontoverwaltung</h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Verwalten Sie Ihr Konto oder löschen Sie es</p>
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">{t('settings.account.title')}</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.account.subtitle')}</p>
                   </div>
                   <div className="p-6 space-y-6">
                     <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
@@ -720,7 +691,7 @@ export default function SettingsPage() {
             <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-            <span className="text-green-800 dark:text-green-200 font-medium">Einstellungen gespeichert</span>
+            <span className="text-green-800 dark:text-green-200 font-medium">{t('settings.saved')}</span>
           </div>
         )}
 

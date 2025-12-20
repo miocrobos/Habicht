@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import ClubBadge from '@/components/shared/ClubBadge'
 
 export default function ClubHistory({ history }: { history: any[] }) {
   if (!history || history.length === 0) {
@@ -21,24 +22,19 @@ export default function ClubHistory({ history }: { history: any[] }) {
           const clubName = item.clubName || item.club?.name || 'Unknown Club';
           const clubId = item.clubId || item.club?.id;
           const isClickable = !!clubId;
+          const clubCountry = item.clubCountry || 'Switzerland';
+          const uploadedLogo = item.clubLogo || item.club?.logo || null;
           
           return (
             <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:shadow-md transition">
-              {/* Club Logo */}
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow flex-shrink-0 overflow-hidden">
-                {(item.clubLogo || item.club?.logo) ? (
-                  <Image
-                    src={item.clubLogo || item.club.logo}
-                    alt={clubName}
-                    width={64}
-                    height={64}
-                    className="w-full h-full object-contain"
-                  />
-                ) : (
-                  <span className="font-bold text-red-600 dark:text-red-400 text-xs">
-                    {clubName.split(' ').map((word: string) => word[0]).join('').slice(0, 3)}
-                  </span>
-                )}
+              {/* Club Badge */}
+              <div className="flex-shrink-0">
+                <ClubBadge 
+                  clubName={clubName} 
+                  size="md" 
+                  uploadedLogo={uploadedLogo}
+                  country={clubCountry}
+                />
               </div>
 
               {/* Club Info */}

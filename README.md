@@ -65,13 +65,7 @@ CREATE DATABASE habicht_db;
 
 ### 4. Environment Configuration
 
-Copy `.env.example` to `.env.local` and fill in your credentials:
-
-```bash
-cp .env.example .env.local
-```
-
-Edit `.env.local`:
+Create a `.env` file in the root directory with your credentials:
 
 ```env
 # Database
@@ -147,8 +141,7 @@ UniSports/
 │   └── schema.prisma          # Database schema
 ├── types/
 │   └── next-auth.d.ts         # TypeScript definitions
-├── .env.local                 # Environment variables (create this)
-├── .env.example               # Environment template
+├── .env                       # Environment variables (create this)
 ├── next.config.js             # Next.js configuration
 ├── tailwind.config.ts         # Tailwind CSS config
 ├── tsconfig.json              # TypeScript config

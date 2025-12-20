@@ -26,13 +26,13 @@ export default function LoginPage() {
     const errorParam = searchParams.get('error')
     
     if (successParam === 'password_reset') {
-      setSuccess('Passwort erfolgreich zurückgesetzt! Du kannst dich jetzt anmelden.')
+      setSuccess(t('auth.login.passwordResetSuccess'))
     } else if (errorParam === 'invalid_token') {
-      setError('Ungültiger oder abgelaufener Link.')
+      setError(t('auth.login.invalidToken'))
     } else if (errorParam === 'token_expired') {
-      setError('Link ist abgelaufen. Bitte fordere einen neuen an.')
+      setError(t('auth.login.tokenExpired'))
     } else if (errorParam === 'server_error') {
-      setError('Ein Fehler ist aufgetreten. Bitte versuche es erneut.')
+      setError(t('auth.login.error'))
     }
 
     // Load saved credentials if remember me was checked
@@ -67,7 +67,7 @@ export default function LoginPage() {
       })
 
       if (result?.error) {
-        setError('Ungültige Anmeldedaten')
+        setError(t('auth.login.invalidCredentials'))
       } else {
         // Save email and remember me preference
         if (rememberMe) {
@@ -95,7 +95,7 @@ export default function LoginPage() {
         router.refresh()
       }
     } catch (error) {
-      setError('Ein Fehler ist aufgetreten. Bitte versuche es erneut.')
+      setError(t('auth.login.error'))
     } finally {
       setLoading(false)
     }
@@ -109,12 +109,12 @@ export default function LoginPage() {
             <img src="/eagle-logo.png" alt="Habicht Logo" className="w-full h-full object-contain" />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
-            Aamelde
+            {t('auth.login.title')}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-            Oder{' '}
+            {t('auth.login.or')}{' '}
             <Link href="/auth/register" className="font-medium text-habicht-600 hover:text-habicht-500">
-              erstell es neus Konto
+              {t('auth.login.createAccount')}
             </Link>
           </p>
         </div>
@@ -134,7 +134,7 @@ export default function LoginPage() {
           <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label htmlFor="email" className="sr-only">
-                Email
+                {t('auth.login.email')}
               </label>
               <input
                 id="email"
@@ -145,12 +145,12 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
-                placeholder="E-Mail"
+                placeholder={t('auth.login.email')}
               />
             </div>
             <div className="relative">
               <label htmlFor="password" className="sr-only">
-                Passwort
+                {t('auth.login.password')}
               </label>
               <input
                 id="password"
@@ -161,7 +161,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                placeholder="Passwort"
+                placeholder={t('auth.login.password')}
               />
               <button
                 type="button"
@@ -188,13 +188,13 @@ export default function LoginPage() {
                 className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 dark:border-gray-600 rounded"
               />
               <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-white">
-                Aameldet Bliibe
+                {t('auth.login.rememberMe')}
               </label>
             </div>
 
             <div className="text-sm">
               <Link href="/auth/forgot-password" className="font-medium text-habicht-600 hover:text-habicht-500">
-                Passwort Vergässe?
+                {t('auth.login.forgotPassword')}
               </Link>
             </div>
           </div>
@@ -205,7 +205,7 @@ export default function LoginPage() {
               disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-habicht-600 hover:bg-habicht-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-habicht-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Lade...' : 'Aamelde'}
+              {loading ? t('auth.login.loading') : t('auth.login.submit')}
             </button>
           </div>
         </form>

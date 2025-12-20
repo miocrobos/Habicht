@@ -19,8 +19,8 @@ export default function AboutPage() {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 mb-8">
           <h2 className="text-2xl font-semibold dark:text-white mb-4">Mission</h2>
           <p className="text-gray-700 dark:text-gray-300">
-            Mir wönd es einfachs und professionells Tool schaffe, wo jungi Schweizer Volleyball-Talente 
-            ihri Fähigkeite chönd zeige und de Schritt zu höchere Ligs oder Universitäts-Teams chönd mache.
+            Mir wönd es einfachs und professionells Tool schaffe, wo Schweizer Volleyball-Talente 
+            ihri Fähigkeite chönd zeige und sich mit Scouts und Clubs chönd vernetze.
           </p>
         </div>
 

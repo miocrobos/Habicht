@@ -705,7 +705,9 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                         checked={club.currentClub}
                         onChange={(e) => {
                           const updated = clubHistory.map((c) =>
-                            c.id === club.id ? { ...c, currentClub: e.target.checked, yearTo: e.target.checked ? '' : c.yearTo } : c
+                            c.id === club.id 
+                              ? { ...c, currentClub: e.target.checked, yearTo: e.target.checked ? '' : c.yearTo } 
+                              : { ...c, currentClub: false } // Uncheck all other clubs
                           );
                           setClubHistory(updated);
                         }}

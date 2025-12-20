@@ -2548,6 +2548,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }
 
   const t = (key: string): string => {
+    // First try to find the key as a flat key (e.g., 'nav.players')
+    const flatValue = (translations[language] as any)[key]
+    if (typeof flatValue === 'string') {
+      return flatValue
+    }
+    
+    // If not found as flat key, try nested navigation (e.g., players.title)
     const keys = key.split('.')
     let value: any = translations[language]
     

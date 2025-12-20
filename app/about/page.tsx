@@ -7,8 +7,8 @@ export default function AboutPage() {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 mb-8">
           <h2 className="text-2xl font-semibold dark:text-white mb-4">Was isch Habicht?</h2>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Habicht isch d'Plattform für Schweizer Volleyball-Talente - vo Kantonsschuel bis Universität. 
-            Mir verbinde junge Spieler mit Recruiters und Scouts us de ganze Schwiiz.
+            Habicht isch d'Plattform für Schweizer Volleyball-Talente. 
+            Mir verbinde Spieler mit Recruiters und Scouts us de ganze Schwiiz.
           </p>
           <p className="text-gray-700 dark:text-gray-300">
             Inspiriert vo Volleybox, aber speziell für d'Schwiizer Volleyball-Landschaft entwicklet, 

@@ -1,6 +1,6 @@
 # Habicht - Swiss Volleyball Scouting Platform
 
-**Habicht** (Hawk in Swiss German) is a comprehensive scouting platform for Swiss volleyball athletes from high school to university level. It provides a professional environment for players to showcase their talents, upload highlight videos, and connect with recruiters and university scouts.
+**Habicht** (Hawk in Swiss German) is a comprehensive scouting platform for Swiss volleyball athletes. It provides a professional environment for players to showcase their talents, upload highlight videos, and connect with recruiters and scouts.
 
 ## 🎯 Features
 

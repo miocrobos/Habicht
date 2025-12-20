@@ -119,6 +119,26 @@ export async function POST(request: Request) {
 
     const { participantId, participantType } = await request.json()
 
+    console.log('Creating conversation:', { 
+      currentUser: session.user.id, 
+      currentRole: session.user.role,
+      participantId, 
+      participantType 
+    })
+
+    // Chat between players is not allowed - only player-recruiter chats
+    if (session.user.role === 'PLAYER' && participantType === 'PLAYER') {
+      return NextResponse.json({ 
+        error: 'Chat zwischen Spielern ist nicht möglich. Nur Spieler-Recruiter Chat ist erlaubt.' 
+      }, { status: 400 })
+    }
+
+    if (session.user.role === 'RECRUITER' && participantType === 'RECRUITER') {
+      return NextResponse.json({ 
+        error: 'Chat zwischen Recruitern ist nicht möglich. Nur Spieler-Recruiter Chat ist erlaubt.' 
+      }, { status: 400 })
+    }
+
     let playerId: string
     let recruiterId: string
 

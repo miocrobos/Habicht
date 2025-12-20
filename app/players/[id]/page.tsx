@@ -742,8 +742,8 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   </>
                 )}
 
-                {/* Chat Button - Show to logged in users viewing someone else's profile */}
-                {!isOwner && session && player && (
+                {/* Chat Button - Show only to recruiters viewing player profiles */}
+                {!isOwner && session && session.user?.role === 'RECRUITER' && player && (
                   <button
                     onClick={handleStartChat}
                     className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"

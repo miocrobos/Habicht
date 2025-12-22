@@ -257,7 +257,7 @@ export const rmTranslations = {
     },
     // Privacy Page
     privacy: {
-      backToHome: 'â† Enavos a la pagina iniziala',
+      backToHome: '← Enavos a la pagina iniziala',
       title: 'Decleraziun da protecziun da datas',
       lastUpdated: 'Ultima actualisaziun:',
       section1Title: '1. ResponsaÌbel',
@@ -316,7 +316,7 @@ export const rmTranslations = {
     },
     // Terms Page
     terms: {
-      backToHome: 'â† Enavos a la pagina iniziala',
+      backToHome: '← Enavos a la pagina iniziala',
       title: 'Cundiziuns d\'utilisaziun',
       lastUpdated: 'Ultima actualisaziun:',
       section1Title: '1. Vigenza',
@@ -370,8 +370,8 @@ export const rmTranslations = {
       playersFound: 'giugaders chattads',
       noPlayersFound: 'Nagins giugaders chattads cun quests filters',
       resetFilters: 'Reinizialsar filters',
-      toMen: 'Tar Umens â†’',
-      toWomen: 'Tar Dunnas â†’',
+      toMen: 'Tar Umens ←’',
+      toWomen: 'Tar Dunnas ←’',
       menPlayers: 'Giugaders da Volleyball Umens Svizzer',
       womenPlayers: 'Giugadras da Volleyball Dunnas Svizzer',
       showAll: 'Mussar tuts',
@@ -397,12 +397,12 @@ export const rmTranslations = {
       clubsFound: 'clubs chattads',
       loading: 'Chargiar clubs...',
       playersRegistered: 'giugaders registrads',
-      viewPlayers: 'Giugaders â†’',
-      website: 'Website â†’',
+      viewPlayers: 'Giugaders ←’',
+      website: 'Website ←’',
       noClubsFound: 'Nagins clubs chattads. Per plaschair adattai voss filters.',
       missingClub: 'Tes club manca?',
       missingClubText: 'Né²s stain expander nossa banca da datas da clubs. Sche tes club manca, annunzcha el a né²s!',
-      submitClub: 'Annunzchar club â†’',
+      submitClub: 'Annunzchar club ←’',
     },
     // Club Profile
     clubProfile: {

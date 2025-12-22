@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
+import ClubBadge from '@/components/shared/ClubBadge'
 import ImageUpload from '@/components/shared/ImageUpload'
 import ChatWindow from '@/components/chat/ChatWindow'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -176,11 +177,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         const playerResponse = await axios.get(`/api/players/${params.id}`)
         const playerData = playerResponse.data.player
         
-        console.log('Player Data:', playerData)
-        console.log('Club History:', playerData?.clubHistory)
-        console.log('Videos:', playerData?.videos)
-        console.log('Highlight Video:', playerData?.highlightVideo)
-        
         if (playerData) {
           setPlayer(playerData)
         }
@@ -220,7 +216,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
   const handleVideoUpload = async () => {
     if (!videoFile) {
-      alert('Bitte wähl es Video us')
+      alert(t('playerProfile.selectVideoFile'))
       return
     }
 
@@ -248,17 +244,16 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       setVideoFile(null)
       setVideoTitle('')
       setVideoDescription('')
-      alert('Video erfolgriich ufeglade!')
+      alert(t('playerProfile.uploadedVideo'))
     } catch (error: any) {
       console.error('Error uploading video:', error)
-      const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
-      alert(`Fehler bim Video-Upload: ${errorMsg}`)
+      alert(t('playerProfile.errorUploadingVideo'))
     } finally {
       setUploadingVideo(false)
     }
   }
   const handleDeleteVideo = async (videoId: string) => {
-    if (!confirm('Bisch sicher, dass du das Video lösche möchtest?')) {
+    if (!confirm(t('playerProfile.confirmDeleteVideo'))) {
       return
     }
 
@@ -270,10 +265,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       const playerResponse = await axios.get(`/api/players/${params.id}`)
       setPlayer(playerResponse.data.player)
       
-      alert('Video erfolgriich glöscht!')
+      alert(t('playerProfile.uploadedVideo'))
     } catch (error) {
       console.error('Error deleting video:', error)
-      alert('Fehler bim Video Lösche')
+      alert(t('playerProfile.errorUploadingVideo'))
     } finally {
       setDeletingVideoId(null)
     }
@@ -293,7 +288,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       setShowChat(true)
     } catch (error) {
       console.error('Error starting chat:', error)
-      alert('Fehler bim Chat starte')
+      alert(t('playerProfile.errorStartingChat'))
     }
   }
 
@@ -302,12 +297,8 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
     try {
       console.log('=== CV EXPORT v2.0 (Professional Format) ===')
-      console.log('Player data:', player)
-      
       // Generate PDF using the utility function
       const pdfBlob = await generatePlayerCV(player)
-      
-      console.log('PDF generated, size:', pdfBlob.size, 'bytes')
       
       // Create download link with timestamp to prevent caching
       const url = URL.createObjectURL(pdfBlob)
@@ -390,8 +381,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       alert(t('playerProfile.photoUpdated'))
     } catch (error: any) {
       console.error('Error updating profile photo:', error)
-      const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
-      alert(`${t('playerProfile.errorUpdatingPhoto')}: ${errorMsg}`)
+      alert(t('playerProfile.errorUpdatingPhoto'))
     } finally {
       setUploadingPhoto(false)
     }
@@ -408,8 +398,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       // Get current player data first
       const currentResponse = await axios.get(`/api/players/${params.id}`)
       const currentPlayer = currentResponse.data.player
-      
-      console.log('Updating background with image:', newBackgroundImage.substring(0, 50))
       
       // Update with cover image
       await axios.put(`/api/players/${params.id}`, {
@@ -463,8 +451,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       setNewBackgroundImage('')
     } catch (error: any) {
       console.error('Error updating background:', error)
-      const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
-      alert(`Fehler bim Hintergrund Ändere: ${errorMsg}`)
+      alert(t('playerProfile.errorUpdatingBackground'))
     } finally {
       setUploadingBackground(false)
     }
@@ -475,7 +462,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">Lade Profil...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">{t('playerProfile.loadingProfile')}</p>
         </div>
       </div>
     )
@@ -485,9 +472,9 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Spieler Nid Gfunde</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('playerProfile.playerNotFound')}</h1>
           <Link href="/players" className="mt-4 inline-block text-red-600 hover:text-red-700">
-            Zrugg Zur Übersicht
+            {t('playerProfile.backToOverview')}
           </Link>
         </div>
       </div>
@@ -613,29 +600,31 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     {player.nationality && (
                       <span>🏳 {t('playerProfile.nationality')} {player.nationality}</span>
                     )}
-                    {player.currentClub && (
-                      <Link 
-                        href={`/clubs/${player.currentClub.id}`}
-                        className="flex items-center gap-2 hover:text-red-600 dark:hover:text-red-400 transition"
-                      >
-                        {player.currentClub.logo && (
-                          <Image
-                            src={player.currentClub.logo}
-                            alt={player.currentClub.name}
-                            width={24}
-                            height={24}
-                            className="w-6 h-6 rounded object-contain bg-white"
+                    {player.currentClub && (() => {
+                      // Find the current club in club history to get the country
+                      const currentClubHistory = player.clubHistory?.find((ch: any) => ch.currentClub === true)
+                      const clubCountry = currentClubHistory?.clubCountry || null
+                      
+                      return (
+                        <Link 
+                          href={`/clubs/${player.currentClub.id}`}
+                          className="flex items-center gap-2 hover:text-red-600 dark:hover:text-red-400 transition"
+                        >
+                          <ClubBadge 
+                            clubName={player.currentClub.name}
+                            size="sm"
+                            uploadedLogo={player.currentClub.logo}
+                            country={clubCountry}
                           />
-                        )}
-                        {!player.currentClub.logo && <span>🏐</span>}
-                        <span>{player.currentClub.name}</span>
-                        {player.currentLeague && (
-                          <span className="text-xs px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full ml-1">
-                            {LEAGUE_TRANSLATIONS[player.currentLeague] || player.currentLeague}
-                          </span>
-                        )}
-                      </Link>
-                    )}
+                          <span>{player.currentClub.name}</span>
+                          {player.currentLeague && (
+                            <span className="text-xs px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full ml-1">
+                              {LEAGUE_TRANSLATIONS[player.currentLeague] || player.currentLeague}
+                            </span>
+                          )}
+                        </Link>
+                      )
+                    })()}
                   </div>
 
                   {/* Contact Info */}
@@ -946,12 +935,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
             {activeTab === 'karriere' && (
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Vereinsgeschichte</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('playerProfile.clubHistory')}</h3>
                 {player.clubHistory && player.clubHistory.length > 0 ? (
                   <ClubHistory history={player.clubHistory} />
                 ) : (
                   <div className="text-center py-12">
-                    <p className="text-gray-500 dark:text-gray-400">Kei Vereinsgeschichte Verfüegbar</p>
+                    <p className="text-gray-500 dark:text-gray-400">{t('playerProfile.noClubHistory')}</p>
                   </div>
                 )}
               </div>
@@ -970,7 +959,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold text-sm"
                     >
                       <Upload className="w-4 h-4" />
-                      Video Ufelade
+                      {t('playerProfile.uploadVideo')}
                     </button>
                   )}
                 </div>
@@ -989,8 +978,8 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           </video>
                         </div>
                         <div className="p-4">
-                          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Registrierungs-Highlight Video</h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">Video us de Erstregistrierig</p>
+                          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('playerProfile.registrationHighlightVideo')}</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{t('playerProfile.videoFromRegistration')}</p>
                         </div>
                       </div>
                     )}
@@ -1002,7 +991,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                             onClick={() => handleDeleteVideo(video.id)}
                             disabled={deletingVideoId === video.id}
                             className="absolute top-2 right-2 z-10 p-2 bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 disabled:opacity-50"
-                            title="Video Lösche"
+                            title={t('playerProfile.deleteVideo')}
                           >
                             {deletingVideoId === video.id ? (
                               <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -1041,14 +1030,14 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 ) : (
                   <div className="text-center py-12 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <VideoIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500 dark:text-gray-400 mb-4">Kei Highlight Videos Verfüegbar</p>
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">{t('playerProfile.noHighlightVideos')}</p>
                     {isOwner && (
                       <button
                         onClick={() => setShowVideoUpload(true)}
                         className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold"
                       >
                         <Upload className="w-4 h-4" />
-                        Erste Video Ufelade
+                        {t('playerProfile.firstVideoUpload')}
                       </button>
                     )}
                   </div>
@@ -1060,7 +1049,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                   <Award className="w-5 h-5 text-yellow-500" />
-                  Erfolge & Uszeichnunge
+                  {t('playerProfile.achievements')}
                 </h3>
                 {player.achievements && player.achievements.length > 0 ? (
                   <div className="space-y-3">
@@ -1075,7 +1064,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   </div>
                 ) : (
                   <div className="text-center py-12">
-                    <p className="text-gray-500 dark:text-gray-400">Kei Erfolge & Uszeichnunge Verfüegbar</p>
+                    <p className="text-gray-500 dark:text-gray-400">{t('playerProfile.noAchievements')}</p>
                   </div>
                 )}
               </div>
@@ -1089,7 +1078,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full p-6">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Video Ufelade</h3>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('playerProfile.uploadVideo')}</h3>
               <button
                 onClick={() => setShowVideoUpload(false)}
                 className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition"
@@ -1103,7 +1092,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Video Datei *
+                  {t('playerProfile.videoFile')} *
                 </label>
                 <input
                   type="file"
@@ -1115,7 +1104,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Titel
+                  {t('playerProfile.title')}
                 </label>
                 <input
                   type="text"
@@ -1157,12 +1146,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Uploading...
+                      {t('playerProfile.videoUploading')}
                     </>
                   ) : (
                     <>
                       <Upload className="w-4 h-4" />
-                      Ufelade
+                      {t('playerProfile.uploadVideo')}
                     </>
                   )}
                 </button>
@@ -1385,12 +1374,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Updating...
+                      {t('playerProfile.backgroundUpdating')}
                     </>
                   ) : (
                     <>
                       <Upload className="w-4 h-4" />
-                      Bild Speichere
+                      {t('playerProfile.saveImage')}
                     </>
                   )}
                 </button>

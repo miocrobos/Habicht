@@ -71,6 +71,27 @@ const COUNTRY_CODES: Record<string, string> = {
   'Australien': 'AU',
   'New Zealand': 'NZ',
   'Neuseeland': 'NZ',
+  
+  // Africa
+  'Nigeria': 'NG',
+  'South Africa': 'ZA',
+  'Südafrika': 'ZA',
+  'Egypt': 'EG',
+  'Ägypten': 'EG',
+  'Kenya': 'KE',
+  'Kenia': 'KE',
+  'Morocco': 'MA',
+  'Marokko': 'MA',
+  'Tunisia': 'TN',
+  'Tunesien': 'TN',
+  'Algeria': 'DZ',
+  'Algerien': 'DZ',
+  'Ghana': 'GH',
+  'Cameroon': 'CM',
+  'Kamerun': 'CM',
+  'Senegal': 'SN',
+  'Ethiopia': 'ET',
+  'Äthiopien': 'ET',
 }
 
 /**

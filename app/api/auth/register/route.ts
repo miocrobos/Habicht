@@ -7,10 +7,26 @@ import crypto from 'crypto'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, password, role, playerData, recruiterData } = body
+    const { name, email, password, role, playerData, recruiterData, accountType, firstName, lastName } = body
 
     // Validate input
-    if (!name || !email || !password) {
+    if (!email || !password) {
+      return NextResponse.json(
+        { error: 'Alli Fälder Sin Erforderlich' },
+        { status: 400 }
+      )
+    }
+
+    // For hybrid users, firstName and lastName are required
+    if (accountType === 'hybrid' && (!firstName || !lastName)) {
+      return NextResponse.json(
+        { error: 'First Name and Last Name are required' },
+        { status: 400 }
+      )
+    }
+
+    // For non-hybrid users, name is required
+    if (accountType !== 'hybrid' && !name) {
       return NextResponse.json(
         { error: 'Alli Fälder Sin Erforderlich' },
         { status: 400 }
@@ -43,7 +59,7 @@ export async function POST(request: NextRequest) {
       }
       if (!recruiterData.clubId) {
         return NextResponse.json(
-          { error: 'Bitte Wähl En Verein' },
+          { error: 'Please select a club' },
           { status: 400 }
         )
       }
@@ -56,7 +72,7 @@ export async function POST(request: NextRequest) {
 
     if (existingUser) {
       return NextResponse.json(
-        { error: 'E-Mail Isch Scho Registriert' },
+        { error: 'Email is already registered' },
         { status: 400 }
       )
     }
@@ -483,6 +499,176 @@ export async function POST(request: NextRequest) {
       })
     }
 
+    // Create user with HYBRID role (both player and recruiter profiles)
+    // NOTE: For now, we only create the player profile. Recruiter profile can be added later.
+    if (accountType === 'hybrid' && playerData) {
+      // Helper function to normalize club name
+      const normalizeClubName = (name: string): string => {
+        return name
+          .replace(/\s+\d+$/, '')  // Remove " 2", " 3", etc. at end
+          .replace(/\s+[IVX]+$/, '') // Remove Roman numerals at end
+          .replace(/\s+U\d{2}$/i, '') // Remove U19, U20, U21, U23 at end
+          .trim()
+      }
+
+      // Process player club history first
+      let currentClubId: string | null = null
+      let playerCurrentLeague: string | null = null
+      let processedPlayerClubHistory: any[] = []
+
+      if (playerData.clubHistory && playerData.clubHistory.length > 0) {
+        const currentClubEntry = playerData.clubHistory.find((club: any) => club.currentClub)
+        
+        if (currentClubEntry && currentClubEntry.clubName) {
+          const normalizedName = normalizeClubName(currentClubEntry.clubName)
+          
+          // Map display league name to database enum value
+          const leagueMap: Record<string, string> = {
+            'NLA': 'NLA',
+            'NLB': 'NLB',
+            '1. Liga': 'FIRST_LEAGUE',
+            '2. Liga': 'SECOND_LEAGUE',
+            '3. Liga': 'THIRD_LEAGUE',
+            '4. Liga': 'FOURTH_LEAGUE',
+            '5. Liga': 'FIFTH_LEAGUE',
+            'U23': 'U23',
+            'U19': 'U19',
+            'U17': 'U17',
+          }
+          playerCurrentLeague = leagueMap[currentClubEntry.league] || null
+          
+          // Try to find or create the current club
+          let existingClub = await prisma.club.findFirst({
+            where: { name: normalizedName }
+          })
+
+          if (existingClub) {
+            currentClubId = existingClub.id
+          }
+        }
+
+        // Process all club history entries
+        processedPlayerClubHistory = await Promise.all(playerData.clubHistory.map(async (club: any) => {
+          let clubId = null
+          const normalizedClubName = normalizeClubName(club.clubName)
+          
+          if (normalizedClubName && club.currentClub) {
+            try {
+              let existingClub = await prisma.club.findFirst({
+                where: { name: normalizedClubName }
+              })
+
+              if (existingClub) {
+                clubId = existingClub.id
+              }
+            } catch (error) {
+              console.error('Error finding club:', error)
+            }
+          }
+
+          return {
+            clubName: normalizedClubName,
+            clubId: clubId,
+            clubLogo: club.logo || null,
+            clubCountry: club.country || 'Switzerland',
+            clubWebsiteUrl: club.clubWebsiteUrl || null,
+            league: club.league || null,
+            startDate: club.startYear ? new Date(parseInt(club.startYear), 0, 1) : new Date(),
+            endDate: club.currentClub ? null : (club.endYear ? new Date(parseInt(club.endYear), 11, 31) : null),
+            currentClub: club.currentClub || false,
+          }
+        }))
+      }
+
+      // Map gender to enum
+      const mapGenderToEnum = (gender: string) => {
+        const upperGender = gender?.toUpperCase()
+        if (upperGender === 'MALE') return 'MALE' as const
+        if (upperGender === 'FEMALE') return 'FEMALE' as const
+        if (upperGender === 'OTHER') return 'OTHER' as const
+        return 'MALE' as const
+      }
+
+      // Create hybrid user with player profile
+      // Note: Recruiter functionality will be available but recruiter profile created separately
+      const user = await prisma.user.create({
+        data: {
+          name: `${firstName} ${lastName}`,
+          email,
+          password: hashedPassword,
+          role: 'HYBRID',
+          verificationToken,
+          verificationTokenExpiry,
+          emailVerified: false,
+          player: {
+            create: {
+              firstName: firstName,
+              lastName: lastName,
+              dateOfBirth: playerData.dateOfBirth ? new Date(playerData.dateOfBirth) : new Date(),
+              gender: mapGenderToEnum(playerData.gender),
+              positions: playerData.positions || [],
+              height: playerData.height ? parseFloat(playerData.height) : null,
+              weight: playerData.weight ? parseFloat(playerData.weight) : null,
+              spikeHeight: playerData.spikeHeight ? parseFloat(playerData.spikeHeight) : null,
+              blockHeight: playerData.blockHeight ? parseFloat(playerData.blockHeight) : null,
+              canton: playerData.canton || 'ZH',
+              city: playerData.municipality || 'Unknown',
+              currentLeague: (playerCurrentLeague || 'FIRST_LEAGUE') as any,
+              phone: playerData.phone || null,
+              instagram: playerData.instagram || null,
+              tiktok: playerData.tiktok || null,
+              youtube: playerData.youtube || null,
+              highlightVideo: playerData.highlightVideo || null,
+              swissVolleyLicense: playerData.swissVolleyLicense || null,
+              skillReceiving: playerData.skillReceiving || 0,
+              skillServing: playerData.skillServing || 0,
+              skillAttacking: playerData.skillAttacking || 0,
+              skillBlocking: playerData.skillBlocking || 0,
+              skillDefense: playerData.skillDefense || 0,
+              profileImage: '/images/default-avatar.png',
+              bio: playerData.bio || null,
+              lookingForClub: playerData.lookingForClub || false,
+              nationality: playerData.nationality || 'Swiss',
+              employmentStatus: playerData.employmentStatus || null,
+              occupation: playerData.occupation || null,
+              schoolName: playerData.schoolName || null,
+              achievements: playerData.achievements?.map((a: any) => `${a.title} (${a.year}): ${a.description}`) || [],
+              currentClubId: currentClubId,
+              clubHistory: processedPlayerClubHistory.length > 0 ? {
+                create: processedPlayerClubHistory
+              } : undefined,
+            },
+          },
+        },
+        include: {
+          player: {
+            include: {
+              clubHistory: true,
+            },
+          },
+        },
+      })
+
+      // Send verification email
+      const emailSent = await sendVerificationEmail({
+        email: user.email,
+        name: user.name,
+        verificationToken,
+      })
+
+      return NextResponse.json({
+        success: true,
+        emailSent,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+        playerId: user.player?.id || null,
+      })
+    }
+
     // Create user without player data
     const user = await prisma.user.create({
       data: {
@@ -516,7 +702,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Registration error:', error)
     return NextResponse.json(
-      { error: 'Fehler Bi Dä Registrierig' },
+      { error: 'Registration failed' },
       { status: 500 }
     )
   }

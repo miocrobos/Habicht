@@ -49,6 +49,11 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(
         new URL(`/recruiters?verified=true`, request.url)
       )
+    } else if (user.role === 'HYBRID' && user.player) {
+      // For hybrid users, redirect to their player profile
+      return NextResponse.redirect(
+        new URL(`/players/${user.player.id}?verified=true`, request.url)
+      )
     }
 
     return NextResponse.redirect(new URL('/auth/login?verified=true', request.url))

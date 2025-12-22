@@ -325,10 +325,10 @@ export default function HybridRegisterPage() {
         {/* Header */}
         <div className="text-center">
           <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white">
-            {t('register.hybridTitle') || 'Hybrid Registration'}
+            {t('register.hybridTitle')}
           </h2>
           <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
-            {t('register.hybridSubtitle') || 'Create both player and recruiter profiles'}
+            {t('register.hybridSubtitle')}
           </p>
         </div>
 
@@ -343,13 +343,13 @@ export default function HybridRegisterPage() {
             {/* SECTION 1: Account Information */}
             <div className="space-y-4 border-b border-gray-200 dark:border-gray-700 pb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {t('register.accountInfo') || '1. Account Information'}
+                {t('register.accountInfo')}
               </h3>
               
               <div className="space-y-4">
                 <input
                   type="email"
-                  placeholder={t('register.email') || 'Email'}
+                  placeholder={t('register.email')}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -359,7 +359,7 @@ export default function HybridRegisterPage() {
                 <div className="grid md:grid-cols-2 gap-4">
                   <input
                     type="password"
-                    placeholder={t('register.password') || 'Password'}
+                    placeholder={t('register.password')}
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -368,7 +368,7 @@ export default function HybridRegisterPage() {
                   
                   <input
                     type="password"
-                    placeholder={t('register.confirmPassword') || 'Confirm Password'}
+                    placeholder={t('register.confirmPassword')}
                     value={formData.confirmPassword}
                     onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -381,13 +381,13 @@ export default function HybridRegisterPage() {
             {/* SECTION 2: Personal Information */}
             <div className="space-y-4 border-b border-gray-200 dark:border-gray-700 pb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {t('register.personalInfo') || '2. Personal Information'}
+                {t('register.personalInfo')}
               </h3>
               
               <div className="grid md:grid-cols-2 gap-4">
                 <input
                   type="text"
-                  placeholder={t('register.firstName') || 'First Name'}
+                  placeholder={t('register.firstName')}
                   value={formData.firstName}
                   onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -396,7 +396,7 @@ export default function HybridRegisterPage() {
                 
                 <input
                   type="text"
-                  placeholder={t('register.lastName') || 'Last Name'}
+                  placeholder={t('register.lastName')}
                   value={formData.lastName}
                   onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -407,7 +407,7 @@ export default function HybridRegisterPage() {
               <div className="grid md:grid-cols-2 gap-4">
                 <input
                   type="date"
-                  placeholder={t('register.dateOfBirth') || 'Date of Birth'}
+                  placeholder={t('register.dateOfBirth')}
                   value={formData.dateOfBirth}
                   onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -420,7 +420,7 @@ export default function HybridRegisterPage() {
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   required
                 >
-                  <option value="">{t('register.selectGender') || 'Select Gender'}</option>
+                  <option value="">{t('register.selectGender')}</option>
                   {genderOptions.map(g => (
                     <option key={g} value={g}>{t(`register.${g.toLowerCase()}`) || g}</option>
                   ))}
@@ -434,7 +434,7 @@ export default function HybridRegisterPage() {
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   required
                 >
-                  <option value="">{t('register.selectCanton') || 'Select Canton'}</option>
+                  <option value="">{t('register.selectCanton')}</option>
                   {cantonOptions.map(c => (
                     <option key={c.code} value={c.code}>{c.name}</option>
                   ))}
@@ -442,7 +442,7 @@ export default function HybridRegisterPage() {
 
                 <input
                   type="text"
-                  placeholder={t('register.municipality') || 'Municipality/City'}
+                  placeholder={t('register.municipality')}
                   value={formData.municipality}
                   onChange={(e) => setFormData({ ...formData, municipality: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -451,7 +451,7 @@ export default function HybridRegisterPage() {
 
                 <input
                   type="tel"
-                  placeholder={t('register.phone') || 'Phone Number'}
+                  placeholder={t('register.phone')}
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -459,7 +459,7 @@ export default function HybridRegisterPage() {
               </div>
 
               <textarea
-                placeholder={t('register.bio') || 'Bio / About Me'}
+                placeholder={t('register.bio')}
                 value={formData.bio}
                 onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                 rows={4}
@@ -470,13 +470,13 @@ export default function HybridRegisterPage() {
             {/* SECTION 3: Player Information */}
             <div className="space-y-6 border-b border-gray-200 dark:border-gray-700 pb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {t('register.playerInfo') || '3. Player Information'}
+                {t('register.playerInfo')}
               </h3>
 
               {/* Positions */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('register.positions') || 'Positions'}
+                  {t('register.positions')}
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {positionOptions.map(pos => (
@@ -499,33 +499,33 @@ export default function HybridRegisterPage() {
               {/* Physical Stats */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('register.physicalStats') || 'Physical Statistics'}
+                  {t('register.physicalStats')}
                 </label>
                 <div className="grid md:grid-cols-4 gap-4">
                   <input
                     type="number"
-                    placeholder={t('register.height') || 'Height (cm)'}
+                    placeholder={t('register.height')}
                     value={formData.height}
                     onChange={(e) => setFormData({ ...formData, height: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
                   <input
                     type="number"
-                    placeholder={t('register.weight') || 'Weight (kg)'}
+                    placeholder={t('register.weight')}
                     value={formData.weight}
                     onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
                   <input
                     type="number"
-                    placeholder={t('register.spikeHeight') || 'Spike Height (cm)'}
+                    placeholder={t('register.spikeHeight')}
                     value={formData.spikeHeight}
                     onChange={(e) => setFormData({ ...formData, spikeHeight: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
                   <input
                     type="number"
-                    placeholder={t('register.blockHeight') || 'Block Height (cm)'}
+                    placeholder={t('register.blockHeight')}
                     value={formData.blockHeight}
                     onChange={(e) => setFormData({ ...formData, blockHeight: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -536,16 +536,16 @@ export default function HybridRegisterPage() {
               {/* Skills */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                  {t('register.skills') || 'Skills (0-5)'}
+                  {t('register.skills')}
                 </label>
                 <div className="grid md:grid-cols-2 gap-4">
                   {[
-                    { key: 'skillReceiving', label: t('register.receiving') || 'Receiving' },
-                    { key: 'skillServing', label: t('register.serving') || 'Serving' },
-                    { key: 'skillAttacking', label: t('register.attacking') || 'Attacking' },
-                    { key: 'skillBlocking', label: t('register.blocking') || 'Blocking' },
-                    { key: 'skillDefense', label: t('register.defense') || 'Defense' },
-                    { key: 'skillSetting', label: t('register.setting') || 'Setting' },
+                    { key: 'skillReceiving', label: t('register.receiving') },
+                    { key: 'skillServing', label: t('register.serving') },
+                    { key: 'skillAttacking', label: t('register.attacking') },
+                    { key: 'skillBlocking', label: t('register.blocking') },
+                    { key: 'skillDefense', label: t('register.defense') },
+                    { key: 'skillSetting', label: t('register.setting') },
                   ].map(({ key, label }) => (
                     <div key={key}>
                       <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">{label}</label>
@@ -569,14 +569,14 @@ export default function HybridRegisterPage() {
               <div>
                 <div className="flex justify-between items-center mb-3">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t('register.clubHistory') || 'Club History'}
+                    {t('register.clubHistory')}
                   </label>
                   <button
                     type="button"
                     onClick={addClubHistory}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
                   >
-                    + {t('register.addClub') || 'Add Club'}
+                    + {t('register.addClub')}
                   </button>
                 </div>
                 {clubHistory.map((club, index) => (
@@ -584,35 +584,35 @@ export default function HybridRegisterPage() {
                     <div className="grid md:grid-cols-5 gap-3">
                       <input
                         type="text"
-                        placeholder={t('register.clubName') || 'Club Name'}
+                        placeholder={t('register.clubName')}
                         value={club.clubName}
                         onChange={(e) => updateClubHistory(index, 'clubName', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
-                        placeholder={t('register.league') || 'League'}
+                        placeholder={t('register.league')}
                         value={club.league}
                         onChange={(e) => updateClubHistory(index, 'league', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
-                        placeholder={t('register.position') || 'Position'}
+                        placeholder={t('register.position')}
                         value={club.position}
                         onChange={(e) => updateClubHistory(index, 'position', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
-                        placeholder={t('register.startYear') || 'Start Year'}
+                        placeholder={t('register.startYear')}
                         value={club.startYear}
                         onChange={(e) => updateClubHistory(index, 'startYear', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
-                        placeholder={t('register.endYear') || 'End Year'}
+                        placeholder={t('register.endYear')}
                         value={club.endYear}
                         onChange={(e) => updateClubHistory(index, 'endYear', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
@@ -623,7 +623,7 @@ export default function HybridRegisterPage() {
                       onClick={() => removeClubHistory(index)}
                       className="mt-2 text-sm text-red-600 hover:text-red-700"
                     >
-                      {t('register.remove') || 'Remove'}
+                      {t('register.remove')}
                     </button>
                   </div>
                 ))}
@@ -633,14 +633,14 @@ export default function HybridRegisterPage() {
               <div>
                 <div className="flex justify-between items-center mb-3">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t('register.achievements') || 'Achievements'}
+                    {t('register.achievements')}
                   </label>
                   <button
                     type="button"
                     onClick={addPlayerAchievement}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
                   >
-                    + {t('register.addAchievement') || 'Add Achievement'}
+                    + {t('register.addAchievement')}
                   </button>
                 </div>
                 {playerAchievements.map((achievement, index) => (
@@ -648,21 +648,21 @@ export default function HybridRegisterPage() {
                     <div className="grid md:grid-cols-2 gap-3 mb-2">
                       <input
                         type="text"
-                        placeholder={t('register.achievementTitle') || 'Title'}
+                        placeholder={t('register.achievementTitle')}
                         value={achievement.title}
                         onChange={(e) => updatePlayerAchievement(index, 'title', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
-                        placeholder={t('register.year') || 'Year'}
+                        placeholder={t('register.year')}
                         value={achievement.year}
                         onChange={(e) => updatePlayerAchievement(index, 'year', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                     </div>
                     <textarea
-                      placeholder={t('register.description') || 'Description'}
+                      placeholder={t('register.description')}
                       value={achievement.description}
                       onChange={(e) => updatePlayerAchievement(index, 'description', e.target.value)}
                       rows={2}
@@ -673,7 +673,7 @@ export default function HybridRegisterPage() {
                       onClick={() => removePlayerAchievement(index)}
                       className="mt-2 text-sm text-red-600 hover:text-red-700"
                     >
-                      {t('register.remove') || 'Remove'}
+                      {t('register.remove')}
                     </button>
                   </div>
                 ))}
@@ -682,33 +682,33 @@ export default function HybridRegisterPage() {
               {/* Social Media */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('register.socialMedia') || 'Social Media & Videos'}
+                  {t('register.socialMedia')}
                 </label>
                 <div className="grid md:grid-cols-2 gap-4">
                   <input
                     type="url"
-                    placeholder={t('register.instagram') || 'Instagram URL'}
+                    placeholder={t('register.instagram')}
                     value={formData.instagram}
                     onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
                   <input
                     type="url"
-                    placeholder={t('register.tiktok') || 'TikTok URL'}
+                    placeholder={t('register.tiktok')}
                     value={formData.tiktok}
                     onChange={(e) => setFormData({ ...formData, tiktok: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
                   <input
                     type="url"
-                    placeholder={t('register.youtube') || 'YouTube URL'}
+                    placeholder={t('register.youtube')}
                     value={formData.youtube}
                     onChange={(e) => setFormData({ ...formData, youtube: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
                   <input
                     type="url"
-                    placeholder={t('register.highlightVideo') || 'Highlight Video URL'}
+                    placeholder={t('register.highlightVideo')}
                     value={formData.highlightVideo}
                     onChange={(e) => setFormData({ ...formData, highlightVideo: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -719,7 +719,7 @@ export default function HybridRegisterPage() {
               {/* Professional/Academic Info */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('register.professionalInfo') || 'Professional & Academic Information'}
+                  {t('register.professionalInfo')}
                 </label>
                 <div className="grid md:grid-cols-2 gap-4">
                   <select
@@ -727,35 +727,35 @@ export default function HybridRegisterPage() {
                     onChange={(e) => setFormData({ ...formData, employmentStatus: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   >
-                    <option value="">{t('register.selectEmployment') || 'Employment Status'}</option>
+                    <option value="">{t('register.selectEmployment')}</option>
                     {employmentOptions.map(emp => (
                       <option key={emp} value={emp}>{t(`register.${emp.toLowerCase()}`) || emp}</option>
                     ))}
                   </select>
                   <input
                     type="text"
-                    placeholder={t('register.occupation') || 'Occupation/Field of Study'}
+                    placeholder={t('register.occupation')}
                     value={formData.occupation}
                     onChange={(e) => setFormData({ ...formData, occupation: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
                   <input
                     type="text"
-                    placeholder={t('register.school') || 'School/University'}
+                    placeholder={t('register.school')}
                     value={formData.schoolName}
                     onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
                   <input
                     type="text"
-                    placeholder={t('register.swissVolleyLicense') || 'Swiss Volley License'}
+                    placeholder={t('register.swissVolleyLicense')}
                     value={formData.swissVolleyLicense}
                     onChange={(e) => setFormData({ ...formData, swissVolleyLicense: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
                   <input
                     type="text"
-                    placeholder={t('register.ausweiss') || 'Ausweiss'}
+                    placeholder={t('register.ausweiss')}
                     value={formData.ausweiss}
                     onChange={(e) => setFormData({ ...formData, ausweiss: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -772,7 +772,7 @@ export default function HybridRegisterPage() {
                   className="w-5 h-5 text-red-600 border-gray-300 rounded focus:ring-red-500"
                 />
                 <span className="text-sm text-gray-700 dark:text-gray-300">
-                  {t('register.lookingForClub') || 'I am currently looking for a club'}
+                  {t('register.lookingForClub')}
                 </span>
               </label>
             </div>
@@ -780,13 +780,13 @@ export default function HybridRegisterPage() {
             {/* SECTION 4: Recruiter Information */}
             <div className="space-y-6 border-b border-gray-200 dark:border-gray-700 pb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {t('register.recruiterInfo') || '4. Recruiter Information'}
+                {t('register.recruiterInfo')}
               </h3>
 
               {/* Coach Roles */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('register.coachRole') || 'Coaching Roles'}
+                  {t('register.coachRole')}
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {coachRoleOptions.map(role => (
@@ -810,14 +810,14 @@ export default function HybridRegisterPage() {
               <div className="grid md:grid-cols-2 gap-4">
                 <input
                   type="text"
-                  placeholder={t('register.organization') || 'Organization/Club Name'}
+                  placeholder={t('register.organization')}
                   value={formData.organization}
                   onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                 />
                 <input
                   type="text"
-                  placeholder={t('register.coachingLicense') || 'Coaching License'}
+                  placeholder={t('register.coachingLicense')}
                   value={formData.coachingLicense}
                   onChange={(e) => setFormData({ ...formData, coachingLicense: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
@@ -827,7 +827,7 @@ export default function HybridRegisterPage() {
               {/* Gender Coached */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('register.genderCoached') || 'Gender Coached'}
+                  {t('register.genderCoached')}
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {genderOptions.map(gender => (
@@ -850,7 +850,7 @@ export default function HybridRegisterPage() {
               {/* Positions Looking For */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('register.positionsLookingFor') || 'Positions Looking For'}
+                  {t('register.positionsLookingFor')}
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {positionOptions.map(pos => (
@@ -874,14 +874,14 @@ export default function HybridRegisterPage() {
               <div>
                 <div className="flex justify-between items-center mb-3">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t('register.clubAffiliations') || 'Club Affiliations'}
+                    {t('register.clubAffiliations')}
                   </label>
                   <button
                     type="button"
                     onClick={addClubAffiliation}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
                   >
-                    + {t('register.addAffiliation') || 'Add Club'}
+                    + {t('register.addAffiliation')}
                   </button>
                 </div>
                 {clubAffiliations.map((affiliation, index) => (
@@ -889,28 +889,28 @@ export default function HybridRegisterPage() {
                     <div className="grid md:grid-cols-4 gap-3">
                       <input
                         type="text"
-                        placeholder={t('register.clubName') || 'Club Name'}
+                        placeholder={t('register.clubName')}
                         value={affiliation.clubName}
                         onChange={(e) => updateClubAffiliation(index, 'clubName', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
-                        placeholder={t('register.role') || 'Role'}
+                        placeholder={t('register.role')}
                         value={affiliation.role}
                         onChange={(e) => updateClubAffiliation(index, 'role', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
-                        placeholder={t('register.startYear') || 'Start Year'}
+                        placeholder={t('register.startYear')}
                         value={affiliation.startYear}
                         onChange={(e) => updateClubAffiliation(index, 'startYear', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
-                        placeholder={t('register.endYear') || 'End Year'}
+                        placeholder={t('register.endYear')}
                         value={affiliation.endYear}
                         onChange={(e) => updateClubAffiliation(index, 'endYear', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
@@ -921,7 +921,7 @@ export default function HybridRegisterPage() {
                       onClick={() => removeClubAffiliation(index)}
                       className="mt-2 text-sm text-red-600 hover:text-red-700"
                     >
-                      {t('register.remove') || 'Remove'}
+                      {t('register.remove')}
                     </button>
                   </div>
                 ))}
@@ -931,14 +931,14 @@ export default function HybridRegisterPage() {
               <div>
                 <div className="flex justify-between items-center mb-3">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t('register.coachingAchievements') || 'Coaching Achievements'}
+                    {t('register.coachingAchievements')}
                   </label>
                   <button
                     type="button"
                     onClick={addRecruiterAchievement}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
                   >
-                    + {t('register.addAchievement') || 'Add Achievement'}
+                    + {t('register.addAchievement')}
                   </button>
                 </div>
                 {recruiterAchievements.map((achievement, index) => (
@@ -946,21 +946,21 @@ export default function HybridRegisterPage() {
                     <div className="grid md:grid-cols-2 gap-3 mb-2">
                       <input
                         type="text"
-                        placeholder={t('register.achievementTitle') || 'Title'}
+                        placeholder={t('register.achievementTitle')}
                         value={achievement.title}
                         onChange={(e) => updateRecruiterAchievement(index, 'title', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
-                        placeholder={t('register.year') || 'Year'}
+                        placeholder={t('register.year')}
                         value={achievement.year}
                         onChange={(e) => updateRecruiterAchievement(index, 'year', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                     </div>
                     <textarea
-                      placeholder={t('register.description') || 'Description'}
+                      placeholder={t('register.description')}
                       value={achievement.description}
                       onChange={(e) => updateRecruiterAchievement(index, 'description', e.target.value)}
                       rows={2}
@@ -971,7 +971,7 @@ export default function HybridRegisterPage() {
                       onClick={() => removeRecruiterAchievement(index)}
                       className="mt-2 text-sm text-red-600 hover:text-red-700"
                     >
-                      {t('register.remove') || 'Remove'}
+                      {t('register.remove')}
                     </button>
                   </div>
                 ))}
@@ -986,7 +986,7 @@ export default function HybridRegisterPage() {
                   className="w-5 h-5 text-red-600 border-gray-300 rounded focus:ring-red-500"
                 />
                 <span className="text-sm text-gray-700 dark:text-gray-300">
-                  {t('register.lookingForMembers') || 'I am currently looking for team members'}
+                  {t('register.lookingForMembers')}
                 </span>
               </label>
             </div>
@@ -1017,13 +1017,13 @@ export default function HybridRegisterPage() {
                 disabled={loading}
                 className="w-full py-4 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg font-bold text-lg hover:from-red-700 hover:to-red-800 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loading ? t('register.creating') || 'Creating Account...' : t('register.createHybridAccount') || 'Create Hybrid Account'}
+                {loading ? t('register.creating') : t('register.createHybridAccount')}
               </button>
 
               <p className="text-center text-sm text-gray-600 dark:text-gray-400">
-                {t('register.alreadyHaveAccount') || 'Already have an account?'}{' '}
+                {t('register.alreadyHaveAccount')}{' '}
                 <Link href="/auth/login" className="text-red-600 hover:text-red-700 font-medium">
-                  {t('register.login') || 'Log in'}
+                  {t('register.login')}
                 </Link>
               </p>
             </div>

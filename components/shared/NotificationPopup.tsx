@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Bell, X, Eye, MessageCircle, UserPlus, Award } from 'lucide-react'
 import Link from 'next/link'
 import axios from 'axios'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Notification {
   id: string
@@ -16,6 +17,7 @@ interface Notification {
 }
 
 export default function NotificationPopup() {
+  const { t } = useLanguage()
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [showPopup, setShowPopup] = useState(false)
   const [unreadCount, setUnreadCount] = useState(0)
@@ -73,10 +75,10 @@ export default function NotificationPopup() {
     const diffMs = now.getTime() - date.getTime()
     const diffMins = Math.floor(diffMs / 60000)
     
-    if (diffMins < 1) return 'gerade ebe'
-    if (diffMins < 60) return `${diffMins} Min`
-    if (diffMins < 1440) return `${Math.floor(diffMins / 60)} Std`
-    return `${Math.floor(diffMins / 1440)} Täg`
+    if (diffMins < 1) return t('notifications.justNow')
+    if (diffMins < 60) return `${diffMins} ${t('notifications.minutes')}`
+    if (diffMins < 1440) return `${Math.floor(diffMins / 60)} ${t('notifications.hours')}`
+    return `${Math.floor(diffMins / 1440)} ${t('notifications.days')}`
   }
 
   return (
@@ -109,7 +111,7 @@ export default function NotificationPopup() {
             <div className="bg-red-600 text-white px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Bell className="w-5 h-5" />
-                <h3 className="font-semibold">Benachrichtigunge</h3>
+                <h3 className="font-semibold">{t('notifications.title')}</h3>
                 {unreadCount > 0 && (
                   <span className="bg-white text-red-600 text-xs rounded-full px-2 py-0.5 font-bold">
                     {unreadCount}
@@ -129,7 +131,7 @@ export default function NotificationPopup() {
               {notifications.length === 0 ? (
                 <div className="p-8 text-center text-gray-500 dark:text-gray-400">
                   <Bell className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                  <p>Keini Benachrichtigunge</p>
+                  <p>{t('notifications.noNotifications')}</p>
                 </div>
               ) : (
                 notifications.map(notification => (
@@ -173,7 +175,7 @@ export default function NotificationPopup() {
               className="block p-3 text-center text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-700 font-semibold text-sm transition border-t border-gray-200 dark:border-gray-700"
               onClick={() => setShowPopup(false)}
             >
-              Alli Benachrichtigunge aaluege
+              {t('notifications.viewAll')}
             </Link>
           </div>
         </>

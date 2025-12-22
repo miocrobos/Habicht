@@ -429,6 +429,11 @@ export const enTranslations = {
       noUnread: 'No unread notifications',
       markRead: 'Mark as read',
       delete: 'Delete',
+      viewAll: 'View all notifications',
+      justNow: 'just now',
+      minutes: 'min',
+      hours: 'hrs',
+      days: 'days',
     },
     // Privacy Page
     privacy: {

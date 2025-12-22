@@ -541,6 +541,7 @@ export const frTranslations = {
       league: 'Ligue',
       canton: 'Canton',
       city: 'Ville',
+      loadingProfile: 'Chargement du profil...',
       errorLoadingProfile: 'Erreur lors du chargement du profil',
       errorExportingCV: 'Erreur lors de l\'exportation du CV',
       errorUpdatingPhoto: 'Erreur lors de la modification de la photo de profil',

@@ -541,6 +541,7 @@ export const rmTranslations = {
       league: 'Liga',
       canton: 'Chantun',
       city: 'Citad',
+      loadingProfile: 'Chargiar il profil...',
       errorLoadingProfile: 'Errur cun chargiar il profil',
       errorExportingCV: 'Errur cun exportar il CV',
       errorUpdatingPhoto: 'Errur cun modifitgar la foto dal profil',

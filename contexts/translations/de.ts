@@ -527,6 +527,7 @@ export const deTranslations = {
       league: 'Liga',
       canton: 'Kanton',
       city: 'Stadt',
+      loadingProfile: 'Profil wird geladen...',
       errorLoadingProfile: 'Fehler beim Laden des Profils',
       errorExportingCV: 'Fehler beim CV Export',
       errorUpdatingPhoto: 'Fehler beim Profilbild Ändern',

@@ -607,6 +607,7 @@ export const gswTranslations = {
       league: 'Liga',
       canton: 'Kanton',
       city: 'Stadt',
+      loadingProfile: 'Profil wird glade...',
       errorLoadingProfile: 'Fehler bim Lade vom Profil',
       errorExportingCV: 'Fehler bim CV Export',
       errorUpdatingPhoto: 'Fehler bim Profilbild Ändere',

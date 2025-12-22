@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     await transporter.sendMail({
       from: '"Habicht Volleyball" <noreply@habicht-volleyball.ch>',
       to: email,
-      subject: 'Willkommen bei Habicht - Bestätige deine E-Mail',
+      subject: 'Welcome to Habicht - Confirm your Email',
       html: `
         <!DOCTYPE html>
         <html>
@@ -57,18 +57,18 @@ export async function POST(request: NextRequest) {
             </div>
             
             <div class="content">
-              <h2>Willkommen bei Habicht!</h2>
-              <p>Vielen Dank für deine Registrierung auf der Habicht Volleyball Scouting Plattform.</p>
-              <p>Bitte bestätige deine E-Mail-Adresse, indem du auf den folgenden Button klickst:</p>
+              <h2>Welcome to Habicht!</h2>
+              <p>Thank you for registering on the Habicht Volleyball Scouting Platform.</p>
+              <p>Please confirm your email address by clicking the button below:</p>
               
               <div style="text-align: center;">
-                <a href="${verificationUrl}" class="button">E-Mail bestätigen</a>
+                <a href="${verificationUrl}" class="button">Confirm Email</a>
               </div>
               
-              <p>Oder kopiere diesen Link in deinen Browser:</p>
+              <p>Or copy this link into your browser:</p>
               <p style="word-break: break-all; color: #666; font-size: 12px;">${verificationUrl}</p>
               
-              <p>Falls du dich nicht registriert hast, ignoriere diese E-Mail bitte.</p>
+              <p>If you didn't register, please ignore this email.</p>
             </div>
             
             <div class="footer">

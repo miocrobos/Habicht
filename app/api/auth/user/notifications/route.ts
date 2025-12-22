@@ -9,7 +9,7 @@ export async function GET(request: Request) {
     const session = await getServerSession(authOptions)
     
     if (!session?.user) {
-      return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const notifications = await prisma.notification.findMany({
@@ -22,7 +22,7 @@ export async function GET(request: Request) {
   } catch (error) {
     console.error('Error fetching notifications:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Laden der Benachrichtigungen' },
+      { error: 'Failed to load notifications' },
       { status: 500 }
     )
   }
@@ -34,7 +34,7 @@ export async function PUT(request: Request) {
     const session = await getServerSession(authOptions)
     
     if (!session?.user) {
-      return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const data = await request.json()
@@ -53,7 +53,7 @@ export async function PUT(request: Request) {
   } catch (error) {
     console.error('Error updating notification settings:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Aktualisieren der Einstellungen' },
+      { error: 'Failed to update settings' },
       { status: 500 }
     )
   }

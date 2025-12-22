@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
 
     if (!emailSent) {
       return NextResponse.json(
-        { error: 'Fehler Bim E-Mail Schicke' },
+        { error: 'Failed to send email' },
         { status: 500 }
       );
     }
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error resending verification:', error);
     return NextResponse.json(
-      { error: 'En Fehler Isch Ufträtte' },
+      { error: 'An error occurred' },
       { status: 500 }
     );
   }

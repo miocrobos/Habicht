@@ -11,7 +11,7 @@ export async function POST(
     const session = await getServerSession(authOptions)
     
     if (!session?.user) {
-      return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     // Verify this is the user's own profile
@@ -39,7 +39,7 @@ export async function POST(
   } catch (error) {
     console.error('Error resetting views:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Zrucksetze vo de Aaluege' },
+      { error: 'Failed to reset views' },
       { status: 500 }
     )
   }

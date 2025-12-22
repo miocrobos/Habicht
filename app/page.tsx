@@ -353,22 +353,22 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <StatCard 
               number="1,000+" 
-              label="Aktive Spieler" 
+              label={t('playerProfile.activePlayers')} 
               icon="👥"
             />
             <StatCard 
               number="26" 
-              label="Kantone" 
+              label={t('playerProfile.cantons')} 
               icon="🇨🇭"
             />
             <StatCard 
               number="100+" 
-              label="Swiss Clubs" 
+              label={t('playerProfile.swissClubs')} 
               icon="🏐"
             />
             <StatCard 
               number="5,000+" 
-              label="Video Highlights" 
+              label={t('playerProfile.videoHighlights')} 
               icon="🎥"
             />
           </div>
@@ -386,12 +386,12 @@ export default function Home() {
                 <div className="absolute inset-0 bg-black/20" />
                 <div className="relative h-full flex flex-col items-center justify-center text-white p-6 md:p-8">
                   <div className="text-6xl md:text-8xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">♂</div>
-                  <h3 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">Herren Volleyball</h3>
+                  <h3 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">{t('playerProfile.mensVolleyball')}</h3>
                   <p className="text-lg md:text-xl mb-4 md:mb-6 opacity-90 text-center">
-                    NLA, NLB, 1. & 2. Liga Spieler
+                    {t('playerProfile.mensLeaguePlayers')}
                   </p>
                   <div className="bg-white dark:bg-gray-800 text-blue-600 px-8 py-3 rounded-xl font-bold group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition">
-                    Herren entdecken →
+                    {t('playerProfile.discoverMen')}
                   </div>
                 </div>
               </div>
@@ -404,12 +404,12 @@ export default function Home() {
                 <div className="absolute inset-0 bg-black/20" />
                 <div className="relative h-full flex flex-col items-center justify-center text-white p-6 md:p-8">
                   <div className="text-6xl md:text-8xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">♀</div>
-                  <h3 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">Damen Volleyball</h3>
+                  <h3 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">{t('playerProfile.womensVolleyball')}</h3>
                   <p className="text-lg md:text-xl mb-4 md:mb-6 opacity-90 text-center">
-                    NLA, NLB, 1. & 2. Liga Spielerinnen
+                    {t('playerProfile.womensLeaguePlayers')}
                   </p>
                   <div className="bg-white dark:bg-gray-800 text-pink-600 px-8 py-3 rounded-xl font-bold group-hover:bg-pink-100 dark:group-hover:bg-pink-900/30 transition">
-                    Damen entdecken →
+                    {t('playerProfile.discoverWomen')}
                   </div>
                 </div>
               </div>
@@ -452,7 +452,7 @@ export default function Home() {
             >
               <span className="flex items-center gap-2 justify-center">
                 <Search className="w-6 h-6" />
-                Spieler browsen
+                {t('playerProfile.browsePlayers')}
               </span>
             </Link>
           </div>
@@ -510,6 +510,8 @@ function FeatureCard({ icon, title, description, color }: {
 }
 
 function AuthPromptModal({ onClose }: { onClose: () => void }) {
+  const { t } = useLanguage()
+  
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={onClose}>
       <div className="bg-white rounded-2xl p-8 max-w-md mx-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
@@ -517,9 +519,9 @@ function AuthPromptModal({ onClose }: { onClose: () => void }) {
           <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <LogIn className="w-8 h-8 text-white" />
           </div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-3">Anmeldung erforderlich</h3>
+          <h3 className="text-2xl font-bold text-gray-900 mb-3">{t('playerProfile.authRequired')}</h3>
           <p className="text-gray-600 mb-6">
-            Bitte melde dich an oder registriere dich, um auf diese Seite zuzugreifen.
+            {t('playerProfile.authRequiredMessage')}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
@@ -528,7 +530,7 @@ function AuthPromptModal({ onClose }: { onClose: () => void }) {
             >
               <span className="flex items-center justify-center gap-2">
                 <LogIn className="w-5 h-5" />
-                Anmelden
+                {t('playerProfile.login')}
               </span>
             </Link>
             <Link
@@ -537,7 +539,7 @@ function AuthPromptModal({ onClose }: { onClose: () => void }) {
             >
               <span className="flex items-center justify-center gap-2">
                 <UserPlus className="w-5 h-5" />
-                Registrieren
+                {t('playerProfile.register')}
               </span>
             </Link>
           </div>

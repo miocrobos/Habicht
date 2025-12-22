@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
       name: error.name
     })
     return NextResponse.json(
-      { error: `Failed to upload video: ${error.message}` },
+      { error: 'Failed to upload video' },
       { status: 500 }
     )
   }

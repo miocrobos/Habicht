@@ -10,11 +10,18 @@ import Footer from '@/components/layout/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Habicht - Swiss Volleyball Scouting Platform',
-  description: 'Scouting platform for Swiss volleyball athletes. Find talented players, view highlights, and connect with recruits.',
-  keywords: ['volleyball', 'swiss volleyball', 'scouting', 'recruitment', 'athletes', 'swiss volley'],
+  title: 'Habicht - Schwiizer Volleyball Scouting Plattform',
+  description: 'D Moderne Scouting-Plattform Für Schwiizer Volleyball. Entdecke Talente, Lueg Highlights Aa Und Vernetz Dich Mit Rekrutierer.',
+  keywords: ['volleyball', 'swiss volleyball', 'scouting', 'recruitment', 'athletes', 'swiss volley', 'schweizer volleyball', 'volleyball schweiz'],
   icons: {
     icon: '/eagle-logo.png',
+    apple: '/eagle-logo.png',
+  },
+  openGraph: {
+    title: 'Habicht - Schwiizer Volleyball Scouting Plattform',
+    description: 'D Moderne Scouting-Plattform Für Schwiizer Volleyball. Entdecke Talente, Lueg Highlights Aa Und Vernetz Dich Mit Rekrutierer.',
+    images: ['/eagle-logo.png'],
+    type: 'website',
   },
 }
 

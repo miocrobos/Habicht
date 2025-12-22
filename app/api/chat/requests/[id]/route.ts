@@ -11,7 +11,7 @@ export async function PATCH(
     const session = await getServerSession(authOptions)
     
     if (!session?.user || session.user.role !== 'RECRUITER') {
-      return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const { action } = await request.json() // 'ACCEPTED' or 'REJECTED'
@@ -21,7 +21,7 @@ export async function PATCH(
     })
 
     if (!recruiter) {
-      return NextResponse.json({ error: 'Recruiter nicht gefunden' }, { status: 404 })
+      return NextResponse.json({ error: 'Recruiter not found' }, { status: 404 })
     }
 
     const chatRequest = await prisma.chatRequest.findUnique({
@@ -76,7 +76,7 @@ export async function PATCH(
   } catch (error) {
     console.error('Update request error:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Aktualisieren der Anfrage' },
+      { error: 'Failed to update request' },
       { status: 500 }
     )
   }

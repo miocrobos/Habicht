@@ -31,7 +31,7 @@ export async function DELETE(
   } catch (error) {
     console.error('Error deleting video:', error);
     return NextResponse.json(
-      { error: 'Fehler Bim L\u00f6sche Vo Video' },
+      { error: 'Failed to delete video' },
       { status: 500 }
     );
   }
@@ -75,7 +75,7 @@ export async function PUT(
   } catch (error) {
     console.error('Error updating video:', error);
     return NextResponse.json(
-      { error: 'Fehler Bim Aktualisiere Vo Video' },
+      { error: 'Failed to update video' },
       { status: 500 }
     );
   }

@@ -7,6 +7,7 @@ import { Mail, Lock, User, Calendar, Globe, Video, Award, Weight, Activity, Trop
 import ImageUpload from '@/components/shared/ImageUpload';
 import VideoUpload from '@/components/shared/VideoUpload';
 import StarRating from '@/components/shared/StarRating';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Import constants
 const NATIONALITIES = [
@@ -32,17 +33,241 @@ const NATIONALITIES = [
   "Vatikanstadt", "Venezuela", "Vietnam", "Jeme", "Sambia", "Simbabwe"
 ];
 
+// Map country name to translation key
+const getCountryLabel = (country: string, t: any): string => {
+  const countryMap: { [key: string]: string } = {
+    "Afghanistan": "countries.afghanistan",
+    "Albanie": "countries.albania",
+    "Algerie": "countries.algeria",
+    "Andorra": "countries.andorra",
+    "Angola": "countries.angola",
+    "Antigua Und Barbuda": "countries.antiguaAndBarbuda",
+    "Argentinie": "countries.argentina",
+    "Armenie": "countries.armenia",
+    "Australie": "countries.australia",
+    "Östriich": "countries.austria",
+    "Aserbaidschan": "countries.azerbaijan",
+    "Bahamas": "countries.bahamas",
+    "Bahrain": "countries.bahrain",
+    "Bangladesch": "countries.bangladesh",
+    "Barbados": "countries.barbados",
+    "Wiissrussland": "countries.belarus",
+    "Belgie": "countries.belgium",
+    "Belize": "countries.belize",
+    "Benin": "countries.benin",
+    "Bhutan": "countries.bhutan",
+    "Bolivie": "countries.bolivia",
+    "Bosnie Und Herzegowina": "countries.bosniaAndHerzegovina",
+    "Botswana": "countries.botswana",
+    "Brasilie": "countries.brazil",
+    "Brunei": "countries.brunei",
+    "Bulgarie": "countries.bulgaria",
+    "Burkina Faso": "countries.burkinaFaso",
+    "Burundi": "countries.burundi",
+    "Kambodscha": "countries.cambodia",
+    "Kamerun": "countries.cameroon",
+    "Kanada": "countries.canada",
+    "Kap Verde": "countries.capeVerde",
+    "Zentralafrikanischi Republik": "countries.centralAfricanRepublic",
+    "Tschad": "countries.chad",
+    "Chile": "countries.chile",
+    "China": "countries.china",
+    "Kolumbie": "countries.colombia",
+    "Komore": "countries.comoros",
+    "Kongo": "countries.congo",
+    "Costa Rica": "countries.costaRica",
+    "Kroatie": "countries.croatia",
+    "Kuba": "countries.cuba",
+    "Zypern": "countries.cyprus",
+    "Tschechie": "countries.czechRepublic",
+    "Dänemark": "countries.denmark",
+    "Dschibuti": "countries.djibouti",
+    "Dominica": "countries.dominica",
+    "Dominikanischi Republik": "countries.dominicanRepublic",
+    "Osttimor": "countries.eastTimor",
+    "Ecuador": "countries.ecuador",
+    "Ägypte": "countries.egypt",
+    "El Salvador": "countries.elSalvador",
+    "Äquatorialguinea": "countries.equatorialGuinea",
+    "Eritrea": "countries.eritrea",
+    "Estland": "countries.estonia",
+    "Äthiopie": "countries.ethiopia",
+    "Fidschi": "countries.fiji",
+    "Finnland": "countries.finland",
+    "Frankriich": "countries.france",
+    "Gabon": "countries.gabon",
+    "Gambia": "countries.gambia",
+    "Georgie": "countries.georgia",
+    "Dütschland": "countries.germany",
+    "Ghana": "countries.ghana",
+    "Griecheland": "countries.greece",
+    "Grenada": "countries.grenada",
+    "Guatemala": "countries.guatemala",
+    "Guinea": "countries.guinea",
+    "Guinea-Bissau": "countries.guineaBissau",
+    "Guyana": "countries.guyana",
+    "Haiti": "countries.haiti",
+    "Honduras": "countries.honduras",
+    "Ungarn": "countries.hungary",
+    "Island": "countries.iceland",
+    "Indie": "countries.india",
+    "Indonesie": "countries.indonesia",
+    "Iran": "countries.iran",
+    "Irak": "countries.iraq",
+    "Irland": "countries.ireland",
+    "Israel": "countries.israel",
+    "Italie": "countries.italy",
+    "Elfebeiküste": "countries.ivoryCoast",
+    "Jamaika": "countries.jamaica",
+    "Japan": "countries.japan",
+    "Jordanie": "countries.jordan",
+    "Kasachstan": "countries.kazakhstan",
+    "Kenia": "countries.kenya",
+    "Kiribati": "countries.kiribati",
+    "Nordkorea": "countries.northKorea",
+    "Südkorea": "countries.southKorea",
+    "Kosovo": "countries.kosovo",
+    "Kuwait": "countries.kuwait",
+    "Kirgisistan": "countries.kyrgyzstan",
+    "Laos": "countries.laos",
+    "Lettland": "countries.latvia",
+    "Libanon": "countries.lebanon",
+    "Lesotho": "countries.lesotho",
+    "Liberia": "countries.liberia",
+    "Libye": "countries.libya",
+    "Liechtestei": "countries.liechtenstein",
+    "Litaue": "countries.lithuania",
+    "Luxemburg": "countries.luxembourg",
+    "Mazedonie": "countries.northMacedonia",
+    "Madagaskar": "countries.madagascar",
+    "Malawi": "countries.malawi",
+    "Malaysia": "countries.malaysia",
+    "Maledive": "countries.maldives",
+    "Mali": "countries.mali",
+    "Malta": "countries.malta",
+    "Marshallinsle": "countries.marshallIslands",
+    "Mauretanie": "countries.mauritania",
+    "Mauritius": "countries.mauritius",
+    "Mexiko": "countries.mexico",
+    "Mikronesie": "countries.micronesia",
+    "Moldau": "countries.moldova",
+    "Monaco": "countries.monaco",
+    "Mongolei": "countries.mongolia",
+    "Montenegro": "countries.montenegro",
+    "Marokko": "countries.morocco",
+    "Mosambik": "countries.mozambique",
+    "Myanmar": "countries.myanmar",
+    "Namibia": "countries.namibia",
+    "Nauru": "countries.nauru",
+    "Nepal": "countries.nepal",
+    "Holländer": "countries.netherlands",
+    "Neuseeland": "countries.newZealand",
+    "Nicaragua": "countries.nicaragua",
+    "Niger": "countries.niger",
+    "Nigeria": "countries.nigeria",
+    "Norwege": "countries.norway",
+    "Oman": "countries.oman",
+    "Pakistan": "countries.pakistan",
+    "Palau": "countries.palau",
+    "Palästina": "countries.palestine",
+    "Panama": "countries.panama",
+    "Papua-Neuguinea": "countries.papuaNewGuinea",
+    "Paraguay": "countries.paraguay",
+    "Peru": "countries.peru",
+    "Philippine": "countries.philippines",
+    "Pole": "countries.poland",
+    "Portugal": "countries.portugal",
+    "Katar": "countries.qatar",
+    "Rumänie": "countries.romania",
+    "Russland": "countries.russia",
+    "Ruanda": "countries.rwanda",
+    "St. Kitts Und Nevis": "countries.saintKittsAndNevis",
+    "St. Lucia": "countries.saintLucia",
+    "St. Vincent Und D Grenadine": "countries.saintVincentAndTheGrenadines",
+    "Samoa": "countries.samoa",
+    "San Marino": "countries.sanMarino",
+    "São Tomé Und Príncipe": "countries.saoTomeAndPrincipe",
+    "Saudi-Arabie": "countries.saudiArabia",
+    "Senegal": "countries.senegal",
+    "Serbie": "countries.serbia",
+    "Seychelle": "countries.seychelles",
+    "Sierra Leone": "countries.sierraLeone",
+    "Singapur": "countries.singapore",
+    "Slowakei": "countries.slovakia",
+    "Slowenie": "countries.slovenia",
+    "Salomone": "countries.solomonIslands",
+    "Somalia": "countries.somalia",
+    "Südafrika": "countries.southAfrica",
+    "Südsudan": "countries.southSudan",
+    "Spanie": "countries.spain",
+    "Sri Lanka": "countries.sriLanka",
+    "Sudan": "countries.sudan",
+    "Suriname": "countries.suriname",
+    "Eswatini": "countries.eswatini",
+    "Schwede": "countries.sweden",
+    "Schwiiz": "countries.switzerland",
+    "Syrie": "countries.syria",
+    "Taiwan": "countries.taiwan",
+    "Tadschikistan": "countries.tajikistan",
+    "Tansania": "countries.tanzania",
+    "Thailand": "countries.thailand",
+    "Togo": "countries.togo",
+    "Tonga": "countries.tonga",
+    "Trinidad Und Tobago": "countries.trinidadAndTobago",
+    "Tunesie": "countries.tunisia",
+    "Türkei": "countries.turkey",
+    "Turkmenistan": "countries.turkmenistan",
+    "Tuvalu": "countries.tuvalu",
+    "Uganda": "countries.uganda",
+    "Ukraine": "countries.ukraine",
+    "Vereinigti Arabischi Emirate": "countries.unitedArabEmirates",
+    "Grossbritannie": "countries.unitedKingdom",
+    "USA": "countries.unitedStates",
+    "Uruguay": "countries.uruguay",
+    "Usbekistan": "countries.uzbekistan",
+    "Vanuatu": "countries.vanuatu",
+    "Vatikanstadt": "countries.vaticanCity",
+    "Venezuela": "countries.venezuela",
+    "Vietnam": "countries.vietnam",
+    "Jeme": "countries.yemen",
+    "Sambia": "countries.zambia",
+    "Simbabwe": "countries.zimbabwe"
+  };
+  
+  const key = countryMap[country];
+  return key ? t(key) : country;
+};
+
 const POSITIONS = [
-  "Ausseagriffler",
-  "Diagonal",
-  "Mittelblocker",
-  "Zuespieler",
-  "Libero",
-  "Universalspieler"
+  "OUTSIDE_HITTER",
+  "OPPOSITE",
+  "MIDDLE_BLOCKER",
+  "SETTER",
+  "LIBERO",
+  "UNIVERSAL"
 ];
 
-// Map Swiss German positions to database enum values
-const mapPositionToEnum = (swissGermanPosition: string): string => {
+// Map position enum to translation key
+const getPositionLabel = (position: string, t: any): string => {
+  const mapping: { [key: string]: string } = {
+    "OUTSIDE_HITTER": t('register.outsideHitter'),
+    "OPPOSITE": t('register.opposite'),
+    "MIDDLE_BLOCKER": t('register.middleBlocker'),
+    "SETTER": t('register.setter'),
+    "LIBERO": t('register.libero'),
+    "UNIVERSAL": t('register.universal')
+  };
+  return mapping[position] || position;
+};
+
+// Map Swiss German positions to database enum values (backward compatibility)
+const mapPositionToEnum = (position: string): string => {
+  // If already an enum, return it
+  if (["OUTSIDE_HITTER", "OPPOSITE", "MIDDLE_BLOCKER", "SETTER", "LIBERO", "UNIVERSAL"].includes(position)) {
+    return position;
+  }
+  
+  // Map old Swiss German to enum
   const mapping: { [key: string]: string } = {
     "Ausseagriffler": "OUTSIDE_HITTER",
     "Diagonal": "OPPOSITE",
@@ -51,7 +276,7 @@ const mapPositionToEnum = (swissGermanPosition: string): string => {
     "Libero": "LIBERO",
     "Universalspieler": "UNIVERSAL"
   };
-  return mapping[swissGermanPosition] || swissGermanPosition;
+  return mapping[position] || position;
 };
 
 interface ClubExperience {
@@ -73,6 +298,7 @@ interface Achievement {
 
 export default function PlayerRegisterPage() {
   const router = useRouter();
+  const { t } = useLanguage();
   const [step, setStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -93,9 +319,9 @@ export default function PlayerRegisterPage() {
   const [loading, setLoading] = useState(false);
 
   const validatePassword = (p: string) => {
-    if (p.length < 8) return { valid: false, message: 'Passwort Muss Mindestens 8 Zeiche Ha' };
-    if (!/\d/.test(p)) return { valid: false, message: 'Passwort Muss E Zahl Enthalte' };
-    if (!/[!@#$%^&*()]/.test(p)) return { valid: false, message: 'Passwort Muss Es Sonderzeiche Enthalte' };
+    if (p.length < 8) return { valid: false, message: t('register.passwordMin8') };
+    if (!/\d/.test(p)) return { valid: false, message: t('register.passwordNeedsNumber') };
+    if (!/[!@#$%^&*()]/.test(p)) return { valid: false, message: t('register.passwordNeedsSymbol') };
     return { valid: true, message: '' };
   };
 
@@ -146,7 +372,7 @@ export default function PlayerRegisterPage() {
     
     if (step === 1) {
       if (formData.password !== formData.confirmPassword) { 
-        setError('Passwörter Stimme Nid überein'); 
+        setError(t('register.passwordsNotMatch')); 
         return; 
       }
       const check = validatePassword(formData.password);
@@ -160,27 +386,27 @@ export default function PlayerRegisterPage() {
     
 
     if (step === 2) {
-      if (!formData.gender) { setError('Bitte Wähl Dis Gschlecht'); return; }
-      if (!formData.nationality) { setError('Bitte Wähl Dini Nationalität'); return; }
-      if (!formData.canton) { setError('Bitte Wähl Din Wohnkanton'); return; }
-      if (!formData.employmentStatus) { setError('Bitte Wähl Din Beschäftigungsstatus'); return; }
+      if (!formData.gender) { setError(t('register.selectGenderRequired')); return; }
+      if (!formData.nationality) { setError(t('register.selectNationality')); return; }
+      if (!formData.canton) { setError(t('register.selectCantonRequired')); return; }
+      if (!formData.employmentStatus) { setError(t('register.selectEmploymentRequired')); return; }
       if ((formData.employmentStatus === 'STUDENT_FULL_TIME' || formData.employmentStatus === 'STUDENT_PART_TIME') && !formData.schoolName) { 
-        setError('Bitte Wähl Dini Schuel/Universität'); 
+        setError(t('register.selectSchoolRequired')); 
         return; 
       }
       if ((formData.employmentStatus === 'WORKING_FULL_TIME' || formData.employmentStatus === 'WORKING_PART_TIME') && !formData.occupation) { 
-        setError('Bitte Gib Din Beruf Aa'); 
+        setError(t('register.enterOccupation')); 
         return; 
       }
-      if (formData.positions.length === 0) { setError('Bitte Wähl Mindeschtens Ei Position'); return; }
-      if (!formData.profileImage) { setError('Bitte Lad Es Profilbild Ufe'); return; }
+      if (formData.positions.length === 0) { setError(t('register.selectPositionRequired')); return; }
+      if (!formData.profileImage) { setError(t('register.uploadProfileImage')); return; }
       setStep(3);
       return;
     }
 
     // Step 3 - Final submission
     if (!agreedToTerms) {
-      setError('Du Muesch D Nutzigsbedingige Akzeptiere');
+      setError(t('register.agreeToTermsRequired'));
       return;
     }
 
@@ -233,7 +459,7 @@ export default function PlayerRegisterPage() {
       const emailSent = response.data.emailSent;
       router.push(`/auth/registration-success?email=${encodeURIComponent(formData.email)}&emailSent=${emailSent}`);
     } catch (err: any) {
-      setError(err.response?.data?.error || 'En Fehler Isch Ufträte');
+      setError(err.response?.data?.error || t('playerProfile.errorRegistration'));
     } finally {
       setLoading(false);
     }
@@ -254,8 +480,8 @@ export default function PlayerRegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4">
       <div className="max-w-2xl w-full space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Spieler Registrierig</h2>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">Schritt {step} Vo 3</p>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{t('register.playerTitle')}</h2>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">{t('register.playerSubtitle')}</p>
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
@@ -269,17 +495,17 @@ export default function PlayerRegisterPage() {
             {/* STEP 1: Account Information */}
             {step === 1 && (
               <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Account-Informatione</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{t('register.accountInfo')}</h3>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <Mail className="w-4 h-4 inline mr-1" />E-Mail
+                    <Mail className="w-4 h-4 inline mr-1" />{t('register.email')}
                   </label>
                   <input name="email" type="email" required value={formData.email} onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <Lock className="w-4 h-4 inline mr-1" />Passwort (8+ Zeiche, Zahl, Symbol)
+                    <Lock className="w-4 h-4 inline mr-1" />{t('register.password')} (8+ {t('register.required')})
                   </label>
                   <div className="relative">
                     <input 
@@ -300,7 +526,7 @@ export default function PlayerRegisterPage() {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Passwort Bestätige</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.confirmPassword')}</label>
                   <div className="relative">
                     <input 
                       name="confirmPassword" 
@@ -321,7 +547,7 @@ export default function PlayerRegisterPage() {
                 </div>
                 <button type="submit" disabled={loading}
                   className="w-full bg-red-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-red-700 transition disabled:opacity-50">
-                  Wiiter →
+                  {t('register.continueButton')}
                 </button>
               </div>
             )}
@@ -329,51 +555,51 @@ export default function PlayerRegisterPage() {
             {/* STEP 2: Player Information */}
             {step === 2 && (
               <div className="space-y-5">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Spieler-Informatione</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{t('register.playerInfo')}</h3>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vorname *</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.firstName')} *</label>
                     <input name="firstName" required value={formData.firstName} onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nachname *</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.lastName')} *</label>
                     <input name="lastName" required value={formData.lastName} onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" />
                   </div>
                 </div>
 
-                <ImageUpload label="Profilbild *" value={formData.profileImage}
+                <ImageUpload label={t('register.profilePicture') + ' *'} value={formData.profileImage}
                   onChange={(v) => setFormData({ ...formData, profileImage: v })} aspectRatio="square" required />
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      <User className="w-4 h-4 inline mr-1" />Gschlecht *
+                      <User className="w-4 h-4 inline mr-1" />{t('register.selectGender')} *
                     </label>
                     <select name="gender" required value={formData.gender} onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
-                      <option value="">Uuswähle...</option>
-                      <option value="MALE">Männlich</option>
-                      <option value="FEMALE">Wiiblich</option>
+                      <option value="">{t('register.selectPlaceholder')}</option>
+                      <option value="MALE">{t('register.male')}</option>
+                      <option value="FEMALE">{t('register.female')}</option>
                     </select>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      <Globe className="w-4 h-4 inline mr-1" />Nationalität *
+                      <Globe className="w-4 h-4 inline mr-1" />{t('register.nationality')} *
                     </label>
                     <select name="nationality" required value={formData.nationality} onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
-                      <option value="">Uuswähle...</option>
-                      {NATIONALITIES.map(n => <option key={n} value={n}>{n}</option>)}
+                      <option value="">{t('register.selectPlaceholder')}</option>
+                      {NATIONALITIES.map(n => <option key={n} value={n}>{getCountryLabel(n, t)}</option>)}
                     </select>
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Position(e) * <span className="text-xs text-gray-500">(Wähl Alli Zutreffende)</span>
+                    {t('register.positions')} * <span className="text-xs text-gray-500">({t('register.selectAll')})</span>
                   </label>
                   <div className="grid grid-cols-2 gap-2">
                     {POSITIONS.map(pos => (
@@ -384,7 +610,7 @@ export default function PlayerRegisterPage() {
                           onChange={() => handlePositionToggle(pos)}
                           className="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500"
                         />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">{pos}</span>
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{getPositionLabel(pos, t)}</span>
                       </label>
                     ))}
                   </div>
@@ -392,104 +618,104 @@ export default function PlayerRegisterPage() {
 
                 <div className="grid grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Grössi (cm)</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.height')}</label>
                     <input name="height" type="number" value={formData.height} onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder="180" />
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder={t('placeholders.height')} />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      <Weight className="w-4 h-4 inline mr-1" />Gwicht (kg)
+                      <Weight className="w-4 h-4 inline mr-1" />{t('register.weight')}
                     </label>
                     <input name="weight" type="number" value={formData.weight} onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder="75" />
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder={t('placeholders.weight')} />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      <Calendar className="w-4 h-4 inline mr-1" />Geburtsdatum
+                      <Calendar className="w-4 h-4 inline mr-1" />{t('register.dateOfBirth')}
                     </label>
                     <input name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleChange}
                       lang="de-CH"
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder="tt.mm.jjjj" />
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder={t('placeholders.dateFormat')} />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <Mail className="w-4 h-4 inline mr-1" />Telefonnummer
+                    <Mail className="w-4 h-4 inline mr-1" />{t('register.phoneNumber')}
                   </label>
                   <input name="phone" type="tel" value={formData.phone} onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder="+41 79 123 45 67" />
-                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Optional - Rekrutierer Chönne Dich Direkt Aaruefe</p>
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder={t('placeholders.phoneNumber')} />
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('register.optional')}</p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <MapPin className="w-4 h-4 inline mr-1" />Wohnkanton *
+                    <MapPin className="w-4 h-4 inline mr-1" />{t('register.canton')} *
                   </label>
                   <select name="canton" value={formData.canton} onChange={handleChange} required
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
-                    <option value="">Uuswähle...</option>
-                    <option value="ZH">Zürich</option>
-                    <option value="BE">Bern</option>
-                    <option value="LU">Luzern</option>
-                    <option value="UR">Uri</option>
-                    <option value="SZ">Schwyz</option>
-                    <option value="OW">Obwalden</option>
-                    <option value="NW">Nidwalden</option>
-                    <option value="GL">Glarus</option>
-                    <option value="ZG">Zug</option>
-                    <option value="FR">Fribourg</option>
-                    <option value="SO">Solothurn</option>
-                    <option value="BS">Basel-Stadt</option>
-                    <option value="BL">Basel-Landschaft</option>
-                    <option value="SH">Schaffhausen</option>
-                    <option value="AR">Appenzell Ausserrhoden</option>
-                    <option value="AI">Appenzell Innerrhoden</option>
-                    <option value="SG">St. Gallen</option>
-                    <option value="GR">Graubünden</option>
-                    <option value="AG">Aargau</option>
-                    <option value="TG">Thurgau</option>
-                    <option value="TI">Ticino</option>
-                    <option value="VD">Vaud</option>
-                    <option value="VS">Valais</option>
-                    <option value="NE">Neuchâtel</option>
-                    <option value="GE">Genève</option>
-                    <option value="JU">Jura</option>
+                    <option value="">{t('register.selectCanton')}</option>
+                    <option value="ZH">ZH</option>
+                    <option value="BE">BE</option>
+                    <option value="LU">LU</option>
+                    <option value="UR">UR</option>
+                    <option value="SZ">SZ</option>
+                    <option value="OW">OW</option>
+                    <option value="NW">NW</option>
+                    <option value="GL">GL</option>
+                    <option value="ZG">ZG</option>
+                    <option value="FR">FR</option>
+                    <option value="SO">SO</option>
+                    <option value="BS">BS</option>
+                    <option value="BL">BL</option>
+                    <option value="SH">SH</option>
+                    <option value="AR">AR</option>
+                    <option value="AI">AI</option>
+                    <option value="SG">SG</option>
+                    <option value="GR">GR</option>
+                    <option value="AG">AG</option>
+                    <option value="TG">TG</option>
+                    <option value="TI">TI</option>
+                    <option value="VD">VD</option>
+                    <option value="VS">VS</option>
+                    <option value="NE">NE</option>
+                    <option value="GE">GE</option>
+                    <option value="JU">JU</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <MapPin className="w-4 h-4 inline mr-1" />Gemeinde/Municipality
+                    <MapPin className="w-4 h-4 inline mr-1" />{t('register.municipality')}
                   </label>
                   <input name="municipality" type="text" value={formData.municipality} onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
-                    placeholder="z.B. Winterthur, Bern, etc." />
-                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Optional - Gmeind I Dim Kanton</p>
+                    placeholder={t('placeholders.exampleCities')} />
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('register.optional')}</p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <Briefcase className="w-4 h-4 inline mr-1" />Beschäftigungsstatus *
+                    <Briefcase className="w-4 h-4 inline mr-1" />{t('register.employmentStatus')} *
                   </label>
                   <select name="employmentStatus" value={formData.employmentStatus} onChange={handleChange} required
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
-                    <option value="">Uuswähle...</option>
-                    <option value="STUDENT_FULL_TIME">Student Vollziit</option>
-                    <option value="STUDENT_PART_TIME">Student Teilziit</option>
-                    <option value="WORKING_FULL_TIME">Schaffe Vollziit</option>
-                    <option value="WORKING_PART_TIME">Schaffe Teilziit</option>
+                    <option value="">{t('register.selectEmployment')}</option>
+                    <option value="STUDENT_FULL_TIME">{t('register.studentFullTime')}</option>
+                    <option value="STUDENT_PART_TIME">{t('register.studentPartTime')}</option>
+                    <option value="WORKING_FULL_TIME">{t('register.workingFullTime')}</option>
+                    <option value="WORKING_PART_TIME">{t('register.workingPartTime')}</option>
                   </select>
                 </div>
 
                 {(formData.employmentStatus === 'STUDENT_FULL_TIME' || formData.employmentStatus === 'STUDENT_PART_TIME') && (
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      <GraduationCap className="w-4 h-4 inline mr-1" />Schuel/Universität *
+                      <GraduationCap className="w-4 h-4 inline mr-1" />{t('register.school')} *
                     </label>
                     <select name="schoolName" value={formData.schoolName} onChange={handleChange} required
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
-                      <option value="">Uuswähle Dini Schuel...</option>
+                      <option value="">{t('register.selectSchool')}</option>
                       <optgroup label="Universitäte">
                         <option value="ETH Zürich">ETH Zürich</option>
                         <option value="Universität Zürich">Universität Zürich</option>
@@ -578,33 +804,33 @@ export default function PlayerRegisterPage() {
                 {(formData.employmentStatus === 'WORKING_FULL_TIME' || formData.employmentStatus === 'WORKING_PART_TIME') && (
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      <Briefcase className="w-4 h-4 inline mr-1" />Beruf/Occupation *
+                      <Briefcase className="w-4 h-4 inline mr-1" />{t('register.occupation')} *
                     </label>
                     <input name="occupation" value={formData.occupation} onChange={handleChange} required
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
-                      placeholder="z.B. Software Entwickler, Lehrer, etc." />
+                      placeholder={t('placeholders.exampleJob')} />
                   </div>
                 )}
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      <Activity className="w-4 h-4 inline mr-1" />Schlagreichwiiti (cm)
+                      <Activity className="w-4 h-4 inline mr-1" />{t('register.spikeHeight')}
                     </label>
                     <input name="spikeHeight" type="number" value={formData.spikeHeight} onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder="320" />
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder={t('placeholders.spikeHeight')} />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      <Activity className="w-4 h-4 inline mr-1" />Blockreichwiiti (cm)
+                      <Activity className="w-4 h-4 inline mr-1" />{t('register.blockHeight')}
                     </label>
                     <input name="blockHeight" type="number" value={formData.blockHeight} onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder="300" />
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder={t('placeholders.blockHeight')} />
                   </div>
                 </div>
 
                 <div className="bg-pink-50 dark:bg-gray-700 border border-pink-200 dark:border-gray-600 rounded-lg p-5">
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Soziali Medie</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3">{t('register.socialMedia')}</h4>
                   <div className="grid grid-cols-3 gap-3">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Instagram</label>
@@ -626,47 +852,47 @@ export default function PlayerRegisterPage() {
 
                 <div className="bg-purple-50 dark:bg-gray-700 border border-purple-200 dark:border-gray-600 rounded-lg p-5">
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                    <Video className="w-5 h-5" />Highlight-Video
+                    <Video className="w-5 h-5" />{t('register.highlightVideo')}
                   </h4>
                   <VideoUpload value={formData.highlightVideo}
-                    onChange={(v) => setFormData({ ...formData, highlightVideo: v })} label="Lad Dis Beschte Spiel-Highlight Ufe" />
+                    onChange={(v) => setFormData({ ...formData, highlightVideo: v })} label={t('register.highlightVideo')} />
                 </div>
 
                 <div className="bg-green-50 dark:bg-gray-700 border border-green-200 dark:border-gray-600 rounded-lg p-5">
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Fähigkeite Selbstiischätzig</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-4">{t('register.skills')}</h4>
                   <div className="space-y-3">
-                    <StarRating label="Annahme" value={formData.skillReceiving} onChange={(v) => setFormData({ ...formData, skillReceiving: v })} />
-                    <StarRating label="Ufschlag" value={formData.skillServing} onChange={(v) => setFormData({ ...formData, skillServing: v })} />
-                    <StarRating label="Aangriff" value={formData.skillAttacking} onChange={(v) => setFormData({ ...formData, skillAttacking: v })} />
-                    <StarRating label="Block" value={formData.skillBlocking} onChange={(v) => setFormData({ ...formData, skillBlocking: v })} />
-                    <StarRating label="Abwehr" value={formData.skillDefense} onChange={(v) => setFormData({ ...formData, skillDefense: v })} />
+                    <StarRating label={t('register.receiving')} value={formData.skillReceiving} onChange={(v) => setFormData({ ...formData, skillReceiving: v })} />
+                    <StarRating label={t('register.serving')} value={formData.skillServing} onChange={(v) => setFormData({ ...formData, skillServing: v })} />
+                    <StarRating label={t('register.attacking')} value={formData.skillAttacking} onChange={(v) => setFormData({ ...formData, skillAttacking: v })} />
+                    <StarRating label={t('register.blocking')} value={formData.skillBlocking} onChange={(v) => setFormData({ ...formData, skillBlocking: v })} />
+                    <StarRating label={t('register.defense')} value={formData.skillDefense} onChange={(v) => setFormData({ ...formData, skillDefense: v })} />
                   </div>
                 </div>
 
                 <div className="bg-orange-50 dark:bg-gray-700 border border-orange-200 dark:border-gray-600 rounded-lg p-5">
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                    <Award className="w-5 h-5" />Swiss Volley Lizenz (Optional)
+                    <Award className="w-5 h-5" />{t('register.swissVolleyLicense')} ({t('register.optional')})
                   </h4>
-                  <ImageUpload label="Lad Lizenz-Foto Ufe" value={formData.swissVolleyLicense}
+                  <ImageUpload label={t('register.swissVolleyLicense')} value={formData.swissVolleyLicense}
                     onChange={(v) => setFormData({ ...formData, swissVolleyLicense: v })} aspectRatio="banner" />
                 </div>
 
                 <div className="bg-blue-50 dark:bg-gray-700 border border-blue-200 dark:border-gray-600 rounded-lg p-5">
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                    <Award className="w-5 h-5" />Ausweiss/ID (Optional)
+                    <Award className="w-5 h-5" />{t('register.ausweiss')} ({t('register.optional')})
                   </h4>
-                  <ImageUpload label="Lad Ausweiss-Foto Ufe" value={formData.ausweiss}
+                  <ImageUpload label={t('register.ausweiss')} value={formData.ausweiss}
                     onChange={(v) => setFormData({ ...formData, ausweiss: v })} aspectRatio="banner" />
                 </div>
 
                 <div className="flex gap-3">
                   <button type="button" onClick={() => setStep(1)}
                     className="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-3 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600">
-                    ← Zurück
+                    {t('register.backButton')}
                   </button>
                   <button type="submit" disabled={loading}
                     className="flex-1 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 disabled:opacity-50">
-                    Wiiter →
+                    {t('register.continueButton')}
                   </button>
                 </div>
               </div>
@@ -675,19 +901,19 @@ export default function PlayerRegisterPage() {
             {/* STEP 3: Achievements & Experience */}
             {step === 3 && (
               <div className="space-y-5">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Erfolg & Erfahrig</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{t('register.skillsAchievements')}</h3>
 
                 {/* Bio Section */}
                 <div className="bg-blue-50 dark:bg-gray-700 border border-blue-200 dark:border-gray-600 rounded-lg p-5">
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                    <User className="w-5 h-5" />Über Mich / Bio
+                    <User className="w-5 h-5" />{t('register.bio')}
                   </h4>
                   <textarea
                     name="bio"
                     value={formData.bio}
                     onChange={handleChange}
                     rows={4}
-                    placeholder="Verzell Über Dich, Din Spielstil, Dini Ziel, etc..."
+                    placeholder={t('placeholders.tellAboutYourself')}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white resize-none"
                   />
                 </div>
@@ -696,14 +922,14 @@ export default function PlayerRegisterPage() {
                 <div className="bg-yellow-50 dark:bg-gray-700 border border-yellow-200 dark:border-gray-600 rounded-lg p-5">
                   <div className="flex items-center justify-between mb-4">
                     <h4 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                      <Trophy className="w-5 h-5" />Erfolg
+                      <Trophy className="w-5 h-5" />{t('register.achievements')}
                     </h4>
                     <button
                       type="button"
                       onClick={addAchievement}
                       className="flex items-center gap-1 px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 text-sm font-medium"
                     >
-                      <Plus className="w-4 h-4" />Erfolg Hinzuefüge
+                      <Plus className="w-4 h-4" />{t('register.addAchievement')}
                     </button>
                   </div>
 
@@ -723,7 +949,7 @@ export default function PlayerRegisterPage() {
                                   type="text"
                                   value={achievement.text}
                                   onChange={(e) => updateAchievement(achievement.id, e.target.value)}
-                                  placeholder="z.B. Schwiizermeister 2023, MVP Uszeichnig, etc."
+                                  placeholder={t('placeholders.exampleAchievement')}
                                   className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
                                 />
                               </div>
@@ -746,7 +972,7 @@ export default function PlayerRegisterPage() {
                 <div className="bg-indigo-50 dark:bg-gray-700 border border-indigo-200 dark:border-gray-600 rounded-lg p-5">
                   <div className="flex items-center justify-between mb-4">
                     <h4 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                      <Trophy className="w-5 h-5" />Vereinserfahrig I Dä Schwiiz
+                      <Trophy className="w-5 h-5" />{t('register.clubHistory')}
                     </h4>
                     <div className="flex gap-2">
                       <Link
@@ -754,28 +980,28 @@ export default function PlayerRegisterPage() {
                         target="_blank"
                         className="flex items-center gap-1 px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-sm font-medium"
                       >
-                        Club Mälde
+                        Club Submit
                       </Link>
                       <button
                         type="button"
                         onClick={addClubExperience}
                         className="flex items-center gap-1 px-3 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-sm font-medium"
                       >
-                        <Plus className="w-4 h-4" />Verein Hinzuefüge
+                        <Plus className="w-4 h-4" />{t('register.addClub')}
                       </button>
                     </div>
                   </div>
 
                   {clubHistory.length === 0 ? (
                     <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
-                      Nonig Vereinserfahrig Hinzugefügt. Klick "Verein Hinzuefüge" Zum Starte.
+                      {t('register.optional')}
                     </p>
                   ) : (
                     <div className="space-y-4">
                       {clubHistory.map((club) => (
                         <div key={club.id} className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
                           <div className="flex items-start justify-between mb-3">
-                            <h5 className="font-medium text-gray-900 dark:text-white">Verein {clubHistory.indexOf(club) + 1}</h5>
+                            <h5 className="font-medium text-gray-900 dark:text-white">{t('playerProfile.clubNumber')} {clubHistory.indexOf(club) + 1}</h5>
                             <button
                               type="button"
                               onClick={() => removeClubExperience(club.id)}
@@ -788,14 +1014,14 @@ export default function PlayerRegisterPage() {
                           <div className="space-y-3">
                             <div className="grid grid-cols-2 gap-3">
                               <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vereinsname *</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.clubName')} *</label>
                                 <input
                                   type="text"
                                   value={club.clubName}
                                   onChange={(e) => updateClubExperience(club.id, 'clubName', e.target.value)}
                                   required
                                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
-                                  placeholder="Gib Vereinsname II"
+                                  placeholder={t('playerProfile.enterClubName')}
                                 />
                               </div>
                               <div>
@@ -808,14 +1034,14 @@ export default function PlayerRegisterPage() {
                                   required
                                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                                 >
-                                  {NATIONALITIES.map(country => <option key={country} value={country}>{country}</option>)}
+                                  {NATIONALITIES.map(country => <option key={country} value={country}>{getCountryLabel(country, t)}</option>)}
                                 </select>
                               </div>
                             </div>
 
                             <div>
                               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                <Trophy className="w-4 h-4 inline mr-1" />Liga/Division *
+                                <Trophy className="w-4 h-4 inline mr-1" />{t('register.league')} *
                               </label>
                               <input
                                 type="text"
@@ -823,23 +1049,23 @@ export default function PlayerRegisterPage() {
                                 onChange={(e) => updateClubExperience(club.id, 'league', e.target.value)}
                                 required
                                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
-                                placeholder="z.B. NLA, 1. Liga, U19 Elite, etc."
+                                placeholder={t('placeholders.exampleLeague')}
                               />
                             </div>
 
                             {club.country !== 'Switzerland' && (
                               <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
                                 <p className="text-xs text-blue-800 dark:text-blue-200">
-                                  <strong>Hiiwis:</strong> Verein Usserhalb Dä Schwiiz Werde Nur Zü Dinere Persönliche Historie Hinzugefügt Und Erschüne Nid I Üser Schwiizer Vereinsdatenbank.
+                                  {t('playerProfile.clubOutsideSwitzerlandNote')}
                                 </p>
                               </div>
                             )}
 
                             {!club.logo ? (
                               <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vereinslogo (Optional)</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('playerProfile.clubLogoOptional')}</label>
                                 <ImageUpload
-                                  label="Lad Vereinslogo Ufe"
+                                  label={t('playerProfile.uploadClubLogo')}
                                   value={club.logo}
                                   onChange={(v) => updateClubExperience(club.id, 'logo', v)}
                                   aspectRatio="square"
@@ -847,7 +1073,7 @@ export default function PlayerRegisterPage() {
                               </div>
                             ) : (
                               <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Vereinslogo</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('playerProfile.clubLogoLabel')}</label>
                                 <div className="flex items-center gap-3">
                                   <div className="flex items-center gap-2">
                                     <img 
@@ -856,7 +1082,7 @@ export default function PlayerRegisterPage() {
                                       className="w-16 h-16 rounded-lg object-cover border-2 border-green-500 dark:border-green-400"
                                     />
                                     <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
-                                      ✓ Ufelade
+                                      ✓ {t('playerProfile.uploaded')}
                                     </span>
                                   </div>
                                   <button
@@ -864,28 +1090,28 @@ export default function PlayerRegisterPage() {
                                     onClick={() => updateClubExperience(club.id, 'logo', '')}
                                     className="px-3 py-2 text-sm bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50"
                                   >
-                                    Logo Entferne
+                                    {t('playerProfile.removeLogo')}
                                   </button>
                                 </div>
                                 <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                                  Logo Isch Bereits Ufelade. Zum Es Neus Logo Uufezlade, Entfern Zerscht S Bestehende.
+                                  {t('playerProfile.logoAlreadyUploaded')}
                                 </p>
                               </div>
                             )}
 
                             <div className="grid grid-cols-2 gap-3">
                               <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jahr Vo</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.startYear')}</label>
                                 <input
                                   type="number"
                                   value={club.yearFrom}
                                   onChange={(e) => updateClubExperience(club.id, 'yearFrom', e.target.value)}
                                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
-                                  placeholder="2020"
+                                  placeholder={t('placeholders.exampleYear')}
                                 />
                               </div>
                               <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jahr Bis</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.endYear')}</label>
                                 {club.currentClub ? (
                                   <div className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
                                     <span className="text-green-600 dark:text-green-400 font-semibold flex items-center gap-1">
@@ -898,7 +1124,7 @@ export default function PlayerRegisterPage() {
                                     value={club.yearTo}
                                     onChange={(e) => updateClubExperience(club.id, 'yearTo', e.target.value)}
                                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
-                                    placeholder="2023"
+                                    placeholder={t('placeholders.exampleYear')}
                                   />
                                 )}
                               </div>
@@ -950,8 +1176,8 @@ export default function PlayerRegisterPage() {
                       className="w-5 h-5 text-red-600 border-gray-300 rounded focus:ring-red-500"
                     />
                     <div>
-                      <p className="font-semibold text-gray-900 dark:text-white">Ich Sueche Aktiv En Verein</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Wähl Das Aa, Zum Für Rekrutierer Sichtbar Zü Werde</p>
+                      <p className="font-semibold text-gray-900 dark:text-white">{t('register.lookingForClub')}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('register.optional')}</p>
                     </div>
                   </label>
                 </div>
@@ -967,11 +1193,9 @@ export default function PlayerRegisterPage() {
                       required
                     />
                     <div className="text-sm">
-                      <p className="font-semibold text-gray-900 dark:text-white mb-2">Nutzigsbedingige Und Dateschutz *</p>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">{t('register.agreeToTerms')} {t('register.terms')} {t('register.and')} {t('register.privacyPolicy')} *</p>
                       <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                        Ich Akzeptiere D <Link href="/terms" target="_blank" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">Nutzigsbedingige</Link> Und D <Link href="/privacy" target="_blank" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">Dateschutzerklärig</Link> Vo Habicht Volleyball. 
-                        Ich Verstönd, Dass Mini Date Gmäss Schwiizerischem Dateschutzgsetz (DSG) Verarbeitet Werde Und Zum Zweck Vo Dä Rekrutierig Und Kontaktufnahm Verwändet Werde Chöi. 
-                        Ich Cha Mini Iiwilligig Jederziit Widerüfe.
+                        {t('register.agreeToTerms')} <Link href="/terms" target="_blank" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">{t('register.terms')}</Link> {t('register.and')} <Link href="/privacy" target="_blank" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">{t('register.privacyPolicy')}</Link>.
                       </p>
                     </div>
                   </label>
@@ -980,11 +1204,11 @@ export default function PlayerRegisterPage() {
                 <div className="flex gap-3">
                   <button type="button" onClick={() => setStep(2)}
                     className="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-3 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600">
-                    ← Zurück
+                    {t('register.backButton')}
                   </button>
                   <button type="submit" disabled={loading}
                     className="flex-1 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 disabled:opacity-50">
-                    {loading ? 'Erstelle Profil...' : 'Profil Erstelle ✓'}
+                    {loading ? t('register.creating') : t('register.createAccount')}
                   </button>
                 </div>
               </div>
@@ -993,7 +1217,7 @@ export default function PlayerRegisterPage() {
         </div>
 
         <p className="text-center text-sm text-gray-600 dark:text-gray-400">
-          Hesch Scho En Account? <Link href="/auth/login" className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium">Aamelde</Link>
+          {t('register.alreadyHaveAccount')} <Link href="/auth/login" className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium">{t('register.login')}</Link>
         </p>
       </div>
     </div>

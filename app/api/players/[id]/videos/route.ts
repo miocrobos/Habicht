@@ -17,7 +17,7 @@ export async function GET(
   } catch (error) {
     console.error('Error fetching videos:', error);
     return NextResponse.json(
-      { error: 'Fehler Bim Lade Vo Videos' },
+      { error: 'Failed to load videos' },
       { status: 500 }
     );
   }
@@ -66,7 +66,7 @@ export async function POST(
   } catch (error) {
     console.error('Error adding video:', error);
     return NextResponse.json(
-      { error: 'Fehler Bim Hinzuefüge Vo Video' },
+      { error: 'Failed to add video' },
       { status: 500 }
     );
   }

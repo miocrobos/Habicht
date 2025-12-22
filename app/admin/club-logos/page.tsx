@@ -52,10 +52,10 @@ export default function ManageClubLogosPage() {
       setSelectedClub(null)
       setNewLogo('')
       
-      alert('Logo erfolgreich hochgeladen!')
+      alert('Logo successfully uploaded!')
     } catch (error) {
       console.error('Error uploading logo:', error)
-      alert('Fehler beim Hochladen des Logos')
+      alert(t('errors.logoUploadError'))
     } finally {
       setUploading(false)
     }
@@ -63,7 +63,7 @@ export default function ManageClubLogosPage() {
 
   const handleAddClub = async () => {
     if (!newClub.name || !newClub.canton) {
-      alert('Bitte Name und Kanton eingeben')
+      alert(t('errors.enterNameCanton'))
       return
     }
 
@@ -84,10 +84,10 @@ export default function ManageClubLogosPage() {
       })
       setShowAddClub(false)
       
-      alert('Club erfolgreich hinzugefügt!')
+      alert('Club successfully added!')
     } catch (error) {
       console.error('Error adding club:', error)
-      alert('Fehler beim Hinzufügen des Clubs')
+      alert(t('errors.clubAddError'))
     } finally {
       setUploading(false)
     }

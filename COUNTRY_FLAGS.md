@@ -58,12 +58,22 @@ Country flags are loaded from the GitHub repository:
 
 ## Supported Countries
 
-The system supports 30+ countries including:
-- **European**: Switzerland, Germany, France, Italy, Austria, Spain, Portugal, Netherlands, Belgium, Poland, Czech Republic, Slovakia, Slovenia, Croatia, Serbia, Turkey, Russia, Ukraine
-- **Americas**: USA, Canada, Brazil, Argentina, Mexico
-- **Asia-Pacific**: Japan, China, South Korea, Thailand, India, Australia, New Zealand
+The system supports **ALL 249 countries and territories** from the ISO 3166-1 standard, including:
+- **All European countries**: Every country in Europe including Switzerland, Germany, France, Italy, Austria, Spain, Portugal, Netherlands, Belgium, Poland, Czech Republic, Slovakia, Slovenia, Croatia, Serbia, Turkey, Russia, Ukraine, and many more
+- **All countries in the Americas**: USA, Canada, Brazil, Argentina, Mexico, Chile, Colombia, Peru, and all others
+- **All Asian countries**: Japan, China, South Korea, Thailand, India, Indonesia, Vietnam, Singapore, and all others
+- **All African countries**: South Africa, Egypt, Nigeria, Kenya, Morocco, Tunisia, Algeria, Ghana, Ethiopia, and all others
+- **All Oceania countries**: Australia, New Zealand, Fiji, Papua New Guinea, and all Pacific islands
+- **Special territories**: England, Scotland, Wales, Northern Ireland, Hong Kong, Macao, and other territories
 
-Both English and German country names are supported (e.g., "Germany" or "Deutschland").
+Both English and German country names are supported for all countries (e.g., "Germany" or "Deutschland", "Switzerland" or "Schweiz").
+
+The complete list includes:
+- 193 UN member states
+- 2 UN observer states
+- 54 dependent territories and special administrative regions
+- Kosovo (using the user-assigned code XK)
+- Constituent countries of the UK (England, Scotland, Wales, Northern Ireland)
 
 ## Usage Example
 

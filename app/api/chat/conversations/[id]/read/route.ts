@@ -12,7 +12,7 @@ export async function PATCH(
     const session = await getServerSession(authOptions)
     
     if (!session?.user) {
-      return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     // Verify user is participant
@@ -77,7 +77,7 @@ export async function PATCH(
   } catch (error) {
     console.error('Mark as read error:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Markieren als gelesen' },
+      { error: 'Failed to mark as read' },
       { status: 500 }
     )
   }

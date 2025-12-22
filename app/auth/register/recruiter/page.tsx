@@ -5,6 +5,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { Mail, Lock, User, Calendar, Globe, MapPin, Briefcase, Eye, EyeOff, Upload, Plus, X } from 'lucide-react';
 import ImageUpload from '@/components/shared/ImageUpload';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Canton list
 const CANTONS = [
@@ -59,14 +60,28 @@ const NATIONALITIES = [
 ];
 
 const COACH_ROLES = [
-  "Cheftrainer",
-  "Assistenztrainer",
-  "Jugendtrainer",
-  "Scout",
-  "Athletiktrainer",
-  "Videoanalyst",
-  "Teammanager"
+  "HEAD_COACH",
+  "ASSISTANT_COACH",
+  "YOUTH_COACH",
+  "SCOUT",
+  "FITNESS_COACH",
+  "VIDEO_ANALYST",
+  "TEAM_MANAGER"
 ];
+
+// Map role enum to translation key
+const getRoleLabel = (role: string, t: any): string => {
+  const mapping: { [key: string]: string } = {
+    "HEAD_COACH": t('register.headCoach'),
+    "ASSISTANT_COACH": t('register.assistantCoach'),
+    "YOUTH_COACH": t('register.youthCoach'),
+    "SCOUT": t('register.scout'),
+    "FITNESS_COACH": t('register.fitnessCoach'),
+    "VIDEO_ANALYST": t('register.videoAnalyst'),
+    "TEAM_MANAGER": t('register.teamManager')
+  };
+  return mapping[role] || role;
+};
 
 interface ClubAffiliation {
   id: string;
@@ -81,6 +96,7 @@ interface ClubAffiliation {
 
 export default function RecruiterRegisterPage() {
   const router = useRouter();
+  const { t } = useLanguage();
   const [step, setStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -131,9 +147,9 @@ export default function RecruiterRegisterPage() {
   }, []);
 
   const validatePassword = (p: string) => {
-    if (p.length < 8) return { valid: false, message: 'Passwort Muss Mindestens 8 Zeiche Ha' };
-    if (!/\d/.test(p)) return { valid: false, message: 'Passwort Muss E Zahl Enthalte' };
-    if (!/[!@#$%^&*()]/.test(p)) return { valid: false, message: 'Passwort Muss Es Sonderzeiche Enthalte' };
+    if (p.length < 8) return { valid: false, message: t('register.passwordMin8') };
+    if (!/\d/.test(p)) return { valid: false, message: t('register.passwordNeedsNumber') };
+    if (!/[!@#$%^&*()]/.test(p)) return { valid: false, message: t('register.passwordNeedsSymbol') };
     return { valid: true, message: '' };
   };
 
@@ -177,7 +193,7 @@ export default function RecruiterRegisterPage() {
     
     if (step === 1) {
       if (formData.password !== formData.confirmPassword) { 
-        setError('Passwörter Stimme Nid Überein'); 
+        setError(t('register.passwordsNotMatch')); 
         return; 
       }
       const check = validatePassword(formData.password);
@@ -191,23 +207,23 @@ export default function RecruiterRegisterPage() {
     
     if (step === 2) {
       if (!agreedToTerms) {
-        setError('Du Muesch D Nutzigsbedingige Akzeptiere');
+        setError(t('register.agreeToTermsRequired'));
         return;
       }
       if (!formData.dateOfBirth) { 
-        setError('Bitte Gib Din Geburtsdatum Ii'); 
+        setError(t('register.enterDateOfBirth')); 
         return; 
       }
       const age = Math.floor((new Date().getTime() - new Date(formData.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000));
       if (age < 18) { 
-        setError('Alter Muss Mindestens 18 Si'); 
+        setError(t('register.mustBe18')); 
         return; 
       }
-      if (!formData.nationality) { setError('Bitte Wähl Dini Nationalität'); return; }
-      if (!formData.canton) { setError('Bitte Wähl Din Wohnkanton'); return; }
-      if (!formData.clubName) { setError('Bitte Wähl Din Verein'); return; }
-      if (formData.coachRole.length === 0) { setError('Bitte Wähl Mindeschtens Ei Roll'); return; }
-      if (formData.genderCoached.length === 0) { setError('Bitte Wähl Welches Gschlecht Du Trainiersch'); return; }
+      if (!formData.nationality) { setError(t('register.selectNationality')); return; }
+      if (!formData.canton) { setError(t('register.selectCantonRequired')); return; }
+      if (!formData.clubName) { setError(t('register.selectOrganization')); return; }
+      if (formData.coachRole.length === 0) { setError(t('register.selectRoleRequired')); return; }
+      if (formData.genderCoached.length === 0) { setError(t('register.selectGenderCoachedRequired')); return; }
       setStep(3);
       return;
     }
@@ -257,7 +273,7 @@ export default function RecruiterRegisterPage() {
       const emailSent = response.data.emailSent;
       router.push(`/auth/registration-success?email=${encodeURIComponent(formData.email)}&emailSent=${emailSent}`);
     } catch (err: any) {
-      setError(err.response?.data?.error || 'En Fehler Isch Ufträte');
+      setError(err.response?.data?.error || t('playerProfile.errorRegistration'));
     } finally {
       setLoading(false);
     }
@@ -271,8 +287,8 @@ export default function RecruiterRegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4">
       <div className="max-w-2xl w-full space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Rekrutierer Registrierig</h2>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">Schritt {step} Vo 3</p>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{t('register.recruiterTitle')}</h2>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">{t('register.recruiterSubtitle')}</p>
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
@@ -286,16 +302,16 @@ export default function RecruiterRegisterPage() {
             {/* STEP 1: Account Information */}
             {step === 1 && (
               <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Account-Informatione</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{t('register.accountInfo')}</h3>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vorname *</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.firstName')} *</label>
                     <input name="firstName" required value={formData.firstName} onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nachname *</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.lastName')} *</label>
                     <input name="lastName" required value={formData.lastName} onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" />
                   </div>
@@ -303,7 +319,7 @@ export default function RecruiterRegisterPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <Mail className="w-4 h-4 inline mr-1" />E-Mail *
+                    <Mail className="w-4 h-4 inline mr-1" />{t('register.email')} *
                   </label>
                   <input name="email" type="email" required value={formData.email} onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white" />
@@ -311,7 +327,7 @@ export default function RecruiterRegisterPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <Lock className="w-4 h-4 inline mr-1" />Passwort (8+ Zeiche, Zahl, Symbol) *
+                    <Lock className="w-4 h-4 inline mr-1" />{t('register.password')} (8+ {t('register.required')}) *
                   </label>
                   <div className="relative">
                     <input 
@@ -333,7 +349,7 @@ export default function RecruiterRegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Passwort Bestätige *</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.confirmPassword')} *</label>
                   <div className="relative">
                     <input 
                       name="confirmPassword" 
@@ -355,7 +371,7 @@ export default function RecruiterRegisterPage() {
 
                 <button type="submit" disabled={loading}
                   className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50">
-                  Wiiter →
+                  {t('register.continueButton')}
                 </button>
               </div>
             )}
@@ -363,11 +379,11 @@ export default function RecruiterRegisterPage() {
             {/* STEP 2: Personal & Professional Information */}
             {step === 2 && (
               <div className="space-y-5">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Persönlichi & Berueflichi Informatione</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{t('register.personalInfo')} & {t('register.professionalInfo')}</h3>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <Calendar className="w-4 h-4 inline mr-1" />Geburtsdatum *
+                    <Calendar className="w-4 h-4 inline mr-1" />{t('register.dateOfBirth')} *
                   </label>
                   <input 
                     name="dateOfBirth" 
@@ -383,29 +399,29 @@ export default function RecruiterRegisterPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <Globe className="w-4 h-4 inline mr-1" />Nationalität *
+                    <Globe className="w-4 h-4 inline mr-1" />{t('register.nationality')} *
                   </label>
                   <select name="nationality" required value={formData.nationality} onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
-                    <option value="">Wähl Nationalität</option>
+                    <option value="">{t('register.selectNationality')}</option>
                     {NATIONALITIES.map(nat => <option key={nat} value={nat}>{nat}</option>)}
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <MapPin className="w-4 h-4 inline mr-1" />Wohnkanton *
+                    <MapPin className="w-4 h-4 inline mr-1" />{t('register.canton')} *
                   </label>
                   <select name="canton" required value={formData.canton} onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
-                    <option value="">Wähl Kanton</option>
+                    <option value="">{t('register.selectCanton')}</option>
                     {CANTONS.map(c => <option key={c.code} value={c.code}>{c.name}</option>)}
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <MapPin className="w-4 h-4 inline mr-1" />Gemeinde/Municipality
+                    <MapPin className="w-4 h-4 inline mr-1" />{t('register.municipality')}
                   </label>
                   <input 
                     name="province" 
@@ -414,23 +430,23 @@ export default function RecruiterRegisterPage() {
                     placeholder="z.B. Winterthur, Bern, etc."
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
                   />
-                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Optional - Gmeind I Dim Kanton</p>
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('register.optional')}</p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    <Briefcase className="w-4 h-4 inline mr-1" />Aktuelle Verein *
+                    <Briefcase className="w-4 h-4 inline mr-1" />{t('register.organization')} *
                   </label>
                   <select name="clubName" required value={formData.clubName} onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
-                    <option value="">Wähl Verein</option>
+                    <option value="">{t('register.selectPlaceholder')}</option>
                     {clubs.map(club => <option key={club.id} value={club.name}>{club.name} ({club.canton})</option>)}
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Rolle(n) Im Verein * (Mehrfach Uuswahl Möglich)
+                    {t('register.coachRole')} * ({t('register.selectAll')})
                   </label>
                   <div className="grid grid-cols-2 gap-2">
                     {COACH_ROLES.map(roleOption => (
@@ -447,14 +463,14 @@ export default function RecruiterRegisterPage() {
                           }}
                           className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                         />
-                        <span className="text-sm text-gray-900 dark:text-white">{roleOption}</span>
+                        <span className="text-sm text-gray-900 dark:text-white">{getRoleLabel(roleOption, t)}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Team Gschlecht * (Mehrfach Uuswahl Möglich)</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('register.genderCoached')} * ({t('register.selectAll')})</label>
                   <div className="space-y-2">
                     <label className="flex items-center gap-3 p-3 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700">
                       <input
@@ -469,7 +485,7 @@ export default function RecruiterRegisterPage() {
                         }}
                         className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <span className="text-gray-900 dark:text-white">♂ Männer</span>
+                      <span className="text-gray-900 dark:text-white">♂ {t('register.male')}</span>
                     </label>
                     <label className="flex items-center gap-3 p-3 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700">
                       <input
@@ -484,7 +500,7 @@ export default function RecruiterRegisterPage() {
                         }}
                         className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <span className="text-gray-900 dark:text-white">♀ Fraue</span>
+                      <span className="text-gray-900 dark:text-white">♀ {t('register.female')}</span>
                     </label>
                   </div>
                 </div>
@@ -494,11 +510,11 @@ export default function RecruiterRegisterPage() {
                     type="button" 
                     onClick={() => setStep(1)}
                     className="w-1/3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 py-3 px-4 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-                    ← Zrugg
+                    {t('register.backButton')}
                   </button>
                   <button type="submit" disabled={loading}
                     className="w-2/3 bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50">
-                    Wiiter →
+                    {t('register.continueButton')}
                   </button>
                 </div>
               </div>
@@ -507,10 +523,10 @@ export default function RecruiterRegisterPage() {
             {/* STEP 3: Additional Information & Club History */}
             {step === 3 && (
               <div className="space-y-5">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Zuesätzlichi Informatione</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{t('register.recruiterInfo')}</h3>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Telefonnummer (Optional)</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.phoneNumber')} ({t('register.optional')})</label>
                   <input 
                     name="phone" 
                     type="tel" 
@@ -522,7 +538,7 @@ export default function RecruiterRegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Über Mich (Optional)</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.bio')} ({t('register.optional')})</label>
                   <textarea 
                     name="bio" 
                     rows={4} 
@@ -535,7 +551,7 @@ export default function RecruiterRegisterPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    <Upload className="w-4 h-4 inline mr-1" />Trainer-Lizenz (Optional)
+                    <Upload className="w-4 h-4 inline mr-1" />{t('register.coachingLicense')} ({t('register.optional')})
                   </label>
                   <ImageUpload 
                     label=""
@@ -546,7 +562,7 @@ export default function RecruiterRegisterPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    <Upload className="w-4 h-4 inline mr-1" />Ausweiss (Optional)
+                    <Upload className="w-4 h-4 inline mr-1" />{t('register.ausweiss')} ({t('register.optional')})
                   </label>
                   <ImageUpload 
                     label=""
@@ -557,7 +573,7 @@ export default function RecruiterRegisterPage() {
 
                 {/* Social Media */}
                 <div className="bg-purple-50 dark:bg-gray-700 border border-purple-200 dark:border-gray-600 rounded-lg p-5">
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Social Media (Optional)</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3">{t('register.socialMedia')} ({t('register.optional')})</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Facebook</label>
@@ -609,7 +625,7 @@ export default function RecruiterRegisterPage() {
                 {/* Achievements */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Erfolge & Uszeichnige (Optional)
+                    {t('register.coachingAchievements')} ({t('register.optional')})
                   </label>
                   <div className="space-y-2">
                     <div className="flex gap-2">
@@ -626,7 +642,7 @@ export default function RecruiterRegisterPage() {
                         onClick={addAchievement}
                         className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-1 text-sm font-medium"
                       >
-                        <Plus className="w-4 h-4" /> Hinzuefüege
+                        <Plus className="w-4 h-4" /> {t('register.addAchievement')}
                       </button>
                     </div>
                     
@@ -652,21 +668,21 @@ export default function RecruiterRegisterPage() {
                 {/* Club History */}
                 <div>
                   <div className="flex justify-between items-center mb-3">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Verein-Gschicht (Optional)</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('register.clubAffiliations')} ({t('register.optional')})</label>
                     <div className="flex gap-2">
                       <Link
                         href="/clubs/submit"
                         target="_blank"
                         className="flex items-center gap-1 px-3 py-1.5 bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-sm font-medium"
                       >
-                        Club Mälde
+                        Club Submit
                       </Link>
                       <button 
                         type="button"
                         onClick={addClubAffiliation}
                         className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm font-medium"
                       >
-                        <Plus className="w-4 h-4" /> Verein Hinzuefüege
+                        <Plus className="w-4 h-4" /> {t('register.addAffiliation')}
                       </button>
                     </div>
                   </div>
@@ -674,7 +690,7 @@ export default function RecruiterRegisterPage() {
                   {clubHistory.map((club) => (
                     <div key={club.id} className="border border-gray-300 dark:border-gray-600 rounded-lg p-4 mb-3 bg-gray-50 dark:bg-gray-700/50">
                       <div className="flex justify-between items-start mb-3">
-                        <h4 className="font-medium text-gray-900 dark:text-white">Verein</h4>
+                        <h4 className="font-medium text-gray-900 dark:text-white">{t('playerProfile.clubAffiliation')}</h4>
                         <button 
                           type="button"
                           onClick={() => removeClubAffiliation(club.id)}
@@ -688,13 +704,13 @@ export default function RecruiterRegisterPage() {
                         <input 
                           value={club.clubName}
                           onChange={(e) => updateClubAffiliation(club.id, 'clubName', e.target.value)}
-                          placeholder="Verein Name"
+                          placeholder={t('playerProfile.clubNamePlaceholder')}
                           className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
                         />
                         
                         <div>
                           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Rolle(n) Im Verein
+                            {t('register.role')}
                           </label>
                           <div className="grid grid-cols-2 gap-2">
                             {COACH_ROLES.map(roleOption => (
@@ -710,7 +726,7 @@ export default function RecruiterRegisterPage() {
                                   }}
                                   className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                                 />
-                                <span className="text-sm text-gray-900 dark:text-white">{roleOption}</span>
+                                <span className="text-sm text-gray-900 dark:text-white">{getRoleLabel(roleOption, t)}</span>
                               </label>
                             ))}
                           </div>
@@ -722,15 +738,15 @@ export default function RecruiterRegisterPage() {
                             onChange={(e) => updateClubAffiliation(club.id, 'genderCoached', e.target.value)}
                             className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
                           >
-                            <option value="">Team Gschlecht</option>
-                            <option value="MALE">Männer</option>
-                            <option value="FEMALE">Fraue</option>
+                            <option value="">{t('register.genderCoached')}</option>
+                            <option value="MALE">{t('register.male')}</option>
+                            <option value="FEMALE">{t('register.female')}</option>
                           </select>
                         </div>
 
                         <div className="grid grid-cols-2 gap-3">
                           <div>
-                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Jahr Vo</label>
+                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">{t('register.startYear')}</label>
                             <input 
                               type="number"
                               value={club.yearFrom}
@@ -740,7 +756,7 @@ export default function RecruiterRegisterPage() {
                             />
                           </div>
                           <div>
-                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Jahr Bis</label>
+                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">{t('register.endYear')}</label>
                             {club.currentClub ? (
                               <div className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
                                 <span className="text-green-600 dark:text-green-400 font-semibold flex items-center gap-1 text-sm">
@@ -780,12 +796,12 @@ export default function RecruiterRegisterPage() {
                               ? 'text-green-700 dark:text-green-300' 
                               : 'text-gray-700 dark:text-gray-300'
                           }`}>
-                            Schaff Aktuell Do
+                            {t('register.currentlyWorkingHere')}
                           </span>
                         </label>
 
                         <div>
-                          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verein Logo</label>
+                          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">{t('playerProfile.clubLogoUpload')}</label>
                           <ImageUpload 
                             label=""
                             value={club.logo}
@@ -808,11 +824,9 @@ export default function RecruiterRegisterPage() {
                       required
                     />
                     <div className="text-sm">
-                      <p className="font-semibold text-gray-900 dark:text-white mb-2">Nutzigsbedingige Und Dateschutz *</p>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">{t('register.agreeToTerms')} {t('register.terms')} {t('register.and')} {t('register.privacyPolicy')} *</p>
                       <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                        Ich Akzeptiere D <Link href="/terms" target="_blank" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">Nutzigsbedingige</Link> Und D <Link href="/privacy" target="_blank" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">Dateschutzerklärig</Link> Vo Habicht Volleyball. 
-                        Ich Verstönd, Dass Mini Date Gmäss Schwiizerischem Dateschutzgsetz (DSG) Verarbeitet Werde Und Zum Zweck Vo Dä Rekrutierig Und Kontaktufnahm Verwändet Werde Chöi. 
-                        Ich Cha Mini Iiwilligig Jederziit Widerüfe.
+                        {t('register.agreeToTerms')} <Link href="/terms" target="_blank" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">{t('register.terms')}</Link> {t('register.and')} <Link href="/privacy" target="_blank" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 underline">{t('register.privacyPolicy')}</Link>.
                       </p>
                     </div>
                   </label>
@@ -823,13 +837,13 @@ export default function RecruiterRegisterPage() {
                     type="button" 
                     onClick={() => setStep(2)}
                     className="w-1/3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 py-3 px-4 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-                    ← Zrugg
+                    {t('register.backButton')}
                   </button>
                   <button 
                     type="submit" 
                     disabled={loading}
                     className="w-2/3 bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50">
-                    {loading ? 'Wird Glade...' : 'Registrierig Abschliesse ✓'}
+                    {loading ? t('register.creating') : t('register.createAccount')}
                   </button>
                 </div>
               </div>
@@ -837,7 +851,7 @@ export default function RecruiterRegisterPage() {
           </form>
 
           <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-6">
-            Hesch Scho En Account? <Link href="/auth/login" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium">Aamelde</Link>
+            {t('register.alreadyHaveAccount')} <Link href="/auth/login" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium">{t('register.login')}</Link>
           </p>
         </div>
       </div>

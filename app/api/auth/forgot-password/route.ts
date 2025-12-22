@@ -48,5 +48,5 @@ export async function POST(req: NextRequest) {
   });
   console.log('📧 Email sent:', emailSent);
   
-  return NextResponse.json({ message: "Bitte prüfe deine E-Mails, um die Passwortänderung zu bestätigen." });
+  return NextResponse.json({ message: "Please check your email to confirm the password reset." });
 }

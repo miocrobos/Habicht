@@ -7,6 +7,7 @@ import { ArrowLeft, Save, Loader2, User, MapPin, Briefcase, GraduationCap, Troph
 import Link from 'next/link';
 import { Canton } from '@prisma/client';
 import { getAllSchools } from '@/lib/schoolData';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const cantons = [
   { code: 'ZH' as Canton, name: 'Züri' },
@@ -56,6 +57,7 @@ const positions = [
 export default function EditPlayerProfilePage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const { t } = useLanguage();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -144,7 +146,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
       setLoading(false);
     } catch (err) {
       console.error('Error loading player:', err);
-      setError('Fehler Bim Lade Vo Spieler-Date');
+      setError(t('playerProfile.errorLoadingPlayerData'));
       setLoading(false);
     }
   };
@@ -166,7 +168,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         router.push(`/players/${params.id}`);
       }, 1500);
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Fehler Bim Speichere');
+      setError(err.response?.data?.error || t('playerProfile.errorSavingPlayerData'));
     } finally {
       setSaving(false);
     }
@@ -212,7 +214,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-habicht-600 mx-auto mb-4" />
-          <p className="text-gray-600 dark:text-gray-400">Lade Profil...</p>
+          <p className="text-gray-600 dark:text-gray-400">{t('playerProfile.loadingProfile')}</p>
         </div>
       </div>
     );
@@ -222,7 +224,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
-          <p className="text-habicht-600 dark:text-habicht-400 text-lg">Spieler Nid Gfunde</p>
+          <p className="text-habicht-600 dark:text-habicht-400 text-lg">{t('playerProfile.playerNotFound')}</p>
           <Link href="/" className="text-habicht-600 hover:text-habicht-700 mt-4 inline-block">
             Zurück Zur Startsii te
           </Link>
@@ -242,7 +244,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
               className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition"
             >
               <ArrowLeft className="w-5 h-5" />
-              Zurück Zum Profil
+              {t('playerProfile.backToProfile')}
             </Link>
             <button
               onClick={handleSave}
@@ -252,12 +254,12 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
               {saving ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
-                  Speichere...
+                  {t('playerProfile.saving')}
                 </>
               ) : (
                 <>
                   <Save className="w-5 h-5" />
-                  Änderige Speichere
+                  {t('playerProfile.saveChanges')}
                 </>
               )}
             </button>
@@ -338,7 +340,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <option value="">Wähl üs</option>
+                <option value="">{t('playerProfile.select')}</option>
                 <option value="MALE">Männlich</option>
                 <option value="FEMALE">Wiiblich</option>
                 <option value="OTHER">Anderi</option>
@@ -388,7 +390,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 onChange={(e) => setFormData({ ...formData, canton: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <option value="">Wähl Kanton</option>
+                <option value="">{t('register.selectCanton')}</option>
                 {cantons.map((canton) => (
                   <option key={canton.code} value={canton.code}>
                     {canton.name}
@@ -406,7 +408,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 onChange={(e) => setFormData({ ...formData, employmentStatus: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <option value="">Wähl Status</option>
+                <option value="">{t('playerProfile.selectStatus')}</option>
                 {employmentStatusOptions.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
@@ -425,7 +427,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                   onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
-                  <option value="">Wähl Schuel</option>
+                  <option value="">{t('register.selectSchool')}</option>
                   {Object.entries(schools).map(([category, schoolList]) => (
                     <optgroup key={category} label={category}>
                       {schoolList.map((school) => (
@@ -823,7 +825,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 Ich sueche en neue Club
               </span>
               <span className="text-sm text-gray-600 dark:text-gray-400">
-                Aktivier das, wenn du für Verein Afrage offe bisch
+                {t('playerProfile.openForClubOffers')}
               </span>
             </div>
           </label>
@@ -839,12 +841,12 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
             {saving ? (
               <>
                 <Loader2 className="w-6 h-6 animate-spin" />
-                Speichere...
+                {t('playerProfile.saving')}
               </>
             ) : (
               <>
                 <Save className="w-6 h-6" />
-                Alli Änderige Speichere
+                {t('playerProfile.saveChanges')}
               </>
             )}
           </button>

@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     })
 
     if (!player) {
-      return NextResponse.json({ error: 'Spieler nicht gefunden' }, { status: 404 })
+      return NextResponse.json({ error: 'Player not found' }, { status: 404 })
     }
 
     // Verify recruiter exists
@@ -78,7 +78,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Chat request error:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Erstellen der Anfrage' },
+      { error: 'Failed to create request' },
       { status: 500 }
     )
   }
@@ -90,7 +90,7 @@ export async function GET(request: Request) {
     const session = await getServerSession(authOptions)
     
     if (!session?.user) {
-      return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const { searchParams } = new URL(request.url)
@@ -156,7 +156,7 @@ export async function GET(request: Request) {
   } catch (error) {
     console.error('Get requests error:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Laden der Anfragen' },
+      { error: 'Failed to load requests' },
       { status: 500 }
     )
   }

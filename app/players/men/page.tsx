@@ -21,6 +21,7 @@ export default function MenPlayersPage() {
     canton: '',
     league: '',
     minHeight: '',
+    school: '',
     gender: 'MALE',
   })
   const [searchDebounce, setSearchDebounce] = useState('')
@@ -35,7 +36,7 @@ export default function MenPlayersPage() {
 
   useEffect(() => {
     loadPlayers()
-  }, [searchDebounce, filters.position, filters.canton, filters.league, filters.minHeight])
+  }, [searchDebounce, filters.position, filters.canton, filters.league, filters.minHeight, filters.school])
 
   const loadPlayers = async () => {
     try {
@@ -65,11 +66,12 @@ export default function MenPlayersPage() {
       canton: '',
       league: '',
       minHeight: '',
+      school: '',
       gender: 'MALE',
     })
   }
 
-  const hasActiveFilters = filters.search || filters.position || filters.canton || filters.league || filters.minHeight
+  const hasActiveFilters = filters.search || filters.position || filters.canton || filters.league || filters.minHeight || filters.school
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -161,7 +163,7 @@ export default function MenPlayersPage() {
               </button>
             )}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
             {/* Search */}
             <div className="lg:col-span-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -269,6 +271,20 @@ export default function MenPlayersPage() {
                 <option value="YOUTH_U17">U17</option>
               </select>
             </div>
+
+            {/* School/Institute */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {t('register.school') || 'Schule'}
+              </label>
+              <input
+                type="text"
+                value={filters.school}
+                onChange={(e) => handleFilterChange('school', e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+                placeholder="ETH, Uni Zürich..."
+              />
+            </div>
           </div>
         </div>
 
@@ -301,14 +317,14 @@ export default function MenPlayersPage() {
             {players.length === 0 && (
               <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-lg shadow-md">
                 <Search className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-                <p className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Kei Spieler gfunde</p>
-                <p className="text-gray-500 dark:text-gray-400 mb-6">Bitte passe dini Filter aa oder setze sie zrugg</p>
+                <p className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">{t('players.noPlayersFound')}</p>
+                <p className="text-gray-500 dark:text-gray-400 mb-6">{t('players.adjustFilters')}</p>
                 <button
                   onClick={clearAllFilters}
                   className="inline-flex items-center gap-2 bg-habicht-600 text-white px-6 py-3 rounded-lg hover:bg-habicht-700 transition font-medium"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  Filter zurücksetzen
+                  {t('players.resetFilters')}
                 </button>
               </div>
             )}  

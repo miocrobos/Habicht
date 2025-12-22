@@ -51,7 +51,7 @@ export async function GET(
     }
 
     if (!isParticipant) {
-      return NextResponse.json({ error: 'Zugriff verweigert' }, { status: 403 })
+      return NextResponse.json({ error: 'Access denied' }, { status: 403 })
     }
 
     const messages = await prisma.message.findMany({
@@ -93,7 +93,7 @@ export async function GET(
   } catch (error) {
     console.error('Get messages error:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Laden der Nachrichten' },
+      { error: 'Failed to load messages' },
       { status: 500 }
     )
   }
@@ -114,7 +114,7 @@ export async function POST(
     const { content, senderType } = await request.json()
 
     if (!content || !content.trim()) {
-      return NextResponse.json({ error: 'Nachricht darf nicht leer sein' }, { status: 400 })
+      return NextResponse.json({ error: 'Message cannot be empty' }, { status: 400 })
     }
 
     // Verify user is participant and get their ID
@@ -266,7 +266,7 @@ export async function POST(
   } catch (error) {
     console.error('Send message error:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Senden der Nachricht' },
+      { error: 'Failed to send message' },
       { status: 500 }
     )
   }

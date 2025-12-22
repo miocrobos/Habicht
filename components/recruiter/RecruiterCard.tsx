@@ -34,7 +34,7 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
     e.stopPropagation()
 
     if (!session?.user) {
-      alert('Bitte melde dich an, um eine Nachricht zu senden')
+      alert(t('errors.loginRequired'))
       return
     }
 
@@ -52,7 +52,7 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
       console.error('Error starting chat:', error)
       console.error('Error response:', error.response?.data)
       const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
-      alert(`Fehler bim Chat starte: ${errorMsg}`)
+      alert(`${t('errors.chatStartError')}: ${errorMsg}`)
     }
   }
   

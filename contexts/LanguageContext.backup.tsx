@@ -29,6 +29,7 @@ const translations = {
   en: enTranslations,
 }
 
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('gsw')
 

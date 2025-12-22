@@ -2,9 +2,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ShieldCheck, Eye, FileText, Lock, Users } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function ConsentPage() {
   const router = useRouter();
+  const { t } = useLanguage();
   const [consents, setConsents] = useState({
     viewProfile: false,
     contactRecruiters: false,
@@ -21,7 +23,7 @@ export default function ConsentPage() {
     e.preventDefault();
     
     if (!allConsentsGiven) {
-      setError('Bitte Akzeptier Alli Erforderliche Zuestimmige Zum Wiitermache');
+      setError(t('auth.consent.pleaseAcceptAll'));
       return;
     }
 
@@ -47,9 +49,9 @@ export default function ConsentPage() {
               <ShieldCheck className="w-8 h-8 text-green-600 dark:text-green-400" />
             </div>
           </div>
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Dateschutz & Zuestimmig</h2>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white">{t('auth.consent.title')}</h2>
           <p className="mt-3 text-lg text-gray-600 dark:text-gray-400">
-            Bevor Du Dis Profil Erstellsch, Bitte Prüef Und Akzeptier Die Folgende Bedingige
+            {t('auth.consent.subtitle')}
           </p>
         </div>
 
@@ -74,11 +76,10 @@ export default function ConsentPage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <Eye className="w-5 h-5 text-red-600" />
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Profilsichtbarkeit *</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t('auth.consent.viewProfile')}</h3>
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Ich Stimme Zü, Dass Mini Profilinformatione (Name, Foto, Körperliche Stats, Fähigkeite, Vereinshistorie Und Erfolg) 
-                      Vo Andere Benutzer Gseh Werde Chönne, Inkl. Verein, Trainer Und Rekrutierer Uf Dä UniSports Plattform.
+                      {t('auth.consent.viewProfileText')}
                     </p>
                   </div>
                 </label>
@@ -96,11 +97,10 @@ export default function ConsentPage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <Users className="w-5 h-5 text-red-600" />
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Kommunikations-Zuestimmig *</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t('auth.consent.contactRecruiters')}</h3>
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Ich Stimme Zü, Dass Verein, Trainer Und Rekrutierer Mich Über S UniSports Plattform Chat-System 
-                      Kontaktiere Chönne Bezüglich Potenzielle Möglichkeite, Probe-Training Oder Vereinsmitgliedschaft.
+                      {t('auth.consent.contactRecruitersText')}
                     </p>
                   </div>
                 </label>
@@ -118,12 +118,10 @@ export default function ConsentPage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <Lock className="w-5 h-5 text-red-600" />
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Dateverarbeitig *</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t('auth.consent.dataProcessing')}</h3>
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Ich Stimme Zü, Dass UniSports Mini Persönliche Date (Inkl. Fotos, Videos Und Leistigsstatistike) 
-                      Im Iiverständnis Mit GDPR Und Schwiizer Dateschutzgesätz Verarbeitet Und Speicheret, 
-                      Zum Zweck Vo Dä Plattform-Dienschtleistige.
+                      {t('auth.consent.dataProcessingText')}
                     </p>
                   </div>
                 </label>
@@ -141,14 +139,13 @@ export default function ConsentPage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <FileText className="w-5 h-5 text-red-600" />
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Nutzigsbedingige *</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t('auth.consent.termsOfService')}</h3>
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Ich Ha Die{' '}
+                      {t('auth.consent.termsOfServiceText')}{' '}
                       <a href="/terms" target="_blank" className="text-red-600 hover:text-red-700 underline">
-                        Nutzigsbedingige
+                        {t('auth.consent.termsLink')}
                       </a>
-                      {' '}Gläse Und Stimme Dene Zü, Inkl. Zulässigi Nutzigsräglige, Inhaltsräglige Und Account-Verantwortige.
                     </p>
                   </div>
                 </label>
@@ -166,14 +163,13 @@ export default function ConsentPage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <FileText className="w-5 h-5 text-red-600" />
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Dateschutzerklärig *</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t('auth.consent.privacyPolicy')}</h3>
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Ich Ha Die{' '}
+                      {t('auth.consent.privacyPolicyText')}{' '}
                       <a href="/privacy" target="_blank" className="text-red-600 hover:text-red-700 underline">
-                        Dateschutzerklärig
+                        {t('auth.consent.privacyLink')}
                       </a>
-                      {' '}Gläse Und Stimme Dere Zü, Inkl. Wie Mini Date Gsammlet, Bruucht, Teilt Und Geschützt Werde Uf Dä Plattform.
                     </p>
                   </div>
                 </label>
@@ -182,9 +178,7 @@ export default function ConsentPage() {
 
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
               <p className="text-sm text-blue-800 dark:text-blue-200">
-                <strong>Hiiwis:</strong> Du Chasch Dini Dateschutz-Iistellige Verwalte Und Dini Zuestimmige Jederzit 
-                I Dine Account-Iistellige Aktualisiere. Du Hesch S Rächt, Datelöschig Z Verlange Oder Dini Date 
-                Jederzit Z Exportiere.
+                <strong>{t('auth.consent.noteTitle')}</strong> {t('auth.consent.noteText')}
               </p>
             </div>
 
@@ -193,12 +187,11 @@ export default function ConsentPage() {
               disabled={!allConsentsGiven || loading}
               className="w-full bg-red-600 text-white py-4 px-4 rounded-lg font-bold text-lg hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Verarbeite...' : allConsentsGiven ? 'Akzeptiere & Profil Erstelle ✓' : 'Bitte Akzeptier Alli Zuestimmige'}
+              {loading ? t('auth.consent.processing') : allConsentsGiven ? t('auth.consent.submit') : t('auth.consent.pleaseAcceptAll')}
             </button>
 
             <p className="text-center text-xs text-gray-500 dark:text-gray-400">
-              Dur S Klicke Uf "Akzeptiere & Profil Erstelle" Bestätisch Du, Dass Du Mindeschtens 16 Jahr Alt Bisch 
-              Und Die Rechtliche Handligsfähigkeit Hesch, Die Vereinbarig Iizgä.
+              {t('auth.consent.confirmationText')}
             </p>
           </form>
         </div>

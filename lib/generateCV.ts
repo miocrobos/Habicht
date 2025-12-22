@@ -41,9 +41,215 @@ interface PlayerData {
   employmentStatus?: string | null;
 }
 
-export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
+// PDF Translation System
+interface PDFTranslations {
+  [key: string]: string | {
+    SETTER: string;
+    OUTSIDE_HITTER: string;
+    MIDDLE_BLOCKER: string;
+    OPPOSITE: string;
+    LIBERO: string;
+    UNIVERSAL: string;
+  };
+}
+
+const pdfTranslations: { [key: string]: PDFTranslations } = {
+  gsw: {
+    verifiedBy: 'VERIFIZIERT VON',
+    personalProfile: 'PERSÖNLICHS PROFIL',
+    male: 'Männlich',
+    female: 'Weiblich',
+    age: 'Jahr Alt',
+    currentClub: 'Aktuelle Verein',
+    school: 'Schuel',
+    contact: 'Kontakt',
+    physicalAttributes: 'PHYSISCHI ATTRIBUTE',
+    height: 'Grössi',
+    weight: 'Gwicht',
+    spikeHeight: 'Sprung-Schmetteri',
+    blockHeight: 'Sprung-Block',
+    clubHistory: 'VEREINSHISTORIE',
+    club: 'Verein',
+    league: 'Liga',
+    period: 'Zitraum',
+    current: 'Aktuell',
+    achievements: 'ERFOLG & USZEICHNIGE',
+    socialMedia: 'SOCIAL MEDIA',
+    footer: 'Erstellt mit Habicht - Schwiizer Volleyball Scouting Plattform',
+    positions: {
+      SETTER: 'Zuespieler/in',
+      OUTSIDE_HITTER: 'Aussenagreifer/in',
+      MIDDLE_BLOCKER: 'Mittelblöcker/in',
+      OPPOSITE: 'Diagonal',
+      LIBERO: 'Libero',
+      UNIVERSAL: 'Universal'
+    }
+  },
+  de: {
+    verifiedBy: 'VERIFIZIERT VON',
+    personalProfile: 'PERSÖNLICHES PROFIL',
+    male: 'Männlich',
+    female: 'Weiblich',
+    age: 'Jahre Alt',
+    currentClub: 'Aktueller Verein',
+    school: 'Schule',
+    contact: 'Kontakt',
+    physicalAttributes: 'PHYSISCHE ATTRIBUTE',
+    height: 'Größe',
+    weight: 'Gewicht',
+    spikeHeight: 'Sprunghöhe Angriff',
+    blockHeight: 'Sprunghöhe Block',
+    clubHistory: 'VEREINSGESCHICHTE',
+    club: 'Verein',
+    league: 'Liga',
+    period: 'Zeitraum',
+    current: 'Aktuell',
+    achievements: 'ERFOLGE & AUSZEICHNUNGEN',
+    socialMedia: 'SOCIAL MEDIA',
+    footer: 'Erstellt mit Habicht - Schweizer Volleyball Scouting Plattform',
+    positions: {
+      SETTER: 'Zuspieler/in',
+      OUTSIDE_HITTER: 'Außenangreifer/in',
+      MIDDLE_BLOCKER: 'Mittelblocker/in',
+      OPPOSITE: 'Diagonal',
+      LIBERO: 'Libero',
+      UNIVERSAL: 'Universal'
+    }
+  },
+  fr: {
+    verifiedBy: 'VÉRIFIÉ PAR',
+    personalProfile: 'PROFIL PERSONNEL',
+    male: 'Masculin',
+    female: 'Féminin',
+    age: 'Ans',
+    currentClub: 'Club Actuel',
+    school: 'École',
+    contact: 'Contact',
+    physicalAttributes: 'ATTRIBUTS PHYSIQUES',
+    height: 'Taille',
+    weight: 'Poids',
+    spikeHeight: 'Hauteur De Détente Attaque',
+    blockHeight: 'Hauteur De Détente Contre',
+    clubHistory: 'HISTORIQUE DU CLUB',
+    club: 'Club',
+    league: 'Ligue',
+    period: 'Période',
+    current: 'Actuel',
+    achievements: 'RÉALISATIONS & DISTINCTIONS',
+    socialMedia: 'RÉSEAUX SOCIAUX',
+    footer: 'Créé avec Habicht - Plateforme de Scouting Volleyball Suisse',
+    positions: {
+      SETTER: 'Passeur/Passeuse',
+      OUTSIDE_HITTER: 'Attaquant/Attaquante',
+      MIDDLE_BLOCKER: 'Contreur/Contreuse Central',
+      OPPOSITE: 'Pointu',
+      LIBERO: 'Libero',
+      UNIVERSAL: 'Universel'
+    }
+  },
+  it: {
+    verifiedBy: 'VERIFICATO DA',
+    personalProfile: 'PROFILO PERSONALE',
+    male: 'Maschile',
+    female: 'Femminile',
+    age: 'Anni',
+    currentClub: 'Club Attuale',
+    school: 'Scuola',
+    contact: 'Contatto',
+    physicalAttributes: 'ATTRIBUTI FISICI',
+    height: 'Altezza',
+    weight: 'Peso',
+    spikeHeight: 'Altezza Di Salto In Attacco',
+    blockHeight: 'Altezza Di Salto A Muro',
+    clubHistory: 'STORIA DEL CLUB',
+    club: 'Club',
+    league: 'Lega',
+    period: 'Periodo',
+    current: 'Attuale',
+    achievements: 'SUCCESSI & RICONOSCIMENTI',
+    socialMedia: 'SOCIAL MEDIA',
+    footer: 'Creato con Habicht - Piattaforma di Scouting Pallavolo Svizzera',
+    positions: {
+      SETTER: 'Palleggiatore/Palleggiatrice',
+      OUTSIDE_HITTER: 'Schiacciatore/Schiacciatrice',
+      MIDDLE_BLOCKER: 'Centrale',
+      OPPOSITE: 'Opposto',
+      LIBERO: 'Libero',
+      UNIVERSAL: 'Universale'
+    }
+  },
+  rm: {
+    verifiedBy: 'VERIFICÀ DA',
+    personalProfile: 'PROFIL PERSUNAL',
+    male: 'Masculin',
+    female: 'Feminin',
+    age: 'Onns',
+    currentClub: 'Club Actual',
+    school: 'Scola',
+    contact: 'Contact',
+    physicalAttributes: 'ATTRIBUTS FISICS',
+    height: 'Grondezza',
+    weight: 'Paisa',
+    spikeHeight: 'Autezza Dal Stgir Attacca',
+    blockHeight: 'Autezza Dal Stgir Bloccar',
+    clubHistory: 'HISTORIA DAL CLUB',
+    club: 'Club',
+    league: 'Liga',
+    period: 'Perioda',
+    current: 'Actual',
+    achievements: 'SUCCESSAS & DISTINCZIUNS',
+    socialMedia: 'MEDIAS SOCIALAS',
+    footer: 'Creà cun Habicht - Plattaforma da Scouting Volleyball Svizzer',
+    positions: {
+      SETTER: 'Passader/Passadra',
+      OUTSIDE_HITTER: 'Attaccader/Attaccadra',
+      MIDDLE_BLOCKER: 'Bloccader/Bloccadra Central',
+      OPPOSITE: 'Diagonal',
+      LIBERO: 'Libero',
+      UNIVERSAL: 'Universal'
+    }
+  },
+  en: {
+    verifiedBy: 'VERIFIED BY',
+    personalProfile: 'PERSONAL PROFILE',
+    male: 'Male',
+    female: 'Female',
+    age: 'Years Old',
+    currentClub: 'Current Club',
+    school: 'School',
+    contact: 'Contact',
+    physicalAttributes: 'PHYSICAL ATTRIBUTES',
+    height: 'Height',
+    weight: 'Weight',
+    spikeHeight: 'Spike Height',
+    blockHeight: 'Block Height',
+    clubHistory: 'CLUB HISTORY',
+    club: 'Club',
+    league: 'League',
+    period: 'Period',
+    current: 'Current',
+    achievements: 'ACHIEVEMENTS & AWARDS',
+    socialMedia: 'SOCIAL MEDIA',
+    footer: 'Created with Habicht - Swiss Volleyball Scouting Platform',
+    positions: {
+      SETTER: 'Setter',
+      OUTSIDE_HITTER: 'Outside Hitter',
+      MIDDLE_BLOCKER: 'Middle Blocker',
+      OPPOSITE: 'Opposite',
+      LIBERO: 'Libero',
+      UNIVERSAL: 'Universal'
+    }
+  }
+};
+
+export async function generatePlayerCV(playerData: PlayerData, language: string = 'gsw'): Promise<Blob> {
   console.log('🎯 CV Generation v2.0 - Professional Format Starting...');
   console.log('Player:', playerData.firstName, playerData.lastName);
+  console.log('Language:', language);
+  
+  // Get translations for selected language
+  const translations = pdfTranslations[language] || pdfTranslations['gsw'];
+  const positions = translations.positions as { [key: string]: string };
   
   const doc = new jsPDF();
   
@@ -65,18 +271,10 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   const fullName = `${playerData.firstName} ${playerData.lastName}`.toUpperCase();
   doc.text(fullName, 15, 25);
   
-  // Position subtitle on the left - translate positions to Swiss German
+  // Position subtitle on the left - translate positions
   doc.setFontSize(14);
   doc.setFont('helvetica', 'normal');
-  const positionTranslations: { [key: string]: string } = {
-    'SETTER': 'Zuespieler/in',
-    'OUTSIDE_HITTER': 'Aussenagreifer/in',
-    'MIDDLE_BLOCKER': 'Mittelblöcker/in',
-    'OPPOSITE': 'Diagonal',
-    'LIBERO': 'Libero',
-    'UNIVERSAL': 'Universal'
-  };
-  const translatedPositions = playerData.positions?.map(pos => positionTranslations[pos] || pos) || [];
+  const translatedPositions = playerData.positions?.map(pos => positions[pos] || pos) || [];
   const positionText = translatedPositions.join(', ') || 'Volleyball Spieler/in';
   doc.text(positionText, 15, 33);
   
@@ -98,11 +296,11 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     // Add logo image at top right
     doc.addImage(logoBase64, 'PNG', 185, 8, 15, 15);
     
-    // Add "VERIFIZIERT VON HABICHT" text next to logo
+    // Add verification text next to logo
     doc.setFontSize(5);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(255, 255, 255);
-    doc.text('VERIFIZIERT VON', 182, 11, { align: 'right' });
+    doc.text(translations.verifiedBy as string, 182, 11, { align: 'right' });
     doc.setFontSize(7);
     doc.setFont('helvetica', 'bold');
     doc.text('HABICHT', 182, 16, { align: 'right' });
@@ -112,7 +310,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
     doc.setFontSize(6);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(255, 255, 255);
-    doc.text('VERIFIZIERT VON', 195, 12, { align: 'right' });
+    doc.text(translations.verifiedBy as string, 195, 12, { align: 'right' });
     doc.setFontSize(8);
     doc.setFont('helvetica', 'bold');
     doc.text('HABICHT', 195, 17, { align: 'right' });
@@ -121,11 +319,11 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   yPos = 50;
 
   // Personal Profile Section with Photo (more human, narrative style)
-  console.log('✅ Using Professional Format (PERSÖNLICHS PROFIL)');
+  console.log('✅ Using Professional Format with translations');
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.text('PERSÖNLICHS PROFIL', 15, yPos);
+  doc.text(translations.personalProfile as string, 15, yPos);
   yPos += 8;
 
   // Add profile photo beside personal information (right side)
@@ -191,7 +389,7 @@ export async function generatePlayerCV(playerData: PlayerData): Promise<Blob> {
   const age = playerData.dateOfBirth ? new Date().getFullYear() - new Date(playerData.dateOfBirth).getFullYear() : null;
   
   // Build narrative text instead of table
-  const genderText = playerData.gender === 'MALE' ? 'Männlich' : 'Weiblich';
+  const genderText = playerData.gender === 'MALE' ? translations.male as string : translations.female as string;
   // Format birth date with zero-padding (e.g., 06.03.2006)
   const formatBirthDate = (dateString: string | Date | null) => {
     if (!dateString) return 'Unbekannt';

@@ -26,14 +26,15 @@ export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData
       setExporting(true)
       console.log('=== Exporting Player CV ===')
       console.log('Player data:', playerData)
+      console.log('Selected language:', selectedLanguage)
       
-      const pdfBlob = await generatePlayerCV(playerData)
+      const pdfBlob = await generatePlayerCV(playerData, selectedLanguage)
       
       const url = URL.createObjectURL(pdfBlob)
       const link = document.createElement('a')
       link.href = url
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
-      link.download = `${userName.replace(' ', '_')}_Spieler_CV_${timestamp}.pdf`
+      link.download = `${userName.replace(' ', '_')}_Spieler_CV_${selectedLanguage}_${timestamp}.pdf`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
@@ -43,7 +44,7 @@ export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData
       onClose()
     } catch (error) {
       console.error('Error exporting player CV:', error)
-      alert('Fehler bim CV Export')
+      alert(t('playerProfile.errorExportingCV'))
     } finally {
       setExporting(false)
     }
@@ -54,14 +55,15 @@ export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData
       setExporting(true)
       console.log('=== Exporting Recruiter CV ===')
       console.log('Recruiter data:', recruiterData)
+      console.log('Selected language:', selectedLanguage)
       
-      const pdfBlob = await generateRecruiterCV(recruiterData)
+      const pdfBlob = await generateRecruiterCV(recruiterData, selectedLanguage)
       
       const url = URL.createObjectURL(pdfBlob)
       const link = document.createElement('a')
       link.href = url
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
-      link.download = `${userName.replace(' ', '_')}_Recruiter_CV_${timestamp}.pdf`
+      link.download = `${userName.replace(' ', '_')}_Recruiter_CV_${selectedLanguage}_${timestamp}.pdf`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
@@ -71,7 +73,7 @@ export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData
       onClose()
     } catch (error) {
       console.error('Error exporting recruiter CV:', error)
-      alert('Fehler bim CV Export')
+      alert(t('playerProfile.errorExportingCV'))
     } finally {
       setExporting(false)
     }

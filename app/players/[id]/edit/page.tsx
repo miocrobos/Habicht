@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { Canton } from '@prisma/client';
 import { getAllSchools } from '@/lib/schoolData';
 import ImageUpload from '@/components/shared/ImageUpload';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const cantons = [
   { code: 'ZH' as Canton, name: 'Züri' },
@@ -57,6 +58,7 @@ const positions = [
 export default function EditPlayerProfilePage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const { t } = useLanguage();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -151,7 +153,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
       setLoading(false);
     } catch (err) {
       console.error('Error loading player:', err);
-      setError('Fehler Bim Lade Vo Spieler-Date');
+      setError(t('playerProfile.errorLoadingPlayerData'));
       setLoading(false);
     }
   };
@@ -171,7 +173,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     });
 
     if (invalidClubs.length > 0) {
-      setError('Bitte füll "Bis Jahr" für alli Clubs üs, wo nid als "Aktuellä Club" markiert sind.');
+      setError(t('playerProfile.pleaseSelectUntilYear'));
       setSaving(false);
       // Scroll to error message
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -201,13 +203,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         achievements: achievements.map(a => a.text).filter((text: string) => text.trim() !== ''),
       };
       
-      console.log('Saving player data...');
-      console.log('Club History being saved:', JSON.stringify(validClubHistory, null, 2));
-      console.log('Current clubs:', validClubHistory.filter(c => c.currentClub));
-
       const response = await axios.put(`/api/players/${params.id}`, saveData);
-      
-      console.log('Save response:', response.data);
 
       setSuccess(true);
       setTimeout(() => {
@@ -216,7 +212,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     } catch (err: any) {
       console.error('Save error:', err);
       console.error('Error response:', err.response?.data);
-      setError(err.response?.data?.error || 'Fehler Bim Speichere');
+      setError(err.response?.data?.error || t('playerProfile.errorSavingPlayerData'));
     } finally {
       setSaving(false);
     }
@@ -262,7 +258,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-habicht-600 mx-auto mb-4" />
-          <p className="text-gray-600 dark:text-gray-400">Lade Profil...</p>
+          <p className="text-gray-600 dark:text-gray-400">{t('playerProfile.loadingProfile')}</p>
         </div>
       </div>
     );
@@ -272,9 +268,9 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
-          <p className="text-habicht-600 dark:text-habicht-400 text-lg">Spieler Nid Gfunde</p>
+          <p className="text-habicht-600 dark:text-habicht-400 text-lg">{t('playerProfile.playerNotFound')}</p>
           <Link href="/" className="text-habicht-600 hover:text-habicht-700 mt-4 inline-block">
-            Zurück Zur Startsii te
+            {t('playerProfile.backToHome')}
           </Link>
         </div>
       </div>
@@ -292,7 +288,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
               className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition text-sm sm:text-base"
             >
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-              Zurück Zum Profil
+              {t('playerProfile.backToProfile')}
             </Link>
             <button
               onClick={handleSave}
@@ -302,19 +298,19 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
               {saving ? (
                 <>
                   <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
-                  Speichere...
+                  {t('playerProfile.saving')}
                 </>
               ) : (
                 <>
                   <Save className="w-4 h-4 sm:w-5 sm:h-5" />
-                  Änderige Speichere
+                  {t('playerProfile.saveChanges')}
                 </>
               )}
             </button>
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-            Profil Bearbeite
+            {t('playerProfile.editProfile')}
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm sm:text-base">
             Aktualisier Dini Informatione
@@ -388,7 +384,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <option value="">Wähl üs</option>
+                <option value="">{t('playerProfile.select')}</option>
                 <option value="MALE">Männlich</option>
                 <option value="FEMALE">Wiiblich</option>
                 <option value="OTHER">Anderi</option>
@@ -438,7 +434,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 onChange={(e) => setFormData({ ...formData, canton: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <option value="">Wähl Kanton</option>
+                <option value="">{t('register.selectCanton')}</option>
                 {cantons.map((canton) => (
                   <option key={canton.code} value={canton.code}>
                     {canton.name}
@@ -455,21 +451,21 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 type="text"
                 value={formData.municipality || ''}
                 onChange={(e) => setFormData({ ...formData, municipality: e.target.value })}
-                placeholder="z.B. Winterthur, Bern, Luzern"
+                placeholder={t('placeholders.exampleCities')}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Beschäftigungsstatus
+                {t('labels.employmentStatus')}
               </label>
               <select
                 value={formData.employmentStatus}
                 onChange={(e) => setFormData({ ...formData, employmentStatus: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <option value="">Wähl Status</option>
+                <option value="">{t('playerProfile.selectStatus')}</option>
                 {employmentStatusOptions.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
@@ -481,14 +477,14 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
             {isStudent && (
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Schuel / Universität
+                  {t('labels.schoolUniversity')}
                 </label>
                 <select
                   value={formData.schoolName}
                   onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
-                  <option value="">Wähl Schuel</option>
+                  <option value="">{t('register.selectSchool')}</option>
                   {schools.map((school) => (
                     <option key={school.value} value={school.value}>
                       {school.label}
@@ -501,13 +497,13 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
             {isWorking && (
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Beruf
+                  {t('labels.occupation')}
                 </label>
                 <input
                   type="text"
                   value={formData.occupation}
                   onChange={(e) => setFormData({ ...formData, occupation: e.target.value })}
-                  placeholder="z.B. Marketing Manager, Softwareentwickler"
+                  placeholder={t('placeholders.exampleJob')}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
@@ -519,7 +515,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
             <Trophy className="w-6 h-6 text-habicht-600" />
-            Volleyball Informatione
+            {t('labels.volleyballInfo')}
           </h2>
 
           <div className="grid md:grid-cols-2 gap-4">
@@ -610,7 +606,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
               Swiss Volley Lizenz
             </label>
             <ImageUpload 
-              label="Lad Lizenz-Foto Ufe" 
+              label={t('playerProfile.uploadLicense')}
               value={formData.swissVolleyLicense}
               onChange={(v) => setFormData({ ...formData, swissVolleyLicense: v })} 
               aspectRatio="banner" 
@@ -699,7 +695,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                           }, 200);
                         }}
                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                        placeholder="z.B. Volley Amriswil"
+                        placeholder={t('placeholders.exampleClub')}
                       />
                       {clubSuggestions[club.id]?.length > 0 && (
                         <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg max-h-48 overflow-y-auto">
@@ -748,7 +744,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                         }}
                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       >
-                        <option value="">Wähl Liga üs</option>
+                        <option value="">{t('clubProfile.selectLeague')}</option>
                         <option value="NLA">NLA</option>
                         <option value="NLB">NLB</option>
                         <option value="1. Liga">1. Liga</option>
@@ -781,7 +777,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                           );
                           setClubHistory(updated);
                         }}
-                        placeholder="z.B. 2020"
+                        placeholder={t('placeholders.exampleYear')}
                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       />
                     </div>
@@ -806,7 +802,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                             );
                             setClubHistory(updated);
                           }}
-                          placeholder="z.B. 2023"
+                          placeholder={t('placeholders.exampleYear')}
                           className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
                             isInvalid ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
                           }`}
@@ -839,7 +835,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                   {isInvalid && (
                     <div className="mt-3 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-lg p-3">
                       <p className="text-sm text-red-800 dark:text-red-200">
-                        ⚠️ Bitte füll "Bis Jahr" üs oder markier dä Club als "Aktuellä Club"
+                        {t('playerProfile.pleaseSelectUntilYearWarning')}
                       </p>
                     </div>
                   )}
@@ -881,7 +877,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                       );
                       setAchievements(updated);
                     }}
-                    placeholder="z.B. U17 Schwiizermeister 2021"
+                    placeholder={t('placeholders.exampleAchievement')}
                     className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                   <button
@@ -908,7 +904,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 Swiss Volley Lizenz (Optional)
               </label>
               <ImageUpload
-                label="Lad Lizenz-Foto Ufe"
+                label={t('playerProfile.uploadLicense')}
                 value={formData.swissVolleyLicense}
                 onChange={(v: string) => setFormData({ ...formData, swissVolleyLicense: v })}
                 aspectRatio="banner"
@@ -920,7 +916,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 Ausweiss/ID (Optional)
               </label>
               <ImageUpload
-                label="Lad Ausweiss-Foto Ufe"
+                label={t('playerProfile.uploadId')}
                 value={formData.ausweiss}
                 onChange={(v: string) => setFormData({ ...formData, ausweiss: v })}
                 aspectRatio="banner"
@@ -1004,7 +1000,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 Ich sueche en neue Club
               </span>
               <span className="text-sm text-gray-600 dark:text-gray-400">
-                Aktivier das, wenn du für Verein Afrage offe bisch
+                {t('playerProfile.openForClubOffers')}
               </span>
             </div>
           </label>
@@ -1020,12 +1016,12 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
             {saving ? (
               <>
                 <Loader2 className="w-6 h-6 animate-spin" />
-                Speichere...
+                {t('playerProfile.saving')}
               </>
             ) : (
               <>
                 <Save className="w-6 h-6" />
-                Alli Änderige Speichere
+                {t('playerProfile.saveChanges')}
               </>
             )}
           </button>

@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     const session = await getServerSession(authOptions)
     
     if (!session?.user) {
-      return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     let conversations: any[] = []
@@ -102,7 +102,7 @@ export async function GET(request: Request) {
   } catch (error) {
     console.error('Get conversations error:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Laden der Konversationen' },
+      { error: 'Failed to load conversations' },
       { status: 500 }
     )
   }
@@ -114,7 +114,7 @@ export async function POST(request: Request) {
     const session = await getServerSession(authOptions)
     
     if (!session?.user) {
-      return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const { participantId, participantType } = await request.json()
@@ -129,13 +129,13 @@ export async function POST(request: Request) {
     // Chat between players is not allowed - only player-recruiter chats
     if (session.user.role === 'PLAYER' && participantType === 'PLAYER') {
       return NextResponse.json({ 
-        error: 'Chat zwischen Spielern ist nicht möglich. Nur Spieler-Recruiter Chat ist erlaubt.' 
+        error: 'Chat between players is not allowed. Only player-recruiter chat is permitted.' 
       }, { status: 400 })
     }
 
     if (session.user.role === 'RECRUITER' && participantType === 'RECRUITER') {
       return NextResponse.json({ 
-        error: 'Chat zwischen Recruitern ist nicht möglich. Nur Spieler-Recruiter Chat ist erlaubt.' 
+        error: 'Chat between recruiters is not allowed. Only player-recruiter chat is permitted.' 
       }, { status: 400 })
     }
 
@@ -149,7 +149,7 @@ export async function POST(request: Request) {
       })
 
       if (!player) {
-        return NextResponse.json({ error: 'Spieler nicht gefunden' }, { status: 404 })
+        return NextResponse.json({ error: 'Player not found' }, { status: 404 })
       }
 
       playerId = player.id
@@ -181,12 +181,12 @@ export async function POST(request: Request) {
       })
 
       if (!player) {
-        return NextResponse.json({ error: 'Spieler nicht gefunden' }, { status: 404 })
+        return NextResponse.json({ error: 'Player not found' }, { status: 404 })
       }
 
       playerId = player.id
     } else {
-      return NextResponse.json({ error: 'Ungültige Benutzerrolle' }, { status: 400 })
+        return NextResponse.json({ error: 'Invalid user role' }, { status: 400 })
     }
 
     // Check if conversation already exists
@@ -221,8 +221,9 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Create conversation error:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Erstellen der Konversation' },
+      { error: 'Failed to create conversation' },
       { status: 500 }
     )
   }
 }
+

@@ -8,7 +8,7 @@ export async function PATCH(request: Request) {
     const session = await getServerSession(authOptions)
     
     if (!session?.user) {
-      return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     await prisma.notification.updateMany({
@@ -26,7 +26,7 @@ export async function PATCH(request: Request) {
   } catch (error) {
     console.error('Error marking all as read:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Aktualisieren' },
+      { error: 'Failed to mark all as read' },
       { status: 500 }
     )
   }

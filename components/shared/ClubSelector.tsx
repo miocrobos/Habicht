@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { getClubsByGenderAndLeague, getAllClubs, type ClubInfo } from '@/lib/clubsDatabase_comprehensive'
 import { League } from '@prisma/client'
 import { Filter } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface ClubSelectorProps {
   gender: 'MEN' | 'WOMEN'
@@ -20,6 +21,7 @@ export default function ClubSelector({
   desiredLeague,
   maxSelections = 10 
 }: ClubSelectorProps) {
+  const { t } = useLanguage()
   const [selectedLeague, setSelectedLeague] = useState<'NLA' | 'NLB' | '1. Liga' | '2. Liga' | 'ALL'>(
     desiredLeague as any || 'ALL'
   )
@@ -171,7 +173,7 @@ export default function ClubSelector({
       <div>
         <input
           type="text"
-          placeholder="Suche nach Club oder Stadt..."
+          placeholder={t('placeholders.searchClubCity')}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"

@@ -4,8 +4,10 @@ import { useState } from 'react';
 import axios from 'axios';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function SubmitClubPage() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     submitterName: '',
     submitterEmail: '',
@@ -75,21 +77,21 @@ export default function SubmitClubPage() {
       <main className="flex-grow container mx-auto px-4 py-8 max-w-2xl">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 md:p-8">
           <h1 className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">
-            Club Mälde
+            {t('clubSubmit.title')}
           </h1>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Fehlt En Club I Üsere Datebank? Mäld Ihn Üs Und Mir Füege Ihn Dezue!
+            {t('clubSubmit.subtitle')}
           </p>
 
           {submitStatus === 'success' && (
             <div className="mb-6 p-4 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 rounded-lg">
-              ✓ Danke! Dini Mäldig Isch Üs Erreicht. Mir Prüefed Und Füege De Club Dezue.
+              {t('clubSubmit.successMessage')}
             </div>
           )}
 
           {submitStatus === 'error' && (
             <div className="mb-6 p-4 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100 rounded-lg">
-              ✗ Es Isch Es Problem Ufträtte. Bitte Versuech Es Später Nomol.
+              {t('clubSubmit.errorMessage')}
             </div>
           )}
 
@@ -97,13 +99,13 @@ export default function SubmitClubPage() {
             {/* Submitter Information */}
             <div className="border-b pb-4">
               <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
-                Dini Kontaktdate
+                {t('clubSubmit.contactInfo')}
               </h2>
               
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Din Name *
+                    {t('clubSubmit.yourName')} *
                   </label>
                   <input
                     type="text"
@@ -111,13 +113,13 @@ export default function SubmitClubPage() {
                     value={formData.submitterName}
                     onChange={(e) => setFormData({ ...formData, submitterName: e.target.value })}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
-                    placeholder="Vorname Nachname"
+                    placeholder={t('clubSubmit.namePlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Dini E-Mail *
+                    {t('clubSubmit.yourEmail')} *
                   </label>
                   <input
                     type="email"
@@ -125,7 +127,7 @@ export default function SubmitClubPage() {
                     value={formData.submitterEmail}
                     onChange={(e) => setFormData({ ...formData, submitterEmail: e.target.value })}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
-                    placeholder="din.email@example.ch"
+                    placeholder={t('clubSubmit.emailPlaceholder')}
                   />
                 </div>
               </div>
@@ -134,13 +136,13 @@ export default function SubmitClubPage() {
             {/* Club Information */}
             <div>
               <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
-                Club Informatione
+                {t('clubSubmit.clubInfo')}
               </h2>
               
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Club Name *
+                    {t('clubSubmit.clubName')} *
                   </label>
                   <input
                     type="text"
@@ -148,13 +150,13 @@ export default function SubmitClubPage() {
                     value={formData.clubName}
                     onChange={(e) => setFormData({ ...formData, clubName: e.target.value })}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
-                    placeholder="z.B. Volley Bern"
+                    placeholder={t('clubSubmit.clubNamePlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Ligen (Wähl Alli Wo Dr Club Spielt)
+                    {t('clubSubmit.leagues')}
                   </label>
                   <div className="grid grid-cols-3 gap-2">
                     {AVAILABLE_LEAGUES.map((league) => (
@@ -176,52 +178,52 @@ export default function SubmitClubPage() {
                       </label>
                     ))}
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">Mehrfachauswahl möglich</p>
+                  <p className="text-xs text-gray-500 mt-1">{t('clubSubmit.multipleSelection')}</p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Kanton
+                    {t('clubSubmit.canton')}
                   </label>
                   <input
                     type="text"
                     value={formData.canton}
                     onChange={(e) => setFormData({ ...formData, canton: e.target.value })}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
-                    placeholder="z.B. Bern, Zürich"
+                    placeholder={t('clubSubmit.cantonPlaceholder')}
                     required
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Gemeinde
+                    {t('clubSubmit.municipality')}
                   </label>
                   <input
                     type="text"
                     value={formData.municipality}
                     onChange={(e) => setFormData({ ...formData, municipality: e.target.value })}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
-                    placeholder="z.B. Interlaken, Winterthur"
+                    placeholder={t('clubSubmit.municipalityPlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Gründigsjahr
+                    {t('clubSubmit.foundedYear')}
                   </label>
                   <input
                     type="number"
                     value={formData.founded}
                     onChange={(e) => setFormData({ ...formData, founded: e.target.value })}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
-                    placeholder="z.B. 1995"
+                    placeholder={t('clubSubmit.yearPlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Websiite
+                    {t('clubSubmit.website')}
                   </label>
                   <input
                     type="url"
@@ -235,7 +237,7 @@ export default function SubmitClubPage() {
                 {/* Social Media Section */}
                 <div className="border-t pt-4 mt-4">
                   <h3 className="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                    Social Media
+                    {t('clubSubmit.socialMedia')}
                   </h3>
                   
                   <div className="space-y-3">
@@ -308,21 +310,21 @@ export default function SubmitClubPage() {
 
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Erfolg & Titel
+                    {t('clubSubmit.achievements')}
                   </label>
                   <textarea
                     value={formData.achievements}
                     onChange={(e) => setFormData({ ...formData, achievements: e.target.value })}
                     rows={3}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
-                    placeholder="z.B. Schwiizermeister 2020, NLA Uffstig 2019 (Ei Erfolg Pro Linie)"
+                    placeholder={t('clubSubmit.achievementsPlaceholder')}
                   />
-                  <p className="text-xs text-gray-500 mt-1">Ei Erfolg Pro Linie</p>
+                  <p className="text-xs text-gray-500 mt-1">{t('clubSubmit.achievementsHelp')}</p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Websiite
+                    {t('clubSubmit.website')}
                   </label>
                   <input
                     type="url"
@@ -335,14 +337,14 @@ export default function SubmitClubPage() {
 
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Zuesätzlechi Informatione
+                    {t('clubSubmit.additionalInfo')}
                   </label>
                   <textarea
                     value={formData.additionalInfo}
                     onChange={(e) => setFormData({ ...formData, additionalInfo: e.target.value })}
                     rows={4}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
-                    placeholder="Öppis Witersch Wo Mir Sötte Wüsse?"
+                    placeholder={t('clubSubmit.additionalInfoPlaceholder')}
                   />
                 </div>
               </div>
@@ -353,7 +355,7 @@ export default function SubmitClubPage() {
               disabled={isSubmitting}
               className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? 'Wird Gschickt...' : 'Club Mälde'}
+              {isSubmitting ? t('clubSubmit.submitting') : t('clubSubmit.submit')}
             </button>
           </form>
         </div>

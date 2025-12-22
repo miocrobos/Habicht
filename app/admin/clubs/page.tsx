@@ -91,14 +91,14 @@ export default function ClubAdminPage() {
         leagues: editingClub.leagues
       })
       
-      setSuccessMessage(`${editingClub.name} erfolgreich aktualisiert!`)
+      setSuccessMessage(`${editingClub.name} successfully updated!`)
       setTimeout(() => setSuccessMessage(''), 3000)
       
       setEditingClub(null)
       loadClubs()
     } catch (error) {
       console.error('Error saving club:', error)
-      alert('Fehler beim Speichern')
+      alert(t('errors.errorSaving'))
     } finally {
       setSaving(false)
     }
@@ -106,7 +106,7 @@ export default function ClubAdminPage() {
 
   const handleAddClub = async () => {
     if (!newClub.name || !newClub.canton || !newClub.town) {
-      alert('Bitte füllen Sie Name, Kanton und Ort aus')
+      alert(t('errors.fillNameCantonLocation'))
       return
     }
 
@@ -114,7 +114,7 @@ export default function ClubAdminPage() {
       setSaving(true)
       await axios.post('/api/clubs', newClub)
       
-      setSuccessMessage(`${newClub.name} erfolgreich hinzugefügt!`)
+      setSuccessMessage(`${newClub.name} successfully added!`)
       setTimeout(() => setSuccessMessage(''), 3000)
       
       setNewClub({ name: '', canton: '', town: '', website: '', logo: '', leagues: {
@@ -141,7 +141,7 @@ export default function ClubAdminPage() {
       loadClubs()
     } catch (error) {
       console.error('Error adding club:', error)
-      alert('Fehler beim Hinzufügen')
+      alert(t('errors.errorAdding'))
     } finally {
       setSaving(false)
     }

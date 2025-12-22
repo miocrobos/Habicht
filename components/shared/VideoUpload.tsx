@@ -24,7 +24,7 @@ export default function VideoUpload({ value, onChange, label = 'Video hochladen'
 
     // Check file size (max 50MB)
     if (file.size > 50 * 1024 * 1024) {
-      alert('Video ist zu gross (max. 50MB)')
+      alert(t('errors.videoTooLarge'))
       return
     }
 

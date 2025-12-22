@@ -59,7 +59,7 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
       alert('Video erfolgreich hochgeladen!')
     } catch (error) {
       console.error('Upload error:', error)
-      alert('Fehler beim Hochladen. Bitte versuche es erneut.')
+      alert(t('errors.videoUploadError'))
     } finally {
       setUploading(false)
     }
@@ -97,7 +97,7 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
       alert('Video erfolgreich hinzugefügt!')
     } catch (error) {
       console.error('Error adding video:', error)
-      alert('Fehler beim Hinzufügen. Bitte versuche es erneut.')
+      alert(t('errors.videoAddError'))
     } finally {
       setUploading(false)
     }

@@ -116,7 +116,7 @@ export default function SettingsPage() {
       }
     } catch (error) {
       console.error('Error exporting CV:', error)
-      alert('Fehler bim CV Export')
+      alert(t('playerProfile.errorExportingCV'))
     }
   }
 
@@ -166,7 +166,7 @@ export default function SettingsPage() {
       showSaveConfirmation()
     } catch (error) {
       console.error('Error updating notification settings:', error)
-      alert('Fehler bim Speichere vo de Benachrichtigungsiistellige')
+      alert(t('playerProfile.errorSavingNotificationSettings'))
     } finally {
       setLoading(false)
     }
@@ -180,7 +180,7 @@ export default function SettingsPage() {
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault()
     if (newPassword !== confirmPassword) {
-      alert('Passwörter stimmen nicht überein')
+      alert(t('playerProfile.passwordMismatch'))
       return
     }
     showSaveConfirmation()
@@ -248,7 +248,7 @@ export default function SettingsPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                   </svg>
-                  <span>{t('settings.language')}</span>
+                  <span>{t('settings.language.title')}</span>
                 </div>
               </button>
 
@@ -557,28 +557,28 @@ export default function SettingsPage() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                           </svg>
-                          Profil-Aaluege Zrucksetze (Nur Spieler)
+                          {t('settings.account.resetViewsTitle')}
                         </h3>
                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                          Setz alli Profil-Aaluege zruck uf 0. Das lösch alli Informatione über wer din Spieler-Profil aagluegt het. Aaluege werdet nur für registrierti Benutzer gezählt und jede Benutzer zählt nur einmal.
+                          {t('settings.account.resetViewsDescription')}
                         </p>
                         <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg mb-4">
                           <p className="text-sm text-blue-700 dark:text-blue-300">
-                            <strong>ℹ️ Hinweis:</strong> Recruiter-Profile händ kei Aaluege-Zähler. Nur Spieler-Profile werdet aagluegt und gezählt.
+                            <strong>{t('settings.account.resetViewsNote')}</strong>
                           </p>
                         </div>
                         <button
                           onClick={async () => {
-                            if (confirm('Möchtsch würkli alli Profil-Aaluege zrucksetze?')) {
+                            if (confirm(t('settings.account.resetViewsConfirm'))) {
                               try {
                                 const response = await axios.post(`/api/players/${session?.user?.playerId}/reset-views`)
-                                console.log('Reset views response:', response.data)
-                                alert('Profil-Aaluege erfolgriich zruckgsetzt!')
+
+                                alert(t('settings.account.resetViewsSuccess'))
                                 // Force reload to clear all caches
                                 window.location.href = window.location.href
                               } catch (error: any) {
                                 console.error('Reset views error:', error)
-                                alert(`Fehler bim Zrucksetze: ${error.response?.data?.error || error.message}`)
+                                alert(t('settings.account.resetViewsError'))
                               }
                             }
                           }}
@@ -587,7 +587,7 @@ export default function SettingsPage() {
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                           </svg>
-                          Aaluege Zrucksetze
+                          {t('settings.account.resetViewsButton')}
                         </button>
                       </div>
                     )}
@@ -597,14 +597,14 @@ export default function SettingsPage() {
                       <div className="border border-green-300 dark:border-green-700 rounded-lg p-6 bg-green-50 dark:bg-green-900/20">
                         <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2 flex items-center gap-2">
                           <FileDown className="w-5 h-5" />
-                          Läbeslaauf Exportiere
+                          {t('settings.account.cvExportTitle')}
                         </h3>
                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                           {session?.user?.role === 'HYBRID' 
-                            ? 'Download din professionelle Läbeslaauf als PDF. Du chasch wähle zwüsched Spieler oder Recruiter CV.'
+                            ? t('settings.account.cvExportDescriptionHybrid')
                             : session?.user?.role === 'RECRUITER'
-                            ? 'Download din professionelle Recruiter Läbeslaauf als PDF.'
-                            : 'Download din professionelle Spieler Läbeslaauf als PDF.'}
+                            ? t('settings.account.cvExportDescriptionRecruiter')
+                            : t('settings.account.cvExportDescriptionPlayer')}
                         </p>
                         
                         {session?.user?.role === 'HYBRID' ? (
@@ -614,7 +614,7 @@ export default function SettingsPage() {
                               className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-red-600 text-white rounded-lg hover:from-blue-700 hover:to-red-700 transition font-semibold shadow-md"
                             >
                               <FileDown className="w-4 h-4" />
-                              CV Typ Wähle & Exportiere
+                              {t('settings.account.cvExportButtonChoose')}
                             </button>
                           </div>
                         ) : session?.user?.role === 'RECRUITER' ? (
@@ -623,7 +623,7 @@ export default function SettingsPage() {
                             className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold shadow-md"
                           >
                             <FileDown className="w-4 h-4" />
-                            Recruiter Läbeslaauf Exportiere
+                            {t('settings.account.cvExportButtonRecruiter')}
                           </button>
                         ) : (
                           <button
@@ -631,52 +631,52 @@ export default function SettingsPage() {
                             className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold shadow-md"
                           >
                             <FileDown className="w-4 h-4" />
-                            Spieler Läbeslaauf Exportiere
+                            {t('settings.account.cvExportButtonPlayer')}
                           </button>
                         )}
                       </div>
                     )}
 
                     <div className="border border-orange-300 dark:border-orange-700 rounded-lg p-6">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Konto Deaktiviere</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Dis Profil Wird Uusblendet Und Du Chasch Di Nöd Meh Aamelde. Du Chasch Dis Konto Jederzit Wieder Aktiviere.</p>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('settings.account.deactivateTitle')}</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{t('settings.account.deactivateDescription')}</p>
                       <button 
                         onClick={async () => {
-                          if (confirm('Möchtsch Dis Konto Würkli Deaktiviere?')) {
+                          if (confirm(t('settings.account.deactivateConfirm'))) {
                             try {
                               await axios.post('/api/auth/deactivate')
-                              alert('Dis Konto Isch Deaktiviert Worde')
+                              alert(t('settings.account.deactivateSuccess'))
                               window.location.href = '/'
                             } catch (error) {
-                              alert('Fehler Bim Deaktiviere Vom Konto')
+                              alert(t('settings.account.deactivateError'))
                             }
                           }
                         }}
                         className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors font-medium"
                       >
-                        Konto Deaktiviere
+                        {t('settings.account.deactivateButton')}
                       </button>
                     </div>
                     <div className="border border-red-300 dark:border-red-700 rounded-lg p-6">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Konto Lösche</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">WARNUNG: Alli Dini Date, Videos Und Nachrichtä Werdet Dauerhaft Glöscht. Das Cha Nöd Rückgängig Gmacht Werde!</p>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('settings.account.deleteTitle')}</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{t('settings.account.deleteWarning')}</p>
                       <button 
                         onClick={async () => {
-                          if (confirm('⚠️ ACHTUNG: Das Löschit Alli Dini Date Dauerhaft!\n\nDis Profil, Alli Videos, Alli Nachrichtä Und Di E-Mail Adresse Werdet Komplett Glöscht.\n\nBisch Sicher?')) {
-                            if (confirm('🔴 LETSCHT WARNUNG: Das Cha Würkli Nöd Rückgängig Gmacht Werde!\n\nKlick OK Zum Dis Konto Dauerhaft Lösche.')) {
+                          if (confirm(t('settings.account.deleteConfirm1'))) {
+                            if (confirm(t('settings.account.deleteConfirm2'))) {
                               try {
                                 await axios.delete('/api/auth/delete-account')
-                                alert('✓ Dis Konto Isch Dauerhaft Glöscht Worde')
+                                alert(t('settings.account.deleteSuccess'))
                                 window.location.href = '/'
                               } catch (error) {
-                                alert('Fehler Bim Lösche Vom Konto')
+                                alert(t('settings.account.deleteError'))
                               }
                             }
                           }
                         }}
                         className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium"
                       >
-                        Konto Dauerhaft Lösche
+                        {t('settings.account.deleteButton')}
                       </button>
                     </div>
                   </div>

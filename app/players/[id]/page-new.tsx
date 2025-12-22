@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
 import { formatViewCount } from '@/lib/formatViewCount'
 import axios from 'axios'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface PlayerProfileProps {
   params: {
@@ -77,6 +78,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [showBgSelector, setShowBgSelector] = useState(false)
   const [selectedBg, setSelectedBg] = useState(BACKGROUND_OPTIONS[0])
   const { data: session } = useSession()
+  const { t } = useLanguage()
 
   const isOwner = session?.user?.playerId === params.id
 
@@ -107,7 +109,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">Lade Profil...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">{t('playerProfile.loadingProfile')}</p>
         </div>
       </div>
     )
@@ -117,7 +119,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Spieler Nid Gfunde</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('playerProfile.playerNotFound')}</h1>
           <Link href="/players" className="mt-4 inline-block text-red-600 hover:text-red-700">
             Zrugg Zur Übersicht
           </Link>
@@ -151,7 +153,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         {/* Background selector dropdown */}
         {showBgSelector && isOwner && (
           <div className="absolute top-16 right-4 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 z-10 min-w-[200px]">
-            <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Wähl Es Hintergrund:</p>
+            <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">{t('playerProfile.selectBackground')}</p>
             <div className="space-y-2">
               {BACKGROUND_OPTIONS.map((bg) => (
                 <button
@@ -177,7 +179,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 text-sm">
           <Eye className="w-4 h-4 text-gray-600 dark:text-gray-400" />
           <span className="font-semibold text-gray-900 dark:text-white">{formatViewCount(player.views || 0)}</span>
-          <span className="text-gray-600 dark:text-gray-400">Profilufrufe</span>
+          <span className="text-gray-600 dark:text-gray-400">{t('playerProfile.profileViews')}</span>
         </div>
       </div>
 
@@ -501,7 +503,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
             {activeTab === 'karriere' && player.clubHistory && (
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Vereinsgeschichte</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('playerProfile.clubHistory')}</h3>
                 <ClubHistory history={player.clubHistory} />
               </div>
             )}

@@ -30,7 +30,7 @@ export async function PATCH(
   } catch (error) {
     console.error('Error marking notification as read:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Aktualisieren' },
+      { error: 'Failed to update notification' },
       { status: 500 }
     )
   }
@@ -45,7 +45,7 @@ export async function DELETE(
     const session = await getServerSession(authOptions)
     
     if (!session?.user) {
-      return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     await prisma.notification.delete({
@@ -59,7 +59,7 @@ export async function DELETE(
   } catch (error) {
     console.error('Error deleting notification:', error)
     return NextResponse.json(
-      { error: 'Fehler beim Löschen' },
+      { error: 'Failed to delete notification' },
       { status: 500 }
     )
   }

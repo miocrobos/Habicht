@@ -119,7 +119,7 @@ export async function GET(
 
     if (!player) {
       return NextResponse.json(
-        { error: 'Spieler Nid Gfunde' },
+        { error: 'Player not found' },
         { status: 404 }
       );
     }
@@ -128,7 +128,7 @@ export async function GET(
   } catch (error) {
     console.error('Error fetching player:', error);
     return NextResponse.json(
-      { error: 'Fehler Bim Lade Vo Spieler-Date' },
+      { error: 'Failed to load player data' },
       { status: 500 }
     );
   }
@@ -150,11 +150,6 @@ export async function PUT(
 
     const body = await request.json();
     const { playerData, clubHistory, achievements } = body;
-
-    console.log('=== SAVE PLAYER DATA ===');
-    console.log('Received playerData:', JSON.stringify(playerData, null, 2));
-    console.log('Received clubHistory:', JSON.stringify(clubHistory, null, 2));
-    console.log('Current clubs in request:', clubHistory?.filter((c: any) => c.currentClub === true));
 
     // Check if lookingForClub status is changing to true
     const existingPlayer = await prisma.player.findUnique({
@@ -191,12 +186,6 @@ export async function PUT(
         name: `${playerData.firstName} ${playerData.lastName}`
       }
     });
-
-    console.log('=== UPDATING PLAYER ===');
-    console.log('Current league value:', currentLeague, 'Type:', typeof currentLeague);
-    console.log('Gender:', playerData.gender);
-    console.log('Positions:', playerData.positions);
-    console.log('Employment status:', playerData.employmentStatus);
 
     // Update player
     const player = await prisma.player.update({
@@ -318,18 +307,6 @@ export async function PUT(
             clubId = clubInDb.id;
           }
 
-          console.log('Processing club history entry:', {
-            clubName: club.clubName,
-            clubId,
-            league: club.league,
-            yearFrom,
-            yearTo,
-            currentClub: club.currentClub,
-            currentClubType: typeof club.currentClub,
-            rawYearFrom: club.yearFrom,
-            rawYearTo: club.yearTo
-          });
-
           return {
             playerId: params.id,
             clubId: clubId,
@@ -403,7 +380,7 @@ export async function PUT(
       cause: error instanceof Error ? error.cause : undefined
     });
     return NextResponse.json(
-      { error: 'Fehler Bim Aktualisiere Vo Spieler-Date', details: error instanceof Error ? error.message : 'Unknown' },
+      { error: 'Failed to update player data' },
       { status: 500 }
     );
   }

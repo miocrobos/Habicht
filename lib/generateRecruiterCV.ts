@@ -37,9 +37,10 @@ interface RecruiterData {
   }>;
 }
 
-export async function generateRecruiterCV(recruiterData: RecruiterData): Promise<Blob> {
+export async function generateRecruiterCV(recruiterData: RecruiterData, language: string = 'gsw'): Promise<Blob> {
   console.log('🎯 Recruiter CV Generation - Professional Format Starting...');
   console.log('Recruiter:', recruiterData.firstName, recruiterData.lastName);
+  console.log('Language:', language);
   
   const doc = new jsPDF();
   

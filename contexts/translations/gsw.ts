@@ -168,6 +168,15 @@ export const gswTranslations = {
         browsePlayers: 'Spieler durchsüäche',
       },
     },
+    // Positions
+    positions: {
+      setter: 'Zuespieler',
+      outsidehitter: 'Ussenaagriffer',
+      opposite: 'Diagonal',
+      middleblocker: 'Mittelblock',
+      libero: 'Libero',
+      universal: 'Universal',
+    },
     // About Page
     about: {
       title: 'Über Habicht',

@@ -169,6 +169,15 @@ export const itTranslations = {
         browsePlayers: 'Sfoglia giocatori',
       },
     },
+    // Positions
+    positions: {
+      setter: 'Palleggiatore',
+      outsidehitter: 'Schiacciatore',
+      opposite: 'Opposto',
+      middleblocker: 'Centrale',
+      libero: 'Libero',
+      universal: 'Universale',
+    },
     // About Page
     about: {
       title: 'Informazioni su Habicht',

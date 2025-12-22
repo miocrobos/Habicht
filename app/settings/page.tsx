@@ -463,7 +463,7 @@ export default function SettingsPage() {
               {activeTab === 'notifications' && (
                 <>
                   <div className="border-b border-gray-200 dark:border-gray-700 p-6">
-                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">{t('settings.notifications')}</h2>
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">{t('settings.notifications.title')}</h2>
                     <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.notifications.subtitle')}</p>
                   </div>
                   <div className="p-6 space-y-6">

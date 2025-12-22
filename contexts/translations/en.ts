@@ -170,6 +170,15 @@ export const enTranslations = {
         browsePlayers: 'Browse Players',
       },
     },
+    // Positions
+    positions: {
+      setter: 'Setter',
+      outsidehitter: 'Outside Hitter',
+      opposite: 'Opposite',
+      middleblocker: 'Middle Blocker',
+      libero: 'Libero',
+      universal: 'Universal',
+    },
     // About Page
     about: {
       title: 'About Habicht',

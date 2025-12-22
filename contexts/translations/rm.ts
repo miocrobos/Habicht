@@ -167,6 +167,15 @@ export const rmTranslations = {
         browsePlayers: 'Tschertgar giugaders',
       },
     },
+    // Positions
+    positions: {
+      setter: 'Passlader',
+      outsidehitter: 'Ataccant',
+      opposite: 'Diagonal',
+      middleblocker: 'Central',
+      libero: 'Libero',
+      universal: 'Universal',
+    },
     // About Page
     about: {
       title: 'Davart Habicht',

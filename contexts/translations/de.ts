@@ -167,6 +167,15 @@ export const deTranslations = {
         browsePlayers: 'Spieler durchsuchen',
       },
     },
+    // Positions
+    positions: {
+      setter: 'Zuspieler',
+      outsidehitter: 'Aussenangreifer',
+      opposite: 'Diagonal',
+      middleblocker: 'Mittelblock',
+      libero: 'Libero',
+      universal: 'Universal',
+    },
     // About Page
     about: {
       title: 'Über Habicht',

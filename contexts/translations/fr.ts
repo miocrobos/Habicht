@@ -115,7 +115,7 @@ export const frTranslations = {
       },
       leagues: {
         title: 'Toutes les ligues. Un endroit.',
-        subtitle: 'De la LNA volleyball d\'élite î  la 5e ligue â€“ découvre des joueurs de toute la Suisse.',
+        subtitle: 'De la LNA volleyball d\'élite à la 5e ligue — découvre des joueurs de toute la Suisse.',
         nla: 'Ligue nationale A',
         nlb: 'Ligue nationale B',
         firstLeague: '1ère Ligue',

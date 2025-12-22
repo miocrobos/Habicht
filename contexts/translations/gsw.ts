@@ -116,7 +116,7 @@ export const gswTranslations = {
       },
       leagues: {
         title: 'Alli Lige. Ein Ort.',
-        subtitle: 'Vo NLA Spitzenvolleyball bis zur 5. Liga â€“ entdeck Spieler us dr ganzä Schwiiz.',
+        subtitle: 'Vo NLA Spitzenvolleyball bis zur 5. Liga — entdeck Spieler us dr ganzä Schwiiz.',
         nla: 'Nationalliga A',
         nlb: 'Nationalliga B',
         firstLeague: '1. Liga',

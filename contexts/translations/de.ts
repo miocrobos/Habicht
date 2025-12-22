@@ -1,5 +1,5 @@
 export const deTranslations = {
-    'gender.male': 'Münnlich',
+    'gender.male': 'Männlich',
     'gender.female': 'Weiblich',
     // Login
     'login.title': 'Anmelden',

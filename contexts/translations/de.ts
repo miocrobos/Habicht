@@ -115,7 +115,7 @@ export const deTranslations = {
       },
       leagues: {
         title: 'Alle Ligen. Ein Ort.',
-        subtitle: 'Von NLA Spitzenvolleyball bis zur 5. Liga â€“ entdecke Spieler aus der ganzen Schweiz.',
+        subtitle: 'Von NLA Spitzenvolleyball bis zur 5. Liga — entdecke Spieler aus der ganzen Schweiz.',
         nla: 'Nationalliga A',
         nlb: 'Nationalliga B',
         firstLeague: '1. Liga',

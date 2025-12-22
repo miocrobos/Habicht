@@ -117,7 +117,7 @@
       },
       leagues: {
         title: 'Tutte le leghe. Un posto.',
-        subtitle: 'Dalla LNA pallavolo d\'Ã©lite alla 5a lega â€“ scopri giocatori da tutta la Svizzera.',
+        subtitle: 'Dalla LNA pallavolo d\'élite alla 5a lega â€“ scopri giocatori da tutta la Svizzera.',
         nla: 'Lega nazionale A',
         nlb: 'Lega nazionale B',
         firstLeague: '1a Lega',
@@ -128,7 +128,7 @@
         players: 'Giocatori',
       },
       features: {
-        title: 'PerchÃ© Habicht?',
+        title: 'Perché Habicht?',
         subtitle: 'La soluzione moderna per lo scouting della pallavolo svizzera',
         search: {
           title: 'Ricerca Intelligente',
@@ -259,7 +259,7 @@
     },
     // Privacy Page
     privacy: {
-      backToHome: 'â† Torna alla homepage',
+      backToHome: '← Torna alla homepage',
       title: 'Informativa sulla privacy',
       lastUpdated: 'Ultimo aggiornamento:',
       section1Title: '1. Responsabile',
@@ -288,9 +288,9 @@
       section5Item1: 'Altri utenti registrati (informazioni profilo)',
       section5Item2: 'Fornitori tecnici (es. hosting, database)',
       section5Item3: 'AutoritÃ , se richiesto dalla legge',
-      section5Note: 'Non vendiamo nÃ© affittiamo mai i tuoi dati a terzi.',
+      section5Note: 'Non vendiamo né affittiamo mai i tuoi dati a terzi.',
       section6Title: '6. Durata della conservazione',
-      section6Text: 'I tuoi dati vengono conservati finchÃ© hai un account attivo. Dopo la cancellazione del tuo account, i tuoi dati verranno rimossi entro 30 giorni, salvo obbligo legale di conservazione.',
+      section6Text: 'I tuoi dati vengono conservati finché hai un account attivo. Dopo la cancellazione del tuo account, i tuoi dati verranno rimossi entro 30 giorni, salvo obbligo legale di conservazione.',
       section7Title: '7. I tuoi diritti',
       section7Intro: 'Hai il diritto a:',
       section7Item1Title: 'Informazione:',
@@ -318,7 +318,7 @@
     },
     // Terms Page
     terms: {
-      backToHome: 'â† Torna alla homepage',
+      backToHome: '← Torna alla homepage',
       title: 'Condizioni d\'uso',
       lastUpdated: 'Ultimo aggiornamento:',
       section1Title: '1. Campo di applicazione',
@@ -372,8 +372,8 @@
       playersFound: 'giocatori trovati',
       noPlayersFound: 'Nessun giocatore trovato con questi filtri',
       resetFilters: 'Reimposta filtri',
-      toMen: 'Agli Uomini â†’',
-      toWomen: 'Alle Donne â†’',
+      toMen: 'Agli Uomini ←’',
+      toWomen: 'Alle Donne ←’',
       menPlayers: 'Giocatori di Pallavolo Maschile Svizzera',
       womenPlayers: 'Giocatrici di Pallavolo Femminile Svizzera',
       showAll: 'Mostra tutto',
@@ -399,12 +399,12 @@
       clubsFound: 'club trovati',
       loading: 'Caricamento club...',
       playersRegistered: 'giocatori registrati',
-      viewPlayers: 'Giocatori â†’',
-      website: 'Sito web â†’',
+      viewPlayers: 'Giocatori ←’',
+      website: 'Sito web ←’',
       noClubsFound: 'Nessun club trovato. Si prega di regolare i filtri.',
       missingClub: 'Manca il tuo club?',
       missingClubText: 'Stiamo ampliando il nostro database dei club. Se manca il tuo club, segnalacelo!',
-      submitClub: 'Segnala club â†’',
+      submitClub: 'Segnala club ←’',
     },
     // Club Profile
     clubProfile: {

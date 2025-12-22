@@ -40,7 +40,7 @@ export const frTranslations = {
     'auth.register.haveAccount': 'Vous avez dîjà un compte?',
     // Auth Forgot Password
     'auth.forgotPassword.title': 'Rîinitialiser le mot de passe',
-    'auth.forgotPassword.subtitle': 'Entrez votre adresse email pour rîinitialiser votre mot de passe',
+    'auth.forgotPassword.subtitle': 'Entrez votre adresse email pour réinitialiser votre mot de passe',
     'auth.forgotPassword.email': 'Adresse email',
     'auth.forgotPassword.newPassword': 'Nouveau mot de passe',
     'auth.forgotPassword.confirmPassword': 'Confirmer le mot de passe',
@@ -50,7 +50,7 @@ export const frTranslations = {
     'auth.forgotPassword.enterEmail': 'Veuillez entrer votre adresse email',
     'auth.forgotPassword.passwordMinLength': 'Le mot de passe doit contenir au moins 8 caractères',
     'auth.forgotPassword.passwordsNoMatch': 'Les mots de passe ne correspondent pas',
-    'auth.forgotPassword.checkEmail': 'Vîrifiez vos emails pour rîinitialiser votre mot de passe',
+    'auth.forgotPassword.checkEmail': 'Vérifiez vos emails pour réinitialiser votre mot de passe',
     'auth.forgotPassword.error': 'Une erreur s\'est produite',
     // Auth Consent
     'auth.consent.title': 'Consentement requis',

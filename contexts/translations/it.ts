@@ -117,7 +117,7 @@ export const itTranslations = {
       },
       leagues: {
         title: 'Tutte le leghe. Un posto.',
-        subtitle: 'Dalla LNA pallavolo d\'élite alla 5a lega â€“ scopri giocatori da tutta la Svizzera.',
+        subtitle: 'Dalla LNA pallavolo d\'élite alla 5a lega — scopri giocatori da tutta la Svizzera.',
         nla: 'Lega nazionale A',
         nlb: 'Lega nazionale B',
         firstLeague: '1a Lega',

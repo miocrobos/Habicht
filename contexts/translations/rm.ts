@@ -115,7 +115,7 @@ export const rmTranslations = {
       },
       leagues: {
         title: 'Tut las ligas. In lieu.',
-        subtitle: 'Da la LNA volleyball d\'elite a la 5avla liga â€“ scuvra giugaders da tutta la Svizra.',
+        subtitle: 'Da la LNA volleyball d\'elite a la 5avla liga — scuvra giugaders da tutta la Svizra.',
         nla: 'Liga naziunala A',
         nlb: 'Liga naziunala B',
         firstLeague: '1avla Liga',

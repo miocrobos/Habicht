@@ -158,8 +158,8 @@
     about: {
       title: 'Informazioni su Habicht',
       what: {
-        title: 'Cos\'Ã¨ Habicht?',
-        description1: 'Habicht Ã¨ la piattaforma per i talenti della pallavolo svizzera. Connettiamo i giocatori con reclutatori e scout da tutta la Svizzera.',
+        title: 'Cos\'è Habicht?',
+        description1: 'Habicht è la piattaforma per i talenti della pallavolo svizzera. Connettiamo i giocatori con reclutatori e scout da tutta la Svizzera.',
         description2: 'Ispirato a Volleybox, ma sviluppato specificamente per il panorama della pallavolo svizzera, con integrazione diretta a Swiss Volley e ai club piÃ¹ importanti.',
       },
       mission: {
@@ -193,10 +193,10 @@
         submit: 'Accedi',
         loading: 'Caricamento...',
         invalidCredentials: 'Credenziali non valide',
-        error: 'Si Ã¨ verificato un errore. Riprova.',
+        error: 'Si è verificato un errore. Riprova.',
         passwordResetSuccess: 'Password reimpostata con successo! Ora puoi accedere.',
         invalidToken: 'Link non valido o scaduto.',
-        tokenExpired: 'Il link Ã¨ scaduto. Richiedine uno nuovo.',
+        tokenExpired: 'Il link è scaduto. Richiedine uno nuovo.',
       },
       register: {
         title: 'Scegli il tuo ruolo',
@@ -338,7 +338,7 @@
       section7Title: '7. Modifiche',
       section7Text: 'Possiamo adattare queste condizioni d\'uso in qualsiasi momento. Le modifiche verranno comunicate via email o pubblicate sulla piattaforma.',
       section8Title: '8. Diritto applicabile',
-      section8Text: 'Si applica il diritto svizzero. Il foro competente Ã¨ Zurigo, Svizzera.',
+      section8Text: 'Si applica il diritto svizzero. Il foro competente è Zurigo, Svizzera.',
       section9Title: '9. Contatto',
       section9Text: 'Per domande sulle condizioni d\'uso puoi contattarci:',
     },

@@ -129,7 +129,6 @@ const COUNTRY_CODES: Record<string, string> = {
   'Ägypten': 'EG',
   'El Salvador': 'SV',
   'England': 'GB-ENG',
-  'England': 'GB-ENG',
   'Equatorial Guinea': 'GQ',
   'Äquatorialguinea': 'GQ',
   'Eritrea': 'ER',
@@ -253,7 +252,6 @@ const COUNTRY_CODES: Record<string, string> = {
   // M
   'Macao': 'MO',
   'Macau': 'MO',
-  'Macao': 'MO',
   'North Macedonia': 'MK',
   'Macedonia': 'MK',
   'Mazedonien': 'MK',

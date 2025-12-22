@@ -5,9 +5,11 @@ import { Upload, Link as LinkIcon, Save, Loader2, Search, Check, Plus } from 'lu
 import axios from 'axios'
 import Image from 'next/image'
 import ImageUpload from '@/components/shared/ImageUpload'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 // Admin panel for managing clubs - includes add new club feature
 export default function ClubAdminPage() {
+  const { t } = useLanguage()
   const [clubs, setClubs] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')

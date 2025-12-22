@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Upload, X, Youtube, Instagram, Music2, Link as LinkIcon } from 'lucide-react'
 import axios from 'axios'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface VideoUploadProps {
   playerId: string
@@ -13,6 +14,7 @@ interface VideoUploadProps {
 type UploadType = 'file' | 'youtube' | 'instagram' | 'tiktok'
 
 export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadProps) {
+  const { t } = useLanguage()
   const [uploadType, setUploadType] = useState<UploadType>('file')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')

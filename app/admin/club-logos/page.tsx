@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react'
 import { Upload, Plus, X } from 'lucide-react'
 import ImageUpload from '@/components/shared/ImageUpload'
 import ClubBadge from '@/components/shared/ClubBadge'
+import { useLanguage } from '@/contexts/LanguageContext'
 import axios from 'axios'
 
 export default function ManageClubLogosPage() {
+  const { t } = useLanguage()
   const [clubs, setClubs] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedClub, setSelectedClub] = useState<any>(null)

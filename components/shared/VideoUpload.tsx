@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Upload, Video, X } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface VideoUploadProps {
   value: string
@@ -10,6 +11,7 @@ interface VideoUploadProps {
 }
 
 export default function VideoUpload({ value, onChange, label = 'Video hochladen' }: VideoUploadProps) {
+  const { t } = useLanguage()
   const [uploading, setUploading] = useState(false)
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {

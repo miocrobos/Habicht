@@ -1,6 +1,6 @@
 ﻿export const frTranslations = {
     'gender.male': 'Masculin',
-    'gender.female': 'Fé©minin',
+    'gender.female': 'Féminin',
     // Login
     'login.title': 'Se connecter',
     'login.button': 'Se connecter',

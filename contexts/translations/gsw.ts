@@ -1,6 +1,6 @@
 ﻿export const gswTranslations = {
     // Gender
-    'gender.male': 'Mä¤nnlich',
+    'gender.male': 'Männlich',
     'gender.female': 'Wiiblich',
     // Login
     'login.title': 'Aamelde',

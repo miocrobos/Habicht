@@ -10,7 +10,7 @@ interface VideoUploadProps {
   label?: string
 }
 
-export default function VideoUpload({ value, onChange, label = 'Video hochladen' }: VideoUploadProps) {
+export default function VideoUpload({ value, onChange, label }: VideoUploadProps) {
   const { t } = useLanguage()
   const [uploading, setUploading] = useState(false)
 
@@ -20,7 +20,7 @@ export default function VideoUpload({ value, onChange, label = 'Video hochladen'
 
     // Check file type
     if (!file.type.startsWith('video/')) {
-      alert('Bitte wähle eine Video-Datei aus')
+      alert(t('errors.pleaseSelectVideo'))
       return
     }
 
@@ -49,7 +49,7 @@ export default function VideoUpload({ value, onChange, label = 'Video hochladen'
     <div className="space-y-2">
       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
         <Video className="w-4 h-4 inline mr-1" />
-        {label}
+        {label || t('video.uploadVideo')}
       </label>
       
       {!value ? (
@@ -68,10 +68,10 @@ export default function VideoUpload({ value, onChange, label = 'Video hochladen'
           >
             <Upload className="w-8 h-8 text-gray-400" />
             <span className="text-sm text-gray-600 dark:text-gray-400">
-              {uploading ? 'Wird hochgeladen...' : 'Klicke zum Hochladen'}
+              {uploading ? t('video.uploading') : t('video.clickToUpload')}
             </span>
             <span className="text-xs text-gray-500 dark:text-gray-500">
-              MP4, MOV, AVI (max. 50MB)
+              {t('video.formats')}
             </span>
           </label>
         </div>

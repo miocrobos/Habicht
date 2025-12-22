@@ -107,7 +107,7 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-2xl font-bold mb-6">Video hinzufügen</h2>
+      <h2 className="text-2xl font-bold mb-6">{t('video.addVideo')}</h2>
 
       {/* Upload Type Selection */}
       <div className="flex gap-2 mb-6 overflow-x-auto">
@@ -116,7 +116,7 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
           onClick={() => setUploadType('file')}
           icon={<Upload className="w-4 h-4" />}
         >
-          Upload
+          {t('video.upload')}
         </TypeButton>
         <TypeButton
           active={uploadType === 'youtube'}
@@ -145,7 +145,7 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
       <div className="space-y-4 mb-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Titel *
+            {t('video.title')} *
           </label>
           <input
             type="text"

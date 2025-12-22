@@ -1069,8 +1069,19 @@ export const enTranslations = {
       occupation: 'Occupation',
       volleyballInfo: 'Volleyball Information',
     },
+    // Video Upload
+    video: {
+      addVideo: 'Add Video',
+      upload: 'Upload',
+      title: 'Title',
+      uploadVideo: 'Upload Video',
+      uploading: 'Uploading...',
+      clickToUpload: 'Click to upload',
+      formats: 'MP4, MOV, AVI (max. 50MB)',
+    },
     // Errors and Alerts
     errors: {
+      pleaseSelectVideo: 'Please select a video file',
       loginRequired: 'Please log in to send a message',
       chatStartError: 'Error starting chat',
       videoFileRequired: 'Please select a video file',

@@ -151,6 +151,21 @@ export const frTranslations = {
         registerPlayer: 'S\'inscrire comme joueur',
         registerRecruiter: 'S\'inscrire comme scout',
       },
+      stats: {
+        activePlayers: 'Joueurs actifs',
+        cantons: 'Cantons',
+        swissClubs: 'Clubs suisses',
+        videoHighlights: 'Vidéos highlights',
+      },
+      gender: {
+        mensVolleyball: 'Volleyball masculin',
+        womensVolleyball: 'Volleyball féminin',
+        mensLeaguePlayers: 'Joueurs LNA, LNB, 1ère & 2ème ligue',
+        womensLeaguePlayers: 'Joueuses LNA, LNB, 1ère & 2ème ligue',
+        discoverMen: 'Découvrir les hommes →',
+        discoverWomen: 'Découvrir les femmes →',
+        browsePlayers: 'Parcourir les joueurs',
+      },
     },
     // About Page
     about: {

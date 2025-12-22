@@ -152,6 +152,21 @@ export const gswTranslations = {
         registerPlayer: 'Als Spieler registriere',
         registerRecruiter: 'Als Scout registriere',
       },
+      stats: {
+        activePlayers: 'Aktivi Spieler',
+        cantons: 'Kantön',
+        swissClubs: 'Schwiizer Veräin',
+        videoHighlights: 'Video Highlights',
+      },
+      gender: {
+        mensVolleyball: 'Männer Volleyball',
+        womensVolleyball: 'Fraue Volleyball',
+        mensLeaguePlayers: 'NLA, NLB, 1. & 2. Liga Spieler',
+        womensLeaguePlayers: 'NLA, NLB, 1. & 2. Liga Spielerinne',
+        discoverMen: 'Männer entdecke →',
+        discoverWomen: 'Fraue entdecke →',
+        browsePlayers: 'Spieler durchsüäche',
+      },
     },
     // About Page
     about: {

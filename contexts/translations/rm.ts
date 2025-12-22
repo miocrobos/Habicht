@@ -151,6 +151,21 @@ export const rmTranslations = {
         registerPlayer: 'S\'annunziar sco giugader',
         registerRecruiter: 'S\'annunziar sco scout',
       },
+      stats: {
+        activePlayers: 'Giugaders activ',
+        cantons: 'Chantuns',
+        swissClubs: 'Clubs svizzers',
+        videoHighlights: 'Video highlights',
+      },
+      gender: {
+        mensVolleyball: 'Volleyball da persunas masculas',
+        womensVolleyball: 'Volleyball da dunnas',
+        mensLeaguePlayers: 'Giugaders LNA, LNB, 1. & 2. liga',
+        womensLeaguePlayers: 'Giugadras LNA, LNB, 1. & 2. liga',
+        discoverMen: 'Descubrir umens →',
+        discoverWomen: 'Descubrir dunnas →',
+        browsePlayers: 'Tschertgar giugaders',
+      },
     },
     // About Page
     about: {

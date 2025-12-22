@@ -154,6 +154,21 @@ export const enTranslations = {
         registerPlayer: 'Register as player',
         registerRecruiter: 'Register as scout',
       },
+      stats: {
+        activePlayers: 'Active Players',
+        cantons: 'Cantons',
+        swissClubs: 'Swiss Clubs',
+        videoHighlights: 'Video Highlights',
+      },
+      gender: {
+        mensVolleyball: 'Men\'s Volleyball',
+        womensVolleyball: 'Women\'s Volleyball',
+        mensLeaguePlayers: 'NLA, NLB, 1st & 2nd League Players',
+        womensLeaguePlayers: 'NLA, NLB, 1st & 2nd League Players',
+        discoverMen: 'Discover Men →',
+        discoverWomen: 'Discover Women →',
+        browsePlayers: 'Browse Players',
+      },
     },
     // About Page
     about: {

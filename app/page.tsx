@@ -353,22 +353,22 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <StatCard 
               number="1,000+" 
-              label={t('playerProfile.activePlayers')} 
+              label={t('home.stats.activePlayers')} 
               icon="👥"
             />
             <StatCard 
               number="26" 
-              label={t('playerProfile.cantons')} 
+              label={t('home.stats.cantons')} 
               icon="🇨🇭"
             />
             <StatCard 
               number="100+" 
-              label={t('playerProfile.swissClubs')} 
+              label={t('home.stats.swissClubs')} 
               icon="🏐"
             />
             <StatCard 
               number="5,000+" 
-              label={t('playerProfile.videoHighlights')} 
+              label={t('home.stats.videoHighlights')} 
               icon="🎥"
             />
           </div>
@@ -386,12 +386,12 @@ export default function Home() {
                 <div className="absolute inset-0 bg-black/20" />
                 <div className="relative h-full flex flex-col items-center justify-center text-white p-6 md:p-8">
                   <div className="text-6xl md:text-8xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">♂</div>
-                  <h3 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">{t('playerProfile.mensVolleyball')}</h3>
+                  <h3 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">{t('home.gender.mensVolleyball')}</h3>
                   <p className="text-lg md:text-xl mb-4 md:mb-6 opacity-90 text-center">
-                    {t('playerProfile.mensLeaguePlayers')}
+                    {t('home.gender.mensLeaguePlayers')}
                   </p>
                   <div className="bg-white dark:bg-gray-800 text-blue-600 px-8 py-3 rounded-xl font-bold group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition">
-                    {t('playerProfile.discoverMen')}
+                    {t('home.gender.discoverMen')}
                   </div>
                 </div>
               </div>
@@ -404,12 +404,12 @@ export default function Home() {
                 <div className="absolute inset-0 bg-black/20" />
                 <div className="relative h-full flex flex-col items-center justify-center text-white p-6 md:p-8">
                   <div className="text-6xl md:text-8xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">♀</div>
-                  <h3 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">{t('playerProfile.womensVolleyball')}</h3>
+                  <h3 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">{t('home.gender.womensVolleyball')}</h3>
                   <p className="text-lg md:text-xl mb-4 md:mb-6 opacity-90 text-center">
-                    {t('playerProfile.womensLeaguePlayers')}
+                    {t('home.gender.womensLeaguePlayers')}
                   </p>
                   <div className="bg-white dark:bg-gray-800 text-pink-600 px-8 py-3 rounded-xl font-bold group-hover:bg-pink-100 dark:group-hover:bg-pink-900/30 transition">
-                    {t('playerProfile.discoverWomen')}
+                    {t('home.gender.discoverWomen')}
                   </div>
                 </div>
               </div>
@@ -452,7 +452,7 @@ export default function Home() {
             >
               <span className="flex items-center gap-2 justify-center">
                 <Search className="w-6 h-6" />
-                {t('playerProfile.browsePlayers')}
+                {t('home.gender.browsePlayers')}
               </span>
             </Link>
           </div>

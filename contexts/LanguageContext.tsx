@@ -41,14 +41,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const setLanguage = (lang: Language) => {
-    // Swiss German (gsw) is the default language - no translation needed
-    // For other languages, translation happens automatically via <Translate> component
-    if (lang !== 'gsw') {
-      console.log(`Language changed to ${lang} - content will be translated automatically`)
-    }
     setLanguageState(lang)
     localStorage.setItem('language', lang)
-    // Language changes dynamically without reload, similar to browser translate extension
   }
 
   const t = (key: string): string => {

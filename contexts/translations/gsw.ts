@@ -657,6 +657,7 @@ export const gswTranslations = {
     settings: {
       title: 'Iistellige',
       subtitle: 'Verwalte Dini Präferenzä Und Konto Iistellige',
+      saved: 'Iistellige erfolgriich gspeicheret!',
       language: {
         title: 'Sprach',
         subtitle: 'Wähl Dini Bevorzugti Sprach',

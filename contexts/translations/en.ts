@@ -837,6 +837,7 @@ export const enTranslations = {
     settings: {
       title: 'Settings',
       subtitle: 'Manage your preferences and account settings',
+      saved: 'Settings saved successfully!',
       language: {
         title: 'Language',
         subtitle: 'Choose your preferred language',

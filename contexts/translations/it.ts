@@ -590,8 +590,7 @@ export const itTranslations = {
     // Settings
     settings: {
       title: 'Impostazioni',
-      subtitle: 'Gestisci le tue preferenze e impostazioni account',
-      language: {
+      subtitle: 'Gestisci le tue preferenze e impostazioni account',      saved: 'Impostazioni salvate con successo!',      language: {
         title: 'Lingua',
         subtitle: 'Scegli la tua lingua preferita',
       },

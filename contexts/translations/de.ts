@@ -577,6 +577,7 @@ export const deTranslations = {
     settings: {
       title: 'Einstellungen',
       subtitle: 'Verwalten Sie Ihre Präferenzen und Kontoeinstellungen',
+      saved: 'Einstellungen erfolgreich gespeichert!',
       language: {
         title: 'Sprache',
         subtitle: 'Wählen Sie Ihre bevorzugte Sprache',

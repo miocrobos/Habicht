@@ -591,6 +591,7 @@ export const rmTranslations = {
     settings: {
       title: 'Parameters',
       subtitle: 'Administrescha tias preferenzas e parameters dal conto',
+      saved: 'Parameters memorisads cun success!',
       language: {
         title: 'Lingua',
         subtitle: 'Tscherna tia lingua preferida',

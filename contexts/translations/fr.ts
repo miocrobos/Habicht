@@ -591,6 +591,7 @@ export const frTranslations = {
     settings: {
       title: 'Paramètres',
       subtitle: 'Gérez vos préférences et paramètres de compte',
+      saved: 'Paramètres enregistrés avec succès!',
       language: {
         title: 'Langue',
         subtitle: 'Choisissez votre langue préférée',

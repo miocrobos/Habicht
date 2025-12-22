@@ -580,42 +580,65 @@ export const rmTranslations = {
       },
       notifications: {
         subtitle: 'Administrar notificaziuns',
-        chat: 'Messadis da Chat',
-        'chat.description': 'Retschaiver notificaziuns per messadis da chat',
-        playerLooking: 'Giugader Tschertga Club',
-        'playerLooking.description': 'Notificaziuns cur che giugaders tschertgan in club',
-        recruiterSearching: 'Recrutader en Tschertga',
-        'recruiterSearching.description': 'Notificaziuns dals recrutaders',
+        chat: {
+          title: 'Messadis da Chat',
+          description: 'Retschaiver notificaziuns per messadis da chat',
+        },
+        playerLooking: {
+          title: 'Giugader Tschertga Club',
+          description: 'Notificaziuns cur che giugaders tschertgan in club',
+        },
+        recruiterSearching: {
+          title: 'Recrutader en Tschertga',
+          description: 'Notificaziuns dals recrutaders',
+        },
         note: {
           title: 'Remartga',
           description: 'Notificaziuns via e-mail èn actualmain deactivadas',
         },
       },
       theme: {
-        light: 'Cler',
-        'light.description': 'Colurs cleras per il di',
-        dark: 'Stgir',
-        'dark.description': 'Colurs stgiras per la notg',
+        title: 'Tema',
+        light: {
+          title: 'Cler',
+          description: 'Colurs cleras per il di',
+        },
+        dark: {
+          title: 'Stgir',
+          description: 'Colurs stgiras per la notg',
+        },
       },
       email: {
-        show: 'Mussar e-mail',
-        'show.description': 'Permetter als auters da vesair tia adressa dad e-mail',
+        title: 'E-mail',
+        show: {
+          title: 'Mussar e-mail',
+          description: 'Permetter als auters da vesair tia adressa dad e-mail',
+        },
       },
       phone: {
-        show: 'Mussar telefon',
-        'show.description': 'Permetter als auters da vesair tes numer da telefon',
+        show: {
+          title: 'Mussar telefon',
+          description: 'Permetter als auters da vesair tes numer da telefon',
+        },
       },
       privacy: {
+        title: 'Protecziun da datas',
         subtitle: 'Administrescha tias preferenzas da protecziun da datas',
       },
       password: {
         change: 'Midar il pled-clav',
-        current: 'Pled-clav actual',
-        'current.placeholder': 'Endatescha tes pled-clav actual',
-        new: 'Nov pled-clav',
-        'new.placeholder': 'Endatescha in nov pled-clav',
-        confirm: 'Confermar il pled-clav',
-        'confirm.placeholder': 'Conferma tes nov pled-clav',
+        current: {
+          title: 'Pled-clav actual',
+          placeholder: 'Endatescha tes pled-clav actual',
+        },
+        new: {
+          title: 'Nov pled-clav',
+          placeholder: 'Endatescha in nov pled-clav',
+        },
+        confirm: {
+          title: 'Confermar il pled-clav',
+          placeholder: 'Conferma tes nov pled-clav',
+        },
       },
       account: {
         title: 'Administraziun dal conto',

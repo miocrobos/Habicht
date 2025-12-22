@@ -827,42 +827,65 @@ export const enTranslations = {
       },
       notifications: {
         subtitle: 'Manage your notification preferences',
-        chat: 'Chat messages',
-        'chat.description': 'Receive notifications for chat messages',
-        playerLooking: 'Player looking for club',
-        'playerLooking.description': 'Notifications when players are looking for a club',
-        recruiterSearching: 'Recruiter searching',
-        'recruiterSearching.description': 'Notifications from recruiters',
+        chat: {
+          title: 'Chat messages',
+          description: 'Receive notifications for chat messages',
+        },
+        playerLooking: {
+          title: 'Player looking for club',
+          description: 'Notifications when players are looking for a club',
+        },
+        recruiterSearching: {
+          title: 'Recruiter searching',
+          description: 'Notifications from recruiters',
+        },
         note: {
           title: 'Note:',
           description: 'Email notifications are currently disabled',
         },
       },
       theme: {
-        light: 'Light',
-        'light.description': 'Light colors for daytime',
-        dark: 'Dark',
-        'dark.description': 'Dark colors for nighttime',
+        title: 'Theme',
+        light: {
+          title: 'Light',
+          description: 'Light colors for daytime',
+        },
+        dark: {
+          title: 'Dark',
+          description: 'Dark colors for nighttime',
+        },
       },
       email: {
-        show: 'Show Email',
-        'show.description': 'Allow others to see your email address',
+        title: 'Email',
+        show: {
+          title: 'Show Email',
+          description: 'Allow others to see your email address',
+        },
       },
       phone: {
-        show: 'Show Phone',
-        'show.description': 'Allow others to see your phone number',
+        show: {
+          title: 'Show Phone',
+          description: 'Allow others to see your phone number',
+        },
       },
       privacy: {
+        title: 'Privacy',
         subtitle: 'Manage your privacy settings',
       },
       password: {
         change: 'Change Password',
-        current: 'Current Password',
-        'current.placeholder': 'Enter your current password',
-        new: 'New Password',
-        'new.placeholder': 'Enter a new password',
-        confirm: 'Confirm Password',
-        'confirm.placeholder': 'Confirm your new password',
+        current: {
+          title: 'Current Password',
+          placeholder: 'Enter your current password',
+        },
+        new: {
+          title: 'New Password',
+          placeholder: 'Enter a new password',
+        },
+        confirm: {
+          title: 'Confirm Password',
+          placeholder: 'Confirm your new password',
+        },
       },
       account: {
         title: 'Account Management',

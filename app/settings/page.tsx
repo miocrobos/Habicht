@@ -295,7 +295,7 @@ export default function SettingsPage() {
                     <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.appearance.subtitle')}</p>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">{t('settings.theme')}</h3>
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">{t('settings.theme.title')}</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <button onClick={() => handleThemeChange('light')} className={`relative p-6 rounded-lg border-2 transition-all duration-200 ${theme === 'light' ? 'border-red-500 bg-red-50 dark:bg-red-900/20' : 'border-gray-300 dark:border-gray-600 hover:border-gray-400'}`}>
                         <div className="flex items-center justify-between mb-3">
@@ -305,7 +305,7 @@ export default function SettingsPage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                               </svg>
                             </div>
-                            <span className="font-semibold text-gray-900 dark:text-white">{t('settings.theme.light')}</span>
+                            <span className="font-semibold text-gray-900 dark:text-white">{t('settings.theme.light.title')}</span>
                           </div>
                           {theme === 'light' && (
                             <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
@@ -325,7 +325,7 @@ export default function SettingsPage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                               </svg>
                             </div>
-                            <span className="font-semibold text-gray-900 dark:text-white">{t('settings.theme.dark')}</span>
+                            <span className="font-semibold text-gray-900 dark:text-white">{t('settings.theme.dark.title')}</span>
                           </div>
                           {theme === 'dark' && (
                             <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
@@ -351,13 +351,13 @@ export default function SettingsPage() {
                   <div className="p-6 space-y-8">
                     {/* Privacy Settings */}
                     <div className="space-y-4">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">{t('settings.privacy')}</h3>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">{t('settings.privacy.title')}</h3>
                       <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.privacy.subtitle')}</p>
                       
                       {/* Email Toggle */}
                       <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                         <div className="flex-1">
-                          <p className="font-medium text-gray-900 dark:text-white">{t('settings.email.show')}</p>
+                          <p className="font-medium text-gray-900 dark:text-white">{t('settings.email.show.title')}</p>
                           <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.email.show.description')}</p>
                         </div>
                         <button
@@ -378,7 +378,7 @@ export default function SettingsPage() {
                       {/* Phone Toggle */}
                       <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                         <div className="flex-1">
-                          <p className="font-medium text-gray-900 dark:text-white">{t('settings.phone.show')}</p>
+                          <p className="font-medium text-gray-900 dark:text-white">{t('settings.phone.show.title')}</p>
                           <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.phone.show.description')}</p>
                         </div>
                         <button
@@ -399,21 +399,21 @@ export default function SettingsPage() {
 
                     <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.email')}</label>
+                        <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.email.title')}</label>
                         <input type="email" value={session?.user?.email || ''} disabled className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 cursor-not-allowed" />
                       </div>
                       <form onSubmit={handlePasswordChange} className="space-y-4 mt-6">
                         <h3 className="text-lg font-medium text-gray-900 dark:text-white">{t('settings.password.change')}</h3>
                         <div>
-                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.password.current')}</label>
+                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.password.current.title')}</label>
                           <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-red-500" placeholder={t('settings.password.current.placeholder')} />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.password.new')}</label>
+                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.password.new.title')}</label>
                           <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-red-500" placeholder={t('settings.password.new.placeholder')} />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.password.confirm')}</label>
+                          <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.password.confirm.title')}</label>
                           <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-red-500" placeholder={t('settings.password.confirm.placeholder')} />
                         </div>
                         <button type="submit" className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium">{t('settings.password.change')}</button>
@@ -470,7 +470,7 @@ export default function SettingsPage() {
                     {/* Chat Messages */}
                     <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                       <div className="flex-1">
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.chat')}</h3>
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.chat.title')}</h3>
                         <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.notifications.chat.description')}</p>
                       </div>
                       <label className="relative inline-flex items-center cursor-pointer">
@@ -489,7 +489,7 @@ export default function SettingsPage() {
                     {session?.user?.role === 'RECRUITER' && (
                       <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                         <div className="flex-1">
-                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.playerLooking')}</h3>
+                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.playerLooking.title')}</h3>
                           <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.notifications.playerLooking.description')}</p>
                         </div>
                         <label className="relative inline-flex items-center cursor-pointer">
@@ -509,7 +509,7 @@ export default function SettingsPage() {
                     {session?.user?.role === 'PLAYER' && (
                       <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                         <div className="flex-1">
-                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.recruiterSearching')}</h3>
+                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.recruiterSearching.title')}</h3>
                           <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.notifications.recruiterSearching.description')}</p>
                         </div>
                         <label className="relative inline-flex items-center cursor-pointer">

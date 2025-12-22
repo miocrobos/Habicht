@@ -566,42 +566,65 @@ export const deTranslations = {
       },
       notifications: {
         subtitle: 'Benachrichtigungen verwalten',
-        chat: 'Chat-Nachrichten',
-        'chat.description': 'Benachrichtigungen für Chat-Nachrichten erhalten',
-        playerLooking: 'Spieler sucht Verein',
-        'playerLooking.description': 'Benachrichtigungen wenn Spieler einen Verein suchen',
-        recruiterSearching: 'Rekrutierer am Suchen',
-        'recruiterSearching.description': 'Benachrichtigungen von Rekrutierern',
+        chat: {
+          title: 'Chat-Nachrichten',
+          description: 'Benachrichtigungen für Chat-Nachrichten erhalten',
+        },
+        playerLooking: {
+          title: 'Spieler sucht Verein',
+          description: 'Benachrichtigungen wenn Spieler einen Verein suchen',
+        },
+        recruiterSearching: {
+          title: 'Rekrutierer am Suchen',
+          description: 'Benachrichtigungen von Rekrutierern',
+        },
         note: {
           title: 'Hinweis',
           description: 'E-Mail-Benachrichtigungen sind derzeit deaktiviert',
         },
       },
       theme: {
-        light: 'Hell',
-        'light.description': 'Helle Farben für tagsüber',
-        dark: 'Dunkel',
-        'dark.description': 'Dunkle Farben für nachts',
+        title: 'Thema',
+        light: {
+          title: 'Hell',
+          description: 'Helle Farben für tagsüber',
+        },
+        dark: {
+          title: 'Dunkel',
+          description: 'Dunkle Farben für nachts',
+        },
       },
       email: {
-        show: 'E-Mail Anzeigen',
-        'show.description': 'Erlauben Sie anderen Ihre E-Mail-Adresse zu sehen',
+        title: 'E-Mail',
+        show: {
+          title: 'E-Mail Anzeigen',
+          description: 'Erlauben Sie anderen Ihre E-Mail-Adresse zu sehen',
+        },
       },
       phone: {
-        show: 'Telefonnummer Anzeigen',
-        'show.description': 'Erlauben Sie anderen Ihre Telefonnummer zu sehen',
+        show: {
+          title: 'Telefonnummer Anzeigen',
+          description: 'Erlauben Sie anderen Ihre Telefonnummer zu sehen',
+        },
       },
       privacy: {
+        title: 'Privatsphäre',
         subtitle: 'Verwalten Sie Ihre Datenschutz-Einstellungen',
       },
       password: {
         change: 'Passwort Ändern',
-        current: 'Aktuelles Passwort',
-        'current.placeholder': 'Geben Sie Ihr aktuelles Passwort ein',
-        new: 'Neues Passwort',
-        'new.placeholder': 'Geben Sie ein neues Passwort ein',
-        confirm: 'Passwort Bestätigen',
-        'confirm.placeholder': 'Bestätigen Sie Ihr neues Passwort',
+        current: {
+          title: 'Aktuelles Passwort',
+          placeholder: 'Geben Sie Ihr aktuelles Passwort ein',
+        },
+        new: {
+          title: 'Neues Passwort',
+          placeholder: 'Geben Sie ein neues Passwort ein',
+        },
+        confirm: {
+          title: 'Passwort Bestätigen',
+          placeholder: 'Bestätigen Sie Ihr neues Passwort',
+        },
       },
       account: {
         title: 'Kontoverwaltung',

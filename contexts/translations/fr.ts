@@ -580,42 +580,65 @@ export const frTranslations = {
       },
       notifications: {
         subtitle: 'Gérer les notifications',
-        chat: 'Messages de Chat',
-        'chat.description': 'Recevoir des notifications pour les messages de chat',
-        playerLooking: 'Joueur Cherche Club',
-        'playerLooking.description': 'Notifications quand les joueurs cherchent un club',
-        recruiterSearching: 'Recruteur en Recherche',
-        'recruiterSearching.description': 'Notifications des recruteurs',
+        chat: {
+          title: 'Messages de Chat',
+          description: 'Recevoir des notifications pour les messages de chat',
+        },
+        playerLooking: {
+          title: 'Joueur Cherche Club',
+          description: 'Notifications quand les joueurs cherchent un club',
+        },
+        recruiterSearching: {
+          title: 'Recruteur en Recherche',
+          description: 'Notifications des recruteurs',
+        },
         note: {
           title: 'Note',
           description: 'Les notifications par e-mail sont actuellement désactivées',
         },
       },
       theme: {
-        light: 'Clair',
-        'light.description': 'Couleurs claires pour le jour',
-        dark: 'Sombre',
-        'dark.description': 'Couleurs sombres pour la nuit',
+        title: 'Thème',
+        light: {
+          title: 'Clair',
+          description: 'Couleurs claires pour le jour',
+        },
+        dark: {
+          title: 'Sombre',
+          description: 'Couleurs sombres pour la nuit',
+        },
       },
       email: {
-        show: 'Afficher l\'e-mail',
-        'show.description': 'Permettre aux autres de voir votre adresse e-mail',
+        title: 'E-mail',
+        show: {
+          title: 'Afficher l\'e-mail',
+          description: 'Permettre aux autres de voir votre adresse e-mail',
+        },
       },
       phone: {
-        show: 'Afficher le téléphone',
-        'show.description': 'Permettre aux autres de voir votre numéro de téléphone',
+        show: {
+          title: 'Afficher le téléphone',
+          description: 'Permettre aux autres de voir votre numéro de téléphone',
+        },
       },
       privacy: {
+        title: 'Confidentialité',
         subtitle: 'Gérez vos paramètres de confidentialité',
       },
       password: {
         change: 'Changer le mot de passe',
-        current: 'Mot de passe actuel',
-        'current.placeholder': 'Entrez votre mot de passe actuel',
-        new: 'Nouveau mot de passe',
-        'new.placeholder': 'Entrez un nouveau mot de passe',
-        confirm: 'Confirmer le mot de passe',
-        'confirm.placeholder': 'Confirmez votre nouveau mot de passe',
+        current: {
+          title: 'Mot de passe actuel',
+          placeholder: 'Entrez votre mot de passe actuel',
+        },
+        new: {
+          title: 'Nouveau mot de passe',
+          placeholder: 'Entrez un nouveau mot de passe',
+        },
+        confirm: {
+          title: 'Confirmer le mot de passe',
+          placeholder: 'Confirmez votre nouveau mot de passe',
+        },
       },
       account: {
         title: 'Gestion du compte',

@@ -582,42 +582,65 @@ export const itTranslations = {
       },
       notifications: {
         subtitle: 'Gestisci le notifiche',
-        chat: 'Messaggi Chat',
-        'chat.description': 'Ricevi notifiche per i messaggi di chat',
-        playerLooking: 'Giocatore Cerca Club',
-        'playerLooking.description': 'Notifiche quando i giocatori cercano un club',
-        recruiterSearching: 'Reclutatore in Ricerca',
-        'recruiterSearching.description': 'Notifiche dai reclutatori',
+        chat: {
+          title: 'Messaggi Chat',
+          description: 'Ricevi notifiche per i messaggi di chat',
+        },
+        playerLooking: {
+          title: 'Giocatore Cerca Club',
+          description: 'Notifiche quando i giocatori cercano un club',
+        },
+        recruiterSearching: {
+          title: 'Reclutatore in Ricerca',
+          description: 'Notifiche dai reclutatori',
+        },
         note: {
           title: 'Nota',
           description: 'Le notifiche via e-mail sono attualmente disattivate',
         },
       },
       theme: {
-        light: 'Chiaro',
-        'light.description': 'Colori chiari per il giorno',
-        dark: 'Scuro',
-        'dark.description': 'Colori scuri per la notte',
+        title: 'Tema',
+        light: {
+          title: 'Chiaro',
+          description: 'Colori chiari per il giorno',
+        },
+        dark: {
+          title: 'Scuro',
+          description: 'Colori scuri per la notte',
+        },
       },
       email: {
-        show: 'Mostra e-mail',
-        'show.description': 'Permetti agli altri di vedere il tuo indirizzo e-mail',
+        title: 'E-mail',
+        show: {
+          title: 'Mostra e-mail',
+          description: 'Permetti agli altri di vedere il tuo indirizzo e-mail',
+        },
       },
       phone: {
-        show: 'Mostra telefono',
-        'show.description': 'Permetti agli altri di vedere il tuo numero di telefono',
+        show: {
+          title: 'Mostra telefono',
+          description: 'Permetti agli altri di vedere il tuo numero di telefono',
+        },
       },
       privacy: {
+        title: 'Privacy',
         subtitle: 'Gestisci le tue impostazioni sulla privacy',
       },
       password: {
         change: 'Cambia password',
-        current: 'Password attuale',
-        'current.placeholder': 'Inserisci la tua password attuale',
-        new: 'Nuova password',
-        'new.placeholder': 'Inserisci una nuova password',
-        confirm: 'Conferma password',
-        'confirm.placeholder': 'Conferma la tua nuova password',
+        current: {
+          title: 'Password attuale',
+          placeholder: 'Inserisci la tua password attuale',
+        },
+        new: {
+          title: 'Nuova password',
+          placeholder: 'Inserisci una nuova password',
+        },
+        confirm: {
+          title: 'Conferma password',
+          placeholder: 'Conferma la tua nuova password',
+        },
       },
       account: {
         title: 'Gestione account',

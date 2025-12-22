@@ -646,42 +646,65 @@ export const gswTranslations = {
       },
       notifications: {
         subtitle: 'Benachrichtigunge verwalte',
-        chat: 'Chat-Nachrichte',
-        'chat.description': 'Erhalte Benachrichtigunge für Chat-Nachrichte',
-        playerLooking: 'Spieler Suecht Club',
-        'playerLooking.description': 'Benachrichtigunge wänn Spieler en Club sueche',
-        recruiterSearching: 'Rekrutierer Am Sueche',
-        'recruiterSearching.description': 'Benachrichtigunge vo Rekrutierern',
+        chat: {
+          title: 'Chat-Nachrichte',
+          description: 'Erhalte Benachrichtigunge für Chat-Nachrichte',
+        },
+        playerLooking: {
+          title: 'Spieler Suecht Club',
+          description: 'Benachrichtigunge wänn Spieler en Club sueche',
+        },
+        recruiterSearching: {
+          title: 'Rekrutierer Am Sueche',
+          description: 'Benachrichtigunge vo Rekrutierern',
+        },
         note: {
           title: 'Hinwis',
           description: 'E-Mail-Benachrichtigunge si derzit deaktiviert',
         },
       },
       theme: {
-        light: 'Hell',
-        'light.description': 'Helli Farbe für de Tag',
-        dark: 'Dunkel',
-        'dark.description': 'Dunkli Farbe für d Nacht',
+        title: 'Thema',
+        light: {
+          title: 'Hell',
+          description: 'Helli Farbe für de Tag',
+        },
+        dark: {
+          title: 'Dunkel',
+          description: 'Dunkli Farbe für d Nacht',
+        },
       },
       email: {
-        show: 'E-Mail Aazeige',
-        'show.description': 'Erlaube Andere Dini E-Mail-Adrässe Z Gseh',
+        title: 'E-Mail',
+        show: {
+          title: 'E-Mail Aazeige',
+          description: 'Erlaube Andere Dini E-Mail-Adrässe Z Gseh',
+        },
       },
       phone: {
-        show: 'Telefon Aazeige',
-        'show.description': 'Erlaube Andere Dini Telefonnummer Z Gseh',
+        show: {
+          title: 'Telefon Aazeige',
+          description: 'Erlaube Andere Dini Telefonnummer Z Gseh',
+        },
       },
       privacy: {
+        title: 'Dateschutz',
         subtitle: 'Verwalte Dini Dateschutz-Iistellige',
       },
       password: {
         change: 'Passwort Ändere',
-        current: 'Aktuells Passwort',
-        'current.placeholder': 'Gib Dis Aktuells Passwort Ii',
-        new: 'Neus Passwort',
-        'new.placeholder': 'Gib Es Neus Passwort Ii',
-        confirm: 'Passwort Bestätige',
-        'confirm.placeholder': 'Bestätig Dis Neus Passwort',
+        current: {
+          title: 'Aktuells Passwort',
+          placeholder: 'Gib Dis Aktuells Passwort Ii',
+        },
+        new: {
+          title: 'Neus Passwort',
+          placeholder: 'Gib Es Neus Passwort Ii',
+        },
+        confirm: {
+          title: 'Passwort Bestätige',
+          placeholder: 'Bestätig Dis Neus Passwort',
+        },
       },
       account: {
         title: 'Kontoverwaltung',

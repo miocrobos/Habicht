@@ -318,7 +318,7 @@ export const deTranslations = {
       section5Title: '5. Haftungsausschluss',
       section5Text: 'Habicht Volleyball übernimmt keine Haftung für die Richtigkeit von Benutzer-Inhalten oder für Schäden, die durch die Nutzung der Plattform entstehen. Die Nutzung erfolgt auf eigenes Risiko.',
       section6Title: '6. Kündigung und Löschung',
-      section6Text: 'Sie können Ihr Konto jederzeit löschen. Wir behalten uns das Recht vor, Konten zu sperren, die gegen diese Bedingungen verstoäŸen.',
+      section6Text: 'Sie können Ihr Konto jederzeit löschen. Wir behalten uns das Recht vor, Konten zu sperren, die gegen diese Bedingungen verstoßen.',
       section7Title: '7. Änderungen',
       section7Text: 'Wir können diese Nutzungsbedingungen jederzeit anpassen. Änderungen werden per E-Mail mitgeteilt oder auf der Plattform veröffentlicht.',
       section8Title: '8. Anwendbares Recht',

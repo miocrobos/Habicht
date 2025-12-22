@@ -149,7 +149,7 @@
       },
       cta: {
         title: 'Pronto per iniziare?',
-        subtitle: 'Unisciti alla piÃ¹ grande comunitÃ  di pallavolo svizzera',
+        subtitle: 'Unisciti alla più grande comunitÃ  di pallavolo svizzera',
         registerPlayer: 'Registrati come giocatore',
         registerRecruiter: 'Registrati come scout',
       },
@@ -160,7 +160,7 @@
       what: {
         title: 'Cos\'è Habicht?',
         description1: 'Habicht è la piattaforma per i talenti della pallavolo svizzera. Connettiamo i giocatori con reclutatori e scout da tutta la Svizzera.',
-        description2: 'Ispirato a Volleybox, ma sviluppato specificamente per il panorama della pallavolo svizzera, con integrazione diretta a Swiss Volley e ai club piÃ¹ importanti.',
+        description2: 'Ispirato a Volleybox, ma sviluppato specificamente per il panorama della pallavolo svizzera, con integrazione diretta a Swiss Volley e ai club più importanti.',
       },
       mission: {
         title: 'Missione',

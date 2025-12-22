@@ -399,7 +399,7 @@ export default function SettingsPage() {
 
                     <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">E-Mail-Adresse</label>
+                        <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">{t('settings.email')}</label>
                         <input type="email" value={session?.user?.email || ''} disabled className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 cursor-not-allowed" />
                       </div>
                       <form onSubmit={handlePasswordChange} className="space-y-4 mt-6">
@@ -463,8 +463,8 @@ export default function SettingsPage() {
               {activeTab === 'notifications' && (
                 <>
                   <div className="border-b border-gray-200 dark:border-gray-700 p-6">
-                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">Benachrichtigungen</h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Leg fest, welli E-Mail Benachrichtigunge du empfange möchtsch</p>
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">{t('settings.notifications')}</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.notifications.subtitle')}</p>
                   </div>
                   <div className="p-6 space-y-6">
                     {/* Chat Messages */}
@@ -542,10 +542,10 @@ export default function SettingsPage() {
                   </div>
                   <div className="p-6 space-y-6">
                     <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <h3 className="font-medium text-gray-900 dark:text-white mb-2">Kontoinformationen</h3>
+                      <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('settings.account.info')}</h3>
                       <div className="space-y-2 text-sm">
-                        <p className="text-gray-600 dark:text-gray-400"><span className="font-medium">E-Mail:</span> {session?.user?.email || 'Nicht angemeldet'}</p>
-                        <p className="text-gray-600 dark:text-gray-400"><span className="font-medium">Kontotyp:</span> {session?.user?.role || 'Gast'}</p>
+                        <p className="text-gray-600 dark:text-gray-400"><span className="font-medium">{t('settings.email')}:</span> {session?.user?.email || t('settings.account.notLoggedIn')}</p>
+                        <p className="text-gray-600 dark:text-gray-400"><span className="font-medium">{t('settings.account.type')}:</span> {session?.user?.role || t('settings.account.guest')}</p>
                       </div>
                     </div>
 

@@ -552,13 +552,6 @@ export const deTranslations = {
     settings: {
       title: 'Einstellungen',
       subtitle: 'Verwalten Sie Ihre Präferenzen und Kontoeinstellungen',
-      appearance: 'Aussehen',
-      security: 'Login & Sicherheit',
-      email: 'E-Mail-Adresse',
-      theme: 'Theme-Modus',
-      privacy: 'Datenschutz',
-      saved: 'Einstellungen Gespeichert',
-      notifications: 'Benachrichtigungen',
       language: {
         title: 'Sprache',
         subtitle: 'Wählen Sie Ihre bevorzugte Sprache',

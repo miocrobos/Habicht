@@ -493,13 +493,6 @@ export const gswTranslations = {
     settings: {
       title: 'Iistellige',
       subtitle: 'Verwalte Dini Präferenzä Und Konto Iistellige',
-      appearance: 'Uussehe',
-      security: 'Login & Sicherheit',
-      email: 'E-Mail-Adrässe',
-      theme: 'Theme-Modus',
-      privacy: 'Dateschutz',
-      saved: 'Iistellunge Gspeichert',
-      notifications: 'Benachrichtigungen',
       language: {
         title: 'Sprach',
         subtitle: 'Wähl Dini Bevorzugti Sprach',

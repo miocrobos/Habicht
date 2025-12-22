@@ -813,13 +813,6 @@ export const enTranslations = {
     settings: {
       title: 'Settings',
       subtitle: 'Manage your preferences and account settings',
-      appearance: 'Appearance',
-      security: 'Login & Security',
-      email: 'Email Address',
-      theme: 'Theme Mode',
-      privacy: 'Privacy',
-      saved: 'Settings Saved',
-      notifications: 'Notifications',
       language: {
         title: 'Language',
         subtitle: 'Choose your preferred language',

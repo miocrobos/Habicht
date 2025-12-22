@@ -568,13 +568,6 @@ export const itTranslations = {
     settings: {
       title: 'Impostazioni',
       subtitle: 'Gestisci le tue preferenze e impostazioni account',
-      appearance: 'Aspetto',
-      security: 'Accesso & Sicurezza',
-      email: 'Indirizzo e-mail',
-      theme: 'Modalità Tema',
-      privacy: 'Privacy',
-      saved: 'Impostazioni Salvate',
-      notifications: 'Notifiche',
       language: {
         title: 'Lingua',
         subtitle: 'Scegli la tua lingua preferita',

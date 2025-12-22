@@ -645,6 +645,7 @@ export const gswTranslations = {
         subtitle: 'Verwalte Dini Login-Informatione',
       },
       notifications: {
+        title: 'Benachrichtigunge',
         subtitle: 'Benachrichtigunge verwalte',
         chat: {
           title: 'Chat-Nachrichte',

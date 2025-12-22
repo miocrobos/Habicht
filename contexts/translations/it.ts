@@ -580,8 +580,7 @@ export const itTranslations = {
         title: 'Accesso & Sicurezza',
         subtitle: 'Gestisci le tue informazioni di accesso',
       },
-      notifications: {
-        subtitle: 'Gestisci le notifiche',
+      notifications: {        title: 'Notifiche',        subtitle: 'Gestisci le notifiche',
         chat: {
           title: 'Messaggi Chat',
           description: 'Ricevi notifiche per i messaggi di chat',

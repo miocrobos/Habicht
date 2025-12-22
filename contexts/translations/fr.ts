@@ -578,8 +578,7 @@ export const frTranslations = {
         title: 'Connexion & Sécurité',
         subtitle: 'Gérez vos informations de connexion',
       },
-      notifications: {
-        subtitle: 'Gérer les notifications',
+      notifications: {        title: 'Notifications',        subtitle: 'Gérer les notifications',
         chat: {
           title: 'Messages de Chat',
           description: 'Recevoir des notifications pour les messages de chat',

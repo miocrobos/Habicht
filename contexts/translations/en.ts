@@ -826,6 +826,7 @@ export const enTranslations = {
         subtitle: 'Manage your login information',
       },
       notifications: {
+        title: 'Notifications',
         subtitle: 'Manage your notification preferences',
         chat: {
           title: 'Chat messages',

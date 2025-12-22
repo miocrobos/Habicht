@@ -565,6 +565,7 @@ export const deTranslations = {
         subtitle: 'Verwalten Sie Ihre Login-Informationen',
       },
       notifications: {
+        title: 'Benachrichtigungen',
         subtitle: 'Benachrichtigungen verwalten',
         chat: {
           title: 'Chat-Nachrichten',

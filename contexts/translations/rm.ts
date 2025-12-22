@@ -578,8 +578,7 @@ export const rmTranslations = {
         title: 'Access & Segirezza',
         subtitle: 'Administrescha tias infurmaziuns d\'access',
       },
-      notifications: {
-        subtitle: 'Administrar notificaziuns',
+      notifications: {        title: 'Notificaziuns',        subtitle: 'Administrar notificaziuns',
         chat: {
           title: 'Messadis da Chat',
           description: 'Retschaiver notificaziuns per messadis da chat',

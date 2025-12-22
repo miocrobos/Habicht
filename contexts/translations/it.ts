@@ -1,4 +1,4 @@
-﻿export const itTranslations = {
+export const itTranslations = {
     'gender.male': 'Maschile',
     'gender.female': 'Femminile',
     // Login

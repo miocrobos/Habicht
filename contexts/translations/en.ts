@@ -104,6 +104,9 @@ export const enTranslations = {
     'register.student': 'Student',
     'register.unemployed': 'Unemployed',
     'register.retired': 'Retired',
+    // Player Profile Actions
+    'playerProfile.backToProfile': 'Back to Profile',
+    'playerProfile.saveChanges': 'Save Changes',
     // Common
     'common.save': 'Save',
     'common.cancel': 'Cancel',

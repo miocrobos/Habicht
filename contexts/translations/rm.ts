@@ -101,6 +101,9 @@
     'register.student': 'Student',
     'register.unemployed': 'Senza lavur',
     'register.retired': 'Pensiunau',
+    // Player Profile Actions
+    'playerProfile.backToProfile': 'Enavos al profil',
+    'playerProfile.saveChanges': 'Memorisar midadas',
     // Common
     'common.save': 'Memorisar',
     'common.cancel': 'Interrumper',

@@ -101,6 +101,9 @@
     'register.student': 'Étudiant',
     'register.unemployed': 'Sans emploi',
     'register.retired': 'Retraité',
+    // Player Profile Actions
+    'playerProfile.backToProfile': 'Retour au profil',
+    'playerProfile.saveChanges': 'Enregistrer les modifications',
     // Common
     'common.save': 'Enregistrer',
     'common.cancel': 'Annuler',

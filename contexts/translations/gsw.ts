@@ -102,6 +102,9 @@
     'register.student': 'Student',
     'register.unemployed': 'Arbeitslos',
     'register.retired': 'Pensioniärt',
+    // Player Profile Actions
+    'playerProfile.backToProfile': 'Zrügg zum Profil',
+    'playerProfile.saveChanges': 'Änderige speichere',
     // Common
     'common.save': 'Speichere',
     'common.cancel': 'Abbräche',

@@ -176,10 +176,20 @@ export const enTranslations = {
     positions: {
       setter: 'Setter',
       outsidehitter: 'Outside Hitter',
+      outside_hitter: 'Outside Hitter',
       opposite: 'Opposite',
       middleblocker: 'Middle Blocker',
+      middle_blocker: 'Middle Blocker',
       libero: 'Libero',
       universal: 'Universal',
+    },
+    coachRole: {
+      head_coach: 'Head Coach',
+      assistant_coach: 'Assistant Coach',
+      technical_coach: 'Technical Coach',
+      physical_coach: 'Physical Coach',
+      scout: 'Scout',
+      trainer: 'Trainer',
     },
     // About Page
     about: {
@@ -1081,6 +1091,8 @@ export const enTranslations = {
       facebookPlaceholder: 'Facebook Profile/Page URL',
       achievementsPlaceholder: 'e.g. Swiss Champion 2023, NLA Promotion...',
       clubSubmit: 'Submit Club',
+      clubAffiliations: 'Club Affiliations',
+      createHybridAccount: 'Create Hybrid Account',
     },
     editProfile: {
       updateInfo: 'Update Your Information',

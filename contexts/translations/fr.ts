@@ -1020,6 +1020,8 @@ export const frTranslations = {
       currentlyWorkingHere: 'Currently working here',
       role: 'Role',
       coachingAchievements: 'Coaching achievements',
+      clubAffiliations: 'Affiliations au club',
+      createHybridAccount: 'Créer un compte hybride',
     },
     // Video (placeholder - English text for now)
     video: {

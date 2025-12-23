@@ -39,22 +39,6 @@ const cantons = [
   { code: 'JU' as Canton, name: 'Jura' },
 ];
 
-const employmentStatusOptions = [
-  { value: 'STUDENT_FULL_TIME', label: 'Student/in (Vollziit)' },
-  { value: 'STUDENT_PART_TIME', label: 'Student/in (Teilziit)' },
-  { value: 'WORKING_FULL_TIME', label: 'Beruefstätig (Vollziit)' },
-  { value: 'WORKING_PART_TIME', label: 'Beruefstätig (Teilziit)' },
-];
-
-const positions = [
-  { value: 'SETTER', label: 'Zuespieler/in' },
-  { value: 'OUTSIDE_HITTER', label: 'Aussenagreifer/in' },
-  { value: 'MIDDLE_BLOCKER', label: 'Mittelblöcker/in' },
-  { value: 'OPPOSITE', label: 'Diagonal' },
-  { value: 'LIBERO', label: 'Libero' },
-  { value: 'UNIVERSAL', label: 'Universal' },
-];
-
 export default function EditPlayerProfilePage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -63,6 +47,29 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  
+  // Define translated options using t() function
+  const employmentStatusOptions = [
+    { value: 'STUDENT_FULL_TIME', label: t('register.studentFullTime') },
+    { value: 'STUDENT_PART_TIME', label: t('register.studentPartTime') },
+    { value: 'WORKING_FULL_TIME', label: t('register.workingFullTime') },
+    { value: 'WORKING_PART_TIME', label: t('register.workingPartTime') },
+  ];
+
+  const positions = [
+    { value: 'SETTER', label: t('register.setter') },
+    { value: 'OUTSIDE_HITTER', label: t('register.outsideHitter') },
+    { value: 'MIDDLE_BLOCKER', label: t('register.middleBlocker') },
+    { value: 'OPPOSITE', label: t('register.opposite') },
+    { value: 'LIBERO', label: t('register.libero') },
+    { value: 'UNIVERSAL', label: t('register.universal') },
+  ];
+
+  const dominantHandOptions = [
+    { value: 'RIGHT', label: t('register.rightHanded') },
+    { value: 'LEFT', label: t('register.leftHanded') },
+    { value: 'AMBIDEXTROUS', label: t('register.ambidextrous') },
+  ];
   
   const [formData, setFormData] = useState<any>(null);
   const [clubHistory, setClubHistory] = useState<any[]>([]);

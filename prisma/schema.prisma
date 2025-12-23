@@ -157,6 +157,7 @@ model Player {
   
   // Volleyball Information
   positions         Position[]  @default([]) // Multiple positions player can play
+  dominantHand      String?     // RIGHT, LEFT, AMBIDEXTROUS
   jerseyNumber      Int?
   hasClub           Boolean     @default(false) // Whether player is currently in a club
   clubName          String?     // Name of current club (if not in our database)

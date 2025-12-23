@@ -1227,3 +1227,4 @@
       Teammanager: 'Manager da team',
     },
 }
+

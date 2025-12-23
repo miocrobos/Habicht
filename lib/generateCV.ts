@@ -43,7 +43,43 @@ interface PlayerData {
 
 // PDF Translation System
 interface PDFTranslations {
-  [key: string]: string | {
+  verifiedBy: string;
+  personalProfile: string;
+  male: string;
+  female: string;
+  age: string;
+  currentClub: string;
+  school: string;
+  occupation: string;
+  status: string;
+  contact: string;
+  physicalAttributes: string;
+  height: string;
+  weight: string;
+  spikeHeight: string;
+  blockHeight: string;
+  clubHistory: string;
+  club: string;
+  league: string;
+  period: string;
+  current: string;
+  achievements: string;
+  socialMedia: string;
+  footer: string;
+  studentFullTime: string;
+  studentPartTime: string;
+  workingFullTime: string;
+  workingPartTime: string;
+  // Additional personal info labels
+  dateOfBirth: string;
+  gender: string;
+  nationality: string;
+  location: string;
+  email: string;
+  phone: string;
+  educationEmployment: string;
+  unknown: string;
+  positions: {
     SETTER: string;
     OUTSIDE_HITTER: string;
     MIDDLE_BLOCKER: string;
@@ -62,7 +98,17 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     age: 'Jahr Alt',
     currentClub: 'Aktuelle Verein',
     school: 'Schuel',
+    occupation: 'Beruf',
+    status: 'Status',
     contact: 'Kontakt',
+    dateOfBirth: 'Geburtsdatum',
+    gender: 'Geschlecht',
+    nationality: 'Nationalität',
+    location: 'Wohnort',
+    email: 'Email',
+    phone: 'Telefon',
+    educationEmployment: 'USBILDIG & BERUF',
+    unknown: 'Unbekannt',
     physicalAttributes: 'PHYSISCHI ATTRIBUTE',
     height: 'Grössi',
     weight: 'Gwicht',
@@ -76,6 +122,10 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     achievements: 'ERFOLG & USZEICHNIGE',
     socialMedia: 'SOCIAL MEDIA',
     footer: 'Erstellt mit Habicht - Schwiizer Volleyball Scouting Plattform',
+    studentFullTime: 'Student Vollziit',
+    studentPartTime: 'Student Teilziit',
+    workingFullTime: 'Schaffend Vollziit',
+    workingPartTime: 'Schaffend Teilziit',
     positions: {
       SETTER: 'Zuespieler/in',
       OUTSIDE_HITTER: 'Aussenagreifer/in',
@@ -93,7 +143,17 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     age: 'Jahre Alt',
     currentClub: 'Aktueller Verein',
     school: 'Schule',
+    occupation: 'Beruf',
+    status: 'Status',
     contact: 'Kontakt',
+    dateOfBirth: 'Geburtsdatum',
+    gender: 'Geschlecht',
+    nationality: 'Nationalität',
+    location: 'Wohnort',
+    email: 'E-Mail',
+    phone: 'Telefon',
+    educationEmployment: 'BILDUNG & BERUF',
+    unknown: 'Unbekannt',
     physicalAttributes: 'PHYSISCHE ATTRIBUTE',
     height: 'Größe',
     weight: 'Gewicht',
@@ -107,6 +167,10 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     achievements: 'ERFOLGE & AUSZEICHNUNGEN',
     socialMedia: 'SOCIAL MEDIA',
     footer: 'Erstellt mit Habicht - Schweizer Volleyball Scouting Plattform',
+    studentFullTime: 'Student Vollzeit',
+    studentPartTime: 'Student Teilzeit',
+    workingFullTime: 'Berufstätig Vollzeit',
+    workingPartTime: 'Berufstätig Teilzeit',
     positions: {
       SETTER: 'Zuspieler/in',
       OUTSIDE_HITTER: 'Außenangreifer/in',
@@ -124,7 +188,17 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     age: 'Ans',
     currentClub: 'Club Actuel',
     school: 'École',
+    occupation: 'Profession',
+    status: 'Statut',
     contact: 'Contact',
+    dateOfBirth: 'Date de naissance',
+    gender: 'Sexe',
+    nationality: 'Nationalité',
+    location: 'Lieu de résidence',
+    email: 'E-mail',
+    phone: 'Téléphone',
+    educationEmployment: 'FORMATION & PROFESSION',
+    unknown: 'Inconnu',
     physicalAttributes: 'ATTRIBUTS PHYSIQUES',
     height: 'Taille',
     weight: 'Poids',
@@ -138,6 +212,10 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     achievements: 'RÉALISATIONS & DISTINCTIONS',
     socialMedia: 'RÉSEAUX SOCIAUX',
     footer: 'Créé avec Habicht - Plateforme de Scouting Volleyball Suisse',
+    studentFullTime: 'Étudiant temps plein',
+    studentPartTime: 'Étudiant temps partiel',
+    workingFullTime: 'Employé temps plein',
+    workingPartTime: 'Employé temps partiel',
     positions: {
       SETTER: 'Passeur/Passeuse',
       OUTSIDE_HITTER: 'Attaquant/Attaquante',
@@ -155,7 +233,17 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     age: 'Anni',
     currentClub: 'Club Attuale',
     school: 'Scuola',
+    occupation: 'Professione',
+    status: 'Stato',
     contact: 'Contatto',
+    dateOfBirth: 'Data di nascita',
+    gender: 'Sesso',
+    nationality: 'Nazionalità',
+    location: 'Luogo di residenza',
+    email: 'E-mail',
+    phone: 'Telefono',
+    educationEmployment: 'FORMAZIONE & PROFESSIONE',
+    unknown: 'Sconosciuto',
     physicalAttributes: 'ATTRIBUTI FISICI',
     height: 'Altezza',
     weight: 'Peso',
@@ -169,6 +257,10 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     achievements: 'SUCCESSI & RICONOSCIMENTI',
     socialMedia: 'SOCIAL MEDIA',
     footer: 'Creato con Habicht - Piattaforma di Scouting Pallavolo Svizzera',
+    studentFullTime: 'Studente a tempo pieno',
+    studentPartTime: 'Studente part-time',
+    workingFullTime: 'Lavoratore a tempo pieno',
+    workingPartTime: 'Lavoratore part-time',
     positions: {
       SETTER: 'Palleggiatore/Palleggiatrice',
       OUTSIDE_HITTER: 'Schiacciatore/Schiacciatrice',
@@ -186,7 +278,17 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     age: 'Onns',
     currentClub: 'Club Actual',
     school: 'Scola',
+    occupation: 'Professiun',
+    status: 'Status',
     contact: 'Contact',
+    dateOfBirth: 'Data da naschientscha',
+    gender: 'Schlattaing',
+    nationality: 'Naziunalitad',
+    location: 'Lieu da domicil',
+    email: 'E-mail',
+    phone: 'Telefon',
+    educationEmployment: 'FURMAZIUN & PROFESSIUN',
+    unknown: 'Nunenconuschent',
     physicalAttributes: 'ATTRIBUTS FISICS',
     height: 'Grondezza',
     weight: 'Paisa',
@@ -200,6 +302,10 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     achievements: 'SUCCESSAS & DISTINCZIUNS',
     socialMedia: 'MEDIAS SOCIALAS',
     footer: 'Creà cun Habicht - Plattaforma da Scouting Volleyball Svizzer',
+    studentFullTime: 'Student temp plain',
+    studentPartTime: 'Student temp parzial',
+    workingFullTime: 'Lavurand temp plain',
+    workingPartTime: 'Lavurand temp parzial',
     positions: {
       SETTER: 'Passader/Passadra',
       OUTSIDE_HITTER: 'Attaccader/Attaccadra',
@@ -217,7 +323,17 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     age: 'Years Old',
     currentClub: 'Current Club',
     school: 'School',
+    occupation: 'Occupation',
+    status: 'Status',
     contact: 'Contact',
+    dateOfBirth: 'Date of Birth',
+    gender: 'Gender',
+    nationality: 'Nationality',
+    location: 'Location',
+    email: 'Email',
+    phone: 'Phone',
+    educationEmployment: 'EDUCATION & EMPLOYMENT',
+    unknown: 'Unknown',
     physicalAttributes: 'PHYSICAL ATTRIBUTES',
     height: 'Height',
     weight: 'Weight',
@@ -231,6 +347,10 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     achievements: 'ACHIEVEMENTS & AWARDS',
     socialMedia: 'SOCIAL MEDIA',
     footer: 'Created with Habicht - Swiss Volleyball Scouting Platform',
+    studentFullTime: 'Student full-time',
+    studentPartTime: 'Student part-time',
+    workingFullTime: 'Working full-time',
+    workingPartTime: 'Working part-time',
     positions: {
       SETTER: 'Setter',
       OUTSIDE_HITTER: 'Outside Hitter',
@@ -241,6 +361,21 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     }
   }
 };
+
+// Helper function to translate employment status
+function translateEmploymentStatus(status: string | null | undefined, translations: PDFTranslations): string {
+  if (!status) return '';
+  
+  const statusMap: { [key: string]: keyof PDFTranslations } = {
+    'STUDENT_FULL_TIME': 'studentFullTime',
+    'STUDENT_PART_TIME': 'studentPartTime',
+    'WORKING_FULL_TIME': 'workingFullTime',
+    'WORKING_PART_TIME': 'workingPartTime'
+  };
+  
+  const translationKey = statusMap[status];
+  return translationKey ? (translations[translationKey] as string) : status;
+}
 
 export async function generatePlayerCV(playerData: PlayerData, language: string = 'gsw'): Promise<Blob> {
   console.log('🎯 CV Generation v2.0 - Professional Format Starting...');
@@ -392,7 +527,7 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
   const genderText = playerData.gender === 'MALE' ? translations.male as string : translations.female as string;
   // Format birth date with zero-padding (e.g., 06.03.2006)
   const formatBirthDate = (dateString: string | Date | null) => {
-    if (!dateString) return 'Unbekannt';
+    if (!dateString) return translations.unknown;
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -403,16 +538,16 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
   const locationText = playerData.municipality ? `${playerData.municipality}, ${playerData.canton}` : playerData.canton;
   
   let narrativeLines = [
-    `Geburtsdatum: ${birthText}`,
-    `Geschlecht: ${genderText}`,
-    `Nationalität: ${playerData.nationality}`,
-    `Wohnort: ${locationText}`,
+    `${translations.dateOfBirth}: ${birthText}`,
+    `${translations.gender}: ${genderText}`,
+    `${translations.nationality}: ${playerData.nationality}`,
+    `${translations.location}: ${locationText}`,
     '',
-    `Email: ${playerData.user.email}`,
+    `${translations.email}: ${playerData.user.email}`,
   ];
   
   if (playerData.phone) {
-    narrativeLines.push(`Telefon: ${playerData.phone}`);
+    narrativeLines.push(`${translations.phone}: ${playerData.phone}`);
   }
   
   narrativeLines.forEach((line, index) => {
@@ -426,7 +561,7 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('ATHLETISCHI DATE', 15, yPos);
+    doc.text(translations.physicalAttributes.toUpperCase(), 15, yPos);
     yPos += 8;
 
     doc.setFontSize(10);
@@ -434,10 +569,10 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
     doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
     
     const statsLines = [];
-    if (playerData.height) statsLines.push(`Körpergrösse: ${playerData.height} cm`);
-    if (playerData.weight) statsLines.push(`Gewicht: ${playerData.weight} kg`);
-    if (playerData.spikeHeight) statsLines.push(`Angriffsreichhöhe: ${playerData.spikeHeight} cm`);
-    if (playerData.blockHeight) statsLines.push(`Blockhöhe: ${playerData.blockHeight} cm`);
+    if (playerData.height) statsLines.push(`${translations.height}: ${playerData.height} cm`);
+    if (playerData.weight) statsLines.push(`${translations.weight}: ${playerData.weight} kg`);
+    if (playerData.spikeHeight) statsLines.push(`${translations.spikeHeight}: ${playerData.spikeHeight} cm`);
+    if (playerData.blockHeight) statsLines.push(`${translations.blockHeight}: ${playerData.blockHeight} cm`);
     
     statsLines.forEach((line, index) => {
       doc.text(line, 15, yPos + (index * 6));
@@ -456,7 +591,7 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('USBILDIG & BERUF', 15, yPos);
+    doc.text(translations.educationEmployment.toUpperCase(), 15, yPos);
     yPos += 8;
 
     doc.setFontSize(10);
@@ -465,15 +600,14 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
     
     const educationLines = [];
     if (playerData.schoolName) {
-      educationLines.push(`Schule: ${playerData.schoolName}`);
+      educationLines.push(`${translations.school}: ${playerData.schoolName}`);
     }
     if (playerData.occupation) {
-      educationLines.push(`Beruf: ${playerData.occupation}`);
+      educationLines.push(`${translations.occupation}: ${playerData.occupation}`);
     }
     if (playerData.employmentStatus) {
-      // Remove underscores and capitalize properly
-      const formattedStatus = playerData.employmentStatus.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, (l: string) => l.toUpperCase());
-      educationLines.push(`Status: ${formattedStatus}`);
+      const translatedStatus = translateEmploymentStatus(playerData.employmentStatus, translations);
+      educationLines.push(`${translations.status}: ${translatedStatus}`);
     }
     
     educationLines.forEach((line, index) => {
@@ -493,7 +627,7 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('CLUB GSCHICHT', 15, yPos);
+    doc.text(translations.clubHistory.toUpperCase(), 15, yPos);
     yPos += 8;
 
     // Remove duplicates and sort by start date (most recent first)
@@ -509,12 +643,12 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
     const clubHistoryData = uniqueClubHistory.map(club => [
       club.clubName,
       club.league || 'N/A',
-      `${new Date(club.startDate).getFullYear()} - ${club.endDate ? new Date(club.endDate).getFullYear() : 'Aktuell'}`
+      `${new Date(club.startDate).getFullYear()} - ${club.endDate ? new Date(club.endDate).getFullYear() : translations.current}`
     ]);
 
     autoTable(doc, {
       startY: yPos,
-      head: [['Club', 'Liga', 'Periode']],
+      head: [[translations.club, translations.league, translations.period]],
       body: clubHistoryData,
       theme: 'striped',
       headStyles: {
@@ -546,7 +680,7 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('SOCIAL MEDIA', 15, yPos);
+    doc.text(translations.socialMedia.toUpperCase(), 15, yPos);
     yPos += 8;
 
     doc.setFontSize(10);
@@ -581,7 +715,7 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-    doc.text('ERFOLGE & AUSZEICHNUNGE', 15, yPos);
+    doc.text(translations.achievements.toUpperCase(), 15, yPos);
     yPos += 8;
 
     doc.setFontSize(10);
@@ -607,8 +741,9 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
     doc.setPage(i);
     doc.setFontSize(8);
     doc.setTextColor(lightGray[0], lightGray[1], lightGray[2]);
+    const footerText = `${translations.footer} | Page ${i} of ${pageCount}`;
     doc.text(
-      `Generated by Habicht | www.habicht-volleyball.ch | Page ${i} of ${pageCount}`,
+      footerText,
       105,
       290,
       { align: 'center' }

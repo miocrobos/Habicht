@@ -676,6 +676,7 @@ export const enTranslations = {
       weightLabel: 'Weight kg',
       spikeLabel: 'Spike cm',
       blockLabel: 'Block cm',
+      dominantHandLabel: 'Hand',
       positionOutsideHitter: 'Outside Hitter',
       positionOpposite: 'Opposite',
       positionMiddleBlocker: 'Middle Blocker',

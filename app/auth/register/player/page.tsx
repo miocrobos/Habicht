@@ -304,7 +304,7 @@ export default function PlayerRegisterPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '', password: '', confirmPassword: '', firstName: '', lastName: '',
-    dateOfBirth: '', gender: '', nationality: '', canton: '', municipality: '', positions: [] as string[], height: '',
+    dateOfBirth: '', gender: '', nationality: '', canton: '', municipality: '', positions: [] as string[], dominantHand: '', height: '',
     weight: '', spikeHeight: '', blockHeight: '', 
     profileImage: '', instagram: '', tiktok: '', youtube: '', highlightVideo: '',
     skillReceiving: 0, skillServing: 0, skillAttacking: 0, skillBlocking: 0, skillDefense: 0,
@@ -431,6 +431,7 @@ export default function PlayerRegisterPage() {
           occupation: formData.occupation,
           schoolName: formData.schoolName,
           positions: formData.positions.map(mapPositionToEnum),
+          dominantHand: formData.dominantHand || null,
           height: formData.height ? parseFloat(formData.height) : undefined,
           weight: formData.weight ? parseFloat(formData.weight) : undefined,
           spikeHeight: formData.spikeHeight ? parseFloat(formData.spikeHeight) : undefined,
@@ -614,6 +615,24 @@ export default function PlayerRegisterPage() {
                       </label>
                     ))}
                   </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    {t('register.dominantHand')}
+                  </label>
+                  <select 
+                    name="dominantHand" 
+                    value={formData.dominantHand} 
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
+                  >
+                    <option value="">{t('register.selectDominantHand')}</option>
+                    <option value="RIGHT">{t('register.rightHanded')}</option>
+                    <option value="LEFT">{t('register.leftHanded')}</option>
+                    <option value="AMBIDEXTROUS">{t('register.ambidextrous')}</option>
+                  </select>
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('register.optional')}</p>
                 </div>
 
                 <div className="grid grid-cols-3 gap-4">

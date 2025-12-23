@@ -32,6 +32,7 @@ export default function HybridRegisterPage() {
     
     // Player - Positions & Physical Stats
     positions: [] as string[],
+    dominantHand: '',
     height: '',
     weight: '',
     spikeHeight: '',
@@ -262,6 +263,7 @@ export default function HybridRegisterPage() {
             phone: formData.phone,
             bio: formData.bio,
             positions: formData.positions,
+            dominantHand: formData.dominantHand || null,
             height: formData.height ? parseFloat(formData.height) : null,
             weight: formData.weight ? parseFloat(formData.weight) : null,
             spikeHeight: formData.spikeHeight ? parseFloat(formData.spikeHeight) : null,
@@ -494,6 +496,23 @@ export default function HybridRegisterPage() {
                     </button>
                   ))}
                 </div>
+              </div>
+
+              {/* Dominant Hand */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  {t('register.dominantHand')}
+                </label>
+                <select
+                  value={formData.dominantHand}
+                  onChange={(e) => setFormData({ ...formData, dominantHand: e.target.value })}
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
+                >
+                  <option value="">{t('register.selectDominantHand')}</option>
+                  <option value="RIGHT">{t('register.rightHanded')}</option>
+                  <option value="LEFT">{t('register.leftHanded')}</option>
+                  <option value="AMBIDEXTROUS">{t('register.ambidextrous')}</option>
+                </select>
               </div>
 
               {/* Physical Stats */}

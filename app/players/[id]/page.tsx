@@ -38,6 +38,7 @@ interface PlayerData {
   height: number | null
   weight: number | null
   positions: string[]
+  dominantHand: string | null
   nationality: string
   canton: string
   city: string | null
@@ -726,6 +727,16 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
                       <div className="text-xl md:text-2xl font-bold text-purple-600 dark:text-purple-400">{player.blockHeight}</div>
                       <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.blockLabel')}</div>
+                    </div>
+                  )}
+                  {player.dominantHand && (
+                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
+                      <div className="text-xl md:text-2xl font-bold text-green-600 dark:text-green-400">
+                        {player.dominantHand === 'RIGHT' ? t('register.rightHanded') : 
+                         player.dominantHand === 'LEFT' ? t('register.leftHanded') : 
+                         t('register.ambidextrous')}
+                      </div>
+                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.dominantHandLabel')}</div>
                     </div>
                   )}
                 </div>

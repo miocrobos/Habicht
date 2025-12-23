@@ -576,6 +576,7 @@ export const gswTranslations = {
       weightLabel: 'Gwicht kg',
       spikeLabel: 'Schlag cm',
       blockLabel: 'Block cm',
+      dominantHandLabel: 'Hand',
       positionOutsideHitter: 'Ausseagriffler',
       positionOpposite: 'Diagonal',
       positionMiddleBlocker: 'Mittelblocker',

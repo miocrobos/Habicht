@@ -364,7 +364,7 @@ export default function RecruiterRegisterPage() {
                     onChange={handleChange}
                     lang="de-CH"
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
-                    placeholder="tt.mm.jjjj"
+                    placeholder={t('placeholders.dateFormat')}
                   />
                 </div>
 
@@ -528,7 +528,7 @@ export default function RecruiterRegisterPage() {
                     type="tel" 
                     value={formData.phone} 
                     onChange={handleChange}
-                    placeholder="+41 79 123 45 67"
+                    placeholder={t('placeholders.phoneNumber')}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
                   />
                 </div>
@@ -589,7 +589,7 @@ export default function RecruiterRegisterPage() {
                         type="text" 
                         value={formData.instagram} 
                         onChange={handleChange}
-                        placeholder="@username"
+                        placeholder={t('placeholders.username')}
                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm" 
                       />
                     </div>
@@ -600,7 +600,7 @@ export default function RecruiterRegisterPage() {
                         type="text" 
                         value={formData.tiktok} 
                         onChange={handleChange}
-                        placeholder="@username"
+                        placeholder={t('placeholders.username')}
                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm" 
                       />
                     </div>
@@ -611,7 +611,7 @@ export default function RecruiterRegisterPage() {
                         type="text" 
                         value={formData.youtube} 
                         onChange={handleChange}
-                        placeholder="Channel URL"
+                        placeholder={t('placeholders.channelUrl')}
                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm" 
                       />
                     </div>
@@ -747,7 +747,7 @@ export default function RecruiterRegisterPage() {
                               type="number"
                               value={club.yearFrom}
                               onChange={(e) => updateClubAffiliation(club.id, 'yearFrom', e.target.value)}
-                              placeholder="2020"
+                              placeholder={t('placeholders.exampleYear')}
                               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
                             />
                           </div>
@@ -756,7 +756,7 @@ export default function RecruiterRegisterPage() {
                             {club.currentClub ? (
                               <div className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
                                 <span className="text-green-600 dark:text-green-400 font-semibold flex items-center gap-1 text-sm">
-                                  ✓ Aktuell
+                                  ✓ {t('register.current')}
                                 </span>
                               </div>
                             ) : (
@@ -764,7 +764,7 @@ export default function RecruiterRegisterPage() {
                                 type="number"
                                 value={club.yearTo}
                                 onChange={(e) => updateClubAffiliation(club.id, 'yearTo', e.target.value)}
-                                placeholder="2023"
+                                placeholder={t('placeholders.exampleYearEnd')}
                                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
                               />
                             )}

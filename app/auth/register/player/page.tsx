@@ -854,17 +854,17 @@ export default function PlayerRegisterPage() {
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Instagram</label>
                       <input name="instagram" value={formData.instagram} onChange={handleChange}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder="@username" />
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder={t('placeholders.username')} />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">TikTok</label>
                       <input name="tiktok" value={formData.tiktok} onChange={handleChange}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder="@username" />
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder={t('placeholders.username')} />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">YouTube</label>
                       <input name="youtube" value={formData.youtube} onChange={handleChange}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder="Channel" />
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder={t('placeholders.channelUrl')} />
                     </div>
                   </div>
                 </div>
@@ -1134,7 +1134,7 @@ export default function PlayerRegisterPage() {
                                 {club.currentClub ? (
                                   <div className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
                                     <span className="text-green-600 dark:text-green-400 font-semibold flex items-center gap-1">
-                                      ✓ Aktuell
+                                      ✓ {t('register.current')}
                                     </span>
                                   </div>
                                 ) : (

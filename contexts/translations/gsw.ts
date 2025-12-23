@@ -1113,6 +1113,7 @@ export const gswTranslations = {
       exampleJob: 'z.B. Marketing Manager, Softwareentwickler',
       exampleClub: 'z.B. Volley Amriswil',
       exampleYear: 'z.B. 2020',
+      exampleYearEnd: 'z.B. 2023',
       exampleAchievement: 'z.B. U17 Schwiizermeister 2021',
       searchClubCity: 'Suche nach Club oder Stadt...',
       tellAboutYourself: 'Verzell äber Dich, Din Spielstil, Dini Ziel, etc...',
@@ -1124,6 +1125,8 @@ export const gswTranslations = {
       blockHeight: '300',
       exampleLeague: 'z.B. NLA, 1. Liga, U19 Elite',
       websiteUrl: 'https://example.ch',
+      username: '@benutzername',
+      channelUrl: 'Channel',
     },
     // Labels
     labels: {

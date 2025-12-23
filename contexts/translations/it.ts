@@ -932,6 +932,7 @@ export const itTranslations = {
       exampleJob: 'es. Manager Marketing, Sviluppatore',
       exampleClub: 'es. Volley Amriswil',
       exampleYear: 'es. 2020',
+      exampleYearEnd: 'es. 2023',
       exampleAchievement: 'es. Campione Svizzero U17 2021',
       searchClubCity: 'Cerca club o città...',
       tellAboutYourself: 'Racconta di te, il tuo stile di gioco, i tuoi obiettivi, etc...',
@@ -943,6 +944,8 @@ export const itTranslations = {
       blockHeight: '300',
       exampleLeague: 'es. LNA, 1a Lega, U19 Elite',
       websiteUrl: 'https://example.ch',
+      username: '@nomeutente',
+      channelUrl: 'Canale',
     },
     // Labels
     labels: {

@@ -930,6 +930,7 @@ export const rmTranslations = {
       exampleJob: 'p.ex. Manager da Marketing, Sviluppader',
       exampleClub: 'p.ex. Volley Amriswil',
       exampleYear: 'p.ex. 2020',
+      exampleYearEnd: 'p.ex. 2023',
       exampleAchievement: 'p.ex. Campion Svizzer U17 2021',
       searchClubCity: 'Tschertgar club u citad...',
       tellAboutYourself: 'Discurra davart tai, tes stil da giug, tes finamiras, etc...',
@@ -941,6 +942,8 @@ export const rmTranslations = {
       blockHeight: '300',
       exampleLeague: 'p.ex. LNA, 1avla Ligia, U19 Elite',
       websiteUrl: 'https://example.ch',
+      username: '@num_utilisader',
+      channelUrl: 'Chanal',
     },
     // Labels
     labels: {

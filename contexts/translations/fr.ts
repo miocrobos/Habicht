@@ -179,6 +179,14 @@ export const frTranslations = {
       libero: 'Libéro',
       universal: 'Universel',
     },
+    coachRole: {
+      head_coach: 'EntraÎneur principal',
+      assistant_coach: 'EntraÎneur assistant',
+      technical_coach: 'EntraÎneur technique',
+      physical_coach: 'Préparateur physique',
+      scout: 'Recruteur',
+      trainer: 'EntraÎneur',
+    },
     // About Page
     about: {
       title: 'à propos de Habicht',
@@ -501,6 +509,8 @@ export const frTranslations = {
     },
     // Player Profile
     playerProfile: {
+      position: 'Position',
+      saving: 'Enregistrement...',
       yearsOld: 'ans',
       bornAbbrev: 'Né',
       male: 'Masculin',

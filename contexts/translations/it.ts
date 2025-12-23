@@ -181,6 +181,14 @@ export const itTranslations = {
       libero: 'Libero',
       universal: 'Universale',
     },
+    coachRole: {
+      head_coach: 'Allenatore capo',
+      assistant_coach: 'Assistente allenatore',
+      technical_coach: 'Allenatore tecnico',
+      physical_coach: 'Preparatore atletico',
+      scout: 'Scout',
+      trainer: 'Allenatore',
+    },
     // About Page
     about: {
       title: 'Informazioni su Habicht',

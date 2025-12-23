@@ -180,6 +180,14 @@ export const gswTranslations = {
       libero: 'Libero',
       universal: 'Universal',
     },
+    coachRole: {
+      head_coach: 'Haupttrainer',
+      assistant_coach: 'Assistenztrainer',
+      technical_coach: 'Technische Trainer',
+      physical_coach: 'Fitnesstrainer',
+      scout: 'Scout',
+      trainer: 'Trainer',
+    },
     // About Page
     about: {
       title: 'Über Habicht',
@@ -569,6 +577,8 @@ export const gswTranslations = {
     },
     // Player Profile
     playerProfile: {
+      position: 'Position',
+      saving: 'Wird gspeicheret...',
       yearsOld: 'Joor alt',
       bornAbbrev: 'Geb.',
       male: 'Männlich',

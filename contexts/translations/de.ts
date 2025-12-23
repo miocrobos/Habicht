@@ -494,6 +494,8 @@ export const deTranslations = {
     },
     // Player Profile
     playerProfile: {
+      position: 'Position',
+      saving: 'Wird gespeichert...',
       yearsOld: 'Jahre alt',
       bornAbbrev: 'Geb.',
       male: 'Männlich',

@@ -669,6 +669,8 @@ export const enTranslations = {
     },
     // Player Profile
     playerProfile: {
+      position: 'Position',
+      saving: 'Saving...',
       yearsOld: 'years old',
       bornAbbrev: 'Born',
       male: 'Male',
@@ -775,7 +777,6 @@ export const enTranslations = {
       men: 'MEN',
       women: 'WOMEN',
       search: 'Search',
-      saving: 'Saving...',
       saveChanges: 'Save Changes',
       backToProfile: 'Back to Profile',
       backToHome: 'Back to Home',

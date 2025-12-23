@@ -179,6 +179,14 @@ export const rmTranslations = {
       libero: 'Libero',
       universal: 'Universal',
     },
+    coachRole: {
+      head_coach: 'Trenader principal',
+      assistant_coach: 'Trenader assistant',
+      technical_coach: 'Trenader tecnic',
+      physical_coach: 'Trenader da fitness',
+      scout: 'Scout',
+      trainer: 'Trenader',
+    },
     // About Page
     about: {
       title: 'Davart Habicht',
@@ -501,6 +509,8 @@ export const rmTranslations = {
     },
     // Player Profile
     playerProfile: {
+      position: 'Posiziun',
+      saving: 'Archivar...',
       yearsOld: 'onns',
       bornAbbrev: 'Naschiu',
       male: 'Masculin',

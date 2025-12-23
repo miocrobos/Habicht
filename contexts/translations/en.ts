@@ -233,7 +233,7 @@
         title: 'Mission',
         description: 'We want to create a simple and professional tool that allows Swiss volleyball talents to showcase their skills and connect with scouts and clubs.',
       },
-      aboutFeatures: {
+      features: {
         title: 'Features',
         item1: 'Complete player profiles with statistics and personal information',
         item2: 'Upload video highlights or link them from YouTube, Instagram & TikTok',

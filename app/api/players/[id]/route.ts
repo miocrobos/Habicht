@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
-import { sendPlayerLookingNotification } from '@/lib/email';
+import { sendPlayerLookingNotification, sendWatchlistUpdateNotification } from '@/lib/email';
 import { authOptions } from '@/lib/auth';
 
 // Convert display league names to enum values with fault tolerance
@@ -71,6 +71,51 @@ function convertLeagueToEnum(league: string | null | undefined): string | undefi
   
   // Return original if no match (will be validated on save)
   return league;
+}
+
+// Function to detect and describe profile changes
+function detectProfileChanges(oldPlayer: any, newData: any, newLeague: string | undefined): string[] {
+  const changes: string[] = [];
+  
+  // Check positions
+  if (JSON.stringify(oldPlayer.positions?.sort()) !== JSON.stringify(newData.positions?.sort())) {
+    const oldPos = oldPlayer.positions?.join(', ') || 'None';
+    const newPos = newData.positions?.join(', ') || 'None';
+    changes.push(`Position changed from ${oldPos} to ${newPos}`);
+  }
+  
+  // Check current league
+  if (oldPlayer.currentLeague !== newLeague && newLeague) {
+    changes.push(`League changed to ${newLeague}`);
+  }
+  
+  // Check club (using currentClubId comparison)
+  const oldClubName = oldPlayer.currentClub?.name || 'No club';
+  // We'll check club changes by comparing the club history entries
+  
+  // Check height
+  if (oldPlayer.height !== newData.height && newData.height) {
+    changes.push(`Height updated to ${newData.height} cm`);
+  }
+  
+  // Check skills
+  const skillChanges: string[] = [];
+  if (oldPlayer.skillReceiving !== newData.skillReceiving) skillChanges.push('Receiving');
+  if (oldPlayer.skillServing !== newData.skillServing) skillChanges.push('Serving');
+  if (oldPlayer.skillAttacking !== newData.skillAttacking) skillChanges.push('Attacking');
+  if (oldPlayer.skillBlocking !== newData.skillBlocking) skillChanges.push('Blocking');
+  if (oldPlayer.skillDefense !== newData.skillDefense) skillChanges.push('Defense');
+  
+  if (skillChanges.length > 0) {
+    changes.push(`Skill ratings updated: ${skillChanges.join(', ')}`);
+  }
+  
+  // Check looking for club status
+  if (oldPlayer.lookingForClub !== newData.lookingForClub && newData.lookingForClub) {
+    changes.push('Now looking for a club');
+  }
+  
+  return changes;
 }
 
 export async function GET(
@@ -364,6 +409,60 @@ export async function PUT(
         console.error('Error sending player looking notifications:', emailError);
         // Don't fail the request if email fails
       }
+    }
+
+    // Send watchlist update notifications
+    try {
+      // Detect changes
+      const changes = detectProfileChanges(existingPlayer, playerData, currentLeague);
+      
+      if (changes.length > 0) {
+        // Find all watchers for this player
+        const watchers = await prisma.watchlist.findMany({
+          where: { playerId: params.id },
+          include: {
+            watcher: {
+              select: {
+                id: true,
+                email: true,
+                name: true,
+              }
+            }
+          }
+        });
+
+        // Send notification to each watcher
+        for (const watchItem of watchers) {
+          if (watchItem.watcher.email) {
+            // Create in-app notification
+            await prisma.notification.create({
+              data: {
+                userId: watchItem.watcher.id,
+                type: 'PROFILE_UPDATE',
+                title: `${playerData.firstName} ${playerData.lastName} updated profile`,
+                message: changes.join('; '),
+                actionUrl: `/players/${params.id}`,
+                read: false,
+              }
+            });
+
+            // Send email notification
+            await sendWatchlistUpdateNotification({
+              recipientEmail: watchItem.watcher.email,
+              recipientName: watchItem.watcher.name || 'Recruiter',
+              playerName: `${playerData.firstName} ${playerData.lastName}`,
+              playerImage: playerData.profileImage || null,
+              playerId: params.id,
+              changes: changes,
+            });
+          }
+        }
+        
+        console.log(`✅ Sent watchlist notifications to ${watchers.length} watchers for player ${params.id}`);
+      }
+    } catch (watchlistError) {
+      console.error('Error sending watchlist notifications:', watchlistError);
+      // Don't fail the request if watchlist notifications fail
     }
 
     return NextResponse.json({

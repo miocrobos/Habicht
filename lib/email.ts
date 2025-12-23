@@ -815,3 +815,112 @@ export async function sendProfileViewNotification({
     return false
   }
 }
+interface SendWatchlistUpdateParams {
+  recipientEmail: string;
+  recipientName: string;
+  playerName: string;
+  playerImage: string | null;
+  playerId: string;
+  changes: string[];
+}
+
+export async function sendWatchlistUpdateNotification({
+  recipientEmail,
+  recipientName,
+  playerName,
+  playerImage,
+  playerId,
+  changes,
+}: SendWatchlistUpdateParams): Promise<boolean> {
+  try {
+    const playerUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/players/${playerId}`;
+    
+    if (!process.env.RESEND_API_KEY) {
+      console.log('⚠️ RESEND_API_KEY not configured. Watchlist update email not sent.');
+      return true;
+    }
+
+    const resendClient = getResendClient();
+    if (!resendClient) {
+      console.log('⚠️ Resend client not available');
+      return false;
+    }
+
+    const changesList = changes.map(change => `<li style="color: #4b5563; font-size: 14px; margin: 8px 0;">${change}</li>`).join('');
+
+    await resendClient.emails.send({
+      from: 'Habicht <onboarding@resend.dev>',
+      to: recipientEmail,
+      subject: `${playerName} het Profil aktualisiert - Habicht Watchlist`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: Arial, Helvetica, sans-serif;">
+          <table role="presentation" style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td align="center" style="padding: 0;">
+                <table role="presentation" style="width: 600px; max-width: 100%; border-collapse: collapse; background-color: #ffffff;">
+                  <tr>
+                    <td style="background-color: #dc2626; padding: 40px 20px; text-align: center;">
+                      <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;">🔖 Watchlist Update</h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 40px 30px;">
+                      <h2 style="color: #1f2937; margin-top: 0; font-size: 22px;">Hallo ${recipientName}!</h2>
+                      <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">
+                        <strong>${playerName}</strong> vo dinere Watchlist het es Profil aktualisiert.
+                      </p>
+                      ${playerImage ? `
+                      <div style="text-align: center; margin: 20px 0;">
+                        <img src="${playerImage}" alt="${playerName}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #dc2626;" />
+                      </div>
+                      ` : ''}
+                      <div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 20px; margin: 20px 0; border-radius: 4px;">
+                        <h3 style="color: #991b1b; margin-top: 0; font-size: 16px;">Änderige:</h3>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                          ${changesList}
+                        </ul>
+                      </div>
+                      <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 35px 0;">
+                        <tr>
+                          <td align="center">
+                            <table role="presentation" style="border-collapse: collapse;">
+                              <tr>
+                                <td style="background-color: #dc2626; border-radius: 8px;">
+                                  <a href="${playerUrl}" style="display: inline-block; color: #ffffff; padding: 16px 40px; text-decoration: none; font-size: 18px; font-weight: bold;">
+                                    👤 Profil Aaluege
+                                  </a>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+                      <p style="color: #9ca3af; font-size: 12px; margin: 0;">© 2025 Habicht | Swiss Volleyball Scouting Platform</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+        </html>
+      `,
+    });
+
+    console.log('✅ Watchlist update email sent successfully to:', recipientEmail);
+    return true;
+  } catch (error) {
+    console.error('❌ Error sending watchlist update notification:', error);
+    return false;
+  }
+}

@@ -206,10 +206,6 @@ export default function RecruiterRegisterPage() {
     }
     
     if (step === 2) {
-      if (!agreedToTerms) {
-        setError(t('register.agreeToTermsRequired'));
-        return;
-      }
       if (!formData.dateOfBirth) { 
         setError(t('register.enterDateOfBirth')); 
         return; 
@@ -228,7 +224,12 @@ export default function RecruiterRegisterPage() {
       return;
     }
 
-    // Step 3 - Final submission
+    // Step 3 - Final submission - Check terms before submitting
+    if (!agreedToTerms) {
+      setError(t('register.agreeToTermsRequired'));
+      return;
+    }
+    
     setLoading(true);
     try {
       const fullName = `${formData.firstName} ${formData.lastName}`.trim();

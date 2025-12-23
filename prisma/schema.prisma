@@ -100,6 +100,7 @@ enum NotificationType {
   CHAT_REQUEST
   CLUB_INTEREST
   RECRUITER_INTEREST
+  PROFILE_UPDATE
 }
 
 model User {

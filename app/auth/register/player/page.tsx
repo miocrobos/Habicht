@@ -999,7 +999,7 @@ export default function PlayerRegisterPage() {
                         target="_blank"
                         className="flex items-center gap-1 px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-sm font-medium"
                       >
-                        Club Submit
+                        {t('register.submitClub')}
                       </Link>
                       <button
                         type="button"
@@ -1045,7 +1045,7 @@ export default function PlayerRegisterPage() {
                               </div>
                               <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                  <Globe className="w-4 h-4 inline mr-1" />Land *
+                                  <Globe className="w-4 h-4 inline mr-1" />{t('register.country')} *
                                 </label>
                                 <select
                                   value={club.country}

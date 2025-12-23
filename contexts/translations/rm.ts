@@ -488,6 +488,7 @@ export const rmTranslations = {
       noRecruiters: 'Nagins reclutaders chaté s',
       men: 'Umens',
       women: 'Dunnas',
+      all: 'Tuts',
     },
     // Recruiters Page
     recruiters: {

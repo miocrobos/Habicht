@@ -488,6 +488,7 @@ export const frTranslations = {
       noRecruiters: 'Aucun recruteur trouvé',
       men: 'Hommes',
       women: 'Femmes',
+      all: 'Tous',
     },
     // Recruiters Page
     recruiters: {

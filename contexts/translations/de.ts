@@ -473,6 +473,7 @@ export const deTranslations = {
       noRecruiters: 'Kei Recruiters gfunde',
       men: 'Herren',
       women: 'Damen',
+      all: 'Alle',
     },
     // Recruiters Page
     recruiters: {

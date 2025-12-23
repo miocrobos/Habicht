@@ -199,7 +199,7 @@ export default function WomenPlayersPage() {
                 onChange={(e) => handleFilterChange('position', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">{t('clubProfile.all')}</option>
+                <option value="">{t('playerProfile.all')}</option>
                 <option value="OUTSIDE_HITTER">{t('playerProfile.positionOutsideHitter')}</option>
                 <option value="OPPOSITE">{t('playerProfile.positionOpposite')}</option>
                 <option value="MIDDLE_BLOCKER">{t('playerProfile.positionMiddleBlocker')}</option>

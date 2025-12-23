@@ -112,7 +112,7 @@ export default function ClubBadge({ clubName, size = 'md', showName = false, upl
         ) : hasCustomLogo ? (
           <span className="filter drop-shadow-lg">{clubInfo.logo}</span>
         ) : (
-          <EagleLogo size={size} />
+          <span className="filter drop-shadow-lg text-white">🏐</span>
         )}
       </div>
       {showName && (

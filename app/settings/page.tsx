@@ -552,49 +552,6 @@ export default function SettingsPage() {
                       </div>
                     </div>
 
-                    {/* Reset Profile Views - Player Only */}
-                    {(session?.user?.role === 'PLAYER' || session?.user?.role === 'HYBRID') && session?.user?.playerId && (
-                      <div className="border border-purple-300 dark:border-purple-700 rounded-lg p-6 bg-purple-50 dark:bg-purple-900/20">
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                          </svg>
-                          {t('settings.account.resetViewsTitle')}
-                        </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                          {t('settings.account.resetViewsDescription')}
-                        </p>
-                        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg mb-4">
-                          <p className="text-sm text-blue-700 dark:text-blue-300">
-                            <strong>{t('settings.account.resetViewsNote')}</strong>
-                          </p>
-                        </div>
-                        <button
-                          onClick={async () => {
-                            if (confirm(t('settings.account.resetViewsConfirm'))) {
-                              try {
-                                const response = await axios.post(`/api/players/${session?.user?.playerId}/reset-views`)
-
-                                alert(t('settings.account.resetViewsSuccess'))
-                                // Force reload to clear all caches
-                                window.location.href = window.location.href
-                              } catch (error: any) {
-                                console.error('Reset views error:', error)
-                                alert(t('settings.account.resetViewsError'))
-                              }
-                            }
-                          }}
-                          className="flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold shadow-md"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                          </svg>
-                          {t('settings.account.resetViewsButton')}
-                        </button>
-                      </div>
-                    )}
-
                     {/* CV Export Section */}
                     {(session?.user?.role === 'RECRUITER' || session?.user?.role === 'HYBRID' || (session?.user?.role === 'PLAYER' && session?.user?.playerId)) && (
                       <div className="border border-green-300 dark:border-green-700 rounded-lg p-6 bg-green-50 dark:bg-green-900/20">

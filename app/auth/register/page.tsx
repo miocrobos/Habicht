@@ -46,9 +46,9 @@ export default function RegisterPage() {
           >
             <div className="flex flex-col items-center text-center space-y-4">
               <div className="w-24 h-24 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center group-hover:bg-orange-200 dark:group-hover:bg-orange-900/50 transition">
-                <div className="flex items-center justify-center">
-                  <Trophy className="w-8 h-8 text-orange-600 dark:text-orange-400 -mr-2" />
-                  <Users className="w-8 h-8 text-orange-600 dark:text-orange-400 -ml-2" />
+                <div className="flex items-center justify-center gap-1">
+                  <Trophy className="w-8 h-8 text-orange-600 dark:text-orange-400" />
+                  <Users className="w-8 h-8 text-orange-600 dark:text-orange-400" />
                 </div>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('auth.register.hybrid')}</h3>

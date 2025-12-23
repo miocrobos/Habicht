@@ -30,6 +30,23 @@ const POSITIONS = [
 
 export default function ClubsPage() {
   const { t } = useLanguage()
+  
+  // Function to get translated league label
+  const getLeagueLabel = (league: string) => {
+    switch(league) {
+      case 'Alle': return t('playerProfile.all')
+      case 'NLA': return t('leagues.nla')
+      case 'NLB': return t('leagues.nlb')
+      case '1. Liga': return t('leagues.firstLeague')
+      case '2. Liga': return t('leagues.secondLeague')
+      case '3. Liga': return t('leagues.thirdLeague')
+      case '4. Liga': return t('leagues.fourthLeague')
+      case 'U23': return 'U23'
+      case 'U19': return t('leagues.u19')
+      case 'U17': return t('leagues.u17')
+      default: return league
+    }
+  }
   const searchParams = useSearchParams()
   const cantonFromUrl = searchParams.get('canton')
   
@@ -115,7 +132,7 @@ export default function ClubsPage() {
               >
                 <option value="Alle">{t('playerProfile.all')}</option>
                 {LEAGUES.slice(1).map(league => (
-                  <option key={league} value={league}>{league}</option>
+                  <option key={league} value={league}>{getLeagueLabel(league)}</option>
                 ))}
               </select>
             </div>

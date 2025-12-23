@@ -10,6 +10,7 @@ interface PlayerData {
   weight?: number | null;
   spikeHeight?: number | null;
   blockHeight?: number | null;
+  dominantHand?: string | null;
   nationality: string;
   canton: string;
   municipality?: string | null;
@@ -58,6 +59,10 @@ interface PDFTranslations {
   weight: string;
   spikeHeight: string;
   blockHeight: string;
+  dominantHand: string;
+  rightHanded: string;
+  leftHanded: string;
+  ambidextrous: string;
   clubHistory: string;
   club: string;
   league: string;
@@ -114,6 +119,10 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     weight: 'Gwicht',
     spikeHeight: 'Sprung-Schmetteri',
     blockHeight: 'Sprung-Block',
+    dominantHand: 'Haupthand',
+    rightHanded: 'Rechtshänder',
+    leftHanded: 'Linkshänder',
+    ambidextrous: 'Beidhändig',
     clubHistory: 'VEREINSHISTORIE',
     club: 'Verein',
     league: 'Liga',
@@ -159,6 +168,10 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     weight: 'Gewicht',
     spikeHeight: 'Sprunghöhe Angriff',
     blockHeight: 'Sprunghöhe Block',
+    dominantHand: 'Dominante Hand',
+    rightHanded: 'Rechtshänder',
+    leftHanded: 'Linkshänder',
+    ambidextrous: 'Beidhändig',
     clubHistory: 'VEREINSGESCHICHTE',
     club: 'Verein',
     league: 'Liga',
@@ -204,6 +217,10 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     weight: 'Poids',
     spikeHeight: 'Hauteur De Détente Attaque',
     blockHeight: 'Hauteur De Détente Contre',
+    dominantHand: 'Main dominante',
+    rightHanded: 'Droitier',
+    leftHanded: 'Gaucher',
+    ambidextrous: 'Ambidextre',
     clubHistory: 'HISTORIQUE DU CLUB',
     club: 'Club',
     league: 'Ligue',
@@ -249,6 +266,10 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     weight: 'Peso',
     spikeHeight: 'Altezza Di Salto In Attacco',
     blockHeight: 'Altezza Di Salto A Muro',
+    dominantHand: 'Mano dominante',
+    rightHanded: 'Destro',
+    leftHanded: 'Mancino',
+    ambidextrous: 'Ambidestro',
     clubHistory: 'STORIA DEL CLUB',
     club: 'Club',
     league: 'Lega',
@@ -292,9 +313,13 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     physicalAttributes: 'ATTRIBUTS FISICS',
     height: 'Grondezza',
     weight: 'Paisa',
-    spikeHeight: 'Autezza Dal Stgir Attacca',
-    blockHeight: 'Autezza Dal Stgir Bloccar',
-    clubHistory: 'HISTORIA DAL CLUB',
+    spikeHeight: 'Autezza Attatga',
+    blockHeight: 'Autezza Bloccada',
+    dominantHand: 'Maun dominanta',
+    rightHanded: 'Dretg',
+    leftHanded: 'Sanester',
+    ambidextrous: 'Ambidexter',
+    clubHistory: 'ISTORGIA DAL CLUB',
     club: 'Club',
     league: 'Liga',
     period: 'Perioda',
@@ -339,6 +364,10 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     weight: 'Weight',
     spikeHeight: 'Spike Height',
     blockHeight: 'Block Height',
+    dominantHand: 'Dominant Hand',
+    rightHanded: 'Right-Handed',
+    leftHanded: 'Left-Handed',
+    ambidextrous: 'Ambidextrous',
     clubHistory: 'CLUB HISTORY',
     club: 'Club',
     league: 'League',
@@ -557,7 +586,7 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
   yPos += narrativeLines.length * 6 + 5;
 
   // Physical Stats (more human format)
-  if (playerData.height || playerData.weight || playerData.spikeHeight || playerData.blockHeight) {
+  if (playerData.height || playerData.weight || playerData.spikeHeight || playerData.blockHeight || playerData.dominantHand) {
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
@@ -573,6 +602,13 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
     if (playerData.weight) statsLines.push(`${translations.weight}: ${playerData.weight} kg`);
     if (playerData.spikeHeight) statsLines.push(`${translations.spikeHeight}: ${playerData.spikeHeight} cm`);
     if (playerData.blockHeight) statsLines.push(`${translations.blockHeight}: ${playerData.blockHeight} cm`);
+    if (playerData.dominantHand) {
+      const handText = playerData.dominantHand === 'RIGHT' ? translations.rightHanded :
+                       playerData.dominantHand === 'LEFT' ? translations.leftHanded :
+                       playerData.dominantHand === 'AMBIDEXTROUS' ? translations.ambidextrous :
+                       playerData.dominantHand;
+      statsLines.push(`${translations.dominantHand}: ${handText}`);
+    }
     
     statsLines.forEach((line, index) => {
       doc.text(line, 15, yPos + (index * 6));

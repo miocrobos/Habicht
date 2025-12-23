@@ -665,7 +665,6 @@
       openForClubOffers: 'Activez ceci si vous êtes ouvert aux offres de club',
       selectBackground: 'Sélectionnez un arrière-plan :',
       dominantHandLabel: 'Main',
-      preferredLanguageLabel: 'Langue',
     },
     // Settings
     settings: {

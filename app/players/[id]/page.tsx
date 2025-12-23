@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
 import ClubBadge from '@/components/shared/ClubBadge'
 import ImageUpload from '@/components/shared/ImageUpload'
+import PhotoGallery from '@/components/shared/PhotoGallery'
 import ChatWindow from '@/components/chat/ChatWindow'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { generatePlayerCV } from '@/lib/generateCV'
@@ -30,6 +31,7 @@ interface PlayerData {
     email: string
     name: string | null
     role: string
+    emailVerified: Date | null
   }
   dateOfBirth: string | null
   gender: string
@@ -886,6 +888,16 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               >
                 {t('playerProfile.tabAchievements')}
               </button>
+              <button
+                onClick={() => setActiveTab('photos')}
+                className={`px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition whitespace-nowrap ${
+                  activeTab === 'photos'
+                    ? 'border-red-600 text-red-600 dark:text-red-400'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                }`}
+              >
+                Photos
+              </button>
             </nav>
           </div>
 
@@ -1129,6 +1141,14 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   </div>
                 )}
               </div>
+            )}
+
+            {activeTab === 'photos' && (
+              <PhotoGallery 
+                playerId={params.id}
+                isOwner={isOwner}
+                isVerified={player?.user?.emailVerified !== null}
+              />
             )}
           </div>
         </div>

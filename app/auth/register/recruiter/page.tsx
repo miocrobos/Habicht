@@ -7,36 +7,6 @@ import { Mail, Lock, User, Calendar, Globe, MapPin, Briefcase, Eye, EyeOff, Uplo
 import ImageUpload from '@/components/shared/ImageUpload';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-// Canton list
-const CANTONS = [
-  { code: 'ZH', name: 'Zürich' },
-  { code: 'BE', name: 'Bern' },
-  { code: 'LU', name: 'Luzern' },
-  { code: 'UR', name: 'Uri' },
-  { code: 'SZ', name: 'Schwyz' },
-  { code: 'OW', name: 'Obwalden' },
-  { code: 'NW', name: 'Nidwalden' },
-  { code: 'GL', name: 'Glarus' },
-  { code: 'ZG', name: 'Zug' },
-  { code: 'FR', name: 'Freiburg' },
-  { code: 'SO', name: 'Solothurn' },
-  { code: 'BS', name: 'Basel-Stadt' },
-  { code: 'BL', name: 'Basel-Landschaft' },
-  { code: 'SH', name: 'Schaffhausen' },
-  { code: 'AR', name: 'Appenzell Ausserrhoden' },
-  { code: 'AI', name: 'Appenzell Innerrhoden' },
-  { code: 'SG', name: 'St. Gallen' },
-  { code: 'GR', name: 'Graubünden' },
-  { code: 'AG', name: 'Aargau' },
-  { code: 'TG', name: 'Thurgau' },
-  { code: 'TI', name: 'Ticino' },
-  { code: 'VD', name: 'Vaud' },
-  { code: 'VS', name: 'Valais' },
-  { code: 'NE', name: 'Neuchâtel' },
-  { code: 'GE', name: 'Genève' },
-  { code: 'JU', name: 'Jura' }
-];
-
 const NATIONALITIES = [
   "Afghanistan", "Albanie", "Algerie", "Andorra", "Angola", "Argentinie", "Armenie", "Australie", "Östriich",
   "Aserbaidschan", "Bahamas", "Bahrain", "Bangladesch", "Barbados", "Wiissrussland", "Belgie", "Belize", "Benin",
@@ -416,7 +386,32 @@ export default function RecruiterRegisterPage() {
                   <select name="canton" required value={formData.canton} onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
                     <option value="">{t('register.selectCanton')}</option>
-                    {CANTONS.map(c => <option key={c.code} value={c.code}>{c.name}</option>)}
+                    <option value="AG">{t('cantons.AG')}</option>
+                    <option value="AI">{t('cantons.AI')}</option>
+                    <option value="AR">{t('cantons.AR')}</option>
+                    <option value="BE">{t('cantons.BE')}</option>
+                    <option value="BL">{t('cantons.BL')}</option>
+                    <option value="BS">{t('cantons.BS')}</option>
+                    <option value="FR">{t('cantons.FR')}</option>
+                    <option value="GE">{t('cantons.GE')}</option>
+                    <option value="GL">{t('cantons.GL')}</option>
+                    <option value="GR">{t('cantons.GR')}</option>
+                    <option value="JU">{t('cantons.JU')}</option>
+                    <option value="LU">{t('cantons.LU')}</option>
+                    <option value="NE">{t('cantons.NE')}</option>
+                    <option value="NW">{t('cantons.NW')}</option>
+                    <option value="OW">{t('cantons.OW')}</option>
+                    <option value="SG">{t('cantons.SG')}</option>
+                    <option value="SH">{t('cantons.SH')}</option>
+                    <option value="SO">{t('cantons.SO')}</option>
+                    <option value="SZ">{t('cantons.SZ')}</option>
+                    <option value="TG">{t('cantons.TG')}</option>
+                    <option value="TI">{t('cantons.TI')}</option>
+                    <option value="UR">{t('cantons.UR')}</option>
+                    <option value="VD">{t('cantons.VD')}</option>
+                    <option value="VS">{t('cantons.VS')}</option>
+                    <option value="ZG">{t('cantons.ZG')}</option>
+                    <option value="ZH">{t('cantons.ZH')}</option>
                   </select>
                 </div>
 

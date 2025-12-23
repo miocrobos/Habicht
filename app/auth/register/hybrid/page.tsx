@@ -33,6 +33,7 @@ export default function HybridRegisterPage() {
     // Player - Positions & Physical Stats
     positions: [] as string[],
     dominantHand: '',
+    preferredLanguage: '',
     height: '',
     weight: '',
     spikeHeight: '',
@@ -236,6 +237,7 @@ export default function HybridRegisterPage() {
             bio: formData.bio,
             positions: formData.positions,
             dominantHand: formData.dominantHand || null,
+            preferredLanguage: formData.preferredLanguage || null,
             height: formData.height ? parseFloat(formData.height) : null,
             weight: formData.weight ? parseFloat(formData.weight) : null,
             spikeHeight: formData.spikeHeight ? parseFloat(formData.spikeHeight) : null,
@@ -264,6 +266,7 @@ export default function HybridRegisterPage() {
             canton: formData.canton,
             province: formData.municipality,
             phone: formData.phone,
+            preferredLanguage: formData.preferredLanguage || null,
             bio: formData.bio,
             coachRole: formData.coachRole,
             organization: formData.organization,
@@ -507,6 +510,26 @@ export default function HybridRegisterPage() {
                   <option value="RIGHT">{t('register.rightHanded')}</option>
                   <option value="LEFT">{t('register.leftHanded')}</option>
                   <option value="AMBIDEXTROUS">{t('register.ambidextrous')}</option>
+                </select>
+              </div>
+
+              {/* Preferred Language */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  {t('register.preferredLanguage')}
+                </label>
+                <select
+                  value={formData.preferredLanguage}
+                  onChange={(e) => setFormData({ ...formData, preferredLanguage: e.target.value })}
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
+                >
+                  <option value="">{t('register.selectPreferredLanguage')}</option>
+                  <option value="gsw">{t('register.languageSwissGerman')}</option>
+                  <option value="de">{t('register.languageGerman')}</option>
+                  <option value="fr">{t('register.languageFrench')}</option>
+                  <option value="it">{t('register.languageItalian')}</option>
+                  <option value="rm">{t('register.languageRomansh')}</option>
+                  <option value="en">{t('register.languageEnglish')}</option>
                 </select>
               </div>
 

@@ -9,6 +9,7 @@ interface RecruiterData {
   canton: string;
   province?: string | null;
   phone?: string | null;
+  preferredLanguage?: string | null;
   bio?: string | null;
   coachRole: string;
   organization: string;
@@ -148,6 +149,20 @@ export async function generateRecruiterCV(recruiterData: RecruiterData, language
 
   const locationText = recruiterData.province ? `${recruiterData.province}, ${recruiterData.canton}` : recruiterData.canton;
   
+  // Get translated language name
+  const getLanguageName = (langCode: string | null) => {
+    if (!langCode) return null;
+    const languageNames: { [key: string]: string } = {
+      gsw: 'Schwiizerdütsch',
+      de: 'Dütsch',
+      fr: 'Französisch',
+      it: 'Italienisch',
+      rm: 'Rumantsch',
+      en: 'Englisch'
+    };
+    return languageNames[langCode] || langCode;
+  };
+  
   let narrativeLines = [
     `Alter: ${recruiterData.age} Jahr`,
     `Nationalität: ${recruiterData.nationality}`,
@@ -158,6 +173,10 @@ export async function generateRecruiterCV(recruiterData: RecruiterData, language
   
   if (recruiterData.phone) {
     narrativeLines.push(`Telefon: ${recruiterData.phone}`);
+  }
+  
+  if (recruiterData.preferredLanguage) {
+    narrativeLines.push(`Bevorzugti Sproch: ${getLanguageName(recruiterData.preferredLanguage)}`);
   }
   
   narrativeLines.forEach((line, index) => {

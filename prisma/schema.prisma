@@ -158,6 +158,7 @@ model Player {
   // Volleyball Information
   positions         Position[]  @default([]) // Multiple positions player can play
   dominantHand      String?     // RIGHT, LEFT, AMBIDEXTROUS
+  preferredLanguage String?     // gsw, de, fr, it, rm, en
   jerseyNumber      Int?
   hasClub           Boolean     @default(false) // Whether player is currently in a club
   clubName          String?     // Name of current club (if not in our database)
@@ -525,6 +526,7 @@ model Recruiter {
   organization      String      // Club name or Agency
   position          String      // Title/Role
   phone             String?
+  preferredLanguage String?     // gsw, de, fr, it, rm, en
   bio               String?     @db.Text
   profileImage      String?     // Profile picture (optional for recruiters)
   coverImage        String?     // Optional backdrop/banner image

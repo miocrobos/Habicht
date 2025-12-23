@@ -304,7 +304,7 @@ export default function PlayerRegisterPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '', password: '', confirmPassword: '', firstName: '', lastName: '',
-    dateOfBirth: '', gender: '', nationality: '', canton: '', municipality: '', positions: [] as string[], dominantHand: '', height: '',
+    dateOfBirth: '', gender: '', nationality: '', canton: '', municipality: '', positions: [] as string[], dominantHand: '', preferredLanguage: '', height: '',
     weight: '', spikeHeight: '', blockHeight: '', 
     profileImage: '', instagram: '', tiktok: '', youtube: '', highlightVideo: '',
     skillReceiving: 0, skillServing: 0, skillAttacking: 0, skillBlocking: 0, skillDefense: 0,
@@ -432,6 +432,7 @@ export default function PlayerRegisterPage() {
           schoolName: formData.schoolName,
           positions: formData.positions.map(mapPositionToEnum),
           dominantHand: formData.dominantHand || null,
+          preferredLanguage: formData.preferredLanguage || null,
           height: formData.height ? parseFloat(formData.height) : undefined,
           weight: formData.weight ? parseFloat(formData.weight) : undefined,
           spikeHeight: formData.spikeHeight ? parseFloat(formData.spikeHeight) : undefined,
@@ -631,6 +632,27 @@ export default function PlayerRegisterPage() {
                     <option value="RIGHT">{t('register.rightHanded')}</option>
                     <option value="LEFT">{t('register.leftHanded')}</option>
                     <option value="AMBIDEXTROUS">{t('register.ambidextrous')}</option>
+                  </select>
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('register.optional')}</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    {t('register.preferredLanguage')}
+                  </label>
+                  <select 
+                    name="preferredLanguage" 
+                    value={formData.preferredLanguage} 
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
+                  >
+                    <option value="">{t('register.selectPreferredLanguage')}</option>
+                    <option value="gsw">{t('register.languageSwissGerman')}</option>
+                    <option value="de">{t('register.languageGerman')}</option>
+                    <option value="fr">{t('register.languageFrench')}</option>
+                    <option value="it">{t('register.languageItalian')}</option>
+                    <option value="rm">{t('register.languageRomansh')}</option>
+                    <option value="en">{t('register.languageEnglish')}</option>
                   </select>
                   <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('register.optional')}</p>
                 </div>

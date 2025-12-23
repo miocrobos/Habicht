@@ -70,6 +70,15 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     { value: 'LEFT', label: t('register.leftHanded') },
     { value: 'AMBIDEXTROUS', label: t('register.ambidextrous') },
   ];
+
+  const preferredLanguageOptions = [
+    { value: 'gsw', label: t('register.languageSwissGerman') },
+    { value: 'de', label: t('register.languageGerman') },
+    { value: 'fr', label: t('register.languageFrench') },
+    { value: 'it', label: t('register.languageItalian') },
+    { value: 'rm', label: t('register.languageRomansh') },
+    { value: 'en', label: t('register.languageEnglish') },
+  ];
   
   const [formData, setFormData] = useState<any>(null);
   const [clubHistory, setClubHistory] = useState<any[]>([]);
@@ -568,6 +577,24 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
               >
                 <option value="">{t('register.selectDominantHand')}</option>
                 {dominantHandOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {t('register.preferredLanguage')}
+              </label>
+              <select
+                value={formData.preferredLanguage || ''}
+                onChange={(e) => setFormData({ ...formData, preferredLanguage: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              >
+                <option value="">{t('register.selectPreferredLanguage')}</option>
+                {preferredLanguageOptions.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>

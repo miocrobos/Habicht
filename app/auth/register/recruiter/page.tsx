@@ -84,6 +84,7 @@ export default function RecruiterRegisterPage() {
     coachRole: [] as string[],  // Changed to array to support multiple roles
     genderCoached: [] as string[],
     phone: '',
+    preferredLanguage: '',
     bio: '',
     coachingLicense: '',
     ausweiss: '',
@@ -226,6 +227,7 @@ export default function RecruiterRegisterPage() {
           coachRole: formData.coachRole,
           genderCoached: formData.genderCoached,
           phone: formData.phone || null,
+          preferredLanguage: formData.preferredLanguage || null,
           bio: formData.bio || null,
           coachingLicense: formData.coachingLicense || null,
           ausweiss: formData.ausweiss || null,
@@ -531,6 +533,26 @@ export default function RecruiterRegisterPage() {
                     placeholder={t('placeholders.phoneNumber')}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    {t('register.preferredLanguage')} ({t('register.optional')})
+                  </label>
+                  <select 
+                    name="preferredLanguage" 
+                    value={formData.preferredLanguage} 
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
+                  >
+                    <option value="">{t('register.selectPreferredLanguage')}</option>
+                    <option value="gsw">{t('register.languageSwissGerman')}</option>
+                    <option value="de">{t('register.languageGerman')}</option>
+                    <option value="fr">{t('register.languageFrench')}</option>
+                    <option value="it">{t('register.languageItalian')}</option>
+                    <option value="rm">{t('register.languageRomansh')}</option>
+                    <option value="en">{t('register.languageEnglish')}</option>
+                  </select>
                 </div>
 
                 <div>

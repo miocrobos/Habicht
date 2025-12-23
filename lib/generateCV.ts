@@ -11,6 +11,7 @@ interface PlayerData {
   spikeHeight?: number | null;
   blockHeight?: number | null;
   dominantHand?: string | null;
+  preferredLanguage?: string | null;
   nationality: string;
   canton: string;
   municipality?: string | null;
@@ -84,6 +85,7 @@ interface PDFTranslations {
   phone: string;
   educationEmployment: string;
   unknown: string;
+  preferredLanguageLabel: string;
   positions: {
     SETTER: string;
     OUTSIDE_HITTER: string;
@@ -114,6 +116,7 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     phone: 'Telefon',
     educationEmployment: 'USBILDIG & BERUF',
     unknown: 'Unbekannt',
+    preferredLanguageLabel: 'Bevorzugti Sproch',
     physicalAttributes: 'PHYSISCHI ATTRIBUTE',
     height: 'Grössi',
     weight: 'Gwicht',
@@ -163,6 +166,7 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     phone: 'Telefon',
     educationEmployment: 'BILDUNG & BERUF',
     unknown: 'Unbekannt',
+    preferredLanguageLabel: 'Bevorzugte Sprache',
     physicalAttributes: 'PHYSISCHE ATTRIBUTE',
     height: 'Größe',
     weight: 'Gewicht',
@@ -212,6 +216,7 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     phone: 'Téléphone',
     educationEmployment: 'FORMATION & PROFESSION',
     unknown: 'Inconnu',
+    preferredLanguageLabel: 'Langue préférée',
     physicalAttributes: 'ATTRIBUTS PHYSIQUES',
     height: 'Taille',
     weight: 'Poids',
@@ -261,6 +266,7 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     phone: 'Telefono',
     educationEmployment: 'FORMAZIONE & PROFESSIONE',
     unknown: 'Sconosciuto',
+    preferredLanguageLabel: 'Lingua preferita',
     physicalAttributes: 'ATTRIBUTI FISICI',
     height: 'Altezza',
     weight: 'Peso',
@@ -310,6 +316,7 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     phone: 'Telefon',
     educationEmployment: 'FURMAZIUN & PROFESSIUN',
     unknown: 'Nunenconuschent',
+    preferredLanguageLabel: 'Lingua preferida',
     physicalAttributes: 'ATTRIBUTS FISICS',
     height: 'Grondezza',
     weight: 'Paisa',
@@ -359,6 +366,7 @@ const pdfTranslations: { [key: string]: PDFTranslations } = {
     phone: 'Phone',
     educationEmployment: 'EDUCATION & EMPLOYMENT',
     unknown: 'Unknown',
+    preferredLanguageLabel: 'Preferred Language',
     physicalAttributes: 'PHYSICAL ATTRIBUTES',
     height: 'Height',
     weight: 'Weight',
@@ -566,6 +574,20 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
   const birthText = formatBirthDate(playerData.dateOfBirth);
   const locationText = playerData.municipality ? `${playerData.municipality}, ${playerData.canton}` : playerData.canton;
   
+  // Get translated language name
+  const getLanguageName = (langCode: string | null) => {
+    if (!langCode) return null;
+    const languageNames: { [key: string]: { [key: string]: string } } = {
+      gsw: { en: 'Swiss German', gsw: 'Schwiizerdütsch', de: 'Schweizerdeutsch', fr: 'Suisse allemand', it: 'Tedesco svizzero', rm: 'Tudestg svizzer' },
+      de: { en: 'German', gsw: 'Dütsch', de: 'Deutsch', fr: 'Allemand', it: 'Tedesco', rm: 'Tudestg' },
+      fr: { en: 'French', gsw: 'Französisch', de: 'Französisch', fr: 'Français', it: 'Francese', rm: 'Franzos' },
+      it: { en: 'Italian', gsw: 'Italienisch', de: 'Italienisch', fr: 'Italien', it: 'Italiano', rm: 'Talian' },
+      rm: { en: 'Romansh', gsw: 'Rumantsch', de: 'Rätoromanisch', fr: 'Romanche', it: 'Romancio', rm: 'Rumantsch' },
+      en: { en: 'English', gsw: 'Englisch', de: 'Englisch', fr: 'Anglais', it: 'Inglese', rm: 'Englais' }
+    };
+    return languageNames[langCode]?.[language] || langCode;
+  };
+  
   let narrativeLines = [
     `${translations.dateOfBirth}: ${birthText}`,
     `${translations.gender}: ${genderText}`,
@@ -577,6 +599,10 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
   
   if (playerData.phone) {
     narrativeLines.push(`${translations.phone}: ${playerData.phone}`);
+  }
+  
+  if (playerData.preferredLanguage) {
+    narrativeLines.push(`${translations.preferredLanguageLabel}: ${getLanguageName(playerData.preferredLanguage)}`);
   }
   
   narrativeLines.forEach((line, index) => {

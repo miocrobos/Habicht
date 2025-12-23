@@ -39,6 +39,7 @@ interface PlayerData {
   weight: number | null
   positions: string[]
   dominantHand: string | null
+  preferredLanguage: string | null
   nationality: string
   canton: string
   city: string | null
@@ -737,6 +738,20 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                          t('register.ambidextrous')}
                       </div>
                       <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.dominantHandLabel')}</div>
+                    </div>
+                  )}
+                  {player.preferredLanguage && (
+                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
+                      <div className="text-xl md:text-2xl font-bold text-purple-600 dark:text-purple-400">
+                        {player.preferredLanguage === 'gsw' ? t('register.languageSwissGerman') :
+                         player.preferredLanguage === 'de' ? t('register.languageGerman') :
+                         player.preferredLanguage === 'fr' ? t('register.languageFrench') :
+                         player.preferredLanguage === 'it' ? t('register.languageItalian') :
+                         player.preferredLanguage === 'rm' ? t('register.languageRomansh') :
+                         player.preferredLanguage === 'en' ? t('register.languageEnglish') :
+                         player.preferredLanguage.toUpperCase()}
+                      </div>
+                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.preferredLanguageLabel')}</div>
                     </div>
                   )}
                 </div>

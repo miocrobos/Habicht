@@ -92,6 +92,30 @@ export default function NotificationsPage() {
     }
   }
 
+  const getNotificationText = (notification: Notification) => {
+    // Handle new translation key format
+    if (notification.type === 'PROFILE_VIEW' && notification.title === 'notifications.profileViewed') {
+      return {
+        title: t('notifications.profileViewed'),
+        message: t('notifications.profileViewedMessage').replace('{name}', notification.message)
+      }
+    }
+    
+    if (notification.type === 'MESSAGE' && !notification.title.includes('vo ')) {
+      // New format: title is senderName, message is the actual message
+      return {
+        title: t('notifications.messageFrom').replace('{name}', notification.title),
+        message: notification.message
+      }
+    }
+    
+    // Legacy format: use as-is
+    return {
+      title: notification.title,
+      message: notification.message
+    }
+  }
+
   const filteredNotifications = notifications
     .filter(n => filter === 'unread' ? !n.read : true)
     .filter(n => typeFilter === 'all' ? true : n.type === typeFilter)
@@ -211,7 +235,9 @@ export default function NotificationsPage() {
           </div>
         ) : (
           <div className="space-y-3">
-            {filteredNotifications.map(notification => (
+            {filteredNotifications.map(notification => {
+              const { title, message } = getNotificationText(notification)
+              return (
               <div
                 key={notification.id}
                 className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 transition hover:shadow-xl ${
@@ -230,14 +256,14 @@ export default function NotificationsPage() {
                   <div className="flex-1">
                     <div className="flex items-start justify-between mb-1">
                       <h3 className="font-semibold text-gray-900 dark:text-white">
-                        {notification.title}
+                        {title}
                       </h3>
                       <span className="text-xs text-gray-500 dark:text-gray-400">
                         {new Date(notification.createdAt).toLocaleString('de-CH')}
                       </span>
                     </div>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      {notification.message}
+                      {message}
                     </p>
                   </div>
 
@@ -261,7 +287,8 @@ export default function NotificationsPage() {
                   </div>
                 </div>
               </div>
-            ))}
+              )
+            })}
           </div>
         )}
       </div>

@@ -427,7 +427,7 @@ export default function RecruiterRegisterPage() {
                     name="province" 
                     value={formData.province} 
                     onChange={handleChange}
-                    placeholder="z.B. Winterthur, Bern, etc."
+                    placeholder={t('register.cityPlaceholder')}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
                   />
                   <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('register.optional')}</p>
@@ -544,7 +544,7 @@ export default function RecruiterRegisterPage() {
                     rows={4} 
                     value={formData.bio} 
                     onChange={handleChange}
-                    placeholder="Erzähl Es Bisseli Über Dich Und Dini Erfahrig..."
+                    placeholder={t('register.bioPlaceholder')}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
                   />
                 </div>
@@ -582,7 +582,7 @@ export default function RecruiterRegisterPage() {
                         type="text" 
                         value={formData.facebook} 
                         onChange={handleChange}
-                        placeholder="Facebook Profil/Site URL"
+                        placeholder={t('register.facebookPlaceholder')}
                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm" 
                       />
                     </div>
@@ -634,7 +634,7 @@ export default function RecruiterRegisterPage() {
                         value={newAchievement}
                         onChange={(e) => setNewAchievement(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addAchievement())}
-                        placeholder="z.B. Schwizer Meischter 2023, NLA Uffstig..."
+                        placeholder={t('register.achievementsPlaceholder')}
                         className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white text-sm"
                       />
                       <button 
@@ -675,7 +675,7 @@ export default function RecruiterRegisterPage() {
                         target="_blank"
                         className="flex items-center gap-1 px-3 py-1.5 bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-sm font-medium"
                       >
-                        Club Submit
+                        {t('register.clubSubmit')}
                       </Link>
                       <button 
                         type="button"

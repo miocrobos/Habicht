@@ -459,13 +459,13 @@ export default function ClubProfilePage() {
                   className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                 >
                   <option value="">{t('clubProfile.league')}</option>
-                  <option value="NLA">NLA</option>
-                  <option value="NLB">NLB</option>
-                  <option value="FIRST_LEAGUE">{t('players.league1')}</option>
-                  <option value="SECOND_LEAGUE">{t('players.league2')}</option>
-                  <option value="THIRD_LEAGUE">{t('players.league3')}</option>
-                  <option value="FOURTH_LEAGUE">{t('players.league4')}</option>
-                  <option value="FIFTH_LEAGUE">{t('players.league5')}</option>
+                  <option value="NLA">{t('home.leagues.nla')}</option>
+                  <option value="NLB">{t('home.leagues.nlb')}</option>
+                  <option value="FIRST_LEAGUE">{t('home.leagues.firstLeague')}</option>
+                  <option value="SECOND_LEAGUE">{t('home.leagues.secondLeague')}</option>
+                  <option value="THIRD_LEAGUE">{t('home.leagues.thirdLeague')}</option>
+                  <option value="FOURTH_LEAGUE">{t('home.leagues.fourthLeague')}</option>
+                  <option value="FIFTH_LEAGUE">{t('home.leagues.fifthLeague')}</option>
                 </select>
               </div>
             </div>

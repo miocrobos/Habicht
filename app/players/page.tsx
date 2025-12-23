@@ -208,15 +208,15 @@ export default function PlayersPage() {
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">{t('players.leagueAll')}</option>
-                <option value="NLA">NLA</option>
-                <option value="NLB">NLB</option>
-                <option value="FIRST_LEAGUE">1. Liga</option>
-                <option value="SECOND_LEAGUE">2. Liga</option>
-                <option value="THIRD_LEAGUE">3. Liga</option>
-                <option value="FOURTH_LEAGUE">4. Liga</option>
-                <option value="FIFTH_LEAGUE">5. Liga</option>
-                <option value="YOUTH_U19">U19</option>
-                <option value="YOUTH_U17">U17</option>
+                <option value="NLA">{t('home.leagues.nla')}</option>
+                <option value="NLB">{t('home.leagues.nlb')}</option>
+                <option value="FIRST_LEAGUE">{t('home.leagues.firstLeague')}</option>
+                <option value="SECOND_LEAGUE">{t('home.leagues.secondLeague')}</option>
+                <option value="THIRD_LEAGUE">{t('home.leagues.thirdLeague')}</option>
+                <option value="FOURTH_LEAGUE">{t('home.leagues.fourthLeague')}</option>
+                <option value="FIFTH_LEAGUE">{t('home.leagues.fifthLeague')}</option>
+                <option value="YOUTH_U19">{t('home.leagues.u19')}</option>
+                <option value="YOUTH_U17">{t('home.leagues.u17')}</option>
               </select>
             </div>
           </div>

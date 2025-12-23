@@ -233,7 +233,7 @@ export async function POST(
             data: {
               userId: recipientUserId,
               type: 'MESSAGE',
-              title: `Nachricht vo ${senderName}`,
+              title: senderName,
               message: content.trim().substring(0, 100) + (content.trim().length > 100 ? '...' : ''),
               senderId: session.user.id,
               senderName,

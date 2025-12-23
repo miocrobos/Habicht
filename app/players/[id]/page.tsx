@@ -12,6 +12,7 @@ import ChatWindow from '@/components/chat/ChatWindow'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { generatePlayerCV } from '@/lib/generateCV'
 import { formatViewCount } from '@/lib/formatViewCount'
+import CVExportLanguagePopup from '@/components/shared/CVExportLanguagePopup'
 import axios from 'axios'
 
 interface PlayerProfileProps {
@@ -167,6 +168,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [uploadingBackground, setUploadingBackground] = useState(false)
   const [showChat, setShowChat] = useState(false)
   const [conversationId, setConversationId] = useState<string | null>(null)
+  const [showCVExportPopup, setShowCVExportPopup] = useState(false)
 
   const isOwner = session?.user?.playerId === params.id
 
@@ -292,20 +294,20 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     }
   }
 
-  const handleExportCV = async () => {
+  const handleExportCV = async (language: string) => {
     if (!player) return
 
     try {
-      console.log('=== CV EXPORT v2.0 (Professional Format) ===')
-      // Generate PDF using the utility function
-      const pdfBlob = await generatePlayerCV(player)
+      console.log(`=== CV EXPORT v2.0 (Language: ${language}) ===`)
+      // Generate PDF using the utility function with selected language
+      const pdfBlob = await generatePlayerCV(player, language)
       
       // Create download link with timestamp to prevent caching
       const url = URL.createObjectURL(pdfBlob)
       const link = document.createElement('a')
       link.href = url
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
-      link.download = `${player.firstName}_${player.lastName}_CV_${timestamp}.pdf`
+      link.download = `${player.firstName}_${player.lastName}_CV_${language.toUpperCase()}_${timestamp}.pdf`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
@@ -721,7 +723,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     </Link>
                     
                     <button
-                      onClick={handleExportCV}
+                      onClick={() => setShowCVExportPopup(true)}
                       className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold"
                       title={t('playerProfile.exportCV')}
                     >
@@ -1406,6 +1408,15 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
             onClose={() => setShowChat(false)}
           />
         </div>
+      )}
+
+      {/* CV Export Language Popup */}
+      {showCVExportPopup && (
+        <CVExportLanguagePopup
+          onClose={() => setShowCVExportPopup(false)}
+          onExport={handleExportCV}
+          userType="player"
+        />
       )}
     </div>
   )

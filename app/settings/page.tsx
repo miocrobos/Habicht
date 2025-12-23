@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react'
 import axios from 'axios'
 import { FileDown } from 'lucide-react'
 import CVTypeModal from '@/components/shared/CVTypeModal'
+import CVExportLanguagePopup from '@/components/shared/CVExportLanguagePopup'
 import { generatePlayerCV } from '@/lib/generateCV'
 import { generateRecruiterCV } from '@/lib/generateRecruiterCV'
 
@@ -29,6 +30,8 @@ export default function SettingsPage() {
   const [notifyPlayerLooking, setNotifyPlayerLooking] = useState(true)
   const [notifyRecruiterSearching, setNotifyRecruiterSearching] = useState(true)
   const [showCVModal, setShowCVModal] = useState(false)
+  const [showCVLanguagePopup, setShowCVLanguagePopup] = useState(false)
+  const [cvExportType, setCvExportType] = useState<'player' | 'recruiter' | 'hybrid'>('player')
   const [playerData, setPlayerData] = useState<any>(null)
   const [recruiterData, setRecruiterData] = useState<any>(null)
 
@@ -89,26 +92,26 @@ export default function SettingsPage() {
     }
   }
 
-  const handleExportCV = async (type: 'player' | 'recruiter') => {
+  const handleExportCV = async (language: string) => {
     try {
-      if (type === 'player' && playerData) {
-        const pdfBlob = await generatePlayerCV(playerData)
+      if (cvExportType === 'player' && playerData) {
+        const pdfBlob = await generatePlayerCV(playerData, language)
         const url = URL.createObjectURL(pdfBlob)
         const link = document.createElement('a')
         link.href = url
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
-        link.download = `${playerData.firstName}_${playerData.lastName}_Spieler_CV_${timestamp}.pdf`
+        link.download = `${playerData.firstName}_${playerData.lastName}_Player_CV_${language.toUpperCase()}_${timestamp}.pdf`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-      } else if (type === 'recruiter' && recruiterData) {
-        const pdfBlob = await generateRecruiterCV(recruiterData)
+      } else if (cvExportType === 'recruiter' && recruiterData) {
+        const pdfBlob = await generateRecruiterCV(recruiterData, language)
         const url = URL.createObjectURL(pdfBlob)
         const link = document.createElement('a')
         link.href = url
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
-        link.download = `${recruiterData.firstName}_${recruiterData.lastName}_Recruiter_CV_${timestamp}.pdf`
+        link.download = `${recruiterData.firstName}_${recruiterData.lastName}_Recruiter_CV_${language.toUpperCase()}_${timestamp}.pdf`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
@@ -619,7 +622,7 @@ export default function SettingsPage() {
                           </div>
                         ) : session?.user?.role === 'RECRUITER' ? (
                           <button
-                            onClick={() => handleExportCV('recruiter')}
+                            onClick={() => { setCvExportType('recruiter'); setShowCVLanguagePopup(true); }}
                             className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold shadow-md"
                           >
                             <FileDown className="w-4 h-4" />
@@ -627,7 +630,7 @@ export default function SettingsPage() {
                           </button>
                         ) : (
                           <button
-                            onClick={() => handleExportCV('player')}
+                            onClick={() => { setCvExportType('player'); setShowCVLanguagePopup(true); }}
                             className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold shadow-md"
                           >
                             <FileDown className="w-4 h-4" />
@@ -703,6 +706,15 @@ export default function SettingsPage() {
             playerData={playerData}
             recruiterData={recruiterData}
             userName={session?.user?.name || `${playerData.firstName} ${playerData.lastName}`}
+          />
+        )}
+
+        {/* CV Language Export Popup */}
+        {showCVLanguagePopup && (
+          <CVExportLanguagePopup
+            onClose={() => setShowCVLanguagePopup(false)}
+            onExport={handleExportCV}
+            userType={cvExportType}
           />
         )}
       </div>

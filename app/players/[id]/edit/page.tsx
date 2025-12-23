@@ -313,7 +313,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
             {t('playerProfile.editProfile')}
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm sm:text-base">
-            Aktualisier Dini Informatione
+            {t('editProfile.updateInfo')}
           </p>
 
           {error && (
@@ -325,7 +325,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
           {success && (
             <div className="mt-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3 sm:p-4">
               <p className="text-green-800 dark:text-green-200 text-sm sm:text-base">
-                ✓ Erfolgriich Gespeichert! Wiiterläitig...
+                ✓ {t('editProfile.savedSuccess')}
               </p>
             </div>
           )}
@@ -335,13 +335,13 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
             <User className="w-6 h-6 text-habicht-600" />
-            Persönlichi Informatione
+            {t('editProfile.personalInfo')}
           </h2>
 
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Vorname *
+                {t('editProfile.firstName')} *
               </label>
               <input
                 type="text"
@@ -353,7 +353,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Nachname *
+                {t('editProfile.lastName')} *
               </label>
               <input
                 type="text"
@@ -365,7 +365,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Geburtsdatum *
+                {t('editProfile.dateOfBirth')} *
               </label>
               <input
                 type="date"
@@ -377,7 +377,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Geschlecht *
+                {t('editProfile.gender')} *
               </label>
               <select
                 value={formData.gender}
@@ -385,15 +385,15 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="">{t('playerProfile.select')}</option>
-                <option value="MALE">Männlich</option>
-                <option value="FEMALE">Wiiblich</option>
-                <option value="OTHER">Anderi</option>
+                <option value="MALE">{t('editProfile.male')}</option>
+                <option value="FEMALE">{t('editProfile.female')}</option>
+                <option value="OTHER">{t('editProfile.other')}</option>
               </select>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Nationalität *
+                {t('editProfile.nationality')} *
               </label>
               <input
                 type="text"
@@ -405,7 +405,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Telefon
+                {t('editProfile.phone')}
               </label>
               <input
                 type="tel"
@@ -421,13 +421,13 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
             <MapPin className="w-6 h-6 text-habicht-600" />
-            Wohnort & Beschäftigung
+            {t('editProfile.locationEmployment')}
           </h2>
 
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Kanton *
+                {t('editProfile.canton')} *
               </label>
               <select
                 value={formData.canton}
@@ -445,7 +445,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Gmaind / Municipality
+                {t('editProfile.municipality')}
               </label>
               <input
                 type="text"
@@ -521,7 +521,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Positione
+                {t('editProfile.positions')}
               </label>
               <div className="space-y-2">
                 {positions.map((pos) => (
@@ -553,7 +553,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Grösse (cm)
+                  {t('editProfile.height')}
                 </label>
                 <input
                   type="number"
@@ -565,7 +565,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Gewicht (kg)
+                  {t('editProfile.weight')}
                 </label>
                 <input
                   type="number"
@@ -577,7 +577,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Angriffshöchi (cm)
+                  {t('editProfile.spikeHeight')}
                 </label>
                 <input
                   type="number"
@@ -589,7 +589,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Blockhöchi (cm)
+                  {t('editProfile.blockHeight')}
                 </label>
                 <input
                   type="number"
@@ -603,7 +603,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
           <div className="mt-4">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Swiss Volley Lizenz
+              {t('editProfile.swissVolleyLicense')}
             </label>
             <ImageUpload 
               label={t('playerProfile.uploadLicense')}
@@ -615,7 +615,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
           <div className="mt-4">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Bio / Beschriibig
+              {t('editProfile.bio')}
             </label>
             <textarea
               value={formData.bio}
@@ -631,19 +631,19 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
               <Trophy className="w-6 h-6 text-habicht-600" />
-              Club-Gschicht
+              {t('editProfile.clubHistory')}
             </h2>
             <button
               onClick={handleAddClub}
               className="flex items-center gap-2 bg-habicht-600 text-white px-4 py-2 rounded-lg hover:bg-habicht-700 transition"
             >
               <Plus className="w-4 h-4" />
-              Club Hinzuefüege
+              {t('editProfile.addClub')}
             </button>
           </div>
 
           {clubHistory.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400 italic">Kei Club-Gschicht hinzugefüegt</p>
+            <p className="text-gray-500 dark:text-gray-400 italic">{t('editProfile.noClubHistory')}</p>
           ) : (
             <div className="space-y-4">
               {clubHistory.map((club, index) => {
@@ -665,7 +665,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="relative">
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Club Name *
+                        {t('editProfile.clubName')}
                       </label>
                       <input
                         type="text"
@@ -732,7 +732,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Liga *
+                        {t('editProfile.league')}
                       </label>
                       <select
                         value={club.league}
@@ -766,7 +766,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Von Jahr *
+                        {t('editProfile.fromYear')}
                       </label>
                       <input
                         type="text"
@@ -784,12 +784,12 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Bis Jahr {!club.currentClub && <span className="text-red-600">*</span>}
+                        {t('editProfile.toYear')} {!club.currentClub && <span className="text-red-600">*</span>}
                       </label>
                       {club.currentClub ? (
                         <div className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
                           <span className="text-green-600 dark:text-green-400 font-semibold flex items-center gap-1">
-                            ✓ Aktuell
+                            {t('register.current')}
                           </span>
                         </div>
                       ) : (
@@ -827,7 +827,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                         className="rounded text-habicht-600 focus:ring-habicht-500"
                       />
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                        Aktuellä Club
+                        {t('editProfile.currentClub')}
                       </span>
                     </label>
                   </div>
@@ -851,19 +851,19 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
               <Trophy className="w-6 h-6 text-habicht-600" />
-              Erfolge & Uszeichnige
+              {t('playerProfile.achievements')}
             </h2>
             <button
               onClick={handleAddAchievement}
               className="flex items-center gap-2 bg-habicht-600 text-white px-4 py-2 rounded-lg hover:bg-habicht-700 transition"
             >
               <Plus className="w-4 h-4" />
-              Erfolg Hinzuefüege
+              {t('editProfile.addAchievement')}
             </button>
           </div>
 
           {achievements.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400 italic">Kei Erfolg hinzugefüegt</p>
+            <p className="text-gray-500 dark:text-gray-400 italic">{t('editProfile.noAchievements')}</p>
           ) : (
             <div className="space-y-3">
               {achievements.map((achievement) => (
@@ -895,13 +895,13 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         {/* Documents */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-            Dokumänt
+            {t('editProfile.documents')}
           </h2>
 
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Swiss Volley Lizenz (Optional)
+                {t('editProfile.swissVolleyLicense')}
               </label>
               <ImageUpload
                 label={t('playerProfile.uploadLicense')}
@@ -913,7 +913,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Ausweiss/ID (Optional)
+                {t('editProfile.idDocument')}
               </label>
               <ImageUpload
                 label={t('playerProfile.uploadId')}
@@ -928,13 +928,13 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         {/* Social Media */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-            Social Media
+            {t('editProfile.socialMedia')}
           </h2>
 
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Instagram Handle
+                {t('editProfile.instagramHandle')}
               </label>
               <input
                 type="text"
@@ -947,7 +947,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                TikTok Handle
+                {t('editProfile.tiktokHandle')}
               </label>
               <input
                 type="text"
@@ -960,7 +960,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                YouTube Channel
+                {t('editProfile.youtubeChannel')}
               </label>
               <input
                 type="text"
@@ -973,7 +973,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Highlight Video URL
+                {t('editProfile.highlightVideo')}
               </label>
               <input
                 type="url"
@@ -997,7 +997,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
             />
             <div>
               <span className="block font-semibold text-gray-900 dark:text-white">
-                Ich sueche en neue Club
+                {t('editProfile.lookingForClub')}
               </span>
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 {t('playerProfile.openForClubOffers')}

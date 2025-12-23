@@ -716,7 +716,7 @@ export default function PlayerRegisterPage() {
                     <select name="schoolName" value={formData.schoolName} onChange={handleChange} required
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white">
                       <option value="">{t('register.selectSchool')}</option>
-                      <optgroup label="Universitäte">
+                      <optgroup label={t('register.universities')}>
                         <option value="ETH Zürich">ETH Zürich</option>
                         <option value="Universität Zürich">Universität Zürich</option>
                         <option value="Universität Bern">Universität Bern</option>
@@ -728,7 +728,7 @@ export default function PlayerRegisterPage() {
                         <option value="Universität Luzern">Universität Luzern</option>
                         <option value="Université de Fribourg">Université de Fribourg</option>
                       </optgroup>
-                      <optgroup label="Fachhochschuele">
+                      <optgroup label={t('register.appliedSciences')}>
                         <option value="ZHAW Zürich">ZHAW Zürich</option>
                         <option value="FHNW">FHNW</option>
                         <option value="BFH Bern">BFH Bern</option>
@@ -739,7 +739,7 @@ export default function PlayerRegisterPage() {
                         <option value="ZHdK - Zürcher Hochschule der Künste">ZHdK - Zürcher Hochschule der Künste</option>
                         <option value="FH Graubünden">FH Graubünden</option>
                       </optgroup>
-                      <optgroup label="Kantonsschuele/Gymnasie">
+                      <optgroup label={t('register.cantonalSchools')}>
                         <option value="Kantonsschule Zürich Nord">Kantonsschule Zürich Nord</option>
                         <option value="Kantonsschule Enge Zürich">Kantonsschule Enge Zürich</option>
                         <option value="Kantonsschule Rämibühl Zürich">Kantonsschule Rämibühl Zürich</option>
@@ -935,7 +935,7 @@ export default function PlayerRegisterPage() {
 
                   {achievements.length === 0 ? (
                     <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
-                      Nonig Erfolg Hinzugefügt. Klick "Erfolg Hinzuefüge" Zum Starte.
+                      {t('register.noAchievementsAdded')}
                     </p>
                   ) : (
                     <div className="space-y-3">
@@ -1151,10 +1151,10 @@ export default function PlayerRegisterPage() {
                                   ? 'text-green-700 dark:text-green-300' 
                                   : 'text-gray-700 dark:text-gray-300'
                               }`}>
-                                Spiel Aktuell Do
+                                {t('register.currentlyPlaying')}
                                 {(club.currentClub || club.logo) && (
                                   <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-green-600 text-white">
-                                    ✓ Aktiv
+                                    {t('register.active')}
                                   </span>
                                 )}
                               </span>

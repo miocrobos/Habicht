@@ -57,8 +57,10 @@ export default function NotificationPopup() {
   const getIcon = (type: string) => {
     switch (type) {
       case 'profile_view':
+      case 'PROFILE_VIEW':
         return <Eye className="w-4 h-4" />
       case 'message':
+      case 'MESSAGE':
         return <MessageCircle className="w-4 h-4" />
       case 'connection':
         return <UserPlus className="w-4 h-4" />
@@ -66,6 +68,30 @@ export default function NotificationPopup() {
         return <Award className="w-4 h-4" />
       default:
         return <Bell className="w-4 h-4" />
+    }
+  }
+
+  const getNotificationText = (notification: Notification) => {
+    // Handle new translation key format
+    if (notification.type === 'PROFILE_VIEW' && notification.title === 'notifications.profileViewed') {
+      return {
+        title: t('notifications.profileViewed'),
+        message: t('notifications.profileViewedMessage').replace('{name}', notification.message)
+      }
+    }
+    
+    if (notification.type === 'MESSAGE' && !notification.title.includes('vo ')) {
+      // New format: title is senderName, message is the actual message
+      return {
+        title: t('notifications.messageFrom').replace('{name}', notification.title),
+        message: notification.message
+      }
+    }
+    
+    // Legacy format: use as-is
+    return {
+      title: notification.title,
+      message: notification.message
     }
   }
 
@@ -134,7 +160,9 @@ export default function NotificationPopup() {
                   <p>{t('notifications.noNotifications')}</p>
                 </div>
               ) : (
-                notifications.map(notification => (
+                notifications.map(notification => {
+                  const { title, message } = getNotificationText(notification)
+                  return (
                   <div
                     key={notification.id}
                     className={`p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition cursor-pointer ${
@@ -153,19 +181,20 @@ export default function NotificationPopup() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
                           <h4 className="font-semibold text-sm text-gray-900 dark:text-white truncate">
-                            {notification.title}
+                            {title}
                           </h4>
                           <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
                             {formatTime(notification.createdAt)}
                           </span>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                          {notification.message}
+                          {message}
                         </p>
                       </div>
                     </div>
                   </div>
-                ))
+                  )
+                })
               )}
             </div>
 

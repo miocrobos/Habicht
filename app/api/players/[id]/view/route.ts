@@ -117,8 +117,8 @@ export async function POST(
           data: {
             userId: existingPlayer.userId,
             type: 'PROFILE_VIEW',
-            title: 'Profil Aagluegt',
-            message: `${viewerName} het din Profil aagluegt`,
+            title: 'notifications.profileViewed',
+            message: viewerName,
             senderId: viewerUserId,
             senderName: viewerName,
             senderImage: viewerImage,

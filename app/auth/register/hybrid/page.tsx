@@ -101,10 +101,10 @@ export default function HybridRegisterPage() {
     description: string;
   }>>([]);
 
-  const positionOptions = ['Setter', 'Outside Hitter', 'Middle Blocker', 'Opposite', 'Libero'];
-  const genderOptions = ['Male', 'Female'];
-  const coachRoleOptions = ['Head Coach', 'Assistant Coach', 'Technical Coach', 'Physical Coach', 'Scout', 'Trainer'];
-  const employmentOptions = ['Employed', 'Self-Employed', 'Student', 'Unemployed', 'Retired'];
+  const positionOptions = ['SETTER', 'OUTSIDE_HITTER', 'MIDDLE_BLOCKER', 'OPPOSITE', 'LIBERO', 'UNIVERSAL'];
+  const genderOptions = ['MALE', 'FEMALE'];
+  const coachRoleOptions = ['HEAD_COACH', 'ASSISTANT_COACH', 'TECHNICAL_COACH', 'PHYSICAL_COACH', 'SCOUT', 'TRAINER'];
+  const employmentOptions = ['EMPLOYED', 'SELF_EMPLOYED', 'STUDENT', 'UNEMPLOYED', 'RETIRED'];
   const cantonOptions = [
     { code: 'ZH', name: 'Zürich' },
     { code: 'BE', name: 'Bern' },
@@ -422,7 +422,7 @@ export default function HybridRegisterPage() {
                 >
                   <option value="">{t('register.selectGender')}</option>
                   {genderOptions.map(g => (
-                    <option key={g} value={g}>{t(`register.${g.toLowerCase()}`) || g}</option>
+                    <option key={g} value={g}>{t(`register.${g.toLowerCase()}`)}</option>
                   ))}
                 </select>
               </div>
@@ -490,7 +490,7 @@ export default function HybridRegisterPage() {
                           : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                       }`}
                     >
-                      {t(`positions.${pos.toLowerCase().replace(' ', '')}`) || pos}
+                      {t(`positions.${pos.toLowerCase()}`)}
                     </button>
                   ))}
                 </div>
@@ -729,7 +729,7 @@ export default function HybridRegisterPage() {
                   >
                     <option value="">{t('register.selectEmployment')}</option>
                     {employmentOptions.map(emp => (
-                      <option key={emp} value={emp}>{t(`register.${emp.toLowerCase()}`) || emp}</option>
+                      <option key={emp} value={emp}>{t(`register.${emp.toLowerCase()}`)}</option>
                     ))}
                   </select>
                   <input
@@ -800,7 +800,7 @@ export default function HybridRegisterPage() {
                           : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                       }`}
                     >
-                      {t(`coachRole.${role.toLowerCase().replace(' ', '')}`) || role}
+                      {t(`coachRole.${role.toLowerCase()}`)}
                     </button>
                   ))}
                 </div>
@@ -841,7 +841,7 @@ export default function HybridRegisterPage() {
                           : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                       }`}
                     >
-                      {t(`register.${gender.toLowerCase()}`) || gender}
+                      {t(`register.${gender.toLowerCase()}`)}
                     </button>
                   ))}
                 </div>
@@ -864,7 +864,7 @@ export default function HybridRegisterPage() {
                           : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                       }`}
                     >
-                      {t(`positions.${pos.toLowerCase().replace(' ', '')}`) || pos}
+                      {t(`positions.${pos.toLowerCase()}`)}
                     </button>
                   ))}
                 </div>

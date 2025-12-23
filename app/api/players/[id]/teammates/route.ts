@@ -19,6 +19,8 @@ export async function GET(
             positions: true,
             jerseyNumber: true,
             profileImage: true,
+            dominantHand: true,
+            preferredLanguage: true,
           },
         },
       },
@@ -34,6 +36,8 @@ export async function GET(
       positions: t.teammate.positions,
       jerseyNumber: t.teammate.jerseyNumber,
       profileImage: t.teammate.profileImage,
+      dominantHand: t.teammate.dominantHand,
+      preferredLanguage: t.teammate.preferredLanguage,
       season: t.season,
       clubName: t.clubName,
     }))

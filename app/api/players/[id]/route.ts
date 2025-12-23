@@ -248,6 +248,8 @@ export async function PUT(
         weight: playerData.weight ? parseFloat(playerData.weight) : undefined,
         spikeHeight: playerData.spikeHeight ? parseFloat(playerData.spikeHeight) : undefined,
         blockHeight: playerData.blockHeight ? parseFloat(playerData.blockHeight) : undefined,
+        dominantHand: playerData.dominantHand || undefined,
+        preferredLanguage: playerData.preferredLanguage || undefined,
         phone: playerData.phone,
         employmentStatus: playerData.employmentStatus,
         occupation: playerData.occupation,

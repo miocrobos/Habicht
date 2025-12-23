@@ -332,6 +332,8 @@ export async function POST(request: NextRequest) {
               weight: playerData.weight,
               spikeHeight: playerData.spikeHeight,
               blockHeight: playerData.blockHeight,
+              dominantHand: playerData.dominantHand,
+              preferredLanguage: playerData.preferredLanguage,
               canton: playerData.canton,
               city: playerData.city || 'Unknown',
               currentLeague: playerCurrentLeague || playerData.currentLeague || 'FIRST_LEAGUE',

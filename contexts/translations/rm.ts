@@ -75,6 +75,26 @@
     'auth.consent.confirmationText': 'Cun cliccar sin "Acceptar e cuntinuar" confermas ti che ti accepteschas tut las cundiziuns surmenziunadas.',    // Chat
     'chat.writeMessage': 'Scriver in messadi...',
     'chat.addEmoji': 'Agiuntar emoji',
+    // Leagues
+    'leagues.nla': 'LNA',
+    'leagues.nlb': 'LNB',
+    'leagues.firstLeague': '1. Liga',
+    'leagues.secondLeague': '2. Liga',
+    'leagues.thirdLeague': '3. Liga',
+    'leagues.fourthLeague': '4. Liga',
+    'leagues.fifthLeague': '5. Liga',
+    'leagues.u23': 'U23',
+    'leagues.u19': 'U19',
+    'leagues.u17': 'U17',
+    // Positions
+    'positions.outside_hitter': 'Attatgader extern',
+    'positions.outsideHitter': 'Attatgader extern',
+    'positions.opposite': 'Diagonal',
+    'positions.middle_blocker': 'Blocker mesaun',
+    'positions.middleBlocker': 'Blocker mesaun',
+    'positions.setter': 'Passiader',
+    'positions.libero': 'Libero',
+    'positions.universal': 'Universal',
     // Common
     'common.save': 'Memorisar',
     'common.cancel': 'Interrumper',

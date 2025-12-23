@@ -75,6 +75,26 @@
     'auth.consent.confirmationText': 'En cliquant sur "Accepter et continuer", vous confirmez que vous acceptez toutes les conditions ci-dessus.',    // Chat
     'chat.writeMessage': 'Écrire un message...',
     'chat.addEmoji': 'Ajouter un emoji',
+    // Leagues
+    'leagues.nla': 'LNA',
+    'leagues.nlb': 'LNB',
+    'leagues.firstLeague': '1ère Ligue',
+    'leagues.secondLeague': '2ème Ligue',
+    'leagues.thirdLeague': '3ème Ligue',
+    'leagues.fourthLeague': '4ème Ligue',
+    'leagues.fifthLeague': '5ème Ligue',
+    'leagues.u23': 'U23',
+    'leagues.u19': 'U19',
+    'leagues.u17': 'U17',
+    // Positions
+    'positions.outside_hitter': 'Attaquant',
+    'positions.outsideHitter': 'Attaquant',
+    'positions.opposite': 'Diagonal',
+    'positions.middle_blocker': 'Central',
+    'positions.middleBlocker': 'Central',
+    'positions.setter': 'Passeur',
+    'positions.libero': 'Libéro',
+    'positions.universal': 'Universel',
     // Common
     'common.save': 'Enregistrer',
     'common.cancel': 'Annuler',

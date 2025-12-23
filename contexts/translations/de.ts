@@ -75,6 +75,26 @@
     'auth.consent.confirmationText': 'Durch Klicken auf "Akzeptieren und Fortfahren" bestätigst du, dass du alle oben genannten Bedingungen akzeptierst.',    // Chat
     'chat.writeMessage': 'Nachricht schreiben...',
     'chat.addEmoji': 'Emoji hinzufügen',
+    // Leagues
+    'leagues.nla': 'NLA',
+    'leagues.nlb': 'NLB',
+    'leagues.firstLeague': '1. Liga',
+    'leagues.secondLeague': '2. Liga',
+    'leagues.thirdLeague': '3. Liga',
+    'leagues.fourthLeague': '4. Liga',
+    'leagues.fifthLeague': '5. Liga',
+    'leagues.u23': 'U23',
+    'leagues.u19': 'U19',
+    'leagues.u17': 'U17',
+    // Positions
+    'positions.outside_hitter': 'Aussenangreifer',
+    'positions.outsideHitter': 'Aussenangreifer',
+    'positions.opposite': 'Diagonal',
+    'positions.middle_blocker': 'Mittelblocker',
+    'positions.middleBlocker': 'Mittelblocker',
+    'positions.setter': 'Zuspieler',
+    'positions.libero': 'Libero',
+    'positions.universal': 'Universal',
     // Common
     'common.save': 'Speichern',
     'common.cancel': 'Abbrechen',

@@ -78,6 +78,26 @@ export const enTranslations = {
     // Chat
     'chat.writeMessage': 'Write a message...',
     'chat.addEmoji': 'Add emoji',
+    // Leagues
+    'leagues.nla': 'NLA',
+    'leagues.nlb': 'NLB',
+    'leagues.firstLeague': '1st League',
+    'leagues.secondLeague': '2nd League',
+    'leagues.thirdLeague': '3rd League',
+    'leagues.fourthLeague': '4th League',
+    'leagues.fifthLeague': '5th League',
+    'leagues.u23': 'U23',
+    'leagues.u19': 'U19',
+    'leagues.u17': 'U17',
+    // Positions
+    'positions.outside_hitter': 'Outside Hitter',
+    'positions.outsideHitter': 'Outside Hitter',
+    'positions.opposite': 'Opposite',
+    'positions.middle_blocker': 'Middle Blocker',
+    'positions.middleBlocker': 'Middle Blocker',
+    'positions.setter': 'Setter',
+    'positions.libero': 'Libero',
+    'positions.universal': 'Universal',
     // Common
     'common.save': 'Save',
     'common.cancel': 'Cancel',

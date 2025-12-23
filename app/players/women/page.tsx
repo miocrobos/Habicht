@@ -192,60 +192,60 @@ export default function WomenPlayersPage() {
             {/* Position */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Position
+                {t('playerProfile.position')}
               </label>
               <select
                 value={filters.position}
                 onChange={(e) => handleFilterChange('position', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
-                <option value="OUTSIDE_HITTER">Aussenspieler</option>
-                <option value="OPPOSITE">Diagonalspieler</option>
-                <option value="MIDDLE_BLOCKER">Mittelblocker</option>
-                <option value="SETTER">Zuspieler</option>
-                <option value="LIBERO">Libero</option>
-                <option value="UNIVERSAL">Universal</option>
+                <option value="">{t('clubProfile.all')}</option>
+                <option value="OUTSIDE_HITTER">{t('playerProfile.positionOutsideHitter')}</option>
+                <option value="OPPOSITE">{t('playerProfile.positionOpposite')}</option>
+                <option value="MIDDLE_BLOCKER">{t('playerProfile.positionMiddleBlocker')}</option>
+                <option value="SETTER">{t('playerProfile.positionSetter')}</option>
+                <option value="LIBERO">{t('playerProfile.positionLibero')}</option>
+                <option value="UNIVERSAL">{t('playerProfile.positionUniversal')}</option>
               </select>
             </div>
 
             {/* Canton */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Kanton
+                {t('playerProfile.canton')}
               </label>
               <select
                 value={filters.canton}
                 onChange={(e) => handleFilterChange('canton', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Alle</option>
-                <option value="AG">Aargau</option>
-                <option value="AI">Appenzell Innerrhoden</option>
-                <option value="AR">Appenzell Ausserrhoden</option>
-                <option value="BE">Bern</option>
-                <option value="BL">Basel-Landschaft</option>
-                <option value="BS">Basel-Stadt</option>
-                <option value="FR">Freiburg</option>
-                <option value="GE">Genève</option>
-                <option value="GL">Glarus</option>
-                <option value="GR">Graubünden</option>
-                <option value="JU">Jura</option>
-                <option value="LU">Luzern</option>
-                <option value="NE">Neuchâtel</option>
-                <option value="NW">Nidwalden</option>
-                <option value="OW">Obwalden</option>
-                <option value="SG">St. Gallen</option>
-                <option value="SH">Schaffhausen</option>
-                <option value="SO">Solothurn</option>
-                <option value="SZ">Schwyz</option>
-                <option value="TG">Thurgau</option>
-                <option value="TI">Ticino</option>
-                <option value="UR">Uri</option>
-                <option value="VD">Vaud</option>
-                <option value="VS">Valais</option>
-                <option value="ZG">Zug</option>
-                <option value="ZH">Zürich</option>
+                <option value="">{t('cantons.allCantons')}</option>
+                <option value="AG">{t('cantons.AG')}</option>
+                <option value="AI">{t('cantons.AI')}</option>
+                <option value="AR">{t('cantons.AR')}</option>
+                <option value="BE">{t('cantons.BE')}</option>
+                <option value="BL">{t('cantons.BL')}</option>
+                <option value="BS">{t('cantons.BS')}</option>
+                <option value="FR">{t('cantons.FR')}</option>
+                <option value="GE">{t('cantons.GE')}</option>
+                <option value="GL">{t('cantons.GL')}</option>
+                <option value="GR">{t('cantons.GR')}</option>
+                <option value="JU">{t('cantons.JU')}</option>
+                <option value="LU">{t('cantons.LU')}</option>
+                <option value="NE">{t('cantons.NE')}</option>
+                <option value="NW">{t('cantons.NW')}</option>
+                <option value="OW">{t('cantons.OW')}</option>
+                <option value="SG">{t('cantons.SG')}</option>
+                <option value="SH">{t('cantons.SH')}</option>
+                <option value="SO">{t('cantons.SO')}</option>
+                <option value="SZ">{t('cantons.SZ')}</option>
+                <option value="TG">{t('cantons.TG')}</option>
+                <option value="TI">{t('cantons.TI')}</option>
+                <option value="UR">{t('cantons.UR')}</option>
+                <option value="VD">{t('cantons.VD')}</option>
+                <option value="VS">{t('cantons.VS')}</option>
+                <option value="ZG">{t('cantons.ZG')}</option>
+                <option value="ZH">{t('cantons.ZH')}</option>
               </select>
             </div>
 

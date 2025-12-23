@@ -8,10 +8,10 @@ import axios from 'axios'
 import { MapPin, Users, Trophy, Globe, Mail, Phone, Facebook, Instagram, Twitter, Youtube, Calendar, Award, Filter, X } from 'lucide-react'
 import { FaTiktok } from 'react-icons/fa'
 import CantonFlag from '@/components/shared/CantonFlag'
+import { useLanguage } from '@/contexts/LanguageContext'
 import PlayerCard from '@/components/player/PlayerCard'
 import RecruiterCard from '@/components/recruiter/RecruiterCard'
 import { getCantonInfo } from '@/lib/swissData'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function ClubProfilePage() {
   const { t } = useLanguage()
@@ -418,7 +418,7 @@ export default function ClubProfilePage() {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Filter className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Filter</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('clubProfile.filter')}</h3>
                 </div>
                 {(playerFilters.position || playerFilters.league || playerFilters.gender) && (
                   <button
@@ -426,7 +426,7 @@ export default function ClubProfilePage() {
                     className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 transition"
                   >
                     <X className="w-4 h-4" />
-                    Filter Lösche
+                    {t('clubProfile.clearFilters')}
                   </button>
                 )}
               </div>
@@ -511,12 +511,12 @@ export default function ClubProfilePage() {
                   onChange={(e) => setRecruiterFilters({ ...recruiterFilters, role: e.target.value })}
                   className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                 >
-                  <option value="">Roll</option>
-                  <option value="Cheftrainer">Cheftrainer</option>
-                  <option value="Assistenztrainer">Assistenztrainer</option>
-                  <option value="Jugendtrainer">Jugendtrainer</option>
-                  <option value="Scout">Scout</option>
-                  <option value="Teammanager">Teammanager</option>
+                  <option value="">{t('clubProfile.role')}</option>
+                  <option value="Cheftrainer">{t('recruiterRoles.headCoach')}</option>
+                  <option value="Assistenztrainer">{t('recruiterRoles.assistantCoach')}</option>
+                  <option value="Jugendtrainer">{t('recruiterRoles.youthCoach')}</option>
+                  <option value="Scout">{t('recruiterRoles.scout')}</option>
+                  <option value="Teammanager">{t('recruiterRoles.teamManager')}</option>
                 </select>
                 <select
                   value={recruiterFilters.gender}

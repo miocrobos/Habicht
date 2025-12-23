@@ -140,14 +140,14 @@ export default function ClubSelector({
           {/* Canton Filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Kanton
+              {t('playerProfile.canton')}
             </label>
             <select
               value={selectedCanton}
               onChange={(e) => setSelectedCanton(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm"
             >
-              <option value="ALL">Alle Kantone</option>
+              <option value="ALL">{t('cantons.allCantons')}</option>
               {cantons.map(canton => (
                 <option key={canton} value={canton}>{canton}</option>
               ))}

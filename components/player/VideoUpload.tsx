@@ -172,22 +172,22 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Kategorie *
+            {t('videoCategories.category')} *
           </label>
           <select
             value={highlightType}
             onChange={(e) => setHighlightType(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
           >
-            <option value="HIGHLIGHTS">Highlights</option>
-            <option value="FULL_MATCH">Ganzes Match</option>
-            <option value="SKILLS">Skills</option>
-            <option value="SERVING">Service</option>
-            <option value="ATTACKING">Angriff</option>
-            <option value="BLOCKING">Block</option>
-            <option value="DEFENSE">Defense</option>
-            <option value="SETTING">Zuspiel</option>
-            <option value="TRAINING">Training</option>
+            <option value="HIGHLIGHTS">{t('videoCategories.HIGHLIGHTS')}</option>
+            <option value="FULL_MATCH">{t('videoCategories.FULL_MATCH')}</option>
+            <option value="SKILLS">{t('videoCategories.SKILLS')}</option>
+            <option value="SERVING">{t('videoCategories.SERVING')}</option>
+            <option value="ATTACKING">{t('videoCategories.ATTACKING')}</option>
+            <option value="BLOCKING">{t('videoCategories.BLOCKING')}</option>
+            <option value="DEFENSE">{t('videoCategories.DEFENSE')}</option>
+            <option value="SETTING">{t('videoCategories.SETTING')}</option>
+            <option value="TRAINING">{t('videoCategories.TRAINING')}</option>
           </select>
         </div>
       </div>

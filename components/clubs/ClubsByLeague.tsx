@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Search, Trophy, Users, MapPin, Loader2 } from 'lucide-react';
 import axios from 'axios';
 import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Club {
   id: string;
@@ -25,6 +26,7 @@ interface Club {
 }
 
 export default function ClubsByLeague() {
+  const { t } = useLanguage();
   const [league, setLeague] = useState('');
   const [canton, setCanton] = useState('');
   const [clubs, setClubs] = useState<Club[]>([]);
@@ -83,25 +85,25 @@ export default function ClubsByLeague() {
               onChange={(e) => setCanton(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
             >
-              <option value="">Alli Kantön</option>
-              <option value="ZH">Zürich</option>
-              <option value="BE">Bern</option>
-              <option value="LU">Luzern</option>
-              <option value="AG">Aargau</option>
-              <option value="SG">St. Gallen</option>
-              <option value="VD">Vaud</option>
-              <option value="GE">Genève</option>
-              <option value="TI">Ticino</option>
-              <option value="VS">Valais</option>
-              <option value="FR">Fribourg</option>
-              <option value="SO">Solothurn</option>
-              <option value="BS">Basel-Stadt</option>
-              <option value="BL">Basel-Landschaft</option>
-              <option value="GR">Graubünden</option>
-              <option value="TG">Thurgau</option>
-              <option value="ZG">Zug</option>
-              <option value="NE">Neuchâtel</option>
-              <option value="SH">Schaffhausen</option>
+              <option value="">{t('cantons.allCantons')}</option>
+              <option value="ZH">{t('cantons.ZH')}</option>
+              <option value="BE">{t('cantons.BE')}</option>
+              <option value="LU">{t('cantons.LU')}</option>
+              <option value="AG">{t('cantons.AG')}</option>
+              <option value="SG">{t('cantons.SG')}</option>
+              <option value="VD">{t('cantons.VD')}</option>
+              <option value="GE">{t('cantons.GE')}</option>
+              <option value="TI">{t('cantons.TI')}</option>
+              <option value="VS">{t('cantons.VS')}</option>
+              <option value="FR">{t('cantons.FR')}</option>
+              <option value="SO">{t('cantons.SO')}</option>
+              <option value="BS">{t('cantons.BS')}</option>
+              <option value="BL">{t('cantons.BL')}</option>
+              <option value="GR">{t('cantons.GR')}</option>
+              <option value="TG">{t('cantons.TG')}</option>
+              <option value="ZG">{t('cantons.ZG')}</option>
+              <option value="NE">{t('cantons.NE')}</option>
+              <option value="SH">{t('cantons.SH')}</option>
             </select>
           </div>
         </div>

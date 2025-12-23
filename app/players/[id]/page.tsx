@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown } from 'lucide-react'
+import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown, Bookmark, BookmarkCheck } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
 import ClubBadge from '@/components/shared/ClubBadge'
@@ -169,8 +169,25 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [showChat, setShowChat] = useState(false)
   const [conversationId, setConversationId] = useState<string | null>(null)
   const [showCVExportPopup, setShowCVExportPopup] = useState(false)
+  const [isWatched, setIsWatched] = useState(false)
+  const [watchlistLoading, setWatchlistLoading] = useState(false)
 
   const isOwner = session?.user?.playerId === params.id
+
+  // Check if player is in watchlist
+  useEffect(() => {
+    const checkWatchlist = async () => {
+      if (session && (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') && !isOwner) {
+        try {
+          const response = await axios.get(`/api/watchlist/${params.id}`)
+          setIsWatched(response.data.isWatched)
+        } catch (error) {
+          console.error('Error checking watchlist:', error)
+        }
+      }
+    }
+    checkWatchlist()
+  }, [session, params.id, isOwner])
 
   useEffect(() => {
     const fetchPlayer = async () => {
@@ -291,6 +308,31 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     } catch (error) {
       console.error('Error starting chat:', error)
       alert(t('playerProfile.errorStartingChat'))
+    }
+  }
+
+  const toggleWatchlist = async () => {
+    if (!session || watchlistLoading) return
+
+    try {
+      setWatchlistLoading(true)
+      
+      if (isWatched) {
+        // Remove from watchlist
+        await axios.delete(`/api/watchlist?playerId=${params.id}`)
+        setIsWatched(false)
+        alert(t('watchlist.removedFromWatchlist'))
+      } else {
+        // Add to watchlist
+        await axios.post('/api/watchlist', { playerId: params.id })
+        setIsWatched(true)
+        alert(t('watchlist.addedToWatchlist'))
+      }
+    } catch (error) {
+      console.error('Error toggling watchlist:', error)
+      alert('Error updating watchlist')
+    } finally {
+      setWatchlistLoading(false)
     }
   }
 
@@ -742,6 +784,23 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   >
                     <MessageCircle className="w-4 h-4" />
                     {t('playerProfile.sendMessage')}
+                  </button>
+                )}
+
+                {/* Watchlist Button - Show to recruiters and hybrids viewing player profiles */}
+                {!isOwner && session && (session.user?.role === 'RECRUITER' || session.user?.role === 'HYBRID') && player && (
+                  <button
+                    onClick={toggleWatchlist}
+                    disabled={watchlistLoading}
+                    className={`flex items-center gap-2 px-6 py-3 rounded-lg transition font-semibold ${
+                      isWatched 
+                        ? 'bg-yellow-600 hover:bg-yellow-700 text-white' 
+                        : 'bg-gray-600 hover:bg-gray-700 text-white'
+                    } ${watchlistLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    title={isWatched ? t('watchlist.removeFromWatchlist') : t('watchlist.addToWatchlist')}
+                  >
+                    {isWatched ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+                    {isWatched ? t('watchlist.removeFromWatchlist') : t('watchlist.addToWatchlist')}
                   </button>
                 )}
                 

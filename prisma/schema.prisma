@@ -126,6 +126,7 @@ model User {
   viewedProfiles PlayerView[] @relation("ViewerViews")
   notifications Notification[] @relation("UserNotifications")
   sentNotifications Notification[] @relation("NotificationSender")
+  watchlist     Watchlist[] @relation("WatchlistWatchers")
 }
 
 model Player {
@@ -228,6 +229,7 @@ model Player {
   conversations     Conversation[]
   sentMessages      Message[]   @relation("PlayerMessages")
   profileViews      PlayerView[] @relation("ProfileViews")
+  watchedBy         Watchlist[] @relation("WatchedPlayers")
 }
 
 model Club {
@@ -739,4 +741,18 @@ model Notification {
   @@index([type])
   @@index([read])
   @@index([createdAt])
+}
+
+// Watchlist - for recruiters and hybrid users to track players
+model Watchlist {
+  id              String    @id @default(cuid())
+  playerId        String
+  player          Player    @relation("WatchedPlayers", fields: [playerId], references: [id], onDelete: Cascade)
+  watcherId       String    // User ID of recruiter or hybrid user
+  watcher         User      @relation("WatchlistWatchers", fields: [watcherId], references: [id], onDelete: Cascade)
+  createdAt       DateTime  @default(now())
+  
+  @@unique([playerId, watcherId])
+  @@index([playerId])
+  @@index([watcherId])
 }

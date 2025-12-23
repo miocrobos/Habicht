@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { Menu, X, User, Search, Settings, Bell } from 'lucide-react'
+import { Menu, X, User, Search, Settings, Bell, Bookmark } from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
 import axios from 'axios'
 import NotificationPopup from '@/components/shared/NotificationPopup'
@@ -13,6 +13,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { data: session } = useSession()
   const [unreadCount, setUnreadCount] = useState(0)
+  const [watchlistCount, setWatchlistCount] = useState(0)
   const { t } = useLanguage()
 
   useEffect(() => {
@@ -27,7 +28,25 @@ export default function Header() {
       }
       fetchUnreadCount()
       const interval = setInterval(fetchUnreadCount, 30000)
-      return () => clearInterval(interval)
+      
+      // Fetch watchlist count for recruiters and hybrids
+      const fetchWatchlistCount = async () => {
+        if (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') {
+          try {
+            const response = await axios.get('/api/watchlist')
+            setWatchlistCount(response.data.watchlist?.length || 0)
+          } catch (error) {
+            console.error('Error fetching watchlist count:', error)
+          }
+        }
+      }
+      fetchWatchlistCount()
+      const watchlistInterval = setInterval(fetchWatchlistCount, 60000)
+      
+      return () => {
+        clearInterval(interval)
+        clearInterval(watchlistInterval)
+      }
     }
   }, [session])
 
@@ -92,6 +111,20 @@ export default function Header() {
           {/* Right side buttons */}
           <div className="hidden md:flex items-center space-x-6">
             {session && <NotificationPopup />}
+            {session && (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') && (
+              <Link 
+                href="/watchlist" 
+                className="flex items-center justify-center w-10 h-10 text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition relative"
+                title={t('nav.watchlist')}
+              >
+                <Bookmark className="w-5 h-5" />
+                {watchlistCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-swiss-red text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {watchlistCount}
+                  </span>
+                )}
+              </Link>
+            )}
             <Link 
               href="/settings" 
               className="flex items-center justify-center w-10 h-10 text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"

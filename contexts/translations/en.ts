@@ -105,6 +105,7 @@ export const enTranslations = {
     'nav.register': 'Register',
     'nav.myProfile': 'My Profile',
     'nav.dashboard': 'Dashboard',
+    'nav.watchlist': 'Watchlist',
     // Home Page
     home: {
       hero: {
@@ -412,6 +413,21 @@ export const enTranslations = {
       helpQuestion: 'Problems with verification?',
       contactUs: 'Contact us',
       loading: 'Loading...',
+    },
+    // Watchlist Page
+    watchlist: {
+      title: 'My Watchlist',
+      empty: 'Your watchlist is empty',
+      emptyDescription: 'Start adding players to track their progress',
+      playerCount: 'players',
+      addToWatchlist: 'Add to Watchlist',
+      removeFromWatchlist: 'Remove from Watchlist',
+      addedToWatchlist: 'Added to watchlist',
+      removedFromWatchlist: 'Removed from watchlist',
+      viewProfile: 'View Profile',
+      filters: 'Filters',
+      clearFilters: 'Clear filters',
+      search: 'Search players...',
     },
     // Notifications Page
     notifications: {

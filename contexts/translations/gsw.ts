@@ -103,6 +103,7 @@ export const gswTranslations = {
     'nav.register': 'Registriere',
     'nav.myProfile': 'Mis Profil',
     'nav.dashboard': 'Dashboard',
+    'nav.watchlist': 'Merklischte',
     // Home Page
     home: {
       hero: {
@@ -204,6 +205,22 @@ export const gswTranslations = {
         description: 'Häsch Frage oder Vorschläg? Mir wönd vo dir ghöre!',
         email: 'Email',
       },
+    },
+    // Watchlist Page
+    watchlist: {
+      title: 'Mini Merklischte',
+      empty: 'Dini Merklischte isch läär',
+      emptyDescription: 'Füeg Spieler hinzue zum ihre Fortschritt verfolge',
+      playerCount: 'Spieler',
+      addToWatchlist: 'Zur Merklischte hinzuefüege',
+      removeFromWatchlist: 'Vo Merklischte entferne',
+      addedToWatchlist: 'Zur Merklischte hinzuegfüegt',
+      removedFromWatchlist: 'Vo Merklischte entfernt',
+      viewProfile: 'Profil aaluege',
+      filters: 'Filter',
+      clearFilters: 'Filter lösche',
+      search: 'Spieler sueche...',
+      loading: 'Am Lade...',
     },
     // Notifications Page
     notifications: {

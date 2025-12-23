@@ -102,6 +102,7 @@ export const rmTranslations = {
     'nav.register': 'S\'annunziar',
     'nav.myProfile': 'Mes profil',
     'nav.dashboard': 'Pannel da gestiun',
+    'nav.watchlist': 'Glista d\'observaziun',
     // Home Page
     home: {
       hero: {
@@ -251,6 +252,22 @@ export const rmTranslations = {
         checkEmail: 'Controllascha tias emails per confermar il midament dal pled-clav.',
         error: 'Errur cun trametter la dumonda.',
       },
+    },
+    // Watchlist Page
+    watchlist: {
+      title: 'Mia glista d\'observaziun',
+      empty: 'Tia glista d\'observaziun è vida',
+      emptyDescription: 'Cumenza dad agiuntar giugadurs per observar lur progress',
+      playerCount: 'giugadurs',
+      addToWatchlist: 'Agiuntar a la glista',
+      removeFromWatchlist: 'Allontanar da la glista',
+      addedToWatchlist: 'Agiuntà a la glista',
+      removedFromWatchlist: 'Allontanà da la glista',
+      viewProfile: 'Guardar profil',
+      filters: 'Filters',
+      clearFilters: 'Stizzar filters',
+      search: 'Tschertgar giugadurs...',
+      loading: 'Chargiar...',
     },
     // Notifications Page
     notifications: {

@@ -102,6 +102,7 @@ export const frTranslations = {
     'nav.register': 'S\'inscrire',
     'nav.myProfile': 'Mon Profil',
     'nav.dashboard': 'Tableau de bord',
+    'nav.watchlist': 'Liste de suivi',
     // Home Page
     home: {
       hero: {
@@ -251,6 +252,22 @@ export const frTranslations = {
         checkEmail: 'Veuillez vérifier vos emails pour confirmer le changement de mot de passe.',
         error: 'Erreur lors de l\'envoi de la demande.',
       },
+    },
+    // Watchlist Page
+    watchlist: {
+      title: 'Ma liste de suivi',
+      empty: 'Votre liste de suivi est vide',
+      emptyDescription: 'Commencez à ajouter des joueurs pour suivre leurs progrès',
+      playerCount: 'joueurs',
+      addToWatchlist: 'Ajouter à la liste de suivi',
+      removeFromWatchlist: 'Retirer de la liste de suivi',
+      addedToWatchlist: 'Ajouté à la liste de suivi',
+      removedFromWatchlist: 'Retiré de la liste de suivi',
+      viewProfile: 'Voir le profil',
+      filters: 'Filtres',
+      clearFilters: 'Effacer les filtres',
+      search: 'Rechercher des joueurs...',
+      loading: 'Chargement...',
     },
     // Notifications Page
     notifications: {

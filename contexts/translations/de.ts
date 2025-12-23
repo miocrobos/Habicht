@@ -101,8 +101,7 @@ export const deTranslations = {
     'nav.login': 'Anmelden',
     'nav.register': 'Registrieren',
     'nav.myProfile': 'Mein Profil',
-    'nav.dashboard': 'Dashboard',
-    // Home Page
+    'nav.dashboard': 'Dashboard',    'nav.watchlist': 'Merkliste',    // Home Page
     home: {
       hero: {
         title: 'Habicht',
@@ -261,6 +260,21 @@ export const deTranslations = {
         checkEmail: 'Bitte prüfe deine E-Mails, um die Passwortänderung zu bestätigen.',
         error: 'Fehler beim Senden der Anfrage.',
       },
+    },
+    // Watchlist Page
+    watchlist: {
+      title: 'Meine Merkliste',
+      empty: 'Ihre Merkliste ist leer',
+      emptyDescription: 'Beginnen Sie, Spieler hinzuzufügen, um ihren Fortschritt zu verfolgen',
+      playerCount: 'Spieler',
+      addToWatchlist: 'Zur Merkliste hinzufügen',
+      removeFromWatchlist: 'Von Merkliste entfernen',
+      addedToWatchlist: 'Zur Merkliste hinzugefügt',
+      removedFromWatchlist: 'Von Merkliste entfernt',
+      viewProfile: 'Profil ansehen',
+      filters: 'Filter',
+      clearFilters: 'Filter löschen',
+      search: 'Spieler suchen...',
     },
     // Notifications Page
     notifications: {

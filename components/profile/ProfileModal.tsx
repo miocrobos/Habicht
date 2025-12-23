@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { X, Mail, Phone, Instagram, MapPin, Calendar, TrendingUp, Award, Ruler, Hash, GraduationCap, Target } from 'lucide-react'
 import SchoolBadge from '@/components/shared/SchoolBadge'
 import { getClubById } from '@/lib/clubsDatabase_comprehensive'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface ProfileModalProps {
   playerId?: string
@@ -35,6 +36,8 @@ interface PlayerProfile {
   bio?: string
   profileImage: string
   coverImage?: string
+  dominantHand?: string
+  preferredLanguage?: string
   achievements?: any[]
   stats?: any[]
   videos?: any[]
@@ -54,6 +57,7 @@ interface RecruiterProfile {
   profileImage: string
   coverImage?: string
   canton?: string
+  preferredLanguage?: string
   user: {
     name: string
     email: string
@@ -64,6 +68,7 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
   const [profile, setProfile] = useState<PlayerProfile | RecruiterProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState<'info' | 'stats' | 'videos'>('info')
+  const { t } = useLanguage()
 
   useEffect(() => {
     if (isOpen && (playerId || recruiterId)) {
@@ -104,14 +109,32 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
   }
 
   const getPositionDisplay = (position: string) => {
-    const positions: Record<string, string> = {
-      OUTSIDE_HITTER: 'Aussenspieler',
-      OPPOSITE: 'Diagonalspieler',
-      MIDDLE_BLOCKER: 'Mittelblocker',
-      SETTER: 'Zuspieler',
-      LIBERO: 'Libero'
+    const positionMap: { [key: string]: string } = {
+      OUTSIDE_HITTER: 'playerProfile.positionOutsideHitter',
+      OPPOSITE: 'playerProfile.positionOpposite',
+      MIDDLE_BLOCKER: 'playerProfile.positionMiddleBlocker',
+      SETTER: 'playerProfile.positionSetter',
+      LIBERO: 'playerProfile.positionLibero',
+      UNIVERSAL: 'playerProfile.positionUniversal'
     }
-    return positions[position] || position
+    return t(positionMap[position] || position)
+  }
+
+  const getLeagueDisplay = (league: string) => {
+    const leagueMap: { [key: string]: string } = {
+      'NLA': 'home.leagues.nla',
+      'NLB': 'home.leagues.nlb',
+      'FIRST_LEAGUE': 'home.leagues.firstLeague',
+      'SECOND_LEAGUE': 'home.leagues.secondLeague',
+      'THIRD_LEAGUE': 'home.leagues.thirdLeague',
+      'FOURTH_LEAGUE': 'home.leagues.fourthLeague',
+      'FIFTH_LEAGUE': 'home.leagues.fifthLeague',
+      'U23': 'U23',
+      'U19': 'home.leagues.u19',
+      'U17': 'home.leagues.u17'
+    }
+    const key = leagueMap[league]
+    return key === 'U23' ? 'U23' : t(key || league)
   }
 
   if (!isOpen) return null
@@ -191,7 +214,7 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
                             {getPositionDisplay(profile.position)}
                           </span>
                           <span>•</span>
-                          <span>{profile.currentLeague}</span>
+                          <span>{getLeagueDisplay(profile.currentLeague)}</span>
                           <span>•</span>
                           <span>{calculateAge(profile.dateOfBirth)} Jahre</span>
                           {profile.height && (
@@ -285,6 +308,30 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
                               <div className="flex items-center gap-3 text-gray-700">
                                 <Instagram className="w-5 h-5 text-gray-400" />
                                 <span>{profile.instagramHandle}</span>
+                              </div>
+                            )}
+                            {isPlayer(profile) && profile.dominantHand && (
+                              <div className="flex items-col gap-3 text-gray-700">
+                                <div className="text-sm font-semibold text-green-600">
+                                  {profile.dominantHand === 'RIGHT' ? t('register.rightHanded') : 
+                                   profile.dominantHand === 'LEFT' ? t('register.leftHanded') : 
+                                   t('register.ambidextrous')}
+                                </div>
+                                <div className="text-xs text-gray-500">{t('playerProfile.dominantHandLabel')}</div>
+                              </div>
+                            )}
+                            {profile.preferredLanguage && (
+                              <div className="flex items-col gap-3 text-gray-700">
+                                <div className="text-sm font-semibold text-blue-600">
+                                  {profile.preferredLanguage === 'gsw' ? t('register.languageSwissGerman') :
+                                   profile.preferredLanguage === 'de' ? t('register.languageGerman') :
+                                   profile.preferredLanguage === 'fr' ? t('register.languageFrench') :
+                                   profile.preferredLanguage === 'it' ? t('register.languageItalian') :
+                                   profile.preferredLanguage === 'rm' ? t('register.languageRomansh') :
+                                   profile.preferredLanguage === 'en' ? t('register.languageEnglish') :
+                                   profile.preferredLanguage.toUpperCase()}
+                                </div>
+                                <div className="text-xs text-gray-500">{t('playerProfile.preferredLanguageLabel')}</div>
                               </div>
                             )}
                           </div>

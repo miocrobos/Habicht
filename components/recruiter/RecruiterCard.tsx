@@ -139,6 +139,21 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
             </div>
           </div>
 
+          {/* Preferred Language */}
+          {recruiter.preferredLanguage && (
+            <div className="mb-4 flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+              <span className="text-sm font-semibold text-blue-700 dark:text-blue-300">
+                {recruiter.preferredLanguage === 'gsw' ? t('register.languageSwissGerman') :
+                 recruiter.preferredLanguage === 'de' ? t('register.languageGerman') :
+                 recruiter.preferredLanguage === 'fr' ? t('register.languageFrench') :
+                 recruiter.preferredLanguage === 'it' ? t('register.languageItalian') :
+                 recruiter.preferredLanguage === 'rm' ? t('register.languageRomansh') :
+                 recruiter.preferredLanguage === 'en' ? t('register.languageEnglish') :
+                 recruiter.preferredLanguage.toUpperCase()}
+              </span>
+            </div>
+          )}
+
           {/* Location */}
           <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
             <MapPin className="w-4 h-4" />

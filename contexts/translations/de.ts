@@ -1,4 +1,4 @@
-export const deTranslations = {
+﻿export const deTranslations = {
     'gender.male': 'Männlich',
     'gender.female': 'Weiblich',
     // Login
@@ -49,8 +49,8 @@ export const deTranslations = {
     'auth.forgotPassword.backToLogin': 'Zurück zur Anmeldung',
     'auth.forgotPassword.enterEmail': 'Bitte gib deine E-Mail-Adresse ein',
     'auth.forgotPassword.passwordMinLength': 'Passwort muss mindestens 8 Zeichen lang sein',
-    'auth.forgotPassword.passwordsNoMatch': 'Passwörter stimmen nicht äberein',
-    'auth.forgotPassword.checkEmail': 'äberpräfe deine E-Mails, um das Passwort zurückzusetzen',
+    'auth.forgotPassword.passwordsNoMatch': 'Passwörter stimmen nicht überein',
+    'auth.forgotPassword.checkEmail': 'überprüfe deine E-Mails, um das Passwort zurückzusetzen',
     'auth.forgotPassword.error': 'Ein Fehler ist aufgetreten',
     // Auth Consent
     'auth.consent.title': 'Zustimmung erforderlich',
@@ -648,6 +648,8 @@ export const deTranslations = {
       videoFromRegistration: 'Video von der ersten Registrierung',
       openForClubOffers: 'Aktivieren Sie dies, wenn Sie für Vereinsangebote offen sind',
       selectBackground: 'Wählen Sie einen Hintergrund:',
+      dominantHandLabel: 'Hand',
+      preferredLanguageLabel: 'Sprache',
     },
     // Settings
     settings: {

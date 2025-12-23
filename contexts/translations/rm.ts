@@ -1,4 +1,4 @@
-export const rmTranslations = {
+﻿export const rmTranslations = {
     'gender.male': 'Masculin',
     'gender.female': 'Feminin',
     // Login
@@ -23,8 +23,8 @@ export const rmTranslations = {
     'auth.login.error': 'In errur è success',
     'auth.login.invalidCredentials': 'Email u pled-clav nunvalids',
     'auth.login.passwordResetSuccess': 'Pled-clav remplazà cun success! Ti pos ussa t\'annunziar.',
-    'auth.login.invalidToken': 'Token nunvalid u scadü',
-    'auth.login.tokenExpired': 'Il token è scadü. Per plaschair dumonda in nov reset dal pled-clav.',
+    'auth.login.invalidToken': 'Token nunvalid u scadù',
+    'auth.login.tokenExpired': 'Il token è scadù. Per plaschair dumonda in nov reset dal pled-clav.',
     // Auth Register
     'auth.register.title': 'Crear in conto',
     'auth.register.subtitle': 'Daventa part da la communitad Habicht',
@@ -521,6 +521,7 @@ export const rmTranslations = {
       weightLabel: 'Pais kg',
       spikeLabel: 'Autezza attatga cm',
       blockLabel: 'Autezza bloccada cm',
+      dominantHandLabel: 'Maun',
       preferredLanguageLabel: 'Lingua',
       positionOutsideHitter: 'Attatgader',
       positionOpposite: 'Diagonal',

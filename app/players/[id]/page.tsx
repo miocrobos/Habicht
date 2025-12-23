@@ -83,26 +83,34 @@ interface PlayerData {
   createdAt: string
 }
 
-const POSITION_TRANSLATIONS: { [key: string]: string } = {
-  'OUTSIDE_HITTER': 'Ausseagriffler',
-  'OPPOSITE': 'Diagonal',
-  'MIDDLE_BLOCKER': 'Mittelblocker',
-  'SETTER': 'Zuespieler',
-  'LIBERO': 'Libero',
-  'UNIVERSAL': 'Universalspieler'
+// Helper functions to get translated position and league labels
+const getPositionLabel = (position: string, t: any) => {
+  const positionMap: { [key: string]: string } = {
+    'OUTSIDE_HITTER': 'playerProfile.positionOutsideHitter',
+    'OPPOSITE': 'playerProfile.positionOpposite',
+    'MIDDLE_BLOCKER': 'playerProfile.positionMiddleBlocker',
+    'SETTER': 'playerProfile.positionSetter',
+    'LIBERO': 'playerProfile.positionLibero',
+    'UNIVERSAL': 'playerProfile.positionUniversal'
+  }
+  return t(positionMap[position] || position)
 }
 
-const LEAGUE_TRANSLATIONS: { [key: string]: string } = {
-  'NLA': 'NLA',
-  'NLB': 'NLB',
-  'FIRST_LEAGUE': '1. Liga',
-  'SECOND_LEAGUE': '2. Liga',
-  'THIRD_LEAGUE': '3. Liga',
-  'FOURTH_LEAGUE': '4. Liga',
-  'FIFTH_LEAGUE': '5. Liga',
-  'U23': 'U23',
-  'U19': 'U19',
-  'U17': 'U17'
+const getLeagueLabel = (league: string, t: any) => {
+  const leagueMap: { [key: string]: string } = {
+    'NLA': 'home.leagues.nla',
+    'NLB': 'home.leagues.nlb',
+    'FIRST_LEAGUE': 'home.leagues.firstLeague',
+    'SECOND_LEAGUE': 'home.leagues.secondLeague',
+    'THIRD_LEAGUE': 'home.leagues.thirdLeague',
+    'FOURTH_LEAGUE': 'home.leagues.fourthLeague',
+    'FIFTH_LEAGUE': 'home.leagues.fifthLeague',
+    'U23': 'U23',
+    'U19': 'home.leagues.u19',
+    'U17': 'home.leagues.u17'
+  }
+  const key = leagueMap[league]
+  return key === 'U23' ? 'U23' : t(key || league)
 }
 
 const BACKGROUND_OPTIONS = [
@@ -667,7 +675,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           <span>{player.currentClub.name}</span>
                           {player.currentLeague && (
                             <span className="text-xs px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full ml-1">
-                              {LEAGUE_TRANSLATIONS[player.currentLeague] || player.currentLeague}
+                              {getLeagueLabel(player.currentLeague, t)}
                             </span>
                           )}
                         </Link>
@@ -1506,7 +1514,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               name: `${player.firstName} ${player.lastName}`,
               type: 'PLAYER',
               club: player.currentClub?.name,
-              position: player.positions[0] ? POSITION_TRANSLATIONS[player.positions[0]] : undefined
+              position: player.positions[0] ? getPositionLabel(player.positions[0], t) : undefined
             }}
             currentUserId={session.user.id}
             currentUserType={session.user.role as 'PLAYER' | 'RECRUITER'}

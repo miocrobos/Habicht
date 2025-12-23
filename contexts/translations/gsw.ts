@@ -1,4 +1,4 @@
-export const gswTranslations = {
+﻿export const gswTranslations = {
     // Gender
     'gender.male': 'Männlich',
     'gender.female': 'Wiiblich',
@@ -50,7 +50,7 @@ export const gswTranslations = {
     'auth.forgotPassword.backToLogin': 'Zrück zur Aameldung',
     'auth.forgotPassword.enterEmail': 'Bitte gib dini Email-Adresse ii',
     'auth.forgotPassword.passwordMinLength': 'Passwort muss mindestens 8 Zeiche lang sii',
-    'auth.forgotPassword.passwordsNoMatch': 'Passwörter stimme nöd äberein',
+    'auth.forgotPassword.passwordsNoMatch': 'Passwörter stimme nöd überein',
     'auth.forgotPassword.checkEmail': 'Präef dini Emails zum s Passwort zrückzsetze',
     'auth.forgotPassword.error': 'Es isch en Fehler uftrette',
     // Auth Consent
@@ -970,7 +970,7 @@ export const gswTranslations = {
       passwordMin8: 'Passwort muss mindestens 8 Zeiche lang sii',
       passwordNeedsNumber: 'Passwort muss e Zahl enthalte',
       passwordNeedsSymbol: 'Passwort muss es Sonderzeiche enthalte',
-      passwordsNotMatch: 'Passwörter stimme nöd äberein',
+      passwordsNotMatch: 'Passwörter stimme nöd überein',
       selectGenderRequired: 'Bitte wähl dis Geschlecht',
       selectCantonRequired: 'Bitte wähl de Kanton',
       selectEmploymentRequired: 'Bitte wähl de Beschäftigungsstatus',

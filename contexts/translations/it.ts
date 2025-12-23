@@ -97,6 +97,12 @@
     'positions.setter': 'Palleggiatore',
     'positions.libero': 'Libero',
     'positions.universal': 'Universale',
+    // Employment Status
+    'register.employed': 'Dipendente',
+    'register.self_employed': 'Lavoratore autonomo',
+    'register.student': 'Studente',
+    'register.unemployed': 'Disoccupato',
+    'register.retired': 'Pensionato',
     // Common
     'common.save': 'Salva',
     'common.cancel': 'Annulla',

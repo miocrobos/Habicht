@@ -95,6 +95,12 @@
     'positions.setter': 'Passeur',
     'positions.libero': 'Libéro',
     'positions.universal': 'Universel',
+    // Employment Status
+    'register.employed': 'Employé',
+    'register.self_employed': 'Indépendant',
+    'register.student': 'Étudiant',
+    'register.unemployed': 'Sans emploi',
+    'register.retired': 'Retraité',
     // Common
     'common.save': 'Enregistrer',
     'common.cancel': 'Annuler',

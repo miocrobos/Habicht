@@ -95,6 +95,12 @@
     'positions.setter': 'Passiader',
     'positions.libero': 'Libero',
     'positions.universal': 'Universal',
+    // Employment Status
+    'register.employed': 'Emploiau',
+    'register.self_employed': 'Independent',
+    'register.student': 'Student',
+    'register.unemployed': 'Senza lavur',
+    'register.retired': 'Pensiunau',
     // Common
     'common.save': 'Memorisar',
     'common.cancel': 'Interrumper',

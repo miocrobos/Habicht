@@ -96,6 +96,12 @@
     'positions.setter': 'Zuespieler',
     'positions.libero': 'Libero',
     'positions.universal': 'Universal',
+    // Employment Status
+    'register.employed': 'Aagschtellt',
+    'register.self_employed': 'Selbschtständig',
+    'register.student': 'Student',
+    'register.unemployed': 'Arbeitslos',
+    'register.retired': 'Pensioniärt',
     // Common
     'common.save': 'Speichere',
     'common.cancel': 'Abbräche',

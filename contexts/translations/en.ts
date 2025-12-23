@@ -98,6 +98,12 @@ export const enTranslations = {
     'positions.setter': 'Setter',
     'positions.libero': 'Libero',
     'positions.universal': 'Universal',
+    // Employment Status
+    'register.employed': 'Employed',
+    'register.self_employed': 'Self-Employed',
+    'register.student': 'Student',
+    'register.unemployed': 'Unemployed',
+    'register.retired': 'Retired',
     // Common
     'common.save': 'Save',
     'common.cancel': 'Cancel',

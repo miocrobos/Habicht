@@ -95,6 +95,12 @@
     'positions.setter': 'Zuspieler',
     'positions.libero': 'Libero',
     'positions.universal': 'Universal',
+    // Employment Status
+    'register.employed': 'Angestellt',
+    'register.self_employed': 'Selbstständig',
+    'register.student': 'Student',
+    'register.unemployed': 'Arbeitslos',
+    'register.retired': 'Pensioniert',
     // Common
     'common.save': 'Speichern',
     'common.cancel': 'Abbrechen',

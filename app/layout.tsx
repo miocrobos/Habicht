@@ -10,18 +10,29 @@ import Footer from '@/components/layout/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Habicht - Schwiizer Volleyball Scouting Plattform',
-  description: 'D Moderne Scouting-Plattform Für Schwiizer Volleyball. Entdecke Talente, Lueg Highlights Aa Und Vernetz Dich Mit Rekrutierer.',
+  title: 'Habicht – Swiss Volleyball Scouting Platform',
+  description: 'Discover and connect with Swiss volleyball talent. Player profiles, highlights, and scouting tools.',
   keywords: ['volleyball', 'swiss volleyball', 'scouting', 'recruitment', 'athletes', 'swiss volley', 'schweizer volleyball', 'volleyball schweiz'],
   icons: {
-    icon: '/eagle-logo.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+    ],
     apple: '/eagle-logo.png',
   },
   openGraph: {
-    title: 'Habicht - Schwiizer Volleyball Scouting Plattform',
-    description: 'D Moderne Scouting-Plattform Für Schwiizer Volleyball. Entdecke Talente, Lueg Highlights Aa Und Vernetz Dich Mit Rekrutierer.',
-    images: ['/eagle-logo.png'],
+    title: 'Habicht – Swiss Volleyball Scouting Platform',
+    description: 'Discover and connect with Swiss volleyball talent. Player profiles, highlights, and scouting tools.',
+    images: [{ url: 'https://habicht-volleyball.ch/og-image.png' }],
+    url: 'https://habicht-volleyball.ch/',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Habicht – Swiss Volleyball Scouting Platform',
+    description: 'Swiss volleyball scouting made simple. Players, stats, and highlights.',
+    images: ['https://habicht-volleyball.ch/og-image.png'],
   },
 }
 
@@ -33,6 +44,9 @@ export default function RootLayout({
   return (
     <html lang="de-CH" suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
         <script
           dangerouslySetInnerHTML={{
             __html: `

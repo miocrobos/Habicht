@@ -13,6 +13,7 @@ export default function HybridRegisterPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [step, setStep] = useState(1); // Add step state
 
   // Comprehensive combined player and recruiter form data
   const [formData, setFormData] = useState({
@@ -202,16 +203,51 @@ export default function HybridRegisterPage() {
     setRecruiterAchievements(updated);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleNext = () => {
+    setError('');
     
-    if (formData.password !== formData.confirmPassword) {
-      setError(t('register.passwordsDoNotMatch'));
+    // Step 1 validation (Account + Personal Info)
+    if (step === 1) {
+      if (!formData.email || !formData.password || !formData.confirmPassword) {
+        setError('Please fill in all required fields');
+        return;
+      }
+      if (formData.password !== formData.confirmPassword) {
+        setError(t('register.passwordsDoNotMatch'));
+        return;
+      }
+      if (!formData.firstName || !formData.lastName || !formData.dateOfBirth || !formData.gender || !formData.canton) {
+        setError('Please fill in all required fields');
+        return;
+      }
+      setStep(2);
+      window.scrollTo(0, 0);
       return;
     }
 
+    // Step 2 validation (Player Info)
+    if (step === 2) {
+      if (formData.positions.length === 0) {
+        setError(t('register.selectPositionRequired'));
+        return;
+      }
+      setStep(3);
+      window.scrollTo(0, 0);
+      return;
+    }
+  };
+
+  const handleBack = () => {
+    setError('');
+    setStep(step - 1);
+    window.scrollTo(0, 0);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
     if (!agreedToTerms) {
-      setError(t('register.agreeToTerms'));
+      setError(t('register.agreeToTermsRequired'));
       return;
     }
 
@@ -309,16 +345,34 @@ export default function HybridRegisterPage() {
           <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
             {t('register.hybridSubtitle')}
           </p>
+          
+          {/* Step Progress */}
+          <div className="mt-6 flex justify-center items-center space-x-4">
+            <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= 1 ? 'bg-red-600 text-white' : 'bg-gray-300 text-gray-600'}`}>
+              1
+            </div>
+            <div className={`h-1 w-16 ${step >= 2 ? 'bg-red-600' : 'bg-gray-300'}`}></div>
+            <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= 2 ? 'bg-red-600 text-white' : 'bg-gray-300 text-gray-600'}`}>
+              2
+            </div>
+            <div className={`h-1 w-16 ${step >= 3 ? 'bg-red-600' : 'bg-gray-300'}`}></div>
+            <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= 3 ? 'bg-red-600 text-white' : 'bg-gray-300 text-gray-600'}`}>
+              3
+            </div>
+          </div>
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={step === 3 ? handleSubmit : (e) => { e.preventDefault(); handleNext(); }} className="space-y-8">
             {error && (
               <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-lg">
                 {error}
               </div>
             )}
 
+            {/* STEP 1: Account + Personal Information */}
+            {step === 1 && (
+              <>
             {/* SECTION 1: Account Information */}
             <div className="space-y-4 border-b border-gray-200 dark:border-gray-700 pb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -468,7 +522,12 @@ export default function HybridRegisterPage() {
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
               />
             </div>
+            </>
+            )}
 
+            {/* STEP 2: Player Information */}
+            {step === 2 && (
+              <>
             {/* SECTION 3: Player Information */}
             <div className="space-y-6 border-b border-gray-200 dark:border-gray-700 pb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -877,7 +936,12 @@ export default function HybridRegisterPage() {
                 </span>
               </label>
             </div>
+            </>
+            )}
 
+            {/* STEP 3: Recruiter Information + Terms */}
+            {step === 3 && (
+              <>
             {/* SECTION 4: Recruiter Information */}
             <div className="space-y-6 border-b border-gray-200 dark:border-gray-700 pb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -1127,6 +1191,41 @@ export default function HybridRegisterPage() {
                 </Link>
               </p>
             </div>
+            </>
+            )}
+
+            {/* Navigation Buttons */}
+            {step !== 3 && (
+              <div className="flex justify-between pt-6">
+                {step > 1 && (
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    className="px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+                  >
+                    {t('register.backButton')}
+                  </button>
+                )}
+                <button
+                  type="submit"
+                  className="ml-auto px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg font-semibold hover:from-red-700 hover:to-red-800 transition-all shadow-lg hover:shadow-xl"
+                >
+                  {t('register.continueButton')}
+                </button>
+              </div>
+            )}
+
+            {step === 3 && step > 1 && (
+              <div className="pt-6">
+                <button
+                  type="button"
+                  onClick={handleBack}
+                  className="px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+                >
+                  {t('register.backButton')}
+                </button>
+              </div>
+            )}
           </form>
         </div>
       </div>

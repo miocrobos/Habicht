@@ -927,7 +927,6 @@
       male: 'Maschile',
       female: 'Femminile',
       selectCanton: 'Seleziona cantone',
-      selectCanton: 'Seleziona cantone',
       nationality: 'Nazionalità',
       selectNationality: 'Seleziona nazionalità',
       selectPlaceholder: 'Seleziona...',

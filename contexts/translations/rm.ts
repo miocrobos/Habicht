@@ -924,7 +924,6 @@
       male: 'Masculin',
       female: 'Feminin',
       selectCanton: 'Tscherner chantun',
-      selectCanton: 'Tscherner chantun',
       nationality: 'Naziunalitad',
       selectNationality: 'Tscherner naziunalitad',
       selectPlaceholder: 'Tscherner...',

@@ -252,9 +252,9 @@ export default function RecruiterProfile({ params }: RecruiterProfileProps) {
                           className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                         >
                           <ClubBadge
-                            logo={club.logo}
-                            name={club.name}
-                            size={40}
+                            clubName={club.name}
+                            uploadedLogo={club.logo}
+                            size="md"
                           />
                           <div className="flex-1 min-w-0">
                             <p className="font-semibold text-gray-900 dark:text-white truncate">{club.name}</p>

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Mail, Lock, User, Calendar, Globe, MapPin, Briefcase, Eye, EyeOff, Upload, Plus, X } from 'lucide-react';
 import ImageUpload from '@/components/shared/ImageUpload';
 import { useLanguage } from '@/contexts/LanguageContext';
+import StepIndicator from '@/components/shared/StepIndicator';
 
 const NATIONALITIES = [
   "Afghanistan", "Albanie", "Algerie", "Andorra", "Angola", "Argentinie", "Armenie", "Australie", "Östriich",
@@ -265,6 +266,8 @@ export default function RecruiterRegisterPage() {
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+          <StepIndicator step={step} total={3} color="blue" />
+
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
               <div className="rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4">

@@ -8,6 +8,7 @@ import ImageUpload from '@/components/shared/ImageUpload';
 import VideoUpload from '@/components/shared/VideoUpload';
 import StarRating from '@/components/shared/StarRating';
 import { useLanguage } from '@/contexts/LanguageContext';
+import StepIndicator from '@/components/shared/StepIndicator';
 
 // Import constants
 const NATIONALITIES = [
@@ -487,6 +488,8 @@ export default function PlayerRegisterPage() {
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+          <StepIndicator step={step} total={3} color="red" />
+
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
               <div className="rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4">

@@ -554,8 +554,35 @@ model Recruiter {
   sentMessages      Message[]   @relation("RecruiterMessages")
   chatRequests      ChatRequest[]
   conversations     Conversation[] @relation("RecruiterConversations")
+  photos            RecruiterPhoto[]
+  videos            RecruiterVideo[]
   
   @@index([clubId])
+}
+
+model RecruiterPhoto {
+  id          String   @id @default(cuid())
+  recruiterId String
+  recruiter   Recruiter @relation(fields: [recruiterId], references: [id], onDelete: Cascade)
+  photoUrl    String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  
+  @@index([recruiterId])
+  @@index([recruiterId, order])
+}
+
+model RecruiterVideo {
+  id          String   @id @default(cuid())
+  recruiterId String
+  recruiter   Recruiter @relation(fields: [recruiterId], references: [id], onDelete: Cascade)
+  videoUrl    String
+  title       String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  
+  @@index([recruiterId])
+  @@index([recruiterId, order])
 }
 
 model RecruiterClubHistory {

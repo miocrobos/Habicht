@@ -761,13 +761,94 @@ export default function HybridRegisterPage() {
                     onChange={(e) => setFormData({ ...formData, occupation: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
-                  <input
-                    type="text"
-                    placeholder={t('register.school')}
+                  <select
                     value={formData.schoolName}
                     onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
-                  />
+                  >
+                    <option value="">{t('register.selectSchool')}</option>
+                    <optgroup label={t('register.universities')}>
+                      <option value="ETH Zürich">ETH Zürich</option>
+                      <option value="Universität Zürich">Universität Zürich</option>
+                      <option value="Universität Bern">Universität Bern</option>
+                      <option value="Universität Basel">Universität Basel</option>
+                      <option value="Universität St. Gallen (HSG)">Universität St. Gallen (HSG)</option>
+                      <option value="Université de Lausanne">Université de Lausanne</option>
+                      <option value="Université de Genève">Université de Genève</option>
+                      <option value="EPFL Lausanne">EPFL Lausanne</option>
+                      <option value="Universität Luzern">Universität Luzern</option>
+                      <option value="Université de Fribourg">Université de Fribourg</option>
+                    </optgroup>
+                    <optgroup label={t('register.appliedSciences')}>
+                      <option value="ZHAW Zürich">ZHAW Zürich</option>
+                      <option value="FHNW">FHNW</option>
+                      <option value="BFH Bern">BFH Bern</option>
+                      <option value="HSLU Luzern">HSLU Luzern</option>
+                      <option value="OST - Ostschweizer Fachhochschule">OST - Ostschweizer Fachhochschule</option>
+                      <option value="SUPSI">SUPSI</option>
+                      <option value="HES-SO">HES-SO</option>
+                      <option value="ZHdK - Zürcher Hochschule der Künste">ZHdK - Zürcher Hochschule der Künste</option>
+                      <option value="FH Graubünden">FH Graubünden</option>
+                    </optgroup>
+                    <optgroup label={t('register.cantonalSchools')}>
+                      <option value="Kantonsschule Zürich Nord">Kantonsschule Zürich Nord</option>
+                      <option value="Kantonsschule Enge Zürich">Kantonsschule Enge Zürich</option>
+                      <option value="Kantonsschule Rämibühl Zürich">Kantonsschule Rämibühl Zürich</option>
+                      <option value="Kantonsschule Wettingen">Kantonsschule Wettingen</option>
+                      <option value="Kantonsschule Aarau">Kantonsschule Aarau</option>
+                      <option value="Kantonsschule Baden">Kantonsschule Baden</option>
+                      <option value="Kantonsschule Wohlen">Kantonsschule Wohlen</option>
+                      <option value="Kantonsschule Zug">Kantonsschule Zug</option>
+                      <option value="Kantonsschule Menzingen">Kantonsschule Menzingen</option>
+                      <option value="Kantonsschule Alpenquai Luzern">Kantonsschule Alpenquai Luzern</option>
+                      <option value="Kantonsschule Reussbühl Luzern">Kantonsschule Reussbühl Luzern</option>
+                      <option value="Kantonsschule Willisau">Kantonsschule Willisau</option>
+                      <option value="Kantonsschule Sursee">Kantonsschule Sursee</option>
+                      <option value="Gymnasium Kirchenfeld Bern">Gymnasium Kirchenfeld Bern</option>
+                      <option value="Gymnasium Neufeld Bern">Gymnasium Neufeld Bern</option>
+                      <option value="Gymnasium français de Bienne">Gymnasium français de Bienne</option>
+                      <option value="Kantonsschule Olten">Kantonsschule Olten</option>
+                      <option value="Kantonsschule Solothurn">Kantonsschule Solothurn</option>
+                      <option value="Gymnasium am Münsterplatz Basel">Gymnasium am Münsterplatz Basel</option>
+                      <option value="Gymnasium Oberwil">Gymnasium Oberwil</option>
+                      <option value="Gymnasium Liestal">Gymnasium Liestal</option>
+                      <option value="Gymnasium Muttenz">Gymnasium Muttenz</option>
+                      <option value="Kantonsschule Schaffhausen">Kantonsschule Schaffhausen</option>
+                      <option value="Kantonsschule am Burggraben St. Gallen">Kantonsschule am Burggraben St. Gallen</option>
+                      <option value="Kantonsschule Wattwil">Kantonsschule Wattwil</option>
+                      <option value="Kollegium St. Fiden">Kollegium St. Fiden</option>
+                      <option value="Kantonsschule Frauenfeld">Kantonsschule Frauenfeld</option>
+                      <option value="Kantonsschule Kreuzlingen">Kantonsschule Kreuzlingen</option>
+                      <option value="Kantonsschule Romanshorn">Kantonsschule Romanshorn</option>
+                      <option value="Bündner Kantonsschule Chur">Bündner Kantonsschule Chur</option>
+                      <option value="Evangelische Mittelschule Schiers">Evangelische Mittelschule Schiers</option>
+                      <option value="Lyceum Alpinum Zuoz">Lyceum Alpinum Zuoz</option>
+                      <option value="Stiftsschule Einsiedeln">Stiftsschule Einsiedeln</option>
+                      <option value="Kollegium Schwyz">Kollegium Schwyz</option>
+                      <option value="Kantonsschule Uri Altdorf">Kantonsschule Uri Altdorf</option>
+                      <option value="Kollegium Karl Borromäus Altdorf">Kollegium Karl Borromäus Altdorf</option>
+                      <option value="Collège St-Michel Fribourg">Collège St-Michel Fribourg</option>
+                      <option value="Collège du Sud Bulle">Collège du Sud Bulle</option>
+                      <option value="Gymnase de Bulle">Gymnase de Bulle</option>
+                      <option value="Lycée Cantonal Porrentruy">Lycée Cantonal Porrentruy</option>
+                      <option value="Lycée Denis-de-Rougemont Neuchâtel">Lycée Denis-de-Rougemont Neuchâtel</option>
+                      <option value="Gymnase de la Cité Lausanne">Gymnase de la Cité Lausanne</option>
+                      <option value="Gymnase de Beaulieu Lausanne">Gymnase de Beaulieu Lausanne</option>
+                      <option value="Gymnase de Renens">Gymnase de Renens</option>
+                      <option value="Gymnase de Morges">Gymnase de Morges</option>
+                      <option value="Gymnase de Nyon">Gymnase de Nyon</option>
+                      <option value="Collège Calvin Genève">Collège Calvin Genève</option>
+                      <option value="Collège de Genève">Collège de Genève</option>
+                      <option value="Collège Voltaire Genève">Collège Voltaire Genève</option>
+                      <option value="Collège Rousseau Genève">Collège Rousseau Genève</option>
+                      <option value="Collège Sismondi Genève">Collège Sismondi Genève</option>
+                      <option value="Lycée Collège de la Planta Sion">Lycée Collège de la Planta Sion</option>
+                      <option value="Liceo Cantonale Lugano">Liceo Cantonale Lugano</option>
+                      <option value="Liceo Cantonale Bellinzona">Liceo Cantonale Bellinzona</option>
+                      <option value="Liceo Cantonale Locarno">Liceo Cantonale Locarno</option>
+                      <option value="Liceo Cantonale Mendrisio">Liceo Cantonale Mendrisio</option>
+                    </optgroup>
+                  </select>
                   <ImageUpload 
                     label={t('register.swissVolleyLicense')} 
                     value={formData.swissVolleyLicense}

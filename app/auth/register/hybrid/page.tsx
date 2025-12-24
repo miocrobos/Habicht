@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import StarRating from '@/components/shared/StarRating';
+import ImageUpload from '@/components/shared/ImageUpload';
 
 export default function HybridRegisterPage() {
   const { t } = useLanguage();
@@ -575,30 +577,13 @@ export default function HybridRegisterPage() {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                   {t('register.skills')}
                 </label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {[
-                    { key: 'skillReceiving', label: t('register.receiving') },
-                    { key: 'skillServing', label: t('register.serving') },
-                    { key: 'skillAttacking', label: t('register.attacking') },
-                    { key: 'skillBlocking', label: t('register.blocking') },
-                    { key: 'skillDefense', label: t('register.defense') },
-                    { key: 'skillSetting', label: t('register.setting') },
-                  ].map(({ key, label }) => (
-                    <div key={key}>
-                      <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">{label}</label>
-                      <input
-                        type="range"
-                        min="0"
-                        max="5"
-                        value={formData[key as keyof typeof formData] as number}
-                        onChange={(e) => setFormData({ ...formData, [key]: parseInt(e.target.value) })}
-                        className="w-full"
-                      />
-                      <div className="text-center text-sm font-medium text-gray-900 dark:text-white">
-                        {formData[key as keyof typeof formData]}
-                      </div>
-                    </div>
-                  ))}
+                <div className="space-y-3">
+                  <StarRating label={t('register.receiving')} value={formData.skillReceiving} onChange={(v) => setFormData({ ...formData, skillReceiving: v })} />
+                  <StarRating label={t('register.serving')} value={formData.skillServing} onChange={(v) => setFormData({ ...formData, skillServing: v })} />
+                  <StarRating label={t('register.attacking')} value={formData.skillAttacking} onChange={(v) => setFormData({ ...formData, skillAttacking: v })} />
+                  <StarRating label={t('register.blocking')} value={formData.skillBlocking} onChange={(v) => setFormData({ ...formData, skillBlocking: v })} />
+                  <StarRating label={t('register.defense')} value={formData.skillDefense} onChange={(v) => setFormData({ ...formData, skillDefense: v })} />
+                  <StarRating label={t('register.setting')} value={formData.skillSetting} onChange={(v) => setFormData({ ...formData, skillSetting: v })} />
                 </div>
               </div>
 
@@ -783,19 +768,17 @@ export default function HybridRegisterPage() {
                     onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
-                  <input
-                    type="text"
-                    placeholder={t('register.swissVolleyLicense')}
+                  <ImageUpload 
+                    label={t('register.swissVolleyLicense')} 
                     value={formData.swissVolleyLicense}
-                    onChange={(e) => setFormData({ ...formData, swissVolleyLicense: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
+                    onChange={(v) => setFormData({ ...formData, swissVolleyLicense: v })} 
+                    aspectRatio="banner" 
                   />
-                  <input
-                    type="text"
-                    placeholder={t('register.ausweiss')}
+                  <ImageUpload 
+                    label={t('register.ausweiss')} 
                     value={formData.ausweiss}
-                    onChange={(e) => setFormData({ ...formData, ausweiss: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
+                    onChange={(v) => setFormData({ ...formData, ausweiss: v })} 
+                    aspectRatio="banner" 
                   />
                 </div>
               </div>
@@ -852,12 +835,11 @@ export default function HybridRegisterPage() {
                   onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                 />
-                <input
-                  type="text"
-                  placeholder={t('register.coachingLicense')}
+                <ImageUpload 
+                  label={t('register.coachingLicense')} 
                   value={formData.coachingLicense}
-                  onChange={(e) => setFormData({ ...formData, coachingLicense: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
+                  onChange={(v) => setFormData({ ...formData, coachingLicense: v })} 
+                  aspectRatio="banner" 
                 />
               </div>
 

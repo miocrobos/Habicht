@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { Canton } from '@prisma/client';
 import { getAllSchools } from '@/lib/schoolData';
 import ImageUpload from '@/components/shared/ImageUpload';
+import StarRating from '@/components/shared/StarRating';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const cantons = [
@@ -677,6 +678,18 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
               rows={4}
               className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             />
+          </div>
+
+          {/* Skills Section */}
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('register.skills')}</h3>
+            <div className="space-y-3">
+              <StarRating label={t('register.receiving')} value={formData.skillReceiving || 0} onChange={(v) => setFormData({ ...formData, skillReceiving: v })} />
+              <StarRating label={t('register.serving')} value={formData.skillServing || 0} onChange={(v) => setFormData({ ...formData, skillServing: v })} />
+              <StarRating label={t('register.attacking')} value={formData.skillAttacking || 0} onChange={(v) => setFormData({ ...formData, skillAttacking: v })} />
+              <StarRating label={t('register.blocking')} value={formData.skillBlocking || 0} onChange={(v) => setFormData({ ...formData, skillBlocking: v })} />
+              <StarRating label={t('register.defense')} value={formData.skillDefense || 0} onChange={(v) => setFormData({ ...formData, skillDefense: v })} />
+            </div>
           </div>
         </div>
 

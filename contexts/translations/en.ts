@@ -1149,6 +1149,28 @@
       describeExperience: 'Describe your experience and qualifications',
       yearsExperience: 'Years of experience',
       clubAffiliation: 'Club affiliation',
+      coachingAchievements: 'Coaching achievements',
+      coachingLicense: 'Coaching license',
+      // Position translations
+      setter: 'Setter',
+      outsideHitter: 'Outside Hitter',
+      middleBlocker: 'Middle Blocker',
+      opposite: 'Opposite',
+      libero: 'Libero',
+      universal: 'Universal',
+      // Employment status
+      selectEmployment: 'Select employment status',
+      studentFullTime: 'Student (Full-time)',
+      studentPartTime: 'Student (Part-time)',
+      workingFullTime: 'Working (Full-time)',
+      workingPartTime: 'Working (Part-time)',
+      occupation: 'Occupation',
+      professionalInfo: 'Professional/Academic Information',
+      // Other
+      login: 'Login',
+      highlightVideo: 'Highlight video',
+      ausweiss: 'ID/Passport',
+      swissVolleyLicense: 'Swiss Volley License',
       // Hybrid Registration
       hybridTitle: 'Create hybrid account',
       hybridSubtitle: 'Create a combined player & recruiter account',

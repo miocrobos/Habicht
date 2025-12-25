@@ -1,13 +1,34 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 
 export default function SubmitClubPage() {
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
+  const router = useRouter();
+  const searchParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : undefined;
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
+
+  useEffect(() => {
+    // Try to get lang from URL (e.g., /de/clubs/submit or ?lang=de)
+    let urlLang = undefined;
+    // Check for /[lang]/ in pathname
+    const match = pathname.match(/^\/(gsw|de|fr|it|rm|en)(\/|$)/);
+    if (match) {
+      urlLang = match[1];
+    } else if (searchParams && searchParams.get('lang')) {
+      urlLang = searchParams.get('lang');
+    }
+    // Only set if different and valid
+    if (urlLang && urlLang !== language && ['gsw','de','fr','it','rm','en'].includes(urlLang)) {
+      setLanguage(urlLang as 'gsw' | 'de' | 'fr' | 'it' | 'rm' | 'en');
+    }
+    // If no URL lang, fallback to localStorage (handled by LanguageProvider on mount)
+  }, [pathname, searchParams, language, setLanguage]);
   const [formData, setFormData] = useState({
     submitterName: '',
     submitterEmail: '',

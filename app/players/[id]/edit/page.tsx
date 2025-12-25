@@ -1,192 +1,1046 @@
-"use client";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import axios from "axios";
-import { PaintBucket, RefreshCcw, ZoomIn, X } from "lucide-react";
-import ImageUpload from "@/components/shared/ImageUpload";
+'use client';
+import { useState, useEffect } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
+import { ArrowLeft, Save, Loader2, User, MapPin, Briefcase, GraduationCap, Trophy, Plus, Trash2, X } from 'lucide-react';
+import Link from 'next/link';
+import { Canton } from '@prisma/client';
+import { getAllSchools } from '@/lib/schoolData';
+import ImageUpload from '@/components/shared/ImageUpload';
 
-const BACKGROUND_OPTIONS = [
-  { id: "solid-blue", name: "Blau", style: "#2563eb" },
-  { id: "solid-green", name: "Grün", style: "#16a34a" },
-  { id: "solid-purple", name: "Lila", style: "#9333ea" },
-  { id: "solid-orange", name: "Orange", style: "#f97316" },
-  { id: "solid-pink", name: "Pink", style: "#ec4899" },
-  { id: "solid-yellow", name: "Gelb", style: "#eab308" },
-  { id: "solid-teal", name: "Türkis", style: "#14b8a6" },
-  { id: "solid-indigo", name: "Indigo", style: "#6366f1" },
-  { id: "solid-dark", name: "Dunkel", style: "#1f2937" },
-  { id: "solid-gray", name: "Grau", style: "#6b7280" },
-  { id: "solid-black", name: "Schwarz", style: "#000000" },
-  { id: "solid-red", name: "Rot", style: "#dc2626" },
-  { id: "gradient-sunset", name: "Sunset", style: "linear-gradient(90deg, #ff7e5f, #feb47b)" },
-  { id: "gradient-ocean", name: "Ocean", style: "linear-gradient(90deg, #43cea2, #185a9d)" },
-  { id: "gradient-rainbow", name: "Rainbow", style: "linear-gradient(90deg, #ff9966, #ff5e62, #00c3ff, #ffff1c)" },
+const cantons = [
+  { code: 'ZH' as Canton, name: 'Züri' },
+  { code: 'BE' as Canton, name: 'Bärn' },
+  { code: 'LU' as Canton, name: 'Luzern' },
+  { code: 'UR' as Canton, name: 'Uri' },
+  { code: 'SZ' as Canton, name: 'Schwyz' },
+  { code: 'OW' as Canton, name: 'Obwalde' },
+  { code: 'NW' as Canton, name: 'Nidwalde' },
+  { code: 'GL' as Canton, name: 'Glarus' },
+  { code: 'ZG' as Canton, name: 'Zug' },
+  { code: 'FR' as Canton, name: 'Friburg' },
+  { code: 'SO' as Canton, name: 'Solothurn' },
+  { code: 'BS' as Canton, name: 'Basel-Stadt' },
+  { code: 'BL' as Canton, name: 'Basel-Land' },
+  { code: 'SH' as Canton, name: 'Schaffhuse' },
+  { code: 'AR' as Canton, name: 'Appenzell Usserrhode' },
+  { code: 'AI' as Canton, name: 'Appenzell Innerrhode' },
+  { code: 'SG' as Canton, name: 'St. Galle' },
+  { code: 'GR' as Canton, name: 'Graubünde' },
+  { code: 'AG' as Canton, name: 'Aargau' },
+  { code: 'TG' as Canton, name: 'Thurgau' },
+  { code: 'TI' as Canton, name: 'Tessin' },
+  { code: 'VD' as Canton, name: 'Waadt' },
+  { code: 'VS' as Canton, name: 'Wallis' },
+  { code: 'NE' as Canton, name: 'Neueburg' },
+  { code: 'GE' as Canton, name: 'Genf' },
+  { code: 'JU' as Canton, name: 'Jura' },
+];
+
+const employmentStatusOptions = [
+  { value: 'STUDENT_FULL_TIME', label: 'Student/in (Vollziit)' },
+  { value: 'STUDENT_PART_TIME', label: 'Student/in (Teilziit)' },
+  { value: 'WORKING_FULL_TIME', label: 'Beruefstätig (Vollziit)' },
+  { value: 'WORKING_PART_TIME', label: 'Beruefstätig (Teilziit)' },
+];
+
+const positions = [
+  { value: 'SETTER', label: 'Zuespieler/in' },
+  { value: 'OUTSIDE_HITTER', label: 'Aussenagreifer/in' },
+  { value: 'MIDDLE_BLOCKER', label: 'Mittelblöcker/in' },
+  { value: 'OPPOSITE', label: 'Diagonal' },
+  { value: 'LIBERO', label: 'Libero' },
+  { value: 'UNIVERSAL', label: 'Universal' },
 ];
 
 export default function EditPlayerProfilePage({ params }: { params: { id: string } }) {
+  const { t } = useLanguage();
   const router = useRouter();
   const { data: session, status } = useSession();
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  
   const [formData, setFormData] = useState<any>(null);
-  const [backgroundImage, setBackgroundImage] = useState("");
-  // showZoom: false | 'background' | 'profile'
-  const [showZoom, setShowZoom] = useState<false | 'background' | 'profile'>(false);
-  const [customColor, setCustomColor] = useState("#2563eb");
-  const [selectedBg, setSelectedBg] = useState(BACKGROUND_OPTIONS[0]);
+  const [clubHistory, setClubHistory] = useState<any[]>([]);
+  const [achievements, setAchievements] = useState<any[]>([]);
+  const [allClubs, setAllClubs] = useState<any[]>([]);
+  const [clubSuggestions, setClubSuggestions] = useState<Record<string, any[]>>({});
 
-  // Helper: Custom Color Picker
-  const ColorPicker = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
-    <input
-      type="color"
-      value={value}
-      onChange={e => onChange(e.target.value)}
-      className="w-10 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full cursor-pointer"
-      aria-label="Custom Color Picker"
-      style={{ background: value }}
-    />
-  );
+  const schools = getAllSchools();
 
   useEffect(() => {
-    if (formData) {
-      setBackgroundImage(formData.backgroundImage || "");
-      setCustomColor(formData.customColor || "#2563eb");
-      if (formData.backgroundGradient) {
-        const found = BACKGROUND_OPTIONS.find(bg => bg.id === formData.backgroundGradient);
-        if (found) setSelectedBg(found);
-      }
+    if (status === 'unauthenticated') {
+      router.push('/auth/login');
+      return;
     }
-  }, [formData]);
 
-  const handleResetBackground = () => {
-    setBackgroundImage("");
-    setCustomColor("#2563eb");
-    setSelectedBg(BACKGROUND_OPTIONS[0]);
-    setFormData((prev: any) => ({ ...prev, backgroundImage: "", customColor: "#2563eb", backgroundGradient: BACKGROUND_OPTIONS[0].id }));
+    if (status === 'authenticated') {
+      loadPlayerData();
+      loadClubs();
+    }
+  }, [status, params.id]);
+
+  const loadClubs = async () => {
+    try {
+      const response = await axios.get('/api/clubs?all=true');
+      setAllClubs(response.data.clubs || []);
+    } catch (err) {
+      console.error('Error loading clubs:', err);
+    }
   };
 
-  const previewStyle = {
-    background: backgroundImage
-      ? `url(${backgroundImage}) center/cover no-repeat`
-      : selectedBg.id === "custom" ? customColor : selectedBg.style,
-    position: "relative" as const,
-    minHeight: "180px",
-    borderRadius: "1rem",
-    overflow: "hidden",
-    // Make the overlay more transparent
+  const loadPlayerData = async () => {
+    try {
+      const response = await axios.get(`/api/players/${params.id}`);
+      const player = response.data.player;
+      
+      setFormData({
+        firstName: player.firstName || '',
+        lastName: player.lastName || '',
+        email: player.user.email || '',
+        dateOfBirth: player.dateOfBirth ? new Date(player.dateOfBirth).toISOString().split('T')[0] : '',
+        gender: player.gender || '',
+        nationality: player.nationality || '',
+        canton: player.canton || '',
+        city: player.city || '',
+        municipality: player.municipality || '',
+        employmentStatus: player.employmentStatus || '',
+        occupation: player.occupation || '',
+        schoolName: player.schoolName || '',
+        positions: player.positions || [],
+        height: player.height || '',
+        weight: player.weight || '',
+        spikeHeight: player.spikeHeight || '',
+        blockHeight: player.blockHeight || '',
+        phone: player.phone || '',
+        profileImage: player.profileImage || '',
+        instagram: player.instagram || '',
+        tiktok: player.tiktok || '',
+        youtube: player.youtube || '',
+        highlightVideo: player.highlightVideo || '',
+        swissVolleyLicense: player.swissVolleyLicense || '',
+        ausweiss: player.ausweiss || '',
+        skillReceiving: player.skillReceiving || 0,
+        skillServing: player.skillServing || 0,
+        skillAttacking: player.skillAttacking || 0,
+        skillBlocking: player.skillBlocking || 0,
+        skillDefense: player.skillDefense || 0,
+        bio: player.bio || '',
+        lookingForClub: player.lookingForClub || false,
+      });
+
+      setClubHistory(player.clubHistory.map((club: any) => ({
+        id: club.id,
+        clubName: club.clubName || '',
+        logo: club.clubLogo || '',
+        country: club.clubCountry || 'Switzerland',
+        clubWebsiteUrl: club.clubWebsiteUrl || '',
+        league: club.league || '',
+        yearFrom: club.startDate ? new Date(club.startDate).getFullYear().toString() : '',
+        yearTo: club.endDate ? new Date(club.endDate).getFullYear().toString() : '',
+        currentClub: club.currentClub || false,
+      })));
+
+      setAchievements(player.achievements.map((text: string, index: number) => ({
+        id: `achievement-${index}`,
+        text,
+      })));
+
+      setLoading(false);
+    } catch (err) {
+      console.error('Error loading player:', err);
+      setError('Fehler Bim Lade Vo Spieler-Date');
+      setLoading(false);
+    }
   };
 
-  // Example: load player data (replace with your actual data loading logic)
-  useEffect(() => {
-    // ...fetch and setFormData logic here...
-  }, []);
+  const handleSave = async () => {
+    setSaving(true);
+    setError('');
+    setSuccess(false);
 
-  return (
-    <>
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-          <PaintBucket className="w-6 h-6 text-habicht-600" /> Profil-Hintergrund
-        </h2>
-        <div className="mb-4 flex flex-wrap gap-3 items-center">
-          {BACKGROUND_OPTIONS.map(bg => (
-            <button
-              key={bg.id}
-              type="button"
-              onClick={() => {
-                setSelectedBg(bg);
-                setFormData((prev: any) => ({ ...prev, backgroundGradient: bg.id }));
-              }}
-              className={`w-10 h-10 rounded-full border-4 flex items-center justify-center transition-all duration-150 ${selectedBg?.id === bg.id ? "border-habicht-600 scale-110" : "border-gray-300 dark:border-gray-600"}`}
-              style={{ background: bg.style }}
-              aria-label={bg.name}
-            >
-              {selectedBg?.id === bg.id && <span className="text-white text-lg font-bold">✓</span>}
-            </button>
-          ))}
-          <ColorPicker value={customColor} onChange={v => {
-            setCustomColor(v);
-            setSelectedBg({ id: "custom", name: "Custom", style: v });
-            setFormData((prev: any) => ({ ...prev, customColor: v, backgroundGradient: "custom" }));
-          }} />
-        </div>
-        <div className="mb-4">
-          <ImageUpload
-            label="Hintergrundbild hochladen (optional)"
-            value={backgroundImage}
-            onChange={v => {
-              setBackgroundImage(v);
-              setFormData((prev: any) => ({ ...prev, backgroundImage: v }));
-            }}
-            aspectRatio="banner"
-            helpText="Empfohlen: Querformat, max. 5MB."
-          />
-          {backgroundImage && (
-            <button
-              type="button"
-              className="mt-2 flex items-center gap-2 text-habicht-600 hover:underline"
-              onClick={() => setShowZoom('background')}
-            >
-              <ZoomIn className="w-5 h-5" /> Bild vergrößern
-            </button>
-          )}
-        </div>
-        <div className="mb-4 flex gap-3">
-          <button
-            type="button"
-            className="flex items-center gap-2 px-3 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200"
-            onClick={handleResetBackground}
-          >
-            <RefreshCcw className="w-4 h-4" /> Zurücksetzen
-          </button>
-        </div>
-        <div className="mt-4">
-          <div style={previewStyle} className="relative w-full h-40 flex items-center justify-center">
-            <div className="absolute inset-0 bg-black/10 dark:bg-black/20" style={{ pointerEvents: "none" }} />
-            <span className="relative z-10 text-white text-lg font-semibold drop-shadow-lg">Live Vorschau</span>
-          </div>
+    // Validate club history: check if any club has a name but neither currentClub nor yearTo
+    const invalidClubs = clubHistory.filter(club => {
+      const hasClubName = club.clubName && club.clubName.trim() !== '';
+      const hasYearTo = club.yearTo && club.yearTo.trim() !== '';
+      const isCurrentClub = club.currentClub === true;
+      // Invalid if: has name BUT neither is current NOR has end year
+      return hasClubName && !isCurrentClub && !hasYearTo;
+    });
+
+    if (invalidClubs.length > 0) {
+      setError('Bitte füll "Bis Jahr" für alli Clubs üs, wo nid als "Aktuellä Club" markiert sind.');
+      setSaving(false);
+      // Scroll to error message
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Filter club history: only include clubs that have a name
+    // AND either currentClub is checked OR yearTo is filled
+    const validClubHistory = clubHistory.filter(club => {
+      const hasClubName = club.clubName && club.clubName.trim() !== '';
+      const hasYearTo = club.yearTo && club.yearTo.trim() !== '';
+      const isCurrentClub = club.currentClub === true;
+      // Include club if: has name AND (is current OR has end year)
+      return hasClubName && (isCurrentClub || hasYearTo);
+    }).map(club => ({
+      ...club,
+      // Clean up empty strings to null/undefined for proper database handling
+      league: club.league && club.league.trim() !== '' ? club.league : '',
+      yearFrom: club.yearFrom && club.yearFrom.trim() !== '' ? club.yearFrom : '',
+      yearTo: club.currentClub ? '' : (club.yearTo && club.yearTo.trim() !== '' ? club.yearTo : ''),
+    }));
+
+    try {
+      const saveData = {
+        playerData: formData,
+        clubHistory: validClubHistory,
+        achievements: achievements.map(a => a.text).filter((text: string) => text.trim() !== ''),
+      };
+      
+      console.log('Saving player data...');
+      console.log('Club History being saved:', JSON.stringify(validClubHistory, null, 2));
+      console.log('Current clubs:', validClubHistory.filter(c => c.currentClub));
+
+      const response = await axios.put(`/api/players/${params.id}`, saveData);
+      
+      console.log('Save response:', response.data);
+
+      setSuccess(true);
+      setTimeout(() => {
+        router.push(`/players/${params.id}`);
+      }, 1500);
+    } catch (err: any) {
+      console.error('Save error:', err);
+      console.error('Error response:', err.response?.data);
+      const apiError = err.response?.data?.error;
+      if (apiError && apiError.startsWith('playerProfile.')) {
+        setError(t(apiError));
+      } else {
+        setError(apiError || 'Fehler Bim Speichere');
+      }
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleAddClub = () => {
+    setClubHistory([
+      ...clubHistory,
+      {
+        id: `new-${Date.now()}`,
+        clubName: '',
+        logo: '',
+        country: 'Switzerland',
+        clubWebsiteUrl: '',
+        league: '',
+        yearFrom: '',
+        yearTo: '',
+        currentClub: false,
+      },
+    ]);
+  };
+
+  const handleRemoveClub = (id: string) => {
+    setClubHistory(clubHistory.filter(club => club.id !== id));
+  };
+
+  const handleAddAchievement = () => {
+    setAchievements([
+      ...achievements,
+      { id: `new-${Date.now()}`, text: '' },
+    ]);
+  };
+
+  const handleRemoveAchievement = (id: string) => {
+    setAchievements(achievements.filter(ach => ach.id !== id));
+  };
+
+  const isStudent = formData?.employmentStatus?.includes('STUDENT');
+  const isWorking = formData?.employmentStatus?.includes('WORKING');
+
+  if (loading || status === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 animate-spin text-habicht-600 mx-auto mb-4" />
+          <p className="text-gray-600 dark:text-gray-400">Lade Profil...</p>
         </div>
       </div>
-      {showZoom === 'background' && backgroundImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-4 relative max-w-3xl w-full">
-            <button
-              type="button"
-              className="absolute top-2 right-2 p-2 bg-red-600 text-white rounded-full hover:bg-red-700"
-              onClick={() => setShowZoom(false)}
+    );
+  }
+
+  if (!formData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <div className="text-center">
+          <p className="text-habicht-600 dark:text-habicht-400 text-lg">Spieler Nid Gfunde</p>
+          <Link href="/" className="text-habicht-600 hover:text-habicht-700 mt-4 inline-block">
+            Zurück Zur Startsii te
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-12 px-4">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
+            <Link
+              href={`/players/${params.id}`}
+              className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition text-sm sm:text-base"
             >
-              <X className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              Zurück Zum Profil
+            </Link>
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-habicht-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-habicht-700 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+            >
+              {saving ? (
+                <>
+                  <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
+                  Speichere...
+                </>
+              ) : (
+                <>
+                  <Save className="w-4 h-4 sm:w-5 sm:h-5" />
+                  Änderige Speichere
+                </>
+              )}
             </button>
-            <img src={backgroundImage} alt="Zoomed Background" className="w-full h-auto rounded-lg" />
+          </div>
+
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+            Profil Bearbeite
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm sm:text-base">
+            Aktualisier Dini Informatione
+          </p>
+
+          {error && (
+            <div className="mt-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 sm:p-4">
+              <p className="text-red-800 dark:text-red-200 text-sm sm:text-base">{error}</p>
+            </div>
+          )}
+
+          {success && (
+            <div className="mt-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3 sm:p-4">
+              <p className="text-green-800 dark:text-green-200 text-sm sm:text-base">
+                ✓ Erfolgriich Gespeichert! Wiiterläitig...
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Personal Information */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <User className="w-6 h-6 text-habicht-600" />
+            Persönlichi Informatione
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Vorname *
+              </label>
+              <input
+                type="text"
+                value={formData.firstName}
+                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Nachname *
+              </label>
+              <input
+                type="text"
+                value={formData.lastName}
+                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Geburtsdatum *
+              </label>
+              <input
+                type="date"
+                value={formData.dateOfBirth}
+                onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Geschlecht *
+              </label>
+              <select
+                value={formData.gender}
+                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              >
+                <option value="">Wähl üs</option>
+                <option value="MALE">Männlich</option>
+                <option value="FEMALE">Wiiblich</option>
+                <option value="OTHER">Anderi</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Nationalität *
+              </label>
+              <input
+                type="text"
+                value={formData.nationality}
+                onChange={(e) => setFormData({ ...formData, nationality: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Telefon
+              </label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+            </div>
           </div>
         </div>
-      )}
 
-      {/* Profile Photo with Zoom */}
-      <div className="mt-8 flex flex-col items-center">
-        {formData?.profileImage && (
-          <>
-            <img
-              src={formData.profileImage}
-              alt="Profilfoto"
-              className="w-32 h-32 rounded-full object-cover border-4 border-habicht-600 shadow-lg cursor-zoom-in"
-              onClick={() => setShowZoom('profile')}
+        {/* Location & Employment */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <MapPin className="w-6 h-6 text-habicht-600" />
+            Wohnort & Beschäftigung
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Kanton *
+              </label>
+              <select
+                value={formData.canton}
+                onChange={(e) => setFormData({ ...formData, canton: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              >
+                <option value="">Wähl Kanton</option>
+                {cantons.map((canton) => (
+                  <option key={canton.code} value={canton.code}>
+                    {canton.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Gmaind / Municipality
+              </label>
+              <input
+                type="text"
+                value={formData.municipality || ''}
+                onChange={(e) => setFormData({ ...formData, municipality: e.target.value })}
+                placeholder="z.B. Winterthur, Bern, Luzern"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Beschäftigungsstatus
+              </label>
+              <select
+                value={formData.employmentStatus}
+                onChange={(e) => setFormData({ ...formData, employmentStatus: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              >
+                <option value="">Wähl Status</option>
+                {employmentStatusOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {isStudent && (
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Schuel / Universität
+                </label>
+                <select
+                  value={formData.schoolName}
+                  onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="">Wähl Schuel</option>
+                  {schools.map((school) => (
+                    <option key={school.value} value={school.value}>
+                      {school.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {isWorking && (
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Beruf
+                </label>
+                <input
+                  type="text"
+                  value={formData.occupation}
+                  onChange={(e) => setFormData({ ...formData, occupation: e.target.value })}
+                  placeholder="z.B. Marketing Manager, Softwareentwickler"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Volleyball Skills */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <Trophy className="w-6 h-6 text-habicht-600" />
+            Volleyball Informatione
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Positione
+              </label>
+              <div className="space-y-2">
+                {positions.map((pos) => (
+                  <label key={pos.value} className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={formData.positions.includes(pos.value)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setFormData({
+                            ...formData,
+                            positions: [...formData.positions, pos.value],
+                          });
+                        } else {
+                          setFormData({
+                            ...formData,
+                            positions: formData.positions.filter((p: string) => p !== pos.value),
+                          });
+                        }
+                      }}
+                      className="rounded text-habicht-600 focus:ring-habicht-500"
+                    />
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{pos.label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Grösse (cm)
+                </label>
+                <input
+                  type="number"
+                  value={formData.height}
+                  onChange={(e) => setFormData({ ...formData, height: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Gewicht (kg)
+                </label>
+                <input
+                  type="number"
+                  value={formData.weight}
+                  onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Angriffshöchi (cm)
+                </label>
+                <input
+                  type="number"
+                  value={formData.spikeHeight}
+                  onChange={(e) => setFormData({ ...formData, spikeHeight: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Blockhöchi (cm)
+                </label>
+                <input
+                  type="number"
+                  value={formData.blockHeight}
+                  onChange={(e) => setFormData({ ...formData, blockHeight: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Swiss Volley Lizenz upload moved to Documents section below, only shown once */}
+
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Bio / Beschriibig
+            </label>
+            <textarea
+              value={formData.bio}
+              onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+              rows={4}
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             />
-            {showZoom === 'profile' && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-                <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-4 relative max-w-xl w-full flex flex-col items-center">
+          </div>
+        </div>
+
+        {/* Club History */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+              <Trophy className="w-6 h-6 text-habicht-600" />
+              Club-Gschicht
+            </h2>
+            <button
+              onClick={handleAddClub}
+              className="flex items-center gap-2 bg-habicht-600 text-white px-4 py-2 rounded-lg hover:bg-habicht-700 transition"
+            >
+              <Plus className="w-4 h-4" />
+              Club Hinzuefüege
+            </button>
+          </div>
+
+          {clubHistory.length === 0 ? (
+            <p className="text-gray-500 dark:text-gray-400 italic">Kei Club-Gschicht hinzugefüegt</p>
+          ) : (
+            <div className="space-y-4">
+              {clubHistory.map((club, index) => {
+                // Check if this club is invalid (has name but no yearTo and not current)
+                const isInvalid = club.clubName && club.clubName.trim() !== '' && !club.currentClub && (!club.yearTo || club.yearTo.trim() === '');
+                
+                return (
+                <div key={club.id} className={`border rounded-lg p-4 ${isInvalid ? 'border-red-500 dark:border-red-400 bg-red-50 dark:bg-red-900/10' : 'border-gray-300 dark:border-gray-600'}`}>
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="font-semibold text-gray-900 dark:text-white">Club {index + 1}</h3>
+                    <button
+                      onClick={() => handleRemoveClub(club.id)}
+                      className="text-red-600 hover:text-red-700 transition"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="relative">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Club Name *
+                      </label>
+                      <input
+                        type="text"
+                        value={club.clubName}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          const updated = clubHistory.map((c) =>
+                            c.id === club.id ? { ...c, clubName: value } : c
+                          );
+                          setClubHistory(updated);
+                          
+                          // Show suggestions if typing
+                          if (value.length >= 2) {
+                            const suggestions = allClubs.filter(c => 
+                              c.name.toLowerCase().includes(value.toLowerCase()) ||
+                              (c.shortName && c.shortName.toLowerCase().includes(value.toLowerCase()))
+                            ).slice(0, 5);
+                            setClubSuggestions({ ...clubSuggestions, [club.id]: suggestions });
+                          } else {
+                            setClubSuggestions({ ...clubSuggestions, [club.id]: [] });
+                          }
+                        }}
+                        onBlur={() => {
+                          // Delay to allow click on suggestion
+                          setTimeout(() => {
+                            setClubSuggestions({ ...clubSuggestions, [club.id]: [] });
+                          }, 200);
+                        }}
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        placeholder="z.B. Volley Amriswil"
+                      />
+                      {clubSuggestions[club.id]?.length > 0 && (
+                        <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                          {clubSuggestions[club.id].map((suggestion) => (
+                            <button
+                              key={suggestion.id}
+                              type="button"
+                              onClick={() => {
+                                const updated = clubHistory.map((c) =>
+                                  c.id === club.id ? { 
+                                    ...c, 
+                                    clubName: suggestion.name,
+                                    logo: suggestion.logo || c.logo
+                                  } : c
+                                );
+                                setClubHistory(updated);
+                                setClubSuggestions({ ...clubSuggestions, [club.id]: [] });
+                              }}
+                              className="w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600 transition flex items-center gap-2"
+                            >
+                              {suggestion.logo && <span className="text-lg">{suggestion.logo}</span>}
+                              <div>
+                                <div className="font-medium text-gray-900 dark:text-white">{suggestion.name}</div>
+                                {suggestion.shortName && (
+                                  <div className="text-sm text-gray-600 dark:text-gray-400">{suggestion.shortName}</div>
+                                )}
+                                <div className="text-xs text-gray-500 dark:text-gray-500">{suggestion.town}, {suggestion.canton}</div>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Liga *
+                      </label>
+                      <select
+                        value={club.league}
+                        onChange={(e) => {
+                          const updated = clubHistory.map((c) =>
+                            c.id === club.id ? { ...c, league: e.target.value } : c
+                          );
+                          setClubHistory(updated);
+                        }}
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      >
+                        <option value="">Wähl Liga üs</option>
+                        <option value="NLA">NLA</option>
+                        <option value="NLB">NLB</option>
+                        <option value="1. Liga">1. Liga</option>
+                        <option value="2. Liga">2. Liga</option>
+                        <option value="3. Liga">3. Liga</option>
+                        <option value="4. Liga">4. Liga</option>
+                        <option value="5. Liga">5. Liga</option>
+                        <option value="U19 Elite">U19 Elite</option>
+                        <option value="U17 Elite">U17 Elite</option>
+                        <option value="U15 Elite">U15 Elite</option>
+                        <option value="U19">U19</option>
+                        <option value="U17">U17</option>
+                        <option value="U15">U15</option>
+                        <option value="U13">U13</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Land / Country
+                      </label>
+                      <select
+                        value={club.country || 'Switzerland'}
+                        onChange={(e) => {
+                          const updated = clubHistory.map((c) =>
+                            c.id === club.id ? { ...c, country: e.target.value } : c
+                          );
+                          setClubHistory(updated);
+                        }}
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      >
+                        <option value="Switzerland">🇨🇭 Switzerland</option>
+                        <option value="Germany">🇩🇪 Germany</option>
+                        <option value="Austria">🇦🇹 Austria</option>
+                        <option value="Italy">🇮🇹 Italy</option>
+                        <option value="France">🇫🇷 France</option>
+                        <option value="Liechtenstein">🇱🇮 Liechtenstein</option>
+                        <option value="Other">🌍 Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Von Jahr *
+                      </label>
+                      <input
+                        type="text"
+                        value={club.yearFrom}
+                        onChange={(e) => {
+                          const updated = clubHistory.map((c) =>
+                            c.id === club.id ? { ...c, yearFrom: e.target.value } : c
+                          );
+                          setClubHistory(updated);
+                        }}
+                        placeholder="z.B. 2020"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Bis Jahr {!club.currentClub && <span className="text-red-600">*</span>}
+                      </label>
+                      {club.currentClub ? (
+                        <div className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
+                          <span className="text-green-600 dark:text-green-400 font-semibold flex items-center gap-1">
+                            ✓ Aktuell
+                          </span>
+                        </div>
+                      ) : (
+                        <input
+                          type="text"
+                          value={club.yearTo}
+                          onChange={(e) => {
+                            const updated = clubHistory.map((c) =>
+                              c.id === club.id ? { ...c, yearTo: e.target.value } : c
+                            );
+                            setClubHistory(updated);
+                          }}
+                          placeholder="z.B. 2023"
+                          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                            isInvalid ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
+                          }`}
+                        />
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <label className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={club.currentClub}
+                        onChange={(e) => {
+                          const updated = clubHistory.map((c) =>
+                            c.id === club.id 
+                              ? { ...c, currentClub: e.target.checked, yearTo: e.target.checked ? '' : c.yearTo } 
+                              : { ...c, currentClub: false } // Uncheck all other clubs
+                          );
+                          setClubHistory(updated);
+                        }}
+                        className="rounded text-habicht-600 focus:ring-habicht-500"
+                      />
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Aktuellä Club
+                      </span>
+                    </label>
+                  </div>
+
+                  {isInvalid && (
+                    <div className="mt-3 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-lg p-3">
+                      <p className="text-sm text-red-800 dark:text-red-200">
+                        ⚠️ Bitte füll "Bis Jahr" üs oder markier dä Club als "Aktuellä Club"
+                      </p>
+                    </div>
+                  )}
+                </div>
+              );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Achievements */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+              <Trophy className="w-6 h-6 text-habicht-600" />
+              Erfolge & Uszeichnige
+            </h2>
+            <button
+              onClick={handleAddAchievement}
+              className="flex items-center gap-2 bg-habicht-600 text-white px-4 py-2 rounded-lg hover:bg-habicht-700 transition"
+            >
+              <Plus className="w-4 h-4" />
+              Erfolg Hinzuefüege
+            </button>
+          </div>
+
+          {achievements.length === 0 ? (
+            <p className="text-gray-500 dark:text-gray-400 italic">Kei Erfolg hinzugefüegt</p>
+          ) : (
+            <div className="space-y-3">
+              {achievements.map((achievement) => (
+                <div key={achievement.id} className="flex items-center gap-3">
+                  <input
+                    type="text"
+                    value={achievement.text}
+                    onChange={(e) => {
+                      const updated = achievements.map((a) =>
+                        a.id === achievement.id ? { ...a, text: e.target.value } : a
+                      );
+                      setAchievements(updated);
+                    }}
+                    placeholder="z.B. U17 Schwiizermeister 2021"
+                    className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  />
                   <button
-                    type="button"
-                    className="absolute top-2 right-2 p-2 bg-red-600 text-white rounded-full hover:bg-red-700"
-                    onClick={() => setShowZoom(false)}
+                    onClick={() => handleRemoveAchievement(achievement.id)}
+                    className="text-red-600 hover:text-red-700 transition"
                   >
                     <X className="w-5 h-5" />
                   </button>
-                  <img src={formData.profileImage} alt="Profilfoto Zoom" className="w-full h-auto rounded-lg" />
                 </div>
-              </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Documents */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Dokumänt
+          </h2>
+
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Swiss Volley Lizenz (Optional)
+              </label>
+              <ImageUpload
+                label="Lad Lizenz-Foto Ufe"
+                value={formData.swissVolleyLicense}
+                onChange={(v: string) => setFormData({ ...formData, swissVolleyLicense: v })}
+                aspectRatio="banner"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Ausweiss/ID (Optional)
+              </label>
+              <ImageUpload
+                label="Lad Ausweiss-Foto Ufe"
+                value={formData.ausweiss}
+                onChange={(v: string) => setFormData({ ...formData, ausweiss: v })}
+                aspectRatio="banner"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Social Media */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            Social Media
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Instagram Handle
+              </label>
+              <input
+                type="text"
+                value={formData.instagram}
+                onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
+                placeholder="@username"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                TikTok Handle
+              </label>
+              <input
+                type="text"
+                value={formData.tiktok}
+                onChange={(e) => setFormData({ ...formData, tiktok: e.target.value })}
+                placeholder="@username"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                YouTube Channel
+              </label>
+              <input
+                type="text"
+                value={formData.youtube}
+                onChange={(e) => setFormData({ ...formData, youtube: e.target.value })}
+                placeholder="@channelname"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+            </div>
+
+            {/* Highlight Video URL removed from editing page as requested */}
+          </div>
+        </div>
+
+        {/* Looking for Club */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+          <label className="flex items-start gap-3">
+            <input
+              type="checkbox"
+              checked={formData.lookingForClub}
+              onChange={(e) => setFormData({ ...formData, lookingForClub: e.target.checked })}
+              className="mt-1 rounded text-habicht-600 focus:ring-habicht-500"
+            />
+            <div>
+              <span className="block font-semibold text-gray-900 dark:text-white">
+                Ich sueche en neue Club
+              </span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                Aktivier das, wenn du für Verein Afrage offe bisch
+              </span>
+            </div>
+          </label>
+        </div>
+
+        {/* Save Button */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="w-full flex items-center justify-center gap-2 bg-habicht-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-habicht-700 transition disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+          >
+            {saving ? (
+              <>
+                <Loader2 className="w-6 h-6 animate-spin" />
+                Speichere...
+              </>
+            ) : (
+              <>
+                <Save className="w-6 h-6" />
+                Alli Änderige Speichere
+              </>
             )}
-          </>
-        )}
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

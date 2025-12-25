@@ -481,7 +481,7 @@ export async function PUT(
       cause: error instanceof Error ? error.cause : undefined
     });
     return NextResponse.json(
-      { error: 'Failed to update player data' },
+      { error: 'playerProfile.errorSavingPlayerData' },
       { status: 500 }
     );
   }

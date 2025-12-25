@@ -136,6 +136,7 @@ type ApiPlayerData = {
 };
 const BACKGROUND_OPTIONS = [
   { id: 'solid-blue', name: 'Blau', style: '#2563eb' },
+  { id: 'solid-red', name: 'Rot', style: '#dc2626' },
   { id: 'solid-green', name: 'Grün', style: '#16a34a' },
   { id: 'solid-purple', name: 'Lila', style: '#9333ea' },
   { id: 'solid-orange', name: 'Orange', style: '#f97316' },
@@ -1418,7 +1419,33 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               </div>
               <button
                 className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg"
-                onClick={() => setShowBgModal(false)}
+                onClick={async () => {
+                  let bgId = selectedBgOption;
+                  let bgStyle = customColor;
+
+                  // If a preset color is selected, use its style
+                  if (bgId) {
+                    const bg = BACKGROUND_OPTIONS.find(opt => opt.id === bgId);
+                    if (bg) bgStyle = bg.style;
+                  }
+
+                  try {
+                    await axios.put(`/api/players/${params.id}`, {
+                      playerData: {
+                        ...player,
+                        backgroundGradient: bgId || null,
+                        coverImage: null,
+                      }
+                    });
+                    setSelectedBg({ id: bgId || 'custom', name: 'Custom', style: bgStyle });
+                    setCustomBgImage(null);
+                    setShowBackgroundModal(false);
+                    setShowBgModal(false);
+                    setNewBackgroundImage('');
+                  } catch (error) {
+                    alert('Fehler beim Speichern des Hintergrunds');
+                  }
+                }}
               >
                 Speichern
               </button>

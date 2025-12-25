@@ -1,7 +1,7 @@
 'use client'
 
 import { getClubInfo } from '@/lib/swissData'
-import { getCountryFlagUrlByName, isSwissClub } from '@/lib/countryFlags'
+import { getCountryFlagUrlByName, isSwissClub, getCountryCode } from '@/lib/countryFlags'
 import Image from 'next/image'
 
 interface ClubBadgeProps {
@@ -77,7 +77,20 @@ export default function ClubBadge({ clubName, size = 'md', showName = false, upl
 
   // Prioritize uploaded logo, then for non-Swiss clubs use country flag, then custom logo, then eagle logo
   const hasUploadedLogo = uploadedLogo && uploadedLogo !== ''
-  const useCountryFlag = !hasUploadedLogo && !isSwiss
+  let useCountryFlag = !hasUploadedLogo && !isSwiss
+  let countryFlagUrl = ''
+  if (useCountryFlag) {
+    const code = getCountryCode(country)
+    if (code && code !== 'CH') {
+      countryFlagUrl = getCountryFlagUrlByName(country)
+    } else {
+      // fallback: not a valid country, don't use flag
+      useCountryFlag = false
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn('ClubBadge: Invalid or unmapped country for flag:', country)
+      }
+    }
+  }
   const hasCustomLogo = !hasUploadedLogo && !useCountryFlag && clubInfo.logo && clubInfo.logo !== '🏐'
   const bgColor = clubInfo.colors?.primary || '#FF0000'
   const borderColor = clubInfo.colors?.secondary || '#FFFFFF'
@@ -102,12 +115,18 @@ export default function ClubBadge({ clubName, size = 'md', showName = false, upl
           />
         ) : useCountryFlag ? (
           <Image
-            src={getCountryFlagUrlByName(country)}
+            src={countryFlagUrl}
             alt={`${country} flag`}
             width={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
             height={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
             className="w-full h-full object-cover"
             unoptimized
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = 'none';
+              if (process.env.NODE_ENV !== 'production') {
+                console.warn('ClubBadge: Failed to load flag for', country, countryFlagUrl)
+              }
+            }}
           />
         ) : hasCustomLogo ? (
           <span className="filter drop-shadow-lg">{clubInfo.logo}</span>

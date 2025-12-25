@@ -51,28 +51,34 @@ export async function POST(
       );
     }
 
-    const body = await request.json();
-    const { photoUrl } = body;
+    // Accept file upload via multipart/form-data
+    const formData = await request.formData();
+    const file = formData.get('file') as File;
 
-    if (!photoUrl) {
+    if (!file) {
       return NextResponse.json(
-        { error: 'Photo URL is required' },
+        { error: 'Photo file is required' },
         { status: 400 }
       );
     }
+
+    // Convert file to base64 for storage (demo only)
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const base64Photo = `data:${file.type};base64,${buffer.toString('base64')}`;
 
     // Create photo with order based on current count
     const photo = await prisma.playerPhoto.create({
       data: {
         playerId: params.id,
-        photoUrl: photoUrl,
+        photoUrl: base64Photo,
         order: photoCount,
       }
     });
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       success: true,
-      photo 
+      photo
     });
   } catch (error) {
     console.error('Error uploading photo:', error);

@@ -87,10 +87,21 @@ export default function PlayerCard({ player }: { player: any }) {
             </div>
           </div>
 
-          {/* Location */}
-          <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-            <MapPin className="w-4 h-4" />
-            <span>{player.municipality ? `${player.municipality}, ` : ''}{cantonInfo.name}</span>
+          {/* Location and League */}
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <MapPin className="w-4 h-4" />
+              <span>{player.municipality ? `${player.municipality}, ` : ''}{cantonInfo.name}</span>
+            </div>
+            {player.currentLeague && player.currentClub && (
+              <Link
+                href={`/clubs/${player.currentClub.id}?league=${encodeURIComponent(player.currentLeague)}`}
+                className="inline-block mt-1 px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-xs font-semibold hover:bg-red-200 dark:hover:bg-red-800 transition cursor-pointer"
+                title={player.currentLeague}
+              >
+                {player.currentLeague}
+              </Link>
+            )}
           </div>
         </div>
       </div>

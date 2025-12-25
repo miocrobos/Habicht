@@ -5,6 +5,8 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import { PaintBucket, RefreshCcw, ZoomIn, X } from "lucide-react";
 import ImageUpload from "@/components/shared/ImageUpload";
+import VideoUpload from '@/components/shared/VideoUpload';
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const BACKGROUND_OPTIONS = [
   { id: "solid-blue", name: "Blau", style: "#2563eb" },
@@ -24,7 +26,19 @@ const BACKGROUND_OPTIONS = [
   { id: "gradient-rainbow", name: "Rainbow", style: "linear-gradient(90deg, #ff9966, #ff5e62, #00c3ff, #ffff1c)" },
 ];
 
-export default function EditPlayerProfilePage({ params }: { params: { id: string } }) {
+const ColorPicker = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
+  <input
+    type="color"
+    value={value}
+    onChange={e => onChange(e.target.value)}
+    className="w-10 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full cursor-pointer"
+    aria-label="Custom Color Picker"
+    style={{ background: value }}
+  />
+);
+
+export default function EditHybridProfilePage({ params }: { params: { id: string } }) {
+  const { t } = useLanguage();
   const router = useRouter();
   const { data: session, status } = useSession();
   const [formData, setFormData] = useState<any>(null);
@@ -33,18 +47,6 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
   const [showZoom, setShowZoom] = useState<false | 'background' | 'profile'>(false);
   const [customColor, setCustomColor] = useState("#2563eb");
   const [selectedBg, setSelectedBg] = useState(BACKGROUND_OPTIONS[0]);
-
-  // Helper: Custom Color Picker
-  const ColorPicker = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
-    <input
-      type="color"
-      value={value}
-      onChange={e => onChange(e.target.value)}
-      className="w-10 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full cursor-pointer"
-      aria-label="Custom Color Picker"
-      style={{ background: value }}
-    />
-  );
 
   useEffect(() => {
     if (formData) {
@@ -75,7 +77,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
     // Make the overlay more transparent
   };
 
-  // Example: load player data (replace with your actual data loading logic)
+  // Example: load hybrid data (replace with your actual data loading logic)
   useEffect(() => {
     // ...fetch and setFormData logic here...
   }, []);

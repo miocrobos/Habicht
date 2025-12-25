@@ -1,4 +1,5 @@
 ﻿export const frTranslations = {
+  'clubProfile.age': 'Âge',
     'gender.male': 'Masculin',
     'gender.female': 'Féminin',
     // Login
@@ -550,7 +551,7 @@
       weightLabel: 'Poids kg',
       spikeLabel: 'Hauteur attaque cm',
       blockLabel: 'Hauteur bloc cm',
-      preferredLanguageLabel: 'Langue',
+      // preferredLanguageLabel duplicate removed
       positionOutsideHitter: 'Attaquant',
       positionOpposite: 'Diagonal',
       positionMiddleBlocker: 'Central',
@@ -694,6 +695,16 @@
       openForClubOffers: 'Activez ceci si vous êtes ouvert aux offres de club',
       selectBackground: 'Sélectionnez un arrière-plan :',
       dominantHandLabel: 'Main',
+      rightHanded: 'Droitier',
+      leftHanded: 'Gaucher',
+      ambidextrous: 'Ambidextre',
+      // preferredLanguageLabel duplicate removed
+      languageSwissGerman: 'Suisse allemand',
+      languageGerman: 'Allemand',
+      languageFrench: 'Français',
+      languageItalian: 'Italien',
+      languageRomansh: 'Romanche',
+      languageEnglish: 'Anglais',
     },
     // Settings
     settings: {
@@ -1203,6 +1214,7 @@
       Scout: 'Scout',
       Teammanager: "Manager d'équipe",
     },
+    'register.languageEnglish': 'Anglais',
 }
 
 

@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
             '5. Liga': 'FIFTH_LEAGUE',
             'U23': 'U23',
             'U19': 'U19',
-            'U17': 'U17',
+            'U17': 'U17'
           }
           playerCurrentLeague = leagueMap[currentClubEntry.league] || null
           
@@ -134,7 +134,7 @@ export async function POST(request: NextRequest) {
               '4. Liga': { men: 'has4LigaMen', women: 'has4LigaWomen' },
               'U23': { men: 'hasU23Men', women: 'hasU23Women' },
               'U19': { men: 'hasU19Men', women: 'hasU19Women' },
-              'U17': { men: 'hasU17Men', women: 'hasU17Women' },
+              'U17': { men: 'hasU17Men', women: 'hasU17Women' }
             }
 
             const isMale = playerData.gender === 'MALE'

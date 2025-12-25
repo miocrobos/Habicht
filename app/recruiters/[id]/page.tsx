@@ -11,6 +11,7 @@ import RecruiterVideoGallery from '@/components/shared/RecruiterVideoGallery'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { formatViewCount } from '@/lib/formatViewCount'
 import axios from 'axios'
+import ErrorBoundary from 'next/dist/client/components/error-boundary'
 
 interface RecruiterProfileProps {
   params: {
@@ -58,51 +59,93 @@ export default function RecruiterProfile({ params }: RecruiterProfileProps) {
   const { t, language } = useLanguage()
   const [recruiter, setRecruiter] = useState<RecruiterData | null>(null)
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState<'info' | 'photos' | 'videos'>('info')
-  const [isOwner, setIsOwner] = useState(false)
+
+  const [activeTab, setActiveTab] = useState<'info' | 'photos' | 'videos'>('info');
+  const [isOwner, setIsOwner] = useState(false);
+  const [error, setError] = useState<any>(null);
+
+  const [showBgModal, setShowBgModal] = useState(false);
+  const [selectedBg, setSelectedBg] = useState<string | null>(null);
+  const [customColor, setCustomColor] = useState("#2563eb");
+  const [backgroundImage, setBackgroundImage] = useState("");
+
+  const BACKGROUND_OPTIONS = [
+    { id: "solid-blue", name: "Blau", style: "#2563eb" },
+    { id: "solid-green", name: "Grün", style: "#16a34a" },
+    { id: "solid-purple", name: "Lila", style: "#9333ea" },
+    { id: "solid-orange", name: "Orange", style: "#f97316" },
+    { id: "solid-pink", name: "Pink", style: "#ec4899" },
+    { id: "solid-yellow", name: "Gelb", style: "#eab308" },
+    { id: "solid-teal", name: "Türkis", style: "#14b8a6" },
+    { id: "solid-indigo", name: "Indigo", style: "#6366f1" },
+    { id: "solid-dark", name: "Dunkel", style: "#1f2937" },
+    { id: "solid-gray", name: "Grau", style: "#6b7280" },
+    { id: "solid-black", name: "Schwarz", style: "#000000" },
+  ];
+
+  function getGradientStyle(id: string) {
+    const gradients: Record<string, string> = {
+      'gradient-sunset': 'linear-gradient(90deg, #ff7e5f, #feb47b)',
+      'gradient-ocean': 'linear-gradient(90deg, #43cea2, #185a9d)',
+      'gradient-rainbow': 'linear-gradient(90deg, #ff9966, #ff5e62, #00c3ff, #ffff1c)',
+      'solid-blue': '#2563eb',
+      'solid-green': '#16a34a',
+      'solid-purple': '#9333ea',
+      'solid-orange': '#f97316',
+      'solid-pink': '#ec4899',
+      'solid-yellow': '#eab308',
+      'solid-teal': '#14b8a6',
+      'solid-indigo': '#6366f1',
+      'solid-dark': '#1f2937',
+      'solid-gray': '#6b7280',
+      'solid-black': '#000000',
+      'solid-red': '#dc2626',
+    };
+    return gradients[id] || '#2563eb';
+  }
 
   useEffect(() => {
-    fetchRecruiterData()
-  }, [params.id])
+    const fetchRecruiterData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const response = await axios.get(`/api/recruiters/${params.id}`);
+        if (response.data && response.data.recruiter) {
+          setRecruiter(response.data.recruiter);
+        } else {
+          setError({ message: t("recruiterProfile.recruiterNotFound") || "Recruiter Not Found" });
+        }
+      } catch (err: any) {
+        setError(err);
+        console.error('Error fetching recruiter data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRecruiterData();
+  }, [params.id]);
 
   useEffect(() => {
     if (recruiter && session?.user) {
-      setIsOwner(recruiter.user.id === session.user.id)
+      setIsOwner(recruiter.user.id === session.user.id);
     }
-  }, [recruiter, session])
+  }, [recruiter, session]);
 
-  const fetchRecruiterData = async () => {
-    try {
-      setLoading(true)
-      const response = await axios.get(`/api/recruiters/${params.id}`)
-      setRecruiter(response.data)
-    } catch (error) {
-      console.error('Error fetching recruiter data:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
       </div>
-    )
+    );
+  }
+
+  if (error) {
+    return <ErrorBoundary error={error} />;
   }
 
   if (!recruiter) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Recruiter Not Found</h1>
-          <p className="text-gray-600 dark:text-gray-400">The recruiter profile you're looking for doesn't exist.</p>
-          <Link href="/recruiters" className="text-purple-600 hover:text-purple-700 mt-4 inline-block">
-            Back to Recruiters
-          </Link>
-        </div>
-      </div>
-    )
+    return <ErrorBoundary error={{ message: 'Recruiter Not Found' }} />;
   }
 
   return (
@@ -354,6 +397,68 @@ export default function RecruiterProfile({ params }: RecruiterProfileProps) {
           )}
         </div>
       </div>
+
+      {/* Background Change Modal */}
+      {showBgModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+          <div className="bg-gray-900 rounded-lg shadow-lg p-8 relative max-w-2xl w-full">
+            <button
+              className="absolute top-4 right-4 text-3xl text-white"
+              onClick={() => setShowBgModal(false)}
+            >
+              &times;
+            </button>
+            <h2 className="text-3xl font-bold text-white mb-6">Hintergrund Ändere</h2>
+            <div className="mb-6">
+              <h3 className="text-xl font-semibold text-white mb-2">Farb Wähle</h3>
+              <div className="grid grid-cols-4 gap-4 mb-4">
+                {BACKGROUND_OPTIONS.map(bg => (
+                  <button
+                    key={bg.id}
+                    className="rounded-lg border-2 border-gray-500 h-24"
+                    style={{ background: bg.style }}
+                    onClick={() => setSelectedBg(bg.id)}
+                  />
+                ))}
+              </div>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-white">Oder</span>
+                <input
+                  type="color"
+                  value={customColor}
+                  onChange={e => setCustomColor(e.target.value)}
+                  className="w-10 h-10 border-2 border-gray-300 rounded-full cursor-pointer"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-white mb-2">Wähl Es Neus Hintergrundbild</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={e => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = ev => setBackgroundImage(ev.target?.result as string);
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                  className="block w-full text-white"
+                />
+                {backgroundImage && (
+                  <img src={backgroundImage} alt="Preview" className="mt-2 rounded-lg max-h-32" />
+                )}
+              </div>
+            </div>
+            <button
+              className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg"
+              onClick={() => setShowBgModal(false)}
+            >
+              Speichern
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

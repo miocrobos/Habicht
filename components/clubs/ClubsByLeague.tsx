@@ -13,6 +13,7 @@ interface Club {
   canton: string;
   town: string;
   league: string;
+  website?: string;
   _count: {
     currentPlayers: number;
   };
@@ -231,6 +232,26 @@ export default function ClubsByLeague() {
                       </div>
                     </div>
                   )}
+
+                  {/* Action Buttons */}
+                  <div className="flex gap-2 mt-4">
+                    <Link
+                      href={`/clubs/${club.id}`}
+                      className="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-700 transition text-center"
+                    >
+                      {t('clubProfile.clubInfo')}
+                    </Link>
+                    {club.website && (
+                      <a
+                        href={club.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition text-center"
+                      >
+                        {t('clubProfile.website')}
+                      </a>
+                    )}
+                  </div>
                 </div>
               </Link>
             ))}

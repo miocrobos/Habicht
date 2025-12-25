@@ -87,8 +87,8 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { searchParams } = new URL(request.url)
-    const photoId = searchParams.get('photoId')
+    const urlObj = new URL(request.url)
+    const photoId = urlObj.searchParams.get('photoId')
 
     if (!photoId) {
       return NextResponse.json({ error: 'Photo ID is required' }, { status: 400 })

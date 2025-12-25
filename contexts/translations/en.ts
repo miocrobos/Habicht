@@ -1,4 +1,5 @@
 ﻿export const enTranslations = {
+  'clubProfile.age': 'Age',
   // Gender
   'gender.male': 'Male',
     'gender.female': 'Female',
@@ -1214,6 +1215,7 @@
       facebookPlaceholder: 'Facebook Profile/Page URL',
       achievementsPlaceholder: 'e.g. Swiss Champion 2023, NLA Promotion...',
       clubSubmit: 'Submit Club',
+      submitClub: 'Submit Club',
       clubAffiliations: 'Club Affiliations',
       createHybridAccount: 'Create Hybrid Account',
     },
@@ -1417,5 +1419,6 @@
       Scout: 'Scout',
       Teammanager: 'Team Manager',
     },
+    'register.languageEnglish': 'English',
 }
 

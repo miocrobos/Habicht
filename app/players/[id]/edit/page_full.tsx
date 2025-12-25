@@ -42,7 +42,7 @@ const employmentStatusOptions = [
   { value: 'STUDENT_FULL_TIME', label: 'Student/in (Vollziit)' },
   { value: 'STUDENT_PART_TIME', label: 'Student/in (Teilziit)' },
   { value: 'WORKING_FULL_TIME', label: 'Beruefstätig (Vollziit)' },
-  { value: 'WORKING_PART_TIME', label: 'Beruefstätig (Teilziit)' },
+  { value: 'WORKING_PART_TIME', label: 'Beruefstätig (Teilziit)' }
 ];
 
 const positions = [

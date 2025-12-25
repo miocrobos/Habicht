@@ -1105,43 +1105,7 @@ export default function PlayerRegisterPage() {
                               </div>
                             )}
 
-                            {!club.logo ? (
-                              <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('playerProfile.clubLogoOptional')}</label>
-                                <ImageUpload
-                                  label={t('playerProfile.uploadClubLogo')}
-                                  value={club.logo}
-                                  onChange={(v) => updateClubExperience(club.id, 'logo', v)}
-                                  aspectRatio="square"
-                                />
-                              </div>
-                            ) : (
-                              <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('playerProfile.clubLogoLabel')}</label>
-                                <div className="flex items-center gap-3">
-                                  <div className="flex items-center gap-2">
-                                    <img 
-                                      src={club.logo} 
-                                      alt="Club Logo" 
-                                      className="w-16 h-16 rounded-lg object-cover border-2 border-green-500 dark:border-green-400"
-                                    />
-                                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
-                                      ✓ {t('playerProfile.uploaded')}
-                                    </span>
-                                  </div>
-                                  <button
-                                    type="button"
-                                    onClick={() => updateClubExperience(club.id, 'logo', '')}
-                                    className="px-3 py-2 text-sm bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50"
-                                  >
-                                    {t('playerProfile.removeLogo')}
-                                  </button>
-                                </div>
-                                <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                                  {t('playerProfile.logoAlreadyUploaded')}
-                                </p>
-                              </div>
-                            )}
+
 
                             <div className="grid grid-cols-2 gap-3">
                               <div>

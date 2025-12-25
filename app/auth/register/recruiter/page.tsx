@@ -821,14 +821,7 @@ export default function RecruiterRegisterPage() {
                           </span>
                         </label>
 
-                        <div>
-                          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">{t('playerProfile.clubLogoUpload')}</label>
-                          <ImageUpload 
-                            label=""
-                            value={club.logo}
-                            onChange={(base64) => updateClubAffiliation(club.id, 'logo', base64)}
-                          />
-                        </div>
+                        {/* Club logo upload removed as per requirements */}
                       </div>
                     </div>
                   ))}

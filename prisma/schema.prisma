@@ -123,6 +123,7 @@ model User {
   player        Player?
   recruiter     Recruiter?
   clubManager   ClubManager?
+  hybrid        Hybrid?
   passwordResetRequests PasswordResetRequest[]
   viewedProfiles PlayerView[] @relation("ViewerViews")
   notifications Notification[] @relation("UserNotifications")
@@ -799,4 +800,42 @@ model Watchlist {
   @@unique([playerId, watcherId])
   @@index([playerId])
   @@index([watcherId])
+}
+
+model Hybrid {
+  id                String      @id @default(cuid())
+  userId            String      @unique
+  user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Personal Information
+  firstName         String
+  lastName          String
+  dateOfBirth       DateTime?
+  gender            Gender?
+  nationality       String?     @default("Swiss")
+  canton            Canton?
+  city              String?
+  municipality      String?
+
+  // Contact & Social Media
+  phone             String?
+  instagram         String?
+  tiktok            String?
+  youtube           String?
+
+  // Profile
+  bio               String?     @db.Text
+  profileImage      String?
+  coverImage        String?
+  backgroundGradient String?
+  customColor       String?
+  backgroundImage   String?
+  achievements      String[]    @default([])
+
+  // Status
+  isPublic          Boolean     @default(true)
+  isActive          Boolean     @default(true)
+
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
 }

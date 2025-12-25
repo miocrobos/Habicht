@@ -61,7 +61,7 @@ export async function PUT(
         playerId: params.id,
       },
       data: {
-        ...(url && { url }),
+        ...(url && { videoUrl: url }),
         ...(title !== undefined && { title }),
         ...(description !== undefined && { description }),
         ...(videoType && { videoType }),

@@ -206,9 +206,10 @@ export default function PhotoGallery({ playerId, isOwner, isVerified }: PhotoGal
         <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
           <button
             onClick={() => setSelectedIndex(null)}
-            className="absolute top-4 right-4 text-white hover:text-gray-300"
+            className="absolute top-4 right-4 text-white hover:text-red-400 bg-black bg-opacity-60 rounded-full p-2 z-50"
+            style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}
           >
-            <X className="w-8 h-8" />
+            <X className="w-10 h-10" />
           </button>
 
           <button

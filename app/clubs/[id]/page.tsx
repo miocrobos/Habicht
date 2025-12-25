@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import axios from 'axios'
@@ -16,24 +16,32 @@ import { getCantonInfo } from '@/lib/swissData'
 export default function ClubProfilePage() {
   const { t } = useLanguage()
   const params = useParams()
+  const searchParams = useSearchParams()
   const clubId = params.id as string
   const [club, setClub] = useState<any>(null)
   const [players, setPlayers] = useState<any[]>([])
   const [recruiters, setRecruiters] = useState<any[]>([])
   const [activeTab, setActiveTab] = useState<'info' | 'players' | 'recruiters'>('info')
-  const [loading, setLoading] = useState(true)
   const [playerFilters, setPlayerFilters] = useState({
     position: '',
     league: '',
     gender: '',
+    age: '',
   })
   const [recruiterFilters, setRecruiterFilters] = useState({
     role: '',
     gender: '',
   })
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     loadClubData()
+    // Set league filter from query param if present
+    const leagueParam = searchParams.get('league')
+    if (leagueParam) {
+      setPlayerFilters((prev) => ({ ...prev, league: leagueParam }))
+      setActiveTab('players')
+    }
   }, [clubId])
 
   useEffect(() => {
@@ -83,7 +91,7 @@ export default function ClubProfilePage() {
   }
 
   const clearPlayerFilters = () => {
-    setPlayerFilters({ position: '', league: '', gender: '' })
+    setPlayerFilters({ position: '', league: '', gender: '', age: '' })
   }
 
   const clearRecruiterFilters = () => {
@@ -243,11 +251,18 @@ export default function ClubProfilePage() {
         {/* Club Info Tab */}
         {activeTab === 'info' && (
           <div className="space-y-6">
-            {/* Description */}
-            {club.description && (
+
+            {/* Dynamic Leagues from Players */}
+            {players && players.length > 0 && (
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('clubProfile.about')}</h2>
-                <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line">{club.description}</p>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('clubProfile.teamsLeagues')}</h2>
+                <div className="flex flex-wrap gap-3">
+                  {[...new Set(players.map(p => p.currentLeague).filter(Boolean))].map((league, idx) => (
+                    <div key={idx} className="px-4 py-2 bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg border border-red-200 dark:border-red-800 font-semibold text-gray-900 dark:text-white cursor-pointer">
+                      {league}
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -402,8 +417,7 @@ export default function ClubProfilePage() {
                   rel="noopener noreferrer"
                   className="flex-1 bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2"
                 >
-                  <Globe className="w-5 h-5" />
-                  Website
+                  {t('clubProfile.website')}
                 </a>
               )}
             </div>
@@ -430,7 +444,16 @@ export default function ClubProfilePage() {
                   </button>
                 )}
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                <input
+                                  type="number"
+                                  min="10"
+                                  max="60"
+                                  placeholder={t('clubProfile.age')}
+                                  value={playerFilters.age}
+                                  onChange={(e) => setPlayerFilters({ ...playerFilters, age: e.target.value })}
+                                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
+                                />
                 <select
                   value={playerFilters.gender}
                   onChange={(e) => setPlayerFilters({ ...playerFilters, gender: e.target.value })}

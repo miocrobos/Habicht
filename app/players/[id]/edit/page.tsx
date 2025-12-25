@@ -4,11 +4,12 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
-import { ArrowLeft, Save, Loader2, User, MapPin, Briefcase, GraduationCap, Trophy, Plus, Trash2, X } from 'lucide-react';
+import { ArrowLeft, Save, Loader2, User, MapPin, Briefcase, GraduationCap, Trophy, Plus, Trash2, X, PaintBucket } from 'lucide-react';
 import Link from 'next/link';
 import { Canton } from '@prisma/client';
 import { getAllSchools } from '@/lib/schoolData';
 import ImageUpload from '@/components/shared/ImageUpload';
+import CountrySelect from '@/components/shared/CountrySelect';
 
 const cantons = [
   { code: 'ZH' as Canton, name: 'Züri' },
@@ -69,8 +70,101 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
   const [achievements, setAchievements] = useState<any[]>([]);
   const [allClubs, setAllClubs] = useState<any[]>([]);
   const [clubSuggestions, setClubSuggestions] = useState<Record<string, any[]>>({});
+  const BACKGROUND_OPTIONS = [
+    { id: 'solid-blue', name: 'Blau', style: '#2563eb' },
+    { id: 'solid-green', name: 'Grün', style: '#16a34a' },
+    { id: 'solid-purple', name: 'Lila', style: '#9333ea' },
+    { id: 'solid-orange', name: 'Orange', style: '#f97316' },
+    { id: 'solid-pink', name: 'Pink', style: '#ec4899' },
+    { id: 'solid-yellow', name: 'Gelb', style: '#eab308' },
+    { id: 'solid-teal', name: 'Türkis', style: '#14b8a6' },
+    { id: 'solid-indigo', name: 'Indigo', style: '#6366f1' },
+    { id: 'solid-dark', name: 'Dunkel', style: '#1f2937' },
+    { id: 'solid-gray', name: 'Grau', style: '#6b7280' },
+    { id: 'solid-black', name: 'Schwarz', style: '#000000' },
+    { id: 'solid-red', name: 'Rot', style: '#dc2626' },
+    { id: 'gradient-sunset', name: 'Sunset', style: 'linear-gradient(90deg, #ff7e5f, #feb47b)' },
+    { id: 'gradient-ocean', name: 'Ocean', style: 'linear-gradient(90deg, #43cea2, #185a9d)' },
+    { id: 'gradient-rainbow', name: 'Rainbow', style: 'linear-gradient(90deg, #ff9966, #ff5e62, #00c3ff, #ffff1c)' },
+  ];
+  const [selectedBg, setSelectedBg] = useState(BACKGROUND_OPTIONS[0]);
+  const [customColor, setCustomColor] = useState('#2563eb');
+  const [backgroundImage, setBackgroundImage] = useState('');
+  const [bgLoading, setBgLoading] = useState(false);
 
   const schools = getAllSchools();
+
+  // Move handleSave inside the component so it can access state
+  const handleSave = async () => {
+    setSaving(true);
+    setError('');
+    setSuccess(false);
+
+    // Validate club history before saving
+    const invalidClubs = clubHistory.filter(club => {
+      const hasClubName = club.clubName && club.clubName.trim() !== '';
+      const hasYearTo = club.yearTo && club.yearTo.trim() !== '';
+      const isCurrentClub = club.currentClub === true;
+      // Invalid if: has name BUT neither is current NOR has end year
+      return hasClubName && !isCurrentClub && !hasYearTo;
+    });
+
+    if (invalidClubs.length > 0) {
+      setError('Bitte füll "Bis Jahr" für alli Clubs üs, wo nid als "Aktuellä Club" markiert sind.');
+      setSaving(false);
+      // Scroll to error message
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Filter club history: only include clubs that have a name
+    // AND either currentClub is checked OR yearTo is filled
+    const validClubHistory = clubHistory.filter(club => {
+      const hasClubName = club.clubName && club.clubName.trim() !== '';
+      const hasYearTo = club.yearTo && club.yearTo.trim() !== '';
+      const isCurrentClub = club.currentClub === true;
+      // Include club if: has name AND (is current OR has end year)
+      return hasClubName && (isCurrentClub || hasYearTo);
+    }).map(club => ({
+      ...club,
+      // Clean up empty strings to null/undefined for proper database handling
+      league: club.league && club.league.trim() !== '' ? club.league : '',
+      yearFrom: club.yearFrom && club.yearFrom.trim() !== '' ? club.yearFrom : '',
+      yearTo: club.currentClub ? '' : (club.yearTo && club.yearTo.trim() !== '' ? club.yearTo : ''),
+    }));
+
+    try {
+      const saveData = {
+        playerData: formData,
+        clubHistory: validClubHistory,
+        achievements: achievements.map(a => a.text).filter((text) => text.trim() !== ''),
+      };
+
+      console.log('Saving player data...');
+      console.log('Club History being saved:', JSON.stringify(validClubHistory, null, 2));
+      console.log('Current clubs:', validClubHistory.filter(c => c.currentClub));
+
+      const response = await axios.put(`/api/players/${params.id}`, saveData);
+
+      console.log('Save response:', response.data);
+
+      setSuccess(true);
+      setTimeout(() => {
+        router.push(`/players/${params.id}`);
+      }, 1500);
+    } catch (err) {
+      console.error('Save error:', err);
+      // @ts-ignore
+      const apiError = err.response?.data?.error;
+      if (apiError && apiError.startsWith('playerProfile.')) {
+        setError(t(apiError));
+      } else {
+        setError(apiError || 'Fehler Bim Speichere');
+      }
+    } finally {
+      setSaving(false);
+    }
+  };
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -150,82 +244,12 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         text,
       })));
 
-      setLoading(false);
+      // ...existing code...
     } catch (err) {
-      console.error('Error loading player:', err);
-      setError('Fehler Bim Lade Vo Spieler-Date');
-      setLoading(false);
-    }
-  };
-
-  const handleSave = async () => {
-    setSaving(true);
-    setError('');
-    setSuccess(false);
-
-    // Validate club history: check if any club has a name but neither currentClub nor yearTo
-    const invalidClubs = clubHistory.filter(club => {
-      const hasClubName = club.clubName && club.clubName.trim() !== '';
-      const hasYearTo = club.yearTo && club.yearTo.trim() !== '';
-      const isCurrentClub = club.currentClub === true;
-      // Invalid if: has name BUT neither is current NOR has end year
-      return hasClubName && !isCurrentClub && !hasYearTo;
-    });
-
-    if (invalidClubs.length > 0) {
-      setError('Bitte füll "Bis Jahr" für alli Clubs üs, wo nid als "Aktuellä Club" markiert sind.');
-      setSaving(false);
-      // Scroll to error message
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    // Filter club history: only include clubs that have a name
-    // AND either currentClub is checked OR yearTo is filled
-    const validClubHistory = clubHistory.filter(club => {
-      const hasClubName = club.clubName && club.clubName.trim() !== '';
-      const hasYearTo = club.yearTo && club.yearTo.trim() !== '';
-      const isCurrentClub = club.currentClub === true;
-      // Include club if: has name AND (is current OR has end year)
-      return hasClubName && (isCurrentClub || hasYearTo);
-    }).map(club => ({
-      ...club,
-      // Clean up empty strings to null/undefined for proper database handling
-      league: club.league && club.league.trim() !== '' ? club.league : '',
-      yearFrom: club.yearFrom && club.yearFrom.trim() !== '' ? club.yearFrom : '',
-      yearTo: club.currentClub ? '' : (club.yearTo && club.yearTo.trim() !== '' ? club.yearTo : ''),
-    }));
-
-    try {
-      const saveData = {
-        playerData: formData,
-        clubHistory: validClubHistory,
-        achievements: achievements.map(a => a.text).filter((text: string) => text.trim() !== ''),
-      };
-      
-      console.log('Saving player data...');
-      console.log('Club History being saved:', JSON.stringify(validClubHistory, null, 2));
-      console.log('Current clubs:', validClubHistory.filter(c => c.currentClub));
-
-      const response = await axios.put(`/api/players/${params.id}`, saveData);
-      
-      console.log('Save response:', response.data);
-
-      setSuccess(true);
-      setTimeout(() => {
-        router.push(`/players/${params.id}`);
-      }, 1500);
-    } catch (err: any) {
-      console.error('Save error:', err);
-      console.error('Error response:', err.response?.data);
-      const apiError = err.response?.data?.error;
-      if (apiError && apiError.startsWith('playerProfile.')) {
-        setError(t(apiError));
-      } else {
-        setError(apiError || 'Fehler Bim Speichere');
-      }
+      console.error('Error loading player data:', err);
+      setError('Fehler bim Lade vo Spielerdate.');
     } finally {
-      setSaving(false);
+      setLoading(false);
     }
   };
 
@@ -291,6 +315,56 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-12 px-4">
       <div className="max-w-4xl mx-auto">
+        {/* Background Picker Section */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <PaintBucket className="w-6 h-6 text-habicht-600" /> Profil-Hintergrund
+          </h2>
+          <div className="mb-4 flex flex-wrap gap-3 items-center">
+            {BACKGROUND_OPTIONS.map(bg => (
+              <button
+                key={bg.id}
+                type="button"
+                onClick={() => {
+                  setBgLoading(true);
+                  setTimeout(() => {
+                    setSelectedBg(bg);
+                    setFormData((prev: any) => ({ ...prev, backgroundGradient: bg.id }));
+                    setBgLoading(false);
+                  }, 400);
+                }}
+                className={`w-10 h-10 rounded-full border-4 flex items-center justify-center transition-all duration-150 ${selectedBg?.id === bg.id ? "border-habicht-600 scale-110" : "border-gray-300 dark:border-gray-600"}`}
+                style={{ background: bg.style }}
+                aria-label={bg.name}
+              >
+                {selectedBg?.id === bg.id && !bgLoading && <span className="text-white text-lg font-bold">✓</span>}
+                {selectedBg?.id === bg.id && bgLoading && <Loader2 className="w-5 h-5 animate-spin text-white" />}
+              </button>
+            ))}
+            <input
+              type="color"
+              value={customColor}
+              onChange={e => {
+                setBgLoading(true);
+                setTimeout(() => {
+                  setCustomColor(e.target.value);
+                  setSelectedBg({ id: "custom", name: "Custom", style: e.target.value });
+                  setFormData((prev: any) => ({ ...prev, customColor: e.target.value, backgroundGradient: "custom" }));
+                  setBgLoading(false);
+                }, 400);
+              }}
+              className="w-10 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full cursor-pointer"
+              aria-label="Custom Color Picker"
+              style={{ background: customColor }}
+            />
+          </div>
+          <div className="mt-4">
+            <div style={{ background: selectedBg.id === "custom" ? customColor : selectedBg.style, borderRadius: "0.5rem" }} className="relative w-full h-40 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/10 dark:bg-black/20" style={{ pointerEvents: "none" }} />
+              <span className="relative z-10 text-white text-lg font-semibold drop-shadow-lg">Live Vorschau</span>
+            </div>
+          </div>
+        </div>
         {/* Header */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
@@ -767,24 +841,16 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Land / Country
                       </label>
-                      <select
+                      <CountrySelect
                         value={club.country || 'Switzerland'}
-                        onChange={(e) => {
+                        onChange={v => {
                           const updated = clubHistory.map((c) =>
-                            c.id === club.id ? { ...c, country: e.target.value } : c
+                            c.id === club.id ? { ...c, country: v } : c
                           );
                           setClubHistory(updated);
                         }}
                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                      >
-                        <option value="Switzerland">🇨🇭 Switzerland</option>
-                        <option value="Germany">🇩🇪 Germany</option>
-                        <option value="Austria">🇦🇹 Austria</option>
-                        <option value="Italy">🇮🇹 Italy</option>
-                        <option value="France">🇫🇷 France</option>
-                        <option value="Liechtenstein">🇱🇮 Liechtenstein</option>
-                        <option value="Other">🌍 Other</option>
-                      </select>
+                      />
                     </div>
                   </div>
 
@@ -1043,4 +1109,5 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
       </div>
     </div>
   );
+
 }

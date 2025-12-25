@@ -1,5 +1,6 @@
 "use client";
 import VideoUpload from '@/components/shared/VideoUpload';
+import CountrySelect from '@/components/shared/CountrySelect';
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -54,6 +55,43 @@ export default function RecruiterProfileEditPage({ params }: { params: { id: str
   const [backgroundImage, setBackgroundImage] = useState('');
   const [showZoom, setShowZoom] = useState<false | 'background' | 'profile'>(false);
   const [customColor, setCustomColor] = useState('#2563eb');
+  const [bgLoading, setBgLoading] = useState(false);
+
+  // Add explicit types for club and index in map callbacks
+  // Example: clubHistory.map((club: any, index: number) => ...)
+
+  // Ensure all handlers are defined
+  const handleAddClub = () => {
+    setClubHistory([
+      ...clubHistory,
+      {
+        id: `new-${Date.now()}`,
+        clubName: '',
+        logo: '',
+        country: 'Switzerland',
+        clubWebsiteUrl: '',
+        league: '',
+        yearFrom: '',
+        yearTo: '',
+        currentClub: false,
+      },
+    ]);
+  };
+
+  const handleRemoveClub = (id: string) => {
+    setClubHistory(clubHistory.filter((club: any) => club.id !== id));
+  };
+
+  const handleAddAchievement = () => {
+    setAchievements([
+      ...achievements,
+      { id: `new-${Date.now()}`, text: '' },
+    ]);
+  };
+
+  const handleRemoveAchievement = (id: string) => {
+    setAchievements(achievements.filter((ach: any) => ach.id !== id));
+  };
 
   const handleSave = async () => {
     setSaving(true);
@@ -63,6 +101,9 @@ export default function RecruiterProfileEditPage({ params }: { params: { id: str
         ...formData,
         clubHistory,
         achievements,
+        backgroundGradient: selectedBg.id,
+        customColor: selectedBg.id === 'custom' ? customColor : undefined,
+        backgroundImage,
       });
       if (response.status === 200) {
         router.refresh();
@@ -78,8 +119,10 @@ export default function RecruiterProfileEditPage({ params }: { params: { id: str
   useEffect(() => {
     if (formData) {
       setBackgroundImage(formData.backgroundImage || '');
-      setCustomColor(formData.customColor || '#2563eb');
-      if (formData.backgroundGradient) {
+      if (formData.backgroundGradient === 'custom') {
+        setCustomColor(formData.customColor || '#2563eb');
+        setSelectedBg({ id: 'custom', name: 'Custom', style: formData.customColor || '#2563eb' });
+      } else if (formData.backgroundGradient) {
         const found = BACKGROUND_OPTIONS.find(bg => bg.id === formData.backgroundGradient);
         if (found) setSelectedBg(found);
       }
@@ -88,73 +131,7 @@ export default function RecruiterProfileEditPage({ params }: { params: { id: str
 
   // Reset background to default
   const handleResetBackground = () => {
-    setBackgroundImage('');
-    setCustomColor('#2563eb');
-    setSelectedBg(BACKGROUND_OPTIONS[0]);
-    setFormData((prev: any) => ({ ...prev, backgroundImage: '', customColor: '#2563eb', backgroundGradient: BACKGROUND_OPTIONS[0].id }));
-  };
-
-  // Live preview style
-  const previewStyle = {
-    background: backgroundImage
-      ? `url(${backgroundImage}) center/cover no-repeat`
-      : selectedBg.id === 'custom' ? customColor : selectedBg.style,
-    position: 'relative' as const,
-    minHeight: '180px',
-    borderRadius: '1rem',
-    overflow: 'hidden',
-    // Make the overlay more transparent
-  };
-
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/auth/login');
-      return;
-    }
-    if (status === 'authenticated') {
-      loadRecruiterData();
-    }
-  }, [status, params?.id]);
-
-  const loadRecruiterData = async () => {
-    try {
-      const response = await axios.get(`/api/recruiters/${params.id}`);
-      const recruiter = response.data.recruiter;
-      setFormData({
-        firstName: recruiter.firstName || '',
-        lastName: recruiter.lastName || '',
-        email: recruiter.user.email || '',
-        dateOfBirth: recruiter.dateOfBirth ? new Date(recruiter.dateOfBirth).toISOString().split('T')[0] : '',
-        gender: recruiter.gender || '',
-        nationality: recruiter.nationality || '',
-        canton: recruiter.canton || '',
-        city: recruiter.city || '',
-        municipality: recruiter.municipality || '',
-        employmentStatus: recruiter.employmentStatus || '',
-        occupation: recruiter.occupation || '',
-        schoolName: recruiter.schoolName || '',
-        phone: recruiter.phone || '',
-        profileImage: recruiter.profileImage || '',
-        instagram: recruiter.instagram || '',
-        tiktok: recruiter.tiktok || '',
-        youtube: recruiter.youtube || '',
-        highlightVideo: recruiter.highlightVideo || '',
-        swissVolleyLicense: recruiter.swissVolleyLicense || '',
-        ausweiss: recruiter.ausweiss || '',
-        bio: recruiter.bio || '',
-        backgroundGradient: recruiter.backgroundGradient || '',
-      });
-      setClubHistory(recruiter.clubHistory || []);
-      setAchievements(recruiter.achievements || []);
-      if (recruiter.backgroundGradient) {
-        const savedBg = BACKGROUND_OPTIONS.find(bg => bg.id === recruiter.backgroundGradient);
-        if (savedBg) setSelectedBg(savedBg);
-      }
       setLoading(false);
-    } catch (err) {
-      setError(t('recruiterProfile.errorLoadingRecruiterData'));
-      setLoading(false);
-    }
   };
 
   // ...handlers for form fields, club history, achievements, etc...
@@ -178,22 +155,49 @@ export default function RecruiterProfileEditPage({ params }: { params: { id: str
                 key={bg.id}
                 type="button"
                 onClick={() => {
-                  setSelectedBg(bg);
-                  setFormData((prev: any) => ({ ...prev, backgroundGradient: bg.id }));
+                  setBgLoading(true);
+                  setTimeout(() => {
+                    setSelectedBg(bg);
+                    setFormData((prev: any) => ({ ...prev, backgroundGradient: bg.id }));
+                    setBgLoading(false);
+                  }, 400);
                 }}
-                className={`w-10 h-10 rounded-full border-4 flex items-center justify-center transition-all duration-150 ${selectedBg?.id === bg.id ? 'border-habicht-600 scale-110' : 'border-gray-300 dark:border-gray-600'}`}
+                className={`w-10 h-10 rounded-full border-4 flex items-center justify-center transition-all duration-150 ${selectedBg?.id === bg.id ? "border-habicht-600 scale-110" : "border-gray-300 dark:border-gray-600"}`}
                 style={{ background: bg.style }}
                 aria-label={bg.name}
               >
-                {selectedBg?.id === bg.id && <span className="text-white text-lg font-bold">713</span>}
+                {selectedBg?.id === bg.id && !bgLoading && <span className="text-white text-lg font-bold">✓</span>}
+                {selectedBg?.id === bg.id && bgLoading && <Loader2 className="w-5 h-5 animate-spin text-white" />}
               </button>
             ))}
-            {/* Custom Color Picker */}
             <ColorPicker value={customColor} onChange={v => {
-              setCustomColor(v);
-              setSelectedBg({ id: 'custom', name: 'Custom', style: v });
-              setFormData((prev: any) => ({ ...prev, customColor: v, backgroundGradient: 'custom' }));
+              setBgLoading(true);
+              setTimeout(() => {
+                setCustomColor(v);
+                setSelectedBg({ id: "custom", name: "Custom", style: v });
+                setFormData((prev: any) => ({ ...prev, customColor: v, backgroundGradient: "custom" }));
+                setBgLoading(false);
+              }, 400);
             }} />
+
+            {/* Club History Editing Section */}
+            {/* This section should be rendered inside the main component function, where clubHistory is defined.
+                If you want to show a preview or a simple list, you can do something like this: */}
+            {/* Example preview (remove if not needed): */}
+            <div className="mb-4">
+              <h3 className="text-md font-semibold mb-2">Club History Preview</h3>
+              <ul>
+                {clubHistory && clubHistory.length > 0 ? (
+                  clubHistory.map((club, index) => (
+                    <li key={club.id || index}>
+                      {club.clubName} ({club.country})
+                    </li>
+                  ))
+                ) : (
+                  <li>No club history added yet.</li>
+                )}
+              </ul>
+            </div>
           </div>
           <div className="mb-4">
             <ImageUpload
@@ -227,10 +231,34 @@ export default function RecruiterProfileEditPage({ params }: { params: { id: str
           </div>
           {/* Live Preview */}
           <div className="mt-4">
-            <div style={previewStyle} className="relative w-full h-40 flex items-center justify-center">
-              <div className="absolute inset-0 bg-black/10 dark:bg-black/20" style={{ pointerEvents: 'none' }} />
-              <span className="relative z-10 text-white text-lg font-semibold drop-shadow-lg">Live Vorschau</span>
-            </div>
+            {/*
+              Define previewStyle based on selectedBg and backgroundImage.
+              If backgroundImage is set, use it as background, otherwise use selectedBg.style.
+            */}
+            {(() => {
+              const previewStyle: React.CSSProperties = backgroundImage
+                ? {
+                    backgroundImage: `url(${backgroundImage})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: '0.5rem',
+                  }
+                : selectedBg.id === 'custom'
+                ? {
+                    background: customColor,
+                    borderRadius: '0.5rem',
+                  }
+                : {
+                    background: selectedBg.style,
+                    borderRadius: '0.5rem',
+                  };
+              return (
+                <div style={previewStyle} className="relative w-full h-40 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/10 dark:bg-black/20" style={{ pointerEvents: 'none' }} />
+                  <span className="relative z-10 text-white text-lg font-semibold drop-shadow-lg">Live Vorschau</span>
+                </div>
+              );
+            })()}
           </div>
         </div>
 
@@ -286,22 +314,14 @@ export default function RecruiterProfileEditPage({ params }: { params: { id: str
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Land / Country</label>
-                        <select
+                        <CountrySelect
                           value={club.country || 'Switzerland'}
-                          onChange={e => {
-                            const updated = clubHistory.map((c, i) => i === index ? { ...c, country: e.target.value } : c);
+                          onChange={v => {
+                            const updated = clubHistory.map((c, i) => i === index ? { ...c, country: v } : c);
                             setClubHistory(updated);
                           }}
                           className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                        >
-                          <option value="Switzerland">🇨🇭 Switzerland</option>
-                          <option value="Germany">🇩🇪 Germany</option>
-                          <option value="Austria">🇦🇹 Austria</option>
-                          <option value="Italy">🇮🇹 Italy</option>
-                          <option value="France">🇫🇷 France</option>
-                          <option value="Liechtenstein">🇱🇮 Liechtenstein</option>
-                          <option value="Other">🌍 Other</option>
-                        </select>
+                        />
                       </div>
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
@@ -389,6 +409,5 @@ export default function RecruiterProfileEditPage({ params }: { params: { id: str
       </div>
     </div>
   );
-}
 
-// TODO: Refactor this page to match the unified structure and UX of the restored player edit page, including persistent and instant background color selection.
+}

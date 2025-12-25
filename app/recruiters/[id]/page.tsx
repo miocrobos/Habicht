@@ -3,13 +3,16 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Briefcase, MapPin, Award, ExternalLink, Eye, Edit2, Phone, Mail, Camera, Building2, Globe } from 'lucide-react'
+import { Briefcase, MapPin, Award, ExternalLink, Eye, Edit2, Phone, Mail, Camera, Building2, Globe, FileDown, FileText } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import ClubBadge from '@/components/shared/ClubBadge'
 import RecruiterPhotoGallery from '@/components/shared/RecruiterPhotoGallery'
 import RecruiterVideoGallery from '@/components/shared/RecruiterVideoGallery'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { formatViewCount } from '@/lib/formatViewCount'
+import CVTypeModal from '@/components/shared/CVTypeModal'
+import CVExportLanguagePopup from '@/components/shared/CVExportLanguagePopup'
+import { generateRecruiterCV } from '@/lib/generateRecruiterCV'
 import axios from 'axios'
 import ErrorBoundary from 'next/dist/client/components/error-boundary'
 
@@ -20,38 +23,48 @@ interface RecruiterProfileProps {
 }
 
 interface RecruiterData {
-  id: string
-  firstName: string
-  lastName: string
+  id: string;
+  firstName: string;
+  lastName: string;
   user: {
-    id: string
-    email: string
-    name: string | null
-    role: string
-  }
-  organization: string
-  position: string
-  profileImage: string | null
-  coverImage: string | null
-  bio: string | null
-  phone: string | null
-  website: string | null
-  nationality: string
-  canton: string
-  city: string | null
-  municipality: string | null
+    id: string;
+    email: string;
+    name: string | null;
+    role: string;
+  };
+  organization: string;
+  position: string;
+  profileImage: string | null;
+  coverImage: string | null;
+  bio: string | null;
+  phone: string | null;
+  website: string | null;
+  nationality: string;
+  canton: string;
+  city: string | null;
+  municipality: string | null;
   linkedClubs: Array<{
-    id: string
-    name: string
-    logo: string | null
-    website: string | null
-    canton: string
-    town: string
-  }>
-  showEmail: boolean
-  showPhone: boolean
-  views: number
-  createdAt: string
+    id: string;
+    name: string;
+    logo: string | null;
+    website: string | null;
+    canton: string;
+    town: string;
+  }>;
+  showEmail: boolean;
+  showPhone: boolean;
+  views: number;
+  createdAt: string;
+  // CV fields
+  age?: number;
+  coachRole?: string;
+  genderCoached?: string[];
+  positionsLookingFor?: string[];
+  achievements?: string[];
+  instagram?: string | null;
+  tiktok?: string | null;
+  youtube?: string | null;
+  facebook?: string | null;
 }
 
 export default function RecruiterProfile({ params }: RecruiterProfileProps) {
@@ -68,6 +81,70 @@ export default function RecruiterProfile({ params }: RecruiterProfileProps) {
   const [selectedBg, setSelectedBg] = useState<string | null>(null);
   const [customColor, setCustomColor] = useState("#2563eb");
   const [backgroundImage, setBackgroundImage] = useState("");
+
+  // CV Export popup states
+  const [showCVModal, setShowCVModal] = useState(false);
+  const [showCVLangPopup, setShowCVLangPopup] = useState(false);
+  const [cvExportLang, setCvExportLang] = useState('gsw'); // Default Swiss German
+  const [exportingCV, setExportingCV] = useState(false);
+  // CV Export logic
+  const handleExportCV = async (language: string) => {
+    if (!recruiter) return;
+    try {
+      setExportingCV(true);
+      // Map recruiter data to expected RecruiterData structure for CV export
+      const recruiterCVData = {
+        firstName: recruiter.firstName,
+        lastName: recruiter.lastName,
+        age: recruiter.age ?? 0,
+        nationality: recruiter.nationality,
+        canton: recruiter.canton,
+        province: recruiter.municipality ?? null,
+        phone: recruiter.phone ?? null,
+        preferredLanguage: language,
+        bio: recruiter.bio ?? '',
+        coachRole: recruiter.coachRole ?? recruiter.position ?? '',
+        organization: recruiter.organization,
+        position: recruiter.position,
+        genderCoached: recruiter.genderCoached ?? [],
+        positionsLookingFor: recruiter.positionsLookingFor ?? [],
+        achievements: recruiter.achievements ?? [],
+        profileImage: recruiter.profileImage ?? null,
+        instagram: recruiter.instagram ?? null,
+        tiktok: recruiter.tiktok ?? null,
+        youtube: recruiter.youtube ?? null,
+        facebook: recruiter.facebook ?? null,
+        user: { email: recruiter.user.email },
+        club: recruiter.linkedClubs && recruiter.linkedClubs.length > 0 ? {
+          name: recruiter.linkedClubs[0].name,
+          logo: recruiter.linkedClubs[0].logo ?? null,
+        } : null,
+        clubHistory: recruiter.linkedClubs?.map(club => ({
+          clubName: club.name,
+          role: recruiter.position,
+          startDate: '',
+          endDate: '',
+          currentClub: false,
+        })) ?? [],
+      };
+      const pdfBlob = await generateRecruiterCV(recruiterCVData, language);
+      const url = URL.createObjectURL(pdfBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+      link.download = `${recruiter.firstName}_${recruiter.lastName}_Recruiter_CV_${language.toUpperCase()}_${timestamp}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error exporting CV:', error);
+      alert('Fehler bim CV Export');
+    } finally {
+      setExportingCV(false);
+      setShowCVLangPopup(false);
+    }
+  };
 
   const BACKGROUND_OPTIONS = [
     { id: "solid-blue", name: "Blau", style: "#2563eb" },
@@ -214,14 +291,34 @@ export default function RecruiterProfile({ params }: RecruiterProfileProps) {
                 </div>
 
                 {isOwner && (
-                  <Link
-                    href="/settings/profile"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
-                  >
-                    <Edit2 className="w-4 h-4" />
-                    Edit Profile
-                  </Link>
+                  <div className="flex gap-3">
+                    <Link
+                      href="/settings/profile"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+                    >
+                      <Edit2 className="w-4 h-4" />
+                      Edit Profile
+                    </Link>
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold shadow-md"
+                      onClick={() => setShowCVLangPopup(true)}
+                      disabled={exportingCV}
+                      title="Recruiter Läbeslaauf Exportiere"
+                    >
+                      <FileDown className="w-4 h-4" />
+                      Export CV
+                    </button>
+                  </div>
                 )}
+                    {/* CV Language Export Popup */}
+                    {showCVLangPopup && (
+                      <CVExportLanguagePopup
+                        onClose={() => setShowCVLangPopup(false)}
+                        onExport={handleExportCV}
+                        userType="recruiter"
+                      />
+                    )}
               </div>
             </div>
           </div>

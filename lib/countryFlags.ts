@@ -515,3 +515,30 @@ export function isSwissClub(country: string | null | undefined): boolean {
   const normalized = country.trim()
   return normalized === 'Switzerland' || normalized === 'Schweiz' || getCountryCode(country) === 'CH'
 }
+
+// Utility to get all countries with flags for dropdowns
+export function getAllCountriesWithFlags(): { code: string, name: string, flagUrl: string, flagEmoji?: string }[] {
+  // Remove duplicates by code, prefer English name
+  const seen = new Set<string>();
+  const countries: { code: string, name: string, flagUrl: string, flagEmoji?: string }[] = [];
+  for (const [name, code] of Object.entries(COUNTRY_CODES)) {
+    if (!seen.has(code)) {
+      seen.add(code);
+      // Get emoji flag if possible
+      const flagEmoji = code.length === 2
+        ? String.fromCodePoint(...[...code.toUpperCase()].map(c => 0x1F1E6 + c.charCodeAt(0) - 65))
+        : undefined;
+      countries.push({
+        code,
+        name,
+        flagUrl: getCountryFlagUrl(code),
+        flagEmoji,
+      });
+    }
+  }
+  // Sort alphabetically by name
+  countries.sort((a, b) => a.name.localeCompare(b.name));
+  // Add 'Other' at the end
+  countries.push({ code: 'OTHER', name: 'Other', flagUrl: '', flagEmoji: '🌍' });
+  return countries;
+}

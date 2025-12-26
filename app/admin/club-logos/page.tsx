@@ -1,4 +1,6 @@
+
 'use client'
+import { toast } from 'react-hot-toast';
 
 import { useState, useEffect } from 'react'
 import { Upload, Plus, X } from 'lucide-react'
@@ -54,10 +56,10 @@ export default function ManageClubLogosPage() {
       setSelectedClub(null)
       setNewLogo('')
       
-      alert('Logo successfully uploaded!')
+      toast.success('Logo successfully uploaded!')
     } catch (error) {
       console.error('Error uploading logo:', error)
-      alert(t('errors.logoUploadError'))
+      toast.error(t('errors.logoUploadError'))
     } finally {
       setUploading(false)
     }
@@ -65,7 +67,7 @@ export default function ManageClubLogosPage() {
 
   const handleAddClub = async () => {
     if (!newClub.name || !newClub.canton) {
-      alert(t('errors.enterNameCanton'))
+      toast.error(t('errors.enterNameCanton'))
       return
     }
 
@@ -86,10 +88,10 @@ export default function ManageClubLogosPage() {
       })
       setShowAddClub(false)
       
-      alert('Club successfully added!')
+      toast.success('Club successfully added!')
     } catch (error) {
       console.error('Error adding club:', error)
-      alert(t('errors.clubAddError'))
+      toast.error(t('errors.clubAddError'))
     } finally {
       setUploading(false)
     }

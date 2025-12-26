@@ -17,6 +17,7 @@ const getLeagueLabel = (league: string, t: any) => {
 };
 
 import { useState, useEffect } from 'react'
+import { toast } from 'react-hot-toast';
 // Helper to get position label (fallback to position string)
 function getPositionLabel(position: string, t: any) {
   return t(`playerProfile.position${position.charAt(0) + position.slice(1).toLowerCase().replace(/_([a-z])/g, (m, c) => c.toUpperCase())}`) || position;
@@ -34,7 +35,7 @@ function ErrorBoundary({ error }: { error: any }) {
 }
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown, Bookmark, BookmarkCheck } from 'lucide-react'
+import { Calendar, MapPin, Ruler, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown, Bookmark, BookMarked } from 'lucide-react'
 import { BackgroundPickerModal } from '@/components/shared/BackgroundPickerModal';
 import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
@@ -267,7 +268,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
   const handleVideoUpload = async () => {
     if (!videoFile) {
-      alert(t('playerProfile.selectVideoFile'))
+      toast.error(t('playerProfile.selectVideoFile'))
       return
     }
 
@@ -295,10 +296,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       setVideoFile(null)
       setVideoTitle('')
       setVideoDescription('')
-      alert(t('playerProfile.uploadedVideo'))
+      toast.success(t('playerProfile.uploadedVideo'))
     } catch (error: any) {
       console.error('Error uploading video:', error)
-      alert(t('playerProfile.errorUploadingVideo'))
+      toast.error(t('playerProfile.errorUploadingVideo'))
     } finally {
       setUploadingVideo(false)
     }
@@ -316,10 +317,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       const playerResponse = await axios.get(`/api/players/${params.id}`)
       setPlayer(playerResponse.data.player)
       
-      alert(t('playerProfile.uploadedVideo'))
+      toast.success(t('playerProfile.uploadedVideo'))
     } catch (error) {
       console.error('Error deleting video:', error)
-      alert(t('playerProfile.errorUploadingVideo'))
+      toast.error(t('playerProfile.errorUploadingVideo'))
     } finally {
       setDeletingVideoId(null)
     }
@@ -339,7 +340,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       setShowChat(true)
     } catch (error) {
       console.error('Error starting chat:', error)
-      alert(t('playerProfile.errorStartingChat'))
+      toast.error(t('playerProfile.errorStartingChat'))
     }
   }
 
@@ -353,16 +354,16 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         // Remove from watchlist
         await axios.delete(`/api/watchlist?playerId=${params.id}`)
         setIsWatched(false)
-        alert(t('watchlist.removedFromWatchlist'))
+        toast.success(t('watchlist.removedFromWatchlist'))
       } else {
         // Add to watchlist
         await axios.post('/api/watchlist', { playerId: params.id })
         setIsWatched(true)
-        alert(t('watchlist.addedToWatchlist'))
+        toast.success(t('watchlist.addedToWatchlist'))
       }
     } catch (error) {
       console.error('Error toggling watchlist:', error)
-      alert('Error updating watchlist')
+      toast.error('Error updating watchlist')
     } finally {
       setWatchlistLoading(false)
     }
@@ -390,13 +391,13 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       console.log('CV downloaded successfully')
     } catch (error) {
       console.error('Error exporting CV:', error)
-      alert(t('playerProfile.errorExportingCV'))
+      toast.error(t('playerProfile.errorExportingCV'))
     }
   }
 
   const handleProfilePhotoUpdate = async () => {
     if (!newProfilePhoto) {
-      alert(t('playerProfile.selectImage'))
+      toast.error(t('playerProfile.selectImage'))
       return
     }
 
@@ -454,10 +455,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       // Reset and close modal
       setShowProfilePhotoModal(false)
       setNewProfilePhoto('')
-      alert(t('playerProfile.photoUpdated'))
+      toast.success(t('playerProfile.photoUpdated'))
     } catch (error: any) {
       console.error('Error updating profile photo:', error)
-      alert(t('playerProfile.errorUpdatingPhoto'))
+      toast.error(t('playerProfile.errorUpdatingPhoto'))
     } finally {
       setUploadingPhoto(false)
     }
@@ -527,7 +528,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       setNewBackgroundImage('')
     } catch (error: any) {
       console.error('Error updating background:', error)
-      alert(t('playerProfile.errorUpdatingBackground'))
+      toast.error(t('playerProfile.errorUpdatingBackground'))
     } finally {
       setUploadingBackground(false)
     }
@@ -851,7 +852,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     } ${watchlistLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                     title={isWatched ? t('watchlist.removeFromWatchlist') : t('watchlist.addToWatchlist')}
                   >
-                    {isWatched ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+                    {isWatched ? <BookMarked className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
                     {isWatched ? t('watchlist.removeFromWatchlist') : t('watchlist.addToWatchlist')}
                   </button>
                 )}
@@ -1376,7 +1377,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               setShowBackgroundModal(false);
               setNewBackgroundImage('');
             } catch (error) {
-              alert('Fehler beim Speichern des Hintergrunds');
+              toast.error('Fehler beim Speichern des Hintergrunds');
             }
           }}
           backgroundOptions={BACKGROUND_OPTIONS}

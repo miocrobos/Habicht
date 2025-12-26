@@ -1,4 +1,6 @@
+
 "use client";
+import { toast } from 'react-hot-toast';
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -98,7 +100,7 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
     setShowCvLangPopup(false);
     // TODO: Implement actual CV export logic here
     // e.g. generateCV(profile, type, lang)
-    alert(`Exporting ${cvExportType === "player" ? "Player" : "Recruiter"} CV in ${lang}`);
+    toast.success(`Exporting ${cvExportType === "player" ? "Player" : "Recruiter"} CV in ${lang}`);
   };
 
   if (loading) {
@@ -151,7 +153,7 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
               setShowBgModal(false);
               setProfile((prev: any) => prev ? { ...prev, backgroundGradient: bg.id, customColor: bg.id === 'custom' ? bg.style : '', backgroundImage: image || '' } : prev);
             } catch (error) {
-              alert('Fehler beim Speichern des Hintergrunds');
+              toast.error('Fehler beim Speichern des Hintergrunds');
             } finally {
               setSavingBg(false);
             }

@@ -1,3 +1,5 @@
+import { Toaster } from 'react-hot-toast';
+  <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'

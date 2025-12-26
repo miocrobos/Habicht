@@ -1,4 +1,6 @@
+
 'use client'
+import { toast } from 'react-hot-toast';
 
 import { useState, useEffect } from 'react'
 import { X, Upload, Plus, Trash2 } from 'lucide-react'
@@ -43,7 +45,7 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
 
   const handleUploadVideo = async () => {
     if (!newVideoUrl) {
-      alert('Please enter a video URL')
+      toast.error('Please enter a video URL')
       return
     }
 
@@ -60,7 +62,7 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
       await fetchVideos()
     } catch (error: any) {
       console.error('Error uploading video:', error)
-      alert(error.response?.data?.error || 'Failed to upload video')
+      toast.error(error.response?.data?.error || 'Failed to upload video')
     } finally {
       setUploading(false)
     }
@@ -76,7 +78,7 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
       await fetchVideos()
     } catch (error) {
       console.error('Error deleting video:', error)
-      alert('Failed to delete video')
+      toast.error('Failed to delete video')
     }
   }
 

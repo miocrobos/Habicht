@@ -1,8 +1,11 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
+'use client'
+import { toast } from 'react-hot-toast';
+
+import { useState, useEffect } from 'react';
 import Image from 'next/image'
-import { X, Upload, ChevronLeft, ChevronRight, Plus } from 'lucide-react'
+import { X, Upload, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import axios from 'axios'
 import ImageUpload from './ImageUpload'
 
@@ -44,7 +47,7 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
 
   const handleUploadPhoto = async () => {
     if (!newPhotoUrl) {
-      alert('Please select a photo')
+      toast.error('Please select a photo')
       return
     }
 
@@ -59,7 +62,7 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
       await fetchPhotos()
     } catch (error: any) {
       console.error('Error uploading photo:', error)
-      alert(error.response?.data?.error || 'Failed to upload photo')
+      toast.error(error.response?.data?.error || 'Failed to upload photo')
     } finally {
       setUploading(false)
     }
@@ -76,7 +79,7 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
       setSelectedIndex(null)
     } catch (error) {
       console.error('Error deleting photo:', error)
-      alert('Failed to delete photo')
+      toast.error('Failed to delete photo')
     }
   }
 

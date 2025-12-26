@@ -1,3 +1,4 @@
+import { toast } from 'react-hot-toast';
 'use client'
 
 import { useState, useCallback } from 'react'
@@ -58,10 +59,10 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
       setUploadProgress(0)
       onUploadComplete?.()
       
-      alert('Video erfolgreich hochgeladen!')
+      toast.success('Video erfolgreich hochgeladen!')
     } catch (error) {
       console.error('Upload error:', error)
-      alert(t('errors.videoUploadError'))
+      toast.error(t('errors.videoUploadError'))
     } finally {
       setUploading(false)
     }
@@ -96,10 +97,10 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
       setExternalUrl('')
       onUploadComplete?.()
       
-      alert('Video erfolgreich hinzugefügt!')
+      toast.success('Video erfolgreich hinzugefügt!')
     } catch (error) {
       console.error('Error adding video:', error)
-      alert(t('errors.videoAddError'))
+      toast.error(t('errors.videoAddError'))
     } finally {
       setUploading(false)
     }

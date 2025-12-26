@@ -1,4 +1,6 @@
+
 'use client'
+import { toast } from 'react-hot-toast';
 
 import { useState } from 'react'
 import { X, FileDown } from 'lucide-react'
@@ -44,7 +46,7 @@ export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData
       onClose()
     } catch (error) {
       console.error('Error exporting player CV:', error)
-      alert(t('playerProfile.errorExportingCV'))
+      toast.error(t('playerProfile.errorExportingCV'))
     } finally {
       setExporting(false)
     }
@@ -73,7 +75,7 @@ export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData
       onClose()
     } catch (error) {
       console.error('Error exporting recruiter CV:', error)
-      alert(t('playerProfile.errorExportingCV'))
+      toast.error(t('playerProfile.errorExportingCV'))
     } finally {
       setExporting(false)
     }

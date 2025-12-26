@@ -1,8 +1,8 @@
-'use client'
-
-import Link from 'next/link'
-import Image from 'next/image'
-import { MapPin, Users, Briefcase, MessageCircle } from 'lucide-react'
+"use client";
+import { toast } from 'react-hot-toast';
+import Link from 'next/link';
+import Image from 'next/image';
+import { MapPin, Users, Briefcase, MessageCircle } from 'lucide-react';
 import CantonFlag from '@/components/shared/CantonFlag'
 import { getCantonInfo } from '@/lib/swissData'
 import { useSession } from 'next-auth/react'
@@ -34,7 +34,7 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
     e.stopPropagation()
 
     if (!session?.user) {
-      alert(t('errors.loginRequired'))
+      toast.error(t('errors.loginRequired'))
       return
     }
 
@@ -52,7 +52,7 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
       console.error('Error starting chat:', error)
       console.error('Error response:', error.response?.data)
       const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
-      alert(`${t('errors.chatStartError')}: ${errorMsg}`)
+      toast.error(`${t('errors.chatStartError')}: ${errorMsg}`)
     }
   }
   

@@ -1,4 +1,6 @@
+
 'use client'
+import { toast } from 'react-hot-toast';
 
 import { useState, useEffect } from 'react'
 import { Upload, Link as LinkIcon, Save, Loader2, Search, Check, Plus } from 'lucide-react'
@@ -100,7 +102,7 @@ export default function ClubAdminPage() {
       loadClubs()
     } catch (error) {
       console.error('Error saving club:', error)
-      alert(t('errors.errorSaving'))
+      toast.error(t('errors.errorSaving'))
     } finally {
       setSaving(false)
     }
@@ -108,7 +110,7 @@ export default function ClubAdminPage() {
 
   const handleAddClub = async () => {
     if (!newClub.name || !newClub.canton || !newClub.town) {
-      alert(t('errors.fillNameCantonLocation'))
+      toast.error(t('errors.fillNameCantonLocation'))
       return
     }
 
@@ -143,7 +145,7 @@ export default function ClubAdminPage() {
       loadClubs()
     } catch (error) {
       console.error('Error adding club:', error)
-      alert(t('errors.errorAdding'))
+      toast.error(t('errors.errorAdding'))
     } finally {
       setSaving(false)
     }

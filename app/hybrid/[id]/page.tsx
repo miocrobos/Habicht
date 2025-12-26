@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { toast } from "react-hot-toast";
 
 function ErrorBoundary({ error }: { error: any }) {
   return (
@@ -98,7 +99,7 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
       }
       setLoading(false);
     } catch (err) {
-      alert('Failed to save background settings.');
+      toast.error('Failed to save background settings.');
     }
   }
 

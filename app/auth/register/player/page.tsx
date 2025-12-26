@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import axios from 'axios';
-import { Mail, Lock, User, Calendar, Globe, Video, Award, Weight, Activity, Trophy, Plus, X, MapPin, Briefcase, GraduationCap, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, User, Calendar, Globe, Video, Award, Activity, Trophy, Plus, X, MapPin, Briefcase, GraduationCap, Eye, EyeOff } from 'lucide-react';
 import ImageUpload from '@/components/shared/ImageUpload';
 import VideoUpload from '@/components/shared/VideoUpload';
 import StarRating from '@/components/shared/StarRating';
@@ -668,7 +668,7 @@ export default function PlayerRegisterPage() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      <Weight className="w-4 h-4 inline mr-1" />{t('register.weight')}
+                      {t('register.weight')}
                     </label>
                     <input name="weight" type="number" value={formData.weight} onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" placeholder={t('placeholders.weight')} />

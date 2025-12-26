@@ -1,4 +1,6 @@
+
 'use client'
+import { toast } from 'react-hot-toast';
 
 import { useTheme } from '@/contexts/ThemeContext'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -119,7 +121,7 @@ export default function SettingsPage() {
       }
     } catch (error) {
       console.error('Error exporting CV:', error)
-      alert(t('playerProfile.errorExportingCV'))
+      toast.error(t('playerProfile.errorExportingCV'))
     }
   }
 
@@ -169,7 +171,7 @@ export default function SettingsPage() {
       showSaveConfirmation()
     } catch (error) {
       console.error('Error updating notification settings:', error)
-      alert(t('playerProfile.errorSavingNotificationSettings'))
+      toast.error(t('playerProfile.errorSavingNotificationSettings'))
     } finally {
       setLoading(false)
     }
@@ -183,7 +185,7 @@ export default function SettingsPage() {
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault()
     if (newPassword !== confirmPassword) {
-      alert(t('playerProfile.passwordMismatch'))
+      toast.error(t('playerProfile.passwordMismatch'))
       return
     }
     showSaveConfirmation()
@@ -605,10 +607,10 @@ export default function SettingsPage() {
                           if (confirm(t('settings.account.deactivateConfirm'))) {
                             try {
                               await axios.post('/api/auth/deactivate')
-                              alert(t('settings.account.deactivateSuccess'))
+                              toast.success(t('settings.account.deactivateSuccess'))
                               window.location.href = '/'
                             } catch (error) {
-                              alert(t('settings.account.deactivateError'))
+                              toast.error(t('settings.account.deactivateError'))
                             }
                           }
                         }}
@@ -626,10 +628,10 @@ export default function SettingsPage() {
                             if (confirm(t('settings.account.deleteConfirm2'))) {
                               try {
                                 await axios.delete('/api/auth/delete-account')
-                                alert(t('settings.account.deleteSuccess'))
+                                toast.success(t('settings.account.deleteSuccess'))
                                 window.location.href = '/'
                               } catch (error) {
-                                alert(t('settings.account.deleteError'))
+                                toast.error(t('settings.account.deleteError'))
                               }
                             }
                           }

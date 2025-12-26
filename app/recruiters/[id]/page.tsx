@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { toast } from 'react-hot-toast';
 import Image from 'next/image'
 import Link from 'next/link'
 import { Briefcase, MapPin, Award, ExternalLink, Eye, Edit2, Phone, Mail, Camera, Building2, Globe, FileDown, FileText } from 'lucide-react'
@@ -93,7 +94,7 @@ const handleExportCV = async (language: string) => {
     URL.revokeObjectURL(url);
   } catch (error) {
     console.error('Error exporting CV:', error);
-    alert('Fehler bim CV Export');
+    toast.error('Fehler bim CV Export');
   } finally {
     setExportingCV(false);
     setShowCVLangPopup(false);

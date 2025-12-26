@@ -1,4 +1,6 @@
+
 'use client'
+import { toast } from 'react-hot-toast';
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
@@ -45,7 +47,7 @@ export default function PhotoGallery({ playerId, isOwner, isVerified }: PhotoGal
 
   const handleUploadPhoto = async () => {
     if (!newPhotoUrl) {
-      alert('Please select a photo')
+      toast.error('Please select a photo')
       return
     }
 
@@ -60,7 +62,7 @@ export default function PhotoGallery({ playerId, isOwner, isVerified }: PhotoGal
       await fetchPhotos()
     } catch (error: any) {
       console.error('Error uploading photo:', error)
-      alert(error.response?.data?.error || 'Failed to upload photo')
+      toast.error(error.response?.data?.error || 'Failed to upload photo')
     } finally {
       setUploading(false)
     }
@@ -77,7 +79,7 @@ export default function PhotoGallery({ playerId, isOwner, isVerified }: PhotoGal
       setSelectedIndex(null)
     } catch (error) {
       console.error('Error deleting photo:', error)
-      alert('Failed to delete photo')
+      toast.error('Failed to delete photo')
     }
   }
 

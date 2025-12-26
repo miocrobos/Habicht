@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Briefcase, MapPin, Award, ExternalLink, Eye, Edit2, Phone, Mail, Camera, Building2, Globe, FileDown, FileText } from 'lucide-react'
+import { BackgroundPickerModal, BackgroundOption } from '@/components/shared/BackgroundPickerModal';
 import { useSession } from 'next-auth/react'
 import ClubBadge from '@/components/shared/ClubBadge'
 import RecruiterPhotoGallery from '@/components/shared/RecruiterPhotoGallery'
@@ -16,135 +17,88 @@ import { generateRecruiterCV } from '@/lib/generateRecruiterCV'
 import axios from 'axios'
 import ErrorBoundary from 'next/dist/client/components/error-boundary'
 
-interface RecruiterProfileProps {
-  params: {
-    id: string
-  }
+type PageProps = {
+  params: { id: string }
 }
 
-interface RecruiterData {
-  id: string;
-  firstName: string;
-  lastName: string;
-  user: {
-    id: string;
-    email: string;
-    name: string | null;
-    role: string;
-  };
-  organization: string;
-  position: string;
-  profileImage: string | null;
-  coverImage: string | null;
-  bio: string | null;
-  phone: string | null;
-  website: string | null;
-  nationality: string;
-  canton: string;
-  city: string | null;
-  municipality: string | null;
-  linkedClubs: Array<{
-    id: string;
-    name: string;
-    logo: string | null;
-    website: string | null;
-    canton: string;
-    town: string;
-  }>;
-  showEmail: boolean;
-  showPhone: boolean;
-  views: number;
-  createdAt: string;
-  // CV fields
-  age?: number;
-  coachRole?: string;
-  genderCoached?: string[];
-  positionsLookingFor?: string[];
-  achievements?: string[];
-  instagram?: string | null;
-  tiktok?: string | null;
-  youtube?: string | null;
-  facebook?: string | null;
-}
-
-export default function RecruiterProfile({ params }: RecruiterProfileProps) {
-  const { data: session } = useSession()
-  const { t, language } = useLanguage()
-  const [recruiter, setRecruiter] = useState<RecruiterData | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  const [activeTab, setActiveTab] = useState<'info' | 'photos' | 'videos'>('info');
-  const [isOwner, setIsOwner] = useState(false);
+export default function RecruiterProfilePage({ params }: PageProps) {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showBgModal, setShowBgModal] = useState<boolean>(false);
+  const [savingBg, setSavingBg] = useState<boolean>(false);
+  const [exportingCV, setExportingCV] = useState<boolean>(false);
+  const [recruiter, setRecruiter] = useState<any>(null);
+  const [showCVLangPopup, setShowCVLangPopup] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
+  const [isOwner, setIsOwner] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<'info' | 'photos' | 'videos'>('info');
+  const [selectedBg, setSelectedBg] = useState<string>('solid-blue');
+  const [customColor, setCustomColor] = useState<string>('#2563eb');
+  const [backgroundImage, setBackgroundImage] = useState<string>('');
+  const { data: session } = useSession();
+  const { t } = useLanguage();
 
-  const [showBgModal, setShowBgModal] = useState(false);
-  const [selectedBg, setSelectedBg] = useState<string | null>(null);
-  const [customColor, setCustomColor] = useState("#2563eb");
-  const [backgroundImage, setBackgroundImage] = useState("");
+// ...rest of your component logic and JSX
 
-  // CV Export popup states
-  const [showCVModal, setShowCVModal] = useState(false);
-  const [showCVLangPopup, setShowCVLangPopup] = useState(false);
-  const [cvExportLang, setCvExportLang] = useState('gsw'); // Default Swiss German
-  const [exportingCV, setExportingCV] = useState(false);
-  // CV Export logic
-  const handleExportCV = async (language: string) => {
-    if (!recruiter) return;
-    try {
-      setExportingCV(true);
-      // Map recruiter data to expected RecruiterData structure for CV export
-      const recruiterCVData = {
-        firstName: recruiter.firstName,
-        lastName: recruiter.lastName,
-        age: recruiter.age ?? 0,
-        nationality: recruiter.nationality,
-        canton: recruiter.canton,
-        province: recruiter.municipality ?? null,
-        phone: recruiter.phone ?? null,
-        preferredLanguage: language,
-        bio: recruiter.bio ?? '',
-        coachRole: recruiter.coachRole ?? recruiter.position ?? '',
-        organization: recruiter.organization,
-        position: recruiter.position,
-        genderCoached: recruiter.genderCoached ?? [],
-        positionsLookingFor: recruiter.positionsLookingFor ?? [],
-        achievements: recruiter.achievements ?? [],
-        profileImage: recruiter.profileImage ?? null,
-        instagram: recruiter.instagram ?? null,
-        tiktok: recruiter.tiktok ?? null,
-        youtube: recruiter.youtube ?? null,
-        facebook: recruiter.facebook ?? null,
-        user: { email: recruiter.user.email },
-        club: recruiter.linkedClubs && recruiter.linkedClubs.length > 0 ? {
-          name: recruiter.linkedClubs[0].name,
-          logo: recruiter.linkedClubs[0].logo ?? null,
-        } : null,
-        clubHistory: recruiter.linkedClubs?.map(club => ({
-          clubName: club.name,
-          role: recruiter.position,
-          startDate: '',
-          endDate: '',
-          currentClub: false,
-        })) ?? [],
-      };
-      const pdfBlob = await generateRecruiterCV(recruiterCVData, language);
-      const url = URL.createObjectURL(pdfBlob);
-      const link = document.createElement('a');
-      link.href = url;
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
-      link.download = `${recruiter.firstName}_${recruiter.lastName}_Recruiter_CV_${language.toUpperCase()}_${timestamp}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Error exporting CV:', error);
-      alert('Fehler bim CV Export');
-    } finally {
-      setExportingCV(false);
-      setShowCVLangPopup(false);
-    }
-  };
+// Example: Move this handler inside the component, after recruiter is defined
+const handleExportCV = async (language: string) => {
+  if (!recruiter) return;
+  setExportingCV(true);
+  try {
+    const recruiterCVData = {
+      firstName: recruiter.firstName,
+      lastName: recruiter.lastName,
+      organization: recruiter.organization,
+      position: recruiter.position,
+      city: recruiter.city,
+      canton: recruiter.canton,
+      bio: recruiter.bio,
+      phone: recruiter.phone,
+      website: recruiter.website,
+      positionsLookingFor: recruiter.positionsLookingFor ?? [],
+      achievements: recruiter.achievements ?? [],
+      profileImage: recruiter.profileImage ?? null,
+      instagram: recruiter.instagram ?? null,
+      tiktok: recruiter.tiktok ?? null,
+      youtube: recruiter.youtube ?? null,
+      facebook: recruiter.facebook ?? null,
+      user: { email: recruiter.user.email },
+      club: recruiter.linkedClubs && recruiter.linkedClubs.length > 0 ? {
+        name: recruiter.linkedClubs[0].name,
+        logo: recruiter.linkedClubs[0].logo ?? null,
+      } : null,
+      clubHistory: recruiter.linkedClubs?.map((club: { name: string }) => ({
+        clubName: club.name,
+        role: recruiter.position,
+        startDate: '',
+        endDate: '',
+        currentClub: false,
+      })) ?? [],
+      // Add required RecruiterData fields
+      age: recruiter.age ?? '',
+      nationality: recruiter.nationality ?? '',
+      coachRole: recruiter.coachRole ?? recruiter.position ?? '',
+      genderCoached: recruiter.genderCoached ?? [],
+      preferredLanguage: recruiter.preferredLanguage ?? null,
+      province: recruiter.province ?? null,
+    };
+    const pdfBlob = await generateRecruiterCV(recruiterCVData, language);
+    const url = URL.createObjectURL(pdfBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+    link.download = `${recruiter.firstName}_${recruiter.lastName}_Recruiter_CV_${language.toUpperCase()}_${timestamp}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Error exporting CV:', error);
+    alert('Fehler bim CV Export');
+  } finally {
+    setExportingCV(false);
+    setShowCVLangPopup(false);
+  }
+};
 
   const BACKGROUND_OPTIONS = [
     { id: "solid-blue", name: "Blau", style: "#2563eb" },
@@ -385,7 +339,7 @@ export default function RecruiterProfile({ params }: RecruiterProfileProps) {
                   <div className="bg-white dark:bg-gray-900 rounded-lg p-6 shadow">
                     <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Associated Clubs</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {recruiter.linkedClubs.map((club) => (
+                      {recruiter.linkedClubs.map((club: any) => (
                         <Link
                           key={club.id}
                           href={`/clubs/${club.id}`}

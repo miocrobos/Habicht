@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import { PaintBucket, Save, Loader2, Plus, Trash2, X, ZoomIn, RefreshCcw, Trophy, FileText } from "lucide-react";
+import { BackgroundPickerModal, BackgroundOption } from "@/components/shared/BackgroundPickerModal";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ImageUpload from "@/components/shared/ImageUpload";
 import CountrySelect from "@/components/shared/CountrySelect";
@@ -48,6 +49,8 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
   const [customColor, setCustomColor] = useState("#2563eb");
   const [backgroundImage, setBackgroundImage] = useState("");
   const [showZoom, setShowZoom] = useState<false | "background" | "profile">(false);
+  const [showBgModal, setShowBgModal] = useState(false);
+  const [savingBg, setSavingBg] = useState(false);
   const [cvExportType, setCvExportType] = useState<string | null>(null);
   const [cvExportLang, setCvExportLang] = useState<string | null>(null);
   const [showCvTypePopup, setShowCvTypePopup] = useState(false);
@@ -123,54 +126,48 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
             {t(error)}
           </div>
         )}
-        {/* Background Picker Section */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-            <PaintBucket className="w-6 h-6 text-habicht-600" /> Profil-Hintergrund
-          </h2>
-          <div className="mb-4 flex flex-wrap gap-3 items-center">
-            {BACKGROUND_OPTIONS.map(bg => (
-              <button
-                key={bg.id}
-                type="button"
-                onClick={() => setSelectedBg(bg)}
-                className={`w-10 h-10 rounded-full border-4 flex items-center justify-center transition-all duration-150 ${selectedBg?.id === bg.id ? "border-habicht-600 scale-110" : "border-gray-300 dark:border-gray-600"}`}
-                style={{ background: bg.style }}
-                aria-label={bg.name}
-              >
-                {selectedBg?.id === bg.id && <span className="text-white text-lg font-bold">★</span>}
-              </button>
-            ))}
-            {/* Custom Color Picker */}
-            <ColorPicker value={customColor} onChange={v => {
-              setCustomColor(v);
-              setSelectedBg({ id: "custom", name: "Custom", style: v });
-            }} />
-          </div>
-          <div className="mb-4">
-            <ImageUpload
-              label="Hintergrundbild hochladen (optional)"
-              value={backgroundImage}
-              onChange={setBackgroundImage}
-              aspectRatio="banner"
-              helpText="Empfohlen: Querformat, max. 5MB."
-            />
-            {backgroundImage && (
-              <button
-                type="button"
-                className="mt-2 flex items-center gap-2 text-habicht-600 hover:underline"
-                onClick={() => setShowZoom("background")}
-              >
-                <ZoomIn className="w-5 h-5" /> Bild vergrößern
-              </button>
-            )}
-          </div>
-          {/* Live Preview */}
-          <div className="mt-4">
-            <div style={{ background: backgroundImage ? `url(${backgroundImage}) center/cover no-repeat` : selectedBg.id === "custom" ? customColor : selectedBg.style, position: "relative", minHeight: "180px", borderRadius: "1rem", overflow: "hidden" }} className="relative w-full h-40 flex items-center justify-center">
-              <div className="absolute inset-0 bg-black/10 dark:bg-black/20" style={{ pointerEvents: "none" }} />
-              <span className="relative z-10 text-white text-lg font-semibold drop-shadow-lg">Live Vorschau</span>
-            </div>
+        {/* Background change button (owner only) */}
+        <button
+          className="px-4 py-2 bg-gray-700 text-white rounded-lg mb-4"
+          onClick={() => setShowBgModal(true)}
+        >
+          {t('hybridProfile.changeBackground') || 'Hintergrund Ändere'}
+        </button>
+
+        {/* Background Modal */}
+        <BackgroundPickerModal
+          onClose={() => setShowBgModal(false)}
+          onSave={async (bg: { id: string; name: string; style: string }, image: string) => {
+            setSavingBg(true);
+            try {
+              await axios.put(`/api/hybrids/${params.id}`, {
+                hybridData: {
+                  ...profile,
+                  backgroundGradient: bg.id,
+                  customColor: bg.id === 'custom' ? bg.style : '',
+                  backgroundImage: image || '',
+                }
+              });
+              setShowBgModal(false);
+              setProfile((prev: any) => prev ? { ...prev, backgroundGradient: bg.id, customColor: bg.id === 'custom' ? bg.style : '', backgroundImage: image || '' } : prev);
+            } catch (error) {
+              alert('Fehler beim Speichern des Hintergrunds');
+            } finally {
+              setSavingBg(false);
+            }
+          }}
+          backgroundOptions={BACKGROUND_OPTIONS}
+          initialBg={selectedBg}
+          initialCustomColor={customColor}
+          initialImage={backgroundImage}
+          loading={savingBg}
+        />
+
+        {/* Live Preview (outside modal) */}
+        <div className="mt-4">
+          <div style={{ background: backgroundImage ? `url(${backgroundImage}) center/cover no-repeat` : selectedBg.id === 'custom' ? customColor : selectedBg.style, position: 'relative', minHeight: '180px', borderRadius: '1rem', overflow: 'hidden' }} className="relative w-full h-40 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black/10 dark:bg-black/20" style={{ pointerEvents: 'none' }} />
+            <span className="relative z-10 text-white text-lg font-semibold drop-shadow-lg">Live Vorschau</span>
           </div>
         </div>
         {/* CV Export Section */}

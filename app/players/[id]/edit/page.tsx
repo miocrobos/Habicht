@@ -315,56 +315,6 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        {/* Background Picker Section */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-            <PaintBucket className="w-6 h-6 text-habicht-600" /> Profil-Hintergrund
-          </h2>
-          <div className="mb-4 flex flex-wrap gap-3 items-center">
-            {BACKGROUND_OPTIONS.map(bg => (
-              <button
-                key={bg.id}
-                type="button"
-                onClick={() => {
-                  setBgLoading(true);
-                  setTimeout(() => {
-                    setSelectedBg(bg);
-                    setFormData((prev: any) => ({ ...prev, backgroundGradient: bg.id }));
-                    setBgLoading(false);
-                  }, 400);
-                }}
-                className={`w-10 h-10 rounded-full border-4 flex items-center justify-center transition-all duration-150 ${selectedBg?.id === bg.id ? "border-habicht-600 scale-110" : "border-gray-300 dark:border-gray-600"}`}
-                style={{ background: bg.style }}
-                aria-label={bg.name}
-              >
-                {selectedBg?.id === bg.id && !bgLoading && <span className="text-white text-lg font-bold">✓</span>}
-                {selectedBg?.id === bg.id && bgLoading && <Loader2 className="w-5 h-5 animate-spin text-white" />}
-              </button>
-            ))}
-            <input
-              type="color"
-              value={customColor}
-              onChange={e => {
-                setBgLoading(true);
-                setTimeout(() => {
-                  setCustomColor(e.target.value);
-                  setSelectedBg({ id: "custom", name: "Custom", style: e.target.value });
-                  setFormData((prev: any) => ({ ...prev, customColor: e.target.value, backgroundGradient: "custom" }));
-                  setBgLoading(false);
-                }, 400);
-              }}
-              className="w-10 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full cursor-pointer"
-              aria-label="Custom Color Picker"
-              style={{ background: customColor }}
-            />
-          </div>
-          <div className="mt-4">
-            <div style={{ background: selectedBg.id === "custom" ? customColor : selectedBg.style, borderRadius: "0.5rem" }} className="relative w-full h-40 flex items-center justify-center">
-              <div className="absolute inset-0 bg-black/10 dark:bg-black/20" style={{ pointerEvents: "none" }} />
-              <span className="relative z-10 text-white text-lg font-semibold drop-shadow-lg">Live Vorschau</span>
-            </div>
-          </div>
-        </div>
         {/* Header */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">

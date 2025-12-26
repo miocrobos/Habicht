@@ -35,6 +35,7 @@ function ErrorBoundary({ error }: { error: any }) {
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown, Bookmark, BookmarkCheck } from 'lucide-react'
+import { BackgroundPickerModal } from '@/components/shared/BackgroundPickerModal';
 import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
 import ClubBadge from '@/components/shared/ClubBadge'
@@ -1357,101 +1358,33 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
       {/* Background Image Modal */}
       {showBackgroundModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('playerProfile.changeBackground')}</h3>
-              <button
-                onClick={() => {
-                  setShowBackgroundModal(false)
-                  setNewBackgroundImage('')
-                }}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            <div className="space-y-6">
-              {/* Color Selector */}
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('playerProfile.selectColor')}</h4>
-                <div className="grid grid-cols-4 gap-4 mb-4">
-                  {BACKGROUND_OPTIONS.map(bg => (
-                    <button
-                      key={bg.id}
-                      className="rounded-lg border-2 border-gray-500 h-24"
-                      style={{ background: bg.style }}
-                      onClick={() => setSelectedBgOption(bg.id)}
-                    />
-                  ))}
-                </div>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-white">Oder</span>
-                  <input
-                    type="color"
-                    value={customColor}
-                    onChange={e => setCustomColor(e.target.value)}
-                    className="w-10 h-10 border-2 border-gray-300 rounded-full cursor-pointer"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-white mb-2">Wähl Es Neus Hintergrundbild</label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={e => {
-                      const file = e.target.files?.[0];
-                      if (file) {
-                        const reader = new FileReader();
-                        reader.onload = ev => setBackgroundImage(ev.target?.result as string);
-                        reader.readAsDataURL(file);
-                      }
-                    }}
-                    className="block w-full text-white"
-                  />
-                  {backgroundImage && (
-                    <img src={backgroundImage} alt="Preview" className="mt-2 rounded-lg max-h-32" />
-                  )}
-                </div>
-              </div>
-              <button
-                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg"
-                onClick={async () => {
-                  let bgId = selectedBgOption;
-                  let bgStyle = customColor;
-
-                  // If a preset color is selected, use its style
-                  if (bgId) {
-                    const bg = BACKGROUND_OPTIONS.find(opt => opt.id === bgId);
-                    if (bg) bgStyle = bg.style;
-                  }
-
-                  try {
-                    await axios.put(`/api/players/${params.id}`, {
-                      playerData: {
-                        ...player,
-                        backgroundGradient: bgId || null,
-                        coverImage: null,
-                      }
-                    });
-                    setSelectedBg({ id: bgId || 'custom', name: 'Custom', style: bgStyle });
-                    setCustomBgImage(null);
-                    setShowBackgroundModal(false);
-                    setShowBgModal(false);
-                    setNewBackgroundImage('');
-                  } catch (error) {
-                    alert('Fehler beim Speichern des Hintergrunds');
-                  }
-                }}
-              >
-                Speichern
-              </button>
-            </div>
-          </div>
-        </div>
+        <BackgroundPickerModal
+          onClose={() => {
+            setShowBackgroundModal(false);
+            setNewBackgroundImage('');
+          }}
+          onSave={async (bg) => {
+            try {
+              await axios.put(`/api/players/${params.id}`, {
+                playerData: {
+                  ...player,
+                  backgroundGradient: bg,
+                }
+              });
+              const savedBg = BACKGROUND_OPTIONS.find(option => option.id === String(bg));
+              if (savedBg) setSelectedBg(savedBg);
+              setShowBackgroundModal(false);
+              setNewBackgroundImage('');
+            } catch (error) {
+              alert('Fehler beim Speichern des Hintergrunds');
+            }
+          }}
+          backgroundOptions={BACKGROUND_OPTIONS}
+          initialBg={selectedBg}
+          initialCustomColor={customColor}
+          initialImage={backgroundImage}
+          loading={false}
+        />
       )}
 
       {/* Chat Window */}

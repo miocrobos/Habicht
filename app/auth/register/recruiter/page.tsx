@@ -798,7 +798,7 @@ export default function RecruiterRegisterPage() {
 
                         <label className={`flex items-center space-x-2 cursor-pointer p-3 rounded-lg border-2 transition ${
                           club.currentClub 
-                            ? 'bg-green-50 dark:bg-green-900/20 border-green-500 dark:border-green-600' 
+                            ? 'bg-green-100 dark:bg-green-900/30 border-green-500 dark:border-green-600 shadow-md' 
                             : 'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
                         }`}>
                           <input 

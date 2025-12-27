@@ -1,4 +1,3 @@
-
 'use client'
 import { toast } from 'react-hot-toast';
 
@@ -7,6 +6,7 @@ import Image from 'next/image'
 import { X, Upload, ChevronLeft, ChevronRight, Plus } from 'lucide-react'
 import axios from 'axios'
 import ImageUpload from './ImageUpload'
+import { useHeader } from '@/contexts/HeaderContext'
 
 interface Photo {
   id: string
@@ -28,6 +28,7 @@ export default function PhotoGallery({ playerId, isOwner, isVerified }: PhotoGal
   const [newPhotoUrl, setNewPhotoUrl] = useState('')
   const [uploading, setUploading] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const { collapsed } = useHeader()
 
   useEffect(() => {
     fetchPhotos()
@@ -208,8 +209,11 @@ export default function PhotoGallery({ playerId, isOwner, isVerified }: PhotoGal
         <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
           <button
             onClick={() => setSelectedIndex(null)}
-            className="absolute top-4 right-4 text-white hover:text-red-400 bg-black bg-opacity-60 rounded-full p-2 z-50"
-            style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}
+            className="absolute right-4 text-white hover:text-red-400 bg-black bg-opacity-60 rounded-full p-2 z-50 transition-all duration-300"
+            style={{ 
+              top: collapsed ? '1rem' : '5rem',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.3)' 
+            }}
           >
             <X className="w-10 h-10" />
           </button>
@@ -222,7 +226,13 @@ export default function PhotoGallery({ playerId, isOwner, isVerified }: PhotoGal
             <ChevronLeft className="w-12 h-12" />
           </button>
 
-          <div className="relative w-full max-w-4xl h-full max-h-[80vh] flex items-center justify-center p-4">
+          <div 
+            className="relative w-full max-w-4xl h-full flex items-center justify-center p-4 transition-all duration-300"
+            style={{
+              maxHeight: collapsed ? '80vh' : 'calc(80vh - 4rem)',
+              marginTop: collapsed ? '0' : '4rem'
+            }}
+          >
             <Image
               src={photos[selectedIndex].photoUrl}
               alt={`Photo ${selectedIndex + 1}`}

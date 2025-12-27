@@ -7,6 +7,7 @@ import { Mail, Lock, User, Calendar, Globe, Video, Award, Activity, Trophy, Plus
 import ImageUpload from '@/components/shared/ImageUpload';
 import VideoUpload from '@/components/shared/VideoUpload';
 import StarRating from '@/components/shared/StarRating';
+import CountrySelect from '@/components/shared/CountrySelect';
 import { useLanguage } from '@/contexts/LanguageContext';
 import StepIndicator from '@/components/shared/StepIndicator';
 
@@ -1072,14 +1073,12 @@ export default function PlayerRegisterPage() {
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                   <Globe className="w-4 h-4 inline mr-1" />{t('register.country')} *
                                 </label>
-                                <select
+                                <CountrySelect
                                   value={club.country}
-                                  onChange={(e) => updateClubExperience(club.id, 'country', e.target.value)}
-                                  required
+                                  onChange={(value) => updateClubExperience(club.id, 'country', value)}
                                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
-                                >
-                                  {NATIONALITIES.map(country => <option key={country} value={country}>{getCountryLabel(country, t)}</option>)}
-                                </select>
+                                  placeholder={t('register.selectCountry') || 'Select Country'}
+                                />
                               </div>
                             </div>
 
@@ -1140,7 +1139,7 @@ export default function PlayerRegisterPage() {
 
                             <label className={`flex items-center space-x-2 cursor-pointer p-3 rounded-lg border-2 transition ${
                               club.currentClub 
-                                ? 'bg-green-50 dark:bg-green-900/20 border-green-500 dark:border-green-600' 
+                                ? 'bg-green-100 dark:bg-green-900/30 border-green-500 dark:border-green-600 shadow-md' 
                                 : 'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
                             }`}>
                               <input
@@ -1175,7 +1174,7 @@ export default function PlayerRegisterPage() {
                 </div>
 
                 {/* Looking For Club Toggle */}
-                <div className="bg-teal-50 dark:bg-gray-700 border border-teal-200 dark:border-gray-600 rounded-lg p-5">
+                <div className={`border rounded-lg p-5 ${formData.lookingForClub ? 'bg-teal-100 dark:bg-teal-900/30 border-teal-500 dark:border-teal-500' : 'bg-teal-50 dark:bg-gray-700 border-teal-200 dark:border-gray-600'}`}>
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="checkbox"

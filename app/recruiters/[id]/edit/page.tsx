@@ -195,7 +195,7 @@ export default function RecruiterProfileEditPage({ params }: { params: { id: str
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Land / Country</label>
                         <CountrySelect
-                          value={club.country || 'Switzerland'}
+                          value={club.country || ''}
                           onChange={v => {
                             const updated = clubHistory.map((c, i) => i === index ? { ...c, country: v } : c);
                             setClubHistory(updated);

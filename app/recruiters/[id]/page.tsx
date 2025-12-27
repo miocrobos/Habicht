@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { toast } from 'react-hot-toast';
 import Image from 'next/image'
 import Link from 'next/link'
@@ -36,6 +36,7 @@ export default function RecruiterProfilePage({ params }: PageProps) {
   const [selectedBg, setSelectedBg] = useState<string>('solid-blue');
   const [customColor, setCustomColor] = useState<string>('#2563eb');
   const [backgroundImage, setBackgroundImage] = useState<string>('');
+  const backgroundLoadedRef = useRef(false);
   const { data: session } = useSession();
   const { t } = useLanguage();
 
@@ -133,15 +134,70 @@ const handleExportCV = async (language: string) => {
         const response = await axios.get(`/api/recruiters/${params.id}`);
         if (response.data && response.data.recruiter) {
           setRecruiter(response.data.recruiter);
-          // Highlight custom color if set
-          if (response.data.recruiter.customColor) {
-            setSelectedBg('custom');
-            setCustomColor(response.data.recruiter.customColor);
-          } else if (response.data.recruiter.backgroundGradient) {
-            setSelectedBg(response.data.recruiter.backgroundGradient);
-            const found = BACKGROUND_OPTIONS.find(bg => bg.id === response.data.recruiter.backgroundGradient);
-            setCustomColor(found ? found.style : '#2563eb');
-          } else {
+          
+          // Only load background once on initial load
+          if (backgroundLoadedRef.current) {
+            setLoading(false);
+            return;
+          }
+          backgroundLoadedRef.current = true;
+          
+          // Parse server background data
+          let serverBg = null;
+          try {
+            if (response.data.recruiter.customColor) {
+              serverBg = JSON.parse(response.data.recruiter.customColor);
+            }
+          } catch (e) {
+            // If parsing fails, treat as old format (plain color string)
+            serverBg = { customColor: response.data.recruiter.customColor };
+          }
+          
+          // Try to load from localStorage first for client-side persistence
+          let bgLoaded = false;
+          try {
+            const savedBg = localStorage.getItem(`profileBackground_recruiter_${params.id}`);
+            if (savedBg) {
+              const parsed = JSON.parse(savedBg);
+              setSelectedBg(parsed.selectedBg?.id || parsed.selectedBg || 'solid-blue');
+              setCustomColor(parsed.customColor || '#2563eb');
+              setBackgroundImage(parsed.backgroundImage || '');
+              bgLoaded = true;
+              return; // Stop processing - localStorage data loaded successfully
+            }
+          } catch (e) {
+            console.error('Failed to load background from localStorage:', e);
+          }
+          
+          // If no localStorage, use server data and save to localStorage
+          if (!bgLoaded && serverBg) {
+            let bgId = 'solid-blue';
+            let color = '#2563eb';
+            let image = '';
+            
+            if (serverBg.backgroundImage) {
+              setBackgroundImage(serverBg.backgroundImage);
+              setSelectedBg('image');
+              bgId = 'image';
+              image = serverBg.backgroundImage;
+            } else if (serverBg.backgroundGradient) {
+              setSelectedBg(serverBg.backgroundGradient);
+              const found = BACKGROUND_OPTIONS.find(bg => bg.id === serverBg.backgroundGradient);
+              color = found ? found.style : '#2563eb';
+              bgId = serverBg.backgroundGradient;
+              setCustomColor(color);
+            } else if (serverBg.customColor) {
+              setSelectedBg('custom');
+              setCustomColor(serverBg.customColor);
+              bgId = 'custom';
+              color = serverBg.customColor;
+            } else {
+              setSelectedBg('solid-blue');
+              setCustomColor('#2563eb');
+            }
+            
+            // Don't save server data to localStorage - only user changes should be saved
+          } else if (!bgLoaded) {
             setSelectedBg('solid-blue');
             setCustomColor('#2563eb');
           }
@@ -184,7 +240,16 @@ const handleExportCV = async (language: string) => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       {/* Cover Image */}
-      <div className="relative h-64 bg-gradient-to-r from-purple-600 to-purple-800">
+      <div 
+        className="relative h-64"
+        style={{
+          background: backgroundImage 
+            ? `url(${backgroundImage}) center/cover no-repeat` 
+            : selectedBg === 'custom' || customColor !== '#2563eb'
+            ? customColor
+            : getGradientStyle(selectedBg)
+        }}
+      >
         {recruiter.coverImage && (
           <Image
             src={recruiter.coverImage}
@@ -463,17 +528,37 @@ const handleExportCV = async (language: string) => {
           onSave={async (bg, image) => {
             setSavingBg(true);
             try {
-              await axios.put(`/api/recruiters/${params.id}/background`, {
-                backgroundGradient: bg.id,
-                customColor: bg.id === 'custom' ? bg.style : '',
+              // Save background data as JSON in customColor field
+              const backgroundData = JSON.stringify({
+                backgroundGradient: bg.id !== 'custom' && bg.id !== 'image' ? bg.id : '',
+                customColor: bg.style,
                 backgroundImage: image || '',
               });
-              // Refresh recruiter data from backend
-              const recruiterResponse = await axios.get(`/api/recruiters/${params.id}`);
-              const updatedRecruiter = recruiterResponse.data.recruiter;
-              setRecruiter(updatedRecruiter);
+              
+              await axios.put(`/api/recruiters/${params.id}/background`, {
+                customColor: backgroundData,
+              });
+              
+              // Update local state immediately
+              setSelectedBg(bg.id);
+              setCustomColor(bg.style);
+              setBackgroundImage(image || '');
+              
+              // Save to localStorage
+              try {
+                localStorage.setItem(`profileBackground_recruiter_${params.id}`, JSON.stringify({
+                  selectedBg: bg.id,
+                  customColor: bg.style,
+                  backgroundImage: image || ''
+                }));
+              } catch (e) {
+                console.error('Failed to save to localStorage:', e);
+              }
+              
               setShowBgModal(false);
+              toast.success('Hintergrund gespeichert');
             } catch (error) {
+              console.error('Background save error:', error);
               toast.error('Fehler beim Speichern des Hintergrunds');
             } finally {
               setSavingBg(false);

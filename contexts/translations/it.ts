@@ -1075,6 +1075,9 @@
       optional: 'Opzionale',
       required: 'Obbligatorio',
       selectAll: 'Tutti applicabili',
+      country: 'Paese',
+      submitClub: 'Segnala club',
+      createAccount: 'Crea account',
     },
     // Video (placeholder - English text for now)
     video: {

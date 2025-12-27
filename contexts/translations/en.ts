@@ -1216,6 +1216,7 @@
       achievementsPlaceholder: 'e.g. Swiss Champion 2023, NLA Promotion...',
       clubSubmit: 'Submit Club',
       submitClub: 'Submit Club',
+      country: 'Country',
       clubAffiliations: 'Club Affiliations',
       createHybridAccount: 'Create Hybrid Account',
     },

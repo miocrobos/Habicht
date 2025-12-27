@@ -1046,6 +1046,9 @@
       optional: 'Optional',
       required: 'Pflicht',
       selectAll: 'Alli wo zuetreffe',
+      country: 'Land',
+      submitClub: 'Club Mälde',
+      createAccount: 'Konto erstelle',
     },
     registrationSuccess: {
       title: 'Konto Erfolgriich Erstellt!',

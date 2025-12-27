@@ -1,7 +1,7 @@
 
 "use client";
 import { toast } from 'react-hot-toast';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import axios from "axios";
@@ -57,6 +57,7 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
   const [cvExportLang, setCvExportLang] = useState<string | null>(null);
   const [showCvTypePopup, setShowCvTypePopup] = useState(false);
   const [showCvLangPopup, setShowCvLangPopup] = useState(false);
+  const backgroundLoadedRef = useRef(false);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -73,18 +74,75 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
       const response = await axios.get(`/api/hybrids/${params.id}`);
       const hybrid = response.data.hybrid;
       setProfile(hybrid);
-      if (hybrid.customColor) {
-        setSelectedBg({ id: 'custom', name: 'Custom', style: hybrid.customColor });
-        setCustomColor(hybrid.customColor);
-      } else if (hybrid.backgroundGradient) {
-        const found = BACKGROUND_OPTIONS.find(bg => bg.id === hybrid.backgroundGradient) || BACKGROUND_OPTIONS[0];
-        setSelectedBg(found);
-        setCustomColor(found.style);
-      } else {
-        setSelectedBg(BACKGROUND_OPTIONS[0]);
-        setCustomColor(BACKGROUND_OPTIONS[0].style);
+      
+      // Only load background once on initial load
+      if (backgroundLoadedRef.current) {
+        setLoading(false);
+        return;
       }
-      setBackgroundImage(hybrid.backgroundImage || "");
+      backgroundLoadedRef.current = true;
+      
+      // Parse server background data
+      let serverBg = null;
+      try {
+        if (hybrid.customColor) {
+          serverBg = JSON.parse(hybrid.customColor);
+        }
+      } catch (e) {
+        // If parsing fails, treat as old format
+        serverBg = { 
+          backgroundGradient: hybrid.backgroundGradient,
+          customColor: hybrid.customColor,
+          backgroundImage: hybrid.backgroundImage
+        };
+      }
+      
+      // Try to load from localStorage first for client-side persistence
+      let bgLoaded = false;
+      try {
+        const savedBg = localStorage.getItem(`profileBackground_hybrid_${params.id}`);
+        if (savedBg) {
+          const parsed = JSON.parse(savedBg);
+          const bgOption = BACKGROUND_OPTIONS.find(bg => bg.id === (parsed.selectedBg?.id || parsed.selectedBg)) || { id: 'custom', name: 'Custom', style: parsed.customColor || '#2563eb' };
+          setSelectedBg(bgOption);
+          setCustomColor(parsed.customColor || '#2563eb');
+          setBackgroundImage(parsed.backgroundImage || '');
+          bgLoaded = true;
+          setLoading(false);
+          return; // Stop processing - localStorage data loaded successfully
+        }
+      } catch (e) {
+        console.error('Failed to load background from localStorage:', e);
+      }
+      
+      // If no localStorage, use server data and save to localStorage
+      if (!bgLoaded && serverBg) {
+        let bgId = 'solid-blue';
+        let color = '#2563eb';
+        let image = '';
+        
+        if (serverBg.backgroundImage) {
+          setBackgroundImage(serverBg.backgroundImage);
+          bgId = 'image';
+          image = serverBg.backgroundImage;
+        } else if (serverBg.backgroundGradient) {
+          const found = BACKGROUND_OPTIONS.find(bg => bg.id === serverBg.backgroundGradient) || BACKGROUND_OPTIONS[0];
+          setSelectedBg(found);
+          setCustomColor(found.style);
+          bgId = serverBg.backgroundGradient;
+          color = found.style;
+        } else if (serverBg.customColor) {
+          setSelectedBg({ id: 'custom', name: 'Custom', style: serverBg.customColor });
+          setCustomColor(serverBg.customColor);
+          bgId = 'custom';
+          color = serverBg.customColor;
+        } else {
+          setSelectedBg(BACKGROUND_OPTIONS[0]);
+          setCustomColor(BACKGROUND_OPTIONS[0].style);
+        }
+        
+        // Don't save server data to localStorage - only user changes should be saved
+      }
       setLoading(false);
     } catch (err) {
       setError(t("hybridProfile.errorLoadingHybridData"));
@@ -149,16 +207,38 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
           onSave={async (bg: { id: string; name: string; style: string }, image: string) => {
             setSavingBg(true);
             try {
-              await axios.put(`/api/hybrids/${params.id}/background`, {
-                backgroundGradient: bg.id,
-                customColor: bg.id === 'custom' ? bg.style : '',
+              // Prepare background data to save
+              const backgroundData = {
+                backgroundGradient: bg.id !== 'custom' ? bg.id : '',
+                customColor: bg.id === 'custom' ? bg.style : bg.style,
                 backgroundImage: image || '',
+              };
+              
+              // Save as JSON string in customColor field
+              const backgroundJson = JSON.stringify(backgroundData);
+              
+              await axios.put(`/api/hybrids/${params.id}/background`, {
+                customColor: backgroundJson,
               });
-              // Refresh hybrid profile data from backend
-              const hybridResponse = await axios.get(`/api/hybrids/${params.id}`);
-              const updatedHybrid = hybridResponse.data.hybrid;
-              setProfile(updatedHybrid);
+              
+              // Update local state
+              setSelectedBg(bg);
+              setCustomColor(bg.style);
+              setBackgroundImage(image || '');
+              
+              // Save to localStorage for persistence
+              try {
+                localStorage.setItem(`profileBackground_hybrid_${params.id}`, JSON.stringify({
+                  selectedBg: bg.id,
+                  customColor: bg.style,
+                  backgroundImage: image || ''
+                }));
+              } catch (e) {
+                console.error('Failed to save background to localStorage:', e);
+              }
+              
               setShowBgModal(false);
+              toast.success('Hintergrund gespeichert');
             } catch (error) {
               toast.error('Fehler beim Speichern des Hintergrunds');
             } finally {

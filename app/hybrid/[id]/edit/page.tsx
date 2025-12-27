@@ -310,7 +310,7 @@ export default function EditHybridProfilePage({ params }: { params: { id: string
 										   <div>
 											   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Land / Country</label>
 											   <select
-												   value={club.country || 'Switzerland'}
+												   value={club.country || ''}
 												   onChange={e => {
 													   const updated = clubHistory.map((c, i) => i === index ? { ...c, country: e.target.value } : c);
 													   setClubHistory(updated);

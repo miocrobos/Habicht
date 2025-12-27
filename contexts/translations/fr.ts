@@ -1057,6 +1057,8 @@
       optional: 'Optionnel',
       required: 'Requis',
       selectAll: 'Tous applicables',
+      country: 'Pays',
+      submitClub: 'Soumettre un club',
       createHybridAccount: 'Créer un compte hybride',
     },
     // Video (placeholder - English text for now)

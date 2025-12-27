@@ -1,5 +1,6 @@
 // Shared background options for all profile types
 export const BACKGROUND_OPTIONS = [
+  { id: "solid-red", name: "Rot", style: "#dc2626" },
   { id: "solid-blue", name: "Blau", style: "#2563eb" },
   { id: "solid-green", name: "Grün", style: "#16a34a" },
   { id: "solid-purple", name: "Lila", style: "#9333ea" },
@@ -8,9 +9,20 @@ export const BACKGROUND_OPTIONS = [
   { id: "solid-yellow", name: "Gelb", style: "#eab308" },
   { id: "solid-teal", name: "Türkis", style: "#14b8a6" },
   { id: "solid-indigo", name: "Indigo", style: "#6366f1" },
+  { id: "gradient-ocean", name: "Ocean", style: "linear-gradient(90deg, #43cea2, #185a9d)" },
+  { id: "gradient-sunset", name: "Sunset", style: "linear-gradient(90deg, #ff7e5f, #feb47b)" },
+  { id: "solid-green-2", name: "Grün 2", style: "#10b981" },
+  { id: "solid-red-2", name: "Rot 2", style: "#ef4444" },
+  { id: "solid-blue-2", name: "Blau 2", style: "#3b82f6" },
+  { id: "solid-green-3", name: "Grün 3", style: "#22c55e" },
+  { id: "solid-purple-2", name: "Lila 2", style: "#a855f7" },
+  { id: "solid-orange-2", name: "Orange 2", style: "#fb923c" },
+  { id: "solid-pink-2", name: "Pink 2", style: "#f472b6" },
+  { id: "solid-yellow-2", name: "Gelb 2", style: "#facc15" },
+  { id: "solid-teal-2", name: "Türkis 2", style: "#2dd4bf" },
+  { id: "solid-indigo-2", name: "Indigo 2", style: "#818cf8" },
   { id: "solid-dark", name: "Dunkel", style: "#1f2937" },
   { id: "solid-gray", name: "Grau", style: "#6b7280" },
   { id: "solid-black", name: "Schwarz", style: "#000000" },
-  { id: "solid-red", name: "Rot", style: "#dc2626" },
 ];
 

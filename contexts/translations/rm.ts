@@ -1072,6 +1072,9 @@
       optional: 'Opziunal',
       required: 'Obligatori',
       selectAll: 'Tuts applitgabels',
+      country: 'Pajais',
+      submitClub: 'Annunzchar club',
+      createAccount: 'Crear cont',
     },
     // Video (placeholder - English text for now)
     video: {

@@ -211,7 +211,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         id: club.id,
         clubName: club.clubName || '',
         logo: club.clubLogo || '',
-        country: club.clubCountry || 'Switzerland',
+        country: club.clubCountry || '',
         clubWebsiteUrl: club.clubWebsiteUrl || '',
         league: club.league || '',
         yearFrom: club.startDate ? new Date(club.startDate).getFullYear().toString() : '',
@@ -772,7 +772,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                         Land / Country
                       </label>
                       <CountrySelect
-                        value={club.country || 'Switzerland'}
+                        value={club.country || ''}
                         onChange={v => {
                           const updated = clubHistory.map((c) =>
                             c.id === club.id ? { ...c, country: v } : c

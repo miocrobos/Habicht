@@ -1061,6 +1061,9 @@
       optional: 'Optional',
       required: 'Erforderlich',
       selectAll: 'Alle zutreffenden',
+      country: 'Land',
+      submitClub: 'Club einreichen',
+      createAccount: 'Konto erstellen',
     },
     // Video (placeholder - English text for now)
     video: {

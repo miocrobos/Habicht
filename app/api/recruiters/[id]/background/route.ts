@@ -6,7 +6,7 @@ import { authOptions } from '@/lib/auth';
 // POST handler (legacy, not used by frontend)
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user?.id !== params.id) {
+  if (!session || session.user?.recruiterId !== params.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -28,13 +28,14 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 // PUT handler (used by frontend)
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user?.id !== params.id) {
+  if (!session || session.user?.recruiterId !== params.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   const body = await req.json();
 
   try {
+    // Accept customColor as JSON string from frontend (already stringified)
     await prisma.recruiter.update({
       where: { id: params.id },
       data: {
@@ -43,6 +44,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     });
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error('Error saving recruiter background:', error);
     return NextResponse.json({ error: 'recruiterProfile.errorSavingRecruiterData' }, { status: 500 });
   }
 }

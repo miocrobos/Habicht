@@ -6,6 +6,7 @@ import './globals.css'
 import { AuthProvider } from '@/components/providers/AuthProvider'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { LanguageProvider } from '@/contexts/LanguageContext'
+import { HeaderProvider } from '@/contexts/HeaderContext'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
@@ -69,13 +70,15 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <AuthProvider>
-              <div className="flex flex-col min-h-screen">
-                <Header />
-                <main className="flex-grow">
-                  {children}
-                </main>
-                <Footer />
-              </div>
+              <HeaderProvider>
+                <div className="flex flex-col min-h-screen">
+                  <Header />
+                  <main className="flex-grow">
+                    {children}
+                  </main>
+                  <Footer />
+                </div>
+              </HeaderProvider>
             </AuthProvider>
           </LanguageProvider>
         </ThemeProvider>

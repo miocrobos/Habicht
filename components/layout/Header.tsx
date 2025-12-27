@@ -8,10 +8,11 @@ import { useSession, signOut } from 'next-auth/react'
 import axios from 'axios'
 import NotificationPopup from '@/components/shared/NotificationPopup'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useHeader } from '@/contexts/HeaderContext'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [collapsed, setCollapsed] = useState(false)
+  const { collapsed, setCollapsed } = useHeader()
   const { data: session } = useSession()
   const [unreadCount, setUnreadCount] = useState(0)
   const [watchlistCount, setWatchlistCount] = useState(0)
@@ -98,13 +99,11 @@ export default function Header() {
             <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium">
               {t('nav.players')}
             </Link>
-            <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium flex flex-col items-center text-center gap-1">
-              <span>{t('nav.men')}</span>
-              <span className="text-2xl">♂</span>
+            <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium">
+              {t('nav.men')}
             </Link>
-            <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium flex flex-col items-center text-center gap-1">
-              <span>{t('nav.women')}</span>
-              <span className="text-2xl">♀</span>
+            <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium">
+              {t('nav.women')}
             </Link>
             <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium">
               {t('nav.clubs')}
@@ -196,13 +195,11 @@ export default function Header() {
               <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 {t('nav.players')}
               </Link>
-              <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium flex flex-col items-center text-center gap-1">
-                <span>{t('nav.men')}</span>
-                <span className="text-2xl">♂</span>
+              <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium">
+                {t('nav.men')}
               </Link>
-              <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium flex flex-col items-center text-center gap-1">
-                <span>{t('nav.women')}</span>
-                <span className="text-2xl">♀</span>
+              <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium">
+                {t('nav.women')}
               </Link>
               <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
                 {t('nav.clubs')}

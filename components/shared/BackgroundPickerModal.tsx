@@ -79,6 +79,7 @@ const BackgroundPickerModal: React.FC<Props> = React.memo(
         if (typeof onSavedBg === 'function') {
           onSavedBg(selectedBg, customColor, backgroundImage);
         }
+        // Note: localStorage is now handled by parent components with profile-specific keys
         // Show popup notification
         const popup = document.createElement('div');
         popup.textContent = 'Hintergrund gespeichert!';
@@ -115,14 +116,14 @@ const BackgroundPickerModal: React.FC<Props> = React.memo(
           className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-xs w-full p-3 sm:p-4 relative"
         >
           <button
-            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl leading-none"
+            className="absolute top-40 right-3 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 text-3xl leading-none z-10"
             onClick={onClose}
             aria-label="Schließen"
             tabIndex={0}
           >
             &times;
           </button>
-          <h2 className="text-lg font-bold mb-4 dark:text-white">Profilhintergrund wählen</h2>
+          <h2 className="text-lg font-bold mb-4 dark:text-white pr-8">Profilhintergrund wählen</h2>
           
           {/* Solid Color Swatches */}
           <div className="mb-4">

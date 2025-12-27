@@ -359,7 +359,7 @@ export async function PUT(
             clubId: clubId,
             clubName: club.clubName,
             clubLogo: club.logo || null,
-            clubCountry: club.country || 'Switzerland',
+            clubCountry: club.country || null,
             // Preserve existing website URL if it was already set, otherwise use new one
             clubWebsiteUrl: existingWebsiteUrls.get(club.clubName) || club.clubWebsiteUrl || null,
             league: club.league || null,

@@ -301,7 +301,7 @@ export async function POST(request: NextRequest) {
                     clubName: normalizedClubName, // Store normalized name in clubHistory
                     clubId: clubId,
                     clubLogo: club.logo || null,
-                    clubCountry: club.country || 'Switzerland',
+                    clubCountry: club.country || null,
                     clubWebsiteUrl: club.clubWebsiteUrl || null,
                     league: club.league || null,
                     startDate: club.yearFrom ? new Date(club.yearFrom, 0, 1) : new Date(),
@@ -572,7 +572,7 @@ export async function POST(request: NextRequest) {
             clubName: normalizedClubName,
             clubId: clubId,
             clubLogo: club.logo || null,
-            clubCountry: club.country || 'Switzerland',
+            clubCountry: club.country || null,
             clubWebsiteUrl: club.clubWebsiteUrl || null,
             league: club.league || null,
             startDate: club.startYear ? new Date(parseInt(club.startYear), 0, 1) : new Date(),

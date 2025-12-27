@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MapPin, Ruler, Weight, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown, Bookmark, BookmarkCheck } from 'lucide-react'
+import { Calendar, MapPin, Ruler, Scale, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown, Bookmark, BookmarkPlus } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
 import ClubBadge from '@/components/shared/ClubBadge'
@@ -59,6 +59,7 @@ interface PlayerData {
   profileImage: string | null
   coverImage: string | null
   backgroundGradient: string | null
+  customColor: string | null
   bio: string | null
   phone: string | null
   instagram: string | null
@@ -183,6 +184,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [showCVExportPopup, setShowCVExportPopup] = useState(false)
   const [isWatched, setIsWatched] = useState(false)
   const [watchlistLoading, setWatchlistLoading] = useState(false)
+  const backgroundLoadedRef = useRef(false)
 
   const isOwner = session?.user?.playerId === params.id
 
@@ -225,23 +227,80 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
   // Set gradient based on saved preference or default based on gender/role
   useEffect(() => {
-    if (player && session) {
-      // If player has a saved background gradient, use it
-      if (player.backgroundGradient) {
-        const savedBg = BACKGROUND_OPTIONS.find(bg => bg.id === player.backgroundGradient)
-        if (savedBg) {
-          setSelectedBg(savedBg)
-          return
+    if (player && session && !backgroundLoadedRef.current) {
+      backgroundLoadedRef.current = true
+      // Parse server background data
+      let serverBg = null;
+      try {
+        if (player.customColor) {
+          serverBg = JSON.parse(player.customColor);
         }
+      } catch (e) {
+        // If parsing fails, treat as old format
+        serverBg = { backgroundGradient: player.backgroundGradient };
       }
       
-      // Otherwise use default gradient based on gender and role
-      const defaultGradient = getDefaultGradient(player.gender, session.user?.role || 'PLAYER')
-      setSelectedBg({
-        id: 'dynamic',
-        name: 'Dynamic',
-        style: defaultGradient
-      })
+      // Try to load from localStorage first for client-side persistence
+      let bgLoaded = false;
+      try {
+        const savedBg = localStorage.getItem(`profileBackground_player_${params.id}`);
+        if (savedBg) {
+          const parsed = JSON.parse(savedBg);
+          const bgId = parsed.selectedBg?.id || parsed.selectedBg || 'solid-blue';
+          const found = BACKGROUND_OPTIONS.find(bg => bg.id === bgId);
+          if (found) {
+            setSelectedBg(found);
+          }
+          if (parsed.backgroundImage) {
+            setCustomBgImage(parsed.backgroundImage);
+          }
+          bgLoaded = true;
+          return; // Stop processing - localStorage data loaded successfully
+        }
+      } catch (e) {
+        console.error('Failed to load background from localStorage:', e);
+      }
+      
+      // If no localStorage, use server data and save to localStorage
+      if (!bgLoaded && serverBg) {
+        let bgId = 'solid-blue';
+        let bgImage = '';
+        
+        if (serverBg.backgroundImage) {
+          setCustomBgImage(serverBg.backgroundImage);
+          bgId = 'image';
+          bgImage = serverBg.backgroundImage;
+        } else if (serverBg.backgroundGradient) {
+          const found = BACKGROUND_OPTIONS.find(bg => bg.id === serverBg.backgroundGradient);
+          if (found) {
+            setSelectedBg(found);
+            bgId = serverBg.backgroundGradient;
+          }
+        } else if (serverBg.customColor) {
+          const found = BACKGROUND_OPTIONS.find(bg => bg.style === serverBg.customColor);
+          if (found) {
+            setSelectedBg(found);
+            bgId = found.id;
+          }
+        }
+        
+        // Don't save server data to localStorage - only user changes should be saved
+        // This prevents old server data from overwriting user's choice
+      } else if (!bgLoaded && player.backgroundGradient) {
+        // Fallback to old format
+        const savedBg = BACKGROUND_OPTIONS.find(bg => bg.id === player.backgroundGradient);
+        if (savedBg) {
+          setSelectedBg(savedBg);
+        }
+      } else if (!bgLoaded) {
+        // Use default gradient based on gender and role
+        const defaultGradient = getDefaultGradient(player.gender, session.user?.role || 'PLAYER');
+        setSelectedBg({
+          id: 'dynamic',
+          name: 'Dynamic',
+          style: defaultGradient
+        });
+      }
     }
   }, [player, session])
 
@@ -451,56 +510,30 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     try {
       setUploadingBackground(true)
       
-      // Get current player data first
-      const currentResponse = await axios.get(`/api/players/${params.id}`)
-      const currentPlayer = currentResponse.data.player
+      // Save background data as JSON in customColor field
+      const backgroundData = JSON.stringify({
+        backgroundGradient: '',
+        customColor: '',
+        backgroundImage: newBackgroundImage,
+      });
       
-      // Update with cover image
-      await axios.put(`/api/players/${params.id}`, {
-        playerData: {
-          firstName: currentPlayer.firstName,
-          lastName: currentPlayer.lastName,
-          dateOfBirth: currentPlayer.dateOfBirth,
-          gender: currentPlayer.gender,
-          nationality: currentPlayer.nationality,
-          canton: currentPlayer.canton,
-          city: currentPlayer.city,
-          municipality: currentPlayer.municipality,
-          height: currentPlayer.height,
-          weight: currentPlayer.weight,
-          spikeHeight: currentPlayer.spikeHeight,
-          blockHeight: currentPlayer.blockHeight,
-          phone: currentPlayer.phone,
-          employmentStatus: currentPlayer.employmentStatus,
-          occupation: currentPlayer.occupation,
-          schoolName: currentPlayer.schoolName,
-          positions: currentPlayer.positions,
-          profileImage: currentPlayer.profileImage,
-          coverImage: newBackgroundImage,  // Update background
-          backgroundGradient: null,  // Clear gradient when using custom image
-          instagram: currentPlayer.instagram,
-          tiktok: currentPlayer.tiktok,
-          youtube: currentPlayer.youtube,
-          highlightVideo: currentPlayer.highlightVideo,
-          swissVolleyLicense: currentPlayer.swissVolleyLicense,
-          skillReceiving: currentPlayer.skillReceiving,
-          skillServing: currentPlayer.skillServing,
-          skillAttacking: currentPlayer.skillAttacking,
-          skillBlocking: currentPlayer.skillBlocking,
-          skillDefense: currentPlayer.skillDefense,
-          bio: currentPlayer.bio,
-          lookingForClub: currentPlayer.lookingForClub,
-          showEmail: currentPlayer.showEmail,
-          showPhone: currentPlayer.showPhone,
-        },
-        clubHistory: currentPlayer.clubHistory || [],
-        achievements: currentPlayer.achievements || [],
+      await axios.put(`/api/players/${params.id}/background`, {
+        customColor: backgroundData,
       })
-
-      // Refresh player data
-      const playerResponse = await axios.get(`/api/players/${params.id}`)
-      setPlayer(playerResponse.data.player)
+      
+      // Update local state
       setCustomBgImage(newBackgroundImage)
+      
+      // Save to localStorage for persistence
+      try {
+        localStorage.setItem(`profileBackground_player_${params.id}`, JSON.stringify({
+          selectedBg: 'image',
+          customColor: '',
+          backgroundImage: newBackgroundImage
+        }));
+      } catch (e) {
+        console.error('Failed to save background to localStorage:', e);
+      }
       
       // Reset and close modal
       setShowBackgroundModal(false)
@@ -556,11 +589,17 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       <div 
         className="h-64 relative"
         style={{ 
-          background: (customBgImage || player.coverImage) ? 'transparent' : selectedBg.style,
-          backgroundImage: (customBgImage || player.coverImage) ? `url(${customBgImage || player.coverImage})` : 'none',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
+          ...(customBgImage || player.coverImage 
+            ? {
+                backgroundImage: `url(${customBgImage || player.coverImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }
+            : {
+                background: selectedBg.style
+              }
+          )
         }}
       >
         {/* Background change button (owner only) */}
@@ -835,7 +874,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     } ${watchlistLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                     title={isWatched ? t('watchlist.removeFromWatchlist') : t('watchlist.addToWatchlist')}
                   >
-                    {isWatched ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+                    {isWatched ? <BookmarkPlus className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
                     {isWatched ? t('watchlist.removeFromWatchlist') : t('watchlist.addToWatchlist')}
                   </button>
                 )}
@@ -1377,60 +1416,30 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           // Update player state immediately to show gradient
                           setPlayer(prev => prev ? { ...prev, coverImage: null, backgroundGradient: option.id } : prev)
                           
-                          // Save gradient/color to database
-                          const currentResponse = await axios.get(`/api/players/${params.id}`)
-                          const currentPlayer = currentResponse.data.player
+                          // Save background data as JSON in customColor field
+                          const backgroundData = JSON.stringify({
+                            backgroundGradient: option.id,
+                            customColor: option.style,
+                            backgroundImage: '',
+                          });
                           
-                          await axios.put(`/api/players/${params.id}`, {
-                            playerData: {
-                              firstName: currentPlayer.firstName,
-                              lastName: currentPlayer.lastName,
-                              dateOfBirth: currentPlayer.dateOfBirth,
-                              gender: currentPlayer.gender,
-                              nationality: currentPlayer.nationality,
-                              canton: currentPlayer.canton,
-                              city: currentPlayer.city,
-                              municipality: currentPlayer.municipality,
-                              currentLeague: currentPlayer.currentLeague,
-                              height: currentPlayer.height,
-                              weight: currentPlayer.weight,
-                              spikeHeight: currentPlayer.spikeHeight,
-                              blockHeight: currentPlayer.blockHeight,
-                              phone: currentPlayer.phone,
-                              employmentStatus: currentPlayer.employmentStatus,
-                              occupation: currentPlayer.occupation,
-                              schoolName: currentPlayer.schoolName,
-                              positions: currentPlayer.positions,
-                              profileImage: currentPlayer.profileImage,
-                              coverImage: null,  // Clear cover image to use gradient
-                              backgroundGradient: option.id,  // Save selected gradient ID
-                              instagram: currentPlayer.instagram,
-                              tiktok: currentPlayer.tiktok,
-                              youtube: currentPlayer.youtube,
-                              highlightVideo: currentPlayer.highlightVideo,
-                              swissVolleyLicense: currentPlayer.swissVolleyLicense,
-                              skillReceiving: currentPlayer.skillReceiving,
-                              skillServing: currentPlayer.skillServing,
-                              skillAttacking: currentPlayer.skillAttacking,
-                              skillBlocking: currentPlayer.skillBlocking,
-                              skillDefense: currentPlayer.skillDefense,
-                              bio: currentPlayer.bio,
-                              lookingForClub: currentPlayer.lookingForClub,
-                              showEmail: currentPlayer.showEmail,
-                              showPhone: currentPlayer.showPhone,
-                            },
-                            clubHistory: currentPlayer.clubHistory || [],
-                            achievements: currentPlayer.achievements || [],
+                          await axios.put(`/api/players/${params.id}/background`, {
+                            customColor: backgroundData,
                           })
                           
-                          // Refresh player data to ensure consistency
-                          const playerResponse = await axios.get(`/api/players/${params.id}`)
-                          setPlayer(playerResponse.data.player)
+                          // Save to localStorage for persistence
+                          try {
+                            localStorage.setItem(`profileBackground_player_${params.id}`, JSON.stringify({
+                              selectedBg: option.id,
+                              customColor: option.style,
+                              backgroundImage: ''
+                            }));
+                          } catch (e) {
+                            console.error('Failed to save background to localStorage:', e);
+                          }
                         } catch (error) {
                           console.error('Error updating background:', error)
-                          // Revert changes on error
-                          const playerResponse = await axios.get(`/api/players/${params.id}`)
-                          setPlayer(playerResponse.data.player)
+                          alert('Failed to save background. Please try again.')
                         }
                       }}
                       className={`h-20 rounded-lg transition-all hover:scale-105 hover:shadow-lg border-2 ${

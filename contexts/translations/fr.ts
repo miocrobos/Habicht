@@ -1051,7 +1051,7 @@
       creating: 'Création du compte...',
       login: 'Connexion',
       continueButton: 'Continuer →',
-      backButton: '← Retour',
+      backButton: 'Retour',
       step: 'Étape',
       of: 'sur',
       optional: 'Optionnel',

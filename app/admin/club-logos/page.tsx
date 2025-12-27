@@ -242,7 +242,7 @@ export default function ManageClubLogosPage() {
                 }}
                 className="text-sm text-gray-600 hover:text-gray-900"
               >
-                ← Zurück zur Liste
+                Zurück zur Liste
               </button>
             </div>
 

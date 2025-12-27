@@ -1055,7 +1055,7 @@
       login: 'Anmelden',
       alreadyHaveAccount: 'Haben Sie bereits ein Konto?',
       continueButton: 'Weiter →',
-      backButton: '← Zurück',
+      backButton: 'Zurück',
       step: 'Schritt',
       of: 'von',
       optional: 'Optional',

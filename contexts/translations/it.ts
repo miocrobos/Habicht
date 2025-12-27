@@ -1069,7 +1069,7 @@
       login: 'Accedi',
       alreadyHaveAccount: 'Hai già un account?',
       continueButton: 'Continua →',
-      backButton: '← Indietro',
+      backButton: 'Indietro',
       step: 'Passo',
       of: 'di',
       optional: 'Opzionale',

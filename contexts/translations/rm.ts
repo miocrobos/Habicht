@@ -1066,7 +1066,7 @@
       login: 'S\'annunziar',
       alreadyHaveAccount: 'Has ti gia in cont?',
       continueButton: 'Cuntinuar →',
-      backButton: '← Enavos',
+      backButton: 'Enavos',
       step: 'Pass',
       of: 'da',
       optional: 'Opziunal',

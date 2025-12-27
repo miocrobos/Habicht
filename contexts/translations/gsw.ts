@@ -1040,7 +1040,7 @@
       login: 'Aamelde',
       alreadyHaveAccount: 'Häsch scho es Konto?',
       continueButton: 'Wiiter →',
-      backButton: '← Zrügg',
+      backButton: 'Zrügg',
       step: 'Schritt',
       of: 'vo',
       optional: 'Optional',

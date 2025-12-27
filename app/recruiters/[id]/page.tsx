@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Briefcase, MapPin, Award, ExternalLink, Eye, Edit2, Phone, Mail, Camera, Building2, Globe, FileDown, FileText } from 'lucide-react'
 import { BackgroundPickerModal, BackgroundOption } from '@/components/shared/BackgroundPickerModal';
+import { BACKGROUND_OPTIONS } from '@/components/shared/backgroundOptions';
 import { useSession } from 'next-auth/react'
 import ClubBadge from '@/components/shared/ClubBadge'
 import RecruiterPhotoGallery from '@/components/shared/RecruiterPhotoGallery'
@@ -101,19 +102,7 @@ const handleExportCV = async (language: string) => {
   }
 };
 
-  const BACKGROUND_OPTIONS = [
-    { id: "solid-blue", name: "Blau", style: "#2563eb" },
-    { id: "solid-green", name: "Grün", style: "#16a34a" },
-    { id: "solid-purple", name: "Lila", style: "#9333ea" },
-    { id: "solid-orange", name: "Orange", style: "#f97316" },
-    { id: "solid-pink", name: "Pink", style: "#ec4899" },
-    { id: "solid-yellow", name: "Gelb", style: "#eab308" },
-    { id: "solid-teal", name: "Türkis", style: "#14b8a6" },
-    { id: "solid-indigo", name: "Indigo", style: "#6366f1" },
-    { id: "solid-dark", name: "Dunkel", style: "#1f2937" },
-    { id: "solid-gray", name: "Grau", style: "#6b7280" },
-    { id: "solid-black", name: "Schwarz", style: "#000000" },
-  ];
+  // Use shared BACKGROUND_OPTIONS from components/shared/backgroundOptions
 
   function getGradientStyle(id: string) {
     const gradients: Record<string, string> = {
@@ -452,64 +441,41 @@ const handleExportCV = async (language: string) => {
 
       {/* Background Change Modal */}
       {showBgModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-          <div className="bg-gray-900 rounded-lg shadow-lg p-8 relative max-w-2xl w-full">
-            <button
-              className="absolute top-4 right-4 text-3xl text-white"
-              onClick={() => setShowBgModal(false)}
-            >
-              &times;
-            </button>
-            <h2 className="text-3xl font-bold text-white mb-6">Hintergrund Ändere</h2>
-            <div className="mb-6">
-              <h3 className="text-xl font-semibold text-white mb-2">Farb Wähle</h3>
-              <div className="grid grid-cols-4 gap-4 mb-4">
-                {BACKGROUND_OPTIONS.map(bg => (
-                  <button
-                    key={bg.id}
-                    className="rounded-lg border-2 border-gray-500 h-24"
-                    style={{ background: bg.style }}
-                    onClick={() => setSelectedBg(bg.id)}
-                  />
-                ))}
-              </div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-white">Oder</span>
-                <input
-                  type="color"
-                  value={customColor}
-                  onChange={e => setCustomColor(e.target.value)}
-                  className="w-10 h-10 border-2 border-gray-300 rounded-full cursor-pointer"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-white mb-2">Wähl Es Neus Hintergrundbild</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={e => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      const reader = new FileReader();
-                      reader.onload = ev => setBackgroundImage(ev.target?.result as string);
-                      reader.readAsDataURL(file);
-                    }
-                  }}
-                  className="block w-full text-white"
-                />
-                {backgroundImage && (
-                  <img src={backgroundImage} alt="Preview" className="mt-2 rounded-lg max-h-32" />
-                )}
-              </div>
-            </div>
-            <button
-              className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg"
-              onClick={() => setShowBgModal(false)}
-            >
-              Speichern
-            </button>
-          </div>
-        </div>
+        <BackgroundPickerModal
+          key={
+            (recruiter?.backgroundGradient || 'solid-blue') +
+            (recruiter?.customColor || '#2563eb') +
+            (recruiter?.backgroundImage || '')
+          }
+          onClose={() => setShowBgModal(false)}
+          onSave={async (bg) => {
+            setSavingBg(true);
+            try {
+              await axios.put(`/api/recruiters/${params.id}/background`, {
+                backgroundGradient: bg.id,
+              });
+              // Refresh recruiter data from backend
+              const recruiterResponse = await axios.get(`/api/recruiters/${params.id}`);
+              const updatedRecruiter = recruiterResponse.data.recruiter;
+              setRecruiter(updatedRecruiter);
+              setShowBgModal(false);
+            } catch (error) {
+              toast.error('Fehler beim Speichern des Hintergrunds');
+            } finally {
+              setSavingBg(false);
+            }
+          }}
+          backgroundOptions={BACKGROUND_OPTIONS}
+          initialBg={BACKGROUND_OPTIONS.find(bg => bg.id === (recruiter?.backgroundGradient || 'solid-blue')) || BACKGROUND_OPTIONS[0]}
+          initialCustomColor={recruiter?.customColor || '#2563eb'}
+          initialImage={recruiter?.backgroundImage || ''}
+          loading={savingBg}
+          onSavedBg={(bg, customColor, image) => {
+            setSelectedBg(bg.id);
+            setCustomColor(customColor);
+            setBackgroundImage(image);
+          }}
+        />
       )}
     </div>
   )

@@ -21,9 +21,6 @@ const BACKGROUND_OPTIONS = [
   { id: "solid-gray", name: "Grau", style: "#6b7280" },
   { id: "solid-black", name: "Schwarz", style: "#000000" },
   { id: "solid-red", name: "Rot", style: "#dc2626" },
-  { id: "gradient-sunset", name: "Sunset", style: "linear-gradient(90deg, #ff7e5f, #feb47b)" },
-  { id: "gradient-ocean", name: "Ocean", style: "linear-gradient(90deg, #43cea2, #185a9d)" },
-  { id: "gradient-rainbow", name: "Rainbow", style: "linear-gradient(90deg, #ff9966, #ff5e62, #00c3ff, #ffff1c)" },
 ];
 
 const ColorPicker = ({ value, onChange }: { value: string, onChange: (v: string) => void }) => (

@@ -341,26 +341,27 @@ function PlayerCard({ player }: { player: any }) {
   const age = player.dateOfBirth ? Math.floor((new Date().getTime() - new Date(player.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : null
   
   // Get gradient based on role and gender
-  const getGradient = () => {
+  // Get solid color based on role and gender
+  const getSolidColor = () => {
     // Check user role first
     if (player.user?.role === 'HYBRID') {
-      return 'linear-gradient(135deg, #f97316 0%, #fed7aa 50%, #ffffff 100%)' // Orange for HYBRID
+      return '#f97316'; // Orange for HYBRID
     }
     if (player.user?.role === 'RECRUITER') {
-      return 'linear-gradient(135deg, #9333ea 0%, #e9d5ff 50%, #ffffff 100%)' // Purple for RECRUITER
+      return '#9333ea'; // Purple for RECRUITER
     }
-    // Pink gradient for all DAMEN players
-    return 'linear-gradient(135deg, #ec4899 0%, #fce7f3 50%, #ffffff 100%)' // Pink for DAMEN
+    // Pink for all DAMEN players
+    return '#ec4899'; // Pink for DAMEN
   }
   
   return (
     <Link href={`/players/${player.id}`}>
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden cursor-pointer">
-        {/* Header with gradient background */}
+        {/* Header with solid background */}
         <div 
           className="h-40 relative flex items-center justify-center"
           style={{ 
-            background: getGradient()
+            background: getSolidColor()
           }}
         >
           {/* Gender Badge */}
@@ -383,7 +384,7 @@ function PlayerCard({ player }: { player: any }) {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-pink-600 to-pink-800">
+              <div className="w-full h-full flex items-center justify-center text-white text-4xl font-bold bg-pink-700">
                 {player.firstName[0]}{player.lastName[0]}
               </div>
             )}

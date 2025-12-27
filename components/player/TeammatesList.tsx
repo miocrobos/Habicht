@@ -45,7 +45,7 @@ export default function TeammatesList({ teammates }: TeammatesListProps) {
                 className="bg-white rounded-lg p-4 hover:shadow-lg transition group"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-habicht-500 to-habicht-700 rounded-full flex items-center justify-center text-white font-bold shadow-md group-hover:scale-110 transition">
+                  <div className="w-12 h-12 bg-habicht-700 rounded-full flex items-center justify-center text-white font-bold shadow-md group-hover:scale-110 transition">
                     {teammate.jerseyNumber || teammate.firstName[0]}
                   </div>
                   <div className="flex-1 min-w-0">

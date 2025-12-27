@@ -142,16 +142,16 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
           onSave={async (bg: { id: string; name: string; style: string }, image: string) => {
             setSavingBg(true);
             try {
-              await axios.put(`/api/hybrids/${params.id}`, {
-                hybridData: {
-                  ...profile,
-                  backgroundGradient: bg.id,
-                  customColor: bg.id === 'custom' ? bg.style : '',
-                  backgroundImage: image || '',
-                }
+              await axios.put(`/api/hybrids/${params.id}/background`, {
+                backgroundGradient: bg.id,
+                customColor: bg.id === 'custom' ? bg.style : '',
+                backgroundImage: image || '',
               });
+              // Refresh hybrid profile data from backend
+              const hybridResponse = await axios.get(`/api/hybrids/${params.id}`);
+              const updatedHybrid = hybridResponse.data.hybrid;
+              setProfile(updatedHybrid);
               setShowBgModal(false);
-              setProfile((prev: any) => prev ? { ...prev, backgroundGradient: bg.id, customColor: bg.id === 'custom' ? bg.style : '', backgroundImage: image || '' } : prev);
             } catch (error) {
               toast.error('Fehler beim Speichern des Hintergrunds');
             } finally {

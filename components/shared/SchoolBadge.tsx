@@ -61,7 +61,7 @@ export default function SchoolBadge({
   return (
     <div className={`
       inline-flex items-center gap-2 rounded-lg border-2
-      bg-gradient-to-r ${bgColor}
+      ${bgColor}
       ${sizes[size].container}
       transition-all hover:shadow-md
     `}>

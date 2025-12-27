@@ -46,7 +46,7 @@ export default function CoachesList({ coaches }: CoachesListProps) {
               >
                 <div className="flex items-start gap-4">
                   {/* Coach Avatar */}
-                  <div className="w-16 h-16 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center text-white font-bold shadow-md text-xl flex-shrink-0">
+                  <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center text-white font-bold shadow-md text-xl flex-shrink-0">
                     {coach.firstName[0]}{coach.lastName[0]}
                   </div>
 

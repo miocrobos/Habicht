@@ -151,19 +151,18 @@ const BACKGROUND_OPTIONS = [
   { id: 'solid-black', name: 'Schwarz', style: '#000000' },
 ];
 
-// Get default gradient based on gender and role
-const getDefaultGradient = (gender: string, role: string) => {
+// Get default solid color based on gender and role
+const getDefaultColor = (gender: string, role: string) => {
   if (role === 'HYBRID') {
-    return 'linear-gradient(135deg, #f97316 0%, #ffffff 100%)'; // Orange to white
+    return '#f97316'; // Orange
   }
   if (role === 'RECRUITER') {
-    return 'linear-gradient(135deg, #dc2626 0%, #ffffff 100%)'; // Red to white
+    return '#dc2626'; // Red
   }
-  // Player role
   if (gender === 'FEMALE') {
-    return 'linear-gradient(135deg, #ec4899 0%, #ffffff 100%)'; // Pink to white
+    return '#ec4899'; // Pink
   }
-  return 'linear-gradient(135deg, #2563eb 0%, #ffffff 100%)'; // Blue to white for male
+  return '#2563eb'; // Blue for male
 };
 
 export default function PlayerProfile({ params }: PlayerProfileProps) {
@@ -256,12 +255,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         }
       }
       
-      // Otherwise use default gradient based on gender and role
-      const defaultGradient = getDefaultGradient(player.gender, session.user?.role || 'PLAYER')
+      // Otherwise use default solid color based on gender and role
+      const defaultColor = getDefaultColor(player.gender, session.user?.role || 'PLAYER')
       setSelectedBg({
         id: 'dynamic',
         name: 'Dynamic',
-        style: defaultGradient
+        style: defaultColor
       })
     }
   }, [player, session])
@@ -617,7 +616,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-white text-5xl font-bold bg-gradient-to-br from-red-600 to-red-800">
+                  <div className="w-full h-full flex items-center justify-center text-white text-5xl font-bold bg-red-700">
                     {player.firstName[0]}{player.lastName[0]}
                   </div>
                 )}
@@ -862,7 +861,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     href={`https://instagram.com/${player.instagram.replace('@', '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90 transition font-semibold"
+                    className="flex items-center gap-2 px-6 py-3 bg-purple-700 text-white rounded-lg hover:opacity-90 transition font-semibold"
                   >
                     <Instagram className="w-4 h-4" />
                     Instagram
@@ -972,7 +971,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           </div>
                           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                             <div
-                              className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all"
+                              className="bg-blue-600 h-2 rounded-full transition-all"
                               style={{ width: `${((player.skillReceiving ?? 0) / 5) * 100}%` }}
                             />
                           </div>
@@ -986,7 +985,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           </div>
                           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                             <div
-                              className="bg-gradient-to-r from-green-500 to-green-600 h-2 rounded-full transition-all"
+                              className="bg-green-600 h-2 rounded-full transition-all"
                               style={{ width: `${((player.skillServing ?? 0) / 5) * 100}%` }}
                             />
                           </div>
@@ -1000,7 +999,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           </div>
                           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                             <div
-                              className="bg-gradient-to-r from-red-500 to-red-600 h-2 rounded-full transition-all"
+                              className="bg-red-600 h-2 rounded-full transition-all"
                               style={{ width: `${((player.skillAttacking ?? 0) / 5) * 100}%` }}
                             />
                           </div>
@@ -1014,7 +1013,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           </div>
                           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                             <div
-                              className="bg-gradient-to-r from-purple-500 to-purple-600 h-2 rounded-full transition-all"
+                              className="bg-purple-600 h-2 rounded-full transition-all"
                               style={{ width: `${((player.skillBlocking ?? 0) / 5) * 100}%` }}
                             />
                           </div>
@@ -1028,7 +1027,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           </div>
                           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                             <div
-                              className="bg-gradient-to-r from-yellow-500 to-yellow-600 h-2 rounded-full transition-all"
+                              className="bg-yellow-600 h-2 rounded-full transition-all"
                               style={{ width: `${((player.skillDefense ?? 0) / 5) * 100}%` }}
                             />
                           </div>
@@ -1045,7 +1044,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       <Award className="w-5 h-5 text-yellow-600" />
                       Swiss Volley Lizenz
                     </h3>
-                    <div className="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-gray-700 dark:to-gray-800 p-6 rounded-lg border-2 border-yellow-300 dark:border-yellow-600">
+                    <div className="bg-yellow-100 dark:bg-gray-700 p-6 rounded-lg border-2 border-yellow-300 dark:border-yellow-600">
                       <img 
                         src={player.swissVolleyLicense} 
                         alt="Swiss Volley License" 
@@ -1366,13 +1365,14 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
           }}
           onSave={async (bg) => {
             try {
-              await axios.put(`/api/players/${params.id}`, {
-                playerData: {
-                  ...player,
-                  backgroundGradient: bg,
-                }
+              await axios.put(`/api/players/${params.id}/background`, {
+                backgroundGradient: bg.id,
               });
-              const savedBg = BACKGROUND_OPTIONS.find(option => option.id === String(bg));
+              // Refresh player data from backend
+              const playerResponse = await axios.get(`/api/players/${params.id}`);
+              const updatedPlayer = playerResponse.data.player;
+              setPlayer(updatedPlayer);
+              const savedBg = BACKGROUND_OPTIONS.find(option => option.id === String(bg.id));
               if (savedBg) setSelectedBg(savedBg);
               setShowBackgroundModal(false);
               setNewBackgroundImage('');

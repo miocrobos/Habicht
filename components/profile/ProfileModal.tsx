@@ -165,7 +165,7 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
           ) : profile ? (
             <>
               {/* Cover Image / Backdrop */}
-              <div className="relative h-64 bg-gradient-to-br from-red-500 via-red-600 to-red-700">
+              <div className="relative h-64 bg-red-700">
                 {profile.coverImage ? (
                   <img
                     src={profile.coverImage}
@@ -173,9 +173,9 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-500 via-red-600 to-red-700" />
+                  <div className="absolute inset-0 bg-red-700" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-black/60" />
               </div>
 
               {/* Profile Picture & Basic Info */}
@@ -339,7 +339,7 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
 
                         {/* Career Goals (Players) */}
                         {isPlayer(profile) && profile.desiredLeague && (
-                          <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-6 border border-red-200">
+                          <div className="bg-red-100 rounded-xl p-6 border border-red-200">
                             <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
                               <Target className="w-5 h-5 text-red-600" />
                               Karriereziele

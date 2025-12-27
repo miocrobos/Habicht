@@ -4,18 +4,20 @@ import { useState } from 'react'
 import { MessageCircle, Send, X } from 'lucide-react'
 import axios from 'axios'
 
+interface Coach {
+  id: string
+  firstName: string
+  lastName: string
+  club: string
+  role: string
+}
+
 interface RequestChatButtonProps {
-  coach: {
-    id: string
-    firstName: string
-    lastName: string
-    club: string
-    role: string
-  }
+  coach: Coach
   playerId: string
 }
 
-export default function RequestChatButton({ coach, playerId }: RequestChatButtonProps) {
+const RequestChatButton: React.FC<RequestChatButtonProps> = ({ coach, playerId }) => {
   const [showModal, setShowModal] = useState(false)
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
@@ -140,3 +142,5 @@ export default function RequestChatButton({ coach, playerId }: RequestChatButton
     </>
   )
 }
+
+export default RequestChatButton

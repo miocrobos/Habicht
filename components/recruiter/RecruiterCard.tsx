@@ -60,11 +60,11 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
     <>
       <Link href={`/recruiters/${recruiter.id}`}>
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden cursor-pointer">
-        {/* Header with gradient background */}
+        {/* Header with solid background */}
         <div 
           className="h-40 relative flex items-center justify-center"
           style={{ 
-            background: 'linear-gradient(135deg, #9333ea 0%, #e9d5ff 50%, #ffffff 100%)' // Purple for all RECRUITERS
+            background: '#9333ea' // Solid purple for all RECRUITERS
           }}
         >
           {/* Gender Coached Badge */}
@@ -88,7 +88,7 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-blue-600 to-blue-800">
+              <div className="w-full h-full flex items-center justify-center text-white text-4xl font-bold bg-blue-700">
                 {recruiter.firstName[0]}{recruiter.lastName[0]}
               </div>
             )}

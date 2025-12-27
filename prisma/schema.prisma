@@ -200,7 +200,7 @@ model Player {
   bio               String?     @db.Text
   profileImage      String      // Required profile picture
   coverImage        String?     // Optional backdrop/banner image
-  backgroundGradient String?     // Selected background gradient ID (e.g., 'gradient1', 'solid-red')
+  // backgroundGradient removed
   achievements      String[]    @default([])        // Notable achievements list
   customColor       String?     // Custom background color (hex or CSS value)
   
@@ -532,7 +532,7 @@ model Recruiter {
   bio               String?     @db.Text
   profileImage      String?     // Profile picture (optional for recruiters)
   coverImage        String?     // Optional backdrop/banner image
-  backgroundGradient String?     // Selected background gradient (optional)
+  // backgroundGradient removed
   achievements      String[]    @default([]) // Achievements and awards
   customColor       String?     // Custom background color (hex or CSS value)
   
@@ -830,7 +830,7 @@ model Hybrid {
   bio               String?     @db.Text
   profileImage      String?
   coverImage        String?
-  backgroundGradient String?
+  // backgroundGradient removed
   customColor       String?
   backgroundImage   String?
   achievements      String[]    @default([])

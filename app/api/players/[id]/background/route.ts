@@ -10,13 +10,12 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const { backgroundGradient, customColor } = await req.json();
+  const { customColor } = await req.json();
 
   try {
     await prisma.player.update({
       where: { id: params.id },
       data: {
-        backgroundGradient,
         customColor,
       },
     });
@@ -39,7 +38,6 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     await prisma.player.update({
       where: { id: params.id },
       data: {
-        backgroundGradient: body.backgroundGradient,
         customColor: body.customColor,
       },
     });

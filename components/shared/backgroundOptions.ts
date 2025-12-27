@@ -12,5 +12,5 @@ export const BACKGROUND_OPTIONS = [
   { id: "solid-gray", name: "Grau", style: "#6b7280" },
   { id: "solid-black", name: "Schwarz", style: "#000000" },
   { id: "solid-red", name: "Rot", style: "#dc2626" },
-]
+];
 

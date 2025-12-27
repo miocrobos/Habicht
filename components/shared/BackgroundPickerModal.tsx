@@ -124,16 +124,29 @@ const BackgroundPickerModal: React.FC<Props> = React.memo(
           </button>
           <h2 className="text-lg font-bold mb-4 dark:text-white">Profilhintergrund wählen</h2>
           
-          {/* Color Picker */}
-          <div className="flex items-center gap-2 mb-2">
-            <label htmlFor="colorPicker" className="text-sm dark:text-gray-300">Farbe wählen:</label>
-            <input
-              id="colorPicker"
-              type="color"
-              value={customColor}
-              className="w-10 h-10 p-0 border-2 border-gray-300 rounded cursor-pointer"
-              onChange={handleColorChange}
-            />
+          {/* Solid Color Swatches */}
+          <div className="mb-4">
+            <label className="text-sm dark:text-gray-300 block mb-2">Farbe wählen:</label>
+            <div className="flex flex-wrap gap-2">
+              {backgroundOptions.map((option) => (
+                <button
+                  key={option.id}
+                  type="button"
+                  className={`w-10 h-10 rounded border-2 transition-all ${selectedBg.id === option.id ? 'border-blue-500 ring-2 ring-blue-400' : 'border-gray-300'} flex items-center justify-center`}
+                  style={{ background: option.style }}
+                  aria-label={option.name}
+                  onClick={() => {
+                    setSelectedBg(option);
+                    setCustomColor(option.style);
+                    setBackgroundImage('');
+                  }}
+                >
+                  {selectedBg.id === option.id && (
+                    <span className="block w-4 h-4 rounded bg-white border border-blue-500" />
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
           
           {/* Image Upload */}

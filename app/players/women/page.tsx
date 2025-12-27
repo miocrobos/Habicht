@@ -87,7 +87,7 @@ export default function WomenPlayersPage() {
             </div>
             <Link 
               href="/players/men"
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold"
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold text-center"
             >
               {t('players.toMen')}
             </Link>

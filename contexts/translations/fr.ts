@@ -486,12 +486,12 @@
       clubsFound: 'clubs trouvés',
       loading: 'Chargement des clubs...',
       playersRegistered: 'joueurs enregistrés',
-      viewPlayers: 'Joueurs ←’',
-      website: 'Site web ←’',
+      viewPlayers: 'Joueurs',
+      website: 'Site web',
       noClubsFound: 'Aucun club trouvé. Veuillez ajuster vos filtres.',
       missingClub: 'Votre club manque?',
       missingClubText: 'Nous élargissons notre base de données de clubs. Si votre club manque, signalez-le nous!',
-      submitClub: 'Signaler un club ←’',
+      submitClub: 'Signaler un club',
     },
     // Club Profile
     clubProfile: {

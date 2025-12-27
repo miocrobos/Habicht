@@ -248,7 +248,7 @@ export default function ClubsPage() {
           </p>
           <Link
             href="/clubs/submit"
-            className="inline-block bg-swiss-red text-white px-6 py-3 rounded-lg hover:bg-red-700 transition font-medium"
+            className="inline-block bg-swiss-red text-white px-6 py-3 rounded-lg hover:bg-red-700 transition font-medium text-center"
           >
             {t('clubs.submitClub')}
           </Link>

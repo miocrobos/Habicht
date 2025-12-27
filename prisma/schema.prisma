@@ -202,6 +202,7 @@ model Player {
   coverImage        String?     // Optional backdrop/banner image
   backgroundGradient String?     // Selected background gradient ID (e.g., 'gradient1', 'solid-red')
   achievements      String[]    @default([])        // Notable achievements list
+  customColor       String?     // Custom background color (hex or CSS value)
   
   // Visibility & Status
   isPublic          Boolean     @default(true)
@@ -533,6 +534,7 @@ model Recruiter {
   coverImage        String?     // Optional backdrop/banner image
   backgroundGradient String?     // Selected background gradient (optional)
   achievements      String[]    @default([]) // Achievements and awards
+  customColor       String?     // Custom background color (hex or CSS value)
   
   // Social Media
   facebook          String?     // Facebook profile/page

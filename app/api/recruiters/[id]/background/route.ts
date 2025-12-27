@@ -10,13 +10,14 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const { backgroundGradient } = await req.json();
+  const { backgroundGradient, customColor } = await req.json();
 
   try {
     await prisma.recruiter.update({
       where: { id: params.id },
       data: {
         backgroundGradient,
+        customColor,
       },
     });
     return NextResponse.json({ success: true });
@@ -38,7 +39,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     await prisma.recruiter.update({
       where: { id: params.id },
       data: {
-        ...body,
+        backgroundGradient: body.backgroundGradient,
+        customColor: body.customColor,
       },
     });
     return NextResponse.json({ success: true });

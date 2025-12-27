@@ -64,19 +64,7 @@ const BackgroundPickerModal: React.FC<Props> = React.memo(
             &times;
           </button>
           <h2 className="text-lg font-bold mb-4">Profilhintergrund wählen</h2>
-          <div className="grid grid-cols-5 gap-1 mb-2 sm:mb-3">
-            {backgroundOptions
-              .filter(bg => !bg.id.startsWith('gradient'))
-              .map((bg) => (
-                <button
-                  key={bg.id}
-                  className={`rounded-lg border-2 h-8 w-8 sm:h-10 sm:w-10 transition-transform duration-100 ${selectedBg.id === bg.id ? 'border-habicht-600 scale-105' : 'border-gray-500'}`}
-                  style={{ background: bg.style }}
-                  aria-label={bg.name}
-                  onClick={() => setSelectedBg(bg)}
-                />
-              ))}
-          </div>
+          {/* Only show solid color picker and file input, no gradient selector */}
           <div className="flex items-center gap-2 mb-2">
             <input
               type="color"
@@ -90,7 +78,6 @@ const BackgroundPickerModal: React.FC<Props> = React.memo(
             />
           </div>
           <div className="mb-2">
-            <label className="block text-white text-xs mb-1">Wähl Es Neus Hintergrundbild</label>
             <input
               type="file"
               accept="image/*"

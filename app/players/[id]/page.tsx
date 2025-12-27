@@ -1,38 +1,7 @@
 "use client";
-// Function to get translated league label
-const getLeagueLabel = (league: string, t: any) => {
-  switch(league) {
-    case 'Alle': return t('playerProfile.all');
-    case 'NLA': return t('leagues.nla');
-    case 'NLB': return t('leagues.nlb');
-    case '1. Liga': return t('leagues.firstLeague');
-    case '2. Liga': return t('leagues.secondLeague');
-    case '3. Liga': return t('leagues.thirdLeague');
-    case '4. Liga': return t('leagues.fourthLeague');
-    case 'U23': return 'U23';
-    case 'U19': return t('leagues.u19');
-    case 'U17': return t('leagues.u17');
-    default: return league;
-  }
-};
 
 import { useState, useEffect } from 'react'
 import { toast } from 'react-hot-toast';
-// Helper to get position label (fallback to position string)
-function getPositionLabel(position: string, t: any) {
-  return t(`playerProfile.position${position.charAt(0) + position.slice(1).toLowerCase().replace(/_([a-z])/g, (m, c) => c.toUpperCase())}`) || position;
-}
-
-function ErrorBoundary({ error }: { error: any }) {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold text-red-700 dark:text-red-400 mb-2">Error loading player profile</h1>
-        <p className="text-gray-600 dark:text-gray-400">{error?.message || 'An unexpected error occurred.'}</p>
-      </div>
-    </div>
-  );
-}
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, MapPin, Ruler, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown, Bookmark, BookMarked } from 'lucide-react'
@@ -49,513 +18,287 @@ import { formatViewCount } from '@/lib/formatViewCount'
 import CVExportLanguagePopup from '@/components/shared/CVExportLanguagePopup'
 import axios from 'axios'
 
-
-interface PlayerProfileProps {
-  params: {
-    id: string
+// Helper function to get translated league label
+const getLeagueLabel = (league: string, t: any) => {
+  switch(league) {
+    case 'Alle': return t('playerProfile.all');
+    case 'NLA': return t('leagues.nla');
+    case 'NLB': return t('leagues.nlb');
+    case '1. Liga': return t('leagues.firstLeague');
+    case '2. Liga': return t('leagues.secondLeague');
+    case '3. Liga': return t('leagues.thirdLeague');
+    case '4. Liga': return t('leagues.fourthLeague');
+    case 'U23': return 'U23';
+    case 'U19': return t('leagues.u19');
+    case 'U17': return t('leagues.u17');
+    default: return league;
   }
+};
+
+// Helper to get position label
+function getPositionLabel(position: string, t: any) {
+  return t(`playerProfile.position${position.charAt(0) + position.slice(1).toLowerCase().replace(/_([a-z])/g, (m, c) => c.toUpperCase())}`) || position;
 }
 
+// Error Boundary Component
+function ErrorBoundary({ error }: { error: any }) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="text-center p-8">
+        <h2 className="text-2xl font-bold text-red-600 mb-4">Error loading player profile</h2>
+        <p className="text-gray-600 dark:text-gray-400">{error?.message || 'An unexpected error occurred.'}</p>
+      </div>
+    </div>
+  );
+}
 
-type ApiPlayerData = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string | Date | null;
-  gender: string;
-  height?: number | null;
-  weight?: number | null;
-  spikeHeight?: number | null;
-  blockHeight?: number | null;
-  dominantHand?: string | null;
-  preferredLanguage?: string | null;
-  nationality: string;
-  canton: string;
-  city?: string | null;
-  municipality?: string | null;
-  phone?: string | null;
-  positions: string[];
-  currentLeague?: string | null;
-  bio?: string | null;
-  achievements?: string[];
-  profileImage?: string | null;
-  instagram?: string | null;
-  tiktok?: string | null;
-  youtube?: string | null;
-  user: {
-    id: string;
-    email: string;
-    name?: string | null;
-    role?: string;
-    emailVerified?: string | null;
-  };
-  currentClub?: {
-    id: string;
-    name: string;
-    logo?: string | null;
-    website?: string | null;
-    canton?: string | null;
-    town?: string | null;
-  } | null;
-  clubHistory?: Array<{
-    id?: string;
-    clubName: string;
-    league?: string | null;
-    startDate: Date | string;
-    endDate?: Date | string | null;
-    currentClub?: boolean;
-    clubCountry?: string;
-    club?: {
-      id?: string;
-      name?: string;
-      logo?: string | null;
-    };
-  }>;
-  schoolName?: string | null;
-  occupation?: string | null;
-  employmentStatus?: string | null;
-  views?: number;
-  lookingForClub?: boolean;
-  showEmail?: boolean;
-  showPhone?: boolean;
-  backgroundGradient?: string | null;
-  coverImage?: string | null;
-  skillReceiving?: number;
-  skillServing?: number;
-  skillAttacking?: number;
-  skillBlocking?: number;
-  skillDefense?: number;
-  swissVolleyLicense?: string | null;
-  highlightVideo?: string | null;
-  videos?: Array<{
-    id: string;
-    videoUrl: string;
-    thumbnailUrl?: string | null;
-    title?: string;
-    description?: string;
-    createdAt?: string;
-  }>;
-};
+// Background options constant (add your actual options here)
 const BACKGROUND_OPTIONS = [
-  { id: 'solid-blue', name: 'Blau', style: '#2563eb' },
-  { id: 'solid-red', name: 'Rot', style: '#dc2626' },
-  { id: 'solid-green', name: 'Grün', style: '#16a34a' },
-  { id: 'solid-purple', name: 'Lila', style: '#9333ea' },
-  { id: 'solid-orange', name: 'Orange', style: '#f97316' },
-  { id: 'solid-pink', name: 'Pink', style: '#ec4899' },
-  { id: 'solid-yellow', name: 'Gelb', style: '#eab308' },
-  { id: 'solid-teal', name: 'Türkis', style: '#14b8a6' },
-  { id: 'solid-indigo', name: 'Indigo', style: '#6366f1' },
-  { id: 'solid-dark', name: 'Dunkel', style: '#1f2937' },
-  { id: 'solid-gray', name: 'Grau', style: '#6b7280' },
-  { id: 'solid-black', name: 'Schwarz', style: '#000000' },
+  { id: '1', name: 'Default', style: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
+  { id: '2', name: 'Sunset', style: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' },
+  { id: '3', name: 'Ocean', style: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' },
+  { id: 'custom', name: 'Custom', style: '#667eea' }
 ];
 
-// Get default solid color based on gender and role
-const getDefaultColor = (gender: string, role: string) => {
-  if (role === 'HYBRID') {
-    return '#f97316'; // Orange
-  }
-  if (role === 'RECRUITER') {
-    return '#dc2626'; // Red
-  }
-  if (gender === 'FEMALE') {
-    return '#ec4899'; // Pink
-  }
-  return '#2563eb'; // Blue for male
-};
-
-export default function PlayerProfile({ params }: PlayerProfileProps) {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [player, setPlayer] = useState<ApiPlayerData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<any>(null);
-  const [showBgSelector, setShowBgSelector] = useState(false);
-  const [selectedBg, setSelectedBg] = useState(BACKGROUND_OPTIONS[0]);
-  const [customBgImage, setCustomBgImage] = useState<string | null>(null);
+// Main Player Profile Page Component
+export default function PlayerProfilePage(props: any) {
   const { data: session } = useSession();
   const { t } = useLanguage();
-  const [showVideoUpload, setShowVideoUpload] = useState(false);
-  const [uploadingVideo, setUploadingVideo] = useState(false);
-  const [videoFile, setVideoFile] = useState<File | null>(null);
-  const [videoTitle, setVideoTitle] = useState('');
-  const [videoDescription, setVideoDescription] = useState('');
-  const [deletingVideoId, setDeletingVideoId] = useState<string | null>(null);
-  const [showProfilePhotoModal, setShowProfilePhotoModal] = useState(false);
-  const [newProfilePhoto, setNewProfilePhoto] = useState('');
-  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const params = props.params || { id: '' };
+
+  // State declarations
+  const [player, setPlayer] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<any>(null);
+  const [isOwner, setIsOwner] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview');
+  
+  // Background and image states
+  const [customBgImage, setCustomBgImage] = useState('');
+  const [backgroundImage, setBackgroundImage] = useState('');
+  const [selectedBg, setSelectedBg] = useState(BACKGROUND_OPTIONS[0]);
+  const [customColor, setCustomColor] = useState('');
   const [showBackgroundModal, setShowBackgroundModal] = useState(false);
   const [newBackgroundImage, setNewBackgroundImage] = useState('');
   const [uploadingBackground, setUploadingBackground] = useState(false);
+  
+  // Profile photo states
+  const [showProfilePhotoModal, setShowProfilePhotoModal] = useState(false);
+  const [newProfilePhoto, setNewProfilePhoto] = useState('');
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  
+  // Video states
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [showVideoUpload, setShowVideoUpload] = useState(false);
+  const [videoTitle, setVideoTitle] = useState('');
+  const [videoDescription, setVideoDescription] = useState('');
+  const [uploadingVideo, setUploadingVideo] = useState(false);
+  const [deletingVideoId, setDeletingVideoId] = useState<string | null>(null);
+  
+  // Chat states
   const [showChat, setShowChat] = useState(false);
   const [conversationId, setConversationId] = useState<string | null>(null);
-  const [showCVExportPopup, setShowCVExportPopup] = useState(false);
+  
+  // Watchlist states
   const [isWatched, setIsWatched] = useState(false);
   const [watchlistLoading, setWatchlistLoading] = useState(false);
-  const [savingBg, setSavingBg] = useState<string | null>(null);
-  const [showBgModal, setShowBgModal] = useState(false);
-  const [selectedBgOption, setSelectedBgOption] = useState<string | null>(null);
-  const [customColor, setCustomColor] = useState('#2563eb');
-  const [backgroundImage, setBackgroundImage] = useState('');
+  
+  // CV export state
+  const [showCVExportPopup, setShowCVExportPopup] = useState(false);
 
-  const isOwner = session?.user?.playerId === params.id;
-  // State declarations moved to top of file, only declare once.
-
-  // Check if player is in watchlist
-  useEffect(() => {
-    const checkWatchlist = async () => {
-      if (session && (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') && !isOwner) {
-        try {
-          const response = await axios.get(`/api/watchlist/${params.id}`);
-          setIsWatched(response.data.isWatched);
-        } catch (err) {
-          console.error('Error checking watchlist:', err);
-        }
-      }
-    };
-    checkWatchlist();
-  }, [session, params.id, isOwner]);
-
+  // Fetch player data
   useEffect(() => {
     const fetchPlayer = async () => {
       try {
         setLoading(true);
-        setError(null);
-        const playerResponse = await axios.get(`/api/players/${params.id}`);
-        const playerData = playerResponse.data.player;
-        if (playerData) {
-          setPlayer({
-            ...playerData,
-            showEmail: playerData.showEmail ?? false,
-            showPhone: playerData.showPhone ?? false,
-          } as ApiPlayerData);
-        } else {
-          setError({ message: 'Player not found.' });
+        const response = await axios.get(`/api/players/${params.id}`);
+        setPlayer(response.data.player);
+        
+        // Set background
+        if (response.data.player.coverImage) {
+          setBackgroundImage(response.data.player.coverImage);
+          setCustomBgImage(response.data.player.coverImage);
+        } else if (response.data.player.backgroundGradient) {
+          const bg = BACKGROUND_OPTIONS.find(opt => opt.id === response.data.player.backgroundGradient);
+          if (bg) setSelectedBg(bg);
         }
-        await axios.post(`/api/players/${params.id}/view`);
+        
+        // Check ownership
+        if (session?.user?.id === response.data.player.userId) {
+          setIsOwner(true);
+        }
+        
+        // Check watchlist status
+        if (session?.user && (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID')) {
+          try {
+            const watchlistResponse = await axios.get(`/api/watchlist/check?playerId=${params.id}`);
+            setIsWatched(watchlistResponse.data.isWatched);
+          } catch (err) {
+            console.error('Error checking watchlist:', err);
+          }
+        }
+        
+        setLoading(false);
       } catch (err: any) {
         setError(err);
-        console.error('Error fetching player:', err);
-      } finally {
         setLoading(false);
       }
     };
-    fetchPlayer();
-  }, [params.id]);
 
-  // Set gradient based on saved preference or default based on gender/role
-  useEffect(() => {
-    if (player && session) {
-      // If player has a saved background gradient, use it
-      if (player.backgroundGradient) {
-        const savedBg = BACKGROUND_OPTIONS.find(bg => bg.id === player.backgroundGradient)
-        if (savedBg) {
-          setSelectedBg(savedBg)
-          return
-        }
-      }
-      
-      // Otherwise use default solid color based on gender and role
-      const defaultColor = getDefaultColor(player.gender, session.user?.role || 'PLAYER')
-      setSelectedBg({
-        id: 'dynamic',
-        name: 'Dynamic',
-        style: defaultColor
-      })
+    if (params.id) {
+      fetchPlayer();
     }
-  }, [player, session])
+  }, [params.id, session]);
 
+  // Handler functions
   const handleVideoUpload = async () => {
     if (!videoFile) {
-      toast.error(t('playerProfile.selectVideoFile'))
-      return
+      toast.error(t('playerProfile.selectVideo'));
+      return;
     }
 
     try {
-      setUploadingVideo(true)
-      const formData = new FormData()
-      formData.append('file', videoFile)
-      formData.append('playerId', params.id)
-      formData.append('title', videoTitle || 'Highlight Video')
-      formData.append('description', videoDescription || '')
-      formData.append('highlightType', 'HIGHLIGHTS')
+      setUploadingVideo(true);
+      const formData = new FormData();
+      formData.append('video', videoFile);
+      formData.append('title', videoTitle);
+      formData.append('description', videoDescription);
+      formData.append('playerId', params.id);
 
       await axios.post(`/api/videos/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
 
-      // Reload player data to show new video
-      const playerResponse = await axios.get(`/api/players/${params.id}`)
-      setPlayer(playerResponse.data.player)
-      
-      // Reset form and close modal
-      setShowVideoUpload(false)
-      setVideoFile(null)
-      setVideoTitle('')
-      setVideoDescription('')
-      toast.success(t('playerProfile.uploadedVideo'))
+      // Reload player data
+      const playerResponse = await axios.get(`/api/players/${params.id}`);
+      setPlayer(playerResponse.data.player);
+
+      // Reset form
+      setShowVideoUpload(false);
+      setVideoFile(null);
+      setVideoTitle('');
+      setVideoDescription('');
+      toast.success(t('playerProfile.uploadedVideo'));
     } catch (error: any) {
-      console.error('Error uploading video:', error)
-      toast.error(t('playerProfile.errorUploadingVideo'))
+      console.error('Error uploading video:', error);
+      toast.error(t('playerProfile.errorUploadingVideo'));
     } finally {
-      setUploadingVideo(false)
+      setUploadingVideo(false);
     }
-  }
+  };
+
   const handleDeleteVideo = async (videoId: string) => {
     if (!confirm(t('playerProfile.confirmDeleteVideo'))) {
-      return
+      return;
     }
 
     try {
-      setDeletingVideoId(videoId)
-      await axios.delete(`/api/videos/${videoId}`)
+      setDeletingVideoId(videoId);
+      await axios.delete(`/api/videos/${videoId}`);
       
-      // Refresh player data
-      const playerResponse = await axios.get(`/api/players/${params.id}`)
-      setPlayer(playerResponse.data.player)
-      
-      toast.success(t('playerProfile.uploadedVideo'))
+      const playerResponse = await axios.get(`/api/players/${params.id}`);
+      setPlayer(playerResponse.data.player);
+      toast.success(t('playerProfile.videoDeleted'));
     } catch (error) {
-      console.error('Error deleting video:', error)
-      toast.error(t('playerProfile.errorUploadingVideo'))
+      console.error('Error deleting video:', error);
+      toast.error(t('playerProfile.errorDeletingVideo'));
     } finally {
-      setDeletingVideoId(null)
+      setDeletingVideoId(null);
     }
-  }
+  };
 
   const handleStartChat = async () => {
-    if (!session?.user || !player) return
+    if (!session?.user || !player) return;
 
     try {
-      // Check if conversation already exists or create a new one
       const response = await axios.post('/api/chat/conversations', {
         participantId: player.user.id,
         participantType: 'PLAYER'
-      })
-
-      setConversationId(response.data.conversationId)
-      setShowChat(true)
+      });
+      setConversationId(response.data.conversationId);
+      setShowChat(true);
     } catch (error) {
-      console.error('Error starting chat:', error)
-      toast.error(t('playerProfile.errorStartingChat'))
+      console.error('Error starting chat:', error);
+      toast.error(t('playerProfile.errorStartingChat'));
     }
-  }
+  };
 
   const toggleWatchlist = async () => {
-    if (!session || watchlistLoading) return
+    if (!session || watchlistLoading) return;
 
     try {
-      setWatchlistLoading(true)
-      
+      setWatchlistLoading(true);
       if (isWatched) {
-        // Remove from watchlist
-        await axios.delete(`/api/watchlist?playerId=${params.id}`)
-        setIsWatched(false)
-        toast.success(t('watchlist.removedFromWatchlist'))
+        await axios.delete(`/api/watchlist?playerId=${params.id}`);
+        setIsWatched(false);
+        toast.success(t('watchlist.removedFromWatchlist'));
       } else {
-        // Add to watchlist
-        await axios.post('/api/watchlist', { playerId: params.id })
-        setIsWatched(true)
-        toast.success(t('watchlist.addedToWatchlist'))
+        await axios.post('/api/watchlist', { playerId: params.id });
+        setIsWatched(true);
+        toast.success(t('watchlist.addedToWatchlist'));
       }
     } catch (error) {
-      console.error('Error toggling watchlist:', error)
-      toast.error('Error updating watchlist')
+      console.error('Error toggling watchlist:', error);
+      toast.error('Error updating watchlist');
     } finally {
-      setWatchlistLoading(false)
+      setWatchlistLoading(false);
     }
-  }
+  };
 
   const handleExportCV = async (language: string) => {
-    if (!player) return
+    if (!player) return;
 
     try {
-      console.log(`=== CV EXPORT v2.0 (Language: ${language}) ===`)
-      // Generate PDF using the utility function with selected language
-      const pdfBlob = await generatePlayerCV(player, language)
-      
-      // Create download link with timestamp to prevent caching
-      const url = URL.createObjectURL(pdfBlob)
-      const link = document.createElement('a')
-      link.href = url
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
-      link.download = `${player.firstName}_${player.lastName}_CV_${language.toUpperCase()}_${timestamp}.pdf`
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      URL.revokeObjectURL(url)
-      
-      console.log('CV downloaded successfully')
+      const pdfBlob = await generatePlayerCV(player, language);
+      const url = URL.createObjectURL(pdfBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+      link.download = `${player.firstName}_${player.lastName}_CV_${language.toUpperCase()}_${timestamp}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Error exporting CV:', error)
-      toast.error(t('playerProfile.errorExportingCV'))
+      console.error('Error exporting CV:', error);
+      toast.error(t('playerProfile.errorExportingCV'));
     }
-  }
+  };
 
   const handleProfilePhotoUpdate = async () => {
     if (!newProfilePhoto) {
-      toast.error(t('playerProfile.selectImage'))
-      return
+      toast.error(t('playerProfile.selectImage'));
+      return;
     }
 
     try {
-      setUploadingPhoto(true)
-      
-      // Get current player data first
-      const currentResponse = await axios.get(`/api/players/${params.id}`)
-      const currentPlayer = currentResponse.data.player
-      
-      // Update with full player data structure
+      setUploadingPhoto(true);
+      const currentResponse = await axios.get(`/api/players/${params.id}`);
+      const currentPlayer = currentResponse.data.player;
+
       await axios.put(`/api/players/${params.id}`, {
         playerData: {
-          firstName: currentPlayer.firstName,
-          lastName: currentPlayer.lastName,
-          dateOfBirth: currentPlayer.dateOfBirth,
-          gender: currentPlayer.gender,
-          nationality: currentPlayer.nationality,
-          canton: currentPlayer.canton,
-          city: currentPlayer.city,
-          municipality: currentPlayer.municipality,
-          height: currentPlayer.height,
-          weight: currentPlayer.weight,
-          spikeHeight: currentPlayer.spikeHeight,
-          blockHeight: currentPlayer.blockHeight,
-          phone: currentPlayer.phone,
-          employmentStatus: currentPlayer.employmentStatus,
-          occupation: currentPlayer.occupation,
-          schoolName: currentPlayer.schoolName,
-          positions: currentPlayer.positions,
-          profileImage: newProfilePhoto,  // Update this field
-          instagram: currentPlayer.instagram,
-          tiktok: currentPlayer.tiktok,
-          youtube: currentPlayer.youtube,
-          highlightVideo: currentPlayer.highlightVideo,
-          swissVolleyLicense: currentPlayer.swissVolleyLicense,
-          skillReceiving: currentPlayer.skillReceiving,
-          skillServing: currentPlayer.skillServing,
-          skillAttacking: currentPlayer.skillAttacking,
-          skillBlocking: currentPlayer.skillBlocking,
-          skillDefense: currentPlayer.skillDefense,
-          bio: currentPlayer.bio,
-          lookingForClub: currentPlayer.lookingForClub,
-          showEmail: currentPlayer.showEmail,
-          showPhone: currentPlayer.showPhone,
+          ...currentPlayer,
+          profileImage: newProfilePhoto,
         },
         clubHistory: currentPlayer.clubHistory || [],
         achievements: currentPlayer.achievements || [],
-      })
+      });
 
-      // Refresh player data
-      const playerResponse = await axios.get(`/api/players/${params.id}`)
-      setPlayer(playerResponse.data.player)
-      
-      // Reset and close modal
-      setShowProfilePhotoModal(false)
-      setNewProfilePhoto('')
-      toast.success(t('playerProfile.photoUpdated'))
+      const playerResponse = await axios.get(`/api/players/${params.id}`);
+      setPlayer(playerResponse.data.player);
+      setShowProfilePhotoModal(false);
+      setNewProfilePhoto('');
+      toast.success(t('playerProfile.photoUpdated'));
     } catch (error: any) {
-      console.error('Error updating profile photo:', error)
-      toast.error(t('playerProfile.errorUpdatingPhoto'))
+      console.error('Error updating profile photo:', error);
+      toast.error(t('playerProfile.errorUpdatingPhoto'));
     } finally {
-      setUploadingPhoto(false)
+      setUploadingPhoto(false);
     }
-  }
+  };
 
-  const handleBackgroundUpdate = async () => {
-    if (!newBackgroundImage) {
-      return
-    }
-
-    try {
-      setUploadingBackground(true)
-      
-      // Get current player data first
-      const currentResponse = await axios.get(`/api/players/${params.id}`)
-      const currentPlayer = currentResponse.data.player
-      
-      // Update with cover image
-      await axios.put(`/api/players/${params.id}`, {
-        playerData: {
-          firstName: currentPlayer.firstName,
-          lastName: currentPlayer.lastName,
-          dateOfBirth: currentPlayer.dateOfBirth,
-          gender: currentPlayer.gender,
-          nationality: currentPlayer.nationality,
-          canton: currentPlayer.canton,
-          city: currentPlayer.city,
-          municipality: currentPlayer.municipality,
-          height: currentPlayer.height,
-          weight: currentPlayer.weight,
-          spikeHeight: currentPlayer.spikeHeight,
-          blockHeight: currentPlayer.blockHeight,
-          phone: currentPlayer.phone,
-          employmentStatus: currentPlayer.employmentStatus,
-          occupation: currentPlayer.occupation,
-          schoolName: currentPlayer.schoolName,
-          positions: currentPlayer.positions,
-          profileImage: currentPlayer.profileImage,
-          coverImage: newBackgroundImage,  // Update background
-          backgroundGradient: null,  // Clear gradient when using custom image
-          instagram: currentPlayer.instagram,
-          tiktok: currentPlayer.tiktok,
-          youtube: currentPlayer.youtube,
-          highlightVideo: currentPlayer.highlightVideo,
-          swissVolleyLicense: currentPlayer.swissVolleyLicense,
-          skillReceiving: currentPlayer.skillReceiving,
-          skillServing: currentPlayer.skillServing,
-          skillAttacking: currentPlayer.skillAttacking,
-          skillBlocking: currentPlayer.skillBlocking,
-          skillDefense: currentPlayer.skillDefense,
-          bio: currentPlayer.bio,
-          lookingForClub: currentPlayer.lookingForClub,
-          showEmail: currentPlayer.showEmail,
-          showPhone: currentPlayer.showPhone,
-        },
-        clubHistory: currentPlayer.clubHistory || [],
-        achievements: currentPlayer.achievements || [],
-      })
-
-      // Refresh player data
-      const playerResponse = await axios.get(`/api/players/${params.id}`)
-      setPlayer(playerResponse.data.player)
-      setCustomBgImage(newBackgroundImage)
-      
-      // Reset and close modal
-      setShowBackgroundModal(false)
-      setNewBackgroundImage('')
-    } catch (error: any) {
-      console.error('Error updating background:', error)
-      toast.error(t('playerProfile.errorUpdatingBackground'))
-    } finally {
-      setUploadingBackground(false)
-    }
-  }
-  
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">{t('playerProfile.loadingProfile')}</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return <ErrorBoundary error={error} />;
-  }
-
-  if (!player) {
-    return <ErrorBoundary error={{ message: t('playerProfile.playerNotFound') }} />;
-  }
-
-  const playerAge = player.dateOfBirth ? new Date().getFullYear() - new Date(player.dateOfBirth).getFullYear() : null
-  
-  // Format birth date with zero-padding (e.g., 06.03.2006)
+  // Format birth date
   const formatBirthDate = (dateValue: string | Date | null) => {
     if (!dateValue) return null;
     const date = typeof dateValue === 'string' ? new Date(dateValue) : dateValue;
@@ -564,20 +307,44 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     const year = date.getFullYear();
     return `${day}.${month}.${year}`;
   };
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-red-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">{t('playerProfile.loadingProfile')}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return <ErrorBoundary error={error} />;
+  }
+
+  // No player found
+  if (!player) {
+    return <ErrorBoundary error={{ message: 'Player not found' }} />;
+  }
+
+  const playerAge = player.dateOfBirth 
+    ? new Date().getFullYear() - new Date(player.dateOfBirth).getFullYear() 
+    : null;
   const formattedBirthDate = formatBirthDate(player.dateOfBirth);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Custom Background Header */}
       <div 
-        className="h-64 relative"
-        style={{ 
-          background: (customBgImage || player.coverImage) ? 'transparent' : selectedBg.style,
-          backgroundImage: (customBgImage || player.coverImage) ? `url(${customBgImage || player.coverImage})` : 'none',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
+        className="relative h-64 md:h-80"
+        style={
+          backgroundImage 
+            ? { backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+            : { background: selectedBg.style }
+        }
       >
         {/* Background change button (owner only) */}
         {isOwner && (
@@ -585,836 +352,363 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
             onClick={() => setShowBackgroundModal(true)}
             className="absolute top-4 right-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition flex items-center gap-2 z-10"
           >
-            <Upload className="w-4 h-4" />
+            <Camera className="w-4 h-4" />
             {t('playerProfile.changeBackgroundButton')}
           </button>
         )}
 
         {/* View counter (owner only) */}
         {isOwner && (
-          <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 text-sm z-10">
-            <Eye className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-            <span className="font-semibold text-gray-900 dark:text-white">{formatViewCount(player.views || 0)}</span>
-            <span className="text-gray-600 dark:text-gray-400">{t('playerProfile.profileViews')}</span>
+          <div className="absolute top-4 left-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg shadow-lg flex items-center gap-2">
+            <Eye className="w-4 h-4" />
+            <span className="font-semibold">{formatViewCount(player.views || 0)}</span>
+            <span className="text-sm">{t('playerProfile.profileViews')}</span>
           </div>
         )}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 pb-12 relative z-10">
-        {/* Profile Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 mb-6 relative z-10">
-          <div className="flex flex-col md:flex-row gap-4 md:gap-6">
-            {/* Profile Image */}
-            <div className="flex-shrink-0 relative group mx-auto md:mx-0">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-gray-700 shadow-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                {player.profileImage ? (
-                  <Image
-                    src={player.profileImage}
-                    alt={`${player.firstName} ${player.lastName}`}
-                    width={160}
-                    height={160}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-white text-5xl font-bold bg-red-700">
-                    {player.firstName[0]}{player.lastName[0]}
+      {/* Profile Card */}
+      <div className="max-w-5xl mx-auto px-4 -mt-20 relative z-10">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+          <div className="p-6 md:p-8">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+              {/* Profile Image */}
+              <div className="relative group">
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white dark:border-gray-700 shadow-xl">
+                  {player.profileImage ? (
+                    <Image
+                      src={player.profileImage}
+                      alt={`${player.firstName} ${player.lastName}`}
+                      width={160}
+                      height={160}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white text-4xl font-bold">
+                      {player.firstName[0]}{player.lastName[0]}
+                    </div>
+                  )}
+                </div>
+
+                {isOwner && (
+                  <button
+                    onClick={() => setShowProfilePhotoModal(true)}
+                    className="absolute inset-0 w-32 h-32 md:w-40 md:h-40 rounded-full bg-black bg-opacity-0 hover:bg-opacity-60 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
+                    title="Profilbild ändern"
+                  >
+                    <div className="text-center text-white">
+                      <Camera className="w-6 h-6 mx-auto mb-1" />
+                      <span className="text-xs">Ändern</span>
+                    </div>
+                  </button>
+                )}
+              </div>
+
+              {/* Player Info */}
+              <div className="flex-1 text-center md:text-left">
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+                  {player.firstName} {player.lastName}
+                </h1>
+                
+                <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-3">
+                  {player.positions.map((pos: string, idx: number) => (
+                    <span key={idx} className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-sm font-semibold">
+                      {getPositionLabel(pos, t)}
+                    </span>
+                  ))}
+                  {player.lookingForClub && (
+                    <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-semibold">
+                      ✓ {t('playerProfile.lookingForClubBadge')}
+                    </span>
+                  )}
+                </div>
+
+                <div className="space-y-2 text-gray-600 dark:text-gray-400">
+                  <p className="flex items-center justify-center md:justify-start gap-2">
+                    <MapPin className="w-4 h-4" />
+                    {player.municipality ? `${player.municipality}, ${player.canton}` : player.canton}
+                  </p>
+                  {playerAge && formattedBirthDate && (
+                    <p className="flex items-center justify-center md:justify-start gap-2">
+                      <Calendar className="w-4 h-4" />
+                      {playerAge} {t('playerProfile.yearsOld')} ({t('playerProfile.bornAbbrev')} {formattedBirthDate})
+                    </p>
+                  )}
+                  <p className="flex items-center justify-center md:justify-start gap-2">
+                    {player.gender === 'MALE' ? '♂' : '♀'} {player.gender === 'MALE' ? t('playerProfile.male') : t('playerProfile.female')}
+                  </p>
+                  {player.nationality && (
+                    <p className="flex items-center justify-center md:justify-start gap-2">
+                      🏳 {t('playerProfile.nationality')} {player.nationality}
+                    </p>
+                  )}
+                  {player.currentClub && (() => {
+                    const currentClubHistory = player.clubHistory?.find((ch: any) => ch.currentClub === true);
+                    return (
+                      <p className="flex items-center justify-center md:justify-start gap-2">
+                        <ClubBadge 
+                          clubName={player.currentClub.name}
+                        />
+                        {player.currentLeague && (
+                          <span className="text-sm">({getLeagueLabel(player.currentLeague, t)})</span>
+                        )}
+                      </p>
+                    );
+                  })()}
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Info */}
+            {(isOwner || player?.showEmail || player?.showPhone) && (
+              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                {(isOwner || player.showPhone) && player.phone && (
+                  <div className="flex items-center gap-2 mb-2">
+                    <Phone className="w-4 h-4" />
+                    <a href={`tel:${player.phone}`} className="text-red-600 hover:underline">
+                      {player.phone}
+                    </a>
+                    {isOwner && !player.showPhone && (
+                      <span className="text-xs text-gray-500">🔒</span>
+                    )}
+                  </div>
+                )}
+                {(isOwner || player.showEmail) && player.user?.email && (
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-4 h-4" />
+                    <a href={`mailto:${player.user.email}`} className="text-red-600 hover:underline">
+                      {player.user.email}
+                    </a>
+                    {isOwner && !player.showEmail && (
+                      <span className="text-xs text-gray-500">🔒</span>
+                    )}
                   </div>
                 )}
               </div>
-              {isOwner && (
-                <button
-                  onClick={() => setShowProfilePhotoModal(true)}
-                  className="absolute inset-0 w-32 h-32 md:w-40 md:h-40 rounded-full bg-black bg-opacity-0 hover:bg-opacity-60 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 active:opacity-100"
-                  title="Profilbild ändere"
-                >
-                  <div className="text-white flex flex-col items-center gap-1">
-                    <Camera className="w-6 h-6" />
-                    <span className="text-xs font-medium">Ändere</span>
+            )}
+
+            {/* Quick Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              {player.height && (
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-red-600">{player.height}</div>
+                  <div className="text-sm text-gray-500">{t('playerProfile.heightLabel')}</div>
+                </div>
+              )}
+              {player.weight && (
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-red-600">{player.weight}</div>
+                  <div className="text-sm text-gray-500">{t('playerProfile.weightLabel')}</div>
+                </div>
+              )}
+              {player.spikeHeight && (
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-red-600">{player.spikeHeight}</div>
+                  <div className="text-sm text-gray-500">{t('playerProfile.spikeLabel')}</div>
+                </div>
+              )}
+              {player.blockHeight && (
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-red-600">{player.blockHeight}</div>
+                  <div className="text-sm text-gray-500">{t('playerProfile.blockLabel')}</div>
+                </div>
+              )}
+              {player.dominantHand && (
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-red-600">
+                    {player.dominantHand === 'RIGHT' ? t('register.rightHanded') : 
+                     player.dominantHand === 'LEFT' ? t('register.leftHanded') : 
+                     t('register.ambidextrous')}
                   </div>
-                </button>
+                  <div className="text-sm text-gray-500">{t('playerProfile.dominantHandLabel')}</div>
+                </div>
+              )}
+              {player.preferredLanguage && (
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-red-600">
+                    {player.preferredLanguage === 'gsw' ? t('register.languageSwissGerman') :
+                     player.preferredLanguage === 'de' ? t('register.languageGerman') :
+                     player.preferredLanguage === 'fr' ? t('register.languageFrench') :
+                     player.preferredLanguage === 'it' ? t('register.languageItalian') :
+                     player.preferredLanguage === 'rm' ? t('register.languageRomansh') :
+                     player.preferredLanguage === 'en' ? t('register.languageEnglish') :
+                     player.preferredLanguage.toUpperCase()}
+                  </div>
+                  <div className="text-sm text-gray-500">{t('playerProfile.preferredLanguageLabel')}</div>
+                </div>
               )}
             </div>
 
-            {/* Player Info */}
-            <div className="flex-grow">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 md:gap-4">
-                <div className="flex-grow">
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 text-center md:text-left">
-                    {player.firstName} {player.lastName}
-                  </h1>
-                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-3 md:mb-4">
-                    {player.positions.map((pos, idx) => (
-                      <span key={idx} className="px-2.5 py-1 md:px-3 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs md:text-sm font-semibold rounded-full">
-                        {t(`playerProfile.position${pos.charAt(0) + pos.slice(1).toLowerCase().replace(/_([a-z])/g, (m, c) => c.toUpperCase())}`) || pos}
-                      </span>
-                    ))}
-                    {player.lookingForClub && (
-                      <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-sm font-semibold rounded-full flex items-center gap-1">
-                        ✓ {t('playerProfile.lookingForClubBadge')}
-                      </span>
-                    )}
-                  </div>
-                  
-                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 md:gap-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 md:mb-4">
-                    <span className="flex items-center gap-1">
-                      <MapPin className="w-4 h-4" />
-                      {player.municipality ? `${player.municipality}, ${player.canton}` : player.canton}
-                    </span>
-                    {playerAge && formattedBirthDate && (
-                      <span className="flex items-center gap-1" title={`${t('playerProfile.bornAbbrev')} ${formattedBirthDate}`}>
-                        <Calendar className="w-4 h-4" />
-                        {playerAge} {t('playerProfile.yearsOld')} ({t('playerProfile.bornAbbrev')} {formattedBirthDate})
-                      </span>
-                    )}
-                    <span className="flex items-center gap-1">
-                      {player.gender === 'MALE' ? '♂' : '♀'} {player.gender === 'MALE' ? t('playerProfile.male') : t('playerProfile.female')}
-                    </span>
-                    {player.nationality && (
-                      <span>🏳 {t('playerProfile.nationality')} {player.nationality}</span>
-                    )}
-                    {player.currentClub && (() => {
-                      // Find the current club in club history to get the country
-                      const currentClubHistory = player.clubHistory?.find((ch: any) => ch.currentClub === true)
-                      const clubCountry = currentClubHistory?.clubCountry || null
-                      
-                      return (
-                        <Link 
-                          href={`/clubs/${player.currentClub.id}`}
-                          className="flex items-center gap-2 hover:text-red-600 dark:hover:text-red-400 transition"
-                        >
-                          <ClubBadge 
-                            clubName={player.currentClub.name}
-                            size="sm"
-                            uploadedLogo={player.currentClub.logo}
-                            country={clubCountry}
-                          />
-                          <span>{player.currentClub.name}</span>
-                          {player.currentLeague && (
-                            <span className="text-xs px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full ml-1">
-                              {getLeagueLabel(player.currentLeague, t)}
-                            </span>
-                          )}
-                        </Link>
-                      )
-                    })()}
-                  </div>
-
-                  {/* Contact Info */}
-                  {(isOwner || player?.showEmail || player?.showPhone) && (
-                    <div className="flex flex-wrap gap-3 mb-4">
-                      {(isOwner || player.showPhone) && player.phone && (
-                        <div className="flex items-center gap-2">
-                          <a href={`tel:${player.phone}`} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400">
-                            <Phone className="w-4 h-4" />
-                            {player.phone}
-                          </a>
-                          {isOwner && !player.showPhone && (
-                            <span className="text-xs text-gray-400 dark:text-gray-500">🔒</span>
-                          )}
-                        </div>
-                      )}
-                      {(isOwner || player.showEmail) && player.user?.email && (
-                        <div className="flex items-center gap-2">
-                          <a href={`mailto:${player.user.email}`} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400">
-                            <Mail className="w-4 h-4" />
-                            {player.user.email}
-                          </a>
-                          {isOwner && !player.showEmail && (
-                            <span className="text-xs text-gray-400 dark:text-gray-500">🔒</span>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-
-                {/* Quick Stats */}
-                <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 md:gap-3 justify-center md:justify-start">
-                  {player.height && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
-                      <div className="text-xl md:text-2xl font-bold text-red-600 dark:text-red-400">{player.height}</div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.heightLabel')}</div>
-                    </div>
-                  )}
-                  {player.weight && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
-                      <div className="text-xl md:text-2xl font-bold text-blue-600 dark:text-blue-400">{player.weight}</div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.weightLabel')}</div>
-                    </div>
-                  )}
-                  {player.spikeHeight && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
-                      <div className="text-xl md:text-2xl font-bold text-orange-600 dark:text-orange-400">{player.spikeHeight}</div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.spikeLabel')}</div>
-                    </div>
-                  )}
-                  {player.blockHeight && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
-                      <div className="text-xl md:text-2xl font-bold text-purple-600 dark:text-purple-400">{player.blockHeight}</div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.blockLabel')}</div>
-                    </div>
-                  )}
-                  {player.dominantHand && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
-                      <div className="text-xl md:text-2xl font-bold text-green-600 dark:text-green-400">
-                        {player.dominantHand === 'RIGHT' ? t('register.rightHanded') : 
-                         player.dominantHand === 'LEFT' ? t('register.leftHanded') : 
-                         t('register.ambidextrous')}
-                      </div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.dominantHandLabel')}</div>
-                    </div>
-                  )}
-                  {player.preferredLanguage && (
-                    <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px]">
-                      <div className="text-xl md:text-2xl font-bold text-purple-600 dark:text-purple-400">
-                        {player.preferredLanguage === 'gsw' ? t('register.languageSwissGerman') :
-                         player.preferredLanguage === 'de' ? t('register.languageGerman') :
-                         player.preferredLanguage === 'fr' ? t('register.languageFrench') :
-                         player.preferredLanguage === 'it' ? t('register.languageItalian') :
-                         player.preferredLanguage === 'rm' ? t('register.languageRomansh') :
-                         player.preferredLanguage === 'en' ? t('register.languageEnglish') :
-                         player.preferredLanguage.toUpperCase()}
-                      </div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.preferredLanguageLabel')}</div>
-                    </div>
-                  )}
-                </div>
+            {/* Bio */}
+            {player.bio && (
+              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{player.bio}</p>
               </div>
+            )}
 
-              {/* Bio */}
-              {player.bio && (
-                <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                  <p className="text-gray-700 dark:text-gray-300">{player.bio}</p>
+            {/* Education/Employment Info */}
+            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {player.schoolName && (
+                <div className="flex items-center gap-2">
+                  <GraduationCap className="w-5 h-5 text-red-600" />
+                  <span className="text-gray-700 dark:text-gray-300">{player.schoolName}</span>
                 </div>
               )}
+              {player.occupation && (
+                <div className="flex items-center gap-2">
+                  <Briefcase className="w-5 h-5 text-red-600" />
+                  <span className="text-gray-700 dark:text-gray-300">{player.occupation}</span>
+                </div>
+              )}
+            </div>
 
-              {/* Education/Employment Info */}
-              <div className="mt-4 flex flex-wrap gap-3">
-                {player.schoolName && (
-                  <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg">
-                    <GraduationCap className="w-5 h-5" />
-                    <span className="font-medium">{player.schoolName}</span>
-                  </div>
-                )}
-                {player.occupation && (
-                  <div className="flex items-center gap-2 px-4 py-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded-lg">
-                    <Briefcase className="w-5 h-5" />
-                    <span className="font-medium">{player.occupation}</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Action Buttons */}
-              <div className="mt-6 flex flex-wrap gap-3">
-                {isOwner && (
-                  <>
-                    <Link
-                      href={`/players/${params.id}/edit`}
-                      className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold"
-                    >
-                      <Edit2 className="w-4 h-4" />
-                      {t('playerProfile.editProfile')}
-                    </Link>
-                    
-                    <button
-                      onClick={() => setShowCVExportPopup(true)}
-                      className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold"
-                      title={t('playerProfile.exportCV')}
-                    >
-                      <FileDown className="w-4 h-4" />
-                      {t('playerProfile.exportCV')}
-                    </button>
-                  </>
-                )}
-
-                {/* Chat Button - Show only to recruiters viewing player profiles */}
-                {!isOwner && session && session.user?.role === 'RECRUITER' && player && (
-                  <button
-                    onClick={handleStartChat}
-                    className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"
-                    title={t('playerProfile.sendMessage')}
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    {t('playerProfile.sendMessage')}
-                  </button>
-                )}
-
-                {/* Watchlist Button - Show to recruiters and hybrids viewing player profiles */}
-                {!isOwner && session && (session.user?.role === 'RECRUITER' || session.user?.role === 'HYBRID') && player && (
-                  <button
-                    onClick={toggleWatchlist}
-                    disabled={watchlistLoading}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-lg transition font-semibold ${
-                      isWatched 
-                        ? 'bg-yellow-600 hover:bg-yellow-700 text-white' 
-                        : 'bg-gray-600 hover:bg-gray-700 text-white'
-                    } ${watchlistLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    title={isWatched ? t('watchlist.removeFromWatchlist') : t('watchlist.addToWatchlist')}
-                  >
-                    {isWatched ? <BookMarked className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
-                    {isWatched ? t('watchlist.removeFromWatchlist') : t('watchlist.addToWatchlist')}
-                  </button>
-                )}
-                
-                {player.instagram && (
-                  <a
-                    href={`https://instagram.com/${player.instagram.replace('@', '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 bg-purple-700 text-white rounded-lg hover:opacity-90 transition font-semibold"
-                  >
-                    <Instagram className="w-4 h-4" />
-                    Instagram
-                  </a>
-                )}
-                {player.tiktok && (
-                  <a
-                    href={`https://www.tiktok.com/@${player.tiktok.replace('@', '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg hover:opacity-90 transition font-semibold"
-                  >
-                    <Music2 className="w-4 h-4" />
-                    TikTok
-                  </a>
-                )}
-                {player.youtube && (
-                  <a
-                    href={`https://youtube.com/@${player.youtube.replace('@', '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+            {/* Action Buttons */}
+            <div className="mt-6 flex flex-wrap gap-3">
+              {isOwner && (
+                <>
+                  <Link
+                    href={`/player-profile/${params.id}/edit`}
                     className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold"
                   >
-                    <Youtube className="w-4 h-4" />
-                    YouTube
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+                    <Edit2 className="w-4 h-4" />
+                    {t('playerProfile.editProfile')}
+                  </Link>
+                  <button
+                    onClick={() => setShowCVExportPopup(true)}
+                    className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold"
+                    title={t('playerProfile.exportCV')}
+                  >
+                    <FileDown className="w-4 h-4" />
+                    {t('playerProfile.exportCV')}
+                  </button>
+                </>
+              )}
 
-        {/* Tabs Navigation */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-          <div className="border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
-            <nav className="flex -mb-px min-w-max">
-              <button
-                onClick={() => setActiveTab('overview')}
-                className={`px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition whitespace-nowrap ${
-                  activeTab === 'overview'
-                    ? 'border-red-600 text-red-600 dark:text-red-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
-                }`}
-              >
-                {t('playerProfile.tabOverview')}
-              </button>
-              <button
-                onClick={() => setActiveTab('karriere')}
-                className={`px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition whitespace-nowrap ${
-                  activeTab === 'karriere'
-                    ? 'border-red-600 text-red-600 dark:text-red-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
-                }`}
-              >
-                {t('playerProfile.tabCareer')}
-              </button>
-              <button
-                onClick={() => setActiveTab('videos')}
-                className={`px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition whitespace-nowrap ${
-                  activeTab === 'videos'
-                    ? 'border-red-600 text-red-600 dark:text-red-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
-                }`}
-              >
-                {t('playerProfile.tabVideos')}
-              </button>
-              <button
-                onClick={() => setActiveTab('erfolge')}
-                className={`px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition whitespace-nowrap ${
-                  activeTab === 'erfolge'
-                    ? 'border-red-600 text-red-600 dark:text-red-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
-                }`}
-              >
-                {t('playerProfile.tabAchievements')}
-              </button>
-              <button
-                onClick={() => setActiveTab('photos')}
-                className={`px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium border-b-2 transition whitespace-nowrap ${
-                  activeTab === 'photos'
-                    ? 'border-red-600 text-red-600 dark:text-red-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
-                }`}
-              >
-                Photos
-              </button>
-            </nav>
-          </div>
+              {/* Chat Button - Show only to recruiters */}
+              {!isOwner && session && session.user?.role === 'RECRUITER' && player && (
+                <button
+                  onClick={handleStartChat}
+                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  {t('playerProfile.sendMessage')}
+                </button>
+              )}
 
-          {/* Tab Content */}
-          <div className="p-4 sm:p-6">
-            {activeTab === 'overview' && (
-              <div className="space-y-6">
-                {/* Skills Section */}
-                {((player.skillReceiving ?? 0) > 0 || (player.skillServing ?? 0) > 0 || (player.skillAttacking ?? 0) > 0 || (player.skillBlocking ?? 0) > 0 || (player.skillDefense ?? 0) > 0) && (
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                      <TrendingUp className="w-5 h-5" />
-                      {t('playerProfile.skills')}
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {(player.skillReceiving ?? 0) > 0 && (
-                        <div>
-                          <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillReceiving')}</span>
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillReceiving}/5</span>
-                          </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div
-                              className="bg-blue-600 h-2 rounded-full transition-all"
-                              style={{ width: `${((player.skillReceiving ?? 0) / 5) * 100}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {(player.skillServing ?? 0) > 0 && (
-                        <div>
-                          <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillServing')}</span>
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillServing}/5</span>
-                          </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div
-                              className="bg-green-600 h-2 rounded-full transition-all"
-                              style={{ width: `${((player.skillServing ?? 0) / 5) * 100}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {(player.skillAttacking ?? 0) > 0 && (
-                        <div>
-                          <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillAttacking')}</span>
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillAttacking}/5</span>
-                          </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div
-                              className="bg-red-600 h-2 rounded-full transition-all"
-                              style={{ width: `${((player.skillAttacking ?? 0) / 5) * 100}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {(player.skillBlocking ?? 0) > 0 && (
-                        <div>
-                          <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillBlocking')}</span>
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillBlocking}/5</span>
-                          </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div
-                              className="bg-purple-600 h-2 rounded-full transition-all"
-                              style={{ width: `${((player.skillBlocking ?? 0) / 5) * 100}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {(player.skillDefense ?? 0) > 0 && (
-                        <div>
-                          <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Verteidige</span>
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillDefense}/5</span>
-                          </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div
-                              className="bg-yellow-600 h-2 rounded-full transition-all"
-                              style={{ width: `${((player.skillDefense ?? 0) / 5) * 100}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
+              {/* Watchlist Button */}
+              {!isOwner && session && (session.user?.role === 'RECRUITER' || session.user?.role === 'HYBRID') && player && (
+                <button
+                  onClick={toggleWatchlist}
+                  disabled={watchlistLoading}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg transition font-semibold ${
+                    isWatched 
+                      ? 'bg-yellow-600 text-white hover:bg-yellow-700' 
+                      : 'bg-gray-600 text-white hover:bg-gray-700'
+                  } disabled:opacity-50`}
+                >
+                  {isWatched ? <BookMarked className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+                  {isWatched ? t('watchlist.removeFromWatchlist') : t('watchlist.addToWatchlist')}
+                </button>
+              )}
 
-                {/* Swiss Volley License Section */}
-                {player.swissVolleyLicense && (
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                      <Award className="w-5 h-5 text-yellow-600" />
-                      Swiss Volley Lizenz
-                    </h3>
-                    <div className="bg-yellow-100 dark:bg-gray-700 p-6 rounded-lg border-2 border-yellow-300 dark:border-yellow-600">
-                      <img 
-                        src={player.swissVolleyLicense} 
-                        alt="Swiss Volley License" 
-                        className="w-full max-w-2xl mx-auto rounded-lg shadow-xl border-2 border-white dark:border-gray-600"
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {activeTab === 'karriere' && (
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('playerProfile.clubHistory')}</h3>
-                {player.clubHistory && player.clubHistory.length > 0 ? (
-                  <ClubHistory history={player.clubHistory} />
-                ) : (
-                  <div className="text-center py-12">
-                    <p className="text-gray-500 dark:text-gray-400">{t('playerProfile.noClubHistory')}</p>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {activeTab === 'videos' && (
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                    <VideoIcon className="w-5 h-5 text-red-500" />
-                    Highlight Videos
-                  </h3>
-                  {isOwner && (
-                    <button
-                      onClick={() => setShowVideoUpload(true)}
-                      className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold text-sm"
-                    >
-                      <Upload className="w-4 h-4" />
-                      {t('playerProfile.uploadVideo')}
-                    </button>
-                  )}
-                </div>
-                {(player.highlightVideo || (player.videos && player.videos.length > 0)) ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* Show highlightVideo from registration if exists */}
-                    {player.highlightVideo && (
-                      <div className="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <div className="aspect-video bg-gray-900 relative">
-                          <video
-                            controls
-                            className="w-full h-full"
-                          >
-                            <source src={player.highlightVideo} type="video/mp4" />
-                            Your browser does not support the video tag.
-                          </video>
-                        </div>
-                        <div className="p-4">
-                          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{t('playerProfile.registrationHighlightVideo')}</h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{t('playerProfile.videoFromRegistration')}</p>
-                        </div>
-                      </div>
-                    )}
-                    {/* Show regular videos */}
-                    {player.videos && player.videos.map((video, idx) => (
-                      <div key={idx} className="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden shadow-md relative group">
-                        {isOwner && (
-                          <button
-                            onClick={() => handleDeleteVideo(video.id)}
-                            disabled={deletingVideoId === video.id}
-                            className="absolute top-2 right-2 z-10 p-2 bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 disabled:opacity-50"
-                            title={t('playerProfile.deleteVideo')}
-                          >
-                            {deletingVideoId === video.id ? (
-                              <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                              </svg>
-                            ) : (
-                              <Trash2 className="w-4 h-4" />
-                            )}
-                          </button>
-                        )}
-                        <div className="aspect-video bg-gray-900 relative">
-                          {video.videoUrl && (
-                            <video
-                              controls
-                              className="w-full h-full"
-                              poster={video.thumbnailUrl || undefined}
+              {/* Social Media Links */}
+              {player.instagram && (
+                <a
+                  href={player.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition font-semibold"
+                >
+                  <Instagram className="w-4 h-4" />
+                  Instagram
+                </a>
+              )}
+              {player.tiktok && (
+                            <a
+                              href={player.tiktok}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition font-semibold"
                             >
-                              <source src={video.videoUrl} type="video/mp4" />
-                              Your browser does not support the video tag.
-                            </video>
-                          )}
-                        </div>
-                        <div className="p-4">
-                          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{video.title || 'Highlight Video'}</h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{video.description}</p>
-                          {video.createdAt && (
-                            <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
-                              {new Date(video.createdAt).toLocaleDateString('de-CH')}
-                            </p>
+                              <Music2 className="w-4 h-4" />
+                              TikTok
+                            </a>
                           )}
                         </div>
                       </div>
-                    ))}
+                    </div>
                   </div>
-                ) : (
-                  <div className="text-center py-12 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                    <VideoIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500 dark:text-gray-400 mb-4">{t('playerProfile.noHighlightVideos')}</p>
-                    {isOwner && (
-                      <button
-                        onClick={() => setShowVideoUpload(true)}
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold"
-                      >
-                        <Upload className="w-4 h-4" />
-                        {t('playerProfile.firstVideoUpload')}
-                      </button>
-                    )}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {activeTab === 'erfolge' && (
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                  <Award className="w-5 h-5 text-yellow-500" />
-                  {t('playerProfile.achievements')}
-                </h3>
-                {player.achievements && player.achievements.length > 0 ? (
-                  <div className="space-y-3">
-                    {player.achievements.map((achievement, idx) => (
-                      <div key={idx} className="flex items-start gap-3 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-                        <Award className="w-5 h-5 text-yellow-600 dark:text-yellow-400 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-semibold text-gray-900 dark:text-white">{achievement}</p>
-                        </div>
+            
+                  {/* Background Picker Modal */}
+                  {showBackgroundModal && (
+                    <BackgroundPickerModal
+                      onClose={() => setShowBackgroundModal(false)}
+                      onSave={async (bg, image) => {
+                        // Save logic: update state and optionally persist
+                        setSelectedBg(bg);
+                        setCustomBgImage(image);
+                        setBackgroundImage(image || bg.style);
+                      }}
+                      backgroundOptions={BACKGROUND_OPTIONS}
+                      initialBg={selectedBg}
+                      initialCustomColor={customColor}
+                      initialImage={customBgImage}
+                      loading={uploadingBackground}
+                      onSavedBg={(bg, color, image) => {
+                        setSelectedBg(bg);
+                        setCustomColor(color);
+                        setCustomBgImage(image);
+                        setBackgroundImage(image || bg.style);
+                      }}
+                    />
+                  )}
+            
+                  {/* Profile Photo Modal */}
+                  {showProfilePhotoModal && (
+                    <div>
+                      <ImageUpload
+                        label={t('playerProfile.changeProfilePhoto')}
+                        value={newProfilePhoto}
+                        onChange={setNewProfilePhoto}
+                      />
+                      <div className="flex gap-2 mt-4">
+                        <button
+                          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                          onClick={() => setShowProfilePhotoModal(false)}
+                          disabled={uploadingPhoto}
+                        >
+                          {t('playerProfile.cancel')}
+                        </button>
+                        <button
+                          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                          onClick={handleProfilePhotoUpdate}
+                          disabled={uploadingPhoto || !newProfilePhoto}
+                        >
+                          {uploadingPhoto ? t('playerProfile.uploading') : t('playerProfile.save')}
+                        </button>
                       </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-12">
-                    <p className="text-gray-500 dark:text-gray-400">{t('playerProfile.noAchievements')}</p>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {activeTab === 'photos' && (
-              <PhotoGallery 
-                playerId={params.id}
-                isOwner={isOwner}
-                isVerified={player?.user?.emailVerified !== null}
-              />
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Video Upload Modal */}
-      {showVideoUpload && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('playerProfile.uploadVideo')}</h3>
-              <button
-                onClick={() => setShowVideoUpload(false)}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('playerProfile.videoFile')} *
-                </label>
-                <input
-                  type="file"
-                  accept="video/*"
-                  onChange={(e) => setVideoFile(e.target.files?.[0] || null)}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 dark:file:bg-red-900/30 dark:file:text-red-300"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('playerProfile.title')}
-                </label>
-                <input
-                  type="text"
-                  value={videoTitle}
-                  onChange={(e) => setVideoTitle(e.target.value)}
-                  placeholder="z.B. Highlight Reel 2024"
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('playerProfile.description')}
-                </label>
-                <textarea
-                  value={videoDescription}
-                  onChange={(e) => setVideoDescription(e.target.value)}
-                  placeholder={`${t('playerProfile.optional')}: ${t('playerProfile.describeVideo')}...`}
-                  rows={3}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                />
-              </div>
-
-              <div className="flex gap-3 pt-4">
-                <button
-                  onClick={() => setShowVideoUpload(false)}
-                  className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-semibold"
-                >
-                  {t('playerProfile.cancel')}
-                </button>
-                <button
-                  onClick={handleVideoUpload}
-                  disabled={!videoFile || uploadingVideo}
-                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  {uploadingVideo ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      {t('playerProfile.videoUploading')}
-                    </>
-                  ) : (
-                    <>
-                      <Upload className="w-4 h-4" />
-                      {t('playerProfile.uploadVideo')}
-                    </>
+                    </div>
                   )}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Profile Photo Modal */}
-      {showProfilePhotoModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('playerProfile.changeProfilePhoto')}</h3>
-              <button
-                onClick={() => {
-                  setShowProfilePhotoModal(false)
-                  setNewProfilePhoto('')
-                }}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <ImageUpload
-                label={t('playerProfile.selectNewProfilePhoto')}
-                value={newProfilePhoto}
-                onChange={(base64) => setNewProfilePhoto(base64)}
-                aspectRatio="square"
-                required
-              />
-
-              <div className="flex gap-3 pt-4">
-                <button
-                  onClick={() => {
-                    setShowProfilePhotoModal(false)
-                    setNewProfilePhoto('')
-                  }}
-                  className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-semibold"
-                >
-                  {t('playerProfile.cancel')}
-                </button>
-                <button
-                  onClick={handleProfilePhotoUpdate}
-                  disabled={!newProfilePhoto || uploadingPhoto}
-                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  {uploadingPhoto ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      {t('playerProfile.uploading')}
-                    </>
-                  ) : (
-                    <>
-                      <Camera className="w-4 h-4" />
-                      {t('playerProfile.save')}
-                    </>
+            
+                  {/* CV Export Popup */}
+                  {showCVExportPopup && (
+                    <CVExportLanguagePopup
+                      onClose={() => setShowCVExportPopup(false)}
+                      onExport={handleExportCV}
+                      userType="player"
+                    />
                   )}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Background Image Modal */}
-      {showBackgroundModal && (
-        <BackgroundPickerModal
-          onClose={() => {
-            setShowBackgroundModal(false);
-            setNewBackgroundImage('');
-          }}
-          onSave={async (bg) => {
-            try {
-              await axios.put(`/api/players/${params.id}/background`, {
-                backgroundGradient: bg.id,
-              });
-              // Refresh player data from backend
-              const playerResponse = await axios.get(`/api/players/${params.id}`);
-              const updatedPlayer = playerResponse.data.player;
-              setPlayer(updatedPlayer);
-              const savedBg = BACKGROUND_OPTIONS.find(option => option.id === String(bg.id));
-              if (savedBg) setSelectedBg(savedBg);
-              setShowBackgroundModal(false);
-              setNewBackgroundImage('');
-            } catch (error) {
-              toast.error('Fehler beim Speichern des Hintergrunds');
-            }
-          }}
-          backgroundOptions={BACKGROUND_OPTIONS}
-          initialBg={selectedBg}
-          initialCustomColor={customColor}
-          initialImage={backgroundImage}
-          loading={false}
-        />
-      )}
-
-      {/* Chat Window */}
-      {showChat && conversationId && player && session?.user && (
-        <div className="fixed bottom-4 right-4 z-50">
-          <ChatWindow
-            conversationId={conversationId}
-            otherParticipant={{
-              id: player.user.id,
-              name: `${player.firstName} ${player.lastName}`,
-              type: 'PLAYER',
-              club: player.currentClub?.name,
-              position: player.positions[0] ? getPositionLabel(player.positions[0], t) : undefined
-            }}
-            currentUserId={session.user.id}
-            currentUserType={session.user.role as 'PLAYER' | 'RECRUITER'}
-            onClose={() => setShowChat(false)}
-          />
-        </div>
-      )}
-
-      {/* CV Export Language Popup */}
-      {showCVExportPopup && (
-        <CVExportLanguagePopup
-          onClose={() => setShowCVExportPopup(false)}
-          onExport={handleExportCV}
-          userType="player"
-        />
-      )}
-    </div>
-  )
-}
+            
+                  {/* Chat Window */}
+                                {showChat && conversationId && (
+                                  <ChatWindow
+                                    conversationId={conversationId}
+                                    onClose={() => setShowChat(false)}
+                                    otherParticipant={player?.user}
+                                    currentUserId={session?.user?.id ?? ''}
+                                    currentUserType={(session?.user?.role === 'PLAYER' || session?.user?.role === 'RECRUITER') ? session.user.role : 'PLAYER'}
+                                  />
+                                )}
+                </div>
+                  );
+                }

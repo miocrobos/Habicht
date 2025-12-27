@@ -11,6 +11,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
   const { data: session } = useSession()
   const [unreadCount, setUnreadCount] = useState(0)
   const [watchlistCount, setWatchlistCount] = useState(0)
@@ -52,8 +53,25 @@ export default function Header() {
 
   return (
     <header className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+      <div className={`container mx-auto px-4 transition-all duration-500 ${collapsed ? 'h-12 overflow-hidden' : 'h-auto'}`} style={{ position: 'relative' }}>
+        {/* Arrow button for retract/expand header (right side, vertically centered) */}
+        <button
+          onClick={() => setCollapsed((prev) => !prev)}
+          className="absolute top-1/2 right-4 -translate-y-1/2 z-50 bg-white/80 dark:bg-gray-800/80 rounded-full p-1 shadow-md border border-gray-300 dark:border-gray-700 flex items-center justify-center transition hover:bg-white dark:hover:bg-gray-700"
+          style={{ width: 32, height: 32 }}
+          aria-label={collapsed ? 'Expand header' : 'Collapse header'}
+        >
+          <svg
+            className={`w-5 h-5 text-gray-700 dark:text-gray-200 transform transition-transform duration-300 ${collapsed ? 'rotate-180' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div className={`flex items-center justify-between transition-all duration-500 ${collapsed ? 'opacity-0 pointer-events-none h-0' : 'opacity-100 h-16'}`} style={{ minHeight: collapsed ? 0 : 64 }}>
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="relative w-12 h-12 transition-transform group-hover:scale-110" style={{ isolation: 'isolate', colorScheme: 'only light', mixBlendMode: 'normal' }}>

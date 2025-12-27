@@ -73,10 +73,17 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
       const response = await axios.get(`/api/hybrids/${params.id}`);
       const hybrid = response.data.hybrid;
       setProfile(hybrid);
-      setSelectedBg(
-        BACKGROUND_OPTIONS.find(bg => bg.id === hybrid.backgroundGradient) || BACKGROUND_OPTIONS[0]
-      );
-      setCustomColor(hybrid.customColor || "#2563eb");
+      if (hybrid.customColor) {
+        setSelectedBg({ id: 'custom', name: 'Custom', style: hybrid.customColor });
+        setCustomColor(hybrid.customColor);
+      } else if (hybrid.backgroundGradient) {
+        const found = BACKGROUND_OPTIONS.find(bg => bg.id === hybrid.backgroundGradient) || BACKGROUND_OPTIONS[0];
+        setSelectedBg(found);
+        setCustomColor(found.style);
+      } else {
+        setSelectedBg(BACKGROUND_OPTIONS[0]);
+        setCustomColor(BACKGROUND_OPTIONS[0].style);
+      }
       setBackgroundImage(hybrid.backgroundImage || "");
       setLoading(false);
     } catch (err) {

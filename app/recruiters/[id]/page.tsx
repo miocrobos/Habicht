@@ -133,6 +133,18 @@ const handleExportCV = async (language: string) => {
         const response = await axios.get(`/api/recruiters/${params.id}`);
         if (response.data && response.data.recruiter) {
           setRecruiter(response.data.recruiter);
+          // Highlight custom color if set
+          if (response.data.recruiter.customColor) {
+            setSelectedBg('custom');
+            setCustomColor(response.data.recruiter.customColor);
+          } else if (response.data.recruiter.backgroundGradient) {
+            setSelectedBg(response.data.recruiter.backgroundGradient);
+            const found = BACKGROUND_OPTIONS.find(bg => bg.id === response.data.recruiter.backgroundGradient);
+            setCustomColor(found ? found.style : '#2563eb');
+          } else {
+            setSelectedBg('solid-blue');
+            setCustomColor('#2563eb');
+          }
         } else {
           setError({ message: t("recruiterProfile.recruiterNotFound") || "Recruiter Not Found" });
         }
@@ -144,7 +156,7 @@ const handleExportCV = async (language: string) => {
       }
     };
     fetchRecruiterData();
-  }, [params.id]);
+  }, [params.id, t]);
 
   useEffect(() => {
     if (recruiter && session?.user) {
@@ -448,11 +460,13 @@ const handleExportCV = async (language: string) => {
             (recruiter?.backgroundImage || '')
           }
           onClose={() => setShowBgModal(false)}
-          onSave={async (bg) => {
+          onSave={async (bg, image) => {
             setSavingBg(true);
             try {
               await axios.put(`/api/recruiters/${params.id}/background`, {
                 backgroundGradient: bg.id,
+                customColor: bg.id === 'custom' ? bg.style : '',
+                backgroundImage: image || '',
               });
               // Refresh recruiter data from backend
               const recruiterResponse = await axios.get(`/api/recruiters/${params.id}`);

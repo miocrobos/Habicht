@@ -1,10 +1,10 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction } from 'react'
 
 interface HeaderContextType {
   collapsed: boolean
-  setCollapsed: (collapsed: boolean) => void
+  setCollapsed: Dispatch<SetStateAction<boolean>>
 }
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined)

@@ -712,7 +712,11 @@ export default function HybridRegisterPage() {
                       )}
                     </div>
                     <div className="mt-2">
-                      <label className="flex items-center gap-2 cursor-pointer">
+                      <label className={`flex items-center space-x-2 cursor-pointer p-3 rounded-lg border-2 transition ${
+                        club.currentClub 
+                          ? 'bg-green-100 dark:bg-green-900/30 border-green-500 dark:border-green-600 shadow-md' 
+                          : 'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
+                      }`}>
                         <input
                           type="checkbox"
                           checked={!!club.currentClub}
@@ -723,9 +727,13 @@ export default function HybridRegisterPage() {
                                 : { ...c, currentClub: false }
                             ));
                           }}
-                          className="rounded text-green-600 focus:ring-green-500"
+                          className="w-5 h-5 rounded text-green-600 border-gray-300 focus:ring-green-500"
                         />
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <span className={`text-sm font-medium flex items-center gap-2 ${
+                          club.currentClub 
+                            ? 'text-green-700 dark:text-green-300' 
+                            : 'text-gray-700 dark:text-gray-300'
+                        }`}>
                           {t('register.currentlyPlaying')}
                         </span>
                       </label>

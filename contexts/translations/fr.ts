@@ -551,7 +551,8 @@
       weightLabel: 'Poids kg',
       spikeLabel: 'Hauteur attaque cm',
       blockLabel: 'Hauteur bloc cm',
-      // preferredLanguageLabel duplicate removed
+      dominantHandLabel: 'Main',
+      preferredLanguageLabel: 'Langue',
       positionOutsideHitter: 'Attaquant',
       positionOpposite: 'Diagonal',
       positionMiddleBlocker: 'Central',

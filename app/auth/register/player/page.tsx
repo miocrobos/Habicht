@@ -361,15 +361,17 @@ export default function PlayerRegisterPage() {
 
   const updateClubExperience = (id: string, field: keyof ClubExperience, value: any) => {
     console.log('updateClubExperience called:', { id, field, value });
-    const updatedHistory = clubHistory.map(club => {
-      if (club.id === id) {
-        console.log('Updating club:', club, 'with', { [field]: value });
-        return { ...club, [field]: value };
-      }
-      return club;
+    setClubHistory(prev => {
+      const updatedHistory = prev.map(club => {
+        if (club.id === id) {
+          console.log('Updating club:', club, 'with', { [field]: value });
+          return { ...club, [field]: value };
+        }
+        return club;
+      });
+      console.log('Updated history:', updatedHistory);
+      return updatedHistory;
     });
-    console.log('Updated history:', updatedHistory);
-    setClubHistory(updatedHistory);
   };
 
   const addAchievement = () => {
@@ -1114,7 +1116,7 @@ export default function PlayerRegisterPage() {
                                   required
                                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                                 >
-                                  <option value="">{t('register.selectLeague') || 'Select League'}</option>
+                                  <option value="">{t('playerProfile.selectLeague') || 'Select League'}</option>
                                   {SWISS_LEAGUES.map(league => (
                                     <option key={league.value} value={league.value}>
                                       {league.label}

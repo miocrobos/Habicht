@@ -1,5 +1,6 @@
 import React from 'react';
 import { getAllCountriesWithFlags } from '@/lib/countryFlags';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface CountrySelectProps {
   value: string;
@@ -19,6 +20,8 @@ const countries = switzerland
   : allCountries;
 
 export default function CountrySelect({ value, onChange, className, placeholder = "Select Country" }: CountrySelectProps) {
+  const { t } = useLanguage();
+  
   return (
     <select
       value={value}
@@ -28,7 +31,7 @@ export default function CountrySelect({ value, onChange, className, placeholder 
       {!value && <option value="">{placeholder}</option>}
       {countries.map(country => (
         <option key={country.code} value={country.name}>
-          {country.flagEmoji ? `${country.flagEmoji} ` : ''}{country.name}
+          {country.flagEmoji ? `${country.flagEmoji} ` : ''}{t(`countries.${country.code.toLowerCase()}`) || country.name}
         </option>
       ))}
     </select>

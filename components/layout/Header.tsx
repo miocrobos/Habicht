@@ -3,7 +3,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { Menu, X, User, Search, Settings, Bell, Bookmark } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { Menu, X, User, Search, Settings, Bell, Bookmark, ChevronDown, Home, Users, UserCircle, LogIn, UserPlus, LogOut, Info, Building2 } from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
 import axios from 'axios'
 import NotificationPopup from '@/components/shared/NotificationPopup'
@@ -17,6 +18,24 @@ export default function Header() {
   const [unreadCount, setUnreadCount] = useState(0)
   const [watchlistCount, setWatchlistCount] = useState(0)
   const { t } = useLanguage()
+  const pathname = usePathname()
+  
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [pathname])
+  
+  // Close mobile menu when clicking outside or navigating
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMenuOpen])
 
   useEffect(() => {
     if (session) {
@@ -180,67 +199,221 @@ export default function Header() {
           </div>
 
           {/* Mobile menu button */}
-          <button
-            className="md:hidden text-gray-700 dark:text-gray-300"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            {session && <NotificationPopup />}
+            <button
+              className="text-gray-700 dark:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Overlay */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t dark:border-gray-700">
-            <nav className="flex flex-col space-y-4">
-              <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                {t('nav.players')}
+          <div 
+            className="md:hidden fixed inset-0 top-0 left-0 right-0 bottom-0 bg-black/50 backdrop-blur-sm z-40"
+            onClick={() => setIsMenuOpen(false)}
+          />
+        )}
+
+        {/* Mobile Navigation Drawer */}
+        <div className={`md:hidden fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          {/* Mobile Menu Header */}
+          <div className="flex items-center justify-between p-4 border-b dark:border-gray-700 bg-gradient-to-r from-red-600 to-red-700">
+            <div className="flex items-center gap-3">
+              <div className="relative w-10 h-10" style={{ isolation: 'isolate', colorScheme: 'only light' }}>
+                <Image
+                  src="/eagle-logo.png"
+                  alt="Habicht Logo"
+                  fill
+                  className="object-contain no-invert"
+                  style={{ filter: 'none' }}
+                />
+              </div>
+              <span className="text-xl font-bold text-white">Habicht</span>
+            </div>
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="p-2 text-white hover:bg-white/20 rounded-lg transition"
+              aria-label="Close menu"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+          
+          {/* User Info Section (if logged in) */}
+          {session && (
+            <div className="p-4 bg-gray-50 dark:bg-gray-800 border-b dark:border-gray-700">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                  {session.user.name?.[0]?.toUpperCase() || 'U'}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                    {session.user.name || session.user.email}
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
+                    {session.user.role?.toLowerCase()}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {/* Navigation Links */}
+          <nav className="flex-1 overflow-y-auto py-2">
+            {/* Main Navigation */}
+            <div className="px-2 py-2">
+              <p className="px-4 py-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                {t('nav.navigation') || 'Navigation'}
+              </p>
+              
+              <Link 
+                href="/" 
+                className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Home className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                <span>{t('nav.home') || 'Home'}</span>
               </Link>
-              <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium">
-                {t('nav.men')}
+              
+              <Link 
+                href="/players" 
+                className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Users className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                <span>{t('nav.players')}</span>
               </Link>
-              <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium">
-                {t('nav.women')}
+              
+              <Link 
+                href="/players/men" 
+                className="flex items-center gap-3 px-4 py-3 mx-2 ml-8 rounded-xl text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition font-medium text-sm"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="text-lg">♂</span>
+                <span>{t('nav.men')}</span>
               </Link>
-              <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                {t('nav.clubs')}
+              
+              <Link 
+                href="/players/women" 
+                className="flex items-center gap-3 px-4 py-3 mx-2 ml-8 rounded-xl text-pink-600 dark:text-pink-400 hover:bg-pink-50 dark:hover:bg-pink-900/30 transition font-medium text-sm"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="text-lg">♀</span>
+                <span>{t('nav.women')}</span>
               </Link>
-              <Link href="/recruiters" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition font-medium">
-                👥 {t('nav.recruiters')}
+              
+              <Link 
+                href="/clubs" 
+                className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Building2 className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                <span>{t('nav.clubs')}</span>
               </Link>
-              <Link href="/settings" className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                <Settings className="w-5 h-5" />
-                <span>{t('nav.settings')}</span>
+              
+              <Link 
+                href="/recruiters" 
+                className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="text-lg">👥</span>
+                <span>{t('nav.recruiters')}</span>
               </Link>
-              <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                {t('nav.about')}
+              
+              <Link 
+                href="/about" 
+                className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Info className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                <span>{t('nav.about')}</span>
               </Link>
+            </div>
+            
+            {/* User Actions */}
+            <div className="px-2 py-2 border-t dark:border-gray-700">
+              <p className="px-4 py-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                {t('nav.account') || 'Account'}
+              </p>
+              
               {session ? (
                 <>
                   {session.user.role === 'PLAYER' && session.user.playerId && (
-                    <Link href={`/players/${session.user.playerId}`} className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                      {t('nav.myProfile')}
+                    <Link 
+                      href={`/players/${session.user.playerId}`} 
+                      className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <UserCircle className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                      <span>{t('nav.myProfile')}</span>
                     </Link>
                   )}
-                  <button
-                    onClick={() => signOut()}
-                    className="text-left text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition"
+                  
+                  {(session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') && (
+                    <Link 
+                      href="/watchlist" 
+                      className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <Bookmark className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                      <span>{t('nav.watchlist')}</span>
+                      {watchlistCount > 0 && (
+                        <span className="ml-auto bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                          {watchlistCount}
+                        </span>
+                      )}
+                    </Link>
+                  )}
+                  
+                  <Link 
+                    href="/settings" 
+                    className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
+                    onClick={() => setIsMenuOpen(false)}
                   >
-                    {t('nav.logout')}
+                    <Settings className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                    <span>{t('nav.settings')}</span>
+                  </Link>
+                  
+                  <button
+                    onClick={() => {
+                      setIsMenuOpen(false)
+                      signOut()
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 transition font-medium"
+                  >
+                    <LogOut className="w-5 h-5" />
+                    <span>{t('nav.logout')}</span>
                   </button>
                 </>
               ) : (
                 <>
-                  <Link href="/auth/login" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
-                    {t('nav.login')}
+                  <Link 
+                    href="/auth/login" 
+                    className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <LogIn className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                    <span>{t('nav.login')}</span>
                   </Link>
-                  <Link href="/auth/register" className="text-swiss-red dark:text-red-400 font-semibold">
-                    {t('nav.register')}
+                  
+                  <Link 
+                    href="/auth/register" 
+                    className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 transition font-semibold shadow-lg"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <UserPlus className="w-5 h-5" />
+                    <span>{t('nav.register')}</span>
                   </Link>
                 </>
               )}
-            </nav>
-          </div>
-        )}
+            </div>
+          </nav>
+        </div>
       </div>
     </header>
   )

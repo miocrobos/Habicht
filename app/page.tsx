@@ -67,7 +67,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Dynamic Background */}
-      <section className="relative min-h-[700px] pb-20 mb-24 overflow-visible">
+      <section className="relative min-h-[500px] sm:min-h-[600px] md:min-h-[700px] pb-12 sm:pb-20 mb-12 sm:mb-24 overflow-visible">
         {/* Animated Background */}
         <div className="absolute inset-0">
           {/* Volleyball Background Images */}
@@ -107,10 +107,10 @@ export default function Home() {
         {/* Content */}
         <div className="relative z-10 h-full flex items-center">
           <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto text-center text-white">
+            <div className="max-w-5xl mx-auto text-center text-white pt-6 sm:pt-0">
               {/* Eagle Logo with Animation */}
-              <div className="mb-8 flex justify-center animate-bounce-slow">
-                <div className="relative w-32 h-32 md:w-40 md:h-40 drop-shadow-2xl transform hover:scale-110 hover:rotate-3 transition-all duration-300" style={{ isolation: 'isolate', colorScheme: 'only light', mixBlendMode: 'normal' }}>
+              <div className="mb-4 sm:mb-8 flex justify-center animate-bounce-slow">
+                <div className="relative w-20 h-20 sm:w-32 sm:h-32 md:w-40 md:h-40 drop-shadow-2xl transform hover:scale-110 hover:rotate-3 transition-all duration-300" style={{ isolation: 'isolate', colorScheme: 'only light', mixBlendMode: 'normal' }}>
                   <Image
                     src="/eagle-logo.png"
                     alt="Eagle Logo"
@@ -123,34 +123,34 @@ export default function Home() {
               </div>
               
               {/* Main Title */}
-              <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-6 tracking-tighter leading-none">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-3 sm:mb-6 tracking-tighter leading-none">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-white">
                   {t('home.hero.title')}
                 </span>
               </h1>
               
               {/* Dynamic Subtitle */}
-              <div className="h-24 mb-8">
-                <p className="text-3xl md:text-4xl font-bold mb-2 animate-fade-in">
+              <div className="h-16 sm:h-20 md:h-24 mb-4 sm:mb-8">
+                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2 animate-fade-in">
                   {slides[currentSlide].emoji} {slides[currentSlide].title}
                 </p>
-                <p className="text-xl md:text-2xl text-gray-200">
+                <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-200">
                   {slides[currentSlide].subtitle}
                 </p>
               </div>
               
-              <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-3xl mx-auto">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-5 sm:mb-8 text-gray-200 max-w-3xl mx-auto px-4">
                 {t('home.hero.description')}
               </p>
 
               {/* Main CTA Buttons */}
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 justify-center mb-6 md:mb-8 px-4">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center mb-4 sm:mb-6 md:mb-8 px-2 sm:px-4">
                 <button
                   onClick={() => handleProtectedNavigation('/players/men')}
-                  className="group relative bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-base md:text-lg font-bold transition-all transform hover:scale-105 shadow-2xl overflow-hidden"
+                  className="group relative bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-sm sm:text-base md:text-lg font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    <span className="text-lg md:text-xl">♂</span>
+                    <span className="text-base sm:text-lg md:text-xl">♂</span>
                     {t('home.hero.menVolleyball')}
                   </span>
                   <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
@@ -158,10 +158,10 @@ export default function Home() {
                 
                 <button
                   onClick={() => handleProtectedNavigation('/players/women')}
-                  className="group relative bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-base md:text-lg font-bold transition-all transform hover:scale-105 shadow-2xl overflow-hidden"
+                  className="group relative bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-sm sm:text-base md:text-lg font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    <span className="text-lg md:text-xl">♀</span>
+                    <span className="text-base sm:text-lg md:text-xl">♀</span>
                     {t('home.hero.womenVolleyball')}
                   </span>
                   <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
@@ -169,13 +169,13 @@ export default function Home() {
               </div>
 
               {/* Secondary Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-2 sm:px-4">
                 <button
                   onClick={() => handleProtectedNavigation('/players')}
-                  className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 shadow-2xl"
+                  className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl text-sm sm:text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl"
                 >
                   <span className="flex items-center gap-2 justify-center">
-                    <Search className="w-5 h-5" />
+                    <Search className="w-4 h-4 sm:w-5 sm:h-5" />
                     {t('home.hero.searchAllPlayers')}
                   </span>
                 </button>
@@ -183,19 +183,19 @@ export default function Home() {
                   <>
                     <Link
                       href="/auth/login"
-                      className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 shadow-2xl border-2 border-gray-300 dark:border-gray-600"
+                      className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl text-sm sm:text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl border-2 border-gray-300 dark:border-gray-600"
                     >
                       <span className="flex items-center gap-2 justify-center">
-                        <LogIn className="w-5 h-5" />
+                        <LogIn className="w-4 h-4 sm:w-5 sm:h-5" />
                         {t('home.hero.login')}
                       </span>
                     </Link>
                     <Link
                       href="/auth/register"
-                      className="bg-red-600 hover:bg-red-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold transition-all transform hover:scale-105 shadow-2xl border-2 border-white"
+                      className="bg-red-600 hover:bg-red-700 text-white px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl text-sm sm:text-base md:text-lg font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl border-2 border-white"
                     >
                       <span className="flex items-center gap-2 justify-center">
-                        <Star className="w-5 h-5" />
+                        <Star className="w-4 h-4 sm:w-5 sm:h-5" />
                         {t('home.hero.registerNow')}
                       </span>
                     </Link>
@@ -224,16 +224,16 @@ export default function Home() {
       </section>
 
       {/* League Showcase Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">{t('home.leagues.title')}</h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+      <section className="py-10 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4">{t('home.leagues.title')}</h2>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto px-4">
               {t('home.leagues.subtitle')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-4 sm:mb-6 md:mb-8">
             <LeagueCard
               league="NLA"
               description={t('home.leagues.nla')}
@@ -264,7 +264,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12 md:mb-16">
             <LeagueCard
               league={t('home.leagues.thirdLeague')}
               description={t('home.leagues.thirdLeague')}
@@ -281,7 +281,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="grid md:grid-cols-1 gap-6 mb-16">
+          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12 md:mb-16">
             <LeagueCard
               league={t('home.leagues.fifthLeague')}
               description={t('home.leagues.fifthLeague')}
@@ -292,17 +292,17 @@ export default function Home() {
           </div>
 
           {/* Swiss Regions Highlight */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-8">🇨🇭 Alle 26 Kantone</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-4 sm:p-6 md:p-12">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-4 sm:mb-6 md:mb-8">🇨🇭 Alle 26 Kantone</h3>
+            <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-3 md:gap-4">
               {['ZH', 'BE', 'VD', 'AG', 'SG', 'GE', 'LU', 'TG', 'TI', 'VS', 'BL', 'SO', 'FR', 'BS', 'GR', 'NE', 'ZG', 'SH', 'UR', 'SZ', 'JU', 'AR', 'AI', 'NW', 'GL', 'OW'].map(canton => (
                 <Link 
                   key={canton} 
                   href={`/clubs?canton=${canton}`}
-                  className="p-2 md:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30 hover:shadow-md transition cursor-pointer flex flex-col items-center gap-2"
+                  className="p-1.5 sm:p-2 md:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30 hover:shadow-md transition cursor-pointer flex flex-col items-center gap-1 sm:gap-2"
                 >
-                  <CantonFlag canton={canton as any} size="md" />
-                  <div className="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200">{canton}</div>
+                  <CantonFlag canton={canton as any} size="sm" />
+                  <div className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-800 dark:text-gray-200">{canton}</div>
                 </Link>
               ))}
             </div>
@@ -311,14 +311,14 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white dark:bg-gray-950">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">{t('home.features.title')}</h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400">{t('home.features.subtitle')}</p>
+      <section className="py-10 sm:py-16 md:py-20 bg-white dark:bg-gray-950">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4">{t('home.features.title')}</h2>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-400">{t('home.features.subtitle')}</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
             <FeatureCard
               icon={<Users className="w-12 h-12" />}
               title={t('home.features.search.title')}
@@ -348,9 +348,9 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
+      <section className="py-10 sm:py-16 md:py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
             <StatCard 
               number="1,000+" 
               label={t('home.stats.activePlayers')} 
@@ -376,21 +376,21 @@ export default function Home() {
       </section>
 
       {/* Gender-Specific Sections */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-pink-50 dark:from-gray-900 dark:to-gray-800">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+      <section className="py-10 sm:py-16 md:py-20 bg-gradient-to-br from-blue-50 to-pink-50 dark:from-gray-900 dark:to-gray-800">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {/* Men's Section */}
             <Link href="/players/men" className="group">
-              <div className="relative h-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative h-60 sm:h-72 md:h-80 lg:h-96 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg sm:shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800 group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-black/20" />
-                <div className="relative h-full flex flex-col items-center justify-center text-white p-6 md:p-8">
-                  <div className="text-6xl md:text-8xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">♂</div>
-                  <h3 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">{t('home.gender.mensVolleyball')}</h3>
-                  <p className="text-lg md:text-xl mb-4 md:mb-6 opacity-90 text-center">
+                <div className="relative h-full flex flex-col items-center justify-center text-white p-4 sm:p-6 md:p-8">
+                  <div className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl mb-2 sm:mb-4 md:mb-6 group-hover:scale-110 transition-transform">♂</div>
+                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 md:mb-4 text-center">{t('home.gender.mensVolleyball')}</h3>
+                  <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-3 sm:mb-4 md:mb-6 opacity-90 text-center line-clamp-2">
                     {t('home.gender.mensLeaguePlayers')}
                   </p>
-                  <div className="bg-white dark:bg-gray-800 text-blue-600 px-8 py-3 rounded-xl font-bold group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition">
+                  <div className="bg-white dark:bg-gray-800 text-blue-600 px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-lg sm:rounded-xl text-sm sm:text-base font-bold group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition">
                     {t('home.gender.discoverMen')}
                   </div>
                 </div>
@@ -399,16 +399,16 @@ export default function Home() {
 
             {/* Women's Section */}
             <Link href="/players/women" className="group">
-              <div className="relative h-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative h-60 sm:h-72 md:h-80 lg:h-96 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg sm:shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-pink-600 to-pink-800 group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-black/20" />
-                <div className="relative h-full flex flex-col items-center justify-center text-white p-6 md:p-8">
-                  <div className="text-6xl md:text-8xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">♀</div>
-                  <h3 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">{t('home.gender.womensVolleyball')}</h3>
-                  <p className="text-lg md:text-xl mb-4 md:mb-6 opacity-90 text-center">
+                <div className="relative h-full flex flex-col items-center justify-center text-white p-4 sm:p-6 md:p-8">
+                  <div className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl mb-2 sm:mb-4 md:mb-6 group-hover:scale-110 transition-transform">♀</div>
+                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 md:mb-4 text-center">{t('home.gender.womensVolleyball')}</h3>
+                  <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-3 sm:mb-4 md:mb-6 opacity-90 text-center line-clamp-2">
                     {t('home.gender.womensLeaguePlayers')}
                   </p>
-                  <div className="bg-white dark:bg-gray-800 text-pink-600 px-8 py-3 rounded-xl font-bold group-hover:bg-pink-100 dark:group-hover:bg-pink-900/30 transition">
+                  <div className="bg-white dark:bg-gray-800 text-pink-600 px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-lg sm:rounded-xl text-sm sm:text-base font-bold group-hover:bg-pink-100 dark:group-hover:bg-pink-900/30 transition">
                     {t('home.gender.discoverWomen')}
                   </div>
                 </div>
@@ -419,7 +419,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-red-600 to-red-700 text-white relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-r from-red-600 to-red-700 text-white relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="h-full w-full" style={{
@@ -429,29 +429,29 @@ export default function Home() {
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="text-5xl md:text-6xl mb-4 md:mb-6">🏐</div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+          <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-3 sm:mb-4 md:mb-6">🏐</div>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 px-2">
             {t('home.cta.title')}
           </h2>
-          <p className="text-lg md:text-xl lg:text-2xl mb-8 md:mb-10 opacity-90 max-w-2xl mx-auto px-4">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 sm:mb-8 md:mb-10 opacity-90 max-w-2xl mx-auto px-4">
             {t('home.cta.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
             <Link 
               href="/auth/register"
-              className="bg-white dark:bg-gray-700 text-red-600 dark:text-red-400 px-8 md:px-10 py-4 md:py-5 rounded-2xl font-bold text-base md:text-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition transform hover:scale-105 shadow-2xl"
+              className="bg-white dark:bg-gray-700 text-red-600 dark:text-red-400 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base md:text-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl"
             >
               <span className="flex items-center gap-2 justify-center">
-                <Star className="w-6 h-6" />
+                <Star className="w-5 h-5 sm:w-6 sm:h-6" />
                 {t('home.cta.registerPlayer')}
               </span>
             </Link>
             <Link 
               href="/players"
-              className="bg-transparent border-2 md:border-3 border-white dark:border-gray-300 text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl font-bold text-base md:text-lg hover:bg-white dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-white transition transform hover:scale-105"
+              className="bg-transparent border-2 md:border-3 border-white dark:border-gray-300 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base md:text-lg hover:bg-white dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-white transition transform hover:scale-105 active:scale-95"
             >
               <span className="flex items-center gap-2 justify-center">
-                <Search className="w-6 h-6" />
+                <Search className="w-5 h-5 sm:w-6 sm:h-6" />
                 {t('home.gender.browsePlayers')}
               </span>
             </Link>
@@ -471,14 +471,14 @@ function LeagueCard({ league, description, color, emoji, playerCount }: {
 }) {
   const { t } = useLanguage()
   return (
-    <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+    <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 sm:hover:-translate-y-2">
       <div className={`absolute inset-0 bg-gradient-to-br ${color}`} />
-      <div className="relative p-8 text-white">
-        <div className="text-5xl mb-4">{emoji}</div>
-        <h3 className="text-3xl font-bold mb-2">{league}</h3>
-        <p className="text-lg opacity-90 mb-4">{description}</p>
-        <div className="text-2xl font-bold">{playerCount}</div>
-        <p className="text-sm opacity-75">{t('home.leagues.players')}</p>
+      <div className="relative p-4 sm:p-6 md:p-8 text-white">
+        <div className="text-2xl sm:text-4xl md:text-5xl mb-2 sm:mb-4">{emoji}</div>
+        <h3 className="text-lg sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 line-clamp-1">{league}</h3>
+        <p className="text-xs sm:text-base md:text-lg opacity-90 mb-2 sm:mb-4 line-clamp-2">{description}</p>
+        <div className="text-xl sm:text-2xl font-bold">{playerCount}</div>
+        <p className="text-[10px] sm:text-sm opacity-75">{t('home.leagues.players')}</p>
       </div>
       <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300" />
     </div>
@@ -499,12 +499,14 @@ function FeatureCard({ icon, title, description, color }: {
   }[color]
 
   return (
-    <div className="group bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
-      <div className={`inline-block p-3 md:p-4 rounded-xl mb-3 md:mb-4 transition-all ${colorClasses}`}>
-        {icon}
+    <div className="group bg-white dark:bg-gray-800 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-md hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
+      <div className={`inline-block p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl mb-2 sm:mb-3 md:mb-4 transition-all ${colorClasses}`}>
+        <div className="w-6 h-6 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
+          {icon}
+        </div>
       </div>
-      <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-gray-900 dark:text-white">{title}</h3>
-      <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed">{description}</p>
+      <h3 className="text-base sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 md:mb-3 text-gray-900 dark:text-white line-clamp-2">{title}</h3>
+      <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3">{description}</p>
     </div>
   )
 }
@@ -558,11 +560,11 @@ function AuthPromptModal({ onClose }: { onClose: () => void }) {
 function StatCard({ number, label, icon }: { number: string; label: string; icon: string }) {
   return (
     <div className="group">
-      <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">{icon}</div>
-      <div className="text-5xl md:text-6xl font-black mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
+      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 sm:mb-3 md:mb-4 group-hover:scale-110 transition-transform">{icon}</div>
+      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-1 sm:mb-2 md:mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
         {number}
       </div>
-      <div className="text-xl text-gray-300 font-medium">{label}</div>
+      <div className="text-xs sm:text-sm md:text-lg lg:text-xl text-gray-300 font-medium">{label}</div>
     </div>
   )
 }

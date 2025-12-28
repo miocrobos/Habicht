@@ -102,16 +102,16 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-6 sm:space-y-8">
         <div>
-          <div className="mx-auto w-20 h-20 flex items-center justify-center">
+          <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center">
             <img src="/eagle-logo.png" alt="Habicht Logo" className="w-full h-full object-contain" />
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
+          <h2 className="mt-4 sm:mt-6 text-center text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">
             {t('auth.login.title')}
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-2 text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400">
             {t('auth.login.or')}{' '}
             <Link href="/auth/register" className="font-medium text-habicht-600 hover:text-habicht-500">
               {t('auth.login.createAccount')}
@@ -119,19 +119,19 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-6 sm:mt-8 space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="rounded-md bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4">
-              <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
+            <div className="rounded-md bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-3 sm:p-4">
+              <p className="text-xs sm:text-sm text-red-800 dark:text-red-200">{error}</p>
             </div>
           )}
           {success && (
-            <div className="rounded-md bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4">
-              <p className="text-sm text-green-800 dark:text-green-200">{success}</p>
+            <div className="rounded-md bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-3 sm:p-4">
+              <p className="text-xs sm:text-sm text-green-800 dark:text-green-200">{success}</p>
             </div>
           )}
 
-          <div className="rounded-md shadow-sm space-y-4">
+          <div className="rounded-md shadow-sm space-y-3 sm:space-y-4">
             <div>
               <label htmlFor="email" className="sr-only">
                 {t('auth.login.email')}
@@ -144,7 +144,7 @@ export default function LoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10"
                 placeholder={t('auth.login.email')}
               />
             </div>
@@ -160,7 +160,7 @@ export default function LoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-2.5 sm:py-2 pr-10 text-sm border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-red-500 focus:border-red-500"
                 placeholder={t('auth.login.password')}
               />
               <button
@@ -177,7 +177,7 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
             <div className="flex items-center">
               <input
                 id="remember-me"
@@ -187,12 +187,12 @@ export default function LoginPage() {
                 onChange={(e) => setRememberMe(e.target.checked)}
                 className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 dark:border-gray-600 rounded"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-white">
+              <label htmlFor="remember-me" className="ml-2 block text-xs sm:text-sm text-gray-900 dark:text-white">
                 {t('auth.login.rememberMe')}
               </label>
             </div>
 
-            <div className="text-sm">
+            <div className="text-xs sm:text-sm">
               <Link href="/auth/forgot-password" className="font-medium text-habicht-600 hover:text-habicht-500">
                 {t('auth.login.forgotPassword')}
               </Link>
@@ -203,7 +203,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-habicht-600 hover:bg-habicht-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-habicht-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2.5 sm:py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-habicht-600 hover:bg-habicht-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-habicht-500 disabled:opacity-50 disabled:cursor-not-allowed transition active:scale-[0.98]"
             >
               {loading ? t('auth.login.loading') : t('auth.login.submit')}
             </button>

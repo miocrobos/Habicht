@@ -197,95 +197,100 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+        <div className="mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">
             {t('settings.title')}
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
             {t('settings.subtitle')}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
           <div className="lg:col-span-1">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 space-y-2">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-2 sm:p-4 space-y-1 sm:space-y-2 flex lg:flex-col overflow-x-auto lg:overflow-visible gap-1 sm:gap-0">
               <button
                 onClick={() => setActiveTab('appearance')}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
                   activeTab === 'appearance'
                     ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                 }`}
               >
-                <div className="flex items-center space-x-3">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                   </svg>
-                  <span>{t('settings.appearance.title')}</span>
+                  <span className="hidden sm:inline">{t('settings.appearance.title')}</span>
+                  <span className="sm:hidden">Theme</span>
                 </div>
               </button>
               
               <button
                 onClick={() => setActiveTab('security')}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
                   activeTab === 'security'
                     ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                 }`}
               >
-                <div className="flex items-center space-x-3">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
-                  <span>{t('settings.security.title')}</span>
+                  <span className="hidden sm:inline">{t('settings.security.title')}</span>
+                  <span className="sm:hidden">Security</span>
                 </div>
               </button>
 
               <button
                 onClick={() => setActiveTab('language')}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
                   activeTab === 'language'
                     ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                 }`}
               >
-                <div className="flex items-center space-x-3">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                   </svg>
-                  <span>{t('settings.language.title')}</span>
+                  <span className="hidden sm:inline">{t('settings.language.title')}</span>
+                  <span className="sm:hidden">Lang</span>
                 </div>
               </button>
 
               <button
                 onClick={() => setActiveTab('notifications')}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
                   activeTab === 'notifications'
                     ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                 }`}
               >
-                <div className="flex items-center space-x-3">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                   </svg>
-                  <span>{t('settings.notifications.title')}</span>
+                  <span className="hidden sm:inline">{t('settings.notifications.title')}</span>
+                  <span className="sm:hidden">Notif</span>
                 </div>
               </button>
 
               <button
                 onClick={() => setActiveTab('account')}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
                   activeTab === 'account'
                     ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                 }`}
               >
-                <div className="flex items-center space-x-3">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                  <span>{t('settings.account.title')}</span>
+                  <span className="hidden sm:inline">{t('settings.account.title')}</span>
+                  <span className="sm:hidden">Account</span>
                 </div>
               </button>
             </div>
@@ -295,9 +300,9 @@ export default function SettingsPage() {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
               {activeTab === 'appearance' && (
                 <>
-                  <div className="border-b border-gray-200 dark:border-gray-700 p-6">
-                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">{t('settings.appearance.title')}</h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.appearance.subtitle')}</p>
+                  <div className="border-b border-gray-200 dark:border-gray-700 p-4 sm:p-6">
+                    <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-1">{t('settings.appearance.title')}</h2>
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{t('settings.appearance.subtitle')}</p>
                   </div>
                   <div className="p-6">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">{t('settings.theme.title')}</h3>

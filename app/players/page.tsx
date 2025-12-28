@@ -69,51 +69,54 @@ export default function PlayersPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">{t('players.title')}</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+        <div className="mb-4 sm:mb-8">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">{t('players.title')}</h1>
+          <p className="text-sm sm:text-lg text-gray-600 dark:text-gray-400">
             {t('players.subtitle')}
           </p>
         </div>
 
         {/* Filters */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sm:p-6 mb-4 sm:mb-8">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
             <div className="flex items-center gap-2">
-              <Filter className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('players.filtersTitle')}</h3>
+              <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400" />
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">{t('players.filtersTitle')}</h3>
             </div>
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition"
+                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition"
               >
-                <X className="w-4 h-4" />
-                {t('players.clearAllFilters')}
+                <X className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">{t('players.clearAllFilters')}</span>
+                <span className="sm:hidden">Clear</span>
               </button>
             )}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
-            {/* Search */}
-            <div className="lg:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          
+          {/* Mobile-optimized filter grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
+            {/* Search - Full width on mobile */}
+            <div className="col-span-2 sm:col-span-2 lg:col-span-2">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('players.searchLabel')}
               </label>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                 <input
                   type="text"
                   value={filters.search}
                   onChange={(e) => handleFilterChange('search', e.target.value)}
-                  className="w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+                  className="w-full pl-9 sm:pl-10 pr-9 sm:pr-10 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
                   placeholder={t('players.searchPlaceholder')}
                 />
                 {filters.search && (
                   <button
                     onClick={() => handleFilterChange('search', '')}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -123,13 +126,13 @@ export default function PlayersPage() {
 
             {/* Position */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('players.positionLabel')}
               </label>
               <select
                 value={filters.position}
                 onChange={(e) => handleFilterChange('position', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">{t('players.positionAll')}</option>
                 <option value="OUTSIDE_HITTER">{t('players.positionOutsideHitter')}</option>
@@ -143,13 +146,13 @@ export default function PlayersPage() {
 
             {/* Gender */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('players.genderLabel')}
               </label>
               <select
                 value={filters.gender}
                 onChange={(e) => handleFilterChange('gender', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">{t('players.genderAll')}</option>
                 <option value="MALE">{t('players.genderMale')}</option>
@@ -159,13 +162,13 @@ export default function PlayersPage() {
 
             {/* Canton */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('players.cantonLabel')}
               </label>
               <select
                 value={filters.canton}
                 onChange={(e) => handleFilterChange('canton', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">{t('cantons.allCantons')}</option>
                 <option value="AG">{t('cantons.AG')}</option>
@@ -199,13 +202,13 @@ export default function PlayersPage() {
 
             {/* League */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('players.leagueLabel')}
               </label>
               <select
                 value={filters.league}
                 onChange={(e) => handleFilterChange('league', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">{t('players.leagueAll')}</option>
                 <option value="NLA">{t('home.leagues.nla')}</option>
@@ -224,28 +227,29 @@ export default function PlayersPage() {
 
         {/* Results */}
         {loading ? (
-          <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-habicht-600"></div>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">{t('players.loading')}</p>
+          <div className="text-center py-8 sm:py-12">
+            <div className="inline-block animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-habicht-600"></div>
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600 dark:text-gray-400">{t('players.loading')}</p>
           </div>
         ) : (
           <>
-            <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+            <div className="mb-3 sm:mb-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
               {players.length} {t('players.playersFound')}
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Mobile-optimized grid: 1 column on very small, 2 on mobile, 3 on desktop */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
               {players.map((player: any) => (
                 <PlayerCard key={player.id} player={player} />
               ))}
             </div>
 
             {players.length === 0 && (
-              <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg">
-                <p className="text-gray-600 dark:text-gray-400">{t('players.noPlayersFound')}</p>
+              <div className="text-center py-8 sm:py-12 bg-white dark:bg-gray-800 rounded-lg">
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">{t('players.noPlayersFound')}</p>
                 <button
                   onClick={() => setFilters({ search: '', position: '', canton: '', league: '', minHeight: '', gender: '' })}
-                  className="mt-4 text-habicht-600 hover:text-habicht-700 font-medium"
+                  className="mt-3 sm:mt-4 text-sm sm:text-base text-habicht-600 hover:text-habicht-700 font-medium"
                 >
                   {t('players.resetFilters')}
                 </button>

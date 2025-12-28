@@ -695,7 +695,6 @@
       videoFromRegistration: 'Vidéo de l\'inscription initiale',
       openForClubOffers: 'Activez ceci si vous êtes ouvert aux offres de club',
       selectBackground: 'Sélectionnez un arrière-plan :',
-      dominantHandLabel: 'Main',
       rightHanded: 'Droitier',
       leftHanded: 'Gaucher',
       ambidextrous: 'Ambidextre',

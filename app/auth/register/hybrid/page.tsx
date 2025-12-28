@@ -77,6 +77,7 @@ export default function HybridRegisterPage() {
 
   // Club history for player
   const [clubHistory, setClubHistory] = useState<Array<{
+    id: string;
     clubName: string;
     league: string;
     startYear: string;
@@ -151,18 +152,18 @@ export default function HybridRegisterPage() {
   const addClubHistory = () => {
     setClubHistory([
       ...clubHistory,
-      { clubName: '', league: '', startYear: '', endYear: '', position: '', currentClub: false }
+      { id: Date.now().toString() + Math.random().toString(36).slice(2), clubName: '', league: '', startYear: '', endYear: '', position: '', currentClub: false }
     ]);
   };
 
-  const removeClubHistory = (index: number) => {
-    setClubHistory(clubHistory.filter((_, i) => i !== index));
+  const removeClubHistory = (id: string) => {
+    setClubHistory(clubHistory.filter((club) => club.id !== id));
   };
 
-  const updateClubHistory = (index: number, field: string, value: string) => {
-    const updated = [...clubHistory];
-    updated[index] = { ...updated[index], [field]: value };
-    setClubHistory(updated);
+  const updateClubHistory = (id: string, field: string, value: string) => {
+    setClubHistory(clubHistory.map(club =>
+      club.id === id ? { ...club, [field]: value } : club
+    ));
   };
 
   const addPlayerAchievement = () => {
@@ -664,41 +665,41 @@ export default function HybridRegisterPage() {
                     + {t('register.addClub')}
                   </button>
                 </div>
-                {clubHistory.map((club, index) => (
-                  <div key={index} className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg mb-3">
+                {clubHistory.map((club) => (
+                  <div key={club.id} className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg mb-3">
                     <div className="grid md:grid-cols-5 gap-3">
                       <input
                         type="text"
                         placeholder={t('register.clubName')}
                         value={club.clubName}
-                        onChange={(e) => updateClubHistory(index, 'clubName', e.target.value)}
+                        onChange={(e) => updateClubHistory(club.id, 'clubName', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
                         placeholder={t('register.league')}
                         value={club.league}
-                        onChange={(e) => updateClubHistory(index, 'league', e.target.value)}
+                        onChange={(e) => updateClubHistory(club.id, 'league', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
                         placeholder={t('register.position')}
                         value={club.position}
-                        onChange={(e) => updateClubHistory(index, 'position', e.target.value)}
+                        onChange={(e) => updateClubHistory(club.id, 'position', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
                         type="text"
                         placeholder={t('register.startYear')}
                         value={club.startYear}
-                        onChange={(e) => updateClubHistory(index, 'startYear', e.target.value)}
+                        onChange={(e) => updateClubHistory(club.id, 'startYear', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       {club.currentClub ? (
                         <div className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
                           <span className="text-green-600 dark:text-green-400 font-semibold flex items-center gap-1">
-                            {t('register.current')}
+                            ✓ {t('register.current')}
                           </span>
                         </div>
                       ) : (
@@ -706,7 +707,7 @@ export default function HybridRegisterPage() {
                           type="text"
                           placeholder={t('register.endYear')}
                           value={club.endYear}
-                          onChange={(e) => updateClubHistory(index, 'endYear', e.target.value)}
+                          onChange={(e) => updateClubHistory(club.id, 'endYear', e.target.value)}
                           className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                         />
                       )}
@@ -721,8 +722,8 @@ export default function HybridRegisterPage() {
                           type="checkbox"
                           checked={!!club.currentClub}
                           onChange={(e) => {
-                            setClubHistory(prev => prev.map((c, i) =>
-                              i === index
+                            setClubHistory(prev => prev.map((c) =>
+                              c.id === club.id
                                 ? { ...c, currentClub: e.target.checked, endYear: e.target.checked ? '' : c.endYear }
                                 : { ...c, currentClub: false }
                             ));
@@ -740,7 +741,7 @@ export default function HybridRegisterPage() {
                     </div>
                     <button
                       type="button"
-                      onClick={() => removeClubHistory(index)}
+                      onClick={() => removeClubHistory(club.id)}
                       className="mt-2 text-sm text-red-600 hover:text-red-700"
                     >
                       {t('register.remove')}

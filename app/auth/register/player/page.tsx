@@ -360,9 +360,16 @@ export default function PlayerRegisterPage() {
   };
 
   const updateClubExperience = (id: string, field: keyof ClubExperience, value: any) => {
-    setClubHistory(clubHistory.map(club => 
-      club.id === id ? { ...club, [field]: value } : club
-    ));
+    console.log('updateClubExperience called:', { id, field, value });
+    const updatedHistory = clubHistory.map(club => {
+      if (club.id === id) {
+        console.log('Updating club:', club, 'with', { [field]: value });
+        return { ...club, [field]: value };
+      }
+      return club;
+    });
+    console.log('Updated history:', updatedHistory);
+    setClubHistory(updatedHistory);
   };
 
   const addAchievement = () => {

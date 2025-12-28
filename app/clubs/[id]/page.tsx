@@ -114,12 +114,14 @@ export default function ClubProfilePage() {
     if (club.has3LigaWomen) leagues.push({ name: '3. Liga', gender: 'Frauen' })
     if (club.has4LigaMen) leagues.push({ name: '4. Liga', gender: 'Männer' })
     if (club.has4LigaWomen) leagues.push({ name: '4. Liga', gender: 'Frauen' })
+    if (club.has5LigaMen) leagues.push({ name: '5. Liga', gender: 'Männer' })
+    if (club.has5LigaWomen) leagues.push({ name: '5. Liga', gender: 'Frauen' })
     if (club.hasU23Men) leagues.push({ name: 'U23', gender: 'Männer' })
     if (club.hasU23Women) leagues.push({ name: 'U23', gender: 'Frauen' })
-    if (club.hasU19Men) leagues.push({ name: 'U19', gender: 'Männer' })
-    if (club.hasU19Women) leagues.push({ name: 'U19', gender: 'Frauen' })
-    if (club.hasU17Men) leagues.push({ name: 'U17', gender: 'Männer' })
-    if (club.hasU17Women) leagues.push({ name: 'U17', gender: 'Frauen' })
+    if (club.hasU20Men) leagues.push({ name: 'U20', gender: 'Männer' })
+    if (club.hasU20Women) leagues.push({ name: 'U20', gender: 'Frauen' })
+    if (club.hasU18Men) leagues.push({ name: 'U18', gender: 'Männer' })
+    if (club.hasU18Women) leagues.push({ name: 'U18', gender: 'Frauen' })
     
     return leagues
   }

@@ -28,9 +28,10 @@ async function fixPlayerLeagues() {
       '2. Liga': League.SECOND_LEAGUE,
       '3. Liga': League.THIRD_LEAGUE,
       '4. Liga': League.FOURTH_LEAGUE,
+      '5. Liga': League.FIFTH_LEAGUE,
       'U23': League.YOUTH_U23,
-      'U19': League.YOUTH_U19,
-      'U17': League.YOUTH_U17,
+      'U20': League.YOUTH_U20,
+      'U18': League.YOUTH_U18,
     };
 
     let updatedCount = 0;

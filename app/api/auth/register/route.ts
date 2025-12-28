@@ -132,9 +132,10 @@ export async function POST(request: NextRequest) {
               '2. Liga': { men: 'has2LigaMen', women: 'has2LigaWomen' },
               '3. Liga': { men: 'has3LigaMen', women: 'has3LigaWomen' },
               '4. Liga': { men: 'has4LigaMen', women: 'has4LigaWomen' },
+              '5. Liga': { men: 'has5LigaMen', women: 'has5LigaWomen' },
               'U23': { men: 'hasU23Men', women: 'hasU23Women' },
-              'U19': { men: 'hasU19Men', women: 'hasU19Women' },
-              'U17': { men: 'hasU17Men', women: 'hasU17Women' }
+              'U20': { men: 'hasU20Men', women: 'hasU20Women' },
+              'U18': { men: 'hasU18Men', women: 'hasU18Women' }
             }
 
             const isMale = playerData.gender === 'MALE'
@@ -170,9 +171,10 @@ export async function POST(request: NextRequest) {
                 '2. Liga': { men: 'has2LigaMen', women: 'has2LigaWomen' },
                 '3. Liga': { men: 'has3LigaMen', women: 'has3LigaWomen' },
                 '4. Liga': { men: 'has4LigaMen', women: 'has4LigaWomen' },
+                '5. Liga': { men: 'has5LigaMen', women: 'has5LigaWomen' },
                 'U23': { men: 'hasU23Men', women: 'hasU23Women' },
-                'U19': { men: 'hasU19Men', women: 'hasU19Women' },
-                'U17': { men: 'hasU17Men', women: 'hasU17Women' },
+                'U20': { men: 'hasU20Men', women: 'hasU20Women' },
+                'U18': { men: 'hasU18Men', women: 'hasU18Women' },
               }
 
               const isMale = playerData.gender === 'MALE'
@@ -238,9 +240,10 @@ export async function POST(request: NextRequest) {
                         '2. Liga': { men: 'has2LigaMen', women: 'has2LigaWomen' },
                         '3. Liga': { men: 'has3LigaMen', women: 'has3LigaWomen' },
                         '4. Liga': { men: 'has4LigaMen', women: 'has4LigaWomen' },
+                        '5. Liga': { men: 'has5LigaMen', women: 'has5LigaWomen' },
                         'U23': { men: 'hasU23Men', women: 'hasU23Women' },
-                        'U19': { men: 'hasU19Men', women: 'hasU19Women' },
-                        'U17': { men: 'hasU17Men', women: 'hasU17Women' },
+                        'U20': { men: 'hasU20Men', women: 'hasU20Women' },
+                        'U18': { men: 'hasU18Men', women: 'hasU18Women' },
                       }
 
                       const isMale = playerData.gender === 'MALE'

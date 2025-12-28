@@ -88,8 +88,8 @@
     'leagues.fourthLeague': '4th League',
     'leagues.fifthLeague': '5th League',
     'leagues.u23': 'U23',
-    'leagues.u19': 'U19',
-    'leagues.u17': 'U17',
+    'leagues.u20': 'U20',
+    'leagues.u18': 'U18',
     // Positions
     'positions.outside_hitter': 'Outside Hitter',
     'positions.outsideHitter': 'Outside Hitter',

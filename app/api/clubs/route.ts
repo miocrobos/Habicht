@@ -26,9 +26,10 @@ export async function GET(request: Request) {
         '2. Liga': ['has2LigaMen', 'has2LigaWomen'],
         '3. Liga': ['has3LigaMen', 'has3LigaWomen'],
         '4. Liga': ['has4LigaMen', 'has4LigaWomen'],
+        // '5. Liga': ['has5LigaMen', 'has5LigaWomen'], // Removed: not in schema
         'U23': ['hasU23Men', 'hasU23Women'],
-        'U19': ['hasU19Men', 'hasU19Women'],
-        'U17': ['hasU17Men', 'hasU17Women'],
+        'U20': ['hasU20Men', 'hasU20Women'],
+        'U18': ['hasU18Men', 'hasU18Women'],
       }
       
       const fields = leagueFields[league]
@@ -64,10 +65,10 @@ export async function GET(request: Request) {
         has4LigaWomen: true,
         hasU23Men: true,
         hasU23Women: true,
-        hasU19Men: true,
-        hasU19Women: true,
-        hasU17Men: true,
-        hasU17Women: true,
+        hasU20Men: true,
+        hasU20Women: true,
+        hasU18Men: true,
+        hasU18Women: true,
         currentPlayers: {
           select: {
             id: true,
@@ -88,9 +89,10 @@ export async function GET(request: Request) {
       if (club.has2LigaMen || club.has2LigaWomen) leagues.push('2. Liga')
       if (club.has3LigaMen || club.has3LigaWomen) leagues.push('3. Liga')
       if (club.has4LigaMen || club.has4LigaWomen) leagues.push('4. Liga')
+      // if (club.has5LigaMen || club.has5LigaWomen) leagues.push('5. Liga') // Removed: not in schema
       if (club.hasU23Men || club.hasU23Women) leagues.push('U23')
-      if (club.hasU19Men || club.hasU19Women) leagues.push('U19')
-      if (club.hasU17Men || club.hasU17Women) leagues.push('U17')
+      if (club.hasU20Men || club.hasU20Women) leagues.push('U20')
+      if (club.hasU18Men || club.hasU18Women) leagues.push('U18')
       
       // Filter players based on gender and position
       let filteredPlayers = club.currentPlayers || []

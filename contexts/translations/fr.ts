@@ -85,8 +85,8 @@
     'leagues.fourthLeague': '4ème Ligue',
     'leagues.fifthLeague': '5ème Ligue',
     'leagues.u23': 'U23',
-    'leagues.u19': 'U19',
-    'leagues.u17': 'U17',
+    'leagues.u20': 'U20',
+    'leagues.u18': 'U18',
     // Positions
     'positions.outside_hitter': 'Attaquant',
     'positions.outsideHitter': 'Attaquant',

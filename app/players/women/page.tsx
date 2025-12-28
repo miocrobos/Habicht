@@ -267,8 +267,9 @@ export default function WomenPlayersPage() {
                 <option value="THIRD_LEAGUE">{t('home.leagues.thirdLeague')}</option>
                 <option value="FOURTH_LEAGUE">{t('home.leagues.fourthLeague')}</option>
                 <option value="FIFTH_LEAGUE">{t('home.leagues.fifthLeague')}</option>
-                <option value="YOUTH_U19">{t('home.leagues.u19')}</option>
-                <option value="YOUTH_U17">{t('home.leagues.u17')}</option>
+                <option value="YOUTH_U23">{t('leagues.u23')}</option>
+                <option value="YOUTH_U20">{t('leagues.u20')}</option>
+                <option value="YOUTH_U18">{t('leagues.u18')}</option>
               </select>
             </div>
 

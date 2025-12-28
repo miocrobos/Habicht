@@ -16,7 +16,7 @@ const CANTONS = [
   'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH'
 ]
 
-const LEAGUES = ['Alle', 'NLA', 'NLB', '1. Liga', '2. Liga', '3. Liga', '4. Liga', 'U23', 'U19', 'U17']
+const LEAGUES = ['Alle', 'NLA', 'NLB', '1. Liga', '2. Liga', '3. Liga', '4. Liga', '5. Liga', 'U23', 'U20', 'U18']
 
 const POSITIONS = [
   'Alle',
@@ -41,9 +41,10 @@ export default function ClubsPage() {
       case '2. Liga': return t('leagues.secondLeague')
       case '3. Liga': return t('leagues.thirdLeague')
       case '4. Liga': return t('leagues.fourthLeague')
-      case 'U23': return 'U23'
-      case 'U19': return t('leagues.u19')
-      case 'U17': return t('leagues.u17')
+      case '5. Liga': return t('leagues.fifthLeague')
+      case 'U23': return t('leagues.u23')
+      case 'U20': return t('leagues.u20')
+      case 'U18': return t('leagues.u18')
       default: return league
     }
   }

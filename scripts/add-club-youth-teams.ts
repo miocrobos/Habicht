@@ -18,66 +18,66 @@ interface TeamToAdd {
 const additionalTeams: TeamToAdd[] = [
   // Sm'Aesch Pfeffingen - Multiple teams
   { name: "Sm'Aesch Pfeffingen U23", canton: 'BL', league: 'YOUTH_U23', town: 'Aesch' },
-  { name: "Sm'Aesch Pfeffingen U19", canton: 'BL', league: 'YOUTH_U19', town: 'Aesch' },
-  { name: "Sm'Aesch Pfeffingen U17", canton: 'BL', league: 'YOUTH_U17', town: 'Aesch' },
+  { name: "Sm'Aesch Pfeffingen U20", canton: 'BL', league: 'YOUTH_U20', town: 'Aesch' },
+  { name: "Sm'Aesch Pfeffingen U18", canton: 'BL', league: 'YOUTH_U18', town: 'Aesch' },
   
   // Volley Amriswil - Multiple teams
   { name: 'Volley Amriswil U23', canton: 'TG', league: 'YOUTH_U23', town: 'Amriswil' },
-  { name: 'Volley Amriswil U19', canton: 'TG', league: 'YOUTH_U19', town: 'Amriswil' },
-  { name: 'Volley Amriswil U17', canton: 'TG', league: 'YOUTH_U17', town: 'Amriswil' },
+  { name: 'Volley Amriswil U19', canton: 'TG', league: 'YOUTH_U20', town: 'Amriswil' },
+  { name: 'Volley Amriswil U17', canton: 'TG', league: 'YOUTH_U18', town: 'Amriswil' },
   { name: 'Volley Amriswil 2', canton: 'TG', league: 'SECOND_LEAGUE', town: 'Amriswil' },
   
   // VFM (Franches-Montagnes) - Youth teams
-  { name: 'VFM U19', canton: 'JU', league: 'YOUTH_U19', town: 'Saignelégier' },
-  { name: 'VFM U17', canton: 'JU', league: 'YOUTH_U17', town: 'Saignelégier' },
+  { name: 'VFM U19', canton: 'JU', league: 'YOUTH_U20', town: 'Saignelégier' },
+  { name: 'VFM U17', canton: 'JU', league: 'YOUTH_U18', town: 'Saignelégier' },
   
   // Volley Luzern - Multiple teams
   { name: 'Volley Luzern U23', canton: 'LU', league: 'YOUTH_U23', town: 'Luzern' },
-  { name: 'Volley Luzern U19', canton: 'LU', league: 'YOUTH_U19', town: 'Luzern' },
-  { name: 'Volley Luzern U17', canton: 'LU', league: 'YOUTH_U17', town: 'Luzern' },
+  { name: 'Volley Luzern U19', canton: 'LU', league: 'YOUTH_U20', town: 'Luzern' },
+  { name: 'Volley Luzern U17', canton: 'LU', league: 'YOUTH_U18', town: 'Luzern' },
   { name: 'Volley Luzern 2', canton: 'LU', league: 'SECOND_LEAGUE', town: 'Luzern' },
   
   // Viteos NUC - Multiple teams
   { name: 'Viteos NUC U23', canton: 'NE', league: 'YOUTH_U23', town: 'Neuchâtel' },
-  { name: 'Viteos NUC U19', canton: 'NE', league: 'YOUTH_U19', town: 'Neuchâtel' },
-  { name: 'Viteos NUC U17', canton: 'NE', league: 'YOUTH_U17', town: 'Neuchâtel' },
+  { name: 'Viteos NUC U19', canton: 'NE', league: 'YOUTH_U20', town: 'Neuchâtel' },
+  { name: 'Viteos NUC U17', canton: 'NE', league: 'YOUTH_U18', town: 'Neuchâtel' },
   
   // Volley Düdingen - Youth teams
-  { name: 'Volley Düdingen U19', canton: 'FR', league: 'YOUTH_U19', town: 'Düdingen' },
-  { name: 'Volley Düdingen U17', canton: 'FR', league: 'YOUTH_U17', town: 'Düdingen' },
+  { name: 'Volley Düdingen U19', canton: 'FR', league: 'YOUTH_U20', town: 'Düdingen' },
+  { name: 'Volley Düdingen U17', canton: 'FR', league: 'YOUTH_U18', town: 'Düdingen' },
   
   // Lausanne UC - Multiple teams
   { name: 'Lausanne UC U23', canton: 'VD', league: 'YOUTH_U23', town: 'Lausanne' },
-  { name: 'Lausanne UC U19', canton: 'VD', league: 'YOUTH_U19', town: 'Lausanne' },
-  { name: 'Lausanne UC U17', canton: 'VD', league: 'YOUTH_U17', town: 'Lausanne' },
+  { name: 'Lausanne UC U19', canton: 'VD', league: 'YOUTH_U20', town: 'Lausanne' },
+  { name: 'Lausanne UC U17', canton: 'VD', league: 'YOUTH_U18', town: 'Lausanne' },
   { name: 'Lausanne UC 2', canton: 'VD', league: 'SECOND_LEAGUE', town: 'Lausanne' },
   
   // Volley Schönenwerd - Youth and lower teams
   { name: 'Volley Schönenwerd U23', canton: 'SO', league: 'YOUTH_U23', town: 'Schönenwerd' },
-  { name: 'Volley Schönenwerd U19', canton: 'SO', league: 'YOUTH_U19', town: 'Schönenwerd' },
-  { name: 'Volley Schönenwerd U17', canton: 'SO', league: 'YOUTH_U17', town: 'Schönenwerd' },
+  { name: 'Volley Schönenwerd U19', canton: 'SO', league: 'YOUTH_U20', town: 'Schönenwerd' },
+  { name: 'Volley Schönenwerd U17', canton: 'SO', league: 'YOUTH_U18', town: 'Schönenwerd' },
   { name: 'Volley Schönenwerd 2', canton: 'SO', league: 'SECOND_LEAGUE', town: 'Schönenwerd' },
   
   // STV St. Gallen - Multiple teams
   { name: 'STV St.Gallen U23', canton: 'SG', league: 'YOUTH_U23', town: 'St. Gallen' },
-  { name: 'STV St.Gallen U19', canton: 'SG', league: 'YOUTH_U19', town: 'St. Gallen' },
-  { name: 'STV St.Gallen U17', canton: 'SG', league: 'YOUTH_U17', town: 'St. Gallen' },
+  { name: 'STV St.Gallen U19', canton: 'SG', league: 'YOUTH_U20', town: 'St. Gallen' },
+  { name: 'STV St.Gallen U17', canton: 'SG', league: 'YOUTH_U18', town: 'St. Gallen' },
   { name: 'STV St.Gallen 2', canton: 'SG', league: 'SECOND_LEAGUE', town: 'St. Gallen' },
   
   // VBC Voléro Zürich - Youth teams
   { name: 'VBC Voléro Zürich U23', canton: 'ZH', league: 'YOUTH_U23', town: 'Zürich' },
-  { name: 'VBC Voléro Zürich U19', canton: 'ZH', league: 'YOUTH_U19', town: 'Zürich' },
-  { name: 'VBC Voléro Zürich U17', canton: 'ZH', league: 'YOUTH_U17', town: 'Zürich' },
+  { name: 'VBC Voléro Zürich U19', canton: 'ZH', league: 'YOUTH_U20', town: 'Zürich' },
+  { name: 'VBC Voléro Zürich U17', canton: 'ZH', league: 'YOUTH_U18', town: 'Zürich' },
   
   // Volley Köniz - Lower leagues
   { name: 'Volley Köniz 2', canton: 'BE', league: 'SECOND_LEAGUE', town: 'Köniz' },
   { name: 'Volley Köniz 3', canton: 'BE', league: 'THIRD_LEAGUE', town: 'Köniz' },
-  { name: 'Volley Köniz U19', canton: 'BE', league: 'YOUTH_U19', town: 'Köniz' },
+  { name: 'Volley Köniz U19', canton: 'BE', league: 'YOUTH_U20', town: 'Köniz' },
   
   // VBC Thun - Multiple teams
   { name: 'VBC Thun 2', canton: 'BE', league: 'SECOND_LEAGUE', town: 'Thun' },
   { name: 'VBC Thun 3', canton: 'BE', league: 'THIRD_LEAGUE', town: 'Thun' },
-  { name: 'VBC Thun U19', canton: 'BE', league: 'YOUTH_U19', town: 'Thun' },
+  { name: 'VBC Thun U19', canton: 'BE', league: 'YOUTH_U20', town: 'Thun' },
   
   // Volley Münsingen - Lower leagues  
   { name: 'Volley Münsingen 2', canton: 'BE', league: 'SECOND_LEAGUE', town: 'Münsingen' },
@@ -86,25 +86,25 @@ const additionalTeams: TeamToAdd[] = [
   // VBC Langenthal - Lower leagues
   { name: 'VBC Langenthal 2', canton: 'BE', league: 'SECOND_LEAGUE', town: 'Langenthal' },
   { name: 'VBC Langenthal 3', canton: 'BE', league: 'THIRD_LEAGUE', town: 'Langenthal' },
-  { name: 'VBC Langenthal U19', canton: 'BE', league: 'YOUTH_U19', town: 'Langenthal' },
+  { name: 'VBC Langenthal U19', canton: 'BE', league: 'YOUTH_U20', town: 'Langenthal' },
   
   // BTV Aarau - Multiple teams
   { name: 'BTV Aarau 2', canton: 'AG', league: 'SECOND_LEAGUE', town: 'Aarau' },
   { name: 'BTV Aarau 3', canton: 'AG', league: 'THIRD_LEAGUE', town: 'Aarau' },
-  { name: 'BTV Aarau U19', canton: 'AG', league: 'YOUTH_U19', town: 'Aarau' },
+  { name: 'BTV Aarau U19', canton: 'AG', league: 'YOUTH_U20', town: 'Aarau' },
   
   // Volley Möhlin - Lower leagues
   { name: 'Volley Möhlin 2', canton: 'AG', league: 'SECOND_LEAGUE', town: 'Möhlin' },
   { name: 'Volley Möhlin 3', canton: 'AG', league: 'THIRD_LEAGUE', town: 'Möhlin' },
   
   // VBC Kanti Baden - Youth teams
-  { name: 'VBC Kanti Baden U19', canton: 'AG', league: 'YOUTH_U19', town: 'Baden' },
-  { name: 'VBC Kanti Baden U17', canton: 'AG', league: 'YOUTH_U17', town: 'Baden' },
+  { name: 'VBC Kanti Baden U19', canton: 'AG', league: 'YOUTH_U20', town: 'Baden' },
+  { name: 'VBC Kanti Baden U17', canton: 'AG', league: 'YOUTH_U18', town: 'Baden' },
   
   // VC Smash Winterthur - Lower leagues
   { name: 'VC Smash Winterthur 2', canton: 'ZH', league: 'SECOND_LEAGUE', town: 'Winterthur' },
   { name: 'VC Smash Winterthur 3', canton: 'ZH', league: 'THIRD_LEAGUE', town: 'Winterthur' },
-  { name: 'VC Smash Winterthur U19', canton: 'ZH', league: 'YOUTH_U19', town: 'Winterthur' },
+  { name: 'VC Smash Winterthur U19', canton: 'ZH', league: 'YOUTH_U20', town: 'Winterthur' },
   
   // VBC Züri Unterland - Lower leagues
   { name: 'VBC Züri Unterland 2', canton: 'ZH', league: 'SECOND_LEAGUE', town: 'Bülach' },
@@ -123,12 +123,12 @@ const additionalTeams: TeamToAdd[] = [
   { name: 'Volley Näfels 3', canton: 'GL', league: 'THIRD_LEAGUE', town: 'Näfels' },
   
   // VBC Spada Academica - Youth teams
-  { name: 'VBC Spada Academica U19', canton: 'ZH', league: 'YOUTH_U19', town: 'Zürich' },
-  { name: 'VBC Spada Academica U17', canton: 'ZH', league: 'YOUTH_U17', town: 'Zürich' },
+  { name: 'VBC Spada Academica U19', canton: 'ZH', league: 'YOUTH_U20', town: 'Zürich' },
+  { name: 'VBC Spada Academica U17', canton: 'ZH', league: 'YOUTH_U18', town: 'Zürich' },
   
   // Genève Volley - Youth teams
-  { name: 'Genève Volley U19', canton: 'GE', league: 'YOUTH_U19', town: 'Genève' },
-  { name: 'Genève Volley U17', canton: 'GE', league: 'YOUTH_U17', town: 'Genève' },
+  { name: 'Genève Volley U19', canton: 'GE', league: 'YOUTH_U20', town: 'Genève' },
+  { name: 'Genève Volley U17', canton: 'GE', league: 'YOUTH_U18', town: 'Genève' },
   { name: 'Genève Volley 2', canton: 'GE', league: 'SECOND_LEAGUE', town: 'Genève' },
   
   // VBC Servette Star-Onex - Lower leagues
@@ -145,7 +145,7 @@ const additionalTeams: TeamToAdd[] = [
   
   // Volley Lugano - Youth and lower leagues
   { name: 'Volley Lugano 2', canton: 'TI', league: 'SECOND_LEAGUE', town: 'Lugano' },
-  { name: 'Volley Lugano U19', canton: 'TI', league: 'YOUTH_U19', town: 'Lugano' },
+  { name: 'Volley Lugano U19', canton: 'TI', league: 'YOUTH_U20', town: 'Lugano' },
   
   // SAG Gordola - Lower leagues
   { name: 'SAG Gordola 2', canton: 'TI', league: 'SECOND_LEAGUE', town: 'Gordola' },
@@ -160,8 +160,8 @@ const additionalTeams: TeamToAdd[] = [
   { name: 'VB Neuenkirch 3', canton: 'LU', league: 'THIRD_LEAGUE', town: 'Neuenkirch' },
   
   // FC Luzern Volleyball - Youth teams
-  { name: 'FC Luzern Volleyball U19', canton: 'LU', league: 'YOUTH_U19', town: 'Luzern' },
-  { name: 'FC Luzern Volleyball U17', canton: 'LU', league: 'YOUTH_U17', town: 'Luzern' },
+  { name: 'FC Luzern Volleyball U19', canton: 'LU', league: 'YOUTH_U20', town: 'Luzern' },
+  { name: 'FC Luzern Volleyball U17', canton: 'LU', league: 'YOUTH_U18', town: 'Luzern' },
   
   // Volley Rüschlikon - Lower leagues
   { name: 'Volley Rüschlikon 2', canton: 'ZH', league: 'SECOND_LEAGUE', town: 'Rüschlikon' },
@@ -172,8 +172,8 @@ const additionalTeams: TeamToAdd[] = [
   { name: 'Pallavolo Kreuzlingen 3', canton: 'TG', league: 'THIRD_LEAGUE', town: 'Kreuzlingen' },
   
   // VC Kanti Schaffhausen - Youth teams
-  { name: 'VC Kanti Schaffhausen U19', canton: 'SH', league: 'YOUTH_U19', town: 'Schaffhausen' },
-  { name: 'VC Kanti Schaffhausen U17', canton: 'SH', league: 'YOUTH_U17', town: 'Schaffhausen' },
+  { name: 'VC Kanti Schaffhausen U19', canton: 'SH', league: 'YOUTH_U20', town: 'Schaffhausen' },
+  { name: 'VC Kanti Schaffhausen U17', canton: 'SH', league: 'YOUTH_U18', town: 'Schaffhausen' },
   
   // Appenzeller Bären - Lower leagues
   { name: 'Appenzeller Bären 2', canton: 'AI', league: 'SECOND_LEAGUE', town: 'Appenzell' },
@@ -189,7 +189,7 @@ const additionalTeams: TeamToAdd[] = [
   
   // TV Murten - Lower leagues
   { name: 'TV Murten 2', canton: 'FR', league: 'SECOND_LEAGUE', town: 'Murten' },
-  { name: 'TV Murten U19', canton: 'FR', league: 'YOUTH_U19', town: 'Murten' },
+  { name: 'TV Murten U19', canton: 'FR', league: 'YOUTH_U20', town: 'Murten' },
   
   // VB Therwil - Lower leagues
   { name: 'VB Therwil 2', canton: 'BL', league: 'SECOND_LEAGUE', town: 'Therwil' },

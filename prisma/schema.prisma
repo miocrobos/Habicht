@@ -39,9 +39,8 @@ enum League {
   FOURTH_LEAGUE    // 4. Liga
   FIFTH_LEAGUE     // 5. Liga
   YOUTH_U23        // U23
-  YOUTH_U19        // U19
-  YOUTH_U17        // U17
-  YOUTH_U15        // U15
+  YOUTH_U20        // U20
+  YOUTH_U18        // U18
   HIGH_SCHOOL      // Kantonsschule
 }
 
@@ -293,12 +292,14 @@ model Club {
   has3LigaWomen     Boolean     @default(false)
   has4LigaMen       Boolean     @default(false)
   has4LigaWomen     Boolean     @default(false)
+  has5LigaMen       Boolean     @default(false)
+  has5LigaWomen     Boolean     @default(false)
   hasU23Men         Boolean     @default(false)
   hasU23Women       Boolean     @default(false)
-  hasU19Men         Boolean     @default(false)
-  hasU19Women       Boolean     @default(false)
-  hasU17Men         Boolean     @default(false)
-  hasU17Women       Boolean     @default(false)
+  hasU20Men         Boolean     @default(false)
+  hasU20Women       Boolean     @default(false)
+  hasU18Men         Boolean     @default(false)
+  hasU18Women       Boolean     @default(false)
   
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt

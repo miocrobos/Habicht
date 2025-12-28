@@ -38,12 +38,14 @@ export default function ClubAdminPage() {
       has3LigaWomen: false,
       has4LigaMen: false,
       has4LigaWomen: false,
+      has5LigaMen: false,
+      has5LigaWomen: false,
       hasU23Men: false,
       hasU23Women: false,
-      hasU19Men: false,
-      hasU19Women: false,
-      hasU17Men: false,
-      hasU17Women: false,
+      hasU20Men: false,
+      hasU20Women: false,
+      hasU18Men: false,
+      hasU18Women: false,
     }
   })
 
@@ -60,12 +62,14 @@ export default function ClubAdminPage() {
     { value: 'has3LigaWomen', label: '3. Liga Frauen' },
     { value: 'has4LigaMen', label: '4. Liga Männer' },
     { value: 'has4LigaWomen', label: '4. Liga Frauen' },
+    { value: 'has5LigaMen', label: '5. Liga Männer' },
+    { value: 'has5LigaWomen', label: '5. Liga Frauen' },
     { value: 'hasU23Men', label: 'U23 Männer' },
     { value: 'hasU23Women', label: 'U23 Frauen' },
-    { value: 'hasU19Men', label: 'U19 Männer' },
-    { value: 'hasU19Women', label: 'U19 Frauen' },
-    { value: 'hasU17Men', label: 'U17 Männer' },
-    { value: 'hasU17Women', label: 'U17 Frauen' },
+    { value: 'hasU20Men', label: 'U20 Männer' },
+    { value: 'hasU20Women', label: 'U20 Frauen' },
+    { value: 'hasU18Men', label: 'U18 Männer' },
+    { value: 'hasU18Women', label: 'U18 Frauen' },
   ];
 
   useEffect(() => {
@@ -134,12 +138,14 @@ export default function ClubAdminPage() {
         has3LigaWomen: false,
         has4LigaMen: false,
         has4LigaWomen: false,
+        has5LigaMen: false,
+        has5LigaWomen: false,
         hasU23Men: false,
         hasU23Women: false,
-        hasU19Men: false,
-        hasU19Women: false,
-        hasU17Men: false,
-        hasU17Women: false,
+        hasU20Men: false,
+        hasU20Women: false,
+        hasU18Men: false,
+        hasU18Women: false,
       } })
       setShowAddForm(false)
       loadClubs()
@@ -309,12 +315,14 @@ export default function ClubAdminPage() {
                     has3LigaWomen: false,
                     has4LigaMen: false,
                     has4LigaWomen: false,
+                    has5LigaMen: false,
+                    has5LigaWomen: false,
                     hasU23Men: false,
                     hasU23Women: false,
-                    hasU19Men: false,
-                    hasU19Women: false,
-                    hasU17Men: false,
-                    hasU17Women: false,
+                    hasU20Men: false,
+                    hasU20Women: false,
+                    hasU18Men: false,
+                    hasU18Women: false,
                   } })
                 }}
                 disabled={saving}

@@ -39,12 +39,14 @@ async function syncClubLeagues() {
         has3LigaWomen: false,
         has4LigaMen: false,
         has4LigaWomen: false,
+        has5LigaMen: false,
+        has5LigaWomen: false,
         hasU23Men: false,
         hasU23Women: false,
-        hasU19Men: false,
-        hasU19Women: false,
-        hasU17Men: false,
-        hasU17Women: false,
+        hasU20Men: false,
+        hasU20Women: false,
+        hasU18Men: false,
+        hasU18Women: false,
       }
 
       // Set flags based on current players
@@ -85,13 +87,17 @@ async function syncClubLeagues() {
             if (isMale) updates.hasU23Men = true
             else updates.hasU23Women = true
             break
-          case 'YOUTH_U19':
-            if (isMale) updates.hasU19Men = true
-            else updates.hasU19Women = true
+          case 'YOUTH_U20':
+            if (isMale) updates.hasU20Men = true
+            else updates.hasU20Women = true
             break
-          case 'YOUTH_U17':
-            if (isMale) updates.hasU17Men = true
-            else updates.hasU17Women = true
+          case 'YOUTH_U18':
+            if (isMale) updates.hasU18Men = true
+            else updates.hasU18Women = true
+            break
+          case 'FIFTH_LEAGUE':
+            if (isMale) updates.has5LigaMen = true
+            else updates.has5LigaWomen = true
             break
         }
       }

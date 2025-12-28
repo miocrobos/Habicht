@@ -129,12 +129,15 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
       'THIRD_LEAGUE': 'home.leagues.thirdLeague',
       'FOURTH_LEAGUE': 'home.leagues.fourthLeague',
       'FIFTH_LEAGUE': 'home.leagues.fifthLeague',
-      'U23': 'U23',
-      'U19': 'home.leagues.u19',
-      'U17': 'home.leagues.u17'
+      'U23': 'leagues.u23',
+      'U20': 'leagues.u20',
+      'U18': 'leagues.u18',
+      'YOUTH_U23': 'leagues.u23',
+      'YOUTH_U20': 'leagues.u20',
+      'YOUTH_U18': 'leagues.u18'
     }
     const key = leagueMap[league]
-    return key === 'U23' ? 'U23' : t(key || league)
+    return key ? t(key) : league
   }
 
   if (!isOpen) return null

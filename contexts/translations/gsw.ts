@@ -879,6 +879,42 @@
         deleteError: 'Fehler Bim Löschen',
       },
     },
+    // Hybrid Profile
+    hybridProfile: {
+      loadingProfile: 'Profil wird glade...',
+      hybridNotFound: 'Hybrid-Profil nid gfunde',
+      backToOverview: 'Zrugg zur Übersicht',
+      changeBackground: 'Hingergrund ändere',
+      errorLoadingHybridData: 'Fehler bim Lade vo de Hybrid-Profildaate',
+      errorSavingHybridData: 'Fehler bim Speichere vom Hybrid-Profil',
+      editProfile: 'Profil Bearbeite',
+      exportCV: 'Läbensluuf Exportiere',
+      playerSection: 'Spieler-Profil',
+      recruiterSection: 'Rekrutierer-Profil',
+    },
+    // Recruiter Profile
+    recruiterProfile: {
+      loadingProfile: 'Profil wird glade...',
+      recruiterNotFound: 'Rekrutierer nid gfunde',
+      backToOverview: 'Zrugg zur Übersicht',
+      changeBackground: 'Hingergrund ändere',
+      errorLoadingRecruiterData: 'Fehler bim Lade vo de Rekrutierer-Daate',
+      errorSavingRecruiterData: 'Fehler bim Speichere vo de Rekrutierer-Daate',
+      editProfile: 'Profil Bearbeite',
+      exportCV: 'Läbensluuf Exportiere',
+      sendMessage: 'Nachricht Schicke',
+      organization: 'Organisation',
+      role: 'Rolle',
+      coachingLicense: 'Coaching Lizänz',
+      positionsLookingFor: 'Gsuechtii Positione',
+      genderCoached: 'Gcoachtis Gschlecht',
+      lookingForMembers: 'Suecht nöii Mitglieder',
+      clubAffiliations: 'Club-Zugehörigkeite',
+      achievements: 'Coaching Erfolg',
+      bio: 'Über mich',
+      contactInfo: 'Kontaktinformatione',
+      socialMedia: 'Social Media',
+    },
     // Registration Pages
     register: {
       // Common

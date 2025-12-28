@@ -905,6 +905,42 @@
       municipalityPlaceholder: 'e.g. Interlaken, Winterthur',
       yearPlaceholder: 'e.g. 1995',
     },
+    // Hybrid Profile
+    hybridProfile: {
+      loadingProfile: 'Chargiond profil...',
+      hybridNotFound: 'Profil hybrid betg chattà',
+      backToOverview: 'Enavos a la survista',
+      changeBackground: 'Midar fund',
+      errorLoadingHybridData: 'Errur cun chargiar las datas dal profil hybrid',
+      errorSavingHybridData: 'Errur cun memorisar il profil hybrid',
+      editProfile: 'Modifitgar Profil',
+      exportCV: 'Exportar CV',
+      playerSection: 'Profil Giugader',
+      recruiterSection: 'Profil Recrutader',
+    },
+    // Recruiter Profile
+    recruiterProfile: {
+      loadingProfile: 'Chargiond profil...',
+      recruiterNotFound: 'Recrutader betg chattà',
+      backToOverview: 'Enavos a la survista',
+      changeBackground: 'Midar fund',
+      errorLoadingRecruiterData: 'Errur cun chargiar las datas dal recrutader',
+      errorSavingRecruiterData: 'Errur cun memorisar las datas dal recrutader',
+      editProfile: 'Modifitgar Profil',
+      exportCV: 'Exportar CV',
+      sendMessage: 'Trametter Messadi',
+      organization: 'Organisaziun',
+      role: 'Rolla',
+      coachingLicense: 'Licenza da Coaching',
+      positionsLookingFor: 'Posiziuns tschertgadas',
+      genderCoached: 'Gener trenà',
+      lookingForMembers: 'Tschertga commembers novs',
+      clubAffiliations: 'Affiliaziuns al Club',
+      achievements: 'Resultats da Coaching',
+      bio: 'Davart mai',
+      contactInfo: 'Infurmaziuns da Contact',
+      socialMedia: 'Social Media',
+    },
     // Register (placeholder - English text for now)
     register: {
       // Common

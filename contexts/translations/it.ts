@@ -908,6 +908,42 @@
       municipalityPlaceholder: 'e.g. Interlaken, Winterthur',
       yearPlaceholder: 'e.g. 1995',
     },
+    // Hybrid Profile
+    hybridProfile: {
+      loadingProfile: 'Caricamento profilo...',
+      hybridNotFound: 'Profilo ibrido non trovato',
+      backToOverview: 'Torna alla panoramica',
+      changeBackground: 'Cambia Sfondo',
+      errorLoadingHybridData: 'Errore nel caricamento dei dati del profilo ibrido',
+      errorSavingHybridData: 'Errore nel salvataggio del profilo ibrido',
+      editProfile: 'Modifica Profilo',
+      exportCV: 'Esporta CV',
+      playerSection: 'Profilo Giocatore',
+      recruiterSection: 'Profilo Reclutatore',
+    },
+    // Recruiter Profile
+    recruiterProfile: {
+      loadingProfile: 'Caricamento profilo...',
+      recruiterNotFound: 'Reclutatore non trovato',
+      backToOverview: 'Torna alla panoramica',
+      changeBackground: 'Cambia Sfondo',
+      errorLoadingRecruiterData: 'Errore nel caricamento dei dati del reclutatore',
+      errorSavingRecruiterData: 'Errore nel salvataggio dei dati del reclutatore',
+      editProfile: 'Modifica Profilo',
+      exportCV: 'Esporta CV',
+      sendMessage: 'Invia Messaggio',
+      organization: 'Organizzazione',
+      role: 'Ruolo',
+      coachingLicense: 'Licenza di Coaching',
+      positionsLookingFor: 'Cerca posizioni',
+      genderCoached: 'Genere allenato',
+      lookingForMembers: 'Cerca nuovi membri',
+      clubAffiliations: 'Affiliazioni ai Club',
+      achievements: 'Risultati di Coaching',
+      bio: 'Chi sono',
+      contactInfo: 'Informazioni di Contatto',
+      socialMedia: 'Social Media',
+    },
     // Register (placeholder - English text for now)
     register: {
       // Common

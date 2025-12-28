@@ -1116,7 +1116,7 @@ export default function PlayerRegisterPage() {
                                   required
                                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                                 >
-                                  <option value="">{t('playerProfile.selectLeague') || 'Select League'}</option>
+                                  <option value="">{t('register.selectLeague') || 'Select League'}</option>
                                   {SWISS_LEAGUES.map(league => (
                                     <option key={league.value} value={league.value}>
                                       {league.label}

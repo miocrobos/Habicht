@@ -22,6 +22,14 @@ const countries = switzerland
 export default function CountrySelect({ value, onChange, className, placeholder = "Select Country" }: CountrySelectProps) {
   const { t } = useLanguage();
   
+  const getCountryTranslation = (country: any) => {
+    // Convert country code to camelCase key for translation lookup
+    const key = country.code.toLowerCase().replace(/_/g, '');
+    const translated = t(`countries.${key}`);
+    // If translation returns the key itself (no translation found), use country name
+    return translated.startsWith('countries.') ? country.name : translated;
+  };
+  
   return (
     <select
       value={value}
@@ -31,7 +39,7 @@ export default function CountrySelect({ value, onChange, className, placeholder 
       {!value && <option value="">{placeholder}</option>}
       {countries.map(country => (
         <option key={country.code} value={country.name}>
-          {country.flagEmoji ? `${country.flagEmoji} ` : ''}{t(`countries.${country.code.toLowerCase()}`) || country.name}
+          {country.flagEmoji ? `${country.flagEmoji} ` : ''}{getCountryTranslation(country)}
         </option>
       ))}
     </select>

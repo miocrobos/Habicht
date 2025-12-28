@@ -969,6 +969,7 @@
       addClub: 'Agiuntar club',
       clubName: 'Num dal club',
       league: 'Liga',
+      selectLeague: 'Tscherner liga',
       position: 'Posiziun',
       startYear: 'Onn d\'entschatta',
       endYear: 'Onn da fin',

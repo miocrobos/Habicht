@@ -26,7 +26,7 @@ export async function GET(request: Request) {
         '2. Liga': ['has2LigaMen', 'has2LigaWomen'],
         '3. Liga': ['has3LigaMen', 'has3LigaWomen'],
         '4. Liga': ['has4LigaMen', 'has4LigaWomen'],
-        // '5. Liga': ['has5LigaMen', 'has5LigaWomen'], // Removed: not in schema
+        '5. Liga': ['has5LigaMen', 'has5LigaWomen'],
         'U23': ['hasU23Men', 'hasU23Women'],
         'U20': ['hasU20Men', 'hasU20Women'],
         'U18': ['hasU18Men', 'hasU18Women'],
@@ -63,6 +63,8 @@ export async function GET(request: Request) {
         has3LigaWomen: true,
         has4LigaMen: true,
         has4LigaWomen: true,
+        has5LigaMen: true,
+        has5LigaWomen: true,
         hasU23Men: true,
         hasU23Women: true,
         hasU20Men: true,
@@ -89,7 +91,7 @@ export async function GET(request: Request) {
       if (club.has2LigaMen || club.has2LigaWomen) leagues.push('2. Liga')
       if (club.has3LigaMen || club.has3LigaWomen) leagues.push('3. Liga')
       if (club.has4LigaMen || club.has4LigaWomen) leagues.push('4. Liga')
-      // if (club.has5LigaMen || club.has5LigaWomen) leagues.push('5. Liga') // Removed: not in schema
+      if (club.has5LigaMen || club.has5LigaWomen) leagues.push('5. Liga')
       if (club.hasU23Men || club.hasU23Women) leagues.push('U23')
       if (club.hasU20Men || club.hasU20Women) leagues.push('U20')
       if (club.hasU18Men || club.hasU18Women) leagues.push('U18')

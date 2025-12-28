@@ -12,6 +12,20 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import StepIndicator from '@/components/shared/StepIndicator';
 
 // Import constants
+const SWISS_LEAGUES = [
+  { value: 'NLA', label: 'NLA (Nationalliga A)' },
+  { value: 'NLB', label: 'NLB (Nationalliga B)' },
+  { value: '1. Liga', label: '1. Liga' },
+  { value: '2. Liga', label: '2. Liga' },
+  { value: '3. Liga', label: '3. Liga' },
+  { value: '4. Liga', label: '4. Liga' },
+  { value: '5. Liga', label: '5. Liga' },
+  { value: 'U23 Elite', label: 'U23 Elite' },
+  { value: 'U19 Elite', label: 'U19 Elite' },
+  { value: 'U17 Elite', label: 'U17 Elite' },
+  { value: 'Other', label: 'Other' },
+];
+
 const NATIONALITIES = [
   "Afghanistan", "Albanie", "Algerie", "Andorra", "Angola", "Antigua Und Barbuda", "Argentinie", "Armenie", "Australie", "Östriich",
   "Aserbaidschan", "Bahamas", "Bahrain", "Bangladesch", "Barbados", "Wiissrussland", "Belgie", "Belize", "Benin", "Bhutan",
@@ -1086,14 +1100,30 @@ export default function PlayerRegisterPage() {
                               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                 <Trophy className="w-4 h-4 inline mr-1" />{t('register.league')} *
                               </label>
-                              <input
-                                type="text"
-                                value={club.league}
-                                onChange={(e) => updateClubExperience(club.id, 'league', e.target.value)}
-                                required
-                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
-                                placeholder={t('placeholders.exampleLeague')}
-                              />
+                              {club.country === 'Switzerland' ? (
+                                <select
+                                  value={club.league}
+                                  onChange={(e) => updateClubExperience(club.id, 'league', e.target.value)}
+                                  required
+                                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
+                                >
+                                  <option value="">{t('register.selectLeague') || 'Select League'}</option>
+                                  {SWISS_LEAGUES.map(league => (
+                                    <option key={league.value} value={league.value}>
+                                      {league.label}
+                                    </option>
+                                  ))}
+                                </select>
+                              ) : (
+                                <input
+                                  type="text"
+                                  value={club.league}
+                                  onChange={(e) => updateClubExperience(club.id, 'league', e.target.value)}
+                                  required
+                                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
+                                  placeholder={t('placeholders.exampleLeague')}
+                                />
+                              )}
                             </div>
 
                             {club.country !== 'Switzerland' && (

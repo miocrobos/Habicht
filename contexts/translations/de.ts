@@ -958,6 +958,7 @@
       addClub: 'Club hinzufügen',
       clubName: 'Club Name',
       league: 'Liga',
+      selectLeague: 'Liga wählen',
       position: 'Position',
       startYear: 'Startjahr',
       endYear: 'Endjahr',

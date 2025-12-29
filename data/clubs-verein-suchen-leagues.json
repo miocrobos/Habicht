@@ -1,0 +1,1206 @@
+[
+  {
+    "name": "Zürich-Affoltern (Schulsportgruppe)",
+    "city": "",
+    "email": "",
+    "specificLeagues": [],
+    "rawAngebot": []
+  },
+  {
+    "name": "#Dragons Lugano",
+    "city": "6900 Lugano",
+    "email": "info@dragonslugano.ch",
+    "specificLeagues": [
+      "1L",
+      "2L",
+      "4L",
+      "U18",
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "men1L": true,
+    "men2L": true,
+    "men4L": true,
+    "menU18": true,
+    "menU16": true,
+    "menU14": true
+  },
+  {
+    "name": "Afghan Volleyball Genève",
+    "city": "",
+    "email": "",
+    "specificLeagues": [],
+    "rawAngebot": []
+  },
+  {
+    "name": "Bellinzona Volley",
+    "city": "6500 Bellinzona",
+    "email": "segretariato@bellinzona-volley.ch",
+    "specificLeagues": [
+      "NLB",
+      "1L",
+      "2L",
+      "3L",
+      "4L",
+      "U20",
+      "U18",
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "womenNLB": true,
+    "women1L": true,
+    "women2L": true,
+    "women3L": true,
+    "women4L": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true,
+    "womenU14": true
+  },
+  {
+    "name": "Bienne Volleyboys",
+    "city": "2500 Bienne",
+    "email": "info@volleyboys.ch",
+    "specificLeagues": [
+      "3L",
+      "4L",
+      "5L",
+      "1L",
+      "2L",
+      "3L",
+      "U23"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women3L": true,
+    "women4L": true,
+    "women5L": true,
+    "men1L": true,
+    "men2L": true,
+    "men3L": true,
+    "menU23": true
+  },
+  {
+    "name": "BMV 92",
+    "city": "2735 Valbirse",
+    "email": "presidence@bmv92.ch",
+    "specificLeagues": [
+      "3L",
+      "5L",
+      "3L",
+      "U18"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "women3L": true,
+    "women5L": true,
+    "men3L": true,
+    "womenU18": true
+  },
+  {
+    "name": "BTV Aarau",
+    "city": "5000 Aarau",
+    "email": "info@volley-aarau.ch",
+    "specificLeagues": [
+      "NLB",
+      "1L",
+      "2L",
+      "3L",
+      "4L",
+      "5L",
+      "NLB",
+      "2L",
+      "4L",
+      "5L",
+      "U23",
+      "U20",
+      "U18",
+      "U16",
+      "U23",
+      "U20",
+      "U18",
+      "U16"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "womenNLB": true,
+    "women1L": true,
+    "women2L": true,
+    "women3L": true,
+    "women4L": true,
+    "women5L": true,
+    "menNLB": true,
+    "men2L": true,
+    "men4L": true,
+    "men5L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true,
+    "menU23": true,
+    "menU20": true,
+    "menU18": true,
+    "menU16": true
+  },
+  {
+    "name": "Chênois Genève Volleyball",
+    "city": "1225 Chene-Bourg",
+    "email": "club@chenoisvolley.ch",
+    "specificLeagues": [
+      "2L",
+      "3L",
+      "4L",
+      "NLA",
+      "1L",
+      "2L",
+      "U20",
+      "U18",
+      "U16",
+      "U23",
+      "U20",
+      "U18",
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women2L": true,
+    "women3L": true,
+    "women4L": true,
+    "menNLA": true,
+    "men1L": true,
+    "men2L": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true,
+    "menU23": true,
+    "menU20": true,
+    "menU18": true,
+    "menU16": true,
+    "menU14": true
+  },
+  {
+    "name": "Colombier Volley",
+    "city": "2013 Colombier",
+    "email": "info@colombiervolley.ch",
+    "specificLeagues": [
+      "2L",
+      "3L",
+      "NLA",
+      "1L",
+      "2L",
+      "3L",
+      "U23",
+      "U18",
+      "U16",
+      "U14",
+      "U18",
+      "U16"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women2L": true,
+    "women3L": true,
+    "menNLA": true,
+    "men1L": true,
+    "men2L": true,
+    "men3L": true,
+    "womenU23": true,
+    "womenU18": true,
+    "womenU16": true,
+    "womenU14": true,
+    "menU18": true,
+    "menU16": true
+  },
+  {
+    "name": "DTV Innertkirchen",
+    "city": "",
+    "email": "",
+    "specificLeagues": [
+      "5L"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)"
+    ],
+    "women5L": true
+  },
+  {
+    "name": "E.f.i. Volley",
+    "city": "8307 Effretikon",
+    "email": "",
+    "specificLeagues": [
+      "4L"
+    ],
+    "rawAngebot": [
+      "Volleyball Männer (NLA – 5L)"
+    ],
+    "men4L": true
+  },
+  {
+    "name": "Eaglets Volley Aarau",
+    "city": "5000 Aarau",
+    "email": "",
+    "specificLeagues": [
+      "NLB",
+      "1L"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)"
+    ],
+    "womenNLB": true,
+    "women1L": true
+  },
+  {
+    "name": "FriSpike",
+    "city": "",
+    "email": "info@frispike.ch",
+    "specificLeagues": [],
+    "rawAngebot": []
+  },
+  {
+    "name": "FSG Locarno",
+    "city": "",
+    "email": "losa.luca@bluewin.ch",
+    "specificLeagues": [
+      "3L",
+      "4L",
+      "U18",
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "women3L": true,
+    "women4L": true,
+    "womenU18": true,
+    "womenU16": true,
+    "womenU14": true
+  },
+  {
+    "name": "FSG Savagnier",
+    "city": "",
+    "email": "",
+    "specificLeagues": [
+      "U14",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "womenU14": true,
+    "menU14": true
+  },
+  {
+    "name": "FSG Stabio",
+    "city": "",
+    "email": "",
+    "specificLeagues": [
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "womenU16": true,
+    "womenU14": true
+  },
+  {
+    "name": "Fémina-Sport Glovelier",
+    "city": "2855 Glovelier",
+    "email": "",
+    "specificLeagues": [
+      "5L"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)"
+    ],
+    "women5L": true
+  },
+  {
+    "name": "Genève Volley",
+    "city": "1203 Genève",
+    "email": "aide@gevb.ch",
+    "specificLeagues": [
+      "NLA",
+      "1L",
+      "2L",
+      "3L",
+      "U23",
+      "U20",
+      "U18",
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "womenNLA": true,
+    "women1L": true,
+    "women2L": true,
+    "women3L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true,
+    "womenU14": true
+  },
+  {
+    "name": "Gibloux Volley",
+    "city": "1726 Farvagny",
+    "email": "info@giblouxvolley.ch",
+    "specificLeagues": [
+      "1L",
+      "2L",
+      "3L",
+      "4L",
+      "5L",
+      "3L",
+      "U23",
+      "U20",
+      "U18",
+      "U23"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women1L": true,
+    "women2L": true,
+    "women3L": true,
+    "women4L": true,
+    "women5L": true,
+    "men3L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "menU23": true
+  },
+  {
+    "name": "Groupement Sportif du CERN",
+    "city": "",
+    "email": "",
+    "specificLeagues": [
+      "2L"
+    ],
+    "rawAngebot": [
+      "Volleyball Männer (NLA – 5L)"
+    ],
+    "men2L": true
+  },
+  {
+    "name": "Grün-Weiss Utzenstorf",
+    "city": "3427 Utzenstorf",
+    "email": "u_d.herzog@bluewin.ch",
+    "specificLeagues": [
+      "4L"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)"
+    ],
+    "women4L": true
+  },
+  {
+    "name": "Hochdorf Audacia",
+    "city": "6280 Hochdorf",
+    "email": "administration@audacia-volley.ch",
+    "specificLeagues": [
+      "2L",
+      "3L",
+      "2L",
+      "4L",
+      "U23",
+      "U20",
+      "U18",
+      "U16",
+      "U14",
+      "U23",
+      "U18",
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women2L": true,
+    "women3L": true,
+    "men2L": true,
+    "men4L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true,
+    "womenU14": true,
+    "menU23": true,
+    "menU18": true,
+    "menU16": true,
+    "menU14": true
+  },
+  {
+    "name": "Inarizaki",
+    "city": "4934 Madiswil",
+    "email": "",
+    "specificLeagues": [
+      "4L"
+    ],
+    "rawAngebot": [
+      "Volleyball Männer (NLA – 5L)"
+    ],
+    "men4L": true
+  },
+  {
+    "name": "KTV Altstetten",
+    "city": "8048 Zürich",
+    "email": "test@test.ch",
+    "specificLeagues": [
+      "U20"
+    ],
+    "rawAngebot": [
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "menU20": true
+  },
+  {
+    "name": "KTV Basel 1915",
+    "city": "4000 Basel",
+    "email": "ktvbasel1915@gmail.com",
+    "specificLeagues": [
+      "3L",
+      "3L"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)"
+    ],
+    "women3L": true,
+    "men3L": true
+  },
+  {
+    "name": "KTV Riehen",
+    "city": "4125 Riehen",
+    "email": "admin@ktvriehen.ch",
+    "specificLeagues": [
+      "2L",
+      "3L",
+      "4L",
+      "2L",
+      "3L",
+      "U20",
+      "U18",
+      "U16",
+      "U23",
+      "U16"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women2L": true,
+    "women3L": true,
+    "women4L": true,
+    "men2L": true,
+    "men3L": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true,
+    "menU23": true,
+    "menU16": true
+  },
+  {
+    "name": "Lancy Volleyball Club",
+    "city": "1213 Petit-Lancy",
+    "email": "",
+    "specificLeagues": [],
+    "rawAngebot": []
+  },
+  {
+    "name": "Lausanne UC",
+    "city": "1015 Lausanne",
+    "email": "info@lucvolleyball.ch",
+    "specificLeagues": [
+      "NLB",
+      "NLA",
+      "NLB",
+      "2L",
+      "4L",
+      "U23",
+      "U20",
+      "U18",
+      "U16"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "womenNLB": true,
+    "menNLA": true,
+    "menNLB": true,
+    "men2L": true,
+    "men4L": true,
+    "menU23": true,
+    "menU20": true,
+    "menU18": true,
+    "menU16": true
+  },
+  {
+    "name": "Le Mouret  CS",
+    "city": "",
+    "email": "",
+    "specificLeagues": [
+      "4L",
+      "3L"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)"
+    ],
+    "women4L": true,
+    "men3L": true
+  },
+  {
+    "name": "Lerbermatt Mittelschule",
+    "city": "3098 Köniz",
+    "email": "",
+    "specificLeagues": [
+      "3L",
+      "3L"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)"
+    ],
+    "women3L": true,
+    "men3L": true
+  },
+  {
+    "name": "LK Zug Volleyball",
+    "city": "6300 Zug",
+    "email": "Lukas.Hotz@volleyzug.ch",
+    "specificLeagues": [
+      "4L",
+      "1L",
+      "2L",
+      "5L",
+      "U23",
+      "U20",
+      "U18",
+      "U23",
+      "U18",
+      "U16"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women4L": true,
+    "men1L": true,
+    "men2L": true,
+    "men5L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "menU23": true,
+    "menU18": true,
+    "menU16": true
+  },
+  {
+    "name": "Martigny Volley",
+    "city": "1920 Martigny",
+    "email": "",
+    "specificLeagues": [
+      "2L",
+      "3L",
+      "2L",
+      "U23",
+      "U20",
+      "U18",
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "women2L": true,
+    "women3L": true,
+    "men2L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true,
+    "womenU14": true
+  },
+  {
+    "name": "Meyrin VBC",
+    "city": "1217 Meyrin",
+    "email": "",
+    "specificLeagues": [
+      "3L",
+      "4L",
+      "1L",
+      "3L",
+      "U20",
+      "U18",
+      "U16",
+      "U20",
+      "U18",
+      "U16"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women3L": true,
+    "women4L": true,
+    "men1L": true,
+    "men3L": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true,
+    "menU20": true,
+    "menU18": true,
+    "menU16": true
+  },
+  {
+    "name": "Montreux Volley",
+    "city": "1820 Montreux",
+    "email": "daniel.gnerre@gmail.com",
+    "specificLeagues": [
+      "2L",
+      "3L",
+      "4L",
+      "3L",
+      "U23",
+      "U20",
+      "U18",
+      "U23"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women2L": true,
+    "women3L": true,
+    "women4L": true,
+    "men3L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "menU23": true
+  },
+  {
+    "name": "Moesa Volley",
+    "city": "6558 Lostallo",
+    "email": "info@abbaco.ch",
+    "specificLeagues": [
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "womenU16": true,
+    "womenU14": true
+  },
+  {
+    "name": "Nidau Volley",
+    "city": "",
+    "email": "",
+    "specificLeagues": [
+      "2L",
+      "5L",
+      "1L",
+      "2L",
+      "3L",
+      "U18",
+      "U16",
+      "U14",
+      "U20",
+      "U18",
+      "U16"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women2L": true,
+    "women5L": true,
+    "men1L": true,
+    "men2L": true,
+    "men3L": true,
+    "womenU18": true,
+    "womenU16": true,
+    "womenU14": true,
+    "menU20": true,
+    "menU18": true,
+    "menU16": true
+  },
+  {
+    "name": "OTA VOLLEY",
+    "city": "",
+    "email": "",
+    "specificLeagues": [
+      "3L",
+      "4L",
+      "3L"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)"
+    ],
+    "women3L": true,
+    "women4L": true,
+    "men3L": true
+  },
+  {
+    "name": "Pallavolo Kreuzlingen",
+    "city": "8280 Kreuzlingen",
+    "email": "sekretariat@pallavolo.ch",
+    "specificLeagues": [
+      "1L",
+      "3L",
+      "5L",
+      "1L",
+      "3L",
+      "4L",
+      "U23",
+      "U20",
+      "U18",
+      "U16",
+      "U14",
+      "U23",
+      "U20",
+      "U18",
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women1L": true,
+    "women3L": true,
+    "women5L": true,
+    "men1L": true,
+    "men3L": true,
+    "men4L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true,
+    "womenU14": true,
+    "menU23": true,
+    "menU20": true,
+    "menU18": true,
+    "menU16": true,
+    "menU14": true
+  },
+  {
+    "name": "Pallavolo-Novaggio-Bedigliora",
+    "city": "6986 Curio",
+    "email": "malcavolleyvicepres@gmail.ch",
+    "specificLeagues": [
+      "3L",
+      "U18",
+      "U16",
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women3L": true,
+    "womenU18": true,
+    "womenU16": true,
+    "menU16": true,
+    "menU14": true
+  },
+  {
+    "name": "Pery Volleyball",
+    "city": "2603 Péry",
+    "email": "",
+    "specificLeagues": [
+      "3L",
+      "5L",
+      "U18",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "women3L": true,
+    "women5L": true,
+    "womenU18": true,
+    "womenU14": true
+  },
+  {
+    "name": "Pizol Volley",
+    "city": "",
+    "email": "",
+    "specificLeagues": [
+      "2L",
+      "4L",
+      "2L",
+      "3L",
+      "4L"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)"
+    ],
+    "women2L": true,
+    "women4L": true,
+    "men2L": true,
+    "men3L": true,
+    "men4L": true
+  },
+  {
+    "name": "Raiffeisen Volleya Obwalden",
+    "city": "6064 Kerns",
+    "email": "administration@volleya.ch",
+    "specificLeagues": [
+      "2L",
+      "3L",
+      "4L",
+      "5L",
+      "2L",
+      "4L",
+      "U23",
+      "U20",
+      "U18",
+      "U16",
+      "U14",
+      "U23",
+      "U20"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women2L": true,
+    "women3L": true,
+    "women4L": true,
+    "women5L": true,
+    "men2L": true,
+    "men4L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true,
+    "womenU14": true,
+    "menU23": true,
+    "menU20": true
+  },
+  {
+    "name": "Rainbow Sport Zürich",
+    "city": "8000 Zürich",
+    "email": "denis.sim@gmx.ch",
+    "specificLeagues": [
+      "3L"
+    ],
+    "rawAngebot": [
+      "Volleyball Männer (NLA – 5L)"
+    ],
+    "men3L": true
+  },
+  {
+    "name": "Regio Volleyteam",
+    "city": "4950 Huttwil",
+    "email": "vorstand@regiovolleyteam.ch",
+    "specificLeagues": [
+      "3L",
+      "4L",
+      "3L",
+      "4L",
+      "U23",
+      "U20",
+      "U18"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "women3L": true,
+    "women4L": true,
+    "men3L": true,
+    "men4L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true
+  },
+  {
+    "name": "Rheno Volleyball",
+    "city": "9435 Heerbrugg",
+    "email": "",
+    "specificLeagues": [
+      "3L",
+      "4L",
+      "2L",
+      "4L",
+      "U23",
+      "U20",
+      "U18",
+      "U16",
+      "U14",
+      "U23",
+      "U20",
+      "U18",
+      "U16"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women3L": true,
+    "women4L": true,
+    "men2L": true,
+    "men4L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true,
+    "womenU14": true,
+    "menU23": true,
+    "menU20": true,
+    "menU18": true,
+    "menU16": true
+  },
+  {
+    "name": "Rhone Volley",
+    "city": "1920 Martigny",
+    "email": "",
+    "specificLeagues": [
+      "1L",
+      "3L"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)"
+    ],
+    "women1L": true,
+    "women3L": true
+  },
+  {
+    "name": "S 9",
+    "city": "8906 Bonstetten",
+    "email": "vorstand@volley-s9.ch",
+    "specificLeagues": [
+      "5L",
+      "4L",
+      "U23",
+      "U20",
+      "U18",
+      "U18"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)",
+      "Volleyball Junioren (U23 – U13)"
+    ],
+    "women5L": true,
+    "men4L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "menU18": true
+  },
+  {
+    "name": "SAG Gordola",
+    "city": "6598 Tenero",
+    "email": "sagvolley@saggordola.ch",
+    "specificLeagues": [
+      "1L",
+      "2L",
+      "3L",
+      "4L",
+      "2L",
+      "U18",
+      "U16"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "women1L": true,
+    "women2L": true,
+    "women3L": true,
+    "women4L": true,
+    "men2L": true,
+    "womenU18": true,
+    "womenU16": true
+  },
+  {
+    "name": "Satigny Volleyball",
+    "city": "1242 Satigny(GE)",
+    "email": "info@satigny-volleyball.ch",
+    "specificLeagues": [],
+    "rawAngebot": []
+  },
+  {
+    "name": "Schaffhausen KJS",
+    "city": "8200 Schaffhausen",
+    "email": "",
+    "specificLeagues": [
+      "3L",
+      "5L",
+      "U23",
+      "U20",
+      "U16",
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "women3L": true,
+    "women5L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU16": true,
+    "womenU14": true
+  },
+  {
+    "name": "Schulsport Adelboden",
+    "city": "",
+    "email": "",
+    "specificLeagues": [],
+    "rawAngebot": []
+  },
+  {
+    "name": "Schulsport Radelfingen",
+    "city": "",
+    "email": "",
+    "specificLeagues": [],
+    "rawAngebot": []
+  },
+  {
+    "name": "Schulsport TV Fraubrunnen",
+    "city": "",
+    "email": "",
+    "specificLeagues": [
+      "U14"
+    ],
+    "rawAngebot": [
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "womenU14": true
+  },
+  {
+    "name": "SFG Montagny-Cousset",
+    "city": "1774 Cousset",
+    "email": "pascaleterrapon@bluewin.ch",
+    "specificLeagues": [
+      "5L"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)"
+    ],
+    "women5L": true
+  },
+  {
+    "name": "Skål Team Volley Losone",
+    "city": "",
+    "email": "info@skalteam.ch",
+    "specificLeagues": [
+      "2L",
+      "3L",
+      "2L",
+      "U18",
+      "U16"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Männer (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "women2L": true,
+    "women3L": true,
+    "men2L": true,
+    "womenU18": true,
+    "womenU16": true
+  },
+  {
+    "name": "Sm`Aesch Pfeffingen",
+    "city": "4147 Aesch",
+    "email": "info@smaesch.ch",
+    "specificLeagues": [
+      "NLA",
+      "2L",
+      "3L",
+      "4L",
+      "U23",
+      "U20",
+      "U18",
+      "U16"
+    ],
+    "rawAngebot": [
+      "Volleyball Frauen (NLA – 5L)",
+      "Volleyball Juniorinnen (U23 – U13)"
+    ],
+    "womenNLA": true,
+    "women2L": true,
+    "women3L": true,
+    "women4L": true,
+    "womenU23": true,
+    "womenU20": true,
+    "womenU18": true,
+    "womenU16": true
+  }
+]

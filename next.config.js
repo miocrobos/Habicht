@@ -1,12 +1,48 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'res.cloudinary.com',
-      'volleyball.ch',
-      'www.volleyball.ch',
-      'i.ytimg.com',
-      'img.youtube.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'volleyball.ch',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.volleyball.ch',
+      },
+      {
+        protocol: 'https',
+        hostname: 'volleymanager.volleyball.ch',
+      },
+      {
+        protocol: 'https',
+        hostname: 'static.wixstatic.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'static.parastorage.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
+      },
+      {
+        // Allow all external images for club logos
+        protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+      },
     ],
   },
   reactStrictMode: true,

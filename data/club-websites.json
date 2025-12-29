@@ -1,0 +1,1526 @@
+{
+  "cmjprn189000b72r7gr3yt7z4": {
+    "id": "cmjprn189000b72r7gr3yt7z4",
+    "name": "#Dragons Lugano",
+    "website": "https://dragonslugano.ch",
+    "logo": null
+  },
+  "cmjprn1bv000e72r7g3805xql": {
+    "id": "cmjprn1bv000e72r7g3805xql",
+    "name": "BMV 92",
+    "website": "https://www.bmv92.ch",
+    "logo": null
+  },
+  "cmjprn1dg000f72r7premiqg1": {
+    "id": "cmjprn1dg000f72r7premiqg1",
+    "name": "BTV Aarau",
+    "website": "https://www.volley-aarau.ch",
+    "logo": null
+  },
+  "cmjprn209000y72r7ajo3obon": {
+    "id": "cmjprn209000y72r7ajo3obon",
+    "name": "Basilea Volleyball",
+    "website": "https://www.volleybasel.ch",
+    "logo": null
+  },
+  "cmjprn19f000c72r7r65u3nt7": {
+    "id": "cmjprn19f000c72r7r65u3nt7",
+    "name": "Bellinzona Volley",
+    "website": "https://bellinzona-volley.ch",
+    "logo": null
+  },
+  "cmjprn1ar000d72r75ex4x8jy": {
+    "id": "cmjprn1ar000d72r75ex4x8jy",
+    "name": "Bienne Volleyboys",
+    "website": "https://www.volleyboys.ch",
+    "logo": null
+  },
+  "cmjprn1er000g72r70soqctkj": {
+    "id": "cmjprn1er000g72r70soqctkj",
+    "name": "Chênois Genève Volleyball",
+    "website": "https://chenoisvolley.ch",
+    "logo": null
+  },
+  "cmjpslpcg0000gjmzyxsb991o": {
+    "id": "cmjpslpcg0000gjmzyxsb991o",
+    "name": "Colombier Volley",
+    "website": "https://colombiervolley.ch",
+    "logo": null
+  },
+  "cmjpslpeq0001gjmzdxexjcty": {
+    "id": "cmjpslpeq0001gjmzdxexjcty",
+    "name": "E.f.i. Volley",
+    "website": "http://volleyefi.ch",
+    "logo": null
+  },
+  "cmjpslpg00002gjmz70kl6h95": {
+    "id": "cmjpslpg00002gjmz70kl6h95",
+    "name": "Eaglets Volley Aarau",
+    "website": "https://www.eagletsvolleyaarau.ch",
+    "logo": null
+  },
+  "cmjpslphf0003gjmztzs58xyt": {
+    "id": "cmjpslphf0003gjmztzs58xyt",
+    "name": "Fémina-Sport Glovelier",
+    "website": "https://fs-glovelier.ch",
+    "logo": null
+  },
+  "cmjpslpiv0004gjmz4qcc48g9": {
+    "id": "cmjpslpiv0004gjmz4qcc48g9",
+    "name": "Genève Volley",
+    "website": "https://gevb.ch",
+    "logo": null
+  },
+  "cmjpslpkb0005gjmzil4tmlvh": {
+    "id": "cmjpslpkb0005gjmzil4tmlvh",
+    "name": "Gibloux Volley",
+    "website": "https://www.giblouxvolley.ch",
+    "logo": null
+  },
+  "cmjpslplo0006gjmzoxjhy6ac": {
+    "id": "cmjpslplo0006gjmzoxjhy6ac",
+    "name": "Grün-Weiss Utzenstorf",
+    "website": "https://www.gwu.ch",
+    "logo": null
+  },
+  "cmjpslpn40007gjmzso0lx7mp": {
+    "id": "cmjpslpn40007gjmzso0lx7mp",
+    "name": "Hochdorf Audacia",
+    "website": "https://www.audacia-volley.ch",
+    "logo": null
+  },
+  "cmjpslpoj0008gjmz40aopfjh": {
+    "id": "cmjpslpoj0008gjmz40aopfjh",
+    "name": "Inarizaki",
+    "website": "https://inarizaki.ch",
+    "logo": null
+  },
+  "cmjpslpq10009gjmz5unbl1zf": {
+    "id": "cmjpslpq10009gjmz5unbl1zf",
+    "name": "KTV Altstetten",
+    "website": "https://www.ktv-altstetten.ch",
+    "logo": null
+  },
+  "cmjpslprl000agjmzrs0tfw3n": {
+    "id": "cmjpslprl000agjmzrs0tfw3n",
+    "name": "KTV Basel 1915",
+    "website": "https://ktvb1915.ch",
+    "logo": null
+  },
+  "cmjpslpsz000bgjmzrtejqxkk": {
+    "id": "cmjpslpsz000bgjmzrtejqxkk",
+    "name": "KTV Riehen",
+    "website": "https://ktvriehen.ch",
+    "logo": null
+  },
+  "cmjpslpzz000fgjmz2iirksx8": {
+    "id": "cmjpslpzz000fgjmz2iirksx8",
+    "name": "LK Zug Volleyball",
+    "website": "https://volleyzug.ch",
+    "logo": null
+  },
+  "cmjpslpu9000cgjmz30mmox7p": {
+    "id": "cmjpslpu9000cgjmz30mmox7p",
+    "name": "Lancy Volleyball Club",
+    "website": "https://www.lancyvbc.ch",
+    "logo": null
+  },
+  "cmjpslpx7000dgjmzr0sx5ory": {
+    "id": "cmjpslpx7000dgjmzr0sx5ory",
+    "name": "Lausanne UC",
+    "website": "https://www.sofascore.com",
+    "logo": null
+  },
+  "cmjpslpyn000egjmzf2lg9yc2": {
+    "id": "cmjpslpyn000egjmzf2lg9yc2",
+    "name": "Lerbermatt Mittelschule",
+    "website": "https://lerbermatt.ch",
+    "logo": null
+  },
+  "cmjpslq1a000ggjmzv98rk51c": {
+    "id": "cmjpslq1a000ggjmzv98rk51c",
+    "name": "Martigny Volley",
+    "website": "https://vbcmartigny.ch",
+    "logo": null
+  },
+  "cmjprn2dg001a72r72g8xuf9r": {
+    "id": "cmjprn2dg001a72r72g8xuf9r",
+    "name": "Meyrin GVA Volley",
+    "website": "https://meyrinvolley.ch",
+    "logo": null
+  },
+  "cmjpslq2j000hgjmzgurv2jih": {
+    "id": "cmjpslq2j000hgjmzgurv2jih",
+    "name": "Meyrin VBC",
+    "website": "https://meyrinvolley.ch",
+    "logo": null
+  },
+  "cmjpslq5b000jgjmzns1kl0in": {
+    "id": "cmjpslq5b000jgjmzns1kl0in",
+    "name": "Moesa Volley",
+    "website": "https://www.graubuenden.ch",
+    "logo": null
+  },
+  "cmjpslq40000igjmzhytti0ms": {
+    "id": "cmjpslq40000igjmzhytti0ms",
+    "name": "Montreux Volley",
+    "website": "https://www.montreuxvolley.ch",
+    "logo": null
+  },
+  "cmjprn15p000972r7fbqkt37l": {
+    "id": "cmjprn15p000972r7fbqkt37l",
+    "name": "NLZ Volleyball Academy",
+    "website": "https://volleyballacademy.ch",
+    "logo": null
+  },
+  "cmjprn2u5001m72r7jgcjd1fm": {
+    "id": "cmjprn2u5001m72r7jgcjd1fm",
+    "name": "Pallavolo Bellinzona",
+    "website": "https://bellinzona-volley.ch",
+    "logo": null
+  },
+  "cmjprn2xd001o72r7sgdm74g3": {
+    "id": "cmjprn2xd001o72r7sgdm74g3",
+    "name": "Pallavolo Biasca",
+    "website": "https://www.findglocal.com",
+    "logo": null
+  },
+  "cmjpslq6q000kgjmz24vdpv5i": {
+    "id": "cmjpslq6q000kgjmz24vdpv5i",
+    "name": "Pallavolo Kreuzlingen",
+    "website": "https://pallavolo.ch",
+    "logo": null
+  },
+  "cmjprn2vw001n72r79b268utf": {
+    "id": "cmjprn2vw001n72r79b268utf",
+    "name": "Pallavolo Locarno",
+    "website": "https://sfglocarno.ch",
+    "logo": null
+  },
+  "cmjpslq85000lgjmzev67h6zc": {
+    "id": "cmjpslq85000lgjmzev67h6zc",
+    "name": "Pallavolo-Novaggio-Bedigliora",
+    "website": "https://www.malcavolley.ch",
+    "logo": null
+  },
+  "cmjpslq9d000mgjmzxr7onrdz": {
+    "id": "cmjpslq9d000mgjmzxr7onrdz",
+    "name": "Pery Volleyball",
+    "website": "https://www.vbpery.ch",
+    "logo": null
+  },
+  "cmjpslqbc000ngjmzncqmq1ke": {
+    "id": "cmjpslqbc000ngjmzncqmq1ke",
+    "name": "Raiffeisen Volleya Obwalden",
+    "website": "https://www.volleya.ch",
+    "logo": null
+  },
+  "cmjpslqcj000ogjmzh1ay173r": {
+    "id": "cmjpslqcj000ogjmzh1ay173r",
+    "name": "Rainbow Sport Zürich",
+    "website": "https://www.rainbowsport.ch",
+    "logo": null
+  },
+  "cmjpslqdx000pgjmzq6vxjs5m": {
+    "id": "cmjpslqdx000pgjmzq6vxjs5m",
+    "name": "Regio Volleyteam",
+    "website": "https://regiovolleyteam.ch",
+    "logo": null
+  },
+  "cmjpslqfo000qgjmz6kiclpo3": {
+    "id": "cmjpslqfo000qgjmz6kiclpo3",
+    "name": "Rheno Volleyball",
+    "website": "https://rhenovolley.ch",
+    "logo": null
+  },
+  "cmjpslqgz000rgjmzrkmal8un": {
+    "id": "cmjpslqgz000rgjmzrkmal8un",
+    "name": "Rhone Volley",
+    "website": "https://rhonevolley.ch",
+    "logo": null
+  },
+  "cmjpslqi8000sgjmzzme19un0": {
+    "id": "cmjpslqi8000sgjmzzme19un0",
+    "name": "S 9",
+    "website": "https://volley-s9.ch",
+    "logo": null
+  },
+  "cmjpslqjx000tgjmz6fqhk5jn": {
+    "id": "cmjpslqjx000tgjmz6fqhk5jn",
+    "name": "SAG Gordola",
+    "website": "https://sagvolley.ch",
+    "logo": null
+  },
+  "cmjpslqmp000vgjmzabq6qspy": {
+    "id": "cmjpslqmp000vgjmzabq6qspy",
+    "name": "SFG Montagny-Cousset",
+    "website": "https://www.fsgmontagnycousset.com",
+    "logo": null
+  },
+  "cmjpslqqx000ygjmz10cnv30s": {
+    "id": "cmjpslqqx000ygjmz10cnv30s",
+    "name": "SSC Audax",
+    "website": "https://www.sscaudax.ch",
+    "logo": null
+  },
+  "cmjpslqv70011gjmzl7xqam7y": {
+    "id": "cmjpslqv70011gjmzl7xqam7y",
+    "name": "STV Buttisholz",
+    "website": "https://volley-buttisholz.ch",
+    "logo": null
+  },
+  "cmjpslqwm0012gjmzimog6vq8": {
+    "id": "cmjpslqwm0012gjmzimog6vq8",
+    "name": "STV Gränichen",
+    "website": "https://volleygraenichen.ch",
+    "logo": null
+  },
+  "cmjpslqxz0013gjmzbtyy01r6": {
+    "id": "cmjpslqxz0013gjmzbtyy01r6",
+    "name": "STV Hitzkirch",
+    "website": "https://stvhitzkirch.ch",
+    "logo": null
+  },
+  "cmjpslqzg0014gjmz3e12qfab": {
+    "id": "cmjpslqzg0014gjmz3e12qfab",
+    "name": "SV Olten",
+    "website": "https://www.svolten.ch",
+    "logo": null
+  },
+  "cmjpslr130015gjmz4ib41azw": {
+    "id": "cmjpslr130015gjmz4ib41azw",
+    "name": "SV Strättligen",
+    "website": "https://www.svthun-straettligen.ch",
+    "logo": null
+  },
+  "cmjpslr2m0016gjmzg8ng9m80": {
+    "id": "cmjpslr2m0016gjmzg8ng9m80",
+    "name": "SV Tägerig",
+    "website": "https://svtaegerig.ch",
+    "logo": null
+  },
+  "cmjpslr3y0017gjmzirxgtane": {
+    "id": "cmjpslr3y0017gjmzirxgtane",
+    "name": "SV Volley Lengnau",
+    "website": "https://svl-lengnau.ch",
+    "logo": null
+  },
+  "cmjpslqlg000ugjmz1lqtfy1e": {
+    "id": "cmjpslqlg000ugjmz1lqtfy1e",
+    "name": "Schaffhausen KJS",
+    "website": "http://www.kjs.ch",
+    "logo": null
+  },
+  "cmjpslqob000wgjmz8mr7kcwi": {
+    "id": "cmjpslqob000wgjmz8mr7kcwi",
+    "name": "Sm`Aesch Pfeffingen",
+    "website": "https://smaeschpfeffingen.ch",
+    "logo": null
+  },
+  "cmjpslqpn000xgjmzzo89gtv5": {
+    "id": "cmjpslqpn000xgjmzzo89gtv5",
+    "name": "Sportunion Beckenried",
+    "website": "https://sportunion-beckenried.ch",
+    "logo": null
+  },
+  "cmjpslqs8000zgjmzevdalnae": {
+    "id": "cmjpslqs8000zgjmzevdalnae",
+    "name": "St-Maurice",
+    "website": "https://vbcst-maurice.ch",
+    "logo": null
+  },
+  "cmjpslqtr0010gjmzamfd9vlc": {
+    "id": "cmjpslqtr0010gjmzamfd9vlc",
+    "name": "Stadtturnverein Wil",
+    "website": "https://stadtturnvereinwil.ch",
+    "logo": null
+  },
+  "cmjpslr5f0018gjmzcyn10efz": {
+    "id": "cmjpslr5f0018gjmzcyn10efz",
+    "name": "TSV Frick Volleyball",
+    "website": "https://www.frickvolley.ch",
+    "logo": null
+  },
+  "cmjpslr6q0019gjmz68lyr149": {
+    "id": "cmjpslr6q0019gjmz68lyr149",
+    "name": "TSV Gurmels",
+    "website": "https://tsv-gurmels.ch",
+    "logo": null
+  },
+  "cmjprn1jo000k72r7hberowob": {
+    "id": "cmjprn1jo000k72r7hberowob",
+    "name": "TSV Jona Volleyball",
+    "website": "http://www.volleyballjona.ch",
+    "logo": null
+  },
+  "cmjpslr9p001agjmzq0ixp8ex": {
+    "id": "cmjpslr9p001agjmzq0ixp8ex",
+    "name": "TSV Neuendorf",
+    "website": "https://www.tsvn.ch",
+    "logo": null
+  },
+  "cmjpslrb0001bgjmzdq862x4w": {
+    "id": "cmjpslrb0001bgjmzdq862x4w",
+    "name": "TSV Rechthalten",
+    "website": "https://tsvrechthalten.ch",
+    "logo": null
+  },
+  "cmjpslrca001cgjmz9powscau": {
+    "id": "cmjpslrca001cgjmz9powscau",
+    "name": "TSV Steinen",
+    "website": "https://www.tsv-steinen.ch",
+    "logo": null
+  },
+  "cmjpslrdl001dgjmze7nran4r": {
+    "id": "cmjpslrdl001dgjmze7nran4r",
+    "name": "TSV Wangen",
+    "website": "https://tsvwangen.ch",
+    "logo": null
+  },
+  "cmjpslrgg001fgjmz1nca01wh": {
+    "id": "cmjpslrgg001fgjmz1nca01wh",
+    "name": "TV Arlesheim",
+    "website": "https://volleyball-arlesheim.ch",
+    "logo": null
+  },
+  "cmjpslri2001ggjmz3kej5kgx": {
+    "id": "cmjpslri2001ggjmz3kej5kgx",
+    "name": "TV Dietlikon (Schulsportgruppe)",
+    "website": "https://tvdietlikon.ch",
+    "logo": null
+  },
+  "cmjpslrje001hgjmzepswlwqn": {
+    "id": "cmjpslrje001hgjmzepswlwqn",
+    "name": "TV Hüttwilen",
+    "website": "https://tvhuettwilen.ch",
+    "logo": null
+  },
+  "cmjpslrkz001igjmzc50dlz3k": {
+    "id": "cmjpslrkz001igjmzc50dlz3k",
+    "name": "TV Itingen",
+    "website": "https://tvitingen.ch",
+    "logo": null
+  },
+  "cmjpslrme001jgjmzcgl8gnm2": {
+    "id": "cmjpslrme001jgjmzcgl8gnm2",
+    "name": "TV Lunkhofen",
+    "website": "https://tvlunkhofen.ch",
+    "logo": null
+  },
+  "cmjpslrnt001kgjmzqatag3s4": {
+    "id": "cmjpslrnt001kgjmzqatag3s4",
+    "name": "TV Magden",
+    "website": "https://www.tv-magden.ch",
+    "logo": null
+  },
+  "cmjpslrp7001lgjmziribt45v": {
+    "id": "cmjpslrp7001lgjmziribt45v",
+    "name": "TV Murten Volleyball",
+    "website": "https://www.volleyball-murten.ch",
+    "logo": null
+  },
+  "cmjpslrqk001mgjmzbfc45i08": {
+    "id": "cmjpslrqk001mgjmzbfc45i08",
+    "name": "TV Muttenz",
+    "website": "https://www.tvmuttenz.ch",
+    "logo": null
+  },
+  "cmjpslrrx001ngjmzpic1j34d": {
+    "id": "cmjpslrrx001ngjmzpic1j34d",
+    "name": "TV Plaffeien",
+    "website": "https://www.tvplaffeien.ch",
+    "logo": null
+  },
+  "cmjpslrtb001ogjmz2vvn9thm": {
+    "id": "cmjpslrtb001ogjmz2vvn9thm",
+    "name": "TV St. Johann",
+    "website": "https://www.tvstjohann.net",
+    "logo": null
+  },
+  "cmjpslrul001pgjmzfydketi9": {
+    "id": "cmjpslrul001pgjmzfydketi9",
+    "name": "TV Ursenbach",
+    "website": "https://tvursenbach.ch",
+    "logo": null
+  },
+  "cmjpslrvy001qgjmz3btfyo5e": {
+    "id": "cmjpslrvy001qgjmz3btfyo5e",
+    "name": "TV Zollikofen",
+    "website": "https://tvz.ch",
+    "logo": null
+  },
+  "cmjpslrf0001egjmz2ncmiqtw": {
+    "id": "cmjpslrf0001egjmz2ncmiqtw",
+    "name": "Turnverein Horgen",
+    "website": "https://www.tv-horgen.ch",
+    "logo": null
+  },
+  "cmjpslrxl001rgjmz6y2gqvbd": {
+    "id": "cmjpslrxl001rgjmz6y2gqvbd",
+    "name": "VB Fides Ruswil",
+    "website": "https://www.volley-ruswil.ch",
+    "logo": null
+  },
+  "cmjpslryx001sgjmz1gw9hd2e": {
+    "id": "cmjpslryx001sgjmz1gw9hd2e",
+    "name": "VB Neuenkirch",
+    "website": "http://www.vb-neuenkirch.ch",
+    "logo": null
+  },
+  "cmjpsls08001tgjmzu2d5cwrt": {
+    "id": "cmjpsls08001tgjmzu2d5cwrt",
+    "name": "VB Steinach",
+    "website": "https://vbsteinach.ch",
+    "logo": null
+  },
+  "cmjprn2iu001e72r78447sv4y": {
+    "id": "cmjprn2iu001e72r78447sv4y",
+    "name": "VBC Aarau",
+    "website": "https://www.volley-aarau.ch",
+    "logo": null
+  },
+  "cmjpsls1i001ugjmzvhdp50a9": {
+    "id": "cmjpsls1i001ugjmzvhdp50a9",
+    "name": "VBC Aigle",
+    "website": "https://www.vbcaigle.ch",
+    "logo": null
+  },
+  "cmjpsls31001vgjmz4t9cegvh": {
+    "id": "cmjpsls31001vgjmz4t9cegvh",
+    "name": "VBC Allschwil",
+    "website": "https://www.vbcallschwil.ch",
+    "logo": null
+  },
+  "cmjpsls4c001wgjmzjymkw9q7": {
+    "id": "cmjpsls4c001wgjmzjymkw9q7",
+    "name": "VBC Antares-Uitikon",
+    "website": "https://www.vbc-antares.ch",
+    "logo": null
+  },
+  "cmjpsls5p001xgjmziizqnb51": {
+    "id": "cmjpsls5p001xgjmziizqnb51",
+    "name": "VBC Arbon",
+    "website": "https://vbcarbon.ch",
+    "logo": null
+  },
+  "cmjpsls6v001ygjmzpytjdfy0": {
+    "id": "cmjpsls6v001ygjmzpytjdfy0",
+    "name": "VBC Arosa",
+    "website": "https://vbc-arosa.ch",
+    "logo": null
+  },
+  "cmjpsls8a001zgjmz23v4v7ol": {
+    "id": "cmjpsls8a001zgjmz23v4v7ol",
+    "name": "VBC Avully",
+    "website": "https://avullyvbc.ch",
+    "logo": null
+  },
+  "cmjprn2k6001f72r7na7m9ghr": {
+    "id": "cmjprn2k6001f72r7na7m9ghr",
+    "name": "VBC Baden",
+    "website": "https://vbckantibaden.ch",
+    "logo": null
+  },
+  "cmjpsls9p0020gjmzsr5403m9": {
+    "id": "cmjpsls9p0020gjmzsr5403m9",
+    "name": "VBC Belfaux",
+    "website": "https://www.vbc-belfaux.ch",
+    "logo": null
+  },
+  "cmjpslscb0022gjmze5q4m76c": {
+    "id": "cmjpslscb0022gjmze5q4m76c",
+    "name": "VBC Bramois",
+    "website": "https://www.vbc-bramois.ch",
+    "logo": null
+  },
+  "cmjpslsdk0023gjmzctu00of3": {
+    "id": "cmjpslsdk0023gjmzctu00of3",
+    "name": "VBC Brig-Glis",
+    "website": "https://www.vbc-brig-glis.ch",
+    "logo": null
+  },
+  "cmjpslsev0024gjmzd6wivt5r": {
+    "id": "cmjpslsev0024gjmzd6wivt5r",
+    "name": "VBC Brislach",
+    "website": "https://www.vbcbrislach.ch",
+    "logo": null
+  },
+  "cmjpslsg90025gjmzjan8w198": {
+    "id": "cmjpslsg90025gjmzjan8w198",
+    "name": "VBC Bulle",
+    "website": "http://vbcbulle.ch",
+    "logo": null
+  },
+  "cmjpslsho0026gjmz4s6rhdl7": {
+    "id": "cmjpslsho0026gjmz4s6rhdl7",
+    "name": "VBC Buochs",
+    "website": "https://www.vbcbuochs.ch",
+    "logo": null
+  },
+  "cmjprn2sp001l72r72xltenca": {
+    "id": "cmjprn2sp001l72r72xltenca",
+    "name": "VBC Burgdorf",
+    "website": "https://www.vbcburgdorf.com",
+    "logo": null
+  },
+  "cmjpslsay0021gjmz0ogrgpg8": {
+    "id": "cmjpslsay0021gjmz0ogrgpg8",
+    "name": "VBC Bösingen",
+    "website": "https://vbc-boesingen.ch",
+    "logo": null
+  },
+  "cmjpslskb0027gjmzx21e108b": {
+    "id": "cmjpslskb0027gjmzx21e108b",
+    "name": "VBC Cazis",
+    "website": "https://www.vbc-cazis.ch",
+    "logo": null
+  },
+  "cmjpslslp0028gjmzc9jh40y8": {
+    "id": "cmjpslslp0028gjmzc9jh40y8",
+    "name": "VBC Cedra",
+    "website": "https://www.localcities.ch",
+    "logo": null
+  },
+  "cmjpslsmz0029gjmzb6d6gpqr": {
+    "id": "cmjpslsmz0029gjmzb6d6gpqr",
+    "name": "VBC Chatel-St-Denis",
+    "website": "https://www.vbc-chatel.ch",
+    "logo": null
+  },
+  "cmjprn111000572r75das617i": {
+    "id": "cmjprn111000572r75das617i",
+    "name": "VBC Cheseaux",
+    "website": "https://vbccheseaux.ch",
+    "logo": null
+  },
+  "cmjpslspt002agjmzkasmcjg2": {
+    "id": "cmjpslspt002agjmzkasmcjg2",
+    "name": "VBC Chur",
+    "website": "https://vbcchur.ch",
+    "logo": null
+  },
+  "cmjprn2ax001872r739oebyta": {
+    "id": "cmjprn2ax001872r739oebyta",
+    "name": "VBC Colombier",
+    "website": "https://colombiervolley.ch",
+    "logo": null
+  },
+  "cmjpslsrl002bgjmzv66ga5ow": {
+    "id": "cmjpslsrl002bgjmzv66ga5ow",
+    "name": "VBC Develier",
+    "website": "https://linktr.ee",
+    "logo": null
+  },
+  "cmjpslst0002cgjmz0fnaplpe": {
+    "id": "cmjpslst0002cgjmz0fnaplpe",
+    "name": "VBC Dietwil",
+    "website": "https://www.vbcdietwil.ch",
+    "logo": null
+  },
+  "cmjpslsun002dgjmz5wfmrhw5": {
+    "id": "cmjpslsun002dgjmz5wfmrhw5",
+    "name": "VBC Dulliken",
+    "website": "https://www.vbc-dulliken.ch",
+    "logo": null
+  },
+  "cmjpslsw1002egjmzkxr0ykvm": {
+    "id": "cmjpslsw1002egjmzkxr0ykvm",
+    "name": "VBC Ebikon",
+    "website": "https://www.vbcebikon.ch",
+    "logo": null
+  },
+  "cmjpslsxd002fgjmzop09bf9c": {
+    "id": "cmjpslsxd002fgjmzop09bf9c",
+    "name": "VBC Eburo",
+    "website": "https://www.vbceburo.ch",
+    "logo": null
+  },
+  "cmjpslsyn002ggjmzirub65c7": {
+    "id": "cmjpslsyn002ggjmzirub65c7",
+    "name": "VBC Ecublens",
+    "website": "https://vbcecublens.ch",
+    "logo": null
+  },
+  "cmjpslt02002hgjmzb8pjbmm0": {
+    "id": "cmjpslt02002hgjmzb8pjbmm0",
+    "name": "VBC Einsiedeln",
+    "website": "https://vbceinsiedeln.ch",
+    "logo": null
+  },
+  "cmjpslt1n002igjmzkbyhwh6i": {
+    "id": "cmjpslt1n002igjmzkbyhwh6i",
+    "name": "VBC Etoile-Geneve",
+    "website": "https://vbcgeneve.ch",
+    "logo": null
+  },
+  "cmjprn2er001b72r7ov86y1ma": {
+    "id": "cmjprn2er001b72r7ov86y1ma",
+    "name": "VBC Franches-Montagnes",
+    "website": "https://www.vfm.ch",
+    "logo": null
+  },
+  "cmjpslt34002jgjmz3pczco5s": {
+    "id": "cmjpslt34002jgjmz3pczco5s",
+    "name": "VBC Freies Gymnasium ZH",
+    "website": "https://www.vbc-fgz.ch",
+    "logo": null
+  },
+  "cmjprn1vk000u72r7ogf5wsrq": {
+    "id": "cmjprn1vk000u72r7ogf5wsrq",
+    "name": "VBC Fribourg",
+    "website": "https://vbcfribourg.ch",
+    "logo": null
+  },
+  "cmjpslt5z002kgjmzzh314bxt": {
+    "id": "cmjpslt5z002kgjmzzh314bxt",
+    "name": "VBC Frutigen",
+    "website": "https://www.vbcfrutigen.ch",
+    "logo": null
+  },
+  "cmjpslt7i002lgjmzim2w3cjp": {
+    "id": "cmjpslt7i002lgjmzim2w3cjp",
+    "name": "VBC Furttal",
+    "website": "https://www.vbcfurttal.ch",
+    "logo": null
+  },
+  "cmjpslt90002mgjmzx9p9l8b2": {
+    "id": "cmjpslt90002mgjmzx9p9l8b2",
+    "name": "VBC Galina",
+    "website": "https://www.vbcgalina.li",
+    "logo": null
+  },
+  "cmjpsltah002ngjmz67ddsgao": {
+    "id": "cmjpsltah002ngjmz67ddsgao",
+    "name": "VBC Gelterkinden",
+    "website": "https://vbcgelterkinden.ch",
+    "logo": null
+  },
+  "cmjpsltbt002ogjmzekh10n7z": {
+    "id": "cmjpsltbt002ogjmzekh10n7z",
+    "name": "VBC Gerlafingen",
+    "website": "https://www.vbcgerlafingen.ch",
+    "logo": null
+  },
+  "cmjpsltd5002pgjmztkydfec6": {
+    "id": "cmjpsltd5002pgjmztkydfec6",
+    "name": "VBC Grosshöchstetten",
+    "website": "https://vbcg.ch",
+    "logo": null
+  },
+  "cmjpslteh002qgjmz58m0hwit": {
+    "id": "cmjpslteh002qgjmz58m0hwit",
+    "name": "VBC Hallau",
+    "website": "https://vbchallau.jimdoweb.com",
+    "logo": null
+  },
+  "cmjpsltfu002rgjmzb3yqr5t1": {
+    "id": "cmjpsltfu002rgjmzb3yqr5t1",
+    "name": "VBC Haut-Lac",
+    "website": "https://www.vbchl.ch",
+    "logo": null
+  },
+  "cmjpslthi002sgjmzk3wp473e": {
+    "id": "cmjpslthi002sgjmzk3wp473e",
+    "name": "VBC Herren Oberwallis",
+    "website": "https://www.vbc-how.ch",
+    "logo": null
+  },
+  "cmjpsltiy002tgjmz743lg0er": {
+    "id": "cmjpsltiy002tgjmz743lg0er",
+    "name": "VBC Kanti Baden",
+    "website": "https://vbckantibaden.ch",
+    "logo": null
+  },
+  "cmjpsltkq002ugjmzztqdzb3a": {
+    "id": "cmjpsltkq002ugjmzztqdzb3a",
+    "name": "VBC Kerzers",
+    "website": "https://www.vbckerzers.ch",
+    "logo": null
+  },
+  "cmjprn2r8001k72r7yy4remzr": {
+    "id": "cmjprn2r8001k72r7yy4remzr",
+    "name": "VBC Kreuzlingen",
+    "website": "https://pallavolo.ch",
+    "logo": null
+  },
+  "cmjpsltm8002vgjmz32fwe7uk": {
+    "id": "cmjpsltm8002vgjmz32fwe7uk",
+    "name": "VBC Küssnacht",
+    "website": "https://www.vbckuessnacht.ch",
+    "logo": null
+  },
+  "cmjprn2c6001972r75c3n7exr": {
+    "id": "cmjprn2c6001972r75c3n7exr",
+    "name": "VBC La Chaux-de-Fonds",
+    "website": "https://www.vbcc.ch",
+    "logo": null
+  },
+  "cmjprn1t8000s72r7y8on62jl": {
+    "id": "cmjprn1t8000s72r7y8on62jl",
+    "name": "VBC Langenthal",
+    "website": "https://vbclangenthal.ch",
+    "logo": null
+  },
+  "cmjpsltqx002wgjmzb42yosrk": {
+    "id": "cmjpsltqx002wgjmzb42yosrk",
+    "name": "VBC Laufen",
+    "website": "https://vbclaufen.ch",
+    "logo": null
+  },
+  "cmjprn258001272r71yvz8q35": {
+    "id": "cmjprn258001272r71yvz8q35",
+    "name": "VBC Laufenburg-Kaisten",
+    "website": "https://smash05.ch",
+    "logo": null
+  },
+  "cmjpsltsc002xgjmzi7fc4w66": {
+    "id": "cmjpsltsc002xgjmzi7fc4w66",
+    "name": "VBC Lausanne",
+    "website": "https://www.lausannevbc.ch",
+    "logo": null
+  },
+  "cmjpslttn002ygjmz8qextoes": {
+    "id": "cmjpslttn002ygjmz8qextoes",
+    "name": "VBC Le Mont-sur-Lausanne",
+    "website": "https://www.vbclemont.ch",
+    "logo": null
+  },
+  "cmjpsltva002zgjmzac1b532u": {
+    "id": "cmjpsltva002zgjmzac1b532u",
+    "name": "VBC Leibstadt",
+    "website": "https://www.leibstadt.ch",
+    "logo": null
+  },
+  "cmjpsltwh0030gjmzzq2lz1pf": {
+    "id": "cmjpsltwh0030gjmzzq2lz1pf",
+    "name": "VBC Lengnau",
+    "website": "https://vbc-lengnau.jimdosite.com",
+    "logo": null
+  },
+  "cmjpsltxq0031gjmz5lg69j83": {
+    "id": "cmjpsltxq0031gjmz5lg69j83",
+    "name": "VBC Liesberg",
+    "website": "https://www.liesberg.ch",
+    "logo": null
+  },
+  "cmjpsltz00032gjmz5kplmi57": {
+    "id": "cmjpsltz00032gjmz5kplmi57",
+    "name": "VBC Lignieres",
+    "website": "http://vbclignieres.club",
+    "logo": null
+  },
+  "cmjpslu0j0033gjmzen64g69f": {
+    "id": "cmjpslu0j0033gjmzen64g69f",
+    "name": "VBC Linth",
+    "website": "https://www.vbclinth.ch",
+    "logo": null
+  },
+  "cmjpslu250034gjmzldyunfpx": {
+    "id": "cmjpslu250034gjmzldyunfpx",
+    "name": "VBC Littau",
+    "website": "https://vbc-littau.ch",
+    "logo": null
+  },
+  "cmjpslu3o0035gjmzyledim79": {
+    "id": "cmjpslu3o0035gjmzyledim79",
+    "name": "VBC Lungern",
+    "website": "https://volley-region-entlebuch.ch",
+    "logo": null
+  },
+  "cmjpslu6i0037gjmz9c2tbbn5": {
+    "id": "cmjpslu6i0037gjmz9c2tbbn5",
+    "name": "VBC Lyss",
+    "website": "https://www.vbclyss.ch",
+    "logo": null
+  },
+  "cmjpslu5a0036gjmztti7asyk": {
+    "id": "cmjpslu5a0036gjmztti7asyk",
+    "name": "VBC Lützelflüh",
+    "website": "https://www.vbcluetzelflueh.ch",
+    "logo": null
+  },
+  "cmjpslu7y0038gjmzuclam887": {
+    "id": "cmjpslu7y0038gjmzuclam887",
+    "name": "VBC Malters",
+    "website": "https://www.vbcmalters.ch",
+    "logo": null
+  },
+  "cmjprn1xy000w72r73c3uflp0": {
+    "id": "cmjprn1xy000w72r73c3uflp0",
+    "name": "VBC Martigny",
+    "website": "https://vbcmartigny.ch",
+    "logo": null
+  },
+  "cmjpslu9o0039gjmzezvgwnk8": {
+    "id": "cmjpslu9o0039gjmzezvgwnk8",
+    "name": "VBC Meggen",
+    "website": "https://www.vbcmeggen.ch",
+    "logo": null
+  },
+  "cmjpslubb003agjmzclioswxp": {
+    "id": "cmjpslubb003agjmzclioswxp",
+    "name": "VBC Merenschwand-Muri",
+    "website": "https://vbcmerenschwand-muri.ch",
+    "logo": null
+  },
+  "cmjprn1wo000v72r7y1ocoqf6": {
+    "id": "cmjprn1wo000v72r7y1ocoqf6",
+    "name": "VBC Moudon",
+    "website": "https://www.fsg-moudon.ch",
+    "logo": null
+  },
+  "cmjpslud8003bgjmzzyjqyhdw": {
+    "id": "cmjpslud8003bgjmzzyjqyhdw",
+    "name": "VBC Münchenbuchsee",
+    "website": "https://vbcmuenchenbuchsee.ch",
+    "logo": null
+  },
+  "cmjpsluer003cgjmz99upqgq1": {
+    "id": "cmjpsluer003cgjmz99upqgq1",
+    "name": "VBC Münchenstein",
+    "website": "https://xn--vbcmnchenstein-jsb.ch",
+    "logo": null
+  },
+  "cmjpslugj003dgjmzf5nqx058": {
+    "id": "cmjpslugj003dgjmzf5nqx058",
+    "name": "VBC Niederlenz",
+    "website": "https://www.vereinsverzeichnis.ch",
+    "logo": null
+  },
+  "cmjprn21e000z72r7cjplzgy6": {
+    "id": "cmjprn21e000z72r7cjplzgy6",
+    "name": "VBC Oberwil",
+    "website": "https://tvoberwil.ch",
+    "logo": null
+  },
+  "cmjprn2hg001d72r7j87wz1lk": {
+    "id": "cmjprn2hg001d72r7j87wz1lk",
+    "name": "VBC Olten",
+    "website": "https://www.svolten.ch",
+    "logo": null
+  },
+  "cmjpsluin003egjmzs5njsy3o": {
+    "id": "cmjpsluin003egjmzs5njsy3o",
+    "name": "VBC Pailly",
+    "website": "https://www.localcities.ch",
+    "logo": null
+  },
+  "cmjpsluk4003fgjmz9kwt1azf": {
+    "id": "cmjpsluk4003fgjmz9kwt1azf",
+    "name": "VBC Peps",
+    "website": "https://pepsvbc.ch",
+    "logo": null
+  },
+  "cmjpslulp003ggjmzgog0aal7": {
+    "id": "cmjpslulp003ggjmzgog0aal7",
+    "name": "VBC Pfäffikon",
+    "website": "https://vbcpfaeffikon.ch",
+    "logo": null
+  },
+  "cmjpslunh003hgjmzd9e7zxem": {
+    "id": "cmjpslunh003hgjmzd9e7zxem",
+    "name": "VBC Porrentruy",
+    "website": "https://vbcporrentruy.com",
+    "logo": null
+  },
+  "cmjprn28p001672r7gpy3otce": {
+    "id": "cmjprn28p001672r7gpy3otce",
+    "name": "VBC Port",
+    "website": "https://www.southportvbc.com",
+    "logo": null
+  },
+  "cmjpslup5003igjmztkuq4cww": {
+    "id": "cmjpslup5003igjmztkuq4cww",
+    "name": "VBC Préverenges",
+    "website": "https://vbcpreverenges.ch",
+    "logo": null
+  },
+  "cmjpslusf003kgjmzdxczd014": {
+    "id": "cmjpslusf003kgjmzdxczd014",
+    "name": "VBC Raron",
+    "website": "https://www.vereinsverzeichnis.ch",
+    "logo": null
+  },
+  "cmjpsluub003lgjmzi9luzhlr": {
+    "id": "cmjpsluub003lgjmzi9luzhlr",
+    "name": "VBC Rheinfelden",
+    "website": "https://vbc-rheinfelden.ch",
+    "logo": null
+  },
+  "cmjpsluvz003mgjmzv31lmgfw": {
+    "id": "cmjpsluvz003mgjmzv31lmgfw",
+    "name": "VBC Richterswil (Schulsportgruppe)",
+    "website": "https://vbc-richterswil.ch",
+    "logo": null
+  },
+  "cmjpsluxa003ngjmzwx3wqhni": {
+    "id": "cmjpsluxa003ngjmzwx3wqhni",
+    "name": "VBC Ried-Brig",
+    "website": "https://www.sv-riedbrig.ch",
+    "logo": null
+  },
+  "cmjpsluz3003ogjmzm2lxraho": {
+    "id": "cmjpsluz3003ogjmzm2lxraho",
+    "name": "VBC Rotkreuz",
+    "website": "https://www.vbcrotkreuz.ch",
+    "logo": null
+  },
+  "cmjpsluqp003jgjmzhs3lh1ws": {
+    "id": "cmjpsluqp003jgjmzhs3lh1ws",
+    "name": "VBC Rämi",
+    "website": "http://vbcraemi.ch",
+    "logo": null
+  },
+  "cmjpslv0g003pgjmzezvlj7uu": {
+    "id": "cmjpslv0g003pgjmzezvlj7uu",
+    "name": "VBC Saviese Olympia",
+    "website": "https://saviese-olympia.ch",
+    "logo": null
+  },
+  "cmjpslv20003qgjmzyd703udn": {
+    "id": "cmjpslv20003qgjmzyd703udn",
+    "name": "VBC Schmitten",
+    "website": "http://www.vbc-schmitten.ch",
+    "logo": null
+  },
+  "cmjpslv3q003rgjmzrg7cwqgv": {
+    "id": "cmjpslv3q003rgjmzrg7cwqgv",
+    "name": "VBC Seftigen",
+    "website": "https://www.vbcseftigen.ch",
+    "logo": null
+  },
+  "cmjpslv5d003sgjmzefpuvia3": {
+    "id": "cmjpslv5d003sgjmzefpuvia3",
+    "name": "VBC Servette Star-Onex",
+    "website": "https://ssovbc.ch",
+    "logo": null
+  },
+  "cmjpslv6s003tgjmzi1c2l8pi": {
+    "id": "cmjpslv6s003tgjmzi1c2l8pi",
+    "name": "VBC Seuzach",
+    "website": "https://vbcseuzach.ch",
+    "logo": null
+  },
+  "cmjprn1z4000x72r7zqknfl51": {
+    "id": "cmjprn1z4000x72r7zqknfl51",
+    "name": "VBC Sion",
+    "website": "https://vbcsion.ch",
+    "logo": null
+  },
+  "cmjpslv9z003ugjmz0gdsvakx": {
+    "id": "cmjpslv9z003ugjmz0gdsvakx",
+    "name": "VBC Sixieme 7",
+    "website": "https://6e7.ch",
+    "logo": null
+  },
+  "cmjpslvbh003vgjmzxdqa67hs": {
+    "id": "cmjpslvbh003vgjmzxdqa67hs",
+    "name": "VBC Smile",
+    "website": "https://www.vbcsmile.ch",
+    "logo": null
+  },
+  "cmjprn27m001572r796b7a5gx": {
+    "id": "cmjprn27m001572r796b7a5gx",
+    "name": "VBC Solothurn",
+    "website": "https://www.volleysolothurn.ch",
+    "logo": null
+  },
+  "cmjpslvcv003wgjmzdnkjia3n": {
+    "id": "cmjpslvcv003wgjmzdnkjia3n",
+    "name": "VBC Sotto-Simme",
+    "website": "https://www.vbcsottosimme.ch",
+    "logo": null
+  },
+  "cmjpslvee003xgjmzyrzmltyp": {
+    "id": "cmjpslvee003xgjmzyrzmltyp",
+    "name": "VBC Spada Academica",
+    "website": "https://vbcspada.ch",
+    "logo": null
+  },
+  "cmjpslvfx003ygjmzj5f5ticj": {
+    "id": "cmjpslvfx003ygjmzj5f5ticj",
+    "name": "VBC Spiez",
+    "website": "https://www.vbcspiez.ch",
+    "logo": null
+  },
+  "cmjprn1op000o72r7a930wvuo": {
+    "id": "cmjprn1op000o72r7a930wvuo",
+    "name": "VBC Steinhausen",
+    "website": "https://www.vbcsteinhausen.ch",
+    "logo": null
+  },
+  "cmjpslvki0040gjmzlrx8k0fu": {
+    "id": "cmjpslvki0040gjmzlrx8k0fu",
+    "name": "VBC Studen",
+    "website": "https://www.vbc-studen.ch",
+    "logo": null
+  },
+  "cmjpslvhk003zgjmzr8x7eta6": {
+    "id": "cmjpslvhk003zgjmzr8x7eta6",
+    "name": "VBC Stäfa",
+    "website": "https://www.vbcstaefa.ch",
+    "logo": null
+  },
+  "cmjpslvm20041gjmzsmf08vbz": {
+    "id": "cmjpslvm20041gjmzsmf08vbz",
+    "name": "VBC Sugnens-Cugy",
+    "website": "https://www.vbcsugnens.com",
+    "logo": null
+  },
+  "cmjpslvnn0042gjmz49xu2rsq": {
+    "id": "cmjpslvnn0042gjmz49xu2rsq",
+    "name": "VBC Suito Schwyz",
+    "website": "https://suito.ch",
+    "logo": null
+  },
+  "cmjpslvpb0043gjmzy2m6islt": {
+    "id": "cmjpslvpb0043gjmzy2m6islt",
+    "name": "VBC Sursee",
+    "website": "https://www.vbcsursee.ch",
+    "logo": null
+  },
+  "cmjprn2oj001i72r74y0e4qj7": {
+    "id": "cmjprn2oj001i72r74y0e4qj7",
+    "name": "VBC Thayngen",
+    "website": "https://www.vereinsverzeichnis.ch",
+    "logo": null
+  },
+  "cmjpslvqy0044gjmzxh4c3mj3": {
+    "id": "cmjpslvqy0044gjmzxh4c3mj3",
+    "name": "VBC Thun",
+    "website": "https://www.vbcthun.ch",
+    "logo": null
+  },
+  "cmjpslvsf0045gjmzxiixujcv": {
+    "id": "cmjpslvsf0045gjmzxiixujcv",
+    "name": "VBC Tramelan",
+    "website": "https://www.vbc-tramelan.ch",
+    "logo": null
+  },
+  "cmjpslvtx0046gjmzc3k5y975": {
+    "id": "cmjpslvtx0046gjmzc3k5y975",
+    "name": "VBC Triengen",
+    "website": "https://www.vbc-triengen.ch",
+    "logo": null
+  },
+  "cmjpslvvi0047gjmzfpg7v9ip": {
+    "id": "cmjpslvvi0047gjmzfpg7v9ip",
+    "name": "VBC Ueberstorf",
+    "website": "https://www.vbc-ueberstorf.ch",
+    "logo": null
+  },
+  "cmjpslvyt0049gjmzhhwrwbsi": {
+    "id": "cmjpslvyt0049gjmzhhwrwbsi",
+    "name": "VBC Uetikon",
+    "website": "http://www.vbcuetikon.ch",
+    "logo": null
+  },
+  "cmjpslvwv0048gjmzoo7wq19r": {
+    "id": "cmjpslvwv0048gjmzoo7wq19r",
+    "name": "VBC Uni Bern",
+    "website": "https://vbcunibern.ch",
+    "logo": null
+  },
+  "cmjprn2n5001h72r7fj0dam57": {
+    "id": "cmjprn2n5001h72r7fj0dam57",
+    "name": "VBC Uster",
+    "website": "https://volley-uster.ch",
+    "logo": null
+  },
+  "cmjpslw06004agjmzjyij78vm": {
+    "id": "cmjpslw06004agjmzjyij78vm",
+    "name": "VBC Viamala Thusis",
+    "website": "https://www.vbcviamalathusis.ch",
+    "logo": null
+  },
+  "cmjpslw21004bgjmzqaitmmzu": {
+    "id": "cmjpslw21004bgjmzqaitmmzu",
+    "name": "VBC Volebo Freiamt",
+    "website": "https://www.volebo.ch",
+    "logo": null
+  },
+  "cmjpslw3h004cgjmzmg0ql2rx": {
+    "id": "cmjpslw3h004cgjmzmg0ql2rx",
+    "name": "VBC Voléro Zürich",
+    "website": "https://vbc.volero.ch",
+    "logo": null
+  },
+  "cmjpslw5c004dgjmzs1gc9oi6": {
+    "id": "cmjpslw5c004dgjmzs1gc9oi6",
+    "name": "VBC Werdana Buchs",
+    "website": "https://vbc-werdana.ch",
+    "logo": null
+  },
+  "cmjprn2ll001g72r7hm5hw3wy": {
+    "id": "cmjprn2ll001g72r7hm5hw3wy",
+    "name": "VBC Wetzikon",
+    "website": "http://vbc-wetzikon.ch",
+    "logo": null
+  },
+  "cmjpslw6m004egjmz178ct4in": {
+    "id": "cmjpslw6m004egjmz178ct4in",
+    "name": "VBC Willisau",
+    "website": "https://www.vbcwillisau.ch",
+    "logo": null
+  },
+  "cmjprn2g3001c72r7mh2gz7nf": {
+    "id": "cmjprn2g3001c72r7mh2gz7nf",
+    "name": "VBC Wimmis",
+    "website": "https://sportimevbc.com",
+    "logo": null
+  },
+  "cmjpslw7t004fgjmz3od0atjj": {
+    "id": "cmjpslw7t004fgjmz3od0atjj",
+    "name": "VBC Yverdon",
+    "website": "https://www.vbcyverdon.ch",
+    "logo": null
+  },
+  "cmjpslw9b004ggjmzjza5fbez": {
+    "id": "cmjpslw9b004ggjmzjza5fbez",
+    "name": "VBC Züri Unterland",
+    "website": "https://www.vbczu.ch",
+    "logo": null
+  },
+  "cmjpslwan004hgjmzzn3nt2dh": {
+    "id": "cmjpslwan004hgjmzzn3nt2dh",
+    "name": "VBG Klettgau",
+    "website": "https://www.vbg-klettgau.ch",
+    "logo": null
+  },
+  "cmjpslwbx004igjmzvfj8zrwm": {
+    "id": "cmjpslwbx004igjmzvfj8zrwm",
+    "name": "VBG Welschenrohr",
+    "website": "https://www.vbgw-h.ch",
+    "logo": null
+  },
+  "cmjpslwd3004jgjmzy09et3yi": {
+    "id": "cmjpslwd3004jgjmzy09et3yi",
+    "name": "VBR Rickenbach",
+    "website": "https://vbr-rickenbach.ch",
+    "logo": null
+  },
+  "cmjprn0tu000172r7nw85yk2i": {
+    "id": "cmjprn0tu000172r7nw85yk2i",
+    "name": "VC Kanti Schaffhausen",
+    "website": "https://vckanti.ch",
+    "logo": null
+  },
+  "cmjpslwix004kgjmzct6jd5fp": {
+    "id": "cmjpslwix004kgjmzct6jd5fp",
+    "name": "VC Los Unidos Ob.Seetal",
+    "website": "https://www.losunidos.ch",
+    "logo": null
+  },
+  "cmjpslwk3004lgjmzx493ui9k": {
+    "id": "cmjpslwk3004lgjmzx493ui9k",
+    "name": "VC Safenwil-Kölliken",
+    "website": "https://www.vcsk.ch",
+    "logo": null
+  },
+  "cmjpslwli004mgjmzf8iwr6q4": {
+    "id": "cmjpslwli004mgjmzf8iwr6q4",
+    "name": "VC Smash Winterthur",
+    "website": "https://vc-smash.ch",
+    "logo": null
+  },
+  "cmjpslwmy004ngjmz6dnhvgwn": {
+    "id": "cmjpslwmy004ngjmz6dnhvgwn",
+    "name": "VC Tornado Adliswil",
+    "website": "https://www.vctornado.ch",
+    "logo": null
+  },
+  "cmjpslwoa004ogjmzn4zvwp4h": {
+    "id": "cmjpslwoa004ogjmzn4zvwp4h",
+    "name": "VC Uettligen",
+    "website": "https://www.vcuettligen.ch",
+    "logo": null
+  },
+  "cmjpslwph004pgjmztrb0y275": {
+    "id": "cmjpslwph004pgjmztrb0y275",
+    "name": "Volewa Wald",
+    "website": "https://www.volewa.ch",
+    "logo": null
+  },
+  "cmjpslwqr004qgjmzk6lehwv0": {
+    "id": "cmjpslwqr004qgjmzk6lehwv0",
+    "name": "Volley Aadorf",
+    "website": "https://volleyaadorf.ch",
+    "logo": null
+  },
+  "cmjpslwsc004rgjmzco7xoy3a": {
+    "id": "cmjpslwsc004rgjmzco7xoy3a",
+    "name": "Volley Aarburg-Zofingen",
+    "website": "https://volley-vaz.ch",
+    "logo": null
+  },
+  "cmjpslwtk004sgjmz0c1gzstk": {
+    "id": "cmjpslwtk004sgjmz0c1gzstk",
+    "name": "Volley Academy Valais",
+    "website": "https://www.findglocal.com",
+    "logo": null
+  },
+  "cmjprn2pw001j72r7a9o0y1m2": {
+    "id": "cmjprn2pw001j72r7a9o0y1m2",
+    "name": "Volley Arbon",
+    "website": "https://vbcarbon.ch",
+    "logo": null
+  },
+  "cmjpslww6004tgjmzmgt443js": {
+    "id": "cmjpslww6004tgjmzmgt443js",
+    "name": "Volley Avenches",
+    "website": "https://volleyavenches.ch",
+    "logo": null
+  },
+  "cmjpslwxh004ugjmz3c3veisn": {
+    "id": "cmjpslwxh004ugjmz3c3veisn",
+    "name": "Volley Brugg",
+    "website": "https://www.vbcbrugg.ch",
+    "logo": null
+  },
+  "cmjprn23w001172r7gpis05zy": {
+    "id": "cmjprn23w001172r7gpis05zy",
+    "name": "Volley Bülach",
+    "website": "https://volleyballacademy.ch",
+    "logo": null
+  },
+  "cmjpslwyr004vgjmz6d1u3dgc": {
+    "id": "cmjpslwyr004vgjmz6d1u3dgc",
+    "name": "Volley Bütschwil",
+    "website": "https://volleybuetschwil.ch",
+    "logo": null
+  },
+  "cmjpslx00004wgjmz46lq2pl1": {
+    "id": "cmjpslx00004wgjmz46lq2pl1",
+    "name": "Volley Caslano",
+    "website": "https://volleycaslano.ch",
+    "logo": null
+  },
+  "cmjprn0wo000372r7z8je9d7u": {
+    "id": "cmjprn0wo000372r7z8je9d7u",
+    "name": "Volley Düdingen",
+    "website": "https://www.volleyduedingen.ch",
+    "logo": null
+  },
+  "cmjpslx2x004xgjmz64wodd8m": {
+    "id": "cmjpslx2x004xgjmz64wodd8m",
+    "name": "Volley Emmen-Nord",
+    "website": "https://ven.ch",
+    "logo": null
+  },
+  "cmjpslx44004ygjmzr8c0oipx": {
+    "id": "cmjpslx44004ygjmzr8c0oipx",
+    "name": "Volley Estavayer",
+    "website": "https://www.fsgestavayer.ch",
+    "logo": null
+  },
+  "cmjpslx5g004zgjmzjb3oaee8": {
+    "id": "cmjpslx5g004zgjmzjb3oaee8",
+    "name": "Volley Goldach",
+    "website": "https://www.volleygoldach.ch",
+    "logo": null
+  },
+  "cmjpslx720050gjmzipjr08as": {
+    "id": "cmjpslx720050gjmzipjr08as",
+    "name": "Volley GraPa",
+    "website": "https://www.volleygrapa.ch",
+    "logo": null
+  },
+  "cmjprn1ud000t72r7qwrcwxsx": {
+    "id": "cmjprn1ud000t72r7qwrcwxsx",
+    "name": "Volley Guggis Oberdiessbach",
+    "website": "https://www.volley-oberdiessbach.ch",
+    "logo": null
+  },
+  "cmjpslxb30053gjmz8yaqlkf2": {
+    "id": "cmjpslxb30053gjmz8yaqlkf2",
+    "name": "Volley KTV Muotathal",
+    "website": "https://www.volleyktvmuotathal.ch",
+    "logo": null
+  },
+  "cmjpslx9u0052gjmzqymtc89k": {
+    "id": "cmjpslx9u0052gjmzqymtc89k",
+    "name": "Volley Kriens",
+    "website": "https://volleykriens.ch",
+    "logo": null
+  },
+  "cmjpslx8m0051gjmz3al1j8rb": {
+    "id": "cmjpslx8m0051gjmz3al1j8rb",
+    "name": "Volley Köniz",
+    "website": "https://volley-koeniz.ch",
+    "logo": null
+  },
+  "cmjpslxcg0054gjmzcdsctycz": {
+    "id": "cmjpslxcg0054gjmzcdsctycz",
+    "name": "Volley Liebefeld",
+    "website": "https://volleyliebefeld.ch",
+    "logo": null
+  },
+  "cmjpslxey0056gjmzcsefgozl": {
+    "id": "cmjpslxey0056gjmzcsefgozl",
+    "name": "Volley Moutier",
+    "website": "https://moutier.ch",
+    "logo": null
+  },
+  "cmjpslxho0058gjmz7o6yasqj": {
+    "id": "cmjpslxho0058gjmz7o6yasqj",
+    "name": "Volley Mutschellen",
+    "website": "https://volleymutschellen.ch",
+    "logo": null
+  },
+  "cmjpslxdm0055gjmz40fk3hzw": {
+    "id": "cmjpslxdm0055gjmz40fk3hzw",
+    "name": "Volley Möhlin",
+    "website": "https://volley-moehlin.ch",
+    "logo": null
+  },
+  "cmjpslxgc0057gjmztdkit6x7": {
+    "id": "cmjpslxgc0057gjmztdkit6x7",
+    "name": "Volley Münsingen",
+    "website": "https://volley-muensingen.ch",
+    "logo": null
+  },
+  "cmjpslxj30059gjmz0457s6cd": {
+    "id": "cmjpslxj30059gjmz0457s6cd",
+    "name": "Volley Obfelden",
+    "website": "https://volley-obfelden.ch",
+    "logo": null
+  },
+  "cmjpslxka005agjmzglapg163": {
+    "id": "cmjpslxka005agjmzglapg163",
+    "name": "Volley Oerlikon",
+    "website": "https://www.volleyoerlikon.ch",
+    "logo": null
+  },
+  "cmjpslxlj005bgjmzxxdxwmqp": {
+    "id": "cmjpslxlj005bgjmzxxdxwmqp",
+    "name": "Volley Rain",
+    "website": "https://emerald-rain.com",
+    "logo": null
+  },
+  "cmjpslxmq005cgjmzorlz98et": {
+    "id": "cmjpslxmq005cgjmzorlz98et",
+    "name": "Volley Region Entlebuch",
+    "website": "https://volley-region-entlebuch.ch",
+    "logo": null
+  },
+  "cmjpslxo9005dgjmzk9pj1caf": {
+    "id": "cmjpslxo9005dgjmzk9pj1caf",
+    "name": "Volley Rossrüti",
+    "website": "https://volleyrossrueti.ch",
+    "logo": null
+  },
+  "cmjpslxpm005egjmz7g4z6qul": {
+    "id": "cmjpslxpm005egjmz7g4z6qul",
+    "name": "Volley Rüschlikon",
+    "website": "https://www.volleyrueschlikon.ch",
+    "logo": null
+  },
+  "cmjpslxqt005fgjmzlzhqr0ao": {
+    "id": "cmjpslxqt005fgjmzlzhqr0ao",
+    "name": "Volley Smash 05 Laufenburg-Kaisten",
+    "website": "https://smash05.ch",
+    "logo": null
+  },
+  "cmjprn22p001072r7904cvbme": {
+    "id": "cmjprn22p001072r7904cvbme",
+    "name": "Volley Smash Winterthur",
+    "website": "https://vc-smash.ch",
+    "logo": null
+  },
+  "cmjpslxs0005ggjmzlz4gr4q0": {
+    "id": "cmjpslxs0005ggjmzlz4gr4q0",
+    "name": "Volley Speicher",
+    "website": "https://volleyspeicher.ch",
+    "logo": null
+  },
+  "cmjpslxt7005hgjmz4bpcu84b": {
+    "id": "cmjpslxt7005hgjmz4bpcu84b",
+    "name": "Volley Surselva",
+    "website": "https://volleysurselva.ch",
+    "logo": null
+  },
+  "cmjprn29t001772r71gup7suw": {
+    "id": "cmjprn29t001772r71gup7suw",
+    "name": "Volley Thun",
+    "website": "https://www.vbcthun.ch",
+    "logo": null
+  },
+  "cmjpslxuo005igjmzx1xsiphk": {
+    "id": "cmjpslxuo005igjmzx1xsiphk",
+    "name": "Volley Toggenburg",
+    "website": "https://volleytoggenburg.ch",
+    "logo": null
+  },
+  "cmjpslxw7005jgjmzw9s9n46l": {
+    "id": "cmjpslxw7005jgjmzw9s9n46l",
+    "name": "Volley Uni Bern",
+    "website": "https://vbcunibern.ch",
+    "logo": null
+  },
+  "cmjpslxxg005kgjmz4l5cui8a": {
+    "id": "cmjpslxxg005kgjmz4l5cui8a",
+    "name": "Volley Unisport Fribourg (VUF)",
+    "website": "https://www.unifr.ch",
+    "logo": null
+  },
+  "cmjpslxyt005lgjmz4a94qa99": {
+    "id": "cmjpslxyt005lgjmz4a94qa99",
+    "name": "Volley Uri",
+    "website": "https://www.volleyuri.ch",
+    "logo": null
+  },
+  "cmjpsly0m005mgjmzl8nmyz84": {
+    "id": "cmjpsly0m005mgjmzl8nmyz84",
+    "name": "Volley Uster",
+    "website": "https://volley-uster.ch",
+    "logo": null
+  },
+  "cmjpsly2w005ngjmz86ny3wua": {
+    "id": "cmjpsly2w005ngjmz86ny3wua",
+    "name": "Volley Waldkirch",
+    "website": "https://www.volleywaldkirch.ch",
+    "logo": null
+  },
+  "cmjpsly5w005ogjmz4lqbpyel": {
+    "id": "cmjpsly5w005ogjmz4lqbpyel",
+    "name": "Volley Wila-Turbenthal",
+    "website": "https://www.volleywila.ch",
+    "logo": null
+  },
+  "cmjpsly77005pgjmz46rvheof": {
+    "id": "cmjpsly77005pgjmz46rvheof",
+    "name": "Volley-Team Wolhusen",
+    "website": "https://www.volley-team-wolhusen.ch",
+    "logo": null
+  },
+  "cmjpsly8s005qgjmzkyx9rh31": {
+    "id": "cmjpsly8s005qgjmzkyx9rh31",
+    "name": "Volley-X Recherswil",
+    "website": "https://volley-x.ch",
+    "logo": null
+  },
+  "cmjpslyab005rgjmz1fbfub7s": {
+    "id": "cmjpslyab005rgjmz1fbfub7s",
+    "name": "Volleyball Academy",
+    "website": "https://volleyballacademy.ch",
+    "logo": null
+  },
+  "cmjpslybj005sgjmz8t7ybtnp": {
+    "id": "cmjpslybj005sgjmz8t7ybtnp",
+    "name": "Volleyball-Club Volketswil",
+    "website": "https://www.vbcv.ch",
+    "logo": null
+  },
+  "cmjpslycn005tgjmzpk8gvudq": {
+    "id": "cmjpslycn005tgjmzpk8gvudq",
+    "name": "Wädivolley",
+    "website": "https://www.waedivolley.ch",
+    "logo": null
+  },
+  "cmjpslyds005ugjmzepu7ognp": {
+    "id": "cmjpslyds005ugjmzepu7ognp",
+    "name": "ZUZU Beach",
+    "website": "https://www.zuzubeach.ch",
+    "logo": null
+  }
+}

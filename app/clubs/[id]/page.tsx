@@ -100,28 +100,28 @@ export default function ClubProfilePage() {
 
   const getClubLeagues = () => {
     if (!club) return []
-    const leagues: Array<{name: string, gender: string}> = []
+    const leagues: Array<{name: string, genderKey: 'men' | 'women'}> = []
     
-    if (club.hasNLAMen) leagues.push({ name: 'NLA', gender: 'Männer' })
-    if (club.hasNLAWomen) leagues.push({ name: 'NLA', gender: 'Frauen' })
-    if (club.hasNLBMen) leagues.push({ name: 'NLB', gender: 'Männer' })
-    if (club.hasNLBWomen) leagues.push({ name: 'NLB', gender: 'Frauen' })
-    if (club.has1LigaMen) leagues.push({ name: '1. Liga', gender: 'Männer' })
-    if (club.has1LigaWomen) leagues.push({ name: '1. Liga', gender: 'Frauen' })
-    if (club.has2LigaMen) leagues.push({ name: '2. Liga', gender: 'Männer' })
-    if (club.has2LigaWomen) leagues.push({ name: '2. Liga', gender: 'Frauen' })
-    if (club.has3LigaMen) leagues.push({ name: '3. Liga', gender: 'Männer' })
-    if (club.has3LigaWomen) leagues.push({ name: '3. Liga', gender: 'Frauen' })
-    if (club.has4LigaMen) leagues.push({ name: '4. Liga', gender: 'Männer' })
-    if (club.has4LigaWomen) leagues.push({ name: '4. Liga', gender: 'Frauen' })
-    if (club.has5LigaMen) leagues.push({ name: '5. Liga', gender: 'Männer' })
-    if (club.has5LigaWomen) leagues.push({ name: '5. Liga', gender: 'Frauen' })
-    if (club.hasU23Men) leagues.push({ name: 'U23', gender: 'Männer' })
-    if (club.hasU23Women) leagues.push({ name: 'U23', gender: 'Frauen' })
-    if (club.hasU20Men) leagues.push({ name: 'U20', gender: 'Männer' })
-    if (club.hasU20Women) leagues.push({ name: 'U20', gender: 'Frauen' })
-    if (club.hasU18Men) leagues.push({ name: 'U18', gender: 'Männer' })
-    if (club.hasU18Women) leagues.push({ name: 'U18', gender: 'Frauen' })
+    if (club.hasNLAMen) leagues.push({ name: 'NLA', genderKey: 'men' })
+    if (club.hasNLAWomen) leagues.push({ name: 'NLA', genderKey: 'women' })
+    if (club.hasNLBMen) leagues.push({ name: 'NLB', genderKey: 'men' })
+    if (club.hasNLBWomen) leagues.push({ name: 'NLB', genderKey: 'women' })
+    if (club.has1LigaMen) leagues.push({ name: '1. Liga', genderKey: 'men' })
+    if (club.has1LigaWomen) leagues.push({ name: '1. Liga', genderKey: 'women' })
+    if (club.has2LigaMen) leagues.push({ name: '2. Liga', genderKey: 'men' })
+    if (club.has2LigaWomen) leagues.push({ name: '2. Liga', genderKey: 'women' })
+    if (club.has3LigaMen) leagues.push({ name: '3. Liga', genderKey: 'men' })
+    if (club.has3LigaWomen) leagues.push({ name: '3. Liga', genderKey: 'women' })
+    if (club.has4LigaMen) leagues.push({ name: '4. Liga', genderKey: 'men' })
+    if (club.has4LigaWomen) leagues.push({ name: '4. Liga', genderKey: 'women' })
+    if (club.has5LigaMen) leagues.push({ name: '5. Liga', genderKey: 'men' })
+    if (club.has5LigaWomen) leagues.push({ name: '5. Liga', genderKey: 'women' })
+    if (club.hasU23Men) leagues.push({ name: 'U23', genderKey: 'men' })
+    if (club.hasU23Women) leagues.push({ name: 'U23', genderKey: 'women' })
+    if (club.hasU20Men) leagues.push({ name: 'U20', genderKey: 'men' })
+    if (club.hasU20Women) leagues.push({ name: 'U20', genderKey: 'women' })
+    if (club.hasU18Men) leagues.push({ name: 'U18', genderKey: 'men' })
+    if (club.hasU18Women) leagues.push({ name: 'U18', genderKey: 'women' })
     
     return leagues
   }
@@ -173,6 +173,7 @@ export default function ClubProfilePage() {
                   width={128}
                   height={128}
                   className="w-full h-full object-contain p-2"
+                  unoptimized
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-gray-400">
@@ -281,7 +282,7 @@ export default function ClubProfilePage() {
                       className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition"
                     >
                       <Globe className="w-5 h-5" />
-                      <span>Website</span>
+                      <span>{t('clubProfile.website')}</span>
                     </a>
                   )}
                   {club.email && (
@@ -374,7 +375,7 @@ export default function ClubProfilePage() {
                       >
                         <div>
                           <p className="font-bold text-gray-900 dark:text-white">{league.name}</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{league.gender}</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{t(`clubProfile.${league.genderKey}`)}</p>
                         </div>
                         <Trophy className="w-5 h-5 text-red-600 dark:text-red-400" />
                       </div>

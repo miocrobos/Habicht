@@ -1,0 +1,210 @@
+{
+  "scrapedAt": "2025-12-28T20:57:39.225Z",
+  "source": "https://www.volleyball.ch/de/verband/services/verein-suchen",
+  "expectedTotal": 35299,
+  "actualTotal": 0,
+  "leagueStatistics": [
+    {
+      "league": "NLA",
+      "gender": "women",
+      "category": "senior",
+      "count": 9
+    },
+    {
+      "league": "NLB",
+      "gender": "women",
+      "category": "senior",
+      "count": 91
+    },
+    {
+      "league": "L",
+      "gender": "women",
+      "category": "senior",
+      "count": 372
+    },
+    {
+      "league": "L",
+      "gender": "women",
+      "category": "senior",
+      "count": 833
+    },
+    {
+      "league": "L",
+      "gender": "women",
+      "category": "senior",
+      "count": 1334
+    },
+    {
+      "league": "L",
+      "gender": "women",
+      "category": "senior",
+      "count": 1465
+    },
+    {
+      "league": "L",
+      "gender": "women",
+      "category": "senior",
+      "count": 105
+    },
+    {
+      "league": "Senioren",
+      "gender": "women",
+      "category": "senior",
+      "count": 9
+    },
+    {
+      "league": "NLA",
+      "gender": "men",
+      "category": "senior",
+      "count": 6
+    },
+    {
+      "league": "NLB",
+      "gender": "men",
+      "category": "senior",
+      "count": 81
+    },
+    {
+      "league": "L",
+      "gender": "men",
+      "category": "senior",
+      "count": 332
+    },
+    {
+      "league": "L",
+      "gender": "men",
+      "category": "senior",
+      "count": 733
+    },
+    {
+      "league": "L",
+      "gender": "men",
+      "category": "senior",
+      "count": 864
+    },
+    {
+      "league": "L",
+      "gender": "men",
+      "category": "senior",
+      "count": 725
+    },
+    {
+      "league": "L",
+      "gender": "men",
+      "category": "senior",
+      "count": 18
+    },
+    {
+      "league": "U",
+      "gender": "juniorinnen",
+      "category": "youth",
+      "count": 132
+    },
+    {
+      "league": "U",
+      "gender": "juniorinnen",
+      "category": "youth",
+      "count": 1487
+    },
+    {
+      "league": "U",
+      "gender": "juniorinnen",
+      "category": "youth",
+      "count": 1513
+    },
+    {
+      "league": "U",
+      "gender": "juniorinnen",
+      "category": "youth",
+      "count": 16114
+    },
+    {
+      "league": "U",
+      "gender": "juniorinnen",
+      "category": "youth",
+      "count": 1710
+    },
+    {
+      "league": "U",
+      "gender": "juniorinnen",
+      "category": "youth",
+      "count": 18139
+    },
+    {
+      "league": "U",
+      "gender": "juniorinnen",
+      "category": "youth",
+      "count": 191
+    },
+    {
+      "league": "U",
+      "gender": "juniorinnen",
+      "category": "youth",
+      "count": 20115
+    },
+    {
+      "league": "U",
+      "gender": "juniorinnen",
+      "category": "youth",
+      "count": 23110
+    },
+    {
+      "league": "U",
+      "gender": "junioren",
+      "category": "youth",
+      "count": 1425
+    },
+    {
+      "league": "U",
+      "gender": "junioren",
+      "category": "youth",
+      "count": 153
+    },
+    {
+      "league": "U",
+      "gender": "junioren",
+      "category": "youth",
+      "count": 1647
+    },
+    {
+      "league": "U",
+      "gender": "junioren",
+      "category": "youth",
+      "count": 172
+    },
+    {
+      "league": "U",
+      "gender": "junioren",
+      "category": "youth",
+      "count": 1857
+    },
+    {
+      "league": "U",
+      "gender": "junioren",
+      "category": "youth",
+      "count": 2044
+    },
+    {
+      "league": "U",
+      "gender": "junioren",
+      "category": "youth",
+      "count": 2369
+    }
+  ],
+  "clubStatistics": {
+    "total": 0,
+    "womenSenior": 0,
+    "menSenior": 0,
+    "womenYouth": 0,
+    "menYouth": 0,
+    "kidsVolley": 0,
+    "beach": 0
+  },
+  "notes": [
+    "League levels shown as ranges (NLA-5L, U23-U13) per club",
+    "Specific league breakdown available in leagueStatistics (count of clubs per league)",
+    "Clubs control visibility - some may opt out of search",
+    "Data may be incomplete during season changeover"
+  ],
+  "clubs": []
+}

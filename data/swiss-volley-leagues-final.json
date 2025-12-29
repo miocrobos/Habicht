@@ -1,0 +1,844 @@
+{
+  "scrapedAt": "2025-12-28T23:57:17.702Z",
+  "source": "https://www.volleyball.ch/de/game-center",
+  "leagues": [
+    "NLA",
+    "NLB",
+    "1. Liga"
+  ],
+  "genders": [
+    "Women",
+    "Men"
+  ],
+  "totalClubs": 92,
+  "clubs": [
+    {
+      "name": "#Dragons Lugano",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Appenzeller Bären",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Auswahlmannschaft Swiss Volley",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": true,
+      "m1L": false
+    },
+    {
+      "name": "Bellinzona Volley",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Bienne Volleyboys",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "BIWI VFM",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "BTV Aarau",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": true,
+      "m1L": false
+    },
+    {
+      "name": "CAP Volley",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Chênois Genève Volleyball",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "City Volley Basel",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": true,
+      "m1L": true
+    },
+    {
+      "name": "Colombier Volley",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "FC Luzern",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Genève Volley",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Gibloux Volley",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Infomaniak Genève Volley",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Lausanne UC",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": true,
+      "m1L": false
+    },
+    {
+      "name": "LK Zug Volleyball",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Lutry-Lavaux Volleyball",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": true,
+      "m1L": false
+    },
+    {
+      "name": "Meyrin VBC",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Nidau Volley",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "NLZ Volleyball Academy",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "NNV Eaglets Volley Aarau",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "NNV FriSpike",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "NNV Volley Talents Argovia",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "NNV Volleyball Academy",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "NNV Volleytalents Rapperswil-Jona",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Pallavolo Kreuzlingen",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Raiffeisen Volley Glaronia",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Raiffeisen Volley Toggenburg",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Rhone Volley",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "SAG Gordola",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "SFG Stabio",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Sm`Aesch Pfeffingen",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "STV St.Gallen Volleyball",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "SV Volley Wyna",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "TSV Jona Volleyball",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": true,
+      "m1L": true
+    },
+    {
+      "name": "TV Grenchen",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "TV Lunkhofen",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "TV Murten Volleyball",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "U60 Muristalden",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VB Neuenkirch",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VB Therwil",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Aeschi",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": true,
+      "m1L": false
+    },
+    {
+      "name": "VBC Andwil-Arnegg",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Bulle",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Cheseaux",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Cossonay",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VBC Epalinges",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VBC Fully",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Glaronia",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Kanti Baden",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Lalden",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VBC Langenthal",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VBC Lausanne",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Münchenbuchsee",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Nendaz",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VBC NUC",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VBC Porrentruy",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Sainte-Croix",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Servette Star-Onex",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": true,
+      "m1L": true
+    },
+    {
+      "name": "VBC Spada Academica",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VBC Sursee",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": true,
+      "m1L": true
+    },
+    {
+      "name": "VBC Thun",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VBC Uni Bern",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": true,
+      "m1L": true
+    },
+    {
+      "name": "VBC Visp",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VBC Voléro Zürich",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": true,
+      "m1L": true
+    },
+    {
+      "name": "VBC Züri Unterland",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VC Kanti Schaffhausen",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VC Smash Winterthur",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "VFM - Volleyball Franches-Montagnes",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Viteos NUC",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Volero Aarberg",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Volley Aadorf",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Volley Amriswil",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": true,
+      "m1L": false
+    },
+    {
+      "name": "Volley Caslano",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Volley Düdingen",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Volley Emmen-Nord",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Volley Espoirs Biel-Bienne",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Volley Köniz",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Volley Lugano",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Volley Luzern",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Volley Möhlin",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Volley Münsingen",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Volley Muri Bern",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Volley Näfels",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Volley Oberdiessbach",
+      "wNLA": false,
+      "wNLB": true,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Volley Oerlikon",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Volley Rüschlikon",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": true,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Volley Schönenwerd",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Volley Uni Bern",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Volley Uri",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": false,
+      "m1L": true
+    },
+    {
+      "name": "Volleyball Papiermühle",
+      "wNLA": false,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": false,
+      "mNLB": true,
+      "m1L": false
+    }
+  ]
+}

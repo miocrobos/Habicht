@@ -1,0 +1,354 @@
+[
+  {
+    "teamName": "BIWI VFM",
+    "clubId": "905280",
+    "teamId": "91",
+    "league": "NLA",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Infomaniak Genève Volley",
+    "clubId": "901085",
+    "teamId": "107",
+    "league": "NLA",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "NLZ Volleyball Academy",
+    "clubId": "912472",
+    "teamId": "13942",
+    "league": "NLA",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Raiffeisen Volley Toggenburg",
+    "clubId": "913510",
+    "teamId": "97",
+    "league": "NLA",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Sm`Aesch Pfeffingen",
+    "clubId": "909660",
+    "teamId": "98",
+    "league": "NLA",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "VBC Cheseaux",
+    "clubId": "902150",
+    "teamId": "105",
+    "league": "NLA",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "VC Kanti Schaffhausen",
+    "clubId": "913310",
+    "teamId": "94",
+    "league": "NLA",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Viteos NUC",
+    "clubId": "904140",
+    "teamId": "110",
+    "league": "NLA",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Volley Düdingen",
+    "clubId": "906100",
+    "teamId": "111",
+    "league": "NLA",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Volley Lugano",
+    "clubId": "915038",
+    "teamId": "1518",
+    "league": "NLA",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "BTV Aarau",
+    "clubId": "910010",
+    "teamId": "7315",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Bellinzona Volley",
+    "clubId": "915040",
+    "teamId": "130",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Lausanne UC",
+    "clubId": "902250",
+    "teamId": "10004",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "NNV Eaglets Volley Aarau",
+    "clubId": "910012",
+    "teamId": "13959",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Raiffeisen Volley Glaronia",
+    "clubId": "914120",
+    "teamId": "101",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "VBC Kanti Baden",
+    "clubId": "910054",
+    "teamId": "27",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "VBC NUC",
+    "clubId": "904140",
+    "teamId": "2604",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "VBC Servette Star-Onex",
+    "clubId": "901170",
+    "teamId": "112",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "VBC Visp",
+    "clubId": "903300",
+    "teamId": "1827",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Volley Aadorf",
+    "clubId": "913010",
+    "teamId": "3223",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Volley Köniz",
+    "clubId": "907345",
+    "teamId": "4746",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Volley Luzern",
+    "clubId": "911355",
+    "teamId": "5848",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Volley Oberdiessbach",
+    "clubId": "907465",
+    "teamId": "127",
+    "league": "NLB",
+    "gender": "women",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Chênois Genève Volleyball",
+    "clubId": "901060",
+    "teamId": "15",
+    "league": "NLA",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Colombier Volley",
+    "clubId": "904060",
+    "teamId": "3215",
+    "league": "NLA",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Lausanne UC",
+    "clubId": "902250",
+    "teamId": "4",
+    "league": "NLA",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "STV St.Gallen Volleyball",
+    "clubId": "913420",
+    "teamId": "517",
+    "league": "NLA",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "TSV Jona Volleyball",
+    "clubId": "914130",
+    "teamId": "81",
+    "league": "NLA",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Volley Amriswil",
+    "clubId": "913030",
+    "teamId": "20",
+    "league": "NLA",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Volley Näfels",
+    "clubId": "914190",
+    "teamId": "1",
+    "league": "NLA",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Volley Schönenwerd",
+    "clubId": "910580",
+    "teamId": "4751",
+    "league": "NLA",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Auswahlmannschaft Swiss Volley",
+    "clubId": "907009",
+    "teamId": "14135",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "BTV Aarau",
+    "clubId": "910010",
+    "teamId": "7316",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "City Volley Basel",
+    "clubId": "909130",
+    "teamId": "1981",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Lausanne UC",
+    "clubId": "902250",
+    "teamId": "3",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Lutry-Lavaux Volleyball",
+    "clubId": "902290",
+    "teamId": "3299",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "TSV Jona Volleyball",
+    "clubId": "914130",
+    "teamId": "5878",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "VBC Aeschi",
+    "clubId": "907921",
+    "teamId": "7122",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "VBC Servette Star-Onex",
+    "clubId": "901170",
+    "teamId": "2737",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "VBC Sursee",
+    "clubId": "911590",
+    "teamId": "18",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "VBC Uni Bern",
+    "clubId": "907820",
+    "teamId": "5853",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "VBC Voléro Zürich",
+    "clubId": "912470",
+    "teamId": "5",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Volley Amriswil",
+    "clubId": "913030",
+    "teamId": "1367",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  },
+  {
+    "teamName": "Volleyball Papiermühle",
+    "clubId": "907620",
+    "teamId": "877",
+    "league": "NLB",
+    "gender": "men",
+    "region": "Swiss Volley"
+  }
+]

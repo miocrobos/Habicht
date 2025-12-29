@@ -172,7 +172,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-2 sm:px-4">
                 <button
                   onClick={() => handleProtectedNavigation('/players')}
-                  className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl text-sm sm:text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl"
+                  className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl text-xs sm:text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl"
                 >
                   <span className="flex items-center gap-2 justify-center">
                     <Search className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -183,7 +183,7 @@ export default function Home() {
                   <>
                     <Link
                       href="/auth/login"
-                      className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl text-sm sm:text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl border-2 border-gray-300 dark:border-gray-600"
+                      className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl text-xs sm:text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl border-2 border-gray-300 dark:border-gray-600"
                     >
                       <span className="flex items-center gap-2 justify-center">
                         <LogIn className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -192,7 +192,7 @@ export default function Home() {
                     </Link>
                     <Link
                       href="/auth/register"
-                      className="bg-red-600 hover:bg-red-700 text-white px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl text-sm sm:text-base md:text-lg font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl border-2 border-white"
+                      className="bg-red-600 hover:bg-red-700 text-white px-3 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl text-xs sm:text-base md:text-lg font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl border-2 border-white"
                     >
                       <span className="flex items-center gap-2 justify-center">
                         <Star className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -207,15 +207,15 @@ export default function Home() {
         </div>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 sm:gap-3 z-20">
           {slides.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`h-3 rounded-full transition-all duration-300 ${
+              className={`h-2 sm:h-3 rounded-full transition-all duration-300 ${
                 idx === currentSlide 
-                  ? 'bg-white w-12 shadow-lg' 
-                  : 'bg-white/40 w-3 hover:bg-white/60'
+                  ? 'bg-white w-8 sm:w-12 shadow-lg' 
+                  : 'bg-white/40 w-2 sm:w-3 hover:bg-white/60'
               }`}
               aria-label={`Slide ${idx + 1}`}
             />

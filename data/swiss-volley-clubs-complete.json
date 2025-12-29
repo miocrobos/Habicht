@@ -1,0 +1,5067 @@
+{
+  "scrapedAt": "2025-12-28T19:48:21.062Z",
+  "source": "https://www.volleyball.ch/de/verband/services/verein-suchen",
+  "totalClubs": 282,
+  "statistics": {
+    "womenSenior": 239,
+    "menSenior": 165,
+    "womenYouth": 207,
+    "menYouth": 135,
+    "kidsVolley": 116
+  },
+  "clubs": [
+    {
+      "name": "#Dragons Lugano",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "6900",
+      "city": "Lugano",
+      "email": "info@dragonslugano.ch"
+    },
+    {
+      "name": "Afghan Volleyball Genève",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Beachvolleyball Männer"
+      ]
+    },
+    {
+      "name": "Bellinzona Volley",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Juniorinnen",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6500",
+      "city": "Bellinzona",
+      "email": "segretariato@bellinzona-volley.ch"
+    },
+    {
+      "name": "Bienne Volleyboys",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "2500",
+      "city": "Bienne",
+      "email": "info@volleyboys.ch"
+    },
+    {
+      "name": "BMV 92",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "2735",
+      "city": "Valbirse",
+      "email": "presidence@bmv92.ch"
+    },
+    {
+      "name": "BTV Aarau",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen"
+      ],
+      "postalCode": "5000",
+      "city": "Aarau",
+      "email": "info@volley-aarau.ch"
+    },
+    {
+      "name": "Chênois Genève Volleyball",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "1225",
+      "city": "Chene-Bourg",
+      "email": "club@chenoisvolley.ch"
+    },
+    {
+      "name": "Fémina-Sport Glovelier",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "2855",
+      "city": "Glovelier"
+    },
+    {
+      "name": "Genève Volley",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "1203",
+      "city": "Genève",
+      "email": "aide@gevb.ch"
+    },
+    {
+      "name": "Gibloux Volley",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "1726",
+      "city": "Farvagny",
+      "email": "info@giblouxvolley.ch"
+    },
+    {
+      "name": "Groupement Sportif du CERN",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)",
+        "Weitere Angebote Erwachsene"
+      ]
+    },
+    {
+      "name": "Grün-Weiss Utzenstorf",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)"
+      ],
+      "postalCode": "3427",
+      "city": "Utzenstorf",
+      "email": "u_d.herzog@bluewin.ch"
+    },
+    {
+      "name": "Hochdorf Audacia",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6280",
+      "city": "Hochdorf",
+      "email": "administration@audacia-volley.ch"
+    },
+    {
+      "name": "Inarizaki",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "4934",
+      "city": "Madiswil"
+    },
+    {
+      "name": "KTV Altstetten",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8048",
+      "city": "Zürich",
+      "email": "test@test.ch"
+    },
+    {
+      "name": "KTV Basel 1915",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "4000",
+      "city": "Basel",
+      "email": "ktvbasel1915@gmail.com"
+    },
+    {
+      "name": "KTV Riehen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "4125",
+      "city": "Riehen",
+      "email": "admin@ktvriehen.ch"
+    },
+    {
+      "name": "Lancy Volleyball Club",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "1213",
+      "city": "Petit-Lancy"
+    },
+    {
+      "name": "Lausanne UC",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Junioren (U23 – U13)",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer"
+      ],
+      "postalCode": "1015",
+      "city": "Lausanne",
+      "email": "info@lucvolleyball.ch"
+    },
+    {
+      "name": "Le Mouret CS",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ]
+    },
+    {
+      "name": "Lerbermatt Mittelschule",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "3098",
+      "city": "Köniz"
+    },
+    {
+      "name": "LK Zug Volleyball",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Beachvolleyball Frauen"
+      ],
+      "postalCode": "6300",
+      "city": "Zug",
+      "email": "Lukas.Hotz@volleyzug.ch"
+    },
+    {
+      "name": "Martigny Volley",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren"
+      ],
+      "postalCode": "1920",
+      "city": "Martigny"
+    },
+    {
+      "name": "Pizol Volley",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ]
+    },
+    {
+      "name": "Raiffeisen Volleya Obwalden",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6064",
+      "city": "Kerns",
+      "email": "administration@volleya.ch"
+    },
+    {
+      "name": "Rainbow Sport Zürich",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "8000",
+      "city": "Zürich",
+      "email": "denis.sim@gmx.ch"
+    },
+    {
+      "name": "Regio Volleyteam",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "4950",
+      "city": "Huttwil",
+      "email": "vorstand@regiovolleyteam.ch"
+    },
+    {
+      "name": "Rheno Volleyball",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "9435",
+      "city": "Heerbrugg"
+    },
+    {
+      "name": "Rhone Volley",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren"
+      ],
+      "postalCode": "1920",
+      "city": "Martigny"
+    },
+    {
+      "name": "S 9",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "8906",
+      "city": "Bonstetten",
+      "email": "vorstand@volley-s9.ch"
+    },
+    {
+      "name": "SAG Gordola",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6598",
+      "city": "Tenero",
+      "email": "sagvolley@saggordola.ch"
+    },
+    {
+      "name": "Satigny Volleyball",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "1242",
+      "city": "Satigny(GE)",
+      "email": "info@satigny-volleyball.ch"
+    },
+    {
+      "name": "Schaffhausen KJS",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "8200",
+      "city": "Schaffhausen"
+    },
+    {
+      "name": "Schulsport Adelboden",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Weitere Angebote Nachwuchs"
+      ]
+    },
+    {
+      "name": "Schulsport Radelfingen",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "Schulsport TV Fraubrunnen",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)"
+      ]
+    },
+    {
+      "name": "SFG Montagny-Cousset",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)"
+      ],
+      "postalCode": "1774",
+      "city": "Cousset",
+      "email": "pascaleterrapon@bluewin.ch"
+    },
+    {
+      "name": "Skål Team Volley Losone",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "email": "info@skalteam.ch"
+    },
+    {
+      "name": "Sm`Aesch Pfeffingen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Juniorinnen",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "4147",
+      "city": "Aesch",
+      "email": "info@smaesch.ch"
+    },
+    {
+      "name": "SP Momò Volley",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "email": "Info@morbiovolley.ch"
+    },
+    {
+      "name": "SP Morbio Volley",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "email": "Info@morbiovolley.ch"
+    },
+    {
+      "name": "Sportunion Beckenried",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "6375",
+      "city": "Beckenried",
+      "email": "volley@sportunion-beckenried.ch"
+    },
+    {
+      "name": "Sportverein Künten",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ]
+    },
+    {
+      "name": "SSC Audax",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "8580",
+      "city": "Amriswil",
+      "email": "info@sscaudax.ch"
+    },
+    {
+      "name": "St-Maurice",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "1890",
+      "city": "St Maurice",
+      "email": "Info@vbcst-maurice.ch"
+    },
+    {
+      "name": "Stadtturnverein Wil",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "9500",
+      "city": "Wil SG",
+      "email": "koordination@volley.stvwil.ch"
+    },
+    {
+      "name": "STV Baden",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ]
+    },
+    {
+      "name": "STV Buttisholz",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6018",
+      "city": "Buttisholz",
+      "email": "alina.erni@volley-buttisholz.ch"
+    },
+    {
+      "name": "STV Gränichen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "5722",
+      "city": "Gränichen"
+    },
+    {
+      "name": "STV Hitzkirch",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "6285",
+      "city": "Hitzkirch",
+      "email": "kontakt@stvhitzkirch.ch"
+    },
+    {
+      "name": "STV St.Gallen Volleyball",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "9000",
+      "city": "St. Gallen"
+    },
+    {
+      "name": "SV Knutwil-St.Erhard",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6212",
+      "city": "St. Erhard",
+      "email": "info@sv-knutwil.ch"
+    },
+    {
+      "name": "SV Olten",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "4600",
+      "city": "Olten"
+    },
+    {
+      "name": "SV Strättligen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "3600",
+      "city": "Thun",
+      "email": "info@svthun-straettligen.ch"
+    },
+    {
+      "name": "SV Tägerig",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "5522",
+      "city": "Tägerig",
+      "email": "kontakt@svtaegerig.ch"
+    },
+    {
+      "name": "SV Volley Lengnau",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "5426",
+      "city": "Lengnau"
+    },
+    {
+      "name": "SV Volley Wyna",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ]
+    },
+    {
+      "name": "SV Wasen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ]
+    },
+    {
+      "name": "TSV Frick Volleyball",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "5070",
+      "city": "Frick"
+    },
+    {
+      "name": "TSV Gurmels",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "3212",
+      "city": "Gurmels",
+      "email": "volleyball@tsv-gurmels.ch"
+    },
+    {
+      "name": "TSV Jona Volleyball",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8645",
+      "city": "Rapperswil-Jona",
+      "email": "sekretariat@volleyballjona.ch"
+    },
+    {
+      "name": "TSV Kestenholz",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)"
+      ]
+    },
+    {
+      "name": "TSV Neuendorf",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "4623",
+      "city": "Neuendorf",
+      "email": "volleyball@tsvn.ch"
+    },
+    {
+      "name": "TSV Rechthalten",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "1718",
+      "city": "Rechthalten",
+      "email": "carole_vonlanthen@hotmail.com"
+    },
+    {
+      "name": "TSV Steinen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6422",
+      "city": "Steinen"
+    },
+    {
+      "name": "TSV Wangen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)"
+      ],
+      "postalCode": "3380",
+      "city": "Wangen an der Aare",
+      "email": "info@tsvwangen.ch"
+    },
+    {
+      "name": "Turnverein Horgen",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8810",
+      "city": "Horgen",
+      "email": "junioren@vobits.ch"
+    },
+    {
+      "name": "TV Arlesheim",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "4144",
+      "city": "Arlesheim",
+      "email": "volleyball.arlesheim@gmail.com"
+    },
+    {
+      "name": "TV Dietlikon (Schulsportgruppe)",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "8305",
+      "city": "Dietlikon",
+      "email": "gs@tvdietlikon.ch"
+    },
+    {
+      "name": "TV Felben-Wellhausen",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ]
+    },
+    {
+      "name": "TV Hüttwilen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "8536",
+      "city": "Hüttwilen",
+      "email": "praesidium_VR@tvhuettwilen.ch"
+    },
+    {
+      "name": "TV Itingen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "4452",
+      "city": "Itingen",
+      "email": "bruderer.isa@gmail.com"
+    },
+    {
+      "name": "TV Lunkhofen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8917",
+      "city": "Oberlunkhofen",
+      "email": "gs@tvlunkhofen.ch"
+    },
+    {
+      "name": "TV Magden",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)"
+      ],
+      "postalCode": "4312",
+      "city": "Magden"
+    },
+    {
+      "name": "TV Murten Volleyball",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "3280",
+      "city": "Murten",
+      "email": "nathalie-meier@gmx.ch"
+    },
+    {
+      "name": "TV Muttenz",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "4132",
+      "city": "Muttenz"
+    },
+    {
+      "name": "TV Plaffeien",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "1716",
+      "city": "Plaffeien",
+      "email": "tvplaffeien.volley@gmail.com"
+    },
+    {
+      "name": "TV Pratteln NS",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ]
+    },
+    {
+      "name": "TV St. Johann",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "4000",
+      "city": "Basel",
+      "email": "volley@tvstjohann.ch"
+    },
+    {
+      "name": "TV Ursenbach",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "4937",
+      "city": "Ursenbach",
+      "email": "lars.lehmann@tvursenbach.ch"
+    },
+    {
+      "name": "TV Zollikofen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "3052",
+      "city": "Zollikofen",
+      "email": "juerg.steiner@gmx.ch"
+    },
+    {
+      "name": "VB Binningen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "VB Fides Ruswil",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6017",
+      "city": "Ruswil",
+      "email": "schumacher.evelyn@gmx.ch"
+    },
+    {
+      "name": "VB Neuenkirch",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6206",
+      "city": "Neuenkirch",
+      "email": "praesi.vb-neuenkirch@hotmail.com"
+    },
+    {
+      "name": "VB Steinach",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren"
+      ],
+      "postalCode": "9323",
+      "city": "Steinach"
+    },
+    {
+      "name": "VBC Aigle",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "1860",
+      "city": "Aigle",
+      "email": "info@vbcaigle.ch"
+    },
+    {
+      "name": "VBC Allschwil",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "4123",
+      "city": "Allschwil"
+    },
+    {
+      "name": "VBC Antares-Uitikon",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8142",
+      "city": "Uitikon"
+    },
+    {
+      "name": "VBC Arbon",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "9320",
+      "city": "Arbon",
+      "email": "info@vbcarbon.ch"
+    },
+    {
+      "name": "VBC Arosa",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "7050",
+      "city": "Arosa"
+    },
+    {
+      "name": "VBC Avully",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "1232",
+      "city": "confignon",
+      "email": "presidence@avullyvbc.ch"
+    },
+    {
+      "name": "VBC Belfaux",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "1782",
+      "city": "Belfaux"
+    },
+    {
+      "name": "VBC Bösingen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "3178",
+      "city": "Bösingen"
+    },
+    {
+      "name": "VBC Bramois",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "1950",
+      "city": "sion",
+      "email": "president@vbcbramois.ch"
+    },
+    {
+      "name": "VBC Brig-Glis",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "3902",
+      "city": "Glis"
+    },
+    {
+      "name": "VBC Brislach",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "4225",
+      "city": "Brislach"
+    },
+    {
+      "name": "VBC Bulle",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "1630",
+      "city": "Bulle",
+      "email": "info@vbcbulle.ch"
+    },
+    {
+      "name": "VBC Buochs",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6374",
+      "city": "Buochs",
+      "email": "praesident@vbcbuochs.ch"
+    },
+    {
+      "name": "VBC Burgdorf",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "3400",
+      "city": "Burgdorf"
+    },
+    {
+      "name": "VBC Bussigny",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "VBC Cazis",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Beachvolleyball Frauen",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "7408",
+      "city": "Cazis"
+    },
+    {
+      "name": "VBC Cedra",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)"
+      ],
+      "postalCode": "1762",
+      "city": "Givisiez"
+    },
+    {
+      "name": "VBC Cerisiers-Gorgier",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "VBC Chatel-St-Denis",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "1618",
+      "city": "Châtel-Saint-Denis"
+    },
+    {
+      "name": "VBC Cheseaux",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "1033",
+      "city": "Cheseaux-sur-Lausanne",
+      "email": "info@vbccheseaux.ch"
+    },
+    {
+      "name": "VBC Chur",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "7000",
+      "city": "Chur",
+      "email": "info@vbcchur.ch"
+    },
+    {
+      "name": "VBC Cossonay",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "VBC Develier",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)"
+      ],
+      "postalCode": "2802",
+      "city": "Develier",
+      "email": "vbcdevelier@gmail.com"
+    },
+    {
+      "name": "VBC Dietwil",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6042",
+      "city": "Dietwil"
+    },
+    {
+      "name": "VBC Dulliken",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "4657",
+      "city": "Dulliken",
+      "email": "info@vbc-dulliken.ch"
+    },
+    {
+      "name": "VBC Ebikon",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6030",
+      "city": "Ebikon",
+      "email": "praesident@vbcebikon.ch"
+    },
+    {
+      "name": "VBC Eburo",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "1400",
+      "city": "Yverdon-les-Bains",
+      "email": "info@vbceburo.ch"
+    },
+    {
+      "name": "VBC Ecublens",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "1024",
+      "city": "Ecublens",
+      "email": "info@vbcecublens.ch"
+    },
+    {
+      "name": "VBC Einsiedeln",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren"
+      ],
+      "postalCode": "8840",
+      "city": "Einsiedeln"
+    },
+    {
+      "name": "VBC Embrach",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ]
+    },
+    {
+      "name": "VBC Entre-deux-Lacs",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ]
+    },
+    {
+      "name": "VBC Etoile-Geneve",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "1203",
+      "city": "Genève",
+      "email": "info@vbcgeneve.ch"
+    },
+    {
+      "name": "VBC Ettiswil",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ]
+    },
+    {
+      "name": "VBC Fairplay Olympia",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ]
+    },
+    {
+      "name": "VBC Freies Gymnasium ZH",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "8008",
+      "city": "Zürich",
+      "email": "chef@vbc-fgz.ch"
+    },
+    {
+      "name": "VBC Fribourg",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "1700",
+      "city": "Fribourg",
+      "email": "responsable.technique.vbcfr@gmail.com"
+    },
+    {
+      "name": "VBC Frutigen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "3714",
+      "city": "Frutigen"
+    },
+    {
+      "name": "VBC Fully",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "email": "info@vbcfully.ch"
+    },
+    {
+      "name": "VBC Furttal",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "8105",
+      "city": "Regensdorf",
+      "email": "sekretariat@vbcfurttal.ch"
+    },
+    {
+      "name": "VBC Galina",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren"
+      ],
+      "postalCode": "9494",
+      "city": "Schaan",
+      "email": "sekretariat@vbcgalina.li"
+    },
+    {
+      "name": "VBC Gelterkinden",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "4460",
+      "city": "Gelterkinden",
+      "email": "info@vbcgelterkinden.ch"
+    },
+    {
+      "name": "VBC Gerlafingen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "4563",
+      "city": "Gerlafingen"
+    },
+    {
+      "name": "VBC Grosshöchstetten",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "3506",
+      "city": "Grosshöchstetten",
+      "email": "info.vbcg@bluewin.ch"
+    },
+    {
+      "name": "VBC Hallau",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "8215",
+      "city": "Hallau"
+    },
+    {
+      "name": "VBC Haut-Lac",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "1896",
+      "city": "Vouvry"
+    },
+    {
+      "name": "VBC Haute-Broye",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ]
+    },
+    {
+      "name": "VBC Heiden",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ]
+    },
+    {
+      "name": "VBC Herren Oberwallis",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "3900",
+      "city": "Brig",
+      "email": "vorstand@vbc-how.ch"
+    },
+    {
+      "name": "VBC Innova",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Weitere Angebote Erwachsene"
+      ]
+    },
+    {
+      "name": "VBC Kanti Baden",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren"
+      ],
+      "postalCode": "5400",
+      "city": "Baden",
+      "email": "sekretariat@vbckantibaden.ch"
+    },
+    {
+      "name": "VBC Kerzers",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "3210",
+      "city": "Kerzers"
+    },
+    {
+      "name": "VBC Konolfingen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ]
+    },
+    {
+      "name": "VBC Küssnacht",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6403",
+      "city": "Küssnacht am Rigi",
+      "email": "info@vbckuessnacht.ch"
+    },
+    {
+      "name": "VBC La Chaux-de-Fonds",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "2300",
+      "city": "La Chaux-de-Fonds"
+    },
+    {
+      "name": "VBC Lalden",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "VBC Langenthal",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "4900",
+      "city": "Langenthal",
+      "email": "praesident@vbclangenthal.ch"
+    },
+    {
+      "name": "VBC Laufen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "4242",
+      "city": "Laufen",
+      "email": "sekretariat@vbclaufen.ch"
+    },
+    {
+      "name": "VBC Lausanne",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "1010",
+      "city": "Lausanne",
+      "email": "info@lausannevbc.ch"
+    },
+    {
+      "name": "VBC Le Mont-sur-Lausanne",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "1052",
+      "city": "Mont-sur-Lausanne",
+      "email": "info@vbclemont.ch"
+    },
+    {
+      "name": "VBC Leibstadt",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)"
+      ],
+      "postalCode": "5325",
+      "city": "Leibstadt"
+    },
+    {
+      "name": "VBC Lengnau",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)"
+      ],
+      "postalCode": "2543",
+      "city": "Lengnau BE",
+      "email": "vbclengnau@gmail.com"
+    },
+    {
+      "name": "VBC les Cèdres",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ]
+    },
+    {
+      "name": "VBC Liesberg",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)"
+      ],
+      "postalCode": "4254",
+      "city": "Liesberg Dorf"
+    },
+    {
+      "name": "VBC Lignieres",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "2523",
+      "city": "Lignières"
+    },
+    {
+      "name": "VBC Limmattal",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ]
+    },
+    {
+      "name": "VBC Linth",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8716",
+      "city": "Schmerikon",
+      "email": "marco.buehler@vbclinth.ch"
+    },
+    {
+      "name": "VBC Littau",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6014",
+      "city": "Luzern",
+      "email": "vbc-littau@gmx.ch"
+    },
+    {
+      "name": "VBC Lungern",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "6078",
+      "city": "Lungern",
+      "email": "daniela-buergi@gmx.ch"
+    },
+    {
+      "name": "VBC Lützelflüh",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "3432",
+      "city": "Lützelflüh"
+    },
+    {
+      "name": "VBC Lyss",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "3250",
+      "city": "Lyss"
+    },
+    {
+      "name": "VBC Malters",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6102",
+      "city": "Malters",
+      "email": "kontakt@vbcmalters.ch"
+    },
+    {
+      "name": "VBC Meggen",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6045",
+      "city": "Meggen",
+      "email": "info@vbcmeggen.ch"
+    },
+    {
+      "name": "VBC Merenschwand-Muri",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "5634",
+      "city": "Merenschwand",
+      "email": "info@vbcmerenschwand-muri.ch"
+    },
+    {
+      "name": "VBC Münchenbuchsee",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "3053",
+      "city": "Münchenbuchsee",
+      "email": "info@vbcm.ch"
+    },
+    {
+      "name": "VBC Münchenstein",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "4142",
+      "city": "Münchenstein",
+      "email": "anna.meierhofer96@gmail.com"
+    },
+    {
+      "name": "VBC Nendaz",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "VBC Niederlenz",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)"
+      ],
+      "postalCode": "5702",
+      "city": "Niederlenz"
+    },
+    {
+      "name": "VBC Obersimmental",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "3772",
+      "city": "St. Stephan",
+      "email": "fabienne.kohli@vbcobersimmental.ch"
+    },
+    {
+      "name": "VBC Oftringen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ]
+    },
+    {
+      "name": "VBC Pailly",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "1416",
+      "city": "Pailly"
+    },
+    {
+      "name": "VBC Peps",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "1290",
+      "city": "Versoix",
+      "email": "francois@pepsvbc.ch"
+    },
+    {
+      "name": "VBC Pfäffikon",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "8808",
+      "city": "Pfäffikon SZ"
+    },
+    {
+      "name": "VBC Porrentruy",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "2900",
+      "city": "Porrentruy",
+      "email": "serge.jubin@bluewin.ch"
+    },
+    {
+      "name": "VBC Préverenges",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "1028",
+      "city": "Préverenges",
+      "email": "gaudin79@gmail.com"
+    },
+    {
+      "name": "VBC Pully",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ]
+    },
+    {
+      "name": "VBC Rämi",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "8001",
+      "city": "Zürich",
+      "email": "praesident@vbcraemi.ch"
+    },
+    {
+      "name": "VBC Raron",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "3942",
+      "city": "Raron",
+      "email": "lara.zurbriggen@gmx.ch"
+    },
+    {
+      "name": "VBC Rheinfelden",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "4310",
+      "city": "Rheinfelden"
+    },
+    {
+      "name": "VBC Richterswil (Schulsportgruppe)",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "8805",
+      "city": "Richterswil",
+      "email": "volleyball@vbc-richterswil.ch"
+    },
+    {
+      "name": "VBC Ried-Brig",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Junioren (U23 – U13)",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "3911",
+      "city": "Ried-Brig"
+    },
+    {
+      "name": "VBC Rotkreuz",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6343",
+      "city": "Rotkreuz",
+      "email": "vbcrotkreuz@gmail.com"
+    },
+    {
+      "name": "VBC Saviese Olympia",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "1965",
+      "city": "Savièse",
+      "email": "vbcsaviese@hotmail.com"
+    },
+    {
+      "name": "VBC Schaffhausen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "email": "info@vbcschaffhausen.ch"
+    },
+    {
+      "name": "VBC Schmitten",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "3185",
+      "city": "Schmitten",
+      "email": "admin@vbc-schmitten.ch"
+    },
+    {
+      "name": "VBC Seftigen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "3662",
+      "city": "Seftigen",
+      "email": "celina.vbcseftigen@gmail.com"
+    },
+    {
+      "name": "VBC Sense",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen"
+      ]
+    },
+    {
+      "name": "VBC Servette Star-Onex",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "1213",
+      "city": "Onex",
+      "email": "secretariat@ssovbc.ch"
+    },
+    {
+      "name": "VBC Seuzach",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "8472",
+      "city": "Seuzach",
+      "email": "tk-chef@vbcseuzach.ch"
+    },
+    {
+      "name": "VBC Sion",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "1950",
+      "city": "Sion"
+    },
+    {
+      "name": "VBC Sixieme 7",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "2515",
+      "city": "Prêles",
+      "email": "patrick.hochuli@bluewin.ch"
+    },
+    {
+      "name": "VBC Smile",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "1733",
+      "city": "Treyvaux",
+      "email": "presidente@vbcsmile.ch"
+    },
+    {
+      "name": "VBC Sotto-Simme",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "3762",
+      "city": "Erlenbach"
+    },
+    {
+      "name": "VBC Spada Academica",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "8000",
+      "city": "Zürich",
+      "email": "praesident@vbcspada.ch"
+    },
+    {
+      "name": "VBC Spiez",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "3700",
+      "city": "Spiez",
+      "email": "info@vbcspiez.ch"
+    },
+    {
+      "name": "VBC Stäfa",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8712",
+      "city": "Stäfa",
+      "email": "info@vbcstaefa.ch"
+    },
+    {
+      "name": "VBC Steinhausen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6312",
+      "city": "Steinhausen",
+      "email": "info@vbcsteinhausen.ch"
+    },
+    {
+      "name": "VBC Studen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "2557",
+      "city": "Studen",
+      "email": "reto.gautschi@vbc-studen.ch"
+    },
+    {
+      "name": "VBC Sugnens-Cugy",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "1043",
+      "city": "Sugnens",
+      "email": "secretariat@vbcsugnens.com"
+    },
+    {
+      "name": "VBC Suito Schwyz",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6430",
+      "city": "Schwyz"
+    },
+    {
+      "name": "VBC Sursee",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6210",
+      "city": "Sursee LU",
+      "email": "andrea@vbcsursee.ch"
+    },
+    {
+      "name": "VBC Thun",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer"
+      ],
+      "postalCode": "3600",
+      "city": "Thun",
+      "email": "info@vbcthun.ch"
+    },
+    {
+      "name": "VBC Tramelan",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "2720",
+      "city": "Tramelan",
+      "email": "info@vbc-tramelan.ch"
+    },
+    {
+      "name": "VBC Triengen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6234",
+      "city": "Triengen",
+      "email": "info@vbc-triengen.ch"
+    },
+    {
+      "name": "VBC Ueberstorf",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "3182",
+      "city": "Ueberstorf",
+      "email": "info@vbc-ueberstorf.ch"
+    },
+    {
+      "name": "VBC Uetikon",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8707",
+      "city": "Uetikon am See"
+    },
+    {
+      "name": "VBC Uni Bern",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "3000",
+      "city": "Bern",
+      "email": "geschaeftsstelle@vbcunibern.ch"
+    },
+    {
+      "name": "VBC Val Terbi",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "email": "info@vbcvt.ch"
+    },
+    {
+      "name": "VBC Val-de-Travers",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ]
+    },
+    {
+      "name": "VBC Vendline",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "VBC Viamala Thusis",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "7430",
+      "city": "Thusis",
+      "email": "tinli67@bluewin.ch"
+    },
+    {
+      "name": "VBC Volebo Freiamt",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "5610",
+      "city": "Wohlen"
+    },
+    {
+      "name": "VBC Voléro Zürich",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "8000",
+      "city": "Zürich",
+      "email": "sekretariat@volero.ch"
+    },
+    {
+      "name": "VBC Werdana Buchs",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "9470",
+      "city": "Buchs"
+    },
+    {
+      "name": "VBC Willisau",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6130",
+      "city": "Willisau",
+      "email": "praesident@vbcwillisau.ch"
+    },
+    {
+      "name": "VBC Yverdon",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "1400",
+      "city": "Yverdon-les-Bains",
+      "email": "president@vbcyverdon.ch"
+    },
+    {
+      "name": "VBC Züri Unterland",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "8302",
+      "city": "Kloten",
+      "email": "gs@vbczu.ch"
+    },
+    {
+      "name": "VBG Klettgau",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)",
+        "Beachvolleyball Männer"
+      ],
+      "postalCode": "8222",
+      "city": "Beringen"
+    },
+    {
+      "name": "VBG Welschenrohr",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "4716",
+      "city": "Welschenrohr",
+      "email": "info@vbgw-h.ch"
+    },
+    {
+      "name": "VBR Rickenbach",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren"
+      ],
+      "postalCode": "8545",
+      "city": "Rickenbach ZH",
+      "email": "info@vbr-rickenbach.ch"
+    },
+    {
+      "name": "VC Kanti Schaffhausen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "8200",
+      "city": "Schaffhausen",
+      "email": "administration@kantivolleyball.ch"
+    },
+    {
+      "name": "VC Los Unidos Ob.Seetal",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "5618",
+      "city": "Bettwil"
+    },
+    {
+      "name": "VC Safenwil-Kölliken",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "5745",
+      "city": "Safenwil",
+      "email": "info@vcsk.ch"
+    },
+    {
+      "name": "VC Smash Winterthur",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8400",
+      "city": "Winterthur",
+      "email": "office@vc-smash.ch"
+    },
+    {
+      "name": "VC Tornado Adliswil",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "8134",
+      "city": "Adliswil",
+      "email": "sport@vctornado.ch"
+    },
+    {
+      "name": "VC Uettligen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "3043",
+      "city": "Uettligen",
+      "email": "info@vcuettligen.ch"
+    },
+    {
+      "name": "VC Viry",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ]
+    },
+    {
+      "name": "VC Vivax Winterthur",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "VFM - Volleyball Franches-Montagnes",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "VG Rüdtligen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "email": "vgruedtligen-kirchberg@bluewin.ch"
+    },
+    {
+      "name": "Volewa Wald",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "8636",
+      "city": "Wald",
+      "email": "info@volewa.ch"
+    },
+    {
+      "name": "Volley Aadorf",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Juniorinnen",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8355",
+      "city": "Aadorf",
+      "email": "info@volleyaadorf.ch"
+    },
+    {
+      "name": "Volley Aarburg-Zofingen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "4800",
+      "city": "Zofingen"
+    },
+    {
+      "name": "Volley Academy Valais",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "3930",
+      "city": "Visp",
+      "email": "christian.berchtold@ultraweb.ch"
+    },
+    {
+      "name": "Volley Amriswil",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ]
+    },
+    {
+      "name": "Volley Avenches",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "1580",
+      "city": "Avenches",
+      "email": "infovolleyavenches@gmail.com"
+    },
+    {
+      "name": "Volley Baar",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ]
+    },
+    {
+      "name": "Volley Brugg",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "5200",
+      "city": "Brugg",
+      "email": "info@volleybrugg.ch"
+    },
+    {
+      "name": "Volley Bütschwil",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "9606",
+      "city": "Bütschwil",
+      "email": "sekretariat@volleybuetschwil.ch"
+    },
+    {
+      "name": "Volley Caslano",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "6987",
+      "city": "Caslano",
+      "email": "info@volleycaslano.ch"
+    },
+    {
+      "name": "Volley Düdingen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "3186",
+      "city": "Düdingen"
+    },
+    {
+      "name": "Volley Emmen-Nord",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "6020",
+      "city": "Emmenbrücke",
+      "email": "info@volley-emmen-nord.ch"
+    },
+    {
+      "name": "Volley Estavayer",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer"
+      ],
+      "postalCode": "1470",
+      "city": "Estavayer-le-Lac"
+    },
+    {
+      "name": "Volley Goldach",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "9403",
+      "city": "Goldach"
+    },
+    {
+      "name": "Volley GraPa",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "1530",
+      "city": "Payerne",
+      "email": "volleygrapa@gmail.com"
+    },
+    {
+      "name": "Volley Grischa United",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ]
+    },
+    {
+      "name": "Volley Hünenberg",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "Volley Köniz",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "3098",
+      "city": "Köniz",
+      "email": "info@volley-koeniz.ch"
+    },
+    {
+      "name": "Volley Kriens",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6010",
+      "city": "Kriens",
+      "email": "info@volleykriens.ch"
+    },
+    {
+      "name": "Volley KTV Muotathal",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "6436",
+      "city": "6436 Muotathal",
+      "email": "mueller_bettina@outlook.com"
+    },
+    {
+      "name": "Volley Liebefeld",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "3097",
+      "city": "Liebefeld",
+      "email": "praesi@volleyliebefeld.ch"
+    },
+    {
+      "name": "Volley Lugano",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "Volley Luzern",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "Volley Möhlin",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "4313",
+      "city": "Möhlin",
+      "email": "lea.oliva@volley-moehlin.ch"
+    },
+    {
+      "name": "Volley Moutier",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "2740",
+      "city": "Moutier",
+      "email": "volleymoutier@gmail.com"
+    },
+    {
+      "name": "Volley Münsingen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "3110",
+      "city": "Münsingen",
+      "email": "info@volley-muensingen.ch"
+    },
+    {
+      "name": "Volley Muristalden",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)"
+      ]
+    },
+    {
+      "name": "Volley Mutschellen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "8964",
+      "city": "Rudolfstetten",
+      "email": "vorstand@volleymutschellen.ch"
+    },
+    {
+      "name": "Volley Obfelden",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8912",
+      "city": "Obfelden"
+    },
+    {
+      "name": "Volley Oerlikon",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "8050",
+      "city": "Zürich",
+      "email": "sekretariat@volleyoerlikon.ch"
+    },
+    {
+      "name": "Volley Rain",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6026",
+      "city": "Rain",
+      "email": "info@volleyrain.clubdesk.com"
+    },
+    {
+      "name": "Volley Region Entlebuch",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "6170",
+      "city": "Schüpfheim",
+      "email": "praesident@volley-region-entlebuch.ch"
+    },
+    {
+      "name": "Volley Rossrüti",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer"
+      ],
+      "postalCode": "9500",
+      "city": "Wil SG",
+      "email": "info@volleyrossrueti.ch"
+    },
+    {
+      "name": "Volley Rüschlikon",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "8803",
+      "city": "Rüschlikon",
+      "email": "info@volleyreuschlikon.ch"
+    },
+    {
+      "name": "Volley Smash 05 Laufenburg-Kaisten",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "5080",
+      "city": "Laufenburg"
+    },
+    {
+      "name": "Volley Solothurn",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ]
+    },
+    {
+      "name": "Volley Speicher",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Weitere Angebote Erwachsene",
+        "Weitere Angebote Nachwuchs"
+      ],
+      "postalCode": "9042",
+      "city": "Speicher",
+      "email": "roland.lauper@volleyspeicher.clubdesk.com"
+    },
+    {
+      "name": "Volley Surselva",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren"
+      ],
+      "postalCode": "7130",
+      "city": "Ilanz"
+    },
+    {
+      "name": "Volley Talents Winterthur Zürich",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Nachwuchs"
+      ]
+    },
+    {
+      "name": "Volley Toggenburg",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "9630",
+      "city": "Wattwil",
+      "email": "info@volleytoggenburg.ch"
+    },
+    {
+      "name": "Volley Uni Bern",
+      "hasWomenSenior": false,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "3000",
+      "city": "Bern"
+    },
+    {
+      "name": "Volley Unisport Fribourg (VUF)",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ],
+      "postalCode": "1700",
+      "city": "Fribourg"
+    },
+    {
+      "name": "Volley Uri",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "6463",
+      "city": "Bürglen",
+      "email": "info@volleyuri.ch"
+    },
+    {
+      "name": "Volley Uster",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "postalCode": "8610",
+      "city": "Uster"
+    },
+    {
+      "name": "Volley Vully",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)"
+      ]
+    },
+    {
+      "name": "Volley Waldkirch",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "9205",
+      "city": "Waldkirch"
+    },
+    {
+      "name": "Volley Wila-Turbenthal",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley"
+      ],
+      "postalCode": "8492",
+      "city": "Wila",
+      "email": "jenny.keller@volleywila.ch"
+    },
+    {
+      "name": "Volley Würenlingen",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ]
+    },
+    {
+      "name": "Volley Zurzach",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ]
+    },
+    {
+      "name": "Volley-Team Wolhusen",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "6110",
+      "city": "Wolhusen",
+      "email": "lea.rroos@hotmail.com"
+    },
+    {
+      "name": "Volley-X Recherswil",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Kids Volley",
+        "Beachvolleyball Frauen"
+      ],
+      "postalCode": "4565",
+      "city": "Recherswil",
+      "email": "massimo.micozzi@ymail.com"
+    },
+    {
+      "name": "Volleyball-Club Volketswil",
+      "hasWomenSenior": true,
+      "hasMenSenior": false,
+      "hasWomenYouth": true,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)"
+      ],
+      "postalCode": "8604",
+      "city": "Volketswil"
+    },
+    {
+      "name": "VolleyTalents Rapperswil-Jona",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Junioren (U23 – U13)"
+      ]
+    },
+    {
+      "name": "VT Langnau",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)"
+      ],
+      "email": "m-brechbuehl@outlook.com"
+    },
+    {
+      "name": "VT Meilen",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": false,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Weitere Angebote Erwachsene"
+      ]
+    },
+    {
+      "name": "Wädivolley",
+      "hasWomenSenior": true,
+      "hasMenSenior": true,
+      "hasWomenYouth": true,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Frauen (NLA – 5L)",
+        "Volleyball Männer (NLA – 5L)",
+        "Volleyball Juniorinnen (U23 – U13)",
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Erwachsene"
+      ],
+      "postalCode": "8820",
+      "city": "Wädenswil"
+    },
+    {
+      "name": "Zürich-Affoltern (Schulsportgruppe)",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": true,
+      "hasKidsVolley": false,
+      "hasBeachWomen": false,
+      "hasBeachMen": false,
+      "rawOfferings": [
+        "Volleyball Junioren (U23 – U13)",
+        "Weitere Angebote Nachwuchs"
+      ]
+    },
+    {
+      "name": "ZUZU Beach",
+      "hasWomenSenior": false,
+      "hasMenSenior": false,
+      "hasWomenYouth": false,
+      "hasMenYouth": false,
+      "hasKidsVolley": true,
+      "hasBeachWomen": true,
+      "hasBeachMen": true,
+      "rawOfferings": [
+        "Kids Volley",
+        "Beachvolleyball Frauen",
+        "Beachvolleyball Männer",
+        "Beachvolleyball Juniorinnen",
+        "Beachvolleyball Junioren"
+      ],
+      "postalCode": "8302",
+      "city": "Kloten",
+      "email": "info@zuzubeach.ch"
+    }
+  ]
+}

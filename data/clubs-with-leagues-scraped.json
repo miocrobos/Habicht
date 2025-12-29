@@ -1,0 +1,2065 @@
+{
+  "clubs": [
+    {
+      "id": "cmjprn189000b72r7gr3yt7z4",
+      "name": "#Dragons Lugano",
+      "website": "https://dragonslugano.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:04:34.968Z"
+    },
+    {
+      "id": "cmjprn1bv000e72r7g3805xql",
+      "name": "BMV 92",
+      "website": "https://www.bmv92.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:04:39.118Z"
+    },
+    {
+      "id": "cmjprn1dg000f72r7premiqg1",
+      "name": "BTV Aarau",
+      "website": "https://www.volley-aarau.ch",
+      "leagues": {},
+      "leaguesFound": [
+        "NLA"
+      ],
+      "scrapedAt": "2025-12-28T22:04:44.946Z",
+      "teamsPageUrl": "https://www.volley-aarau.ch/teams"
+    },
+    {
+      "id": "cmjprn209000y72r7ajo3obon",
+      "name": "Basilea Volleyball",
+      "website": "https://www.volleybasel.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:04:54.757Z",
+      "teamsPageUrl": "https://www.volleybasel.ch/wissen/cat/fuer-teams"
+    },
+    {
+      "id": "cmjprn19f000c72r7r65u3nt7",
+      "name": "Bellinzona Volley",
+      "website": "https://bellinzona-volley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:05:00.899Z"
+    },
+    {
+      "id": "cmjprn1ar000d72r75ex4x8jy",
+      "name": "Bienne Volleyboys",
+      "website": "https://www.volleyboys.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:05:05.605Z"
+    },
+    {
+      "id": "cmjprn1er000g72r70soqctkj",
+      "name": "Chênois Genève Volleyball",
+      "website": "https://chenoisvolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:05:12.211Z",
+      "teamsPageUrl": "https://chenoisvolley.ch/carte-sport-promotion/"
+    },
+    {
+      "id": "cmjpslpcg0000gjmzyxsb991o",
+      "name": "Colombier Volley",
+      "website": "https://colombiervolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:05:39.571Z",
+      "teamsPageUrl": "https://colombiervolley.ch/merite-sportif/"
+    },
+    {
+      "id": "cmjpslpeq0001gjmzdxexjcty",
+      "name": "E.f.i. Volley",
+      "website": "http://volleyefi.ch",
+      "leagues": {},
+      "leaguesFound": [
+        "4L"
+      ],
+      "scrapedAt": "2025-12-28T22:05:49.137Z",
+      "teamsPageUrl": "http://volleyefi.ch/herren-team/"
+    },
+    {
+      "id": "cmjpslpg00002gjmz70kl6h95",
+      "name": "Eaglets Volley Aarau",
+      "website": "https://www.eagletsvolleyaarau.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:05:59.165Z"
+    },
+    {
+      "id": "cmjpslphf0003gjmztzs58xyt",
+      "name": "Fémina-Sport Glovelier",
+      "website": "https://fs-glovelier.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:00.675Z"
+    },
+    {
+      "id": "cmjpslpiv0004gjmz4qcc48g9",
+      "name": "Genève Volley",
+      "website": "https://gevb.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:02.194Z"
+    },
+    {
+      "id": "cmjpslpkb0005gjmzil4tmlvh",
+      "name": "Gibloux Volley",
+      "website": "https://www.giblouxvolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:03.703Z"
+    },
+    {
+      "id": "cmjpslplo0006gjmzoxjhy6ac",
+      "name": "Grün-Weiss Utzenstorf",
+      "website": "https://www.gwu.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:05.215Z"
+    },
+    {
+      "id": "cmjpslpn40007gjmzso0lx7mp",
+      "name": "Hochdorf Audacia",
+      "website": "https://www.audacia-volley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:06.737Z"
+    },
+    {
+      "id": "cmjpslpoj0008gjmz40aopfjh",
+      "name": "Inarizaki",
+      "website": "https://inarizaki.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:08.254Z"
+    },
+    {
+      "id": "cmjpslpq10009gjmz5unbl1zf",
+      "name": "KTV Altstetten",
+      "website": "https://www.ktv-altstetten.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:09.767Z"
+    },
+    {
+      "id": "cmjpslprl000agjmzrs0tfw3n",
+      "name": "KTV Basel 1915",
+      "website": "https://ktvb1915.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:11.282Z"
+    },
+    {
+      "id": "cmjpslpsz000bgjmzrtejqxkk",
+      "name": "KTV Riehen",
+      "website": "https://ktvriehen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:12.796Z"
+    },
+    {
+      "id": "cmjpslpzz000fgjmz2iirksx8",
+      "name": "LK Zug Volleyball",
+      "website": "https://volleyzug.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:14.305Z"
+    },
+    {
+      "id": "cmjpslpu9000cgjmz30mmox7p",
+      "name": "Lancy Volleyball Club",
+      "website": "https://www.lancyvbc.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:15.815Z"
+    },
+    {
+      "id": "cmjpslpx7000dgjmzr0sx5ory",
+      "name": "Lausanne UC",
+      "website": "https://www.sofascore.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:17.330Z"
+    },
+    {
+      "id": "cmjpslpyn000egjmzf2lg9yc2",
+      "name": "Lerbermatt Mittelschule",
+      "website": "https://lerbermatt.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:18.845Z"
+    },
+    {
+      "id": "cmjpslq1a000ggjmzv98rk51c",
+      "name": "Martigny Volley",
+      "website": "https://vbcmartigny.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:20.361Z"
+    },
+    {
+      "id": "cmjprn2dg001a72r72g8xuf9r",
+      "name": "Meyrin GVA Volley",
+      "website": "https://meyrinvolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:21.868Z"
+    },
+    {
+      "id": "cmjpslq2j000hgjmzgurv2jih",
+      "name": "Meyrin VBC",
+      "website": "https://meyrinvolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:23.376Z"
+    },
+    {
+      "id": "cmjpslq5b000jgjmzns1kl0in",
+      "name": "Moesa Volley",
+      "website": "https://www.graubuenden.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:24.888Z"
+    },
+    {
+      "id": "cmjpslq40000igjmzhytti0ms",
+      "name": "Montreux Volley",
+      "website": "https://www.montreuxvolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:26.406Z"
+    },
+    {
+      "id": "cmjprn15p000972r7fbqkt37l",
+      "name": "NLZ Volleyball Academy",
+      "website": "https://volleyballacademy.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:27.911Z"
+    },
+    {
+      "id": "cmjprn2u5001m72r7jgcjd1fm",
+      "name": "Pallavolo Bellinzona",
+      "website": "https://bellinzona-volley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:29.473Z"
+    },
+    {
+      "id": "cmjprn2xd001o72r7sgdm74g3",
+      "name": "Pallavolo Biasca",
+      "website": "https://www.findglocal.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:30.985Z"
+    },
+    {
+      "id": "cmjpslq6q000kgjmz24vdpv5i",
+      "name": "Pallavolo Kreuzlingen",
+      "website": "https://pallavolo.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:32.505Z"
+    },
+    {
+      "id": "cmjprn2vw001n72r79b268utf",
+      "name": "Pallavolo Locarno",
+      "website": "https://sfglocarno.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:34.013Z"
+    },
+    {
+      "id": "cmjpslq85000lgjmzev67h6zc",
+      "name": "Pallavolo-Novaggio-Bedigliora",
+      "website": "https://www.malcavolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:35.522Z"
+    },
+    {
+      "id": "cmjpslq9d000mgjmzxr7onrdz",
+      "name": "Pery Volleyball",
+      "website": "https://www.vbpery.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:37.035Z"
+    },
+    {
+      "id": "cmjpslqbc000ngjmzncqmq1ke",
+      "name": "Raiffeisen Volleya Obwalden",
+      "website": "https://www.volleya.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:38.551Z"
+    },
+    {
+      "id": "cmjpslqcj000ogjmzh1ay173r",
+      "name": "Rainbow Sport Zürich",
+      "website": "https://www.rainbowsport.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:40.092Z"
+    },
+    {
+      "id": "cmjpslqdx000pgjmzq6vxjs5m",
+      "name": "Regio Volleyteam",
+      "website": "https://regiovolleyteam.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:41.640Z"
+    },
+    {
+      "id": "cmjpslqfo000qgjmz6kiclpo3",
+      "name": "Rheno Volleyball",
+      "website": "https://rhenovolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:43.869Z"
+    },
+    {
+      "id": "cmjpslqgz000rgjmzrkmal8un",
+      "name": "Rhone Volley",
+      "website": "https://rhonevolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:45.657Z"
+    },
+    {
+      "id": "cmjpslqi8000sgjmzzme19un0",
+      "name": "S 9",
+      "website": "https://volley-s9.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:47.172Z"
+    },
+    {
+      "id": "cmjpslqjx000tgjmz6fqhk5jn",
+      "name": "SAG Gordola",
+      "website": "https://sagvolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:48.681Z"
+    },
+    {
+      "id": "cmjpslqmp000vgjmzabq6qspy",
+      "name": "SFG Montagny-Cousset",
+      "website": "https://www.fsgmontagnycousset.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:50.357Z"
+    },
+    {
+      "id": "cmjpslqqx000ygjmz10cnv30s",
+      "name": "SSC Audax",
+      "website": "https://www.sscaudax.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:52.037Z"
+    },
+    {
+      "id": "cmjpslqv70011gjmzl7xqam7y",
+      "name": "STV Buttisholz",
+      "website": "https://volley-buttisholz.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:53.981Z"
+    },
+    {
+      "id": "cmjpslqwm0012gjmzimog6vq8",
+      "name": "STV Gränichen",
+      "website": "https://volleygraenichen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:55.540Z"
+    },
+    {
+      "id": "cmjpslqxz0013gjmzbtyy01r6",
+      "name": "STV Hitzkirch",
+      "website": "https://stvhitzkirch.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:57.154Z"
+    },
+    {
+      "id": "cmjpslqzg0014gjmz3e12qfab",
+      "name": "SV Olten",
+      "website": "https://www.svolten.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:06:58.720Z"
+    },
+    {
+      "id": "cmjpslr130015gjmz4ib41azw",
+      "name": "SV Strättligen",
+      "website": "https://www.svthun-straettligen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:00.232Z"
+    },
+    {
+      "id": "cmjpslr2m0016gjmzg8ng9m80",
+      "name": "SV Tägerig",
+      "website": "https://svtaegerig.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:01.737Z"
+    },
+    {
+      "id": "cmjpslr3y0017gjmzirxgtane",
+      "name": "SV Volley Lengnau",
+      "website": "https://svl-lengnau.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:03.251Z"
+    },
+    {
+      "id": "cmjpslqlg000ugjmz1lqtfy1e",
+      "name": "Schaffhausen KJS",
+      "website": "http://www.kjs.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:04.764Z"
+    },
+    {
+      "id": "cmjpslqob000wgjmz8mr7kcwi",
+      "name": "Sm`Aesch Pfeffingen",
+      "website": "https://smaeschpfeffingen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:06.282Z"
+    },
+    {
+      "id": "cmjpslqpn000xgjmzzo89gtv5",
+      "name": "Sportunion Beckenried",
+      "website": "https://sportunion-beckenried.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:07.800Z"
+    },
+    {
+      "id": "cmjpslqs8000zgjmzevdalnae",
+      "name": "St-Maurice",
+      "website": "https://vbcst-maurice.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:09.317Z"
+    },
+    {
+      "id": "cmjpslqtr0010gjmzamfd9vlc",
+      "name": "Stadtturnverein Wil",
+      "website": "https://stadtturnvereinwil.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:10.831Z"
+    },
+    {
+      "id": "cmjpslr5f0018gjmzcyn10efz",
+      "name": "TSV Frick Volleyball",
+      "website": "https://www.frickvolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:12.338Z"
+    },
+    {
+      "id": "cmjpslr6q0019gjmz68lyr149",
+      "name": "TSV Gurmels",
+      "website": "https://tsv-gurmels.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:13.846Z"
+    },
+    {
+      "id": "cmjprn1jo000k72r7hberowob",
+      "name": "TSV Jona Volleyball",
+      "website": "http://www.volleyballjona.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:15.356Z"
+    },
+    {
+      "id": "cmjpslr9p001agjmzq0ixp8ex",
+      "name": "TSV Neuendorf",
+      "website": "https://www.tsvn.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:16.873Z"
+    },
+    {
+      "id": "cmjpslrb0001bgjmzdq862x4w",
+      "name": "TSV Rechthalten",
+      "website": "https://tsvrechthalten.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:18.390Z"
+    },
+    {
+      "id": "cmjpslrca001cgjmz9powscau",
+      "name": "TSV Steinen",
+      "website": "https://www.tsv-steinen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:19.903Z"
+    },
+    {
+      "id": "cmjpslrdl001dgjmze7nran4r",
+      "name": "TSV Wangen",
+      "website": "https://tsvwangen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:21.416Z"
+    },
+    {
+      "id": "cmjpslrgg001fgjmz1nca01wh",
+      "name": "TV Arlesheim",
+      "website": "https://volleyball-arlesheim.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:22.933Z"
+    },
+    {
+      "id": "cmjpslri2001ggjmz3kej5kgx",
+      "name": "TV Dietlikon (Schulsportgruppe)",
+      "website": "https://tvdietlikon.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:24.450Z"
+    },
+    {
+      "id": "cmjpslrje001hgjmzepswlwqn",
+      "name": "TV Hüttwilen",
+      "website": "https://tvhuettwilen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:25.970Z"
+    },
+    {
+      "id": "cmjpslrkz001igjmzc50dlz3k",
+      "name": "TV Itingen",
+      "website": "https://tvitingen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:27.488Z"
+    },
+    {
+      "id": "cmjpslrme001jgjmzcgl8gnm2",
+      "name": "TV Lunkhofen",
+      "website": "https://tvlunkhofen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:29.003Z"
+    },
+    {
+      "id": "cmjpslrnt001kgjmzqatag3s4",
+      "name": "TV Magden",
+      "website": "https://www.tv-magden.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:30.523Z"
+    },
+    {
+      "id": "cmjpslrp7001lgjmziribt45v",
+      "name": "TV Murten Volleyball",
+      "website": "https://www.volleyball-murten.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:32.027Z"
+    },
+    {
+      "id": "cmjpslrqk001mgjmzbfc45i08",
+      "name": "TV Muttenz",
+      "website": "https://www.tvmuttenz.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:33.537Z"
+    },
+    {
+      "id": "cmjpslrrx001ngjmzpic1j34d",
+      "name": "TV Plaffeien",
+      "website": "https://www.tvplaffeien.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:35.051Z"
+    },
+    {
+      "id": "cmjpslrtb001ogjmz2vvn9thm",
+      "name": "TV St. Johann",
+      "website": "https://www.tvstjohann.net",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:36.566Z"
+    },
+    {
+      "id": "cmjpslrul001pgjmzfydketi9",
+      "name": "TV Ursenbach",
+      "website": "https://tvursenbach.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:38.072Z"
+    },
+    {
+      "id": "cmjpslrvy001qgjmz3btfyo5e",
+      "name": "TV Zollikofen",
+      "website": "https://tvz.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:39.684Z"
+    },
+    {
+      "id": "cmjpslrf0001egjmz2ncmiqtw",
+      "name": "Turnverein Horgen",
+      "website": "https://www.tv-horgen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:41.190Z"
+    },
+    {
+      "id": "cmjpslrxl001rgjmz6y2gqvbd",
+      "name": "VB Fides Ruswil",
+      "website": "https://www.volley-ruswil.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:42.703Z"
+    },
+    {
+      "id": "cmjpslryx001sgjmz1gw9hd2e",
+      "name": "VB Neuenkirch",
+      "website": "http://www.vb-neuenkirch.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:44.221Z"
+    },
+    {
+      "id": "cmjpsls08001tgjmzu2d5cwrt",
+      "name": "VB Steinach",
+      "website": "https://vbsteinach.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:45.732Z"
+    },
+    {
+      "id": "cmjprn2iu001e72r78447sv4y",
+      "name": "VBC Aarau",
+      "website": "https://www.volley-aarau.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:47.248Z"
+    },
+    {
+      "id": "cmjpsls1i001ugjmzvhdp50a9",
+      "name": "VBC Aigle",
+      "website": "https://www.vbcaigle.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:48.854Z"
+    },
+    {
+      "id": "cmjpsls31001vgjmz4t9cegvh",
+      "name": "VBC Allschwil",
+      "website": "https://www.vbcallschwil.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:50.985Z"
+    },
+    {
+      "id": "cmjpsls4c001wgjmzjymkw9q7",
+      "name": "VBC Antares-Uitikon",
+      "website": "https://www.vbc-antares.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:53.531Z"
+    },
+    {
+      "id": "cmjpsls5p001xgjmziizqnb51",
+      "name": "VBC Arbon",
+      "website": "https://vbcarbon.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:55.409Z"
+    },
+    {
+      "id": "cmjpsls6v001ygjmzpytjdfy0",
+      "name": "VBC Arosa",
+      "website": "https://vbc-arosa.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:56.919Z"
+    },
+    {
+      "id": "cmjpsls8a001zgjmz23v4v7ol",
+      "name": "VBC Avully",
+      "website": "https://avullyvbc.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:07:58.502Z"
+    },
+    {
+      "id": "cmjprn2k6001f72r7na7m9ghr",
+      "name": "VBC Baden",
+      "website": "https://vbckantibaden.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:00.173Z"
+    },
+    {
+      "id": "cmjpsls9p0020gjmzsr5403m9",
+      "name": "VBC Belfaux",
+      "website": "https://www.vbc-belfaux.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:01.690Z"
+    },
+    {
+      "id": "cmjpslscb0022gjmze5q4m76c",
+      "name": "VBC Bramois",
+      "website": "https://www.vbc-bramois.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:03.206Z"
+    },
+    {
+      "id": "cmjpslsdk0023gjmzctu00of3",
+      "name": "VBC Brig-Glis",
+      "website": "https://www.vbc-brig-glis.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:04.712Z"
+    },
+    {
+      "id": "cmjpslsev0024gjmzd6wivt5r",
+      "name": "VBC Brislach",
+      "website": "https://www.vbcbrislach.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:06.217Z"
+    },
+    {
+      "id": "cmjpslsg90025gjmzjan8w198",
+      "name": "VBC Bulle",
+      "website": "http://vbcbulle.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:07.732Z"
+    },
+    {
+      "id": "cmjpslsho0026gjmz4s6rhdl7",
+      "name": "VBC Buochs",
+      "website": "https://www.vbcbuochs.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:09.255Z"
+    },
+    {
+      "id": "cmjprn2sp001l72r72xltenca",
+      "name": "VBC Burgdorf",
+      "website": "https://www.vbcburgdorf.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:10.762Z"
+    },
+    {
+      "id": "cmjpslsay0021gjmz0ogrgpg8",
+      "name": "VBC Bösingen",
+      "website": "https://vbc-boesingen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:12.268Z"
+    },
+    {
+      "id": "cmjpslskb0027gjmzx21e108b",
+      "name": "VBC Cazis",
+      "website": "https://www.vbc-cazis.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:13.784Z"
+    },
+    {
+      "id": "cmjpslslp0028gjmzc9jh40y8",
+      "name": "VBC Cedra",
+      "website": "https://www.localcities.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:15.298Z"
+    },
+    {
+      "id": "cmjpslsmz0029gjmzb6d6gpqr",
+      "name": "VBC Chatel-St-Denis",
+      "website": "https://www.vbc-chatel.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:16.806Z"
+    },
+    {
+      "id": "cmjprn111000572r75das617i",
+      "name": "VBC Cheseaux",
+      "website": "https://vbccheseaux.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:18.315Z"
+    },
+    {
+      "id": "cmjpslspt002agjmzkasmcjg2",
+      "name": "VBC Chur",
+      "website": "https://vbcchur.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:19.822Z"
+    },
+    {
+      "id": "cmjprn2ax001872r739oebyta",
+      "name": "VBC Colombier",
+      "website": "https://colombiervolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:21.339Z"
+    },
+    {
+      "id": "cmjpslsrl002bgjmzv66ga5ow",
+      "name": "VBC Develier",
+      "website": "https://linktr.ee",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:22.844Z"
+    },
+    {
+      "id": "cmjpslst0002cgjmz0fnaplpe",
+      "name": "VBC Dietwil",
+      "website": "https://www.vbcdietwil.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:24.366Z"
+    },
+    {
+      "id": "cmjpslsun002dgjmz5wfmrhw5",
+      "name": "VBC Dulliken",
+      "website": "https://www.vbc-dulliken.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:25.877Z"
+    },
+    {
+      "id": "cmjpslsw1002egjmzkxr0ykvm",
+      "name": "VBC Ebikon",
+      "website": "https://www.vbcebikon.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:27.390Z"
+    },
+    {
+      "id": "cmjpslsxd002fgjmzop09bf9c",
+      "name": "VBC Eburo",
+      "website": "https://www.vbceburo.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:28.905Z"
+    },
+    {
+      "id": "cmjpslsyn002ggjmzirub65c7",
+      "name": "VBC Ecublens",
+      "website": "https://vbcecublens.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:30.415Z"
+    },
+    {
+      "id": "cmjpslt02002hgjmzb8pjbmm0",
+      "name": "VBC Einsiedeln",
+      "website": "https://vbceinsiedeln.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:31.922Z"
+    },
+    {
+      "id": "cmjpslt1n002igjmzkbyhwh6i",
+      "name": "VBC Etoile-Geneve",
+      "website": "https://vbcgeneve.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:33.437Z"
+    },
+    {
+      "id": "cmjprn2er001b72r7ov86y1ma",
+      "name": "VBC Franches-Montagnes",
+      "website": "https://www.vfm.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:34.943Z"
+    },
+    {
+      "id": "cmjpslt34002jgjmz3pczco5s",
+      "name": "VBC Freies Gymnasium ZH",
+      "website": "https://www.vbc-fgz.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:36.447Z"
+    },
+    {
+      "id": "cmjprn1vk000u72r7ogf5wsrq",
+      "name": "VBC Fribourg",
+      "website": "https://vbcfribourg.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:37.952Z"
+    },
+    {
+      "id": "cmjpslt5z002kgjmzzh314bxt",
+      "name": "VBC Frutigen",
+      "website": "https://www.vbcfrutigen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:39.461Z"
+    },
+    {
+      "id": "cmjpslt7i002lgjmzim2w3cjp",
+      "name": "VBC Furttal",
+      "website": "https://www.vbcfurttal.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:40.973Z"
+    },
+    {
+      "id": "cmjpslt90002mgjmzx9p9l8b2",
+      "name": "VBC Galina",
+      "website": "https://www.vbcgalina.li",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:42.477Z"
+    },
+    {
+      "id": "cmjpsltah002ngjmz67ddsgao",
+      "name": "VBC Gelterkinden",
+      "website": "https://vbcgelterkinden.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:43.990Z"
+    },
+    {
+      "id": "cmjpsltbt002ogjmzekh10n7z",
+      "name": "VBC Gerlafingen",
+      "website": "https://www.vbcgerlafingen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:45.510Z"
+    },
+    {
+      "id": "cmjpsltd5002pgjmztkydfec6",
+      "name": "VBC Grosshöchstetten",
+      "website": "https://vbcg.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:47.226Z"
+    },
+    {
+      "id": "cmjpslteh002qgjmz58m0hwit",
+      "name": "VBC Hallau",
+      "website": "https://vbchallau.jimdoweb.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:48.973Z"
+    },
+    {
+      "id": "cmjpsltfu002rgjmzb3yqr5t1",
+      "name": "VBC Haut-Lac",
+      "website": "https://www.vbchl.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:50.660Z"
+    },
+    {
+      "id": "cmjpslthi002sgjmzk3wp473e",
+      "name": "VBC Herren Oberwallis",
+      "website": "https://www.vbc-how.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:52.181Z"
+    },
+    {
+      "id": "cmjpsltiy002tgjmz743lg0er",
+      "name": "VBC Kanti Baden",
+      "website": "https://vbckantibaden.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:53.690Z"
+    },
+    {
+      "id": "cmjpsltkq002ugjmzztqdzb3a",
+      "name": "VBC Kerzers",
+      "website": "https://www.vbckerzers.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:55.194Z"
+    },
+    {
+      "id": "cmjprn2r8001k72r7yy4remzr",
+      "name": "VBC Kreuzlingen",
+      "website": "https://pallavolo.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:56.710Z"
+    },
+    {
+      "id": "cmjpsltm8002vgjmz32fwe7uk",
+      "name": "VBC Küssnacht",
+      "website": "https://www.vbckuessnacht.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:58.213Z"
+    },
+    {
+      "id": "cmjprn2c6001972r75c3n7exr",
+      "name": "VBC La Chaux-de-Fonds",
+      "website": "https://www.vbcc.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:08:59.721Z"
+    },
+    {
+      "id": "cmjprn1t8000s72r7y8on62jl",
+      "name": "VBC Langenthal",
+      "website": "https://vbclangenthal.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:01.227Z"
+    },
+    {
+      "id": "cmjpsltqx002wgjmzb42yosrk",
+      "name": "VBC Laufen",
+      "website": "https://vbclaufen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:02.737Z"
+    },
+    {
+      "id": "cmjprn258001272r71yvz8q35",
+      "name": "VBC Laufenburg-Kaisten",
+      "website": "https://smash05.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:04.246Z"
+    },
+    {
+      "id": "cmjpsltsc002xgjmzi7fc4w66",
+      "name": "VBC Lausanne",
+      "website": "https://www.lausannevbc.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:05.755Z"
+    },
+    {
+      "id": "cmjpslttn002ygjmz8qextoes",
+      "name": "VBC Le Mont-sur-Lausanne",
+      "website": "https://www.vbclemont.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:07.262Z"
+    },
+    {
+      "id": "cmjpsltva002zgjmzac1b532u",
+      "name": "VBC Leibstadt",
+      "website": "https://www.leibstadt.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:08.782Z"
+    },
+    {
+      "id": "cmjpsltwh0030gjmzzq2lz1pf",
+      "name": "VBC Lengnau",
+      "website": "https://vbc-lengnau.jimdosite.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:10.291Z"
+    },
+    {
+      "id": "cmjpsltxq0031gjmz5lg69j83",
+      "name": "VBC Liesberg",
+      "website": "https://www.liesberg.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:11.795Z"
+    },
+    {
+      "id": "cmjpsltz00032gjmz5kplmi57",
+      "name": "VBC Lignieres",
+      "website": "http://vbclignieres.club",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:13.306Z"
+    },
+    {
+      "id": "cmjpslu0j0033gjmzen64g69f",
+      "name": "VBC Linth",
+      "website": "https://www.vbclinth.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:14.814Z"
+    },
+    {
+      "id": "cmjpslu250034gjmzldyunfpx",
+      "name": "VBC Littau",
+      "website": "https://vbc-littau.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:16.320Z"
+    },
+    {
+      "id": "cmjpslu3o0035gjmzyledim79",
+      "name": "VBC Lungern",
+      "website": "https://volley-region-entlebuch.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:17.840Z"
+    },
+    {
+      "id": "cmjpslu6i0037gjmz9c2tbbn5",
+      "name": "VBC Lyss",
+      "website": "https://www.vbclyss.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:19.348Z"
+    },
+    {
+      "id": "cmjpslu5a0036gjmztti7asyk",
+      "name": "VBC Lützelflüh",
+      "website": "https://www.vbcluetzelflueh.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:20.862Z"
+    },
+    {
+      "id": "cmjpslu7y0038gjmzuclam887",
+      "name": "VBC Malters",
+      "website": "https://www.vbcmalters.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:22.380Z"
+    },
+    {
+      "id": "cmjprn1xy000w72r73c3uflp0",
+      "name": "VBC Martigny",
+      "website": "https://vbcmartigny.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:23.897Z"
+    },
+    {
+      "id": "cmjpslu9o0039gjmzezvgwnk8",
+      "name": "VBC Meggen",
+      "website": "https://www.vbcmeggen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:25.412Z"
+    },
+    {
+      "id": "cmjpslubb003agjmzclioswxp",
+      "name": "VBC Merenschwand-Muri",
+      "website": "https://vbcmerenschwand-muri.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:26.927Z"
+    },
+    {
+      "id": "cmjprn1wo000v72r7y1ocoqf6",
+      "name": "VBC Moudon",
+      "website": "https://www.fsg-moudon.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:28.439Z"
+    },
+    {
+      "id": "cmjpslud8003bgjmzzyjqyhdw",
+      "name": "VBC Münchenbuchsee",
+      "website": "https://vbcmuenchenbuchsee.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:29.948Z"
+    },
+    {
+      "id": "cmjpsluer003cgjmz99upqgq1",
+      "name": "VBC Münchenstein",
+      "website": "https://xn--vbcmnchenstein-jsb.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:31.466Z"
+    },
+    {
+      "id": "cmjpslugj003dgjmzf5nqx058",
+      "name": "VBC Niederlenz",
+      "website": "https://www.vereinsverzeichnis.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:32.977Z"
+    },
+    {
+      "id": "cmjprn21e000z72r7cjplzgy6",
+      "name": "VBC Oberwil",
+      "website": "https://tvoberwil.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:34.494Z"
+    },
+    {
+      "id": "cmjprn2hg001d72r7j87wz1lk",
+      "name": "VBC Olten",
+      "website": "https://www.svolten.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:35.998Z"
+    },
+    {
+      "id": "cmjpsluin003egjmzs5njsy3o",
+      "name": "VBC Pailly",
+      "website": "https://www.localcities.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:37.501Z"
+    },
+    {
+      "id": "cmjpsluk4003fgjmz9kwt1azf",
+      "name": "VBC Peps",
+      "website": "https://pepsvbc.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:39.023Z"
+    },
+    {
+      "id": "cmjpslulp003ggjmzgog0aal7",
+      "name": "VBC Pfäffikon",
+      "website": "https://vbcpfaeffikon.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:40.529Z"
+    },
+    {
+      "id": "cmjpslunh003hgjmzd9e7zxem",
+      "name": "VBC Porrentruy",
+      "website": "https://vbcporrentruy.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:42.040Z"
+    },
+    {
+      "id": "cmjprn28p001672r7gpy3otce",
+      "name": "VBC Port",
+      "website": "https://www.southportvbc.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:43.548Z"
+    },
+    {
+      "id": "cmjpslup5003igjmztkuq4cww",
+      "name": "VBC Préverenges",
+      "website": "https://vbcpreverenges.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:45.058Z"
+    },
+    {
+      "id": "cmjpslusf003kgjmzdxczd014",
+      "name": "VBC Raron",
+      "website": "https://www.vereinsverzeichnis.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:46.561Z"
+    },
+    {
+      "id": "cmjpsluub003lgjmzi9luzhlr",
+      "name": "VBC Rheinfelden",
+      "website": "https://vbc-rheinfelden.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:48.078Z"
+    },
+    {
+      "id": "cmjpsluvz003mgjmzv31lmgfw",
+      "name": "VBC Richterswil (Schulsportgruppe)",
+      "website": "https://vbc-richterswil.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:49.586Z"
+    },
+    {
+      "id": "cmjpsluxa003ngjmzwx3wqhni",
+      "name": "VBC Ried-Brig",
+      "website": "https://www.sv-riedbrig.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:51.097Z"
+    },
+    {
+      "id": "cmjpsluz3003ogjmzm2lxraho",
+      "name": "VBC Rotkreuz",
+      "website": "https://www.vbcrotkreuz.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:52.623Z"
+    },
+    {
+      "id": "cmjpsluqp003jgjmzhs3lh1ws",
+      "name": "VBC Rämi",
+      "website": "http://vbcraemi.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:54.136Z"
+    },
+    {
+      "id": "cmjpslv0g003pgjmzezvlj7uu",
+      "name": "VBC Saviese Olympia",
+      "website": "https://saviese-olympia.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:55.650Z"
+    },
+    {
+      "id": "cmjpslv20003qgjmzyd703udn",
+      "name": "VBC Schmitten",
+      "website": "http://www.vbc-schmitten.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:57.162Z"
+    },
+    {
+      "id": "cmjpslv3q003rgjmzrg7cwqgv",
+      "name": "VBC Seftigen",
+      "website": "https://www.vbcseftigen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:09:58.665Z"
+    },
+    {
+      "id": "cmjpslv5d003sgjmzefpuvia3",
+      "name": "VBC Servette Star-Onex",
+      "website": "https://ssovbc.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:00.180Z"
+    },
+    {
+      "id": "cmjpslv6s003tgjmzi1c2l8pi",
+      "name": "VBC Seuzach",
+      "website": "https://vbcseuzach.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:01.691Z"
+    },
+    {
+      "id": "cmjprn1z4000x72r7zqknfl51",
+      "name": "VBC Sion",
+      "website": "https://vbcsion.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:03.198Z"
+    },
+    {
+      "id": "cmjpslv9z003ugjmz0gdsvakx",
+      "name": "VBC Sixieme 7",
+      "website": "https://6e7.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:04.710Z"
+    },
+    {
+      "id": "cmjpslvbh003vgjmzxdqa67hs",
+      "name": "VBC Smile",
+      "website": "https://www.vbcsmile.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:06.219Z"
+    },
+    {
+      "id": "cmjprn27m001572r796b7a5gx",
+      "name": "VBC Solothurn",
+      "website": "https://www.volleysolothurn.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:07.722Z"
+    },
+    {
+      "id": "cmjpslvcv003wgjmzdnkjia3n",
+      "name": "VBC Sotto-Simme",
+      "website": "https://www.vbcsottosimme.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:09.230Z"
+    },
+    {
+      "id": "cmjpslvee003xgjmzyrzmltyp",
+      "name": "VBC Spada Academica",
+      "website": "https://vbcspada.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:10.738Z"
+    },
+    {
+      "id": "cmjpslvfx003ygjmzj5f5ticj",
+      "name": "VBC Spiez",
+      "website": "https://www.vbcspiez.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:12.245Z"
+    },
+    {
+      "id": "cmjprn1op000o72r7a930wvuo",
+      "name": "VBC Steinhausen",
+      "website": "https://www.vbcsteinhausen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:13.756Z"
+    },
+    {
+      "id": "cmjpslvki0040gjmzlrx8k0fu",
+      "name": "VBC Studen",
+      "website": "https://www.vbc-studen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:15.262Z"
+    },
+    {
+      "id": "cmjpslvhk003zgjmzr8x7eta6",
+      "name": "VBC Stäfa",
+      "website": "https://www.vbcstaefa.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:16.765Z"
+    },
+    {
+      "id": "cmjpslvm20041gjmzsmf08vbz",
+      "name": "VBC Sugnens-Cugy",
+      "website": "https://www.vbcsugnens.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:18.274Z"
+    },
+    {
+      "id": "cmjpslvnn0042gjmz49xu2rsq",
+      "name": "VBC Suito Schwyz",
+      "website": "https://suito.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:19.781Z"
+    },
+    {
+      "id": "cmjpslvpb0043gjmzy2m6islt",
+      "name": "VBC Sursee",
+      "website": "https://www.vbcsursee.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:21.290Z"
+    },
+    {
+      "id": "cmjprn2oj001i72r74y0e4qj7",
+      "name": "VBC Thayngen",
+      "website": "https://www.vereinsverzeichnis.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:22.805Z"
+    },
+    {
+      "id": "cmjpslvqy0044gjmzxh4c3mj3",
+      "name": "VBC Thun",
+      "website": "https://www.vbcthun.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:24.316Z"
+    },
+    {
+      "id": "cmjpslvsf0045gjmzxiixujcv",
+      "name": "VBC Tramelan",
+      "website": "https://www.vbc-tramelan.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:25.824Z"
+    },
+    {
+      "id": "cmjpslvtx0046gjmzc3k5y975",
+      "name": "VBC Triengen",
+      "website": "https://www.vbc-triengen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:27.341Z"
+    },
+    {
+      "id": "cmjpslvvi0047gjmzfpg7v9ip",
+      "name": "VBC Ueberstorf",
+      "website": "https://www.vbc-ueberstorf.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:28.852Z"
+    },
+    {
+      "id": "cmjpslvyt0049gjmzhhwrwbsi",
+      "name": "VBC Uetikon",
+      "website": "http://www.vbcuetikon.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:30.365Z"
+    },
+    {
+      "id": "cmjpslvwv0048gjmzoo7wq19r",
+      "name": "VBC Uni Bern",
+      "website": "https://vbcunibern.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:31.868Z"
+    },
+    {
+      "id": "cmjprn2n5001h72r7fj0dam57",
+      "name": "VBC Uster",
+      "website": "https://volley-uster.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:33.390Z"
+    },
+    {
+      "id": "cmjpslw06004agjmzjyij78vm",
+      "name": "VBC Viamala Thusis",
+      "website": "https://www.vbcviamalathusis.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:34.901Z"
+    },
+    {
+      "id": "cmjpslw21004bgjmzqaitmmzu",
+      "name": "VBC Volebo Freiamt",
+      "website": "https://www.volebo.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:36.413Z"
+    },
+    {
+      "id": "cmjpslw3h004cgjmzmg0ql2rx",
+      "name": "VBC Voléro Zürich",
+      "website": "https://vbc.volero.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:37.965Z"
+    },
+    {
+      "id": "cmjpslw5c004dgjmzs1gc9oi6",
+      "name": "VBC Werdana Buchs",
+      "website": "https://vbc-werdana.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:39.493Z"
+    },
+    {
+      "id": "cmjprn2ll001g72r7hm5hw3wy",
+      "name": "VBC Wetzikon",
+      "website": "http://vbc-wetzikon.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:41.008Z"
+    },
+    {
+      "id": "cmjpslw6m004egjmz178ct4in",
+      "name": "VBC Willisau",
+      "website": "https://www.vbcwillisau.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:42.511Z"
+    },
+    {
+      "id": "cmjprn2g3001c72r7mh2gz7nf",
+      "name": "VBC Wimmis",
+      "website": "https://sportimevbc.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:44.184Z"
+    },
+    {
+      "id": "cmjpslw7t004fgjmz3od0atjj",
+      "name": "VBC Yverdon",
+      "website": "https://www.vbcyverdon.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:45.804Z"
+    },
+    {
+      "id": "cmjpslw9b004ggjmzjza5fbez",
+      "name": "VBC Züri Unterland",
+      "website": "https://www.vbczu.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:47.315Z"
+    },
+    {
+      "id": "cmjpslwan004hgjmzzn3nt2dh",
+      "name": "VBG Klettgau",
+      "website": "https://www.vbg-klettgau.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:48.835Z"
+    },
+    {
+      "id": "cmjpslwbx004igjmzvfj8zrwm",
+      "name": "VBG Welschenrohr",
+      "website": "https://www.vbgw-h.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:50.340Z"
+    },
+    {
+      "id": "cmjpslwd3004jgjmzy09et3yi",
+      "name": "VBR Rickenbach",
+      "website": "https://vbr-rickenbach.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:51.845Z"
+    },
+    {
+      "id": "cmjprn0tu000172r7nw85yk2i",
+      "name": "VC Kanti Schaffhausen",
+      "website": "https://vckanti.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:53.365Z"
+    },
+    {
+      "id": "cmjpslwix004kgjmzct6jd5fp",
+      "name": "VC Los Unidos Ob.Seetal",
+      "website": "https://www.losunidos.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:54.875Z"
+    },
+    {
+      "id": "cmjpslwk3004lgjmzx493ui9k",
+      "name": "VC Safenwil-Kölliken",
+      "website": "https://www.vcsk.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:56.381Z"
+    },
+    {
+      "id": "cmjpslwli004mgjmzf8iwr6q4",
+      "name": "VC Smash Winterthur",
+      "website": "https://vc-smash.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:57.887Z"
+    },
+    {
+      "id": "cmjpslwmy004ngjmz6dnhvgwn",
+      "name": "VC Tornado Adliswil",
+      "website": "https://www.vctornado.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:10:59.405Z"
+    },
+    {
+      "id": "cmjpslwoa004ogjmzn4zvwp4h",
+      "name": "VC Uettligen",
+      "website": "https://www.vcuettligen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:00.914Z"
+    },
+    {
+      "id": "cmjpslwph004pgjmztrb0y275",
+      "name": "Volewa Wald",
+      "website": "https://www.volewa.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:02.423Z"
+    },
+    {
+      "id": "cmjpslwqr004qgjmzk6lehwv0",
+      "name": "Volley Aadorf",
+      "website": "https://volleyaadorf.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:03.928Z"
+    },
+    {
+      "id": "cmjpslwsc004rgjmzco7xoy3a",
+      "name": "Volley Aarburg-Zofingen",
+      "website": "https://volley-vaz.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:06.034Z"
+    },
+    {
+      "id": "cmjpslwtk004sgjmz0c1gzstk",
+      "name": "Volley Academy Valais",
+      "website": "https://www.findglocal.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:07.923Z"
+    },
+    {
+      "id": "cmjprn2pw001j72r7a9o0y1m2",
+      "name": "Volley Arbon",
+      "website": "https://vbcarbon.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:09.534Z"
+    },
+    {
+      "id": "cmjpslww6004tgjmzmgt443js",
+      "name": "Volley Avenches",
+      "website": "https://volleyavenches.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:11.471Z"
+    },
+    {
+      "id": "cmjpslwxh004ugjmz3c3veisn",
+      "name": "Volley Brugg",
+      "website": "https://www.vbcbrugg.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:13.449Z"
+    },
+    {
+      "id": "cmjprn23w001172r7gpis05zy",
+      "name": "Volley Bülach",
+      "website": "https://volleyballacademy.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:16.227Z"
+    },
+    {
+      "id": "cmjpslwyr004vgjmz6d1u3dgc",
+      "name": "Volley Bütschwil",
+      "website": "https://volleybuetschwil.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:17.851Z"
+    },
+    {
+      "id": "cmjpslx00004wgjmz46lq2pl1",
+      "name": "Volley Caslano",
+      "website": "https://volleycaslano.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:19.618Z"
+    },
+    {
+      "id": "cmjprn0wo000372r7z8je9d7u",
+      "name": "Volley Düdingen",
+      "website": "https://www.volleyduedingen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:21.795Z"
+    },
+    {
+      "id": "cmjpslx2x004xgjmz64wodd8m",
+      "name": "Volley Emmen-Nord",
+      "website": "https://ven.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:23.341Z"
+    },
+    {
+      "id": "cmjpslx44004ygjmzr8c0oipx",
+      "name": "Volley Estavayer",
+      "website": "https://www.fsgestavayer.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:24.877Z"
+    },
+    {
+      "id": "cmjpslx5g004zgjmzjb3oaee8",
+      "name": "Volley Goldach",
+      "website": "https://www.volleygoldach.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:26.396Z"
+    },
+    {
+      "id": "cmjpslx720050gjmzipjr08as",
+      "name": "Volley GraPa",
+      "website": "https://www.volleygrapa.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:27.942Z"
+    },
+    {
+      "id": "cmjprn1ud000t72r7qwrcwxsx",
+      "name": "Volley Guggis Oberdiessbach",
+      "website": "https://www.volley-oberdiessbach.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:29.484Z"
+    },
+    {
+      "id": "cmjpslxb30053gjmz8yaqlkf2",
+      "name": "Volley KTV Muotathal",
+      "website": "https://www.volleyktvmuotathal.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:31.044Z"
+    },
+    {
+      "id": "cmjpslx9u0052gjmzqymtc89k",
+      "name": "Volley Kriens",
+      "website": "https://volleykriens.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:32.563Z"
+    },
+    {
+      "id": "cmjpslx8m0051gjmz3al1j8rb",
+      "name": "Volley Köniz",
+      "website": "https://volley-koeniz.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:34.547Z"
+    },
+    {
+      "id": "cmjpslxcg0054gjmzcdsctycz",
+      "name": "Volley Liebefeld",
+      "website": "https://volleyliebefeld.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:36.553Z"
+    },
+    {
+      "id": "cmjpslxey0056gjmzcsefgozl",
+      "name": "Volley Moutier",
+      "website": "https://moutier.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:39.229Z"
+    },
+    {
+      "id": "cmjpslxho0058gjmz7o6yasqj",
+      "name": "Volley Mutschellen",
+      "website": "https://volleymutschellen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:41.538Z"
+    },
+    {
+      "id": "cmjpslxdm0055gjmz40fk3hzw",
+      "name": "Volley Möhlin",
+      "website": "https://volley-moehlin.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:43.622Z"
+    },
+    {
+      "id": "cmjpslxgc0057gjmztdkit6x7",
+      "name": "Volley Münsingen",
+      "website": "https://volley-muensingen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:45.220Z"
+    },
+    {
+      "id": "cmjpslxj30059gjmz0457s6cd",
+      "name": "Volley Obfelden",
+      "website": "https://volley-obfelden.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:46.827Z"
+    },
+    {
+      "id": "cmjpslxka005agjmzglapg163",
+      "name": "Volley Oerlikon",
+      "website": "https://www.volleyoerlikon.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:48.486Z"
+    },
+    {
+      "id": "cmjpslxlj005bgjmzxxdxwmqp",
+      "name": "Volley Rain",
+      "website": "https://emerald-rain.com",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:50.326Z"
+    },
+    {
+      "id": "cmjpslxmq005cgjmzorlz98et",
+      "name": "Volley Region Entlebuch",
+      "website": "https://volley-region-entlebuch.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:52.106Z"
+    },
+    {
+      "id": "cmjpslxo9005dgjmzk9pj1caf",
+      "name": "Volley Rossrüti",
+      "website": "https://volleyrossrueti.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:53.720Z"
+    },
+    {
+      "id": "cmjpslxpm005egjmz7g4z6qul",
+      "name": "Volley Rüschlikon",
+      "website": "https://www.volleyrueschlikon.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:55.437Z"
+    },
+    {
+      "id": "cmjpslxqt005fgjmzlzhqr0ao",
+      "name": "Volley Smash 05 Laufenburg-Kaisten",
+      "website": "https://smash05.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:56.965Z"
+    },
+    {
+      "id": "cmjprn22p001072r7904cvbme",
+      "name": "Volley Smash Winterthur",
+      "website": "https://vc-smash.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:11:58.484Z"
+    },
+    {
+      "id": "cmjpslxs0005ggjmzlz4gr4q0",
+      "name": "Volley Speicher",
+      "website": "https://volleyspeicher.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:00.002Z"
+    },
+    {
+      "id": "cmjpslxt7005hgjmz4bpcu84b",
+      "name": "Volley Surselva",
+      "website": "https://volleysurselva.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:01.567Z"
+    },
+    {
+      "id": "cmjprn29t001772r71gup7suw",
+      "name": "Volley Thun",
+      "website": "https://www.vbcthun.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:03.201Z"
+    },
+    {
+      "id": "cmjpslxuo005igjmzx1xsiphk",
+      "name": "Volley Toggenburg",
+      "website": "https://volleytoggenburg.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:04.928Z"
+    },
+    {
+      "id": "cmjpslxw7005jgjmzw9s9n46l",
+      "name": "Volley Uni Bern",
+      "website": "https://vbcunibern.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:06.453Z"
+    },
+    {
+      "id": "cmjpslxxg005kgjmz4l5cui8a",
+      "name": "Volley Unisport Fribourg (VUF)",
+      "website": "https://www.unifr.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:08.251Z"
+    },
+    {
+      "id": "cmjpslxyt005lgjmz4a94qa99",
+      "name": "Volley Uri",
+      "website": "https://www.volleyuri.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:10.040Z"
+    },
+    {
+      "id": "cmjpsly0m005mgjmzl8nmyz84",
+      "name": "Volley Uster",
+      "website": "https://volley-uster.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:11.563Z"
+    },
+    {
+      "id": "cmjpsly2w005ngjmz86ny3wua",
+      "name": "Volley Waldkirch",
+      "website": "https://www.volleywaldkirch.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:13.549Z"
+    },
+    {
+      "id": "cmjpsly5w005ogjmz4lqbpyel",
+      "name": "Volley Wila-Turbenthal",
+      "website": "https://www.volleywila.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:15.177Z"
+    },
+    {
+      "id": "cmjpsly77005pgjmz46rvheof",
+      "name": "Volley-Team Wolhusen",
+      "website": "https://www.volley-team-wolhusen.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:17.017Z"
+    },
+    {
+      "id": "cmjpsly8s005qgjmzkyx9rh31",
+      "name": "Volley-X Recherswil",
+      "website": "https://volley-x.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:18.896Z"
+    },
+    {
+      "id": "cmjpslyab005rgjmz1fbfub7s",
+      "name": "Volleyball Academy",
+      "website": "https://volleyballacademy.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:21.266Z"
+    },
+    {
+      "id": "cmjpslybj005sgjmz8t7ybtnp",
+      "name": "Volleyball-Club Volketswil",
+      "website": "https://www.vbcv.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:23.209Z"
+    },
+    {
+      "id": "cmjpslycn005tgjmzpk8gvudq",
+      "name": "Wädivolley",
+      "website": "https://www.waedivolley.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:25.058Z"
+    },
+    {
+      "id": "cmjpslyds005ugjmzepu7ognp",
+      "name": "ZUZU Beach",
+      "website": "https://www.zuzubeach.ch",
+      "leagues": {},
+      "leaguesFound": [],
+      "scrapedAt": "2025-12-28T22:12:26.852Z"
+    }
+  ],
+  "statistics": {
+    "total": 254,
+    "withLeagues": 2,
+    "womenNLA": 0,
+    "womenNLB": 0,
+    "women1L": 0,
+    "women2L": 0,
+    "women3L": 0,
+    "women4L": 0,
+    "women5L": 0,
+    "menNLA": 0,
+    "menNLB": 0,
+    "men1L": 0,
+    "men2L": 0,
+    "men3L": 0,
+    "men4L": 0,
+    "men5L": 0,
+    "errors": 0
+  },
+  "scrapedAt": "2025-12-28T22:12:28.373Z"
+}

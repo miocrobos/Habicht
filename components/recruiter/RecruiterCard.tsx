@@ -115,6 +115,7 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
                   width={16}
                   height={16}
                   className="w-4 h-4 rounded object-contain bg-white"
+                  unoptimized
                 />
               ) : (
                 <Users className="w-4 h-4" />

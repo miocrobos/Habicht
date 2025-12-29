@@ -1,0 +1,488 @@
+[
+  {
+    "url": "https://www.volleyball.ch/api/searchkit/club-search",
+    "data": {
+      "results": [
+        {
+          "appliedRules": [],
+          "exhaustiveNbHits": true,
+          "exhaustiveFacetsCount": true,
+          "exhaustiveTypo": true,
+          "exhaustive": {
+            "facetsCount": true,
+            "nbHits": true,
+            "typo": true
+          },
+          "hitsPerPage": 8,
+          "processingTimeMS": 23,
+          "nbHits": 299,
+          "page": 0,
+          "nbPages": 38,
+          "query": "",
+          "renderingContent": {
+            "facetOrdering": {
+              "facets": {
+                "order": [
+                  "offers",
+                  "activeLeaguesWomen",
+                  "activeLeaguesMen",
+                  "juniorteamsWomen",
+                  "juniorteamsMen"
+                ]
+              },
+              "values": {
+                "offers": {
+                  "sortRemainingBy": "count"
+                },
+                "activeLeaguesWomen": {
+                  "sortRemainingBy": "count"
+                },
+                "activeLeaguesMen": {
+                  "sortRemainingBy": "count"
+                },
+                "juniorteamsWomen": {
+                  "sortRemainingBy": "count"
+                },
+                "juniorteamsMen": {
+                  "sortRemainingBy": "count"
+                }
+              }
+            }
+          },
+          "facets": {
+            "offers": {
+              "kidsVolley": 125,
+              "additionalOffersAdults": 97,
+              "additionalOffersJuniors": 35,
+              "activeBeachWomen": 33,
+              "activeBeachMen": 25,
+              "juniorteamsBeachWomen": 21,
+              "juniorteamsBeachMen": 17
+            },
+            "juniorteamsWomen": {
+              "U18": 139,
+              "U20": 115,
+              "U16": 114,
+              "U23": 110,
+              "U14": 87,
+              "U15": 13,
+              "U17": 10,
+              "U13": 2,
+              "U19": 1
+            },
+            "activeLeaguesWomen": {
+              "4L": 146,
+              "3L": 133,
+              "5L": 105,
+              "2L": 83,
+              "1L": 37,
+              "NLA": 9,
+              "NLB": 9,
+              "Senioren": 9
+            },
+            "juniorteamsMen": {
+              "U23": 69,
+              "U18": 57,
+              "U16": 47,
+              "U20": 44,
+              "U14": 25,
+              "U15": 3,
+              "U17": 2
+            },
+            "activeLeaguesMen": {
+              "3L": 86,
+              "2L": 73,
+              "4L": 72,
+              "1L": 33,
+              "5L": 18,
+              "NLB": 8,
+              "NLA": 6
+            }
+          },
+          "facets_stats": {},
+          "hits": [
+            {
+              "objectID": "912040",
+              "_index": "clubs-0-1766883607",
+              "_score": null,
+              "zip": "",
+              "juniorteamsWomen": [],
+              "offers": [
+                "additionalOffersJuniors"
+              ],
+              "website": "https://sportclub.clubdesk.com",
+              "city": "",
+              "plusCode": "",
+              "caption": " Zürich-Affoltern (Schulsportgruppe)",
+              "activeLeaguesWomen": [],
+              "juniorteamsMen": [],
+              "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/0dd1232c37548469d9b77ec582e8bb2eebf73d15/55284_%20Z%C3%BCrich-Affoltern%20%28Schulsportgruppe%29.png",
+              "offersToShowOnClubCard": [
+                {
+                  "additionalOffersJuniors": [],
+                  "juniorteamsMen": []
+                }
+              ],
+              "id": 912040,
+              "activeLeaguesMen": [],
+              "email": ""
+            },
+            {
+              "objectID": "915155",
+              "_index": "clubs-0-1766883607",
+              "_score": null,
+              "zip": "6900",
+              "juniorteamsWomen": [],
+              "offers": [],
+              "website": "www.dragonslugano.ch",
+              "city": "Lugano",
+              "plusCode": "8FRC2X52+P8",
+              "caption": "#Dragons Lugano",
+              "activeLeaguesWomen": [],
+              "juniorteamsMen": [
+                "U18",
+                "U16",
+                "U14"
+              ],
+              "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/394c1e133869ad5ecfaffac768ca368256a3cc35/27630_%23Dragons%20Lugano.png",
+              "offersToShowOnClubCard": [
+                {
+                  "activeLeaguesMen": [
+                    "1L",
+                    "2L",
+                    "4L"
+                  ],
+                  "juniorteamsMen": [
+                    "U18",
+                    "U16",
+                    "U14"
+                  ]
+                }
+              ],
+              "id": 915155,
+              "activeLeaguesMen": [
+                "1L",
+                "2L",
+                "4L"
+              ],
+              "email": "info@dragonslugano.ch"
+            },
+            {
+              "objectID": "901025",
+              "_index": "clubs-0-1766883607",
+              "_score": null,
+              "zip": "",
+              "juniorteamsWomen": [],
+              "offers": [
+                "activeBeachMen"
+              ],
+              "website": "https://www.facebook.com/p/Afghans-Volleyball-club-Geneva-100063548208094/?locale=fr_FR",
+              "city": "",
+              "plusCode": "",
+              "caption": "Afghan Volleyball Genève",
+              "activeLeaguesWomen": [],
+              "juniorteamsMen": [],
+              "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/c3e487b4b31ab71c90b6808c2214df1914711e6f/56298_Afghan%20Volleyball%20Gen%C3%A8ve.png",
+              "offersToShowOnClubCard": [
+                {
+                  "activeBeachMen": []
+                }
+              ],
+              "id": 901025,
+              "activeLeaguesMen": [],
+              "email": ""
+            },
+            {
+              "objectID": "915040",
+              "_index": "clubs-0-1766883607",
+              "_score": null,
+              "zip": "6500",
+              "juniorteamsWomen": [
+                "U20",
+                "U18",
+                "U16",
+                "U14"
+              ],
+              "offers": [
+                "kidsVolley",
+                "activeBeachWomen",
+                "juniorteamsBeachWomen",
+                "additionalOffersAdults"
+              ],
+              "website": "https://bellinzona-volley.ch",
+              "city": "Bellinzona",
+              "plusCode": "8FRF52VF+GG",
+              "caption": "Bellinzona Volley",
+              "activeLeaguesWomen": [
+                "NLB",
+                "1L",
+                "2L",
+                "3L",
+                "4L"
+              ],
+              "juniorteamsMen": [],
+              "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/77918791f9ac4a254192180ceb52d209b1c33f26/22469_G%26B%20Scuola%20Volley.png",
+              "offersToShowOnClubCard": [
+                {
+                  "juniorteamsWomen": [
+                    "U20",
+                    "U18",
+                    "U16",
+                    "U14"
+                  ],
+                  "activeLeaguesWomen": [
+                    "NLB",
+                    "1L",
+                    "2L",
+                    "3L",
+                    "4L"
+                  ],
+                  "activeBeachWomen": [],
+                  "additionalOffersAdults": [],
+                  "juniorteamsBeachWomen": [],
+                  "kidsVolley": []
+                }
+              ],
+              "id": 915040,
+              "activeLeaguesMen": [],
+              "email": "segretariato@bellinzona-volley.ch"
+            },
+            {
+              "objectID": "905090",
+              "_index": "clubs-0-1766883607",
+              "_score": null,
+              "zip": "2500",
+              "juniorteamsWomen": [],
+              "offers": [],
+              "website": "",
+              "city": "Bienne",
+              "plusCode": "8FV946PW+PP",
+              "caption": "Bienne Volleyboys",
+              "activeLeaguesWomen": [
+                "3L",
+                "4L",
+                "5L"
+              ],
+              "juniorteamsMen": [
+                "U23"
+              ],
+              "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/b09fde5f138055b1e90eb5534be6936d6efb56f3/20102_Bienne%20Volleyboys.png",
+              "offersToShowOnClubCard": [
+                {
+                  "activeLeaguesWomen": [
+                    "3L",
+                    "4L",
+                    "5L"
+                  ],
+                  "activeLeaguesMen": [
+                    "1L",
+                    "2L",
+                    "3L"
+                  ],
+                  "juniorteamsMen": [
+                    "U23"
+                  ]
+                }
+              ],
+              "id": 905090,
+              "activeLeaguesMen": [
+                "1L",
+                "2L",
+                "3L"
+              ],
+              "email": "info@volleyboys.ch"
+            },
+            {
+              "objectID": "905210",
+              "_index": "clubs-0-1766883607",
+              "_score": null,
+              "zip": "2735",
+              "juniorteamsWomen": [
+                "U18"
+              ],
+              "offers": [
+                "kidsVolley"
+              ],
+              "website": "www.bmv92.ch",
+              "city": "Valbirse",
+              "plusCode": "8FV967VG+3P",
+              "caption": "BMV 92",
+              "activeLeaguesWomen": [
+                "3L",
+                "5L"
+              ],
+              "juniorteamsMen": [],
+              "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/be215a75373bbfafddc0752e2ce3f74bbe9cbd36/20134_BMV%2092.png",
+              "offersToShowOnClubCard": [
+                {
+                  "juniorteamsWomen": [
+                    "U18"
+                  ],
+                  "activeLeaguesWomen": [
+                    "3L",
+                    "5L"
+                  ],
+                  "activeLeaguesMen": [
+                    "3L"
+                  ],
+                  "juniorteamsMen": [],
+                  "kidsVolley": []
+                }
+              ],
+              "id": 905210,
+              "activeLeaguesMen": [
+                "3L"
+              ],
+              "email": "presidence@bmv92.ch"
+            },
+            {
+              "objectID": "910010",
+              "_index": "clubs-0-1766883607",
+              "_score": null,
+              "zip": "5000",
+              "juniorteamsWomen": [
+                "U23",
+                "U20",
+                "U18",
+                "U16"
+              ],
+              "offers": [
+                "kidsVolley",
+                "activeBeachWomen"
+              ],
+              "website": "https://www.volley-aarau.ch/",
+              "city": "Aarau",
+              "plusCode": "8FVC92QV+5M",
+              "caption": "BTV Aarau",
+              "activeLeaguesWomen": [
+                "NLB",
+                "1L",
+                "Senioren",
+                "2L",
+                "3L",
+                "4L",
+                "5L"
+              ],
+              "juniorteamsMen": [
+                "U23",
+                "U20",
+                "U18",
+                "U16"
+              ],
+              "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/486f0d9007e1b47f19227498c13ae8ed034aebbd/21127_BTV%20Aarau.png",
+              "offersToShowOnClubCard": [
+                {
+                  "juniorteamsWomen": [
+                    "U23",
+                    "U20",
+                    "U18",
+                    "U16"
+                  ],
+                  "activeLeaguesWomen": [
+                    "NLB",
+                    "1L",
+                    "Senioren",
+                    "2L",
+                    "3L",
+                    "4L",
+                    "5L"
+                  ],
+                  "activeBeachWomen": [],
+                  "activeLeaguesMen": [
+                    "NLB",
+                    "2L",
+                    "4L",
+                    "5L"
+                  ],
+                  "juniorteamsMen": [
+                    "U23",
+                    "U20",
+                    "U18",
+                    "U16"
+                  ],
+                  "kidsVolley": []
+                }
+              ],
+              "id": 910010,
+              "activeLeaguesMen": [
+                "NLB",
+                "2L",
+                "4L",
+                "5L"
+              ],
+              "email": "info@volley-aarau.ch"
+            },
+            {
+              "objectID": "901060",
+              "_index": "clubs-0-1766883607",
+              "_score": null,
+              "zip": "1225",
+              "juniorteamsWomen": [
+                "U20",
+                "U18",
+                "U16"
+              ],
+              "offers": [
+                "kidsVolley"
+              ],
+              "website": "https://www.chenoisvolley.ch",
+              "city": "Chene-Bourg",
+              "plusCode": "8FR855XW+8V",
+              "caption": "Chênois Genève Volleyball",
+              "activeLeaguesWomen": [
+                "2L",
+                "3L",
+                "4L"
+              ],
+              "juniorteamsMen": [
+                "U23",
+                "U20",
+                "U18",
+                "U16",
+                "U14"
+              ],
+              "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/e88d709867a1982d28aabff5545c7a2d2d4fdc7c/19684_Ch%C3%AAnois%20Gen%C3%A8ve%20Volleyball.png",
+              "offersToShowOnClubCard": [
+                {
+                  "juniorteamsWomen": [
+                    "U20",
+                    "U18",
+                    "U16"
+                  ],
+                  "activeLeaguesWomen": [
+                    "2L",
+                    "3L",
+                    "4L"
+                  ],
+                  "activeLeaguesMen": [
+                    "NLA",
+                    "1L",
+                    "2L"
+                  ],
+                  "juniorteamsMen": [
+                    "U23",
+                    "U20",
+                    "U18",
+                    "U16",
+                    "U14"
+                  ],
+                  "kidsVolley": []
+                }
+              ],
+              "id": 901060,
+              "activeLeaguesMen": [
+                "NLA",
+                "1L",
+                "2L"
+              ],
+              "email": "club@chenoisvolley.ch"
+            }
+          ],
+          "index": "clubs-0_caption_asc",
+          "params": "facets=activeLeaguesMen%2CactiveLeaguesWomen%2CjuniorteamsMen%2CjuniorteamsWomen%2Coffers&highlightPostTag=__%2Fais-highlight__&highlightPreTag=__ais-highlight__&hitsPerPage=8&maxValuesPerFacet=10&page=0&query="
+        }
+      ]
+    },
+    "timestamp": "2025-12-28T17:38:27.320Z"
+  }
+]

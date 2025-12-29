@@ -49,28 +49,34 @@ export default function ClubAdminPage() {
     }
   })
 
-  const LEAGUE_OPTIONS = [
-    { value: 'hasNLAMen', label: 'NLA Männer' },
-    { value: 'hasNLAWomen', label: 'NLA Frauen' },
-    { value: 'hasNLBMen', label: 'NLB Männer' },
-    { value: 'hasNLBWomen', label: 'NLB Frauen' },
-    { value: 'has1LigaMen', label: '1. Liga Männer' },
-    { value: 'has1LigaWomen', label: '1. Liga Frauen' },
-    { value: 'has2LigaMen', label: '2. Liga Männer' },
-    { value: 'has2LigaWomen', label: '2. Liga Frauen' },
-    { value: 'has3LigaMen', label: '3. Liga Männer' },
-    { value: 'has3LigaWomen', label: '3. Liga Frauen' },
-    { value: 'has4LigaMen', label: '4. Liga Männer' },
-    { value: 'has4LigaWomen', label: '4. Liga Frauen' },
-    { value: 'has5LigaMen', label: '5. Liga Männer' },
-    { value: 'has5LigaWomen', label: '5. Liga Frauen' },
-    { value: 'hasU23Men', label: 'U23 Männer' },
-    { value: 'hasU23Women', label: 'U23 Frauen' },
-    { value: 'hasU20Men', label: 'U20 Männer' },
-    { value: 'hasU20Women', label: 'U20 Frauen' },
-    { value: 'hasU18Men', label: 'U18 Männer' },
-    { value: 'hasU18Women', label: 'U18 Frauen' },
+  // Generate league options with translated labels
+  const getLeagueOptions = () => [
+    { value: 'hasNLAMen', leagueName: 'NLA', genderKey: 'men' },
+    { value: 'hasNLAWomen', leagueName: 'NLA', genderKey: 'women' },
+    { value: 'hasNLBMen', leagueName: 'NLB', genderKey: 'men' },
+    { value: 'hasNLBWomen', leagueName: 'NLB', genderKey: 'women' },
+    { value: 'has1LigaMen', leagueName: '1. Liga', genderKey: 'men' },
+    { value: 'has1LigaWomen', leagueName: '1. Liga', genderKey: 'women' },
+    { value: 'has2LigaMen', leagueName: '2. Liga', genderKey: 'men' },
+    { value: 'has2LigaWomen', leagueName: '2. Liga', genderKey: 'women' },
+    { value: 'has3LigaMen', leagueName: '3. Liga', genderKey: 'men' },
+    { value: 'has3LigaWomen', leagueName: '3. Liga', genderKey: 'women' },
+    { value: 'has4LigaMen', leagueName: '4. Liga', genderKey: 'men' },
+    { value: 'has4LigaWomen', leagueName: '4. Liga', genderKey: 'women' },
+    { value: 'has5LigaMen', leagueName: '5. Liga', genderKey: 'men' },
+    { value: 'has5LigaWomen', leagueName: '5. Liga', genderKey: 'women' },
+    { value: 'hasU23Men', leagueName: 'U23', genderKey: 'men' },
+    { value: 'hasU23Women', leagueName: 'U23', genderKey: 'women' },
+    { value: 'hasU20Men', leagueName: 'U20', genderKey: 'men' },
+    { value: 'hasU20Women', leagueName: 'U20', genderKey: 'women' },
+    { value: 'hasU18Men', leagueName: 'U18', genderKey: 'men' },
+    { value: 'hasU18Women', leagueName: 'U18', genderKey: 'women' },
   ];
+
+  const LEAGUE_OPTIONS = getLeagueOptions().map(opt => ({
+    value: opt.value,
+    label: `${opt.leagueName} ${t(`clubProfile.${opt.genderKey}`)}`
+  }));
 
   useEffect(() => {
     loadClubs()
@@ -379,6 +385,7 @@ export default function ClubAdminPage() {
                             alt={club.name}
                             fill
                             className="object-contain p-2"
+                            unoptimized
                           />
                         </div>
                       ) : (

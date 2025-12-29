@@ -124,6 +124,9 @@ export default function Header() {
             <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium">
               {t('nav.women')}
             </Link>
+            <Link href="/player-requests" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium">
+              {t('nav.playerRequests') || 'Aafroge'}
+            </Link>
             <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium">
               {t('nav.clubs')}
             </Link>
@@ -314,6 +317,15 @@ export default function Header() {
               >
                 <Building2 className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                 <span>{t('nav.clubs')}</span>
+              </Link>
+              
+              <Link 
+                href="/player-requests" 
+                className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="text-lg">📋</span>
+                <span>{t('nav.playerRequests') || 'Spieler-Aafroge'}</span>
               </Link>
               
               <Link 

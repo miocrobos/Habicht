@@ -1,0 +1,310 @@
+[
+  {
+    "teamName": "BIWI VFM",
+    "clubName": "BIWI VFM",
+    "league": "NLA",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Infomaniak Genève Volley",
+    "clubName": "Infomaniak Genève Volley",
+    "league": "NLA",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "NLZ Volleyball Academy",
+    "clubName": "NLZ Volleyball Academy",
+    "league": "NLA",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Raiffeisen Volley Toggenburg",
+    "clubName": "Raiffeisen Volley Toggenburg",
+    "league": "NLA",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Sm`Aesch Pfeffingen",
+    "clubName": "Sm`Aesch Pfeffingen",
+    "league": "NLA",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "VBC Cheseaux",
+    "clubName": "VBC Cheseaux",
+    "league": "NLA",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "VC Kanti Schaffhausen",
+    "clubName": "VC Kanti Schaffhausen",
+    "league": "NLA",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Viteos NUC",
+    "clubName": "Viteos NUC",
+    "league": "NLA",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Volley Düdingen",
+    "clubName": "Volley Düdingen",
+    "league": "NLA",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Volley Lugano",
+    "clubName": "Volley Lugano",
+    "league": "NLA",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "BTV Aarau",
+    "clubName": "BTV Aarau",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Bellinzona Volley",
+    "clubName": "Bellinzona Volley",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Lausanne UC",
+    "clubName": "Lausanne UC",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "NNV Eaglets Volley Aarau",
+    "clubName": "NNV Eaglets Volley Aarau",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Raiffeisen Volley Glaronia",
+    "clubName": "Raiffeisen Volley Glaronia",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "VBC Kanti Baden",
+    "clubName": "VBC Kanti Baden",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "VBC NUC",
+    "clubName": "VBC NUC",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "VBC Servette Star-Onex",
+    "clubName": "VBC Servette Star-Onex",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "VBC Visp",
+    "clubName": "VBC Visp",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Volley Aadorf",
+    "clubName": "Volley Aadorf",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Volley Köniz",
+    "clubName": "Volley Köniz",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Volley Luzern",
+    "clubName": "Volley Luzern",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Volley Oberdiessbach",
+    "clubName": "Volley Oberdiessbach",
+    "league": "NLB",
+    "gender": "women",
+    "category": "senior"
+  },
+  {
+    "teamName": "Chênois Genève Volleyball",
+    "clubName": "Chênois Genève Volleyball",
+    "league": "NLA",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "Colombier Volley",
+    "clubName": "Colombier Volley",
+    "league": "NLA",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "Lausanne UC",
+    "clubName": "Lausanne UC",
+    "league": "NLA",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "STV St.Gallen Volleyball",
+    "clubName": "STV St.Gallen Volleyball",
+    "league": "NLA",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "TSV Jona Volleyball",
+    "clubName": "TSV Jona Volleyball",
+    "league": "NLA",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "Volley Amriswil",
+    "clubName": "Volley Amriswil",
+    "league": "NLA",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "Volley Näfels",
+    "clubName": "Volley Näfels",
+    "league": "NLA",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "Volley Schönenwerd",
+    "clubName": "Volley Schönenwerd",
+    "league": "NLA",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "Auswahlmannschaft Swiss Volley",
+    "clubName": "Auswahlmannschaft Swiss Volley",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "BTV Aarau",
+    "clubName": "BTV Aarau",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "City Volley Basel",
+    "clubName": "City Volley Basel",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "Lausanne UC",
+    "clubName": "Lausanne UC",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "Lutry-Lavaux Volleyball",
+    "clubName": "Lutry-Lavaux Volleyball",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "TSV Jona Volleyball",
+    "clubName": "TSV Jona Volleyball",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "VBC Aeschi",
+    "clubName": "VBC Aeschi",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "VBC Servette Star-Onex",
+    "clubName": "VBC Servette Star-Onex",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "VBC Sursee",
+    "clubName": "VBC Sursee",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "VBC Uni Bern",
+    "clubName": "VBC Uni Bern",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "VBC Voléro Zürich",
+    "clubName": "VBC Voléro Zürich",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "Volley Amriswil",
+    "clubName": "Volley Amriswil",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  },
+  {
+    "teamName": "Volleyball Papiermühle",
+    "clubName": "Volleyball Papiermühle",
+    "league": "NLB",
+    "gender": "men",
+    "category": "senior"
+  }
+]

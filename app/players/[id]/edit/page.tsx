@@ -74,6 +74,44 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
   const schools = getAllSchools();
 
+  // Helper function to get available leagues for a club based on player's gender
+  const getAvailableLeagues = (clubEntry: any): { value: string; label: string }[] => {
+    const allLeagues = [
+      { value: 'NLA', label: 'NLA', menField: 'hasNLAMen', womenField: 'hasNLAWomen' },
+      { value: 'NLB', label: 'NLB', menField: 'hasNLBMen', womenField: 'hasNLBWomen' },
+      { value: '1. Liga', label: '1. Liga', menField: 'has1LigaMen', womenField: 'has1LigaWomen' },
+      { value: '2. Liga', label: '2. Liga', menField: 'has2LigaMen', womenField: 'has2LigaWomen' },
+      { value: '3. Liga', label: '3. Liga', menField: 'has3LigaMen', womenField: 'has3LigaWomen' },
+      { value: '4. Liga', label: '4. Liga', menField: 'has4LigaMen', womenField: 'has4LigaWomen' },
+      { value: '5. Liga', label: '5. Liga', menField: 'has5LigaMen', womenField: 'has5LigaWomen' },
+      { value: 'U23', label: 'U23', menField: 'hasU23Men', womenField: 'hasU23Women' },
+      { value: 'U20', label: 'U20', menField: 'hasU20Men', womenField: 'hasU20Women' },
+      { value: 'U18', label: 'U18', menField: 'hasU18Men', womenField: 'hasU18Women' },
+    ];
+
+    // If no club data or club not from database, show all leagues
+    const clubData = clubEntry.clubData || allClubs.find(c => c.name === clubEntry.clubName);
+    if (!clubData) {
+      return allLeagues.map(l => ({ value: l.value, label: l.label }));
+    }
+
+    // Filter based on player's gender
+    const isMale = formData?.gender === 'MALE';
+    const isFemale = formData?.gender === 'FEMALE';
+
+    return allLeagues
+      .filter(league => {
+        if (isMale) {
+          return clubData[league.menField] === true;
+        } else if (isFemale) {
+          return clubData[league.womenField] === true;
+        }
+        // If gender not set, show leagues available for either
+        return clubData[league.menField] === true || clubData[league.womenField] === true;
+      })
+      .map(l => ({ value: l.value, label: l.label }));
+  };
+
   // Move handleSave inside the component so it can access state
   const handleSave = async () => {
     setSaving(true);
@@ -713,7 +751,8 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                                   c.id === club.id ? { 
                                     ...c, 
                                     clubName: suggestion.name,
-                                    logo: suggestion.logo || c.logo
+                                    logo: suggestion.logo || c.logo,
+                                    clubData: suggestion // Store full club data for league filtering
                                   } : c
                                 );
                                 setClubHistory(updated);
@@ -750,20 +789,11 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                         className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       >
                         <option value="">Wähl Liga üs</option>
-                        <option value="NLA">NLA</option>
-                        <option value="NLB">NLB</option>
-                        <option value="1. Liga">1. Liga</option>
-                        <option value="2. Liga">2. Liga</option>
-                        <option value="3. Liga">3. Liga</option>
-                        <option value="4. Liga">4. Liga</option>
-                        <option value="5. Liga">5. Liga</option>
-                        <option value="U19 Elite">U19 Elite</option>
-                        <option value="U17 Elite">U17 Elite</option>
-                        <option value="U15 Elite">U15 Elite</option>
-                        <option value="U19">U19</option>
-                        <option value="U17">U17</option>
-                        <option value="U15">U15</option>
-                        <option value="U13">U13</option>
+                        {getAvailableLeagues(club).map((league) => (
+                          <option key={league.value} value={league.value}>
+                            {league.label}
+                          </option>
+                        ))}
                       </select>
                     </div>
 

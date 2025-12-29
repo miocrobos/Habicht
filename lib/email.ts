@@ -924,3 +924,212 @@ export async function sendWatchlistUpdateNotification({
     return false;
   }
 }
+
+// Position translations for emails
+const positionNames: Record<string, string> = {
+  OUTSIDE_HITTER: 'Aussespieler',
+  OPPOSITE: 'Diagonalspieler',
+  MIDDLE_BLOCKER: 'Mittelblocker',
+  SETTER: 'Zuspieler',
+  LIBERO: 'Libero',
+  UNIVERSAL: 'Universal'
+};
+
+// Contract type translations for emails
+const contractTypeNames: Record<string, string> = {
+  PROFESSIONAL: 'Professionell',
+  SEMI_PROFESSIONAL: 'Semi-Professionell',
+  AMATEUR: 'Amateur',
+  VOLUNTEER: 'Freiwillig',
+  INTERNSHIP: 'Praktikum'
+};
+
+interface SendPlayerRequestNotificationParams {
+  recipientEmail: string;
+  recipientName: string;
+  creatorName: string;
+  clubName: string;
+  canton: string;
+  position: string;
+  contractType: string;
+  title: string;
+  description: string;
+  requestUrl: string;
+}
+
+export async function sendPlayerRequestNotification({
+  recipientEmail,
+  recipientName,
+  creatorName,
+  clubName,
+  canton,
+  position,
+  contractType,
+  title,
+  description,
+  requestUrl
+}: SendPlayerRequestNotificationParams): Promise<boolean> {
+  try {
+    const fullRequestUrl = `https://www.habicht-volleyball.ch${requestUrl}`;
+    const positionDisplay = positionNames[position] || position;
+    const contractDisplay = contractTypeNames[contractType] || contractType;
+    const truncatedDescription = description.length > 200 
+      ? description.substring(0, 200) + '...' 
+      : description;
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log('\n=================================');
+      console.log('🏐 PLAYER REQUEST NOTIFICATION EMAIL');
+      console.log('=================================');
+      console.log(`To: ${recipientEmail}`);
+      console.log(`Recipient: ${recipientName}`);
+      console.log(`Creator: ${creatorName}`);
+      console.log(`Club: ${clubName} (${canton})`);
+      console.log(`Position: ${positionDisplay}`);
+      console.log(`Contract: ${contractDisplay}`);
+      console.log(`Title: ${title}`);
+      console.log(`URL: ${fullRequestUrl}`);
+      console.log('=================================\n');
+    }
+
+    if (!process.env.RESEND_API_KEY) {
+      console.log('⚠️ RESEND_API_KEY not configured. Email not sent.');
+      return true;
+    }
+
+    const resendClient = getResendClient();
+    if (!resendClient) {
+      console.log('⚠️ Resend client not available');
+      return false;
+    }
+
+    await resendClient.emails.send({
+      from: 'Habicht <onboarding@resend.dev>',
+      to: recipientEmail,
+      subject: `🏐 Neui Spieler-Aafrog: ${title}`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: Arial, Helvetica, sans-serif;">
+          <table role="presentation" style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td align="center" style="padding: 0;">
+                <table role="presentation" style="width: 600px; max-width: 100%; border-collapse: collapse; background-color: #ffffff;">
+                  <!-- Logo Header -->
+                  <tr>
+                    <td style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); padding: 40px 20px; text-align: center;">
+                      <img src="https://habicht-volleyball.ch/eagle-logo.png" alt="Habicht Logo" width="80" height="80" style="display: block; margin: 0 auto 15px auto; border: 0;" />
+                      <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;">🏐 Neui Spieler-Aafrog</h1>
+                    </td>
+                  </tr>
+                  <!-- Main Content -->
+                  <tr>
+                    <td style="padding: 40px 30px;">
+                      <h2 style="color: #1f2937; margin-top: 0; font-size: 22px;">Hallo ${recipientName}!</h2>
+                      <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">
+                        Es git e neui Spieler-Aafrog wo für dich interessant sii chönnt:
+                      </p>
+                      
+                      <!-- Request Card -->
+                      <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin: 24px 0;">
+                        <h3 style="color: #1e40af; margin-top: 0; font-size: 20px; margin-bottom: 16px;">${title}</h3>
+                        
+                        <table style="width: 100%; border-collapse: collapse;">
+                          <tr>
+                            <td style="padding: 8px 0; vertical-align: top;">
+                              <strong style="color: #64748b;">🏢 Club:</strong>
+                            </td>
+                            <td style="padding: 8px 0; color: #1f2937;">
+                              ${clubName}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 8px 0; vertical-align: top;">
+                              <strong style="color: #64748b;">📍 Kanton:</strong>
+                            </td>
+                            <td style="padding: 8px 0; color: #1f2937;">
+                              ${canton}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 8px 0; vertical-align: top;">
+                              <strong style="color: #64748b;">🎯 Position:</strong>
+                            </td>
+                            <td style="padding: 8px 0; color: #1f2937;">
+                              ${positionDisplay}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 8px 0; vertical-align: top;">
+                              <strong style="color: #64748b;">📝 Vertragstyp:</strong>
+                            </td>
+                            <td style="padding: 8px 0; color: #1f2937;">
+                              ${contractDisplay}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 8px 0; vertical-align: top;">
+                              <strong style="color: #64748b;">👤 Vo:</strong>
+                            </td>
+                            <td style="padding: 8px 0; color: #1f2937;">
+                              ${creatorName}
+                            </td>
+                          </tr>
+                        </table>
+                        
+                        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+                          <strong style="color: #64748b; display: block; margin-bottom: 8px;">📄 Beschriibig:</strong>
+                          <p style="color: #374151; margin: 0; line-height: 1.5;">${truncatedDescription}</p>
+                        </div>
+                      </div>
+                      
+                      <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 30px 0;">
+                        <tr>
+                          <td align="center">
+                            <table role="presentation" style="border-collapse: collapse;">
+                              <tr>
+                                <td style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); border-radius: 8px;">
+                                  <a href="${fullRequestUrl}" style="display: inline-block; color: #ffffff; padding: 16px 40px; text-decoration: none; font-size: 18px; font-weight: bold;">
+                                    🔍 Aafrog aaluege
+                                  </a>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                      
+                      <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin-top: 24px;">
+                        Wenn du interessiert bisch, chasch direkt mit em Recruiter i Kontakt trätte!
+                      </p>
+                    </td>
+                  </tr>
+                  <!-- Footer -->
+                  <tr>
+                    <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+                      <p style="color: #9ca3af; font-size: 12px; margin: 0;">© 2025 Habicht | Swiss Volleyball Scouting Platform</p>
+                      <p style="color: #9ca3af; font-size: 11px; margin-top: 8px;">
+                        Du chasch dini Benachrichtigunge i dine <a href="https://www.habicht-volleyball.ch/settings" style="color: #3b82f6;">Istellige</a> ändere.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+        </html>
+      `,
+    });
+
+    console.log('✅ Player request notification email sent successfully to:', recipientEmail);
+    return true;
+  } catch (error) {
+    console.error('❌ Error sending player request notification:', error);
+    return false;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "scrapedAt": "2025-12-28T20:39:06.145Z",
+  "source": "https://www.volleyball.ch/de/verband/services/verein-suchen",
+  "method": "Angebote dropdown filter",
+  "statistics": {
+    "totalClubs": 0,
+    "leaguesScraped": 0,
+    "leaguesFailed": 28
+  },
+  "clubs": []
+}

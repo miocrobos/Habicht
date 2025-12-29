@@ -61,12 +61,12 @@ export default function ClubsByLeague() {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
           <Trophy className="w-6 h-6 text-red-600" />
-          Verein Nach Liga Sueche
+          {t('clubProfile.searchByLeague')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Liga/Division *
+              {t('clubProfile.leagueDivision')} *
             </label>
             <input
               type="text"
@@ -74,12 +74,12 @@ export default function ClubsByLeague() {
               onChange={(e) => setLeague(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
-              placeholder="z.B. NLA, 1. Liga, U19 Elite..."
+              placeholder={t('clubProfile.leaguePlaceholder')}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Kanton (Optional)
+              {t('clubProfile.cantonOptional')}
             </label>
             <select
               value={canton}
@@ -116,12 +116,12 @@ export default function ClubsByLeague() {
           {loading ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
-              Sueche...
+              {t('clubProfile.searching')}
             </>
           ) : (
             <>
               <Search className="w-5 h-5" />
-              Verein Sueche
+              {t('clubProfile.searchClubs')}
             </>
           )}
         </button>
@@ -136,17 +136,17 @@ export default function ClubsByLeague() {
         <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-12 text-center">
           <Trophy className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <p className="text-gray-600 dark:text-gray-400 text-lg">
-            Kei Verein Gfunde Für Liga "{league}"
+            {t('clubProfile.noClubsFoundForLeague')} "{league}"
           </p>
           <p className="text-gray-500 dark:text-gray-500 text-sm mt-2">
-            Probier En Anderi Liga Oder Vergrössere Din Suchberiich
+            {t('clubProfile.tryOtherLeague')}
           </p>
         </div>
       ) : clubs.length > 0 ? (
         <>
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
             <p className="text-blue-800 dark:text-blue-200">
-              <strong>{clubs.length}</strong> Verein Gfunde I Dä Liga "{league}"
+              <strong>{clubs.length}</strong> {t('clubProfile.clubsFoundInLeague')} "{league}"
             </p>
           </div>
 
@@ -160,13 +160,15 @@ export default function ClubsByLeague() {
                 <div className="p-6">
                   <div className="flex items-start gap-4 mb-4">
                     {club.logo ? (
-                      <img
-                        src={club.logo}
-                        alt={club.name}
-                        className="w-16 h-16 rounded-lg object-cover border-2 border-gray-200 dark:border-gray-600"
-                      />
+                      <div className="w-16 h-16 rounded-xl bg-white dark:bg-gray-100 border-2 border-gray-200 dark:border-gray-300 flex items-center justify-center p-1.5 flex-shrink-0">
+                        <img
+                          src={club.logo}
+                          alt={club.name}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
                     ) : (
-                      <div className="w-16 h-16 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
                         <span className="text-2xl">🏐</span>
                       </div>
                     )}
@@ -193,14 +195,14 @@ export default function ClubsByLeague() {
                     </div>
                     <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                       <Users className="w-4 h-4 text-red-600" />
-                      <span>{club._count.currentPlayers} Aktivi Spieler</span>
+                      <span>{club._count.currentPlayers} {t('clubProfile.activePlayers')}</span>
                     </div>
                   </div>
 
                   {club.currentPlayers.length > 0 && (
                     <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                        Einigi Spieler:
+                        {t('clubProfile.somePlayers')}
                       </p>
                       <div className="flex -space-x-2">
                         {club.currentPlayers.slice(0, 5).map((player) => (

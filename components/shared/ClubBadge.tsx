@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { getClubInfo } from '@/lib/swissData'
 import { getCountryFlagUrlByName, isSwissClub, getCountryCode } from '@/lib/countryFlags'
 import Image from 'next/image'
@@ -60,6 +61,7 @@ const EagleLogo = ({ size }: { size: 'sm' | 'md' | 'lg' }) => {
 }
 
 export default function ClubBadge({ clubName, size = 'md', showName = false, uploadedLogo, country }: ClubBadgeProps) {
+  const [logoError, setLogoError] = useState(false)
   const clubInfo = getClubInfo(clubName)
   const isSwiss = isSwissClub(country)
   
@@ -76,7 +78,8 @@ export default function ClubBadge({ clubName, size = 'md', showName = false, upl
   }
 
   // Prioritize uploaded logo, then for non-Swiss clubs use country flag, then custom logo, then eagle logo
-  const hasUploadedLogo = uploadedLogo && uploadedLogo !== ''
+  // If the uploaded logo fails to load, fall back to other options
+  const hasUploadedLogo = uploadedLogo && uploadedLogo !== '' && !logoError
   let useCountryFlag = !hasUploadedLogo && !isSwiss
   let countryFlagUrl = ''
   if (useCountryFlag) {
@@ -98,10 +101,10 @@ export default function ClubBadge({ clubName, size = 'md', showName = false, upl
   return (
     <div className="flex items-center gap-3">
       <div 
-        className={`${sizeClasses[size]} rounded-full shadow-md flex items-center justify-center font-bold relative border-4 overflow-hidden`}
+        className={`${sizeClasses[size]} rounded-xl shadow-md flex items-center justify-center font-bold relative border-2 overflow-hidden ${hasUploadedLogo ? 'bg-white p-1' : ''}`}
         style={{ 
-          backgroundColor: useCountryFlag ? '#FFFFFF' : bgColor,
-          borderColor: useCountryFlag ? '#CCCCCC' : borderColor,
+          backgroundColor: hasUploadedLogo ? '#FFFFFF' : (useCountryFlag ? '#FFFFFF' : bgColor),
+          borderColor: hasUploadedLogo ? '#E5E7EB' : (useCountryFlag ? '#CCCCCC' : borderColor),
         }}
         title={`${clubName}${!isSwiss && country ? ` (${country})` : ''}`}
       >
@@ -111,7 +114,11 @@ export default function ClubBadge({ clubName, size = 'md', showName = false, upl
             alt={clubName}
             width={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
             height={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
+            unoptimized
+            onError={() => {
+              setLogoError(true)
+            }}
           />
         ) : useCountryFlag ? (
           <Image
@@ -119,7 +126,7 @@ export default function ClubBadge({ clubName, size = 'md', showName = false, upl
             alt={`${country} flag`}
             width={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
             height={size === 'sm' ? 40 : size === 'md' ? 56 : 80}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
             unoptimized
             onError={(e) => {
               (e.target as HTMLImageElement).style.display = 'none';

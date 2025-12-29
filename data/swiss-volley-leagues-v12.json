@@ -1,0 +1,95 @@
+{
+  "scrapedAt": "2025-12-28T19:24:43.179Z",
+  "clubs": [
+    {
+      "name": "BIWI VFM",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Infomaniak Genève Volley",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "NLZ Volleyball Academy",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Raiffeisen Volley Toggenburg",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Sm`Aesch Pfeffingen",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VBC Cheseaux",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "VC Kanti Schaffhausen",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Viteos NUC",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Volley Düdingen",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": false
+    },
+    {
+      "name": "Volley Lugano",
+      "wNLA": true,
+      "wNLB": false,
+      "w1L": false,
+      "mNLA": true,
+      "mNLB": false,
+      "m1L": false
+    }
+  ]
+}

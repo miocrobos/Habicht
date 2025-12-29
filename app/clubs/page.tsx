@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { Filter } from 'lucide-react'
+import { Filter, Search } from 'lucide-react'
 import CantonFlag from '@/components/shared/CantonFlag'
 import ClubBadge from '@/components/shared/ClubBadge'
 import Link from 'next/link'
@@ -17,16 +17,6 @@ const CANTONS = [
 ]
 
 const LEAGUES = ['Alle', 'NLA', 'NLB', '1. Liga', '2. Liga', '3. Liga', '4. Liga', '5. Liga', 'U23', 'U20', 'U18']
-
-const POSITIONS = [
-  'Alle',
-  'OUTSIDE_HITTER',
-  'OPPOSITE',
-  'MIDDLE_BLOCKER',
-  'SETTER',
-  'LIBERO',
-  'UNIVERSAL'
-]
 
 export default function ClubsPage() {
   const { t } = useLanguage()
@@ -51,10 +41,10 @@ export default function ClubsPage() {
   const searchParams = useSearchParams()
   const cantonFromUrl = searchParams.get('canton')
   
+  const [searchQuery, setSearchQuery] = useState('')
   const [selectedCanton, setSelectedCanton] = useState(cantonFromUrl || 'Alle')
   const [selectedLeague, setSelectedLeague] = useState('Alle')
   const [selectedGender, setSelectedGender] = useState('ALL')
-  const [selectedPosition, setSelectedPosition] = useState('Alle')
   const [clubs, setClubs] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -66,7 +56,7 @@ export default function ClubsPage() {
 
   useEffect(() => {
     loadClubs()
-  }, [selectedCanton, selectedLeague, selectedGender, selectedPosition])
+  }, [selectedCanton, selectedLeague, selectedGender])
 
   const loadClubs = async () => {
     try {
@@ -77,16 +67,27 @@ export default function ClubsPage() {
       if (selectedGender !== 'ALL') {
         params.append('gender', selectedGender)
       }
-      if (selectedPosition !== 'Alle') params.append('position', selectedPosition)
       
       const response = await axios.get(`/api/clubs?${params}`)
-      setClubs(response.data.clubs)
+      // Sort clubs alphabetically by name
+      const sortedClubs = response.data.clubs.sort((a: any, b: any) => 
+        a.name.localeCompare(b.name, 'de-CH')
+      )
+      setClubs(sortedClubs)
     } catch (error) {
       console.error('Error loading clubs:', error)
     } finally {
       setLoading(false)
     }
   }
+
+  // Filter clubs by search query (client-side)
+  const filteredClubs = searchQuery.trim() 
+    ? clubs.filter(club => 
+        club.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (club.town && club.town.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+    : clubs
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-8 md:py-12">
@@ -103,7 +104,24 @@ export default function ClubsPage() {
             <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">{t('clubs.filtersTitle')}</h3>
           </div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+          {/* Search Bar - Full width on top */}
+          <div className="mb-3 sm:mb-4">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2">
+              {t('clubs.searchLabel') || 'Suche'}
+            </label>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={t('clubs.searchPlaceholder') || 'Verein oder Stadt suchen...'}
+                className="w-full pl-10 pr-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+              />
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             {/* Canton Filter */}
             <div>
               <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2">
@@ -153,30 +171,10 @@ export default function ClubsPage() {
                 <option value="FEMALE">{t('playerProfile.women')}</option>
               </select>
             </div>
-
-            {/* Position Filter */}
-            <div>
-              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2">
-                {t('clubs.positionLabel')}
-              </label>
-              <select
-                value={selectedPosition}
-                onChange={(e) => setSelectedPosition(e.target.value)}
-                className="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
-              >
-                <option value="Alle">{t('playerProfile.all')}</option>
-                <option value="OUTSIDE_HITTER">{t('playerProfile.positionOutsideHitter')}</option>
-                <option value="OPPOSITE">{t('playerProfile.positionOpposite')}</option>
-                <option value="MIDDLE_BLOCKER">{t('playerProfile.positionMiddleBlocker')}</option>
-                <option value="SETTER">{t('playerProfile.positionSetter')}</option>
-                <option value="LIBERO">{t('playerProfile.positionLibero')}</option>
-                <option value="UNIVERSAL">{t('playerProfile.positionUniversal')}</option>
-              </select>
-            </div>
           </div>
 
           <div className="mt-3 sm:mt-4 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-            <span className="font-medium">{clubs.length}</span>
+            <span className="font-medium">{filteredClubs.length}</span>
             <span>{t('clubs.clubsFound')}</span>
           </div>
         </div>
@@ -189,7 +187,7 @@ export default function ClubsPage() {
         ) : (
           <>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {clubs.map((club: any) => (
+              {filteredClubs.map((club: any) => (
                 <div key={club.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition p-4 sm:p-6">
                   <div className="flex items-center gap-4 mb-4">
                     {/* Club badge links to profile page */}
@@ -234,7 +232,7 @@ export default function ClubsPage() {
               ))}
             </div>
 
-            {clubs.length === 0 && (
+            {filteredClubs.length === 0 && (
               <div className="text-center py-12">
                 <p className="text-gray-500 dark:text-gray-400 text-lg">{t('clubs.noClubsFound')}</p>
               </div>

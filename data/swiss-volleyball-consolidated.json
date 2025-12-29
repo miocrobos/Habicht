@@ -1,0 +1,4190 @@
+{
+  "generatedAt": "2025-12-28T21:27:46.752Z",
+  "sources": [
+    "https://www.volleyball.ch/de/verband/services/verein-suchen",
+    "https://www.volleyball.ch/de/game-center"
+  ],
+  "summary": {
+    "totalClubs": 297,
+    "clubsWithWomenSeniorTeams": 246,
+    "clubsWithMenSeniorTeams": 173,
+    "clubsWithWomenYouthTeams": 208,
+    "clubsWithMenYouthTeams": 137,
+    "clubsWithKidsVolley": 116,
+    "clubsWithBeach": 30,
+    "clubsWithWomenNLA": 10,
+    "clubsWithWomenNLB": 13,
+    "clubsWithMenNLA": 8,
+    "clubsWithMenNLB": 13
+  },
+  "leagueStatistics": {
+    "womenSenior": {
+      "NLA": 9,
+      "NLB": 9,
+      "1L": 37,
+      "2L": 83,
+      "3L": 133,
+      "4L": 146,
+      "5L": 105,
+      "Senioren": 9
+    },
+    "menSenior": {
+      "NLA": 6,
+      "NLB": 8,
+      "1L": 33,
+      "2L": 73,
+      "3L": 86,
+      "4L": 72,
+      "5L": 18
+    },
+    "womenYouth": {
+      "U13": 2,
+      "U14": 87,
+      "U15": 13,
+      "U16": 114,
+      "U17": 10,
+      "U18": 139,
+      "U19": 1,
+      "U20": 115,
+      "U23": 110
+    },
+    "menYouth": {
+      "U14": 25,
+      "U15": 3,
+      "U16": 47,
+      "U17": 2,
+      "U18": 57,
+      "U20": 44,
+      "U23": 69
+    },
+    "kidsVolley": 125,
+    "beachWomen": 33,
+    "beachMen": 25,
+    "beachYouthWomen": 21,
+    "beachYouthMen": 17,
+    "otherAdult": 97,
+    "otherYouth": 35
+  },
+  "notes": [
+    "Club offerings show ranges (e.g., NLA-5L) not specific leagues per club",
+    "NLA/NLB specific data available only for clubs found in Game Center",
+    "Lower leagues (1L-5L) are managed by regional federations",
+    "Youth leagues are U13-U23",
+    "Some clubs may not appear if they opted out of the search",
+    "Data may be incomplete during season changeover",
+    "Total of 299 clubs expected, 282 successfully scraped"
+  ],
+  "clubs": [
+    {
+      "name": "#Dragons Lugano",
+      "postalCode": "6900",
+      "city": "Lugano",
+      "email": "info@dragonslugano.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Afghan Volleyball Genève",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "Auswahlmannschaft Swiss Volley",
+      "city": "",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "Bellinzona Volley",
+      "postalCode": "6500",
+      "city": "Bellinzona",
+      "email": "segretariato@bellinzona-volley.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": true
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Bienne Volleyboys",
+      "postalCode": "2500",
+      "city": "Bienne",
+      "email": "info@volleyboys.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "BIWI VFM",
+      "city": "Saignelégier",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": true,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "BMV 92",
+      "postalCode": "2735",
+      "city": "Valbirse",
+      "email": "presidence@bmv92.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "BTV Aarau",
+      "postalCode": "5000",
+      "city": "Aarau",
+      "email": "info@volley-aarau.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": true
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "Chênois Genève Volleyball",
+      "postalCode": "1225",
+      "city": "Chene-Bourg",
+      "email": "club@chenoisvolley.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": true,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "City Volley Basel",
+      "city": "",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "Colombier Volley",
+      "city": "",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": true,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Fémina-Sport Glovelier",
+      "postalCode": "2855",
+      "city": "Glovelier",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Genève Volley",
+      "postalCode": "1203",
+      "city": "Genève",
+      "email": "aide@gevb.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": true,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Gibloux Volley",
+      "postalCode": "1726",
+      "city": "Farvagny",
+      "email": "info@giblouxvolley.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Groupement Sportif du CERN",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Grün-Weiss Utzenstorf",
+      "postalCode": "3427",
+      "city": "Utzenstorf",
+      "email": "u_d.herzog@bluewin.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Hochdorf Audacia",
+      "postalCode": "6280",
+      "city": "Hochdorf",
+      "email": "administration@audacia-volley.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Inarizaki",
+      "postalCode": "4934",
+      "city": "Madiswil",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "KTV Altstetten",
+      "postalCode": "8048",
+      "city": "Zürich",
+      "email": "test@test.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "KTV Basel 1915",
+      "postalCode": "4000",
+      "city": "Basel",
+      "email": "ktvbasel1915@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "KTV Riehen",
+      "postalCode": "4125",
+      "city": "Riehen",
+      "email": "admin@ktvriehen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Lancy Volleyball Club",
+      "postalCode": "1213",
+      "city": "Petit-Lancy",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Lausanne UC",
+      "postalCode": "1015",
+      "city": "Lausanne",
+      "email": "info@lucvolleyball.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": true
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": true,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "Le Mouret CS",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Lerbermatt Mittelschule",
+      "postalCode": "3098",
+      "city": "Köniz",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "LK Zug Volleyball",
+      "postalCode": "6300",
+      "city": "Zug",
+      "email": "Lukas.Hotz@volleyzug.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "Lutry-Lavaux Volleyball",
+      "city": "",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "Martigny Volley",
+      "postalCode": "1920",
+      "city": "Martigny",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": true
+      }
+    },
+    {
+      "name": "NLZ Volleyball Academy",
+      "city": "Zürich",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": true,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "NNV Eaglets Volley Aarau",
+      "city": "",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Pizol Volley",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Raiffeisen Volley Glaronia",
+      "city": "",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Raiffeisen Volleya Obwalden",
+      "postalCode": "6064",
+      "city": "Kerns",
+      "email": "administration@volleya.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Rainbow Sport Zürich",
+      "postalCode": "8000",
+      "city": "Zürich",
+      "email": "denis.sim@gmx.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Regio Volleyteam",
+      "postalCode": "4950",
+      "city": "Huttwil",
+      "email": "vorstand@regiovolleyteam.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Rheno Volleyball",
+      "postalCode": "9435",
+      "city": "Heerbrugg",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Rhone Volley",
+      "postalCode": "1920",
+      "city": "Martigny",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "S 9",
+      "postalCode": "8906",
+      "city": "Bonstetten",
+      "email": "vorstand@volley-s9.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "SAG Gordola",
+      "postalCode": "6598",
+      "city": "Tenero",
+      "email": "sagvolley@saggordola.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Satigny Volleyball",
+      "postalCode": "1242",
+      "city": "Satigny(GE)",
+      "email": "info@satigny-volleyball.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Schaffhausen KJS",
+      "postalCode": "8200",
+      "city": "Schaffhausen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Schulsport Adelboden",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Schulsport Radelfingen",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Schulsport TV Fraubrunnen",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "SFG Montagny-Cousset",
+      "postalCode": "1774",
+      "city": "Cousset",
+      "email": "pascaleterrapon@bluewin.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Skål Team Volley Losone",
+      "email": "info@skalteam.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": true
+      }
+    },
+    {
+      "name": "Sm`Aesch Pfeffingen",
+      "postalCode": "4147",
+      "city": "Aesch",
+      "email": "info@smaesch.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": true
+      },
+      "specificLeagues": {
+        "womenNLA": true,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "SP Momò Volley",
+      "email": "Info@morbiovolley.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "SP Morbio Volley",
+      "email": "Info@morbiovolley.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Sportunion Beckenried",
+      "postalCode": "6375",
+      "city": "Beckenried",
+      "email": "volley@sportunion-beckenried.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Sportverein Künten",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "SSC Audax",
+      "postalCode": "8580",
+      "city": "Amriswil",
+      "email": "info@sscaudax.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "St-Maurice",
+      "postalCode": "1890",
+      "city": "St Maurice",
+      "email": "Info@vbcst-maurice.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Stadtturnverein Wil",
+      "postalCode": "9500",
+      "city": "Wil SG",
+      "email": "koordination@volley.stvwil.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "STV Baden",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "STV Buttisholz",
+      "postalCode": "6018",
+      "city": "Buttisholz",
+      "email": "alina.erni@volley-buttisholz.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "STV Gränichen",
+      "postalCode": "5722",
+      "city": "Gränichen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "STV Hitzkirch",
+      "postalCode": "6285",
+      "city": "Hitzkirch",
+      "email": "kontakt@stvhitzkirch.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "STV St.Gallen Volleyball",
+      "postalCode": "9000",
+      "city": "St. Gallen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": true,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "SV Knutwil-St.Erhard",
+      "postalCode": "6212",
+      "city": "St. Erhard",
+      "email": "info@sv-knutwil.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "SV Olten",
+      "postalCode": "4600",
+      "city": "Olten",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "SV Strättligen",
+      "postalCode": "3600",
+      "city": "Thun",
+      "email": "info@svthun-straettligen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "SV Tägerig",
+      "postalCode": "5522",
+      "city": "Tägerig",
+      "email": "kontakt@svtaegerig.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "SV Volley Lengnau",
+      "postalCode": "5426",
+      "city": "Lengnau",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "SV Volley Wyna",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "SV Wasen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TSV Frick Volleyball",
+      "postalCode": "5070",
+      "city": "Frick",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "TSV Gurmels",
+      "postalCode": "3212",
+      "city": "Gurmels",
+      "email": "volleyball@tsv-gurmels.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "TSV Jona Volleyball",
+      "postalCode": "8645",
+      "city": "Rapperswil-Jona",
+      "email": "sekretariat@volleyballjona.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": true
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": true,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "TSV Kestenholz",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TSV Neuendorf",
+      "postalCode": "4623",
+      "city": "Neuendorf",
+      "email": "volleyball@tsvn.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TSV Rechthalten",
+      "postalCode": "1718",
+      "city": "Rechthalten",
+      "email": "carole_vonlanthen@hotmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TSV Steinen",
+      "postalCode": "6422",
+      "city": "Steinen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "TSV Wangen",
+      "postalCode": "3380",
+      "city": "Wangen an der Aare",
+      "email": "info@tsvwangen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Turnverein Horgen",
+      "postalCode": "8810",
+      "city": "Horgen",
+      "email": "junioren@vobits.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Arlesheim",
+      "postalCode": "4144",
+      "city": "Arlesheim",
+      "email": "volleyball.arlesheim@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Dietlikon (Schulsportgruppe)",
+      "postalCode": "8305",
+      "city": "Dietlikon",
+      "email": "gs@tvdietlikon.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Felben-Wellhausen",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Hüttwilen",
+      "postalCode": "8536",
+      "city": "Hüttwilen",
+      "email": "praesidium_VR@tvhuettwilen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Itingen",
+      "postalCode": "4452",
+      "city": "Itingen",
+      "email": "bruderer.isa@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Lunkhofen",
+      "postalCode": "8917",
+      "city": "Oberlunkhofen",
+      "email": "gs@tvlunkhofen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Magden",
+      "postalCode": "4312",
+      "city": "Magden",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Murten Volleyball",
+      "postalCode": "3280",
+      "city": "Murten",
+      "email": "nathalie-meier@gmx.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Muttenz",
+      "postalCode": "4132",
+      "city": "Muttenz",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Plaffeien",
+      "postalCode": "1716",
+      "city": "Plaffeien",
+      "email": "tvplaffeien.volley@gmail.com",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Pratteln NS",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV St. Johann",
+      "postalCode": "4000",
+      "city": "Basel",
+      "email": "volley@tvstjohann.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "TV Ursenbach",
+      "postalCode": "4937",
+      "city": "Ursenbach",
+      "email": "lars.lehmann@tvursenbach.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "TV Zollikofen",
+      "postalCode": "3052",
+      "city": "Zollikofen",
+      "email": "juerg.steiner@gmx.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VB Binningen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VB Fides Ruswil",
+      "postalCode": "6017",
+      "city": "Ruswil",
+      "email": "schumacher.evelyn@gmx.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VB Neuenkirch",
+      "postalCode": "6206",
+      "city": "Neuenkirch",
+      "email": "praesi.vb-neuenkirch@hotmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VB Steinach",
+      "postalCode": "9323",
+      "city": "Steinach",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "VBC Aeschi",
+      "city": "",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "VBC Aigle",
+      "postalCode": "1860",
+      "city": "Aigle",
+      "email": "info@vbcaigle.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Allschwil",
+      "postalCode": "4123",
+      "city": "Allschwil",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Antares-Uitikon",
+      "postalCode": "8142",
+      "city": "Uitikon",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Arbon",
+      "postalCode": "9320",
+      "city": "Arbon",
+      "email": "info@vbcarbon.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Arosa",
+      "postalCode": "7050",
+      "city": "Arosa",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Avully",
+      "postalCode": "1232",
+      "city": "confignon",
+      "email": "presidence@avullyvbc.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Belfaux",
+      "postalCode": "1782",
+      "city": "Belfaux",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Bösingen",
+      "postalCode": "3178",
+      "city": "Bösingen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Bramois",
+      "postalCode": "1950",
+      "city": "sion",
+      "email": "president@vbcbramois.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Brig-Glis",
+      "postalCode": "3902",
+      "city": "Glis",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Brislach",
+      "postalCode": "4225",
+      "city": "Brislach",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Bulle",
+      "postalCode": "1630",
+      "city": "Bulle",
+      "email": "info@vbcbulle.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Buochs",
+      "postalCode": "6374",
+      "city": "Buochs",
+      "email": "praesident@vbcbuochs.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Burgdorf",
+      "postalCode": "3400",
+      "city": "Burgdorf",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Bussigny",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Cazis",
+      "postalCode": "7408",
+      "city": "Cazis",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "VBC Cedra",
+      "postalCode": "1762",
+      "city": "Givisiez",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Cerisiers-Gorgier",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Chatel-St-Denis",
+      "postalCode": "1618",
+      "city": "Châtel-Saint-Denis",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Cheseaux",
+      "postalCode": "1033",
+      "city": "Cheseaux-sur-Lausanne",
+      "email": "info@vbccheseaux.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": true,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "VBC Chur",
+      "postalCode": "7000",
+      "city": "Chur",
+      "email": "info@vbcchur.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Cossonay",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Develier",
+      "postalCode": "2802",
+      "city": "Develier",
+      "email": "vbcdevelier@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Dietwil",
+      "postalCode": "6042",
+      "city": "Dietwil",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Dulliken",
+      "postalCode": "4657",
+      "city": "Dulliken",
+      "email": "info@vbc-dulliken.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Ebikon",
+      "postalCode": "6030",
+      "city": "Ebikon",
+      "email": "praesident@vbcebikon.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Eburo",
+      "postalCode": "1400",
+      "city": "Yverdon-les-Bains",
+      "email": "info@vbceburo.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Ecublens",
+      "postalCode": "1024",
+      "city": "Ecublens",
+      "email": "info@vbcecublens.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Einsiedeln",
+      "postalCode": "8840",
+      "city": "Einsiedeln",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": true
+      }
+    },
+    {
+      "name": "VBC Embrach",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Entre-deux-Lacs",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Etoile-Geneve",
+      "postalCode": "1203",
+      "city": "Genève",
+      "email": "info@vbcgeneve.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Ettiswil",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Fairplay Olympia",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Freies Gymnasium ZH",
+      "postalCode": "8008",
+      "city": "Zürich",
+      "email": "chef@vbc-fgz.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Fribourg",
+      "postalCode": "1700",
+      "city": "Fribourg",
+      "email": "responsable.technique.vbcfr@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Frutigen",
+      "postalCode": "3714",
+      "city": "Frutigen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Fully",
+      "email": "info@vbcfully.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Furttal",
+      "postalCode": "8105",
+      "city": "Regensdorf",
+      "email": "sekretariat@vbcfurttal.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Galina",
+      "postalCode": "9494",
+      "city": "Schaan",
+      "email": "sekretariat@vbcgalina.li",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": true
+      }
+    },
+    {
+      "name": "VBC Gelterkinden",
+      "postalCode": "4460",
+      "city": "Gelterkinden",
+      "email": "info@vbcgelterkinden.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Gerlafingen",
+      "postalCode": "4563",
+      "city": "Gerlafingen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Grosshöchstetten",
+      "postalCode": "3506",
+      "city": "Grosshöchstetten",
+      "email": "info.vbcg@bluewin.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Hallau",
+      "postalCode": "8215",
+      "city": "Hallau",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Haut-Lac",
+      "postalCode": "1896",
+      "city": "Vouvry",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Haute-Broye",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Heiden",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Herren Oberwallis",
+      "postalCode": "3900",
+      "city": "Brig",
+      "email": "vorstand@vbc-how.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Innova",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "VBC Kanti Baden",
+      "postalCode": "5400",
+      "city": "Baden",
+      "email": "sekretariat@vbckantibaden.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": true
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "VBC Kerzers",
+      "postalCode": "3210",
+      "city": "Kerzers",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Konolfingen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Küssnacht",
+      "postalCode": "6403",
+      "city": "Küssnacht am Rigi",
+      "email": "info@vbckuessnacht.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC La Chaux-de-Fonds",
+      "postalCode": "2300",
+      "city": "La Chaux-de-Fonds",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Lalden",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Langenthal",
+      "postalCode": "4900",
+      "city": "Langenthal",
+      "email": "praesident@vbclangenthal.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Laufen",
+      "postalCode": "4242",
+      "city": "Laufen",
+      "email": "sekretariat@vbclaufen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Lausanne",
+      "postalCode": "1010",
+      "city": "Lausanne",
+      "email": "info@lausannevbc.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Le Mont-sur-Lausanne",
+      "postalCode": "1052",
+      "city": "Mont-sur-Lausanne",
+      "email": "info@vbclemont.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Leibstadt",
+      "postalCode": "5325",
+      "city": "Leibstadt",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Lengnau",
+      "postalCode": "2543",
+      "city": "Lengnau BE",
+      "email": "vbclengnau@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC les Cèdres",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Liesberg",
+      "postalCode": "4254",
+      "city": "Liesberg Dorf",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Lignieres",
+      "postalCode": "2523",
+      "city": "Lignières",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Limmattal",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Linth",
+      "postalCode": "8716",
+      "city": "Schmerikon",
+      "email": "marco.buehler@vbclinth.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Littau",
+      "postalCode": "6014",
+      "city": "Luzern",
+      "email": "vbc-littau@gmx.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Lungern",
+      "postalCode": "6078",
+      "city": "Lungern",
+      "email": "daniela-buergi@gmx.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Lützelflüh",
+      "postalCode": "3432",
+      "city": "Lützelflüh",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Lyss",
+      "postalCode": "3250",
+      "city": "Lyss",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Malters",
+      "postalCode": "6102",
+      "city": "Malters",
+      "email": "kontakt@vbcmalters.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Meggen",
+      "postalCode": "6045",
+      "city": "Meggen",
+      "email": "info@vbcmeggen.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Merenschwand-Muri",
+      "postalCode": "5634",
+      "city": "Merenschwand",
+      "email": "info@vbcmerenschwand-muri.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Münchenbuchsee",
+      "postalCode": "3053",
+      "city": "Münchenbuchsee",
+      "email": "info@vbcm.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Münchenstein",
+      "postalCode": "4142",
+      "city": "Münchenstein",
+      "email": "anna.meierhofer96@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Nendaz",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Niederlenz",
+      "postalCode": "5702",
+      "city": "Niederlenz",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Obersimmental",
+      "postalCode": "3772",
+      "city": "St. Stephan",
+      "email": "fabienne.kohli@vbcobersimmental.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Oftringen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Pailly",
+      "postalCode": "1416",
+      "city": "Pailly",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Peps",
+      "postalCode": "1290",
+      "city": "Versoix",
+      "email": "francois@pepsvbc.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Pfäffikon",
+      "postalCode": "8808",
+      "city": "Pfäffikon SZ",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Porrentruy",
+      "postalCode": "2900",
+      "city": "Porrentruy",
+      "email": "serge.jubin@bluewin.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Préverenges",
+      "postalCode": "1028",
+      "city": "Préverenges",
+      "email": "gaudin79@gmail.com",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Pully",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Rämi",
+      "postalCode": "8001",
+      "city": "Zürich",
+      "email": "praesident@vbcraemi.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Raron",
+      "postalCode": "3942",
+      "city": "Raron",
+      "email": "lara.zurbriggen@gmx.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Rheinfelden",
+      "postalCode": "4310",
+      "city": "Rheinfelden",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Richterswil (Schulsportgruppe)",
+      "postalCode": "8805",
+      "city": "Richterswil",
+      "email": "volleyball@vbc-richterswil.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Ried-Brig",
+      "postalCode": "3911",
+      "city": "Ried-Brig",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "VBC Rotkreuz",
+      "postalCode": "6343",
+      "city": "Rotkreuz",
+      "email": "vbcrotkreuz@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Saviese Olympia",
+      "postalCode": "1965",
+      "city": "Savièse",
+      "email": "vbcsaviese@hotmail.com",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Schaffhausen",
+      "email": "info@vbcschaffhausen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Schmitten",
+      "postalCode": "3185",
+      "city": "Schmitten",
+      "email": "admin@vbc-schmitten.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Seftigen",
+      "postalCode": "3662",
+      "city": "Seftigen",
+      "email": "celina.vbcseftigen@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Sense",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": true
+      }
+    },
+    {
+      "name": "VBC Servette Star-Onex",
+      "postalCode": "1213",
+      "city": "Onex",
+      "email": "secretariat@ssovbc.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "VBC Seuzach",
+      "postalCode": "8472",
+      "city": "Seuzach",
+      "email": "tk-chef@vbcseuzach.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Sion",
+      "postalCode": "1950",
+      "city": "Sion",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": true
+      }
+    },
+    {
+      "name": "VBC Sixieme 7",
+      "postalCode": "2515",
+      "city": "Prêles",
+      "email": "patrick.hochuli@bluewin.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Smile",
+      "postalCode": "1733",
+      "city": "Treyvaux",
+      "email": "presidente@vbcsmile.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Sotto-Simme",
+      "postalCode": "3762",
+      "city": "Erlenbach",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Spada Academica",
+      "postalCode": "8000",
+      "city": "Zürich",
+      "email": "praesident@vbcspada.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Spiez",
+      "postalCode": "3700",
+      "city": "Spiez",
+      "email": "info@vbcspiez.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Stäfa",
+      "postalCode": "8712",
+      "city": "Stäfa",
+      "email": "info@vbcstaefa.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Steinhausen",
+      "postalCode": "6312",
+      "city": "Steinhausen",
+      "email": "info@vbcsteinhausen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Studen",
+      "postalCode": "2557",
+      "city": "Studen",
+      "email": "reto.gautschi@vbc-studen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Sugnens-Cugy",
+      "postalCode": "1043",
+      "city": "Sugnens",
+      "email": "secretariat@vbcsugnens.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Suito Schwyz",
+      "postalCode": "6430",
+      "city": "Schwyz",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Sursee",
+      "postalCode": "6210",
+      "city": "Sursee LU",
+      "email": "andrea@vbcsursee.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "VBC Thun",
+      "postalCode": "3600",
+      "city": "Thun",
+      "email": "info@vbcthun.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "VBC Tramelan",
+      "postalCode": "2720",
+      "city": "Tramelan",
+      "email": "info@vbc-tramelan.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Triengen",
+      "postalCode": "6234",
+      "city": "Triengen",
+      "email": "info@vbc-triengen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Ueberstorf",
+      "postalCode": "3182",
+      "city": "Ueberstorf",
+      "email": "info@vbc-ueberstorf.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Uetikon",
+      "postalCode": "8707",
+      "city": "Uetikon am See",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Uni Bern",
+      "postalCode": "3000",
+      "city": "Bern",
+      "email": "geschaeftsstelle@vbcunibern.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "VBC Val Terbi",
+      "email": "info@vbcvt.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Val-de-Travers",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Vendline",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Viamala Thusis",
+      "postalCode": "7430",
+      "city": "Thusis",
+      "email": "tinli67@bluewin.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Visp",
+      "city": "",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "VBC Volebo Freiamt",
+      "postalCode": "5610",
+      "city": "Wohlen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Voléro Zürich",
+      "postalCode": "8000",
+      "city": "Zürich",
+      "email": "sekretariat@volero.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "VBC Werdana Buchs",
+      "postalCode": "9470",
+      "city": "Buchs",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Willisau",
+      "postalCode": "6130",
+      "city": "Willisau",
+      "email": "praesident@vbcwillisau.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Yverdon",
+      "postalCode": "1400",
+      "city": "Yverdon-les-Bains",
+      "email": "president@vbcyverdon.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBC Züri Unterland",
+      "postalCode": "8302",
+      "city": "Kloten",
+      "email": "gs@vbczu.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBG Klettgau",
+      "postalCode": "8222",
+      "city": "Beringen",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "VBG Welschenrohr",
+      "postalCode": "4716",
+      "city": "Welschenrohr",
+      "email": "info@vbgw-h.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VBR Rickenbach",
+      "postalCode": "8545",
+      "city": "Rickenbach ZH",
+      "email": "info@vbr-rickenbach.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "VC Kanti Schaffhausen",
+      "postalCode": "8200",
+      "city": "Schaffhausen",
+      "email": "administration@kantivolleyball.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": true,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "VC Los Unidos Ob.Seetal",
+      "postalCode": "5618",
+      "city": "Bettwil",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VC Safenwil-Kölliken",
+      "postalCode": "5745",
+      "city": "Safenwil",
+      "email": "info@vcsk.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VC Smash Winterthur",
+      "postalCode": "8400",
+      "city": "Winterthur",
+      "email": "office@vc-smash.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VC Tornado Adliswil",
+      "postalCode": "8134",
+      "city": "Adliswil",
+      "email": "sport@vctornado.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VC Uettligen",
+      "postalCode": "3043",
+      "city": "Uettligen",
+      "email": "info@vcuettligen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VC Viry",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VC Vivax Winterthur",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VFM - Volleyball Franches-Montagnes",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "VG Rüdtligen",
+      "email": "vgruedtligen-kirchberg@bluewin.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Viteos NUC",
+      "city": "Neuchâtel",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": true,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Volewa Wald",
+      "postalCode": "8636",
+      "city": "Wald",
+      "email": "info@volewa.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Aadorf",
+      "postalCode": "8355",
+      "city": "Aadorf",
+      "email": "info@volleyaadorf.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": true
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Volley Aarburg-Zofingen",
+      "postalCode": "4800",
+      "city": "Zofingen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Academy Valais",
+      "postalCode": "3930",
+      "city": "Visp",
+      "email": "christian.berchtold@ultraweb.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Amriswil",
+      "city": "Amriswil",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": true,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "Volley Avenches",
+      "postalCode": "1580",
+      "city": "Avenches",
+      "email": "infovolleyavenches@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Baar",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Brugg",
+      "postalCode": "5200",
+      "city": "Brugg",
+      "email": "info@volleybrugg.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Bütschwil",
+      "postalCode": "9606",
+      "city": "Bütschwil",
+      "email": "sekretariat@volleybuetschwil.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Caslano",
+      "postalCode": "6987",
+      "city": "Caslano",
+      "email": "info@volleycaslano.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Düdingen",
+      "postalCode": "3186",
+      "city": "Düdingen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": true,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Volley Emmen-Nord",
+      "postalCode": "6020",
+      "city": "Emmenbrücke",
+      "email": "info@volley-emmen-nord.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Estavayer",
+      "postalCode": "1470",
+      "city": "Estavayer-le-Lac",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "Volley Goldach",
+      "postalCode": "9403",
+      "city": "Goldach",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley GraPa",
+      "postalCode": "1530",
+      "city": "Payerne",
+      "email": "volleygrapa@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Grischa United",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Hünenberg",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Köniz",
+      "postalCode": "3098",
+      "city": "Köniz",
+      "email": "info@volley-koeniz.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Volley Kriens",
+      "postalCode": "6010",
+      "city": "Kriens",
+      "email": "info@volleykriens.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley KTV Muotathal",
+      "postalCode": "6436",
+      "city": "6436 Muotathal",
+      "email": "mueller_bettina@outlook.com",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Liebefeld",
+      "postalCode": "3097",
+      "city": "Liebefeld",
+      "email": "praesi@volleyliebefeld.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Lugano",
+      "city": "Lugano",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": true,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Volley Luzern",
+      "city": "Luzern",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Volley Möhlin",
+      "postalCode": "4313",
+      "city": "Möhlin",
+      "email": "lea.oliva@volley-moehlin.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Moutier",
+      "postalCode": "2740",
+      "city": "Moutier",
+      "email": "volleymoutier@gmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Münsingen",
+      "postalCode": "3110",
+      "city": "Münsingen",
+      "email": "info@volley-muensingen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Muristalden",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Mutschellen",
+      "postalCode": "8964",
+      "city": "Rudolfstetten",
+      "email": "vorstand@volleymutschellen.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Näfels",
+      "city": "Näfels",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": true,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Volley Oberdiessbach",
+      "city": "",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": true,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Volley Obfelden",
+      "postalCode": "8912",
+      "city": "Obfelden",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Oerlikon",
+      "postalCode": "8050",
+      "city": "Zürich",
+      "email": "sekretariat@volleyoerlikon.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Rain",
+      "postalCode": "6026",
+      "city": "Rain",
+      "email": "info@volleyrain.clubdesk.com",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Region Entlebuch",
+      "postalCode": "6170",
+      "city": "Schüpfheim",
+      "email": "praesident@volley-region-entlebuch.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Rossrüti",
+      "postalCode": "9500",
+      "city": "Wil SG",
+      "email": "info@volleyrossrueti.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "Volley Rüschlikon",
+      "postalCode": "8803",
+      "city": "Rüschlikon",
+      "email": "info@volleyreuschlikon.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Schönenwerd",
+      "city": "Schönenwerd",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": true,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Volley Smash 05 Laufenburg-Kaisten",
+      "postalCode": "5080",
+      "city": "Laufenburg",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Solothurn",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Speicher",
+      "postalCode": "9042",
+      "city": "Speicher",
+      "email": "roland.lauper@volleyspeicher.clubdesk.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Surselva",
+      "postalCode": "7130",
+      "city": "Ilanz",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": true
+      }
+    },
+    {
+      "name": "Volley Talents Winterthur Zürich",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Toggenburg",
+      "postalCode": "9630",
+      "city": "Wattwil",
+      "email": "info@volleytoggenburg.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": true,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": false
+      }
+    },
+    {
+      "name": "Volley Uni Bern",
+      "postalCode": "3000",
+      "city": "Bern",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Unisport Fribourg (VUF)",
+      "postalCode": "1700",
+      "city": "Fribourg",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Uri",
+      "postalCode": "6463",
+      "city": "Bürglen",
+      "email": "info@volleyuri.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Uster",
+      "postalCode": "8610",
+      "city": "Uster",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Vully",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Waldkirch",
+      "postalCode": "9205",
+      "city": "Waldkirch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Wila-Turbenthal",
+      "postalCode": "8492",
+      "city": "Wila",
+      "email": "jenny.keller@volleywila.ch",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Würenlingen",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley Zurzach",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley-Team Wolhusen",
+      "postalCode": "6110",
+      "city": "Wolhusen",
+      "email": "lea.rroos@hotmail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Volley-X Recherswil",
+      "postalCode": "4565",
+      "city": "Recherswil",
+      "email": "massimo.micozzi@ymail.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": true,
+        "beach": true
+      }
+    },
+    {
+      "name": "Volleyball Papiermühle",
+      "city": "",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "specificLeagues": {
+        "womenNLA": false,
+        "womenNLB": false,
+        "menNLA": false,
+        "menNLB": true
+      }
+    },
+    {
+      "name": "Volleyball-Club Volketswil",
+      "postalCode": "8604",
+      "city": "Volketswil",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": false,
+        "womenYouth": true,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VolleyTalents Rapperswil-Jona",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VT Langnau",
+      "email": "m-brechbuehl@outlook.com",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "VT Meilen",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": false,
+        "beach": true
+      }
+    },
+    {
+      "name": "Wädivolley",
+      "postalCode": "8820",
+      "city": "Wädenswil",
+      "offerings": {
+        "womenSenior": true,
+        "menSenior": true,
+        "womenYouth": true,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "Zürich-Affoltern (Schulsportgruppe)",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      }
+    },
+    {
+      "name": "ZUZU Beach",
+      "postalCode": "8302",
+      "city": "Kloten",
+      "email": "info@zuzubeach.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": false,
+        "womenYouth": false,
+        "menYouth": false,
+        "kidsVolley": true,
+        "beach": true
+      }
+    }
+  ]
+}

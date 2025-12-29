@@ -1,0 +1,39 @@
+{
+  "clubs": [
+    {
+      "name": "#Dragons Lugano",
+      "postalCode": "6900",
+      "city": "Lugano",
+      "email": "info@dragonslugano.ch",
+      "offerings": {
+        "womenSenior": false,
+        "menSenior": true,
+        "womenYouth": false,
+        "menYouth": true,
+        "kidsVolley": false,
+        "beach": false
+      },
+      "scrapedAt": "2025-12-28T21:55:42.481Z"
+    }
+  ],
+  "statistics": {
+    "total": 1,
+    "withWebsite": 0,
+    "withLeagues": 0,
+    "womenNLA": 0,
+    "womenNLB": 0,
+    "women1L": 0,
+    "women2L": 0,
+    "women3L": 0,
+    "women4L": 0,
+    "women5L": 0,
+    "menNLA": 0,
+    "menNLB": 0,
+    "men1L": 0,
+    "men2L": 0,
+    "men3L": 0,
+    "men4L": 0,
+    "men5L": 0
+  },
+  "lastUpdated": "2025-12-28T21:55:46.233Z"
+}

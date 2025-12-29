@@ -1,0 +1,6285 @@
+[
+  {
+    "name": "#Dragons Lugano",
+    "website": "https://dragonslugano.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://dragonslugano.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "BMV 92",
+    "website": "https://www.bmv92.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.bmv92.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "BTV Aarau",
+    "website": "https://www.volley-aarau.ch",
+    "leagues": [
+      {
+        "league": "NLA",
+        "gender": "men",
+        "category": "senior",
+        "raw": "NLA"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "NLB",
+        "gender": "women",
+        "category": "senior",
+        "raw": "NLB"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.volley-aarau.ch",
+      "https://www.volley-aarau.ch/teams",
+      "https://www.volley-aarau.ch/teams/frauen",
+      "https://www.volley-aarau.ch/teams/frauen/frauen-1-nlb",
+      "https://www.volley-aarau.ch/teams/frauen/frauen-2-1-liga",
+      "https://www.volley-aarau.ch/teams/frauen/frauen-3-2-liga"
+    ],
+    "success": true
+  },
+  {
+    "name": "Basilea Volleyball",
+    "website": "https://www.volleybasel.ch",
+    "leagues": [
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1L"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.volleybasel.ch",
+      "https://www.volleybasel.ch/wissen/cat/fuer-teams",
+      "https://www.volleybasel.ch/nachwuchs/breitensport/kids-volley",
+      "https://www.volleybasel.ch/nachwuchs/breitensport/kleinfeld",
+      "https://www.volleybasel.ch/nachwuchs/breitensport/u16-u23",
+      "https://www.volleybasel.ch/nachwuchs/breitensport/smart-competition"
+    ],
+    "success": true
+  },
+  {
+    "name": "Bellinzona Volley",
+    "website": "https://bellinzona-volley.ch",
+    "leagues": [
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://bellinzona-volley.ch",
+      "https://bellinzona-volley.ch/u20-elite-prima-lega-nazionale-2025/",
+      "https://bellinzona-volley.ch/u18-elite-seconda-lega-regionale-2025/",
+      "https://bellinzona-volley.ch/u16-elite-terza-lega-regionale-2025/",
+      "https://bellinzona-volley.ch/u14-elite-quarta-lega-regionale-2025-2026/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Bienne Volleyboys",
+    "website": "https://www.volleyboys.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.volleyboys.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Chênois Genève Volleyball",
+    "website": "https://chenoisvolley.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2L"
+      }
+    ],
+    "pagesChecked": [
+      "https://chenoisvolley.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Colombier Volley",
+    "website": "https://colombiervolley.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://colombiervolley.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "E.f.i. Volley",
+    "website": "http://volleyefi.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "http://volleyefi.ch",
+      "http://volleyefi.ch/herren-2/",
+      "http://volleyefi.ch/nachwuchs/",
+      "http://volleyefi.ch/juniorinnen-u20/",
+      "http://volleyefi.ch/saisonfazit-herren/",
+      "http://volleyefi.ch/herren-team/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Eaglets Volley Aarau",
+    "website": "https://www.eagletsvolleyaarau.ch",
+    "leagues": [
+      {
+        "league": "NLA",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "NLA"
+      },
+      {
+        "league": "NLB",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "NLB"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "1. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.eagletsvolleyaarau.ch",
+      "https://www.eagletsvolleyaarau.ch/post/niederlage-gegen-baden-1-liga",
+      "https://www.eagletsvolleyaarau.ch/post/1-liga-siegt-souver%C3%A4n"
+    ],
+    "success": true
+  },
+  {
+    "name": "Fémina-Sport Glovelier",
+    "website": "https://fs-glovelier.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://fs-glovelier.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Genève Volley",
+    "website": "https://gevb.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://gevb.ch",
+      "https://gevb.ch/team/infomaniak-geneve-volley/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Gibloux Volley",
+    "website": "https://www.giblouxvolley.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.giblouxvolley.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Grün-Weiss Utzenstorf",
+    "website": "https://www.gwu.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.gwu.ch",
+      "https://www.gwu.ch/home/damen-1/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Hochdorf Audacia",
+    "website": "https://www.audacia-volley.ch",
+    "leagues": [
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "u23"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.audacia-volley.ch",
+      "https://www.audacia-volley.ch/category/damen-1-2/",
+      "https://www.audacia-volley.ch/category/damen-2/",
+      "https://www.audacia-volley.ch/category/damen-3-2/",
+      "https://www.audacia-volley.ch/category/herren/",
+      "https://www.audacia-volley.ch/category/herren-2/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Inarizaki",
+    "website": "https://inarizaki.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://inarizaki.ch",
+      "https://inarizaki.ch/mannschaft/",
+      "https://inarizaki.ch/news/"
+    ],
+    "success": true
+  },
+  {
+    "name": "KTV Altstetten",
+    "website": "https://www.ktv-altstetten.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.ktv-altstetten.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "KTV Basel 1915",
+    "website": "https://ktvb1915.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://ktvb1915.ch",
+      "https://ktvb1915.ch/senioren/"
+    ],
+    "success": true
+  },
+  {
+    "name": "KTV Riehen",
+    "website": "https://ktvriehen.ch",
+    "leagues": [
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. LIGA"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. LIGA"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. LIGA"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. LIGA"
+      }
+    ],
+    "pagesChecked": [
+      "https://ktvriehen.ch",
+      "https://ktvriehen.ch/volleyball/damen",
+      "https://ktvriehen.ch/volleyball/damen/damen_1__2_liga",
+      "https://ktvriehen.ch/volleyball/damen/damen_2__3_liga",
+      "https://ktvriehen.ch/volleyball/damen/damen_3__4_liga",
+      "https://ktvriehen.ch/volleyball/herren"
+    ],
+    "success": true
+  },
+  {
+    "name": "LK Zug Volleyball",
+    "website": "https://volleyzug.ch",
+    "leagues": [
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "U16",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "5. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://volleyzug.ch",
+      "https://volleyzug.ch/Teams",
+      "https://volleyzug.ch/Teams/herren",
+      "https://volleyzug.ch/Teams/herren/herren_1",
+      "https://volleyzug.ch/Teams/herren/herren_2",
+      "https://volleyzug.ch/Teams/herren/herren_3",
+      "https://volleyzug.ch/Teams?action=login",
+      "https://volleyzug.ch/Teams/herren?action=login",
+      "https://volleyzug.ch/Teams/herren/herren_1?action=login",
+      "https://volleyzug.ch/Teams/herren/herren_2?action=login",
+      "https://volleyzug.ch/Teams/herren/herren_3?action=login"
+    ],
+    "success": true
+  },
+  {
+    "name": "Lancy Volleyball Club",
+    "website": "https://www.lancyvbc.ch",
+    "leagues": [
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.lancyvbc.ch",
+      "https://www.lancyvbc.ch/team-manager/",
+      "https://www.lancyvbc.ch/team-lancy-accueil/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Lausanne UC",
+    "website": "https://www.sofascore.com",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "1\nL"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.sofascore.com",
+      "https://www.sofascore.com/tournament/football/spain/laliga/8",
+      "https://www.sofascore.com/tournament/football/germany/bundesliga/35",
+      "https://www.sofascore.com/football/team/compare",
+      "https://www.sofascore.com/news/laliga-matchday-17-review/",
+      "https://www.sofascore.com/tournament/basketball/spain/liga-acb/264",
+      "https://www.sofascore.com/tournament/football/spain/laliga-2/54",
+      "https://www.sofascore.com/tournament/football/germany/2-bundesliga/44",
+      "https://www.sofascore.com/football/team/sunderland/41",
+      "https://www.sofascore.com/football/team/everton/48",
+      "https://www.sofascore.com/tournament/football/spain/laliga/8#id:77559",
+      "https://www.sofascore.com/football/team/valencia/2828",
+      "https://www.sofascore.com/basketball/team/real-madrid/3540",
+      "https://www.sofascore.com/basketball/team/ucam-murcia/6495"
+    ],
+    "success": true
+  },
+  {
+    "name": "Lerbermatt Mittelschule",
+    "website": "https://lerbermatt.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://lerbermatt.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Martigny Volley",
+    "website": "https://vbcmartigny.ch",
+    "leagues": [
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U14",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcmartigny.ch",
+      "https://vbcmartigny.ch/equipe-detente-1/",
+      "https://vbcmartigny.ch/equipe-detente-2-2/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Meyrin GVA Volley",
+    "website": "https://meyrinvolley.ch",
+    "leagues": [
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U14",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://meyrinvolley.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Meyrin VBC",
+    "website": "https://meyrinvolley.ch",
+    "leagues": [
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U14",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://meyrinvolley.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Moesa Volley",
+    "website": "https://www.graubuenden.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.graubuenden.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Montreux Volley",
+    "website": "https://www.montreuxvolley.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.montreuxvolley.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "NLZ Volleyball Academy",
+    "website": "https://volleyballacademy.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://volleyballacademy.ch",
+      "https://volleyballacademy.ch/teams/nationalliga-a/",
+      "https://volleyballacademy.ch/teams/nnv-volleyball/",
+      "https://volleyballacademy.ch/teams/nnv-beachvolleyball/",
+      "https://volleyballacademy.ch/teams/regionales-trainingszentrum/",
+      "https://volleyballacademy.ch/teams/regionale-talentsichtung/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Pallavolo Bellinzona",
+    "website": "https://bellinzona-volley.ch",
+    "leagues": [
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://bellinzona-volley.ch",
+      "https://bellinzona-volley.ch/u20-elite-prima-lega-nazionale-2025/",
+      "https://bellinzona-volley.ch/u18-elite-seconda-lega-regionale-2025/",
+      "https://bellinzona-volley.ch/u16-elite-terza-lega-regionale-2025/",
+      "https://bellinzona-volley.ch/u14-elite-quarta-lega-regionale-2025-2026/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Pallavolo Biasca",
+    "website": "https://www.findglocal.com",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.findglocal.com"
+    ],
+    "success": true
+  },
+  {
+    "name": "Pallavolo Kreuzlingen",
+    "website": "https://pallavolo.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://pallavolo.ch",
+      "https://pallavolo.ch/damen",
+      "https://pallavolo.ch/herren",
+      "https://pallavolo.ch/juniorinnen",
+      "https://pallavolo.ch/junioren"
+    ],
+    "success": true
+  },
+  {
+    "name": "Pallavolo Locarno",
+    "website": "https://sfglocarno.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://sfglocarno.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Pallavolo-Novaggio-Bedigliora",
+    "website": "https://www.malcavolley.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.malcavolley.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Pery Volleyball",
+    "website": "https://www.vbpery.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vbpery.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Raiffeisen Volleya Obwalden",
+    "website": "https://www.volleya.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. LIGA"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.volleya.ch",
+      "https://www.volleya.ch/teams/",
+      "https://www.volleya.ch/damen/",
+      "https://www.volleya.ch/damen1",
+      "https://www.volleya.ch/damen2",
+      "https://www.volleya.ch/damen3",
+      "https://www.volleya.ch/teams/teams/",
+      "https://www.volleya.ch/teams/damen/",
+      "https://www.volleya.ch/damen/teams/",
+      "https://www.volleya.ch/damen/damen/",
+      "https://www.volleya.ch/teams/teams/teams/",
+      "https://www.volleya.ch/teams/teams/damen/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Rainbow Sport Zürich",
+    "website": "https://www.rainbowsport.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.rainbowsport.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Regio Volleyteam",
+    "website": "https://regiovolleyteam.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://regiovolleyteam.ch",
+      "https://regiovolleyteam.ch/teams",
+      "https://regiovolleyteam.ch/teams/damen1",
+      "https://regiovolleyteam.ch/teams/damen2",
+      "https://regiovolleyteam.ch/teams/damen3",
+      "https://regiovolleyteam.ch/teams/u23"
+    ],
+    "success": true
+  },
+  {
+    "name": "Rheno Volleyball",
+    "website": "https://rhenovolley.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "https://rhenovolley.ch",
+      "https://rhenovolley.ch/teams/",
+      "https://rhenovolley.ch/2025/12/11/schwierige-aufgaben-fuer-die-ersten-mannschaften/",
+      "https://rhenovolley.ch/2025/11/19/junioren-u18/",
+      "https://rhenovolley.ch/category/news/news_damen_i/",
+      "https://rhenovolley.ch/2025/01/14/fehlstart-der-rheno-teams/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Rhone Volley",
+    "website": "https://rhonevolley.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://rhonevolley.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "S 9",
+    "website": "https://volley-s9.ch",
+    "leagues": [
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://volley-s9.ch",
+      "https://volley-s9.ch/teams",
+      "https://volley-s9.ch/nachwuchs_turnier"
+    ],
+    "success": true
+  },
+  {
+    "name": "SAG Gordola",
+    "website": "https://sagvolley.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://sagvolley.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "SFG Montagny-Cousset",
+    "website": "https://www.fsgmontagnycousset.com",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.fsgmontagnycousset.com"
+    ],
+    "success": true
+  },
+  {
+    "name": "SSC Audax",
+    "website": "https://www.sscaudax.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2L"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4L"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.sscaudax.ch",
+      "https://www.sscaudax.ch/spielbetrieb",
+      "https://www.sscaudax.ch/spielbetrieb/spielplan",
+      "https://www.sscaudax.ch/spielbetrieb/resultate__ranglisten",
+      "https://www.sscaudax.ch/spielbetrieb/spielberichte",
+      "https://www.sscaudax.ch/spielbetrieb/schreibereinteilung"
+    ],
+    "success": true
+  },
+  {
+    "name": "STV Buttisholz",
+    "website": "https://volley-buttisholz.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://volley-buttisholz.ch",
+      "https://volley-buttisholz.ch/mannschaften",
+      "https://volley-buttisholz.ch/mannschaften/damen_1",
+      "https://volley-buttisholz.ch/mannschaften/damen3",
+      "https://volley-buttisholz.ch/mannschaften/juniorinnen_u23",
+      "https://volley-buttisholz.ch/mannschaften/juniorinnen_u20",
+      "https://volley-buttisholz.ch/mannschaften?action=login",
+      "https://volley-buttisholz.ch/mannschaften/damen_1?action=login",
+      "https://volley-buttisholz.ch/mannschaften/damen3?action=login",
+      "https://volley-buttisholz.ch/mannschaften/juniorinnen_u23?action=login",
+      "https://volley-buttisholz.ch/mannschaften/juniorinnen_u20?action=login"
+    ],
+    "success": true
+  },
+  {
+    "name": "STV Gränichen",
+    "website": "https://volleygraenichen.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://volleygraenichen.ch",
+      "https://volleygraenichen.ch/damen1/"
+    ],
+    "success": true
+  },
+  {
+    "name": "STV Hitzkirch",
+    "website": "https://stvhitzkirch.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://stvhitzkirch.ch",
+      "https://stvhitzkirch.ch/riegen/aktiveplus",
+      "https://stvhitzkirch.ch/riegen/maennerriege",
+      "https://stvhitzkirch.ch/riegen/aktiveplus?action=login"
+    ],
+    "success": true
+  },
+  {
+    "name": "SV Olten",
+    "website": "https://www.svolten.ch",
+    "leagues": [
+      {
+        "league": "NLB",
+        "gender": "men",
+        "category": "senior",
+        "raw": "NLB"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "U17",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "U13",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U13",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U17",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.svolten.ch",
+      "https://www.svolten.ch/#Meisterschaftskalender",
+      "https://www.svolten.ch/verein#Teams",
+      "https://www.svolten.ch/willkommen#Meisterschaftskalender"
+    ],
+    "success": true
+  },
+  {
+    "name": "SV Strättligen",
+    "website": "https://www.svthun-straettligen.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "5.Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4.Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U17",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4.Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "5.Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.svthun-straettligen.ch",
+      "https://www.svthun-straettligen.ch/",
+      "https://www.svthun-straettligen.ch/volleyball",
+      "https://www.svthun-straettligen.ch/volleyball/damen-4-liga",
+      "https://www.svthun-straettligen.ch/volleyball/damen-5-liga",
+      "https://www.svthun-straettligen.ch/volleyball/juniorinnen-u23"
+    ],
+    "success": true
+  },
+  {
+    "name": "SV Tägerig",
+    "website": "https://svtaegerig.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://svtaegerig.ch",
+      "https://svtaegerig.ch/fitness/team%ef%ac%81t-kids/",
+      "https://svtaegerig.ch/fitness/team%ef%ac%81t-jugend/",
+      "https://svtaegerig.ch/fitness/team%ef%ac%81t-aktive/",
+      "https://svtaegerig.ch/fitness/team%ef%ac%81t-frauen-schnurball/",
+      "https://svtaegerig.ch/fitness/team%ef%ac%81t-maenner/"
+    ],
+    "success": true
+  },
+  {
+    "name": "SV Volley Lengnau",
+    "website": "https://svl-lengnau.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://svl-lengnau.ch",
+      "https://svl-lengnau.ch/saisonzwischenbericht-herren-3/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Schaffhausen KJS",
+    "website": "http://www.kjs.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2.Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3.Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "U19",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U19"
+      },
+      {
+        "league": "U17",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "U15",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "U13",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U17",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "U17",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "U13",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U15",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "U13",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U15",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "U19",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U19"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "http://www.kjs.ch",
+      "http://www.kjs.ch/",
+      "http://www.kjs.ch/?q=node/5",
+      "http://www.kjs.ch/?q=node/6",
+      "http://www.kjs.ch/?q=node/2409",
+      "http://www.kjs.ch/?q=node/1815"
+    ],
+    "success": true
+  },
+  {
+    "name": "Sm`Aesch Pfeffingen",
+    "website": "https://smaeschpfeffingen.ch",
+    "leagues": [
+      {
+        "league": "NLA",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "NLA"
+      },
+      {
+        "league": "NLA",
+        "gender": "women",
+        "category": "senior",
+        "raw": "NLA"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. LIGA"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. LIGA"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. LIGA"
+      }
+    ],
+    "pagesChecked": [
+      "https://smaeschpfeffingen.ch",
+      "https://smaeschpfeffingen.ch/teams/nla-team/",
+      "https://smaeschpfeffingen.ch/teams/",
+      "https://smaeschpfeffingen.ch/teams/damen-2/",
+      "https://smaeschpfeffingen.ch/teams/damen-3/",
+      "https://smaeschpfeffingen.ch/teams/damen-4/"
+    ],
+    "success": true
+  },
+  {
+    "name": "Sportunion Beckenried",
+    "website": "https://sportunion-beckenried.ch",
+    "leagues": [
+      {
+        "league": "5L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      }
+    ],
+    "pagesChecked": [
+      "https://sportunion-beckenried.ch",
+      "https://sportunion-beckenried.ch/volleyball/damen",
+      "https://sportunion-beckenried.ch/volleyball/juniorinnen-U18",
+      "https://sportunion-beckenried.ch/volleyball/juniorinnen-U16"
+    ],
+    "success": true
+  },
+  {
+    "name": "St-Maurice",
+    "website": "https://vbcst-maurice.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://vbcst-maurice.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "Stadtturnverein Wil",
+    "website": "https://stadtturnvereinwil.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://stadtturnvereinwil.ch",
+      "https://stadtturnvereinwil.ch/stvw-sports/frauen/",
+      "https://stadtturnvereinwil.ch/stvw-sports/maenner/",
+      "https://stadtturnvereinwil.ch/2025/11/zwei-wiler-turnerinnen-an-den-schweizer-meisterschaften/",
+      "https://stadtturnvereinwil.ch/das-team/"
+    ],
+    "success": true
+  },
+  {
+    "name": "TSV Frick Volleyball",
+    "website": "https://www.frickvolley.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4L"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3L"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.frickvolley.ch",
+      "https://www.frickvolley.ch/verein/nachwuchs",
+      "https://www.frickvolley.ch/teams",
+      "https://www.frickvolley.ch/verein/nachwuchs?action=login",
+      "https://www.frickvolley.ch/teams?action=login"
+    ],
+    "success": true
+  },
+  {
+    "name": "TSV Gurmels",
+    "website": "https://tsv-gurmels.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://tsv-gurmels.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "TSV Jona Volleyball",
+    "website": "http://www.volleyballjona.ch",
+    "leagues": [
+      {
+        "league": "NLA",
+        "gender": "men",
+        "category": "senior",
+        "raw": "NLA"
+      },
+      {
+        "league": "NLA",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "NLA"
+      },
+      {
+        "league": "NLA",
+        "gender": "women",
+        "category": "senior",
+        "raw": "NLA"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2L"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4L"
+      },
+      {
+        "league": "1L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "1L"
+      },
+      {
+        "league": "NLB",
+        "gender": "men",
+        "category": "senior",
+        "raw": "NLB"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "http://www.volleyballjona.ch",
+      "http://www.volleyballjona.ch/nla_herren",
+      "http://www.volleyballjona.ch/herren",
+      "http://www.volleyballjona.ch/damen",
+      "http://www.volleyballjona.ch/junioren",
+      "http://www.volleyballjona.ch/juniorinnen"
+    ],
+    "success": true
+  },
+  {
+    "name": "TSV Neuendorf",
+    "website": "https://www.tsvn.ch",
+    "leagues": [
+      {
+        "league": "5L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "5. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.tsvn.ch",
+      "https://www.tsvn.ch/riegen/aktive",
+      "https://www.tsvn.ch/riegen/maenner",
+      "https://www.tsvn.ch/riegen/aktive?action=login"
+    ],
+    "success": true
+  },
+  {
+    "name": "TSV Rechthalten",
+    "website": "https://tsvrechthalten.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "https://tsvrechthalten.ch",
+      "https://tsvrechthalten.ch/2-liga/",
+      "https://tsvrechthalten.ch/volleyball/2-liga/",
+      "https://tsvrechthalten.ch/volleyball/3-liga-2/",
+      "https://tsvrechthalten.ch/volleyball/u23a/",
+      "https://tsvrechthalten.ch/volleyball/u23b/"
+    ],
+    "success": true
+  },
+  {
+    "name": "TSV Steinen",
+    "website": "https://www.tsv-steinen.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.tsv-steinen.ch",
+      "https://www.tsv-steinen.ch/laeuferteam",
+      "https://www.tsv-steinen.ch/damenriege"
+    ],
+    "success": true
+  },
+  {
+    "name": "TSV Wangen",
+    "website": "https://tsvwangen.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://tsvwangen.ch",
+      "https://tsvwangen.ch/index.php/turnverein/aktivriege-herren/",
+      "https://tsvwangen.ch/index.php/turnverein/aktive-damen/",
+      "https://tsvwangen.ch/index.php/turnverein/damenriege/",
+      "https://tsvwangen.ch/index.php/turnverein/frauenriege/",
+      "https://tsvwangen.ch/index.php/turnverein/maennerriege/"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV Arlesheim",
+    "website": "https://volleyball-arlesheim.ch",
+    "leagues": [
+      {
+        "league": "U16",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U15",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U13",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U13",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U14",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U13",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U15",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U15"
+      }
+    ],
+    "pagesChecked": [
+      "https://volleyball-arlesheim.ch",
+      "https://volleyball-arlesheim.ch/team",
+      "https://volleyball-arlesheim.ch/team/teamuebersicht",
+      "https://volleyball-arlesheim.ch/team/kids",
+      "https://volleyball-arlesheim.ch/team/u14m",
+      "https://volleyball-arlesheim.ch/team/u14k",
+      "https://volleyball-arlesheim.ch/team?action=login",
+      "https://volleyball-arlesheim.ch/team/teamuebersicht?action=login",
+      "https://volleyball-arlesheim.ch/team/kids?action=login",
+      "https://volleyball-arlesheim.ch/team/u14m?action=login",
+      "https://volleyball-arlesheim.ch/team/u14k?action=login"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV Dietlikon (Schulsportgruppe)",
+    "website": "https://tvdietlikon.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://tvdietlikon.ch",
+      "https://tvdietlikon.ch/senioren_innen_turnen",
+      "https://tvdietlikon.ch/kontakt_senioren_2",
+      "https://tvdietlikon.ch/kontakt_senioren_1",
+      "https://tvdietlikon.ch/kontakt_volley_herren_1",
+      "https://tvdietlikon.ch/kontakt_volley_herren_21"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV Hüttwilen",
+    "website": "https://tvhuettwilen.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://tvhuettwilen.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV Itingen",
+    "website": "https://tvitingen.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://tvitingen.ch",
+      "https://tvitingen.ch/wp-content/uploads/2025/10/Insta-Beitrag-Heimspiele-Frauen.jpg"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV Lunkhofen",
+    "website": "https://tvlunkhofen.ch",
+    "leagues": [
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. LIGA"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. LIGA"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. LIGA"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. LIGA"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. LIGA"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://tvlunkhofen.ch",
+      "https://tvlunkhofen.ch/teams/",
+      "https://tvlunkhofen.ch/mannschaften/frauen-1/",
+      "https://tvlunkhofen.ch/mannschaften/maenner-1/",
+      "https://tvlunkhofen.ch/kurzuebersicht-der-teams/"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV Magden",
+    "website": "https://www.tv-magden.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.tv-magden.ch",
+      "https://www.tv-magden.ch/maennerriege/",
+      "https://www.tv-magden.ch/damen-1-mit-einem-sieg-gegen-die-sg-oberwil-binningen-gehts-ab-in-die-verdiente-weihnachtspause/",
+      "https://www.tv-magden.ch/#",
+      "https://www.tv-magden.ch/maennerriege/#",
+      "https://www.tv-magden.ch/damen-1-mit-einem-sieg-gegen-die-sg-oberwil-binningen-gehts-ab-in-die-verdiente-weihnachtspause/#"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV Murten Volleyball",
+    "website": "https://www.volleyball-murten.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2L"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1L"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "1L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.volleyball-murten.ch",
+      "https://www.volleyball-murten.ch/teams",
+      "https://www.volleyball-murten.ch/teams/damen_1",
+      "https://www.volleyball-murten.ch/teams/damen_2",
+      "https://www.volleyball-murten.ch/teams/Damen_3",
+      "https://www.volleyball-murten.ch/teams/damen_4"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV Muttenz",
+    "website": "https://www.tvmuttenz.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.tvmuttenz.ch",
+      "https://www.tvmuttenz.ch/tv/berichte/2016/ber201605.php"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV Plaffeien",
+    "website": "https://www.tvplaffeien.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.tvplaffeien.ch",
+      "https://www.tvplaffeien.ch/gruppen/erwachsene/poly_frauen",
+      "https://www.tvplaffeien.ch/gruppen/erwachsene/polysport_maenner"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV St. Johann",
+    "website": "https://www.tvstjohann.net",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.tvstjohann.net",
+      "https://www.tvstjohann.net/home/meisterschaftsspiele",
+      "https://www.tvstjohann.net/riegen/aktive",
+      "https://www.tvstjohann.net/riegen/damenriege",
+      "https://www.tvstjohann.net/volleyball/tv_st_johann_herren"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV Ursenbach",
+    "website": "https://tvursenbach.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://tvursenbach.ch",
+      "https://tvursenbach.ch/aktive",
+      "https://tvursenbach.ch/seniorinnensenioren",
+      "https://tvursenbach.ch/aktive/frauenmaenner35",
+      "https://tvursenbach.ch/aktive/geraeteturnen",
+      "https://tvursenbach.ch/aktive/gymnastik",
+      "https://tvursenbach.ch/aktive?action=login",
+      "https://tvursenbach.ch/seniorinnensenioren?action=login",
+      "https://tvursenbach.ch/aktive/frauenmaenner35?action=login",
+      "https://tvursenbach.ch/aktive/geraeteturnen?action=login",
+      "https://tvursenbach.ch/aktive/gymnastik?action=login"
+    ],
+    "success": true
+  },
+  {
+    "name": "TV Zollikofen",
+    "website": "https://tvz.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://tvz.ch",
+      "https://tvz.ch/gruppen_angebot/aktive",
+      "https://tvz.ch/gruppen_angebot/aktive/aerobic",
+      "https://tvz.ch/gruppen_angebot/aktive/fitness_mixed",
+      "https://tvz.ch/gruppen_angebot/aktive/fitness_frauen",
+      "https://tvz.ch/gruppen_angebot/aktive/fitness_maenner"
+    ],
+    "success": true
+  },
+  {
+    "name": "Turnverein Horgen",
+    "website": "https://www.tv-horgen.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.tv-horgen.ch",
+      "https://www.tv-horgen.ch/damenriege/",
+      "https://www.tv-horgen.ch/damenriege/jahresprogramm/",
+      "https://www.tv-horgen.ch/damenriege/vorstand/",
+      "https://www.tv-horgen.ch/damenriege/berichte-und-fotos/",
+      "https://www.tv-horgen.ch/frauenriege/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VB Fides Ruswil",
+    "website": "https://www.volley-ruswil.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U15",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "U19",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U19"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.volley-ruswil.ch",
+      "https://www.volley-ruswil.ch/teams",
+      "https://www.volley-ruswil.ch/damen1",
+      "https://www.volley-ruswil.ch/damen2",
+      "https://www.volley-ruswil.ch/herren1",
+      "https://www.volley-ruswil.ch/herren3"
+    ],
+    "success": true
+  },
+  {
+    "name": "VB Neuenkirch",
+    "website": "http://www.vb-neuenkirch.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4 .Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "http://www.vb-neuenkirch.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VB Steinach",
+    "website": "https://vbsteinach.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://vbsteinach.ch",
+      "https://vbsteinach.ch/teams/",
+      "https://vbsteinach.ch/trainersuche/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Aarau",
+    "website": "https://www.volley-aarau.ch",
+    "leagues": [
+      {
+        "league": "NLA",
+        "gender": "men",
+        "category": "senior",
+        "raw": "NLA"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "NLB",
+        "gender": "women",
+        "category": "senior",
+        "raw": "NLB"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.volley-aarau.ch",
+      "https://www.volley-aarau.ch/teams",
+      "https://www.volley-aarau.ch/teams/frauen",
+      "https://www.volley-aarau.ch/teams/frauen/frauen-1-nlb",
+      "https://www.volley-aarau.ch/teams/frauen/frauen-2-1-liga",
+      "https://www.volley-aarau.ch/teams/frauen/frauen-3-2-liga"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Aigle",
+    "website": "https://www.vbcaigle.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vbcaigle.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Allschwil",
+    "website": "https://www.vbcallschwil.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcallschwil.ch",
+      "https://www.vbcallschwil.ch/",
+      "https://www.vbcallschwil.ch/damen-1",
+      "https://www.vbcallschwil.ch/damen-3",
+      "https://www.vbcallschwil.ch/damen-2",
+      "https://www.vbcallschwil.ch/herren-1"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Antares-Uitikon",
+    "website": "https://www.vbc-antares.ch",
+    "leagues": [
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. LIGA"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbc-antares.ch",
+      "https://www.vbc-antares.ch/teams.html",
+      "https://www.vbc-antares.ch/aktuelles--clubleben/dj1-juniorinnen-am-future-1-turnier",
+      "https://www.vbc-antares.ch/aktuelles--clubleben/dj1-juniorinnen-am-future-1-turnier#comments",
+      "https://www.vbc-antares.ch/aktuelles--clubleben/1-saisonsieg-damen-1",
+      "https://www.vbc-antares.ch/aktuelles--clubleben/1-saisonsieg-damen-1#comments"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Arbon",
+    "website": "https://vbcarbon.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3L"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5L"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcarbon.ch",
+      "https://vbcarbon.ch/teams",
+      "https://vbcarbon.ch/teams/damen_1",
+      "https://vbcarbon.ch/teams/damen_2",
+      "https://vbcarbon.ch/teams/damen_3",
+      "https://vbcarbon.ch/teams/herren_1"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Arosa",
+    "website": "https://vbc-arosa.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbc-arosa.ch",
+      "https://vbc-arosa.ch/mannschaften/",
+      "https://vbc-arosa.ch/mannschaften/damen/",
+      "https://vbc-arosa.ch/mannschaften/damen/#team"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Avully",
+    "website": "https://avullyvbc.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://avullyvbc.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Baden",
+    "website": "https://vbckantibaden.ch",
+    "leagues": [
+      {
+        "league": "NLB",
+        "gender": "women",
+        "category": "senior",
+        "raw": "NLB"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2.Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1.Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2.Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3.Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "NLB",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "NLB"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbckantibaden.ch",
+      "https://vbckantibaden.ch/teams",
+      "https://vbckantibaden.ch/articles/1195",
+      "https://vbckantibaden.ch/teams/D1"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Belfaux",
+    "website": "https://www.vbc-belfaux.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vbc-belfaux.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Bramois",
+    "website": "https://www.vbc-bramois.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vbc-bramois.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Brig-Glis",
+    "website": "https://www.vbc-brig-glis.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "U16",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U15",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "U15",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "U13",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U19",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U19"
+      },
+      {
+        "league": "U17",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U17"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbc-brig-glis.ch",
+      "https://www.vbc-brig-glis.ch/teams/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Brislach",
+    "website": "https://www.vbcbrislach.ch",
+    "leagues": [
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1\n\nLiga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2\n\nLiga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcbrislach.ch",
+      "https://www.vbcbrislach.ch/mannschaften"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Bulle",
+    "website": "http://vbcbulle.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "http://vbcbulle.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Buochs",
+    "website": "https://www.vbcbuochs.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. LIGA"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcbuochs.ch",
+      "https://www.vbcbuochs.ch/#MenuTeams",
+      "https://www.vbcbuochs.ch/teams",
+      "https://www.vbcbuochs.ch/teams/?id=2",
+      "https://www.vbcbuochs.ch/teams/?id=3",
+      "https://www.vbcbuochs.ch/teams/?id=7",
+      "https://www.vbcbuochs.ch/teams#MenuTeams",
+      "https://www.vbcbuochs.ch/teams/?id=2#MenuTeams",
+      "https://www.vbcbuochs.ch/teams/?id=3#MenuTeams",
+      "https://www.vbcbuochs.ch/teams/?id=7#MenuTeams"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Burgdorf",
+    "website": "https://www.vbcburgdorf.com",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U17",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "U14",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcburgdorf.com",
+      "https://www.vbcburgdorf.com/teams/",
+      "https://www.vbcburgdorf.com/teaminformationen/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Bösingen",
+    "website": "https://vbc-boesingen.ch",
+    "leagues": [
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbc-boesingen.ch",
+      "https://vbc-boesingen.ch/teams",
+      "https://vbc-boesingen.ch/verein/mannschaftsfuehrerinnen",
+      "https://vbc-boesingen.ch/teams/damen_1",
+      "https://vbc-boesingen.ch/teams/damen_2",
+      "https://vbc-boesingen.ch/teams/damen_3",
+      "https://vbc-boesingen.ch/teams?action=login",
+      "https://vbc-boesingen.ch/verein/mannschaftsfuehrerinnen?action=login",
+      "https://vbc-boesingen.ch/teams/damen_1?action=login",
+      "https://vbc-boesingen.ch/teams/damen_2?action=login",
+      "https://vbc-boesingen.ch/teams/damen_3?action=login"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Cazis",
+    "website": "https://www.vbc-cazis.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vbc-cazis.ch",
+      "https://www.vbc-cazis.ch/index.php/stadtmeisterschaft-mixed"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Cedra",
+    "website": "https://www.localcities.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.localcities.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Chatel-St-Denis",
+    "website": "https://www.vbc-chatel.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vbc-chatel.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Cheseaux",
+    "website": "https://vbccheseaux.ch",
+    "leagues": [
+      {
+        "league": "1L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "1L"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1L"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbccheseaux.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Chur",
+    "website": "https://vbcchur.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcchur.ch",
+      "https://vbcchur.ch/meisterschaft",
+      "https://vbcchur.ch/meisterschaft/damen",
+      "https://vbcchur.ch/meisterschaft/herren",
+      "https://vbcchur.ch/meisterschaft/herren2",
+      "https://vbcchur.ch/nachwuchs"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Colombier",
+    "website": "https://colombiervolley.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://colombiervolley.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Develier",
+    "website": "https://linktr.ee",
+    "leagues": [],
+    "pagesChecked": [
+      "https://linktr.ee"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Dietwil",
+    "website": "https://www.vbcdietwil.ch",
+    "leagues": [
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcdietwil.ch",
+      "https://www.vbcdietwil.ch/teams/",
+      "https://www.vbcdietwil.ch/teams/damen-1/",
+      "https://www.vbcdietwil.ch/teams/damen-2/",
+      "https://www.vbcdietwil.ch/teams/u-teams/",
+      "https://www.vbcdietwil.ch/teams/u-teams/u20-m%C3%A4dchen/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Dulliken",
+    "website": "https://www.vbc-dulliken.ch",
+    "leagues": [
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbc-dulliken.ch",
+      "https://www.vbc-dulliken.ch/Mannschaften/",
+      "https://www.vbc-dulliken.ch/Mannschaften/Damen/",
+      "https://www.vbc-dulliken.ch/Mannschaften/Juniorinnen-U18/",
+      "https://www.vbc-dulliken.ch/Mannschaften/Juniorinnen-U16/",
+      "https://www.vbc-dulliken.ch/Mannschaften/Juniorinnen-U14/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Ebikon",
+    "website": "https://www.vbcebikon.ch",
+    "leagues": [
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcebikon.ch",
+      "https://www.vbcebikon.ch/teams/",
+      "https://www.vbcebikon.ch/teams/damen-1/",
+      "https://www.vbcebikon.ch/teams/damen-2/",
+      "https://www.vbcebikon.ch/teams/herren-1/",
+      "https://www.vbcebikon.ch/teams/herren-2/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Eburo",
+    "website": "https://www.vbceburo.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vbceburo.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Ecublens",
+    "website": "https://vbcecublens.ch",
+    "leagues": [
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcecublens.ch",
+      "https://vbcecublens.ch/team/f3/",
+      "https://vbcecublens.ch/team/f5-ii/",
+      "https://vbcecublens.ch/team/f5-iii/",
+      "https://vbcecublens.ch/team/f5-iv/",
+      "https://vbcecublens.ch/team/u20/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Einsiedeln",
+    "website": "https://vbceinsiedeln.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbceinsiedeln.ch",
+      "https://vbceinsiedeln.ch/teams/damen-1",
+      "https://vbceinsiedeln.ch/teams/damen-2",
+      "https://vbceinsiedeln.ch/teams/damen-3",
+      "https://vbceinsiedeln.ch/teams/damen-plausch",
+      "https://vbceinsiedeln.ch/teams/herren-1"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Etoile-Geneve",
+    "website": "https://vbcgeneve.ch",
+    "leagues": [
+      {
+        "league": "U14",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcgeneve.ch",
+      "https://vbcgeneve.ch/u13-feminin/",
+      "https://vbcgeneve.ch/u15-feminin/",
+      "https://vbcgeneve.ch/u17-feminin/",
+      "https://vbcgeneve.ch/u19-feminin/",
+      "https://vbcgeneve.ch/u23-feminine/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Franches-Montagnes",
+    "website": "https://www.vfm.ch",
+    "leagues": [
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vfm.ch",
+      "https://www.vfm.ch/fr/equipes/u23",
+      "https://www.vfm.ch/fr/equipes/u23#"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Freies Gymnasium ZH",
+    "website": "https://www.vbc-fgz.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbc-fgz.ch",
+      "https://www.vbc-fgz.ch/teams",
+      "https://www.vbc-fgz.ch/teams/team-damen",
+      "https://www.vbc-fgz.ch/teams/team-herren",
+      "https://www.vbc-fgz.ch/9-news/188-magistrale-schiedsrichterleistung-beim-damenmatch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Fribourg",
+    "website": "https://vbcfribourg.ch",
+    "leagues": [
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcfribourg.ch",
+      "https://vbcfribourg.ch/teams"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Frutigen",
+    "website": "https://www.vbcfrutigen.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcfrutigen.ch",
+      "https://www.vbcfrutigen.ch/teams/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Furttal",
+    "website": "https://www.vbcfurttal.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3.Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4.Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcfurttal.ch",
+      "https://www.vbcfurttal.ch/team",
+      "https://www.vbcfurttal.ch/team/rookies",
+      "https://www.vbcfurttal.ch/team/juniorinnen-future1",
+      "https://www.vbcfurttal.ch/team/juniorinnen-future2",
+      "https://www.vbcfurttal.ch/team/juniorinnen-u20"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Galina",
+    "website": "https://www.vbcgalina.li",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3.Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcgalina.li",
+      "https://www.vbcgalina.li/Teams",
+      "https://www.vbcgalina.li/Teams/Damen",
+      "https://www.vbcgalina.li/Teams/Herren",
+      "https://www.vbcgalina.li/Teams/juniorinnen",
+      "https://www.vbcgalina.li/Teams/trainer",
+      "https://www.vbcgalina.li/Teams?action=login",
+      "https://www.vbcgalina.li/Teams/Damen?action=login",
+      "https://www.vbcgalina.li/Teams/Herren?action=login",
+      "https://www.vbcgalina.li/Teams/juniorinnen?action=login",
+      "https://www.vbcgalina.li/Teams/trainer?action=login"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Gelterkinden",
+    "website": "https://vbcgelterkinden.ch",
+    "leagues": [
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcgelterkinden.ch",
+      "https://vbcgelterkinden.ch/teams",
+      "https://vbcgelterkinden.ch/teams/mu14",
+      "https://vbcgelterkinden.ch/teams/mu14?b=100916&c=EL&s=djEtABbAkO4wIBy9D1uW5HGJlV06mXmYptsUhoqNsAYsatA=&subscribeUrl=webcal%3A%2F%2Fcalendar.clubdesk.com%2Fclubdesk%2Fical%2F12253%2F100916_1000125%2FdjEtdLc5YqmH-yc51y6HWq2SNWoZ6-r_6AsGlHBRiyXYv94%3D%2Fbasic.ics"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Gerlafingen",
+    "website": "https://www.vbcgerlafingen.ch",
+    "leagues": [
+      {
+        "league": "NLB",
+        "gender": "women",
+        "category": "senior",
+        "raw": "NLB"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. LIga"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2 . Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcgerlafingen.ch",
+      "https://www.vbcgerlafingen.ch/#",
+      "https://www.vbcgerlafingen.ch/klub/vbc-gerlafingen/hold/damen-1",
+      "https://www.vbcgerlafingen.ch/klub/vbc-gerlafingen/hold/juniorinnen-u18",
+      "https://www.vbcgerlafingen.ch/klub/vbc-gerlafingen/hold/damen-1#",
+      "https://www.vbcgerlafingen.ch/klub/vbc-gerlafingen/hold/juniorinnen-u18#"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Grosshöchstetten",
+    "website": "https://vbcg.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcg.ch",
+      "https://vbcg.ch/teams",
+      "https://vbcg.ch/teams/2_liga",
+      "https://vbcg.ch/teams/5_liga_a",
+      "https://vbcg.ch/teams/5_liga_b",
+      "https://vbcg.ch/teams/liberty",
+      "https://vbcg.ch/teams?action=login",
+      "https://vbcg.ch/teams/2_liga?action=login",
+      "https://vbcg.ch/teams/5_liga_a?action=login",
+      "https://vbcg.ch/teams/5_liga_b?action=login",
+      "https://vbcg.ch/teams/liberty?action=login"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Hallau",
+    "website": "https://vbchallau.jimdoweb.com",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "5L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "5. LIGA"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbchallau.jimdoweb.com",
+      "https://vbchallau.jimdoweb.com/mannschaften/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Haut-Lac",
+    "website": "https://www.vbchl.ch",
+    "leagues": [
+      {
+        "league": "U17",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U17"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbchl.ch",
+      "https://www.vbchl.ch/photosequipeu17"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Herren Oberwallis",
+    "website": "https://www.vbc-how.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2.Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbc-how.ch",
+      "https://www.vbc-how.ch/",
+      "https://www.vbc-how.ch/mannschaften",
+      "https://www.vbc-how.ch/mannschaften/herren_1_mannschaft",
+      "https://www.vbc-how.ch/mannschaften/herren_2mannschaft",
+      "https://www.vbc-how.ch/mannschaften/junioren",
+      "https://www.vbc-how.ch/home",
+      "https://www.vbc-how.ch/mannschaften?action=login",
+      "https://www.vbc-how.ch/mannschaften/herren_1_mannschaft?action=login",
+      "https://www.vbc-how.ch/mannschaften/herren_2mannschaft?action=login",
+      "https://www.vbc-how.ch/mannschaften/junioren?action=login"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Kanti Baden",
+    "website": "https://vbckantibaden.ch",
+    "leagues": [
+      {
+        "league": "NLB",
+        "gender": "women",
+        "category": "senior",
+        "raw": "NLB"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2.Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1.Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2.Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3.Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "NLB",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "NLB"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbckantibaden.ch",
+      "https://vbckantibaden.ch/teams",
+      "https://vbckantibaden.ch/articles/1195",
+      "https://vbckantibaden.ch/teams/D1"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Kerzers",
+    "website": "https://www.vbckerzers.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbckerzers.ch",
+      "https://www.vbckerzers.ch/teams",
+      "https://www.vbckerzers.ch/teams/damen_1",
+      "https://www.vbckerzers.ch/teams/damen_2",
+      "https://www.vbckerzers.ch/teams/damen_3"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Kreuzlingen",
+    "website": "https://pallavolo.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://pallavolo.ch",
+      "https://pallavolo.ch/damen",
+      "https://pallavolo.ch/herren",
+      "https://pallavolo.ch/juniorinnen",
+      "https://pallavolo.ch/junioren"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Küssnacht",
+    "website": "https://www.vbckuessnacht.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.vbckuessnacht.ch/\nCall log:\n\u001b[2m  - navigating to \"https://www.vbckuessnacht.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC La Chaux-de-Fonds",
+    "website": "https://www.vbcc.ch",
+    "leagues": [
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U13",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U13"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcc.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Langenthal",
+    "website": "https://vbclangenthal.ch",
+    "leagues": [
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. LIGA"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. LIGA"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. LIGA"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbclangenthal.ch",
+      "https://vbclangenthal.ch/teams",
+      "https://vbclangenthal.ch/damen-teams",
+      "https://vbclangenthal.ch/damen_1",
+      "https://vbclangenthal.ch/damen_2",
+      "https://vbclangenthal.ch/damen_3"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Laufen",
+    "website": "https://vbclaufen.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbclaufen.ch",
+      "https://vbclaufen.ch/#",
+      "https://vbclaufen.ch/teams/herren-1/",
+      "https://vbclaufen.ch/teams/herren-2/",
+      "https://vbclaufen.ch/teams/herren-3/",
+      "https://vbclaufen.ch/teams/damen-1/",
+      "https://vbclaufen.ch/teams/herren-1/#",
+      "https://vbclaufen.ch/teams/herren-2/#",
+      "https://vbclaufen.ch/teams/herren-3/#",
+      "https://vbclaufen.ch/teams/damen-1/#"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Laufenburg-Kaisten",
+    "website": "https://smash05.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://smash05.ch/\nCall log:\n\u001b[2m  - navigating to \"https://smash05.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Lausanne",
+    "website": "https://www.lausannevbc.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.lausannevbc.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Le Mont-sur-Lausanne",
+    "website": "https://www.vbclemont.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vbclemont.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Leibstadt",
+    "website": "https://www.leibstadt.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.leibstadt.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Lengnau",
+    "website": "https://vbc-lengnau.jimdosite.com",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. LIGA"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4. LIGA"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. LIGA"
+      },
+      {
+        "league": "5L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "5. LIGA"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbc-lengnau.jimdosite.com"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Liesberg",
+    "website": "https://www.liesberg.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.liesberg.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Lignieres",
+    "website": "http://vbclignieres.club",
+    "leagues": [],
+    "pagesChecked": [
+      "http://vbclignieres.club"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Linth",
+    "website": "https://www.vbclinth.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.vbclinth.ch/\nCall log:\n\u001b[2m  - navigating to \"https://www.vbclinth.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Littau",
+    "website": "https://vbc-littau.ch",
+    "leagues": [
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U15",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "5L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbc-littau.ch",
+      "https://vbc-littau.ch/mannschaft/",
+      "https://vbc-littau.ch/mannschaft/herren-5-liga/",
+      "https://vbc-littau.ch/mannschaft/damen-4-liga/",
+      "https://vbc-littau.ch/mannschaft/damenplausch/",
+      "https://vbc-littau.ch/mannschaft/juniorinnen-u20/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Lungern",
+    "website": "https://volley-region-entlebuch.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://volley-region-entlebuch.ch",
+      "https://volley-region-entlebuch.ch/unsere-teams/",
+      "https://volley-region-entlebuch.ch/2025/12/20/juniorinnen-1-kampfgeist-wird-belohnt-entlebucherinnen-siegen-im-fuenfsaetzer/",
+      "https://volley-region-entlebuch.ch/2025/12/18/damen-1-enges-duell-in-obwalden/",
+      "https://volley-region-entlebuch.ch/2025/12/14/juniorinnen-1-drei-verdiente-punkte-fuer-das-juniorinnen-1/",
+      "https://volley-region-entlebuch.ch/event/8328/",
+      "https://volley-region-entlebuch.ch/damen-1",
+      "https://volley-region-entlebuch.ch/wp-content/uploads/2025/09/Damen-1-scaled.jpg"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Lyss",
+    "website": "https://www.vbclyss.ch",
+    "leagues": [
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "u14"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U17",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "U19",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U19"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbclyss.ch",
+      "https://www.vbclyss.ch/indoor/",
+      "https://www.vbclyss.ch/indoor/juniorinnen-u15/",
+      "https://www.vbclyss.ch/indoor/juniorinnen-u18/",
+      "https://www.vbclyss.ch/indoor/juniorinnen-u20/",
+      "https://www.vbclyss.ch/indoor/damen-1/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Lützelflüh",
+    "website": "https://www.vbcluetzelflueh.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "5.Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcluetzelflueh.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Malters",
+    "website": "https://www.vbcmalters.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.vbcmalters.ch/\nCall log:\n\u001b[2m  - navigating to \"https://www.vbcmalters.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Martigny",
+    "website": "https://vbcmartigny.ch",
+    "leagues": [
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U14",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U14"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcmartigny.ch",
+      "https://vbcmartigny.ch/equipe-detente-1/",
+      "https://vbcmartigny.ch/equipe-detente-2-2/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Meggen",
+    "website": "https://www.vbcmeggen.ch",
+    "leagues": [
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcmeggen.ch",
+      "https://www.vbcmeggen.ch/aktuell/meisterschaft",
+      "https://www.vbcmeggen.ch/mannschaften",
+      "https://www.vbcmeggen.ch/mannschaften/mixed",
+      "https://www.vbcmeggen.ch/mannschaften/juniorinnen"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Merenschwand-Muri",
+    "website": "https://vbcmerenschwand-muri.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://vbcmerenschwand-muri.ch/\nCall log:\n\u001b[2m  - navigating to \"https://vbcmerenschwand-muri.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Moudon",
+    "website": "https://www.fsg-moudon.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.fsg-moudon.ch/\nCall log:\n\u001b[2m  - navigating to \"https://www.fsg-moudon.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Münchenbuchsee",
+    "website": "https://vbcmuenchenbuchsee.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://vbcmuenchenbuchsee.ch/\nCall log:\n\u001b[2m  - navigating to \"https://vbcmuenchenbuchsee.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Münchenstein",
+    "website": "https://xn--vbcmnchenstein-jsb.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://xn--vbcmnchenstein-jsb.ch/\nCall log:\n\u001b[2m  - navigating to \"https://xn--vbcmnchenstein-jsb.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Niederlenz",
+    "website": "https://www.vereinsverzeichnis.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vereinsverzeichnis.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Oberwil",
+    "website": "https://tvoberwil.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://tvoberwil.ch/\nCall log:\n\u001b[2m  - navigating to \"https://tvoberwil.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Olten",
+    "website": "https://www.svolten.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.svolten.ch/\nCall log:\n\u001b[2m  - navigating to \"https://www.svolten.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Pailly",
+    "website": "https://www.localcities.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.localcities.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Peps",
+    "website": "https://pepsvbc.ch",
+    "leagues": [
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://pepsvbc.ch",
+      "https://pepsvbc.ch/teams",
+      "https://pepsvbc.ch/teams/u14-f",
+      "https://pepsvbc.ch/teams/u16-f",
+      "https://pepsvbc.ch/teams/u18-f-1",
+      "https://pepsvbc.ch/teams/u18-f-2"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Pfäffikon",
+    "website": "https://vbcpfaeffikon.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://vbcpfaeffikon.ch/\nCall log:\n\u001b[2m  - navigating to \"https://vbcpfaeffikon.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Porrentruy",
+    "website": "https://vbcporrentruy.com",
+    "leagues": [
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcporrentruy.com",
+      "https://vbcporrentruy.com/filles-juniors-m17-a/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Port",
+    "website": "https://www.southportvbc.com",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.southportvbc.com",
+      "https://www.southportvbc.com/page/show/6764921-teams",
+      "https://www.southportvbc.com/login?user_return_to=https%3A%2F%2Flogin.sportngin.com%2Fcheck_login%3Fnext_url%3Dhttps%3A%2F%2Fwww.southportvbc.com%2Fpage%2Fshow%2F6764921-teams"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Préverenges",
+    "website": "https://vbcpreverenges.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://vbcpreverenges.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Raron",
+    "website": "https://www.vereinsverzeichnis.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vereinsverzeichnis.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Rheinfelden",
+    "website": "https://vbc-rheinfelden.ch",
+    "leagues": [
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3L"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4L"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5L"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3L"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4L"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4L"
+      },
+      {
+        "league": "5L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "5L"
+      },
+      {
+        "league": "5L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "5L"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbc-rheinfelden.ch",
+      "https://vbc-rheinfelden.ch/teams",
+      "https://vbc-rheinfelden.ch/sponsors?query=Renata+AG",
+      "https://vbc-rheinfelden.ch/teams/5839820a-fb98-4d54-ac36-fe1133e39a0e",
+      "https://vbc-rheinfelden.ch/teams/c2b113fa-3b50-4def-a442-a876be19993b",
+      "https://vbc-rheinfelden.ch/teams/d0f113a1-aa40-4dae-8a3e-f292fc02a70d",
+      "https://vbc-rheinfelden.ch/teams/c9f97c4d-49a2-45ef-bc93-d7eb86add26f",
+      "https://vbc-rheinfelden.ch/teams/ffdd5519-1ecb-4bf1-a7b0-5b2c4d220511"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Richterswil (Schulsportgruppe)",
+    "website": "https://vbc-richterswil.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://vbc-richterswil.ch/\nCall log:\n\u001b[2m  - navigating to \"https://vbc-richterswil.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Ried-Brig",
+    "website": "https://www.sv-riedbrig.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.sv-riedbrig.ch",
+      "https://www.sv-riedbrig.ch/angebot/turnen/senioren/",
+      "https://www.sv-riedbrig.ch/angebot/volleyball/2-liga/",
+      "https://www.sv-riedbrig.ch/angebot/volleyball/u19/",
+      "https://www.sv-riedbrig.ch/angebot/volleyball/u17/",
+      "https://www.sv-riedbrig.ch/angebot/volleyball/u15/",
+      "https://www.sv-riedbrig.ch/angebot/turnen/senioren/#top",
+      "https://www.sv-riedbrig.ch/angebot/volleyball/2-liga/#top"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Rotkreuz",
+    "website": "https://www.vbcrotkreuz.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.vbcrotkreuz.ch/\nCall log:\n\u001b[2m  - navigating to \"https://www.vbcrotkreuz.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Rämi",
+    "website": "http://vbcraemi.ch",
+    "leagues": [
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U19",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U19"
+      }
+    ],
+    "pagesChecked": [
+      "http://vbcraemi.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Saviese Olympia",
+    "website": "https://saviese-olympia.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://saviese-olympia.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Schmitten",
+    "website": "http://www.vbc-schmitten.ch",
+    "leagues": [
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. LIGA"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. LIGA"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. LIGA"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "http://www.vbc-schmitten.ch",
+      "http://www.vbc-schmitten.ch/index.php/teams/",
+      "http://www.vbc-schmitten.ch/index.php/teams/informationen-zu-den-foerdertrainings/",
+      "http://www.vbc-schmitten.ch/index.php/teams/damen-1/",
+      "http://www.vbc-schmitten.ch/index.php/teams/damen-2/",
+      "http://www.vbc-schmitten.ch/index.php/teams/u19/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Seftigen",
+    "website": "https://www.vbcseftigen.ch",
+    "leagues": [
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcseftigen.ch",
+      "https://www.vbcseftigen.ch/teams/",
+      "https://www.vbcseftigen.ch/teams/3-liga-pro-damen/",
+      "https://www.vbcseftigen.ch/teams/4-liga-herren/",
+      "https://www.vbcseftigen.ch/teams/5-liga-damen/",
+      "https://www.vbcseftigen.ch/teams/juniorinnen-u23/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Servette Star-Onex",
+    "website": "https://ssovbc.ch",
+    "leagues": [
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "https://ssovbc.ch",
+      "https://ssovbc.ch/u23f/",
+      "https://ssovbc.ch/u23m/",
+      "https://ssovbc.ch/nos-u23-f-championnes-genevoises/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Seuzach",
+    "website": "https://vbcseuzach.ch",
+    "leagues": [
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcseuzach.ch",
+      "https://vbcseuzach.ch/teams/",
+      "https://vbcseuzach.ch/teams/damen-1/",
+      "https://vbcseuzach.ch/teams/damen-2/",
+      "https://vbcseuzach.ch/teams/herren/",
+      "https://vbcseuzach.ch/teams/u23f/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Sion",
+    "website": "https://vbcsion.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://vbcsion.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Sixieme 7",
+    "website": "https://6e7.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://6e7.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Smile",
+    "website": "https://www.vbcsmile.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vbcsmile.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Solothurn",
+    "website": "https://www.volleysolothurn.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4L"
+      },
+      {
+        "league": "5L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "5L"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3L"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3L"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "5L"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.volleysolothurn.ch",
+      "https://www.volleysolothurn.ch/damen",
+      "https://www.volleysolothurn.ch/damen/damen-1",
+      "https://www.volleysolothurn.ch/damen/damen-2",
+      "https://www.volleysolothurn.ch/damen/damen-3",
+      "https://www.volleysolothurn.ch/damen/easyleague"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Sotto-Simme",
+    "website": "https://www.vbcsottosimme.ch",
+    "leagues": [
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5.Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcsottosimme.ch",
+      "https://www.vbcsottosimme.ch/mannschaften/",
+      "https://www.vbcsottosimme.ch/mannschaften/5-liga-damen/",
+      "https://www.vbcsottosimme.ch/mannschaften/minis/",
+      "https://www.vbcsottosimme.ch/mannschaften/juniorinnen-u16/",
+      "https://www.vbcsottosimme.ch/spielbetrieb/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Spada Academica",
+    "website": "https://vbcspada.ch",
+    "leagues": [
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "U17",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://vbcspada.ch",
+      "https://vbcspada.ch/Teams",
+      "https://vbcspada.ch/Meisterschaft",
+      "https://vbcspada.ch/teams/Damen-3",
+      "https://vbcspada.ch/teams/Mixed",
+      "https://vbcspada.ch/teams/Herren-2"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Spiez",
+    "website": "https://www.vbcspiez.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. LIGA"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. LIGA"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. LIGA"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcspiez.ch",
+      "https://www.vbcspiez.ch/teams",
+      "https://www.vbcspiez.ch/teams/damen",
+      "https://www.vbcspiez.ch/teams/damen/damen-2-liga",
+      "https://www.vbcspiez.ch/teams/damen/damen-4-Liga",
+      "https://www.vbcspiez.ch/teams/herren"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Steinhausen",
+    "website": "https://www.vbcsteinhausen.ch",
+    "leagues": [
+      {
+        "league": "NLB",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "NLB"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U13",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U15",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "U13",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U17",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "U15",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "U19",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U19"
+      },
+      {
+        "league": "U17",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "U17",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U17"
+      },
+      {
+        "league": "U15",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "U13",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U13"
+      },
+      {
+        "league": "U19",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U19"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "5. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcsteinhausen.ch",
+      "https://www.vbcsteinhausen.ch/page/de/teams",
+      "https://www.vbcsteinhausen.ch/page/de/spielplaene/kalender-abo",
+      "https://www.vbcsteinhausen.ch/page/de/spielplaene",
+      "https://www.vbcsteinhausen.ch/page/de/teams/2.damen-1-2-liga",
+      "https://www.vbcsteinhausen.ch/page/de/teams/3.damen-2-4-liga",
+      "https://www.vbcsteinhausen.ch/page/de/teams/probetr"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Studen",
+    "website": "https://www.vbc-studen.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.vbc-studen.ch/\nCall log:\n\u001b[2m  - navigating to \"https://www.vbc-studen.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Stäfa",
+    "website": "https://www.vbcstaefa.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcstaefa.ch",
+      "https://www.vbcstaefa.ch/Herren.htm",
+      "https://www.vbcstaefa.ch/Damen.htm",
+      "https://www.vbcstaefa.ch/Junioren.htm"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Sugnens-Cugy",
+    "website": "https://www.vbcsugnens.com",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vbcsugnens.com"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Suito Schwyz",
+    "website": "https://suito.ch",
+    "leagues": [
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "2L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U23"
+      }
+    ],
+    "pagesChecked": [
+      "https://suito.ch",
+      "https://suito.ch/WP/verein/teams/",
+      "https://suito.ch/WP/category/teams/team-berichte/",
+      "https://suito.ch/WP/category/teams/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Sursee",
+    "website": "https://www.vbcsursee.ch",
+    "leagues": [
+      {
+        "league": "NLB",
+        "gender": "men",
+        "category": "senior",
+        "raw": "NLB"
+      },
+      {
+        "league": "NLB",
+        "gender": "women",
+        "category": "senior",
+        "raw": "NLB"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1L"
+      },
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1L"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2L"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5L"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U16"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcsursee.ch",
+      "https://www.vbcsursee.ch/teams",
+      "https://www.vbcsursee.ch/damen",
+      "https://www.vbcsursee.ch/herren",
+      "https://www.vbcsursee.ch/juniorinnen",
+      "https://www.vbcsursee.ch/junioren"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Thayngen",
+    "website": "https://www.vereinsverzeichnis.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vereinsverzeichnis.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Thun",
+    "website": "https://www.vbcthun.ch",
+    "leagues": [
+      {
+        "league": "1L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "1. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "2. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3 Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. LIGA"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U15",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U15"
+      },
+      {
+        "league": "1L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "1L"
+      },
+      {
+        "league": "1L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "1L"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3L"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbcthun.ch",
+      "https://www.vbcthun.ch/de/verein/teamverantwortliche.html",
+      "https://www.vbcthun.ch/de/aktive.html",
+      "https://www.vbcthun.ch/de/aktive/damen-1-liga.html",
+      "https://www.vbcthun.ch/de/aktive/damen-3-liga-pro-a.html",
+      "https://www.vbcthun.ch/de/aktive/damen-3-liga-pro-b.html",
+      "https://www.vbcthun.ch/de/verein/teamverantwortliche.html#mainNavigation",
+      "https://www.vbcthun.ch/de/verein/teamverantwortliche.html#contentColumns",
+      "https://www.vbcthun.ch/de/aktive.html#mainNavigation",
+      "https://www.vbcthun.ch/de/aktive.html#contentColumns",
+      "https://www.vbcthun.ch/de/aktive/damen-1-liga.html#mainNavigation",
+      "https://www.vbcthun.ch/de/aktive/damen-1-liga.html#contentColumns",
+      "https://www.vbcthun.ch/de/aktive/damen-3-liga-pro-a.html#mainNavigation",
+      "https://www.vbcthun.ch/de/aktive/damen-3-liga-pro-a.html#contentColumns",
+      "https://www.vbcthun.ch/de/aktive/damen-3-liga-pro-b.html#mainNavigation",
+      "https://www.vbcthun.ch/de/aktive/damen-3-liga-pro-b.html#contentColumns"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Tramelan",
+    "website": "https://www.vbc-tramelan.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "https://www.vbc-tramelan.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Triengen",
+    "website": "https://www.vbc-triengen.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U14",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbc-triengen.ch",
+      "https://www.vbc-triengen.ch/Teams/",
+      "https://www.vbc-triengen.ch/Teams/Teams/",
+      "https://www.vbc-triengen.ch/Teams/Damen1/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Ueberstorf",
+    "website": "https://www.vbc-ueberstorf.ch",
+    "leagues": [
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "U18",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U14",
+        "gender": "unknown",
+        "category": "youth",
+        "raw": "U14"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. LIGA"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. LIGA"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      }
+    ],
+    "pagesChecked": [
+      "https://www.vbc-ueberstorf.ch",
+      "https://www.vbc-ueberstorf.ch/teams/",
+      "https://www.vbc-ueberstorf.ch/2-liga/",
+      "https://www.vbc-ueberstorf.ch/4-liga/",
+      "https://www.vbc-ueberstorf.ch/5-liga/",
+      "https://www.vbc-ueberstorf.ch/u18/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Uetikon",
+    "website": "http://www.vbcuetikon.ch",
+    "leagues": [],
+    "pagesChecked": [
+      "http://www.vbcuetikon.ch"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Uni Bern",
+    "website": "https://vbcunibern.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://vbcunibern.ch/\nCall log:\n\u001b[2m  - navigating to \"https://vbcunibern.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Uster",
+    "website": "https://volley-uster.ch",
+    "leagues": [
+      {
+        "league": "4L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "3L",
+        "gender": "unknown",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "U16",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "U23",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "women",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U23",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U23"
+      },
+      {
+        "league": "U18",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U18"
+      },
+      {
+        "league": "U16",
+        "gender": "men",
+        "category": "youth",
+        "raw": "U16"
+      },
+      {
+        "league": "3L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "3. Liga"
+      },
+      {
+        "league": "4L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "4. Liga"
+      },
+      {
+        "league": "5L",
+        "gender": "women",
+        "category": "senior",
+        "raw": "5. Liga"
+      },
+      {
+        "league": "2L",
+        "gender": "men",
+        "category": "senior",
+        "raw": "2. Liga"
+      }
+    ],
+    "pagesChecked": [
+      "https://volley-uster.ch",
+      "https://volley-uster.ch/teams/",
+      "https://volley-uster.ch/teams/teams-nachwuchs/",
+      "https://volley-uster.ch/teams/teams-erwachsene/",
+      "https://volley-uster.ch/teams/spielplan-und-resultate/",
+      "https://volley-uster.ch/teams/probetraining/"
+    ],
+    "success": true
+  },
+  {
+    "name": "VBC Viamala Thusis",
+    "website": "https://www.vbcviamalathusis.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.vbcviamalathusis.ch/\nCall log:\n\u001b[2m  - navigating to \"https://www.vbcviamalathusis.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  {
+    "name": "VBC Volebo Freiamt",
+    "website": "https://www.volebo.ch",
+    "leagues": [],
+    "pagesChecked": [],
+    "success": false,
+    "error": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.volebo.ch/\nCall log:\n\u001b[2m  - navigating to \"https://www.volebo.ch/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  }
+]

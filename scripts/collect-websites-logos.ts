@@ -81,11 +81,11 @@ async function main() {
   let clubsToProcess = validClubs
   
   if (fs.existsSync(progressPath)) {
-    const existing = JSON.parse(fs.readFileSync(progressPath, 'utf-8'))
+    const existing: ClubData[] = JSON.parse(fs.readFileSync(progressPath, 'utf-8'))
     console.log(`Found progress file with ${existing.length} clubs`)
     
     // Merge - keep existing website/logo data
-    const existingMap = new Map(existing.map((c: ClubData) => [c.name, c]))
+    const existingMap = new Map(existing.map((c) => [c.name, c]))
     for (const club of clubsToProcess) {
       const ex = existingMap.get(club.name)
       if (ex) {

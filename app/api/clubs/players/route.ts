@@ -79,6 +79,7 @@ export async function GET(request: Request) {
     const gender = searchParams.get('gender')
     const league = searchParams.get('league')
     const canton = searchParams.get('canton')
+    const position = searchParams.get('position')
     
     // Build where clause for clubs
     const where: any = {}
@@ -102,14 +103,28 @@ export async function GET(request: Request) {
     const playerWhere: any = {
       isActive: true
     }
-    
     if (gender) {
       playerWhere.gender = gender as any
     }
-    
     if (league) {
       // Convert league display value to enum
       playerWhere.currentLeague = convertLeagueToEnum(league)
+    }
+    if (position) {
+      // Filter by position (array contains)
+      playerWhere.positions = { has: position }
+    }
+    if (searchParams.get('age')) {
+      // Age filter: match players who are exactly the given age
+      const age = parseInt(searchParams.get('age') || '', 10)
+      if (!isNaN(age) && age > 0) {
+        const today = new Date();
+        // Lower bound: birthday after this date (one year older)
+        const lower = new Date(today.getFullYear() - age - 1, today.getMonth(), today.getDate() + 1);
+        // Upper bound: birthday before or on this date (exact age)
+        const upper = new Date(today.getFullYear() - age, today.getMonth(), today.getDate());
+        playerWhere.dateOfBirth = { gt: lower, lte: upper };
+      }
     }
     
     const clubs = await prisma.club.findMany({

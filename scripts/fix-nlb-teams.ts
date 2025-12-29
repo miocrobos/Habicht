@@ -56,7 +56,7 @@ async function main() {
       await prisma.club.create({
         data: {
           name: club.name,
-          canton: club.canton,
+          canton: club.canton as any as import('@prisma/client').Canton,
           town: club.town,
           hasNLBMen: club.hasNLBMen || false,
           hasNLBWomen: club.hasNLBWomen || false,

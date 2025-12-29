@@ -88,7 +88,7 @@ async function scrapeByLeague(): Promise<void> {
     });
     
     console.log('\nDropdown structure found:', filterStructure.found);
-    console.log('Labels found:', filterStructure.labels.slice(0, 20));
+    console.log('Labels found:', Array.isArray(filterStructure.labels) ? filterStructure.labels.slice(0, 20) : []);
     
     // Try to scrape clubs for each league by clicking the checkboxes
     // Women Senior leagues

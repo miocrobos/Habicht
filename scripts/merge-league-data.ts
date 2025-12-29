@@ -3,8 +3,7 @@
  * Creates final swiss-volleyball-leagues-final.json
  */
 
-const fs = require('fs');
-const path = require('path');
+// const path = require('path'); // Removed duplicate declaration if already declared elsewhere
 
 const dataDir = path.join(__dirname, '..', 'data');
 

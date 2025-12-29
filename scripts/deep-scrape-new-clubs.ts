@@ -279,7 +279,7 @@ async function scrapeClub(name: string, website: string): Promise<Partial<ClubDa
   
   // Extract data from main page
   Object.assign(allData, extractSocialMedia(mainHtml, website));
-  Object.assign(allData, extractContactInfo(mainHtml, website));
+  Object.assign(allData, extractContactInfo(mainHtml));
   Object.assign(allData, extractLeagues(mainHtml, name));
   
   const logo = extractLogo(mainHtml, website);

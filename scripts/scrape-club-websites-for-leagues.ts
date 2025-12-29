@@ -266,9 +266,9 @@ async function scrapeClub(page: Page, club: ClubWebsite): Promise<ClubLeagueResu
       
       // Also get text from specific elements that might contain league info
       const tables = Array.from(document.querySelectorAll('table')).map(t => t.innerText).join('\n');
-      const lists = Array.from(document.querySelectorAll('ul, ol')).map(l => l.innerText).join('\n');
-      const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(h => h.innerText).join('\n');
-      const cards = Array.from(document.querySelectorAll('.card, .team, .mannschaft, .squad, [class*="team"], [class*="liga"], [class*="league"]')).map(c => c.innerText).join('\n');
+      const lists = Array.from(document.querySelectorAll('ul, ol')).map(l => (l as HTMLElement).innerText).join('\n');
+      const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(h => (h as HTMLElement).innerText).join('\n');
+      const cards = Array.from(document.querySelectorAll('.card, .team, .mannschaft, .squad, [class*="team"], [class*="liga"], [class*="league"]')).map(c => (c as HTMLElement).innerText).join('\n');
       
       // Get alt text and title attributes (sometimes leagues are in images)
       const imgAlts = Array.from(document.querySelectorAll('img[alt]')).map(i => i.getAttribute('alt') || '').join('\n');
@@ -296,9 +296,9 @@ async function scrapeClub(page: Page, club: ClubWebsite): Promise<ClubLeagueResu
         const pageText = await page.evaluate(() => {
           const body = document.body?.innerText || '';
           const tables = Array.from(document.querySelectorAll('table')).map(t => t.innerText).join('\n');
-          const lists = Array.from(document.querySelectorAll('ul, ol')).map(l => l.innerText).join('\n');
-          const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(h => h.innerText).join('\n');
-          const cards = Array.from(document.querySelectorAll('.card, .team, .mannschaft, .squad, [class*="team"], [class*="liga"], [class*="league"]')).map(c => c.innerText).join('\n');
+          const lists = Array.from(document.querySelectorAll('ul, ol')).map(l => (l as HTMLElement).innerText).join('\n');
+          const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(h => (h as HTMLElement).innerText).join('\n');
+          const cards = Array.from(document.querySelectorAll('.card, .team, .mannschaft, .squad, [class*="team"], [class*="liga"], [class*="league"]')).map(c => (c as HTMLElement).innerText).join('\n');
           return [body, tables, lists, headings, cards].join('\n');
         });
         allText += '\n' + pageText;

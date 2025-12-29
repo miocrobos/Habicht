@@ -7,6 +7,27 @@ import CantonFlag from '@/components/shared/CantonFlag'
 import { getCantonInfo } from '@/lib/swissData'
 import { useLanguage } from '@/contexts/LanguageContext'
 
+// League translation helper
+const getLeagueLabel = (league: string, t: (key: string) => string) => {
+  const leagueMap: { [key: string]: string } = {
+    'NLA': 'home.leagues.nla',
+    'NLB': 'home.leagues.nlb',
+    'FIRST_LEAGUE': 'home.leagues.firstLeague',
+    'SECOND_LEAGUE': 'home.leagues.secondLeague',
+    'THIRD_LEAGUE': 'home.leagues.thirdLeague',
+    'FOURTH_LEAGUE': 'home.leagues.fourthLeague',
+    'FIFTH_LEAGUE': 'home.leagues.fifthLeague',
+    'U23': 'leagues.u23',
+    'U20': 'leagues.u20',
+    'U18': 'leagues.u18',
+    'YOUTH_U23': 'leagues.u23',
+    'YOUTH_U20': 'leagues.u20',
+    'YOUTH_U18': 'leagues.u18'
+  }
+  const key = leagueMap[league]
+  return key ? t(key) : league
+}
+
 export default function PlayerCard({ player }: { player: any }) {
   const { t } = useLanguage()
   const cantonInfo = getCantonInfo(player.canton)
@@ -96,9 +117,9 @@ export default function PlayerCard({ player }: { player: any }) {
               <Link
                 href={`/clubs/${player.currentClub.id}?league=${encodeURIComponent(player.currentLeague)}`}
                 className="inline-block mt-0.5 sm:mt-1 px-2 sm:px-3 py-0.5 sm:py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-[10px] sm:text-xs font-semibold hover:bg-red-200 dark:hover:bg-red-800 transition cursor-pointer truncate max-w-full"
-                title={player.currentLeague}
+                title={getLeagueLabel(player.currentLeague, t)}
               >
-                {player.currentLeague}
+                {getLeagueLabel(player.currentLeague, t)}
               </Link>
             )}
           </div>

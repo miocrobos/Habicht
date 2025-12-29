@@ -169,13 +169,13 @@ export default function Home() {
               </div>
 
               {/* Secondary Buttons */}
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-2 sm:px-4">
+              <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-2 md:gap-4 justify-center px-2 sm:px-4 pb-6 sm:pb-8 md:pb-0">
                 <button
                   onClick={() => handleProtectedNavigation('/players')}
-                  className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl text-xs sm:text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl"
+                  className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-2 sm:px-4 md:px-8 py-1.5 sm:py-2.5 md:py-4 rounded-lg sm:rounded-xl text-[10px] sm:text-sm md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-lg sm:shadow-xl md:shadow-2xl"
                 >
-                  <span className="flex items-center gap-2 justify-center">
-                    <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="flex items-center gap-1 sm:gap-2 justify-center">
+                    <Search className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
                     {t('home.hero.searchAllPlayers')}
                   </span>
                 </button>
@@ -183,19 +183,19 @@ export default function Home() {
                   <>
                     <Link
                       href="/auth/login"
-                      className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl text-xs sm:text-base md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl border-2 border-gray-300 dark:border-gray-600"
+                      className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-2 sm:px-4 md:px-8 py-1.5 sm:py-2.5 md:py-4 rounded-lg sm:rounded-xl text-[10px] sm:text-sm md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-lg sm:shadow-xl md:shadow-2xl border-2 border-gray-300 dark:border-gray-600"
                     >
-                      <span className="flex items-center gap-2 justify-center">
-                        <LogIn className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="flex items-center gap-1 sm:gap-2 justify-center">
+                        <LogIn className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
                         {t('home.hero.login')}
                       </span>
                     </Link>
                     <Link
                       href="/auth/register"
-                      className="bg-red-600 hover:bg-red-700 text-white px-3 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl text-xs sm:text-base md:text-lg font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl border-2 border-white"
+                      className="bg-red-600 hover:bg-red-700 text-white px-2 sm:px-4 md:px-8 py-1.5 sm:py-2.5 md:py-4 rounded-lg sm:rounded-xl text-[10px] sm:text-sm md:text-lg font-bold transition-all transform hover:scale-105 active:scale-95 shadow-lg sm:shadow-xl md:shadow-2xl border-2 border-white"
                     >
-                      <span className="flex items-center gap-2 justify-center">
-                        <Star className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="flex items-center gap-1 sm:gap-2 justify-center">
+                        <Star className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
                         {t('home.hero.registerNow')}
                       </span>
                     </Link>
@@ -207,15 +207,15 @@ export default function Home() {
         </div>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 sm:gap-3 z-20">
+        <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 sm:gap-3 z-20">
           {slides.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`h-2 sm:h-3 rounded-full transition-all duration-300 ${
+              className={`h-1.5 sm:h-2 md:h-3 rounded-full transition-all duration-300 ${
                 idx === currentSlide 
-                  ? 'bg-white w-8 sm:w-12 shadow-lg' 
-                  : 'bg-white/40 w-2 sm:w-3 hover:bg-white/60'
+                  ? 'bg-white w-6 sm:w-8 md:w-12 shadow-lg' 
+                  : 'bg-white/40 w-1.5 sm:w-2 md:w-3 hover:bg-white/60'
               }`}
               aria-label={`Slide ${idx + 1}`}
             />

@@ -1320,5 +1320,12 @@
       delete: 'Elimina',
       createTitle: 'Crea nuova richiesta giocatore',
       createSubtitle: 'Trova il giocatore perfetto per il tuo club',
+      contractTypes: {
+        professional: 'Professionale',
+        semiProfessional: 'Semi-Professionale',
+        amateur: 'Dilettante',
+        volunteer: 'Volontario',
+        internship: 'Stage',
+      },
     },
 }

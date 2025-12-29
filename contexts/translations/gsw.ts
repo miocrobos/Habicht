@@ -1344,5 +1344,12 @@
       delete: 'Lösche',
       createTitle: 'Neui Spieler-Aafrog erstelle',
       createSubtitle: 'Find de perfekte Spieler für din Club',
+      contractTypes: {
+        professional: 'Professionell',
+        semiProfessional: 'Semi-Professionell',
+        amateur: 'Amateur',
+        volunteer: 'Freiwilig',
+        internship: 'Praktikum',
+      },
     },
 }

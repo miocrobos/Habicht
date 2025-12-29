@@ -114,42 +114,42 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium">
+          <nav className="hidden lg:flex items-center space-x-3 xl:space-x-5">
+            <Link href="/players" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
               {t('nav.players')}
             </Link>
-            <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium">
+            <Link href="/players/men" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
               {t('nav.men')}
             </Link>
-            <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium">
+            <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
               {t('nav.women')}
             </Link>
-            <Link href="/player-requests" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium">
+            <Link href="/player-requests" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
               {t('nav.playerRequests') || 'Aafroge'}
             </Link>
-            <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium">
+            <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
               {t('nav.clubs')}
             </Link>
-            <Link href="/recruiters" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition font-medium">
+            <Link href="/recruiters" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
               {t('nav.recruiters')}
             </Link>
-            <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
+            <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition text-sm xl:text-base whitespace-nowrap">
               {t('nav.about')}
             </Link>
             {session?.user.role === 'RECRUITER' && (
-              <Link href="/dashboard/recruiter" className="text-gray-700 hover:text-swiss-red transition">
+              <Link href="/dashboard/recruiter" className="text-gray-700 hover:text-swiss-red transition text-sm xl:text-base whitespace-nowrap">
                 {t('nav.dashboard')}
               </Link>
             )}
             {session?.user.role === 'PLAYER' && session?.user.playerId && (
-              <Link href={`/players/${session.user.playerId}`} className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition">
+              <Link href={`/players/${session.user.playerId}`} className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition text-sm xl:text-base whitespace-nowrap">
                 {t('nav.myProfile')}
               </Link>
             )}
           </nav>
 
           {/* Right side buttons */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
             {session && <NotificationPopup />}
             {session && (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') && (
               <Link 
@@ -202,7 +202,7 @@ export default function Header() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center gap-2">
+          <div className="lg:hidden flex items-center gap-2">
             {session && <NotificationPopup />}
             <button
               className="text-gray-700 dark:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"
@@ -217,13 +217,13 @@ export default function Header() {
         {/* Mobile Navigation Overlay */}
         {isMenuOpen && (
           <div 
-            className="md:hidden fixed inset-0 top-0 left-0 right-0 bottom-0 bg-black/50 backdrop-blur-sm z-40"
+            className="lg:hidden fixed inset-0 top-0 left-0 right-0 bottom-0 bg-black/50 backdrop-blur-sm z-40"
             onClick={() => setIsMenuOpen(false)}
           />
         )}
 
         {/* Mobile Navigation Drawer */}
-        <div className={`md:hidden fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`lg:hidden fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           {/* Mobile Menu Header */}
           <div className="flex items-center justify-between p-4 border-b dark:border-gray-700 bg-gradient-to-r from-red-600 to-red-700">
             <div className="flex items-center gap-3">
@@ -279,8 +279,8 @@ export default function Header() {
                 className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <Home className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                <span>{t('nav.home') || 'Home'}</span>
+                <Home className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
+                <span className="whitespace-nowrap">{t('nav.home') || 'Home'}</span>
               </Link>
               
               <Link 
@@ -288,8 +288,8 @@ export default function Header() {
                 className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <Users className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                <span>{t('nav.players')}</span>
+                <Users className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
+                <span className="whitespace-nowrap">{t('nav.players')}</span>
               </Link>
               
               <Link 
@@ -297,8 +297,8 @@ export default function Header() {
                 className="flex items-center gap-3 px-4 py-3 mx-2 ml-8 rounded-xl text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition font-medium text-sm"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <span className="text-lg">♂</span>
-                <span>{t('nav.men')}</span>
+                <span className="text-lg flex-shrink-0">♂</span>
+                <span className="whitespace-nowrap">{t('nav.men')}</span>
               </Link>
               
               <Link 
@@ -306,8 +306,8 @@ export default function Header() {
                 className="flex items-center gap-3 px-4 py-3 mx-2 ml-8 rounded-xl text-pink-600 dark:text-pink-400 hover:bg-pink-50 dark:hover:bg-pink-900/30 transition font-medium text-sm"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <span className="text-lg">♀</span>
-                <span>{t('nav.women')}</span>
+                <span className="text-lg flex-shrink-0">♀</span>
+                <span className="whitespace-nowrap">{t('nav.women')}</span>
               </Link>
               
               <Link 
@@ -315,8 +315,8 @@ export default function Header() {
                 className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <Building2 className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                <span>{t('nav.clubs')}</span>
+                <Building2 className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
+                <span className="whitespace-nowrap">{t('nav.clubs')}</span>
               </Link>
               
               <Link 
@@ -324,8 +324,8 @@ export default function Header() {
                 className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <span className="text-lg">📋</span>
-                <span>{t('nav.playerRequests') || 'Spieler-Aafroge'}</span>
+                <span className="text-lg flex-shrink-0">📋</span>
+                <span className="whitespace-nowrap">{t('nav.playerRequests') || 'Spieler-Aafroge'}</span>
               </Link>
               
               <Link 
@@ -333,8 +333,8 @@ export default function Header() {
                 className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <span className="text-lg">👥</span>
-                <span>{t('nav.recruiters')}</span>
+                <span className="text-lg flex-shrink-0">👥</span>
+                <span className="whitespace-nowrap">{t('nav.recruiters')}</span>
               </Link>
               
               <Link 
@@ -342,8 +342,8 @@ export default function Header() {
                 className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <Info className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                <span>{t('nav.about')}</span>
+                <Info className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
+                <span className="whitespace-nowrap">{t('nav.about')}</span>
               </Link>
             </div>
             
@@ -361,8 +361,8 @@ export default function Header() {
                       className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      <UserCircle className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                      <span>{t('nav.myProfile')}</span>
+                      <UserCircle className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
+                      <span className="whitespace-nowrap">{t('nav.myProfile')}</span>
                     </Link>
                   )}
                   
@@ -372,10 +372,10 @@ export default function Header() {
                       className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      <Bookmark className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                      <span>{t('nav.watchlist')}</span>
+                      <Bookmark className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
+                      <span className="whitespace-nowrap">{t('nav.watchlist')}</span>
                       {watchlistCount > 0 && (
-                        <span className="ml-auto bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                        <span className="ml-auto flex-shrink-0 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
                           {watchlistCount}
                         </span>
                       )}
@@ -387,8 +387,8 @@ export default function Header() {
                     className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <Settings className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                    <span>{t('nav.settings')}</span>
+                    <Settings className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
+                    <span className="whitespace-nowrap">{t('nav.settings')}</span>
                   </Link>
                   
                   <button
@@ -398,8 +398,8 @@ export default function Header() {
                     }}
                     className="w-full flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 transition font-medium"
                   >
-                    <LogOut className="w-5 h-5" />
-                    <span>{t('nav.logout')}</span>
+                    <LogOut className="w-5 h-5 flex-shrink-0" />
+                    <span className="whitespace-nowrap">{t('nav.logout')}</span>
                   </button>
                 </>
               ) : (
@@ -409,8 +409,8 @@ export default function Header() {
                     className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <LogIn className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                    <span>{t('nav.login')}</span>
+                    <LogIn className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
+                    <span className="whitespace-nowrap">{t('nav.login')}</span>
                   </Link>
                   
                   <Link 
@@ -418,8 +418,8 @@ export default function Header() {
                     className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 transition font-semibold shadow-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <UserPlus className="w-5 h-5" />
-                    <span>{t('nav.register')}</span>
+                    <UserPlus className="w-5 h-5 flex-shrink-0" />
+                    <span className="whitespace-nowrap">{t('nav.register')}</span>
                   </Link>
                 </>
               )}

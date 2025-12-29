@@ -37,34 +37,50 @@ interface PlayerRequest {
   }
 }
 
-const positionLabels: Record<string, string> = {
-  OUTSIDE_HITTER: 'Aussespieler',
-  OPPOSITE: 'Diagonalspieler',
-  MIDDLE_BLOCKER: 'Mittelblocker',
-  SETTER: 'Zuspieler',
-  LIBERO: 'Libero',
-  UNIVERSAL: 'Universal'
+// Translation helper functions
+const getPositionLabel = (position: string, t: (key: string) => string) => {
+  const positionMap: { [key: string]: string } = {
+    'OUTSIDE_HITTER': 'positions.outsideHitter',
+    'OPPOSITE': 'positions.opposite',
+    'MIDDLE_BLOCKER': 'positions.middleBlocker',
+    'SETTER': 'positions.setter',
+    'LIBERO': 'positions.libero',
+    'UNIVERSAL': 'positions.universal'
+  }
+  const key = positionMap[position]
+  return key ? t(key) : position
 }
 
-const contractTypeLabels: Record<string, string> = {
-  PROFESSIONAL: 'Professionell',
-  SEMI_PROFESSIONAL: 'Semi-Professionell',
-  AMATEUR: 'Amateur',
-  VOLUNTEER: 'Freiwillig',
-  INTERNSHIP: 'Praktikum'
+const getContractTypeLabel = (contractType: string, t: (key: string) => string) => {
+  const contractMap: { [key: string]: string } = {
+    'PROFESSIONAL': 'playerRequests.contractTypes.professional',
+    'SEMI_PROFESSIONAL': 'playerRequests.contractTypes.semiProfessional',
+    'AMATEUR': 'playerRequests.contractTypes.amateur',
+    'VOLUNTEER': 'playerRequests.contractTypes.volunteer',
+    'INTERNSHIP': 'playerRequests.contractTypes.internship'
+  }
+  const key = contractMap[contractType]
+  return key ? t(key) : contractType
 }
 
-const leagueLabels: Record<string, string> = {
-  NLA: 'NLA',
-  NLB: 'NLB',
-  FIRST_LEAGUE: '1. Liga',
-  SECOND_LEAGUE: '2. Liga',
-  THIRD_LEAGUE: '3. Liga',
-  FOURTH_LEAGUE: '4. Liga',
-  FIFTH_LEAGUE: '5. Liga',
-  YOUTH_U23: 'U23',
-  YOUTH_U20: 'U20',
-  YOUTH_U18: 'U18'
+const getLeagueLabel = (league: string, t: (key: string) => string) => {
+  const leagueMap: { [key: string]: string } = {
+    'NLA': 'leagues.nla',
+    'NLB': 'leagues.nlb',
+    'FIRST_LEAGUE': 'leagues.firstLeague',
+    'SECOND_LEAGUE': 'leagues.secondLeague',
+    'THIRD_LEAGUE': 'leagues.thirdLeague',
+    'FOURTH_LEAGUE': 'leagues.fourthLeague',
+    'FIFTH_LEAGUE': 'leagues.fifthLeague',
+    'U23': 'leagues.u23',
+    'U20': 'leagues.u20',
+    'U18': 'leagues.u18',
+    'YOUTH_U23': 'leagues.u23',
+    'YOUTH_U20': 'leagues.u20',
+    'YOUTH_U18': 'leagues.u18'
+  }
+  const key = leagueMap[league]
+  return key ? t(key) : league
 }
 
 export default function PlayerRequestsPage() {
@@ -223,9 +239,12 @@ export default function PlayerRequestsPage() {
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">{t('playerRequests.allPositions') || 'Alli Positione'}</option>
-                {Object.entries(positionLabels).map(([value, label]) => (
-                  <option key={value} value={value}>{label}</option>
-                ))}
+                <option value="OUTSIDE_HITTER">{t('positions.outsideHitter')}</option>
+                <option value="OPPOSITE">{t('positions.opposite')}</option>
+                <option value="MIDDLE_BLOCKER">{t('positions.middleBlocker')}</option>
+                <option value="SETTER">{t('positions.setter')}</option>
+                <option value="LIBERO">{t('positions.libero')}</option>
+                <option value="UNIVERSAL">{t('positions.universal')}</option>
               </select>
             </div>
 
@@ -240,9 +259,11 @@ export default function PlayerRequestsPage() {
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">{t('playerRequests.allContracts') || 'Alli Typen'}</option>
-                {Object.entries(contractTypeLabels).map(([value, label]) => (
-                  <option key={value} value={value}>{label}</option>
-                ))}
+                <option value="PROFESSIONAL">{t('playerRequests.contractTypes.professional')}</option>
+                <option value="SEMI_PROFESSIONAL">{t('playerRequests.contractTypes.semiProfessional')}</option>
+                <option value="AMATEUR">{t('playerRequests.contractTypes.amateur')}</option>
+                <option value="VOLUNTEER">{t('playerRequests.contractTypes.volunteer')}</option>
+                <option value="INTERNSHIP">{t('playerRequests.contractTypes.internship')}</option>
               </select>
             </div>
 
@@ -338,19 +359,19 @@ export default function PlayerRequestsPage() {
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-3">
                       <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-sm rounded-full">
-                        {positionLabels[request.positionNeeded] || request.positionNeeded}
+                        {getPositionLabel(request.positionNeeded, t)}
                       </span>
                       <span className="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-sm rounded-full">
-                        {contractTypeLabels[request.contractType] || request.contractType}
+                        {getContractTypeLabel(request.contractType, t)}
                       </span>
                       {request.league && (
                         <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 text-sm rounded-full">
-                          {leagueLabels[request.league] || request.league}
+                          {getLeagueLabel(request.league, t)}
                         </span>
                       )}
                       {request.gender && (
                         <span className="px-3 py-1 bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-300 text-sm rounded-full">
-                          {request.gender === 'MALE' ? '♂ Männer' : request.gender === 'FEMALE' ? '♀ Fraue' : request.gender}
+                          {request.gender === 'MALE' ? `♂ ${t('playerProfile.men')}` : request.gender === 'FEMALE' ? `♀ ${t('playerProfile.women')}` : request.gender}
                         </span>
                       )}
                     </div>

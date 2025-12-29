@@ -9,6 +9,27 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 
+// League translation helper
+const getLeagueLabel = (league: string, t: (key: string) => string) => {
+  const leagueMap: { [key: string]: string } = {
+    'NLA': 'leagues.nla',
+    'NLB': 'leagues.nlb',
+    'FIRST_LEAGUE': 'leagues.firstLeague',
+    'SECOND_LEAGUE': 'leagues.secondLeague',
+    'THIRD_LEAGUE': 'leagues.thirdLeague',
+    'FOURTH_LEAGUE': 'leagues.fourthLeague',
+    'FIFTH_LEAGUE': 'leagues.fifthLeague',
+    'U23': 'leagues.u23',
+    'U20': 'leagues.u20',
+    'U18': 'leagues.u18',
+    'YOUTH_U23': 'leagues.u23',
+    'YOUTH_U20': 'leagues.u20',
+    'YOUTH_U18': 'leagues.u18'
+  }
+  const key = leagueMap[league]
+  return key ? t(key) : league
+}
+
 interface WatchlistPlayer {
   id: string
   player: {
@@ -186,7 +207,7 @@ export default function WatchlistPage() {
                     {item.player.currentLeague && (
                       <p className="text-sm text-gray-700 dark:text-gray-300">
                         <span className="font-medium">{t('playerProfile.league')}:</span>{' '}
-                        {t(`leagues.${item.player.currentLeague.toLowerCase().replace(/\s+/g, '')}`)}
+                        {getLeagueLabel(item.player.currentLeague, t)}
                       </p>
                     )}
                   </div>

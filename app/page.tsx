@@ -193,9 +193,11 @@ export default function Home() {
                     <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-left flex items-center gap-2 sm:gap-3">
                       <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl">{slides[currentSlide].emoji}</span> {t(slides[currentSlide].titleKey)}
                     </h1>
-                    <p className="text-[19.5px] text-gray-200 mt-1 sm:mt-2 text-center w-full break-words">
-                      {t(slides[currentSlide].subtitleKey)}
-                    </p>
+                    {t(slides[currentSlide].subtitleKey) && (
+                      <p className="text-[19.5px] text-gray-200 mt-1 sm:mt-2 text-center w-full break-words">
+                        {t(slides[currentSlide].subtitleKey)}
+                      </p>
+                    )}
                   </div>
                   
                   {/* RIGHT: Quote and explanation box */}

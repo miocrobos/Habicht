@@ -89,9 +89,10 @@ body {
 }
 
 /* League card wrapper - expands precisely to show quote on hover */
+
 .league-card-wrapper {
-  flex: 1 1 0;
-  min-width: 120px;
+  flex: 2 1 0;
+  min-width: 140px;
   transition: flex 0.3s ease-out;
 }
 
@@ -111,9 +112,9 @@ body {
   }
   
   .league-card-wrapper {
-    flex: 1 1 calc(50% - 0.25rem);
-    min-width: calc(50% - 0.25rem);
-    max-width: calc(50% - 0.25rem);
+    flex: 2 1 calc(60% - 0.25rem);
+    min-width: calc(60% - 0.25rem);
+    max-width: calc(100% - 0.25rem);
     transition: flex 0.3s ease-out, min-width 0.3s ease-out, max-width 0.3s ease-out;
   }
   
@@ -126,15 +127,15 @@ body {
   
   /* Mobile tap expand behavior */
   .league-card-wrapper.is-expanded {
-    flex: 1 1 calc(65% - 0.25rem);
-    min-width: calc(65% - 0.25rem);
-    max-width: calc(65% - 0.25rem);
+    flex: 3 1 calc(90% - 0.25rem);
+    min-width: calc(90% - 0.25rem);
+    max-width: 100%;
   }
   
   .league-row:has(.league-card-wrapper.is-expanded) .league-card-wrapper:not(.is-expanded):not(.w-full) {
-    flex: 1 1 calc(35% - 0.25rem);
-    min-width: calc(35% - 0.25rem);
-    max-width: calc(35% - 0.25rem);
+    flex: 1 1 calc(10% - 0.25rem);
+    min-width: calc(10% - 0.25rem);
+    max-width: calc(30% - 0.25rem);
   }
 }
 
@@ -147,7 +148,7 @@ body {
   }
   
   .league-card-wrapper {
-    min-width: 130px;
+    min-width: 180px;
   }
   
   /* CSS :has() approach for modern browsers */
@@ -177,7 +178,7 @@ body {
   }
   
   .league-card-wrapper {
-    min-width: 140px;
+    min-width: 200px;
   }
 }
 
@@ -187,7 +188,7 @@ body {
   }
   
   .league-card-wrapper {
-    min-width: 160px;
+    min-width: 240px;
   }
 }
 

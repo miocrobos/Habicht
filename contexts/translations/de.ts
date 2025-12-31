@@ -198,8 +198,8 @@
         womensVolleyball: 'Frauen Volleyball',
         mensLeaguePlayers: 'NLA, NLB, 1. & 2. Liga Spieler',
         womensLeaguePlayers: 'NLA, NLB, 1. & 2. Liga Spielerinnen',
-        discoverMen: 'Männer entdecken →',
-        discoverWomen: 'Frauen entdecken →',
+        discoverMen: 'Männer entdecken',
+        discoverWomen: 'Frauen entdecken',
         browsePlayers: 'Spieler durchsuchen',
       },
       slides: {

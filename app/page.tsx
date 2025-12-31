@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Search, TrendingUp, Users, Video, Award, MapPin, Star, Zap, LogIn, UserPlus } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import CantonFlag from '@/components/shared/CantonFlag'
@@ -15,6 +15,36 @@ export default function Home() {
   const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
+
+  // JavaScript fallback for league card hover (for browsers without :has() support)
+  useEffect(() => {
+    const leagueRows = document.querySelectorAll('.league-row');
+    
+    leagueRows.forEach(row => {
+      const wrappers = row.querySelectorAll('.league-card-wrapper');
+      
+      wrappers.forEach(wrapper => {
+        wrapper.addEventListener('mouseenter', () => {
+          row.classList.add('has-hover');
+          wrapper.classList.add('is-hovered');
+        });
+        
+        wrapper.addEventListener('mouseleave', () => {
+          row.classList.remove('has-hover');
+          wrapper.classList.remove('is-hovered');
+        });
+      });
+    });
+    
+    return () => {
+      leagueRows.forEach(row => {
+        const wrappers = row.querySelectorAll('.league-card-wrapper');
+        wrappers.forEach(wrapper => {
+          wrapper.replaceWith(wrapper.cloneNode(true));
+        });
+      });
+    };
+  }, []);
 
   const handleProtectedNavigation = (path: string) => {
     if (!session) {
@@ -575,17 +605,17 @@ function LeagueCard({ league, description, color, emoji, playerCount, factKey }:
       <div className="relative flex flex-col sm:flex-row h-full">
         {/* Main content */}
         <div 
-          className="p-2.5 sm:p-4 md:p-5 text-white flex-shrink-0 flex flex-col justify-between flex-1 min-h-[90px] sm:min-h-[140px]"
+          className="p-3 sm:p-4 md:p-5 text-white flex-shrink-0 flex flex-col justify-between flex-1 min-h-[100px] sm:min-h-[150px] min-w-[100px] sm:min-w-[120px]"
           onClick={() => setMobileExpanded(!mobileExpanded)}
         >
           <div>
-            <div className="text-lg sm:text-2xl md:text-3xl mb-0.5 sm:mb-2">{emoji}</div>
-            <h3 className="text-[11px] sm:text-lg md:text-xl font-bold mb-0.5 leading-tight">{league}</h3>
-            <p className="text-[8px] sm:text-xs md:text-sm opacity-90 mb-1 sm:mb-2 line-clamp-1 sm:line-clamp-2">{description}</p>
+            <div className="text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2">{emoji}</div>
+            <h3 className="text-xs sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1 leading-tight">{league}</h3>
+            <p className="text-[9px] sm:text-xs md:text-sm opacity-90 mb-1 sm:mb-2 line-clamp-2 sm:line-clamp-2">{description}</p>
           </div>
           <div>
             <div className="text-base sm:text-lg md:text-xl font-bold">{playerCount}</div>
-            <p className="text-[7px] sm:text-[10px] opacity-75">{t('home.leagues.players')}</p>
+            <p className="text-[8px] sm:text-[10px] opacity-75">{t('home.leagues.players')}</p>
           </div>
         </div>
         {/* Quote panel - mobile: expandable on tap, desktop: visible on hover */}

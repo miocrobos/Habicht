@@ -275,15 +275,16 @@ export default function ClubProfilePage() {
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('clubProfile.contactSocial')}</h2>
                 <div className="space-y-3">
                   {club.website && (
-                    <a 
-                      href={club.website} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition"
-                    >
-                      <Globe className="w-5 h-5" />
-                      <span>{t('clubProfile.website')}</span>
-                    </a>
+                    <div className="flex justify-center">
+                      <a 
+                        href={club.website} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition font-semibold text-center w-full max-w-xs"
+                      >
+                        <span className="w-full block text-center">{t('clubProfile.website')}</span>
+                      </a>
+                    </div>
                   )}
                   {club.email && (
                     <a 

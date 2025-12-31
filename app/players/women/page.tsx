@@ -78,18 +78,12 @@ export default function WomenPlayersPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">{t('players.womenTitle')}</h1>
-              <p className="text-lg text-gray-600">
-                {t('players.womenPlayers')}
-              </p>
-            </div>
+          <div className="mb-4 flex justify-center">
             <Link 
               href="/players/men"
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold text-center"
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold text-center w-full max-w-xs"
             >
-              {t('players.toMen')}
+              <span className="w-full block text-center">{t('players.toMen')}</span>
             </Link>
           </div>
           

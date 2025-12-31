@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { Menu, X, User, Search, Settings, Bell, Bookmark, ChevronDown, Home, Users, UserCircle, LogIn, UserPlus, LogOut, Info, Building2 } from 'lucide-react'
+import SettingsPopup from '@/components/shared/SettingsPopup'
 import { useSession, signOut } from 'next-auth/react'
 import axios from 'axios'
 import NotificationPopup from '@/components/shared/NotificationPopup'
@@ -74,24 +75,7 @@ export default function Header() {
   return (
     <header className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors">
       <div className={`container mx-auto px-4 transition-all duration-500 ${collapsed ? 'h-12 overflow-hidden' : 'h-auto'}`} style={{ position: 'relative' }}>
-        {/* Arrow button for retract/expand header (centered below header, no circle) */}
-        <div className="w-full flex justify-center">
-          <button
-            onClick={() => setCollapsed((prev) => !prev)}
-            className="mt-1 mb-2 focus:outline-none"
-            aria-label={collapsed ? 'Expand header' : 'Collapse header'}
-          >
-            <svg
-              className={`w-7 h-7 text-gray-700 dark:text-gray-200 transform transition-transform duration-300 ${collapsed ? 'rotate-180' : ''}`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-        </div>
+        {/* ...dropdown arrow removed... */}
         <div className={`flex items-center justify-between transition-all duration-500 ${collapsed ? 'opacity-0 pointer-events-none h-0' : 'opacity-100 h-16'}`} style={{ minHeight: collapsed ? 0 : 64 }}>
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">

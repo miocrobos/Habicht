@@ -88,6 +88,9 @@ body {
   }
 }
 
+/* League card row - cards don't grow/shrink, only the internal quote panel expands */
+/* No flex-grow behavior needed - card expands naturally with its quote content */
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

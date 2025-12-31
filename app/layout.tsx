@@ -1,5 +1,4 @@
 import { Toaster } from 'react-hot-toast';
-  <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -9,6 +8,7 @@ import { LanguageProvider } from '@/contexts/LanguageContext'
 import { HeaderProvider } from '@/contexts/HeaderContext'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import SettingsPopup from '@/components/shared/SettingsPopup'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -77,6 +77,8 @@ export default function RootLayout({
                     {children}
                   </main>
                   <Footer />
+                  <SettingsPopup />
+                  <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
                 </div>
               </HeaderProvider>
             </AuthProvider>

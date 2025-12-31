@@ -10,67 +10,101 @@ import CantonFlag from '@/components/shared/CantonFlag'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Home() {
-  const { data: session, status } = useSession()
-  const router = useRouter()
-  const { t } = useLanguage()
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const { t } = useLanguage();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   const handleProtectedNavigation = (path: string) => {
     if (!session) {
-      // Redirect to register page with return URL
-      router.push(`/auth/register?returnUrl=${encodeURIComponent(path)}`)
+      router.push(`/auth/register?returnUrl=${encodeURIComponent(path)}`);
     } else {
-      router.push(path)
+      router.push(path);
     }
-  }
-  
+  };
+
   const slides = [
     {
-      title: "NLA Herren & Damen",
-      subtitle: "Schweizer Spitzenvolleyball",
+      titleKey: 'home.slides.nla.title',
+      subtitleKey: 'home.slides.nla.subtitle',
       color: "from-blue-900/90 to-blue-700/90",
-      emoji: "�"
+      emoji: "🏆",
+      explanationKey: 'home.slides.nla.explanation',
+      quoteKey: 'home.slides.nla.quote'
     },
     {
-      title: "NLB",
-      subtitle: "Der Weg nach oben",
+      titleKey: 'home.slides.nlb.title',
+      subtitleKey: 'home.slides.nlb.subtitle',
       color: "from-indigo-900/90 to-indigo-700/90",
-      emoji: "🏐"
+      emoji: "🏐",
+      explanationKey: 'home.slides.nlb.explanation',
+      quoteKey: 'home.slides.nlb.quote'
     },
     {
-      title: "1. Liga",
-      subtitle: "Regionale Spitze",
+      titleKey: 'home.slides.liga1.title',
+      subtitleKey: 'home.slides.liga1.subtitle',
       color: "from-purple-900/90 to-purple-700/90",
-      emoji: "🔥"
+      emoji: "🔥",
+      explanationKey: 'home.slides.liga1.explanation',
+      quoteKey: 'home.slides.liga1.quote'
     },
     {
-      title: "2. & 3. Liga",
-      subtitle: "Aufstrebende Talente",
+      titleKey: 'home.slides.liga23.title',
+      subtitleKey: 'home.slides.liga23.subtitle',
       color: "from-red-900/90 to-red-700/90",
-      emoji: "💪"
+      emoji: "💪",
+      explanationKey: 'home.slides.liga23.explanation',
+      quoteKey: 'home.slides.liga23.quote'
     },
     {
-      title: "4. & 5. Liga",
-      subtitle: "Basis und Nachwuchs",
+      titleKey: 'home.slides.liga45.title',
+      subtitleKey: 'home.slides.liga45.subtitle',
       color: "from-green-900/90 to-green-700/90",
-      emoji: "⭐"
+      emoji: "⭐",
+      explanationKey: 'home.slides.liga45.explanation',
+      quoteKey: 'home.slides.liga45.quote'
+    },
+    {
+      titleKey: 'home.slides.u23.title',
+      subtitleKey: 'home.slides.u23.subtitle',
+      color: "from-orange-900/90 to-orange-700/90",
+      emoji: "🎯",
+      explanationKey: 'home.slides.u23.explanation',
+      quoteKey: 'home.slides.u23.quote'
+    },
+    {
+      titleKey: 'home.slides.u20.title',
+      subtitleKey: 'home.slides.u20.subtitle',
+      color: "from-cyan-900/90 to-cyan-700/90",
+      emoji: "🚀",
+      explanationKey: 'home.slides.u20.explanation',
+      quoteKey: 'home.slides.u20.quote'
+    },
+    {
+      titleKey: 'home.slides.u18.title',
+      subtitleKey: 'home.slides.u18.subtitle',
+      color: "from-amber-900/90 to-amber-700/90",
+      emoji: "🌟",
+      explanationKey: 'home.slides.u18.explanation',
+      quoteKey: 'home.slides.u18.quote'
     }
-  ]
+  ];
 
   useEffect(() => {
+    if (paused) return;
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 4000)
-    return () => clearInterval(timer)
-  }, [])
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 30000);
+    return () => clearInterval(timer);
+  }, [paused, slides.length]);
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section with Dynamic Background */}
-      <section className="relative min-h-[500px] sm:min-h-[600px] md:min-h-[700px] pb-12 sm:pb-20 mb-12 sm:mb-24 overflow-visible">
+      {/* Hero Section with League Explanation */}
+      <section className="relative min-h-[400px] sm:min-h-[500px] md:min-h-[600px] pb-8 sm:pb-16 mb-8 sm:mb-16 md:mb-24 overflow-visible">
         {/* Animated Background */}
         <div className="absolute inset-0">
-          {/* Volleyball Background Images */}
           <div className="absolute inset-0">
             <Image
               src="/volleyball-bg-1.jpg"
@@ -81,10 +115,7 @@ export default function Home() {
               priority
             />
           </div>
-          {/* Base gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
-          
-          {/* Animated volleyball court pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="h-full w-full" style={{
               backgroundImage: `
@@ -94,60 +125,73 @@ export default function Home() {
               backgroundSize: '60px 60px'
             }}></div>
           </div>
-          
-          {/* Dynamic color overlay */}
-          <div 
-            className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].color} transition-all duration-1000`}
-          />
-          
-          {/* Radial gradient for depth */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].color} transition-all duration-1000`} />
           <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-black/50" />
         </div>
 
-        {/* Content */}
-        <div className="relative z-10 h-full flex items-center">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto text-center text-white pt-6 sm:pt-0">
-              {/* Eagle Logo with Animation */}
-              <div className="mb-4 sm:mb-8 flex justify-center animate-bounce-slow">
-                <div className="relative w-20 h-20 sm:w-32 sm:h-32 md:w-40 md:h-40 drop-shadow-2xl transform hover:scale-110 hover:rotate-3 transition-all duration-300" style={{ isolation: 'isolate', colorScheme: 'only light', mixBlendMode: 'normal' }}>
-                  <Image
-                    src="/eagle-logo.png"
-                    alt="Eagle Logo"
-                    fill
-                    className="object-contain no-invert"
-                    priority
-                    style={{ filter: 'none', WebkitFilter: 'none', colorScheme: 'only light', mixBlendMode: 'normal' }}
-                  />
+        {/* Pause/Play Button - top left */}
+        <div className="absolute top-4 left-4 z-30">
+          <button
+            onClick={() => setPaused((p) => !p)}
+            className="bg-white/80 hover:bg-white text-blue-700 hover:text-blue-900 border border-blue-200 hover:border-blue-400 rounded-full p-2 shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-400 group"
+            aria-label={paused ? 'Play transitions' : 'Pause transitions'}
+          >
+            <span className="sr-only">{paused ? 'Play transitions' : 'Pause transitions'}</span>
+            {paused ? (
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v18l15-9L5 3z" /></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+            )}
+            <span className="absolute left-full ml-2 top-1/2 -translate-y-1/2 bg-black/80 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+              {paused ? 'Play transitions' : 'Pause transitions'}
+            </span>
+          </button>
+        </div>
+
+        {/* Content with League Explanation - Side by Side Layout */}
+        <div className="relative z-10 h-full flex items-center justify-center min-h-[420px] sm:min-h-[520px] md:min-h-[600px]">
+          <div className="container mx-auto px-3 sm:px-4">
+            <div className="max-w-6xl mx-auto text-white">
+              {/* Animated League Slide - Side by Side */}
+              <div
+                key={currentSlide}
+                className="transition-all duration-700 ease-in-out animate-fade-in"
+              >
+                <div className="flex flex-col lg:flex-row items-stretch gap-3 lg:gap-12 w-full mb-4 sm:mb-6">
+                  {/* LEFT: Liga name + subtitle */}
+                  <div className="flex-shrink-0 lg:w-2/5 flex flex-col justify-center">
+                    <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-left flex items-center gap-2 sm:gap-3">
+                      <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl">{slides[currentSlide].emoji}</span> {t(slides[currentSlide].titleKey)}
+                    </h1>
+                    <p className="text-[19.5px] text-gray-200 mt-1 sm:mt-2 text-center w-full break-words">
+                      {t(slides[currentSlide].subtitleKey)}
+                    </p>
+                  </div>
+                  
+                  {/* RIGHT: Quote and explanation box */}
+                  <div className="flex-1 lg:w-3/5 bg-white/10 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 flex flex-col justify-center">
+                    {/* Inspiring quote at top */}
+                    <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-white font-bold italic mb-2 sm:mb-3">
+                      {t(slides[currentSlide].quoteKey)}
+                    </p>
+                    {/* Explanation below */}
+                    <p className="text-[11px] sm:text-sm md:text-base text-gray-200 text-left">
+                      {t(slides[currentSlide].explanationKey)}
+                    </p>
+                  </div>
                 </div>
               </div>
               
-              {/* Main Title */}
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-3 sm:mb-6 tracking-tighter leading-none">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-white">
-                  {t('home.hero.title')}
-                </span>
-              </h1>
-              
-              {/* Dynamic Subtitle */}
-              <div className="h-16 sm:h-20 md:h-24 mb-4 sm:mb-8">
-                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2 animate-fade-in">
-                  {slides[currentSlide].emoji} {slides[currentSlide].title}
-                </p>
-                <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-200">
-                  {slides[currentSlide].subtitle}
-                </p>
-              </div>
-              
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-5 sm:mb-8 text-gray-200 max-w-3xl mx-auto px-4">
+              {/* Center tagline */}
+              <p className="text-[11px] sm:text-sm md:text-base lg:text-lg mb-4 sm:mb-6 text-gray-200 max-w-2xl mx-auto text-center px-2">
                 {t('home.hero.description')}
               </p>
 
               {/* Main CTA Buttons */}
-              <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center mb-4 sm:mb-6 md:mb-8 px-2 sm:px-4">
+              <div className="flex flex-row flex-wrap gap-2 sm:gap-2 md:gap-3 justify-center mb-4 sm:mb-6 md:mb-8 px-2 sm:px-4">
                 <button
                   onClick={() => handleProtectedNavigation('/players/men')}
-                  className="group relative bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-sm sm:text-base md:text-lg font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl overflow-hidden"
+                  className="group relative bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs sm:text-sm md:text-base font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     <span className="text-base sm:text-lg md:text-xl">♂</span>
@@ -155,10 +199,9 @@ export default function Home() {
                   </span>
                   <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </button>
-                
                 <button
                   onClick={() => handleProtectedNavigation('/players/women')}
-                  className="group relative bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-sm sm:text-base md:text-lg font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl overflow-hidden"
+                  className="group relative bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs sm:text-sm md:text-base font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl sm:shadow-2xl overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     <span className="text-base sm:text-lg md:text-xl">♀</span>
@@ -169,12 +212,12 @@ export default function Home() {
               </div>
 
               {/* Secondary Buttons */}
-              <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-2 md:gap-4 justify-center px-2 sm:px-4 pb-6 sm:pb-8 md:pb-0">
+              <div className="flex flex-row gap-1 sm:gap-1.5 md:gap-2 justify-center px-2 sm:px-4 pb-4 sm:pb-6 md:pb-0">
                 <button
                   onClick={() => handleProtectedNavigation('/players')}
-                  className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-2 sm:px-4 md:px-8 py-1.5 sm:py-2.5 md:py-4 rounded-lg sm:rounded-xl text-[10px] sm:text-sm md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-lg sm:shadow-xl md:shadow-2xl"
+                  className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-lg text-[10px] sm:text-xs md:text-sm font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-lg sm:shadow-xl md:shadow-2xl"
                 >
-                  <span className="flex items-center gap-1 sm:gap-2 justify-center">
+                  <span className="flex items-center gap-1 sm:gap-1.5 justify-center">
                     <Search className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
                     {t('home.hero.searchAllPlayers')}
                   </span>
@@ -183,18 +226,18 @@ export default function Home() {
                   <>
                     <Link
                       href="/auth/login"
-                      className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-2 sm:px-4 md:px-8 py-1.5 sm:py-2.5 md:py-4 rounded-lg sm:rounded-xl text-[10px] sm:text-sm md:text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-lg sm:shadow-xl md:shadow-2xl border-2 border-gray-300 dark:border-gray-600"
+                      className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-lg text-[10px] sm:text-xs md:text-sm font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-all transform hover:scale-105 active:scale-95 shadow-lg sm:shadow-xl md:shadow-2xl border-2 border-gray-300 dark:border-gray-600"
                     >
-                      <span className="flex items-center gap-1 sm:gap-2 justify-center">
+                      <span className="flex items-center gap-1 sm:gap-1.5 justify-center">
                         <LogIn className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
                         {t('home.hero.login')}
                       </span>
                     </Link>
                     <Link
                       href="/auth/register"
-                      className="bg-red-600 hover:bg-red-700 text-white px-2 sm:px-4 md:px-8 py-1.5 sm:py-2.5 md:py-4 rounded-lg sm:rounded-xl text-[10px] sm:text-sm md:text-lg font-bold transition-all transform hover:scale-105 active:scale-95 shadow-lg sm:shadow-xl md:shadow-2xl border-2 border-white"
+                      className="bg-red-600 hover:bg-red-700 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-lg text-[10px] sm:text-xs md:text-sm font-bold transition-all transform hover:scale-105 active:scale-95 shadow-lg sm:shadow-xl md:shadow-2xl border-2 border-white"
                     >
-                      <span className="flex items-center gap-1 sm:gap-2 justify-center">
+                      <span className="flex items-center gap-1 sm:gap-1.5 justify-center">
                         <Star className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
                         {t('home.hero.registerNow')}
                       </span>
@@ -233,62 +276,114 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-4 sm:mb-6 md:mb-8">
-            <LeagueCard
-              league="NLA"
-              description={t('home.leagues.nla')}
-              color="from-blue-600 to-blue-700"
-              emoji="🏆"
-              playerCount="120+"
-            />
-            <LeagueCard
-              league="NLB"
-              description={t('home.leagues.nlb')}
-              color="from-indigo-600 to-indigo-700"
-              emoji="🏐"
-              playerCount="200+"
-            />
-            <LeagueCard
-              league={t('home.leagues.firstLeague')}
-              description={t('home.leagues.firstLeague')}
-              color="from-purple-600 to-purple-700"
-              emoji="🔥"
-              playerCount="300+"
-            />
-            <LeagueCard
-              league={t('home.leagues.secondLeague')}
-              description={t('home.leagues.secondLeague')}
-              color="from-pink-600 to-pink-700"
-              emoji="💪"
-              playerCount="400+"
-            />
+          {/* First row: All main leagues NLA to 5. Liga */}
+
+          {/* First row: NLA to 3rd League */}
+          <div className="league-row grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8">
+            <div className="league-card-wrapper transition-all duration-300">
+              <LeagueCard
+                league={t('home.leagues.nlaShort')}
+                description={t('home.leagues.nla')}
+                color="from-blue-600 to-blue-700"
+                emoji="🏆"
+                playerCount="120+"
+                factKey="home.leagueCards.nla.quote"
+              />
+            </div>
+            <div className="league-card-wrapper transition-all duration-300">
+              <LeagueCard
+                league={t('home.leagues.nlbShort')}
+                description={t('home.leagues.nlb')}
+                color="from-indigo-600 to-indigo-700"
+                emoji="🏐"
+                playerCount="200+"
+                factKey="home.leagueCards.nlb.quote"
+              />
+            </div>
+            <div className="league-card-wrapper transition-all duration-300">
+              <LeagueCard
+                league={t('home.leagues.firstLeague')}
+                description={t('home.leagues.firstLeague')}
+                color="from-purple-600 to-purple-700"
+                emoji="🔥"
+                playerCount="300+"
+                factKey="home.leagueCards.liga1.quote"
+              />
+            </div>
+            <div className="league-card-wrapper transition-all duration-300">
+              <LeagueCard
+                league={t('home.leagues.secondLeague')}
+                description={t('home.leagues.secondLeague')}
+                color="from-pink-600 to-pink-700"
+                emoji="💪"
+                playerCount="400+"
+                factKey="home.leagueCards.liga2.quote"
+              />
+            </div>
+            <div className="league-card-wrapper col-span-2 sm:col-span-1 transition-all duration-300">
+              <LeagueCard
+                league={t('home.leagues.thirdLeague')}
+                description={t('home.leagues.thirdLeague')}
+                color="from-green-600 to-green-700"
+                emoji="⚡"
+                playerCount="500+"
+                factKey="home.leagueCards.liga3.quote"
+              />
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12 md:mb-16">
-            <LeagueCard
-              league={t('home.leagues.thirdLeague')}
-              description={t('home.leagues.thirdLeague')}
-              color="from-green-600 to-green-700"
-              emoji="⚡"
-              playerCount="500+"
-            />
-            <LeagueCard
-              league={t('home.leagues.fourthLeague')}
-              description={t('home.leagues.fourthLeague')}
-              color="from-teal-600 to-teal-700"
-              emoji="⭐"
-              playerCount="600+"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12 md:mb-16">
-            <LeagueCard
-              league={t('home.leagues.fifthLeague')}
-              description={t('home.leagues.fifthLeague')}
-              color="from-indigo-600 to-purple-700"
-              emoji="🌟"
-              playerCount="300+"
-            />
+          {/* Second row: 4th, 5th, U23, U20, U18 */}
+          <div className="league-row grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-12 md:mb-16">
+            <div className="league-card-wrapper transition-all duration-300">
+              <LeagueCard
+                league={t('home.leagues.fourthLeague')}
+                description={t('home.leagues.fourthLeague')}
+                color="from-teal-600 to-teal-700"
+                emoji="⭐"
+                playerCount="600+"
+                factKey="home.leagueCards.liga4.quote"
+              />
+            </div>
+            <div className="league-card-wrapper transition-all duration-300">
+              <LeagueCard
+                league={t('home.leagues.fifthLeague')}
+                description={t('home.leagues.fifthLeague')}
+                color="from-indigo-600 to-purple-700"
+                emoji="🌟"
+                playerCount="300+"
+                factKey="home.leagueCards.liga5.quote"
+              />
+            </div>
+            <div className="league-card-wrapper transition-all duration-300">
+              <LeagueCard
+                league={t('home.leagues.u23')}
+                description={t('home.leagues.u23')}
+                color="from-orange-600 to-orange-700"
+                emoji="🎯"
+                playerCount="150+"
+                factKey="home.leagueCards.u23.quote"
+              />
+            </div>
+            <div className="league-card-wrapper transition-all duration-300">
+              <LeagueCard
+                league={t('home.leagues.u20')}
+                description={t('home.leagues.u20')}
+                color="from-cyan-600 to-cyan-700"
+                emoji="🚀"
+                playerCount="180+"
+                factKey="home.leagueCards.u20.quote"
+              />
+            </div>
+            <div className="league-card-wrapper col-span-2 sm:col-span-1 transition-all duration-300">
+              <LeagueCard
+                league={t('home.leagues.u18')}
+                description={t('home.leagues.u18')}
+                color="from-amber-600 to-amber-700"
+                emoji="✨"
+                playerCount="200+"
+                factKey="home.leagueCards.u18.quote"
+              />
+            </div>
           </div>
 
           {/* Swiss Regions Highlight */}
@@ -459,44 +554,62 @@ export default function Home() {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
-function LeagueCard({ league, description, color, emoji, playerCount }: { 
-  league: string
-  description: string
-  color: string
-  emoji: string
-  playerCount: string
+function LeagueCard({ league, description, color, emoji, playerCount, factKey }: {
+  league: string;
+  description: string;
+  color: string;
+  emoji: string;
+  playerCount: string;
+  factKey?: string;
 }) {
-  const { t } = useLanguage()
+  const { t } = useLanguage();
+  const fact = factKey ? t(factKey) : undefined;
   return (
-    <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 sm:hover:-translate-y-2">
-      <div className={`absolute inset-0 bg-gradient-to-br ${color}`} />
-      <div className="relative p-4 sm:p-6 md:p-8 text-white">
-        <div className="text-2xl sm:text-4xl md:text-5xl mb-2 sm:mb-4">{emoji}</div>
-        <h3 className="text-lg sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 line-clamp-1">{league}</h3>
-        <p className="text-xs sm:text-base md:text-lg opacity-90 mb-2 sm:mb-4 line-clamp-2">{description}</p>
-        <div className="text-xl sm:text-2xl font-bold">{playerCount}</div>
-        <p className="text-[10px] sm:text-sm opacity-75">{t('home.leagues.players')}</p>
+    <div className="league-card group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 h-full flex flex-col min-h-[120px] sm:min-h-[140px]">
+      <div className={`absolute inset-0 bg-gradient-to-br ${color} rounded-xl sm:rounded-2xl`} />
+      <div className="relative flex h-full">
+        {/* Main content */}
+        <div className="p-2.5 sm:p-4 md:p-5 text-white flex-shrink-0 flex flex-col justify-between flex-1">
+          <div>
+            <div className="text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2">{emoji}</div>
+            <h3 className="text-xs sm:text-lg md:text-xl font-bold mb-0.5 leading-tight">{league}</h3>
+            <p className="text-[8px] sm:text-xs md:text-sm opacity-90 mb-1 sm:mb-2 line-clamp-1 sm:line-clamp-2">{description}</p>
+          </div>
+          <div>
+            <div className="text-lg sm:text-lg md:text-xl font-bold">{playerCount}</div>
+            <p className="text-[8px] sm:text-[10px] opacity-75">{t('home.leagues.players')}</p>
+          </div>
+        </div>
+        {/* Quote panel - expands on hover (desktop only) */}
+        {fact && (
+          <div className="hidden sm:block w-0 group-hover:w-[160px] sm:group-hover:w-[200px] md:group-hover:w-[260px] overflow-hidden transition-all duration-300 ease-out flex-shrink-0">
+            <div className="w-[160px] sm:w-[200px] md:w-[260px] h-full bg-white/20 backdrop-blur-sm border-l border-white/30 p-2 sm:p-3 md:p-4 flex items-center">
+              <p className="text-[9px] sm:text-xs md:text-sm text-white font-medium italic leading-relaxed">
+                "{fact}"
+              </p>
+            </div>
+          </div>
+        )}
       </div>
-      <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300" />
     </div>
-  )
+  );
 }
 
 function FeatureCard({ icon, title, description, color }: { 
-  icon: React.ReactNode
-  title: string
-  description: string
-  color: string
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  color: string;
 }) {
   const colorClasses = {
     blue: 'text-blue-600 bg-blue-50 group-hover:bg-blue-100',
     pink: 'text-pink-600 bg-pink-50 group-hover:bg-pink-100',
     red: 'text-red-600 bg-red-50 group-hover:bg-red-100',
     yellow: 'text-yellow-600 bg-yellow-50 group-hover:bg-yellow-100',
-  }[color]
+  }[color];
 
   return (
     <div className="group bg-white dark:bg-gray-800 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-md hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
@@ -508,11 +621,11 @@ function FeatureCard({ icon, title, description, color }: {
       <h3 className="text-base sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 md:mb-3 text-gray-900 dark:text-white line-clamp-2">{title}</h3>
       <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3">{description}</p>
     </div>
-  )
+  );
 }
 
 function AuthPromptModal({ onClose }: { onClose: () => void }) {
-  const { t } = useLanguage()
+  const { t } = useLanguage();
   
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={onClose}>
@@ -554,7 +667,7 @@ function AuthPromptModal({ onClose }: { onClose: () => void }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function StatCard({ number, label, icon }: { number: string; label: string; icon: string }) {
@@ -566,5 +679,5 @@ function StatCard({ number, label, icon }: { number: string; label: string; icon
       </div>
       <div className="text-xs sm:text-sm md:text-lg lg:text-xl text-gray-300 font-medium">{label}</div>
     </div>
-  )
+  );
 }

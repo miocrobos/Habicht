@@ -129,20 +129,20 @@ export default function Home() {
           <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-black/50" />
         </div>
 
-        {/* Pause/Play Button - top left */}
-        <div className="absolute top-4 left-4 z-30">
+        {/* Pause/Play Button - bottom left, above slide indicators */}
+        <div className="absolute bottom-10 sm:bottom-12 left-4 z-30">
           <button
             onClick={() => setPaused((p) => !p)}
-            className="bg-white/80 hover:bg-white text-blue-700 hover:text-blue-900 border border-blue-200 hover:border-blue-400 rounded-full p-2 shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-400 group"
+            className="bg-white/70 hover:bg-white text-gray-600 hover:text-gray-900 rounded-full p-1.5 sm:p-2 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-blue-400 group"
             aria-label={paused ? 'Play transitions' : 'Pause transitions'}
           >
             <span className="sr-only">{paused ? 'Play transitions' : 'Pause transitions'}</span>
             {paused ? (
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v18l15-9L5 3z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v18l15-9L5 3z" /></svg>
             ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
             )}
-            <span className="absolute left-full ml-2 top-1/2 -translate-y-1/2 bg-black/80 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+            <span className="hidden sm:block absolute left-full ml-2 top-1/2 -translate-y-1/2 bg-black/80 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
               {paused ? 'Play transitions' : 'Pause transitions'}
             </span>
           </button>
@@ -249,16 +249,16 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Slide Indicators */}
-        <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 sm:gap-3 z-20">
+        {/* Slide Indicators - small dots on mobile */}
+        <div className="absolute bottom-3 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1.5 sm:gap-2 z-20">
           {slides.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`h-1.5 sm:h-2 md:h-3 rounded-full transition-all duration-300 ${
+              className={`rounded-full transition-all duration-300 ${
                 idx === currentSlide 
-                  ? 'bg-white w-6 sm:w-8 md:w-12 shadow-lg' 
-                  : 'bg-white/40 w-1.5 sm:w-2 md:w-3 hover:bg-white/60'
+                  ? 'bg-white w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 shadow-lg' 
+                  : 'bg-white/40 w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 hover:bg-white/60'
               }`}
               aria-label={`Slide ${idx + 1}`}
             />

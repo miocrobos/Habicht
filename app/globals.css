@@ -88,8 +88,62 @@ body {
   }
 }
 
-/* League card row - cards don't grow/shrink, only the internal quote panel expands */
-/* No flex-grow behavior needed - card expands naturally with its quote content */
+/* League card wrapper - expands precisely to show quote on hover */
+.league-card-wrapper {
+  flex: 1 1 0;
+  min-width: 0;
+  transition: flex 0.3s ease-out;
+}
+
+.league-card-wrapper .league-card {
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease-out;
+}
+
+/* Mobile: grid layout for even sizing */
+@media (max-width: 639px) {
+  .league-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .league-card-wrapper {
+    flex: none;
+  }
+}
+
+/* Desktop: wrapper expands on hover, siblings shrink */
+@media (min-width: 640px) {
+  .league-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  /* When any wrapper is hovered, it grows */
+  .league-row:has(.league-card-wrapper:hover) .league-card-wrapper {
+    flex: 0.7 1 0;
+  }
+  
+  .league-row .league-card-wrapper:hover {
+    flex: 1.8 1 0;
+    z-index: 10;
+  }
+}
+
+@media (min-width: 768px) {
+  .league-row {
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .league-row {
+    gap: 1rem;
+  }
+}
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {

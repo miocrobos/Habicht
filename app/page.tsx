@@ -285,7 +285,7 @@ export default function Home() {
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`rounded-full transition-all duration-300 ${
+              className={`slider-dot rounded-full transition-all duration-300 ${
                 idx === currentSlide 
                   ? 'bg-white w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 shadow-lg' 
                   : 'bg-white/40 w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 hover:bg-white/60'
@@ -306,115 +306,23 @@ export default function Home() {
             </p>
           </div>
 
-          {/* First row: All main leagues NLA to 5. Liga */}
-
           {/* First row: NLA to 3rd League */}
-          <div className="league-row flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8">
-            <div className="league-card-wrapper w-[calc(50%-0.25rem)] sm:w-auto">
-              <LeagueCard
-                league={t('home.leagues.nlaShort')}
-                description={t('home.leagues.nla')}
-                color="from-blue-600 to-blue-700"
-                emoji="🏆"
-                playerCount="120+"
-                factKey="home.leagueCards.nla.quote"
-              />
-            </div>
-            <div className="league-card-wrapper w-[calc(50%-0.25rem)] sm:w-auto">
-              <LeagueCard
-                league={t('home.leagues.nlbShort')}
-                description={t('home.leagues.nlb')}
-                color="from-indigo-600 to-indigo-700"
-                emoji="🏐"
-                playerCount="200+"
-                factKey="home.leagueCards.nlb.quote"
-              />
-            </div>
-            <div className="league-card-wrapper w-[calc(50%-0.25rem)] sm:w-auto">
-              <LeagueCard
-                league={t('home.leagues.firstLeague')}
-                description={t('home.leagues.firstLeague')}
-                color="from-purple-600 to-purple-700"
-                emoji="🔥"
-                playerCount="300+"
-                factKey="home.leagueCards.liga1.quote"
-              />
-            </div>
-            <div className="league-card-wrapper w-[calc(50%-0.25rem)] sm:w-auto">
-              <LeagueCard
-                league={t('home.leagues.secondLeague')}
-                description={t('home.leagues.secondLeague')}
-                color="from-pink-600 to-pink-700"
-                emoji="💪"
-                playerCount="400+"
-                factKey="home.leagueCards.liga2.quote"
-              />
-            </div>
-            <div className="league-card-wrapper w-full sm:w-auto">
-              <LeagueCard
-                league={t('home.leagues.thirdLeague')}
-                description={t('home.leagues.thirdLeague')}
-                color="from-green-600 to-green-700"
-                emoji="⚡"
-                playerCount="500+"
-                factKey="home.leagueCards.liga3.quote"
-              />
-            </div>
-          </div>
+          <LeagueRow cards={[
+            { league: t('home.leagues.nlaShort'), description: t('home.leagues.nla'), color: "from-blue-600 to-blue-700", emoji: "🏆", playerCount: "120+", factKey: "home.leagueCards.nla.quote" },
+            { league: t('home.leagues.nlbShort'), description: t('home.leagues.nlb'), color: "from-indigo-600 to-indigo-700", emoji: "🏐", playerCount: "200+", factKey: "home.leagueCards.nlb.quote" },
+            { league: t('home.leagues.firstLeague'), description: t('home.leagues.firstLeague'), color: "from-purple-600 to-purple-700", emoji: "🔥", playerCount: "300+", factKey: "home.leagueCards.liga1.quote" },
+            { league: t('home.leagues.secondLeague'), description: t('home.leagues.secondLeague'), color: "from-pink-600 to-pink-700", emoji: "💪", playerCount: "400+", factKey: "home.leagueCards.liga2.quote" },
+            { league: t('home.leagues.thirdLeague'), description: t('home.leagues.thirdLeague'), color: "from-green-600 to-green-700", emoji: "⚡", playerCount: "500+", factKey: "home.leagueCards.liga3.quote", widthClass: "w-full" }
+          ]} />
 
           {/* Second row: 4th, 5th, U23, U20, U18 */}
-          <div className="league-row flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-12 md:mb-16">
-            <div className="league-card-wrapper w-[calc(50%-0.25rem)] sm:w-auto">
-              <LeagueCard
-                league={t('home.leagues.fourthLeague')}
-                description={t('home.leagues.fourthLeague')}
-                color="from-teal-600 to-teal-700"
-                emoji="⭐"
-                playerCount="600+"
-                factKey="home.leagueCards.liga4.quote"
-              />
-            </div>
-            <div className="league-card-wrapper w-[calc(50%-0.25rem)] sm:w-auto">
-              <LeagueCard
-                league={t('home.leagues.fifthLeague')}
-                description={t('home.leagues.fifthLeague')}
-                color="from-indigo-600 to-purple-700"
-                emoji="🌟"
-                playerCount="300+"
-                factKey="home.leagueCards.liga5.quote"
-              />
-            </div>
-            <div className="league-card-wrapper w-[calc(50%-0.25rem)] sm:w-auto">
-              <LeagueCard
-                league={t('home.leagues.u23')}
-                description={t('home.leagues.u23')}
-                color="from-orange-600 to-orange-700"
-                emoji="🎯"
-                playerCount="150+"
-                factKey="home.leagueCards.u23.quote"
-              />
-            </div>
-            <div className="league-card-wrapper w-[calc(50%-0.25rem)] sm:w-auto">
-              <LeagueCard
-                league={t('home.leagues.u20')}
-                description={t('home.leagues.u20')}
-                color="from-cyan-600 to-cyan-700"
-                emoji="🚀"
-                playerCount="180+"
-                factKey="home.leagueCards.u20.quote"
-              />
-            </div>
-            <div className="league-card-wrapper w-full sm:w-auto">
-              <LeagueCard
-                league={t('home.leagues.u18')}
-                description={t('home.leagues.u18')}
-                color="from-amber-600 to-amber-700"
-                emoji="✨"
-                playerCount="200+"
-                factKey="home.leagueCards.u18.quote"
-              />
-            </div>
-          </div>
+          <LeagueRow cards={[
+            { league: t('home.leagues.fourthLeague'), description: t('home.leagues.fourthLeague'), color: "from-teal-600 to-teal-700", emoji: "⭐", playerCount: "600+", factKey: "home.leagueCards.liga4.quote" },
+            { league: t('home.leagues.fifthLeague'), description: t('home.leagues.fifthLeague'), color: "from-indigo-600 to-purple-700", emoji: "🌟", playerCount: "300+", factKey: "home.leagueCards.liga5.quote" },
+            { league: t('home.leagues.u23'), description: t('home.leagues.u23'), color: "from-orange-600 to-orange-700", emoji: "🎯", playerCount: "150+", factKey: "home.leagueCards.u23.quote" },
+            { league: t('home.leagues.u20'), description: t('home.leagues.u20'), color: "from-cyan-600 to-cyan-700", emoji: "🚀", playerCount: "180+", factKey: "home.leagueCards.u20.quote" },
+            { league: t('home.leagues.u18'), description: t('home.leagues.u18'), color: "from-amber-600 to-amber-700", emoji: "✨", playerCount: "200+", factKey: "home.leagueCards.u18.quote", widthClass: "w-full" }
+          ]} />
 
           {/* Swiss Regions Highlight */}
           <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-4 sm:p-6 md:p-12">
@@ -587,60 +495,97 @@ export default function Home() {
   );
 }
 
-function LeagueCard({ league, description, color, emoji, playerCount, factKey }: {
+function LeagueCard({ league, description, color, emoji, playerCount, factKey, isExpanded, onToggle }: {
   league: string;
   description: string;
   color: string;
   emoji: string;
   playerCount: string;
   factKey?: string;
+  isExpanded?: boolean;
+  onToggle?: () => void;
 }) {
   const { t } = useLanguage();
   const fact = factKey ? t(factKey) : undefined;
-  const [mobileExpanded, setMobileExpanded] = useState(false);
   
   return (
-    <div className="league-card group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+    <div 
+      className="league-card group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 h-full flex flex-col cursor-pointer"
+      onClick={onToggle}
+    >
       <div className={`absolute inset-0 bg-gradient-to-br ${color} rounded-xl sm:rounded-2xl`} />
-      <div className="relative flex flex-col sm:flex-row h-full">
+      <div className="relative flex flex-row h-full">
         {/* Main content */}
         <div 
-          className="p-3 sm:p-4 md:p-5 text-white flex-shrink-0 flex flex-col justify-between flex-1 min-h-[100px] sm:min-h-[150px] min-w-[100px] sm:min-w-[120px]"
-          onClick={() => setMobileExpanded(!mobileExpanded)}
+          className="p-2 sm:p-4 md:p-5 text-white flex-shrink-0 flex flex-col justify-between flex-1 min-h-[90px] sm:min-h-[150px]"
         >
           <div>
-            <div className="text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2">{emoji}</div>
-            <h3 className="text-xs sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1 leading-tight">{league}</h3>
-            <p className="text-[9px] sm:text-xs md:text-sm opacity-90 mb-1 sm:mb-2 line-clamp-2 sm:line-clamp-2">{description}</p>
+            <div className="text-lg sm:text-2xl md:text-3xl mb-0.5 sm:mb-2">{emoji}</div>
+            <h3 className="text-[10px] sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1 leading-tight">{league}</h3>
+            <p className="text-[8px] sm:text-xs md:text-sm opacity-90 mb-0.5 sm:mb-2 line-clamp-2">{description}</p>
           </div>
           <div>
-            <div className="text-base sm:text-lg md:text-xl font-bold">{playerCount}</div>
-            <p className="text-[8px] sm:text-[10px] opacity-75">{t('home.leagues.players')}</p>
+            <div className="text-sm sm:text-lg md:text-xl font-bold">{playerCount}</div>
+            <p className="text-[7px] sm:text-[10px] opacity-75">{t('home.leagues.players')}</p>
           </div>
         </div>
-        {/* Quote panel - mobile: expandable on tap, desktop: visible on hover */}
+        {/* Quote panel - appears on right for both mobile and desktop */}
         {fact && (
-          <>
-            {/* Mobile quote - tap to expand */}
-            <div 
-              className={`sm:hidden bg-white/15 backdrop-blur-sm border-t border-white/20 px-2 py-1.5 transition-all duration-300 cursor-pointer ${mobileExpanded ? 'max-h-32' : 'max-h-8'}`}
-              onClick={() => setMobileExpanded(!mobileExpanded)}
-            >
-              <p className={`text-[8px] text-white/90 font-medium italic leading-snug ${mobileExpanded ? '' : 'line-clamp-2'}`}>
+          <div 
+            className={`transition-all duration-300 ease-out overflow-hidden flex-shrink-0 ${
+              isExpanded 
+                ? 'max-w-[80px] sm:max-w-0 sm:group-hover:max-w-[200px] lg:group-hover:max-w-[260px]' 
+                : 'max-w-0 sm:group-hover:max-w-[200px] lg:group-hover:max-w-[260px]'
+            }`}
+          >
+            <div className="w-[80px] sm:w-[200px] lg:w-[260px] h-full bg-white/20 backdrop-blur-sm border-l border-white/30 p-1 sm:p-3 lg:p-4 flex items-center">
+              <p className="text-[6px] sm:text-xs lg:text-sm text-white font-medium italic leading-snug sm:leading-relaxed">
                 "{fact}"
               </p>
             </div>
-            {/* Desktop quote - visible on hover */}
-            <div className="hidden sm:flex max-w-0 group-hover:max-w-[200px] lg:group-hover:max-w-[260px] overflow-hidden transition-all duration-300 ease-out">
-              <div className="w-[200px] lg:w-[260px] h-full bg-white/20 backdrop-blur-sm border-l border-white/30 p-3 lg:p-4 flex items-center">
-                <p className="text-xs lg:text-sm text-white font-medium italic leading-relaxed">
-                  "{fact}"
-                </p>
-              </div>
-            </div>
-          </>
+          </div>
         )}
       </div>
+    </div>
+  );
+}
+
+// Wrapper for League rows that handles expand/collapse state on mobile
+function LeagueRow({ children, cards }: { children?: React.ReactNode, cards: Array<{
+  league: string;
+  description: string;
+  color: string;
+  emoji: string;
+  playerCount: string;
+  factKey?: string;
+  widthClass?: string;
+}> }) {
+  const { t } = useLanguage();
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  
+  const handleToggle = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+  
+  return (
+    <div className="league-row flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8">
+      {cards.map((card, index) => (
+        <div 
+          key={index} 
+          className={`league-card-wrapper ${card.widthClass || ''} sm:w-auto ${expandedIndex === index ? 'is-expanded' : ''}`}
+        >
+          <LeagueCard
+            league={card.league}
+            description={card.description}
+            color={card.color}
+            emoji={card.emoji}
+            playerCount={card.playerCount}
+            factKey={card.factKey}
+            isExpanded={expandedIndex === index}
+            onToggle={() => handleToggle(index)}
+          />
+        </div>
+      ))}
     </div>
   );
 }

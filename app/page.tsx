@@ -524,7 +524,7 @@ function LeagueCard({ league, description, color, emoji, playerCount, factKey, i
           <div>
             <div className="text-lg sm:text-2xl md:text-3xl mb-0.5 sm:mb-2">{emoji}</div>
             <h3 className="text-[10px] sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1 leading-tight">{league}</h3>
-            <p className="text-[8px] sm:text-xs md:text-sm opacity-90 mb-0.5 sm:mb-2 line-clamp-2">{description}</p>
+            <p className="text-[8px] sm:text-xs md:text-sm opacity-90 mb-0.5 sm:mb-2 line-clamp-3 md:line-clamp-none">{description}</p>
           </div>
           <div>
             <div className="text-sm sm:text-lg md:text-xl font-bold">{playerCount}</div>

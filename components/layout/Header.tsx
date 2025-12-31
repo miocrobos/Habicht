@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { Menu, X, User, Search, Settings, Bell, Bookmark, ChevronDown, Home, Users, UserCircle, LogIn, UserPlus, LogOut, Info, Building2 } from 'lucide-react'
 import SettingsPopup from '@/components/shared/SettingsPopup'
@@ -14,6 +14,8 @@ import { useHeader } from '@/contexts/HeaderContext'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isPlayersDropdownOpen, setIsPlayersDropdownOpen] = useState(false)
+  const sidebarRef = useRef<HTMLDivElement>(null)
   const { collapsed, setCollapsed } = useHeader()
   const { data: session } = useSession()
   const [unreadCount, setUnreadCount] = useState(0)
@@ -30,10 +32,18 @@ export default function Header() {
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden'
+      // Prevent touchmove on body when sidebar is open
+      const preventScroll = (e: TouchEvent) => {
+        if (sidebarRef.current && !sidebarRef.current.contains(e.target as Node)) {
+          e.preventDefault()
+        }
+      }
+      document.body.addEventListener('touchmove', preventScroll, { passive: false })
+      return () => {
+        document.body.style.overflow = 'unset'
+        document.body.removeEventListener('touchmove', preventScroll)
+      }
     } else {
-      document.body.style.overflow = 'unset'
-    }
-    return () => {
       document.body.style.overflow = 'unset'
     }
   }, [isMenuOpen])
@@ -199,6 +209,7 @@ export default function Header() {
         </div>
 
         {/* Mobile Navigation Overlay */}
+
         {isMenuOpen && (
           <div 
             className="lg:hidden fixed inset-0 top-0 left-0 right-0 bottom-0 bg-black/50 backdrop-blur-sm z-40"
@@ -207,7 +218,11 @@ export default function Header() {
         )}
 
         {/* Mobile Navigation Drawer */}
-        <div className={`lg:hidden fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div
+          ref={sidebarRef}
+          className={`lg:hidden fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          style={{ display: 'flex', flexDirection: 'column' }}
+        >
           {/* Mobile Menu Header */}
           <div className="flex items-center justify-between p-4 border-b dark:border-gray-700 bg-gradient-to-r from-red-600 to-red-700">
             <div className="flex items-center gap-3">
@@ -251,7 +266,7 @@ export default function Header() {
           )}
           
           {/* Navigation Links */}
-          <nav className="flex-1 overflow-y-auto py-2">
+          <nav className="flex-1 overflow-y-auto py-2" style={{ WebkitOverflowScrolling: 'touch' }}>
             {/* Main Navigation */}
             <div className="px-2 py-2">
               <p className="px-4 py-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
@@ -267,32 +282,38 @@ export default function Header() {
                 <span className="whitespace-nowrap">{t('nav.home') || 'Home'}</span>
               </Link>
               
-              <Link 
-                href="/players" 
-                className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
-                onClick={() => setIsMenuOpen(false)}
+
+              <button
+                type="button"
+                className="flex items-center w-full gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium focus:outline-none"
+                onClick={() => setIsPlayersDropdownOpen((v) => !v)}
+                aria-expanded={isPlayersDropdownOpen}
+                aria-controls="players-dropdown"
               >
                 <Users className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
                 <span className="whitespace-nowrap">{t('nav.players')}</span>
-              </Link>
-              
-              <Link 
-                href="/players/men" 
-                className="flex items-center gap-3 px-4 py-3 mx-2 ml-8 rounded-xl text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition font-medium text-sm"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <span className="text-lg flex-shrink-0">♂</span>
-                <span className="whitespace-nowrap">{t('nav.men')}</span>
-              </Link>
-              
-              <Link 
-                href="/players/women" 
-                className="flex items-center gap-3 px-4 py-3 mx-2 ml-8 rounded-xl text-pink-600 dark:text-pink-400 hover:bg-pink-50 dark:hover:bg-pink-900/30 transition font-medium text-sm"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <span className="text-lg flex-shrink-0">♀</span>
-                <span className="whitespace-nowrap">{t('nav.women')}</span>
-              </Link>
+                <ChevronDown className={`w-4 h-4 ml-auto transition-transform ${isPlayersDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isPlayersDropdownOpen && (
+                <div id="players-dropdown" className="ml-8">
+                  <Link 
+                    href="/players/men" 
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition font-medium text-sm"
+                    onClick={() => { setIsMenuOpen(false); setIsPlayersDropdownOpen(false); }}
+                  >
+                    <span className="text-lg flex-shrink-0">♂</span>
+                    <span className="whitespace-nowrap">{t('nav.men')}</span>
+                  </Link>
+                  <Link 
+                    href="/players/women" 
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-pink-600 dark:text-pink-400 hover:bg-pink-50 dark:hover:bg-pink-900/30 transition font-medium text-sm"
+                    onClick={() => { setIsMenuOpen(false); setIsPlayersDropdownOpen(false); }}
+                  >
+                    <span className="text-lg flex-shrink-0">♀</span>
+                    <span className="whitespace-nowrap">{t('nav.women')}</span>
+                  </Link>
+                </div>
+              )}
               
               <Link 
                 href="/clubs" 

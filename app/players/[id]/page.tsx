@@ -728,9 +728,9 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
                   {/* Contact Info */}
                   {(isOwner || player.showEmail || player.showPhone) && (
-                    <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 max-w-full overflow-hidden">
+                    <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3 mb-4 max-w-full overflow-hidden items-center sm:items-start justify-center sm:justify-start">
                       {(isOwner || player.showPhone) && player.phone && (
-                        <div className="flex items-center gap-1 sm:gap-2 min-w-0">
+                        <div className="flex items-center gap-1 sm:gap-2 min-w-0 w-full sm:w-auto justify-center sm:justify-start">
                           <a href={`tel:${player.phone}`} className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 min-w-0">
                             <Phone className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                             <span className="truncate">{player.phone}</span>
@@ -741,7 +741,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                         </div>
                       )}
                       {(isOwner || player.showEmail) && player.user?.email && (
-                        <div className="flex items-center gap-1 sm:gap-2 min-w-0 max-w-full sm:max-w-none">
+                        <div className="flex items-center gap-1 sm:gap-2 min-w-0 w-full sm:w-auto justify-center sm:justify-start">
                           <a href={`mailto:${player.user.email}`} className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 min-w-0 max-w-[200px] sm:max-w-none">
                             <Mail className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                             <span className="truncate">{player.user.email}</span>

@@ -91,7 +91,7 @@ body {
 /* League card wrapper - expands precisely to show quote on hover */
 
 .league-card-wrapper {
-  flex: 2 1 0;
+  flex: 1 1 0;
   min-width: 180px;
   max-width: 100%;
   margin-left: auto;
@@ -108,76 +108,82 @@ body {
   justify-content: center;
 }
 
-/* Mobile: horizontal layout like desktop with tap to expand */
+/* Mobile: vertical stack with tap to expand quote panel */
 @media (max-width: 639px) {
   .league-row {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
   }
   
   .league-card-wrapper {
-    flex: 2 1 80%;
-    min-width: 70vw;
-    max-width: 100vw;
-    margin-left: auto;
-    margin-right: auto;
-    transition: flex 0.3s ease-out, min-width 0.3s, max-width 0.3s;
-  }
-  
-  /* Full width cards (5th card in each row) */
-  .league-card-wrapper.w-full {
-    flex: 1 1 100%;
-    min-width: 100%;
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: unset;
     max-width: 100%;
+    transition: all 0.3s ease-out;
   }
   
-  /* Mobile tap expand behavior */
+  /* Full width cards */
+  .league-card-wrapper.w-full {
+    width: 100%;
+  }
+  
+  /* Mobile tap expand behavior - card shows quote panel */
   .league-card-wrapper.is-expanded {
-    flex: 3 1 100%;
-    min-width: 95vw;
-    max-width: 100vw;
+    width: 100%;
+    z-index: 10;
+    transform: scale(1.02);
   }
   
-  .league-row:has(.league-card-wrapper.is-expanded) .league-card-wrapper:not(.is-expanded):not(.w-full) {
-    flex: 1 1 10%;
-    min-width: 60px;
-    max-width: 120px;
+  /* When a card is expanded, slightly dim other cards */
+  .league-row:has(.league-card-wrapper.is-expanded) .league-card-wrapper:not(.is-expanded) {
+    opacity: 0.7;
   }
 }
 
 /* Desktop: wrapper expands on hover, siblings shrink */
+/* Quote panel: 200px on sm/md, 260px on lg */
 @media (min-width: 640px) {
   .league-row {
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    align-items: stretch;
     justify-content: center;
     gap: 0.75rem;
   }
   
   .league-card-wrapper {
-    min-width: 180px;
+    flex: 1 1 0;
+    min-width: 120px;
+    transition: flex 0.3s ease-out, min-width 0.3s;
   }
   
   /* CSS :has() approach for modern browsers */
+  /* When any card is hovered, shrink all cards first */
   .league-row:has(.league-card-wrapper:hover) .league-card-wrapper {
-    flex: 0.625 1 0; /* Shrink to compensate for 1.5x expansion */
+    flex: 0.5 1 0;
+    min-width: 70px;
   }
   
+  /* The hovered card expands to accommodate the quote panel (200px) */
   .league-row .league-card-wrapper:hover {
-    flex: 1.5 1 0; /* 1.5x normal size */
+    flex: 2.2 1 0;
+    min-width: calc(120px + 200px);
     z-index: 10;
   }
   
   /* JavaScript fallback using classes (for browsers without :has() support) */
   .league-row.has-hover .league-card-wrapper {
-    flex: 0.625 1 0; /* Shrink siblings */
+    flex: 0.5 1 0;
+    min-width: 70px;
   }
   
   .league-row.has-hover .league-card-wrapper.is-hovered {
-    flex: 1.5 1 0; /* 1.5x normal size */
+    flex: 2.2 1 0;
+    min-width: calc(120px + 200px);
     z-index: 10;
   }
 }
@@ -188,17 +194,58 @@ body {
   }
   
   .league-card-wrapper {
-    min-width: 200px;
+    min-width: 140px;
+  }
+  
+  .league-row:has(.league-card-wrapper:hover) .league-card-wrapper {
+    flex: 0.5 1 0;
+    min-width: 90px;
+  }
+  
+  .league-row .league-card-wrapper:hover {
+    flex: 2.2 1 0;
+    min-width: calc(140px + 200px);
+  }
+  
+  .league-row.has-hover .league-card-wrapper {
+    flex: 0.5 1 0;
+    min-width: 90px;
+  }
+  
+  .league-row.has-hover .league-card-wrapper.is-hovered {
+    flex: 2.2 1 0;
+    min-width: calc(140px + 200px);
   }
 }
 
+/* lg screens: quote panel is 260px */
 @media (min-width: 1024px) {
   .league-row {
     gap: 1.25rem;
   }
   
   .league-card-wrapper {
-    min-width: 240px;
+    min-width: 160px;
+  }
+  
+  .league-row:has(.league-card-wrapper:hover) .league-card-wrapper {
+    flex: 0.5 1 0;
+    min-width: 110px;
+  }
+  
+  .league-row .league-card-wrapper:hover {
+    flex: 2.5 1 0;
+    min-width: calc(160px + 260px);
+  }
+  
+  .league-row.has-hover .league-card-wrapper {
+    flex: 0.5 1 0;
+    min-width: 110px;
+  }
+  
+  .league-row.has-hover .league-card-wrapper.is-hovered {
+    flex: 2.5 1 0;
+    min-width: calc(160px + 260px);
   }
 }
 

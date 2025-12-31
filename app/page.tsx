@@ -12,7 +12,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -309,21 +309,21 @@ export default function Home() {
           </div>
 
           {/* First row: NLA to 3rd League */}
-          <LeagueRow cards={[
-            { league: t('home.leagues.nlaShort'), description: t('home.leagues.nla'), color: "from-blue-600 to-blue-700", emoji: "🏆", playerCount: "120+", factKey: "home.leagueCards.nla.quote" },
-            { league: t('home.leagues.nlbShort'), description: t('home.leagues.nlb'), color: "from-indigo-600 to-indigo-700", emoji: "🏐", playerCount: "200+", factKey: "home.leagueCards.nlb.quote" },
-            { league: t('home.leagues.firstLeague'), description: t('home.leagues.firstLeague'), color: "from-purple-600 to-purple-700", emoji: "🔥", playerCount: "300+", factKey: "home.leagueCards.liga1.quote" },
-            { league: t('home.leagues.secondLeague'), description: t('home.leagues.secondLeague'), color: "from-pink-600 to-pink-700", emoji: "💪", playerCount: "400+", factKey: "home.leagueCards.liga2.quote" },
-            { league: t('home.leagues.thirdLeague'), description: t('home.leagues.thirdLeague'), color: "from-green-600 to-green-700", emoji: "⚡", playerCount: "500+", factKey: "home.leagueCards.liga3.quote", widthClass: "w-full" }
+          <LeagueRow key={`row1-${language}`} language={language} cards={[
+            { league: t('home.leagues.nlaShort'), description: t('home.leagues.nla'), color: "from-blue-600 to-blue-700", emoji: "🏆", playerCount: "120+", fact: t('home.leagueCards.nla.quote') },
+            { league: t('home.leagues.nlbShort'), description: t('home.leagues.nlb'), color: "from-indigo-600 to-indigo-700", emoji: "🏐", playerCount: "200+", fact: t('home.leagueCards.nlb.quote') },
+            { league: t('home.leagues.firstLeague'), description: t('home.leagues.firstLeague'), color: "from-purple-600 to-purple-700", emoji: "🔥", playerCount: "300+", fact: t('home.leagueCards.liga1.quote') },
+            { league: t('home.leagues.secondLeague'), description: t('home.leagues.secondLeague'), color: "from-pink-600 to-pink-700", emoji: "💪", playerCount: "400+", fact: t('home.leagueCards.liga2.quote') },
+            { league: t('home.leagues.thirdLeague'), description: t('home.leagues.thirdLeague'), color: "from-green-600 to-green-700", emoji: "⚡", playerCount: "500+", fact: t('home.leagueCards.liga3.quote'), widthClass: "w-full" }
           ]} />
 
           {/* Second row: 4th, 5th, U23, U20, U18 */}
-          <LeagueRow cards={[
-            { league: t('home.leagues.fourthLeague'), description: t('home.leagues.fourthLeague'), color: "from-teal-600 to-teal-700", emoji: "⭐", playerCount: "600+", factKey: "home.leagueCards.liga4.quote" },
-            { league: t('home.leagues.fifthLeague'), description: t('home.leagues.fifthLeague'), color: "from-indigo-600 to-purple-700", emoji: "🌟", playerCount: "300+", factKey: "home.leagueCards.liga5.quote" },
-            { league: t('home.leagues.u23'), description: t('home.leagues.u23'), color: "from-orange-600 to-orange-700", emoji: "🎯", playerCount: "150+", factKey: "home.leagueCards.u23.quote" },
-            { league: t('home.leagues.u20'), description: t('home.leagues.u20'), color: "from-cyan-600 to-cyan-700", emoji: "🚀", playerCount: "180+", factKey: "home.leagueCards.u20.quote" },
-            { league: t('home.leagues.u18'), description: t('home.leagues.u18'), color: "from-amber-600 to-amber-700", emoji: "✨", playerCount: "200+", factKey: "home.leagueCards.u18.quote", widthClass: "w-full" }
+          <LeagueRow key={`row2-${language}`} language={language} cards={[
+            { league: t('home.leagues.fourthLeague'), description: t('home.leagues.fourthLeague'), color: "from-teal-600 to-teal-700", emoji: "⭐", playerCount: "600+", fact: t('home.leagueCards.liga4.quote') },
+            { league: t('home.leagues.fifthLeague'), description: t('home.leagues.fifthLeague'), color: "from-indigo-600 to-purple-700", emoji: "🌟", playerCount: "300+", fact: t('home.leagueCards.liga5.quote') },
+            { league: t('home.leagues.u23'), description: t('home.leagues.u23'), color: "from-orange-600 to-orange-700", emoji: "🎯", playerCount: "150+", fact: t('home.leagueCards.u23.quote') },
+            { league: t('home.leagues.u20'), description: t('home.leagues.u20'), color: "from-cyan-600 to-cyan-700", emoji: "🚀", playerCount: "180+", fact: t('home.leagueCards.u20.quote') },
+            { league: t('home.leagues.u18'), description: t('home.leagues.u18'), color: "from-amber-600 to-amber-700", emoji: "✨", playerCount: "200+", fact: t('home.leagueCards.u18.quote'), widthClass: "w-full" }
           ]} />
 
           {/* Swiss Regions Highlight */}
@@ -497,23 +497,30 @@ export default function Home() {
   );
 }
 
-function LeagueCard({ league, description, color, emoji, playerCount, factKey, isExpanded, onToggle }: {
+function LeagueCard({ league, description, color, emoji, playerCount, fact, isExpanded, isHovered, onToggle, onMouseEnter, onMouseLeave }: {
   league: string;
   description: string;
   color: string;
   emoji: string;
   playerCount: string;
-  factKey?: string;
+  fact?: string;
   isExpanded?: boolean;
+  isHovered?: boolean;
   onToggle?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }) {
   const { t } = useLanguage();
-  const fact = factKey ? t(factKey) : undefined;
+  
+  // Determine if quote should show (mobile: tap expand, desktop: hover)
+  const showQuote = isExpanded || isHovered;
   
   return (
     <div 
       className="league-card group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 h-full flex flex-col cursor-pointer"
       onClick={onToggle}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className={`absolute inset-0 bg-gradient-to-br ${color} rounded-xl sm:rounded-2xl`} />
       <div className="relative flex flex-row h-full">
@@ -531,17 +538,17 @@ function LeagueCard({ league, description, color, emoji, playerCount, factKey, i
             <p className="text-[7px] sm:text-[10px] opacity-75">{t('home.leagues.players')}</p>
           </div>
         </div>
-        {/* Quote panel - appears on right for both mobile and desktop */}
+        {/* Quote panel - expands on tap (mobile) or hover (desktop) */}
         {fact && (
           <div 
-            className={`transition-all duration-300 ease-out overflow-hidden flex-shrink-0 ${
-              isExpanded 
-                ? 'max-w-[80px] sm:max-w-0 sm:group-hover:max-w-[200px] lg:group-hover:max-w-[260px]' 
-                : 'max-w-0 sm:group-hover:max-w-[200px] lg:group-hover:max-w-[260px]'
+            className={`quote-panel transition-all duration-300 ease-out overflow-hidden flex-shrink-0 ${
+              showQuote 
+                ? 'w-[140px] sm:w-[200px] lg:w-[260px]' 
+                : 'w-0'
             }`}
           >
-            <div className="w-[80px] sm:w-[200px] lg:w-[260px] h-full bg-white/20 backdrop-blur-sm border-l border-white/30 p-1 sm:p-3 lg:p-4 flex items-center">
-              <p className="text-[6px] sm:text-xs lg:text-sm text-white font-medium italic leading-snug sm:leading-relaxed">
+            <div className="w-[140px] sm:w-[200px] lg:w-[260px] h-full bg-white/20 backdrop-blur-sm border-l border-white/30 p-2 sm:p-3 lg:p-4 flex items-center">
+              <p className="text-[9px] sm:text-xs lg:text-sm text-white font-medium italic leading-snug sm:leading-relaxed">
                 "{fact}"
               </p>
             </div>
@@ -552,29 +559,43 @@ function LeagueCard({ league, description, color, emoji, playerCount, factKey, i
   );
 }
 
-// Wrapper for League rows that handles expand/collapse state on mobile
-function LeagueRow({ children, cards }: { children?: React.ReactNode, cards: Array<{
+// Wrapper for League rows that handles expand/collapse state on mobile and hover on desktop
+function LeagueRow({ children, cards, language }: { children?: React.ReactNode, language?: string, cards: Array<{
   league: string;
   description: string;
   color: string;
   emoji: string;
   playerCount: string;
-  factKey?: string;
+  fact?: string;
   widthClass?: string;
 }> }) {
-  const { t } = useLanguage();
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  
+  // Reset states when language changes
+  useEffect(() => {
+    setExpandedIndex(null);
+    setHoveredIndex(null);
+  }, [language]);
   
   const handleToggle = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
   
+  const handleMouseEnter = (index: number) => {
+    setHoveredIndex(index);
+  };
+  
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+  
   return (
-    <div className="league-row flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8">
+    <div className={`league-row flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8 ${hoveredIndex !== null ? 'has-hover' : ''}`}>
       {cards.map((card, index) => (
         <div 
-          key={index} 
-          className={`league-card-wrapper ${card.widthClass || ''} sm:w-auto ${expandedIndex === index ? 'is-expanded' : ''}`}
+          key={`${index}-${language}`} 
+          className={`league-card-wrapper ${card.widthClass || ''} sm:w-auto ${expandedIndex === index ? 'is-expanded' : ''} ${hoveredIndex === index ? 'is-hovered' : ''}`}
         >
           <LeagueCard
             league={card.league}
@@ -582,9 +603,12 @@ function LeagueRow({ children, cards }: { children?: React.ReactNode, cards: Arr
             color={card.color}
             emoji={card.emoji}
             playerCount={card.playerCount}
-            factKey={card.factKey}
+            fact={card.fact}
             isExpanded={expandedIndex === index}
+            isHovered={hoveredIndex === index}
             onToggle={() => handleToggle(index)}
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={handleMouseLeave}
           />
         </div>
       ))}

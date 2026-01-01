@@ -162,7 +162,7 @@ const getDefaultGradient = (gender: string, role: string) => {
 }
 
 export default function PlayerProfile({ params }: PlayerProfileProps) {
-  const [activeTab, setActiveTab] = useState('overview')
+  const [activeTab, setActiveTab] = useState('karriere')
   const [player, setPlayer] = useState<PlayerData | null>(null)
   const [loading, setLoading] = useState(true)
   const [authRequired, setAuthRequired] = useState(false)
@@ -973,16 +973,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
           <div className="border-b border-gray-200 dark:border-gray-700 overflow-x-auto scrollbar-hide">
             <nav className="flex -mb-px min-w-max px-1">
               <button
-                onClick={() => setActiveTab('overview')}
-                className={`px-3 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-sm font-medium border-b-2 transition whitespace-nowrap flex-shrink-0 ${
-                  activeTab === 'overview'
-                    ? 'border-red-600 text-red-600 dark:text-red-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
-                }`}
-              >
-                {t('playerProfile.tabOverview')}
-              </button>
-              <button
                 onClick={() => setActiveTab('karriere')}
                 className={`px-3 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-sm font-medium border-b-2 transition whitespace-nowrap flex-shrink-0 ${
                   activeTab === 'karriere'
@@ -1027,27 +1017,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
           {/* Tab Content */}
           <div className="p-4 sm:p-6">
-            {activeTab === 'overview' && (
-              <div className="space-y-6">
-                {/* Swiss Volley License Section */}
-                {player.swissVolleyLicense && (
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                      <Award className="w-5 h-5 text-yellow-600" />
-                      Swiss Volley Lizenz
-                    </h3>
-                    <div className="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-gray-700 dark:to-gray-800 p-6 rounded-lg border-2 border-yellow-300 dark:border-yellow-600">
-                      <img 
-                        src={player.swissVolleyLicense} 
-                        alt="Swiss Volley License" 
-                        className="w-full max-w-2xl mx-auto rounded-lg shadow-xl border-2 border-white dark:border-gray-600"
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
             {activeTab === 'karriere' && (
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('playerProfile.clubHistory')}</h3>

@@ -355,13 +355,13 @@ function LeagueCard({ league, description, color, emoji, playerCount, fact, expl
           className="p-2.5 sm:p-4 md:p-5 text-white flex-shrink-0 flex flex-col justify-between flex-1 min-h-[85px] sm:min-h-[120px]"
         >
           <div>
-            <div className="text-base sm:text-2xl md:text-3xl mb-0.5 sm:mb-2">{emoji}</div>
-            <h3 className="text-xs sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1 leading-tight">{league}</h3>
-            <p className="text-[9px] sm:text-xs md:text-sm opacity-90 mb-0.5 sm:mb-2 line-clamp-1 md:line-clamp-none">{description}</p>
+            <div className="text-lg sm:text-2xl md:text-3xl mb-0.5 sm:mb-2">{emoji}</div>
+            <h3 className="text-sm sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1 leading-tight">{league}</h3>
+            <p className="text-[11px] sm:text-xs md:text-sm opacity-90 mb-0.5 sm:mb-2 line-clamp-1 md:line-clamp-none">{description}</p>
           </div>
           <div>
-            <div className="text-xs sm:text-lg md:text-xl font-bold">{playerCount}</div>
-            <p className="text-[8px] sm:text-[10px] opacity-75">{t('home.leagues.players')}</p>
+            <div className="text-sm sm:text-lg md:text-xl font-bold">{playerCount}</div>
+            <p className="text-[10px] sm:text-[10px] opacity-75">{t('home.leagues.players')}</p>
           </div>
         </div>
         {/* Quote/Explanation panel - shows on hover/tap/double-tap */}

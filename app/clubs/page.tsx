@@ -116,7 +116,7 @@ export default function ClubsPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('clubs.searchPlaceholder') || 'Verein oder Stadt suchen...'}
-                className="w-full pl-10 pr-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                className="w-full pl-10 pr-4 py-2.5 sm:py-2 text-sm leading-normal border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 placeholder:leading-normal"
               />
             </div>
           </div>

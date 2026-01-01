@@ -422,12 +422,19 @@ function LeagueRow({ children, cards, language }: { children?: React.ReactNode, 
     setHoveredIndex(null);
   }, [language]);
   
-  // Single click toggles explanation
+  // Single click toggles explanation - also clears hover state to ensure only one section is visible
   const handleClick = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
+    const newExpanded = expandedIndex === index ? null : index;
+    setExpandedIndex(newExpanded);
+    // Clear hover state when clicking to ensure only one section is visible at a time
+    if (newExpanded !== null) {
+      setHoveredIndex(null);
+    }
   };
   
   const handleMouseEnter = (index: number) => {
+    // Don't show hover state if a card is already expanded with explanation
+    if (expandedIndex !== null) return;
     setHoveredIndex(index);
   };
   

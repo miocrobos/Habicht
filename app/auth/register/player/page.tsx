@@ -931,7 +931,7 @@ export default function PlayerRegisterPage() {
                     <Award className="w-5 h-5" />{t('register.swissVolleyLicense')} ({t('register.optional')})
                   </h4>
                   <ImageUpload label={t('register.swissVolleyLicense')} value={formData.swissVolleyLicense}
-                    onChange={(v) => setFormData({ ...formData, swissVolleyLicense: v })} aspectRatio="banner" />
+                    onChange={(v) => setFormData({ ...formData, swissVolleyLicense: v })} aspectRatio="banner" allowPdf={true} />
                 </div>
 
                 <div className="bg-blue-50 dark:bg-gray-700 border border-blue-200 dark:border-gray-600 rounded-lg p-5">
@@ -939,7 +939,7 @@ export default function PlayerRegisterPage() {
                     <Award className="w-5 h-5" />{t('register.ausweiss')} ({t('register.optional')})
                   </h4>
                   <ImageUpload label={t('register.ausweiss')} value={formData.ausweiss}
-                    onChange={(v) => setFormData({ ...formData, ausweiss: v })} aspectRatio="banner" />
+                    onChange={(v) => setFormData({ ...formData, ausweiss: v })} aspectRatio="banner" allowPdf={true} />
                 </div>
 
                 <div className="flex gap-3">

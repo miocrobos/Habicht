@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { Upload, X, Image as ImageIcon } from 'lucide-react'
+import { Upload, X, Image as ImageIcon, FileText } from 'lucide-react'
 
 interface ImageUploadProps {
   label: string
@@ -10,6 +10,7 @@ interface ImageUploadProps {
   aspectRatio?: 'square' | 'banner'
   required?: boolean
   helpText?: string
+  allowPdf?: boolean  // New prop to allow PDF uploads
 }
 
 export default function ImageUpload({
@@ -18,24 +19,33 @@ export default function ImageUpload({
   onChange,
   aspectRatio = 'square',
   required = false,
-  helpText
+  helpText,
+  allowPdf = false
 }: ImageUploadProps) {
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState('')
+  const [isPdf, setIsPdf] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Check if the current value is a PDF
+  const isCurrentValuePdf = value?.startsWith('data:application/pdf')
 
   const handleFileChange = async (file: File) => {
     setError('')
 
     // Validate file type
-    if (!file.type.startsWith('image/')) {
-      setError('Bitte wähle eine Bilddatei aus')
+    const isImage = file.type.startsWith('image/')
+    const isPdfFile = file.type === 'application/pdf'
+    
+    if (!isImage && !(allowPdf && isPdfFile)) {
+      setError(allowPdf ? 'Please select an image or PDF file' : 'Please select an image file')
       return
     }
 
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      setError('Bild darf maximal 5MB gross sein')
+    // Validate file size (max 10MB for PDFs, 5MB for images)
+    const maxSize = isPdfFile ? 10 * 1024 * 1024 : 5 * 1024 * 1024
+    if (file.size > maxSize) {
+      setError(isPdfFile ? 'PDF must be max 10MB' : 'Image must be max 5MB')
       return
     }
 
@@ -44,11 +54,12 @@ export default function ImageUpload({
       const reader = new FileReader()
       reader.onloadend = () => {
         const base64 = reader.result as string
+        setIsPdf(isPdfFile)
         onChange(base64)
       }
       reader.readAsDataURL(file)
     } catch (err) {
-      setError('Fehler beim Hochladen des Bildes')
+      setError('Error uploading file')
     }
   }
 
@@ -94,13 +105,31 @@ export default function ImageUpload({
 
       {value ? (
         <div className="relative group">
-          <div className={`w-full ${aspectClasses} rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700`}>
-            <img
-              src={value}
-              alt={label}
-              className="w-full h-full object-cover"
-            />
-          </div>
+          {isCurrentValuePdf ? (
+            // PDF Preview
+            <div className={`w-full ${aspectClasses} rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center`}>
+              <FileText className="w-16 h-16 text-red-500 dark:text-red-400 mb-2" />
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">PDF Document</p>
+              <a 
+                href={value} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-xs text-blue-600 dark:text-blue-400 hover:underline mt-1"
+                onClick={(e) => e.stopPropagation()}
+              >
+                View PDF
+              </a>
+            </div>
+          ) : (
+            // Image Preview
+            <div className={`w-full ${aspectClasses} rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700`}>
+              <img
+                src={value}
+                alt={label}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
           <button
             type="button"
             onClick={handleRemove}
@@ -114,7 +143,7 @@ export default function ImageUpload({
             className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
           >
             <span className="bg-white dark:bg-gray-800 px-4 py-2 rounded-lg font-medium text-gray-900 dark:text-gray-100 shadow-lg">
-              Bild ändern
+              {isCurrentValuePdf ? 'Change file' : 'Change image'}
             </span>
           </button>
         </div>
@@ -135,12 +164,22 @@ export default function ImageUpload({
             }
           `}
         >
-          <ImageIcon className={`w-12 h-12 mb-3 ${isDragging ? 'text-red-500 dark:text-red-400' : 'text-gray-400 dark:text-gray-500'}`} />
+          {allowPdf ? (
+            <div className="flex gap-2 mb-3">
+              <ImageIcon className={`w-10 h-10 ${isDragging ? 'text-red-500 dark:text-red-400' : 'text-gray-400 dark:text-gray-500'}`} />
+              <FileText className={`w-10 h-10 ${isDragging ? 'text-red-500 dark:text-red-400' : 'text-gray-400 dark:text-gray-500'}`} />
+            </div>
+          ) : (
+            <ImageIcon className={`w-12 h-12 mb-3 ${isDragging ? 'text-red-500 dark:text-red-400' : 'text-gray-400 dark:text-gray-500'}`} />
+          )}
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            {isDragging ? 'Bild hier ablegen' : 'Klicke oder ziehe ein Bild hierher'}
+            {isDragging 
+              ? (allowPdf ? 'Drop file here' : 'Drop image here')
+              : (allowPdf ? 'Click or drag image/PDF here' : 'Click or drag image here')
+            }
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            PNG, JPG oder WEBP (max. 5MB)
+            {allowPdf ? 'PNG, JPG, WEBP (max 5MB) or PDF (max 10MB)' : 'PNG, JPG or WEBP (max 5MB)'}
           </p>
         </div>
       )}
@@ -148,7 +187,7 @@ export default function ImageUpload({
       <input
         ref={fileInputRef}
         type="file"
-        accept="image/*"
+        accept={allowPdf ? "image/*,.pdf,application/pdf" : "image/*"}
         onChange={(e) => e.target.files?.[0] && handleFileChange(e.target.files[0])}
         className="hidden"
       />

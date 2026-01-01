@@ -959,6 +959,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 value={formData.swissVolleyLicense}
                 onChange={(v: string) => setFormData({ ...formData, swissVolleyLicense: v })}
                 aspectRatio="banner"
+                allowPdf={true}
               />
             </div>
 
@@ -971,6 +972,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                 value={formData.ausweiss}
                 onChange={(v: string) => setFormData({ ...formData, ausweiss: v })}
                 aspectRatio="banner"
+                allowPdf={true}
               />
             </div>
           </div>

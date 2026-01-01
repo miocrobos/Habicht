@@ -236,10 +236,6 @@ export default function HybridRegisterPage() {
         setError(t('register.selectPositionRequired'));
         return;
       }
-      if (!formData.coachingLicense) {
-        setError(t('register.coachingLicenseRequired') || 'Coaching license is required');
-        return;
-      }
       setStep(3);
       window.scrollTo(0, 0);
       return;
@@ -254,6 +250,11 @@ export default function HybridRegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.coachingLicense) {
+      setError(t('register.coachingLicenseRequired') || 'Coaching license is required');
+      return;
+    }
     
     if (!agreedToTerms) {
       setError(t('register.agreeToTermsRequired'));
@@ -941,13 +942,15 @@ export default function HybridRegisterPage() {
                     label={t('register.swissVolleyLicense')} 
                     value={formData.swissVolleyLicense}
                     onChange={(v) => setFormData({ ...formData, swissVolleyLicense: v })} 
-                    aspectRatio="banner" 
+                    aspectRatio="banner"
+                    allowPdf={true}
                   />
                   <ImageUpload 
                     label={t('register.ausweiss')} 
                     value={formData.ausweiss}
                     onChange={(v) => setFormData({ ...formData, ausweiss: v })} 
-                    aspectRatio="banner" 
+                    aspectRatio="banner"
+                    allowPdf={true}
                   />
                 </div>
               </div>
@@ -1017,7 +1020,8 @@ export default function HybridRegisterPage() {
                     label="" 
                     value={formData.coachingLicense}
                     onChange={(v) => setFormData({ ...formData, coachingLicense: v })} 
-                    aspectRatio="banner" 
+                    aspectRatio="banner"
+                    allowPdf={true}
                   />
                 </div>
               </div>

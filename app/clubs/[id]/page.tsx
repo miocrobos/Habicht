@@ -154,41 +154,47 @@ export default function ClubProfilePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Club Info Section */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center gap-6">
+      {/* Header with gradient background based on canton colors */}
+      <div
+        className="relative h-64"
+        style={{ 
+          background: `linear-gradient(135deg, ${cantonInfo.colors.primary} 0%, ${cantonInfo.colors.secondary} 100%)`
+        }}
+      >
+        <div className="absolute top-4 right-4">
+          <CantonFlag canton={club.canton} size="lg" />
+        </div>
+
+        <div className="container mx-auto px-4 h-full flex items-end pb-8">
+          <div className="flex items-end gap-6">
             {/* Club Logo */}
-            <div className="w-20 h-20 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden bg-white flex-shrink-0">
+            <div className="w-32 h-32 rounded-2xl border-4 border-white dark:border-gray-800 shadow-xl overflow-hidden bg-white">
               {club.logo ? (
                 <Image
                   src={club.logo}
                   alt={club.name}
-                  width={80}
-                  height={80}
+                  width={128}
+                  height={128}
                   className="w-full h-full object-contain p-2"
                   unoptimized
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-gray-400">
+                <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-gray-400">
                   🏐
                 </div>
               )}
             </div>
 
             {/* Club Info */}
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{club.name}</h1>
-                <CantonFlag canton={club.canton} size="sm" />
-              </div>
-              <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 text-sm">
-                <div className="flex items-center gap-1">
+            <div className="text-white pb-2">
+              <h1 className="text-4xl font-bold mb-2">{club.name}</h1>
+              <div className="flex items-center gap-4 text-white/90">
+                <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
                   <span>{club.town}, {cantonInfo.name}</span>
                 </div>
                 {club.founded && (
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
                     <span>{t('clubProfile.founded')} {club.founded}</span>
                   </div>
@@ -200,7 +206,7 @@ export default function ClubProfilePage() {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10">
+      <div className="sticky top-0 z-10">
         <div className="container mx-auto px-4">
           <div className="flex gap-8">
             <button
@@ -271,18 +277,6 @@ export default function ClubProfilePage() {
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('clubProfile.contactSocial')}</h2>
                 <div className="space-y-3">
-                  {club.website && (
-                    <div className="flex justify-center">
-                      <a 
-                        href={club.website} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition font-semibold text-center w-full max-w-xs"
-                      >
-                        <span className="w-full block text-center">{t('clubProfile.website')}</span>
-                      </a>
-                    </div>
-                  )}
                   {club.email && (
                     <a 
                       href={`mailto:${club.email}`}

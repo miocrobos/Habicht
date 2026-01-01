@@ -192,12 +192,15 @@ export default function RecruiterRegisterPage() {
       if (!formData.clubName) { setError(t('register.selectOrganization')); return; }
       if (formData.coachRole.length === 0) { setError(t('register.selectRoleRequired')); return; }
       if (formData.genderCoached.length === 0) { setError(t('register.selectGenderCoachedRequired')); return; }
-      if (!formData.coachingLicense) { setError(t('register.coachingLicenseRequired') || 'Coaching license is required'); return; }
       setStep(3);
       return;
     }
 
-    // Step 3 - Final submission - Check terms before submitting
+    // Step 3 - Final submission - Check coaching license and terms before submitting
+    if (!formData.coachingLicense) {
+      setError(t('register.coachingLicenseRequired') || 'Coaching license is required');
+      return;
+    }
     if (!agreedToTerms) {
       setError(t('register.agreeToTermsRequired'));
       return;
@@ -579,6 +582,7 @@ export default function RecruiterRegisterPage() {
                     label=""
                     value={formData.coachingLicense}
                     onChange={(base64) => setFormData({ ...formData, coachingLicense: base64 })}
+                    allowPdf={true}
                   />
                 </div>
 
@@ -590,6 +594,7 @@ export default function RecruiterRegisterPage() {
                     label=""
                     value={formData.ausweiss}
                     onChange={(base64) => setFormData({ ...formData, ausweiss: base64 })}
+                    allowPdf={true}
                   />
                 </div>
 

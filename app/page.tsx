@@ -151,7 +151,7 @@ export default function Home() {
 
           {/* Swiss Regions Highlight */}
           <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-3 sm:p-6 md:p-12">
-            <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-center mb-3 sm:mb-6 md:mb-8">🇨🇭 Alle 26 Kantone</h3>
+            <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-center mb-3 sm:mb-6 md:mb-8">🇨🇭 {t('home.leagues.all26Cantons')}</h3>
             <div className="grid grid-cols-4 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-1.5 sm:gap-3 md:gap-4">
               {['ZH', 'BE', 'VD', 'AG', 'SG', 'GE', 'LU', 'TG', 'TI', 'VS', 'BL', 'SO', 'FR', 'BS', 'GR', 'NE', 'ZG', 'SH', 'UR', 'SZ', 'JU', 'AR', 'AI', 'NW', 'GL', 'OW'].map(canton => (
                 <Link 
@@ -440,6 +440,8 @@ function LeagueRow({ children, cards, language }: { children?: React.ReactNode, 
   
   const handleMouseLeave = () => {
     setHoveredIndex(null);
+    // Also close explanation when mouse leaves the card
+    setExpandedIndex(null);
   };
   
   return (

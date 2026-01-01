@@ -1,4 +1,4 @@
-export const enTranslations = {
+﻿export const enTranslations = {
   'clubProfile.age': 'Age',
   // Gender
   'gender.male': 'Male',
@@ -174,6 +174,7 @@ export const enTranslations = {
         u19: 'U19',
         u17: 'U17',
         players: 'Players',
+        all26Cantons: 'All 26 Cantons',
       },
       features: {
         title: 'Why Habicht?',

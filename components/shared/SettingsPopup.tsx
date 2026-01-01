@@ -37,7 +37,7 @@ export default function SettingsPopup() {
   }, [open]);
 
   return (
-    <div className="fixed bottom-4 right-4 sm:top-24 sm:bottom-auto z-50" ref={ref}>
+    <div className="fixed bottom-4 right-4 sm:top-24 sm:bottom-auto z-40" ref={ref}>
       <button
         aria-label="Settings"
         className="bg-white dark:bg-gray-800 rounded-full shadow-lg p-2.5 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition border border-gray-200 dark:border-gray-600"

@@ -11,6 +11,8 @@ export const BACKGROUND_OPTIONS = [
   { id: "solid-indigo", name: "Indigo", style: "#6366f1" },
   { id: "gradient-ocean", name: "Ocean", style: "linear-gradient(90deg, #43cea2, #185a9d)" },
   { id: "gradient-sunset", name: "Sunset", style: "linear-gradient(90deg, #ff7e5f, #feb47b)" },
+  { id: "gradient-blue-fade", name: "Blau Verlauf", style: "linear-gradient(90deg, #2563eb 0%, #60a5fa 50%, #f0f9ff 100%)" },
+  { id: "gradient-pink-fade", name: "Pink Verlauf", style: "linear-gradient(90deg, #ec4899 0%, #f472b6 50%, #fdf2f8 100%)" },
   { id: "solid-green-2", name: "Grün 2", style: "#10b981" },
   { id: "solid-red-2", name: "Rot 2", style: "#ef4444" },
   { id: "solid-blue-2", name: "Blau 2", style: "#3b82f6" },

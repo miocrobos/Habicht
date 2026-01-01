@@ -73,7 +73,13 @@
     'auth.consent.submit': 'Accepter et continuer',
     'auth.consent.processing': 'Traitement en cours...',
     'auth.consent.pleaseAcceptAll': 'Veuillez accepter toutes les conditions',
-    'auth.consent.confirmationText': 'En cliquant sur "Accepter et continuer", vous confirmez que vous acceptez toutes les conditions ci-dessus.',    // Chat
+    'auth.consent.confirmationText': 'En cliquant sur "Accepter et continuer", vous confirmez que vous acceptez toutes les conditions ci-dessus.',
+    // Auth Required Modal
+    'auth.required.title': 'Connexion requise',
+    'auth.required.message': 'Veuillez vous connecter ou vous inscrire pour voir les profils des joueurs et accéder à toutes les fonctionnalités.',
+    'auth.required.signIn': 'Se connecter',
+    'auth.required.register': 'S\'inscrire',
+    // Chat
     'chat.writeMessage': 'Écrire un message...',
     'chat.addEmoji': 'Ajouter un emoji',
     // Leagues
@@ -119,6 +125,7 @@
     'common.next': 'Suivant',
     'common.submit': 'Soumettre',
     // Navigation
+    'nav.navigation': 'Navigation',
     'nav.home': 'Accueil',
     'nav.players': 'Joueurs',
     'nav.men': 'Hommes',
@@ -137,11 +144,13 @@
     // Home Page
     home: {
       hero: {
-        title: 'Habicht',
+        title: 'La plateforme de scouting moderne pour le volleyball suisse.',
+        subtitle: 'Découvre des talents, regarde des highlights et connecte-toi avec des scouts.',
         description: 'La plateforme de scouting moderne pour le volleyball suisse. Découvre des talents, regarde des highlights et connecte-toi avec des scouts.',
         menVolleyball: 'Volleyball Hommes',
         womenVolleyball: 'Volleyball Femmes',
         searchAllPlayers: 'Rechercher tous les joueurs',
+        searchAllClubs: 'Rechercher tous les clubs',
         login: 'Connexion',
         registerNow: 'S\'inscrire maintenant',
       },
@@ -206,6 +215,7 @@
         browsePlayers: 'Parcourir les joueurs',
       },
       slides: {
+        aboutThisLeague: 'À propos de cette ligue',
         nla: {
           title: 'LNA',
           subtitle: '',
@@ -224,11 +234,35 @@
           explanation: 'Le troisième niveau, composé d\'équipes régionales fortes. De nombreux joueurs développent ici leurs compétences avec l\'objectif de monter en ligue nationale.',
           quote: '1. Liga: Où l\'ambition rencontre l\'opportunité!',
         },
+        liga2: {
+          title: '2. Liga',
+          subtitle: '',
+          explanation: 'Le quatrième niveau du volleyball suisse, avec des équipes de club engagées en compétition régionale. Un excellent tremplin pour les joueurs qui développent leur jeu compétitif.',
+          quote: 'Construire des champions, match après match.',
+        },
+        liga3: {
+          title: '3. Liga',
+          subtitle: '',
+          explanation: 'Le cinquième niveau où la passion rencontre la compétition. Ces ligues offrent un jeu compétitif pour les joueurs de niveau intermédiaire.',
+          quote: 'Où le travail acharné devient habitude.',
+        },
         liga23: {
           title: '2. & 3. Liga',
           subtitle: '',
           explanation: 'Ces ligues sont pour les talents en ascension et les équipes de club engagées. Elles offrent la compétition et un chemin pour progresser dans le volleyball suisse.',
           quote: 'Chaque champion commence ici.',
+        },
+        liga4: {
+          title: '4. Liga',
+          subtitle: '',
+          explanation: 'Volleyball compétitif d\'entrée de gamme axé sur le développement et le plaisir. Parfait pour les nouveaux joueurs qui découvrent le jeu en ligue organisée.',
+          quote: 'Chaque voyage commence par un premier service.',
+        },
+        liga5: {
+          title: '5. Liga',
+          subtitle: '',
+          explanation: 'Le fondement du volleyball suisse, axé sur les débutants et les joueurs récréatifs. Ces ligues mettent l\'accent sur le plaisir, l\'apprentissage et la communauté.',
+          quote: 'Jouer pour l\'amour du jeu.',
         },
         liga45: {
           title: '4. & 5. Liga',
@@ -530,6 +564,9 @@
       cantonAll: 'Tous',
       leagueLabel: 'Ligue',
       leagueAll: 'Toutes',
+      lookingForClubLabel: 'Disponibilité',
+      lookingForClubAll: 'Tous les joueurs',
+      lookingForClubActive: 'Cherche un club',
       loading: 'Chargement des joueurs...',
       playersFound: 'joueurs trouvés',
       noPlayersFound: 'Aucun joueur trouvé avec ces filtres',
@@ -630,6 +667,7 @@
     },
     // Player Profile
     playerProfile: {
+      backToOverview: 'Annuler',
       position: 'Position',
       saving: 'Enregistrement...',
       yearsOld: 'ans',
@@ -1214,6 +1252,7 @@
       selectOrganization: 'Veuillez sélectionner votre club',
       selectRoleRequired: 'Veuillez sélectionner au moins un rôle',
       selectGenderCoachedRequired: 'Veuillez sélectionner le genre que vous entraînez',
+      coachingLicenseRequired: 'Veuillez télécharger votre licence de coaching',
       agreeToTerms: 'J\'accepte les',
       terms: 'conditions d\'utilisation',
       and: 'et',

@@ -4,33 +4,28 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
   color-scheme: only light;
 }
 
 :root[data-theme='dark'] {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 17, 24, 39;
-  --background-end-rgb: 31, 41, 55;
+  --background-start-rgb: 3, 7, 18;
+  --background-end-rgb: 3, 7, 18;
   color-scheme: only light;
 }
 
 :root[data-theme='light'] {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
   color-scheme: only light;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -96,7 +91,7 @@ body {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  transition: flex 0.3s ease-out, min-width 0.3s, max-width 0.3s;
+  transition: all 0.3s ease-out;
 }
 
 .league-card-wrapper .league-card {
@@ -108,44 +103,61 @@ body {
   justify-content: center;
 }
 
-/* Mobile: vertical stack with tap to expand quote panel */
+/* Mobile: 2-column grid layout with tap to expand quote panel */
 @media (max-width: 639px) {
   .league-row {
-    display: flex;
-    flex-direction: column;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
   }
   
   .league-card-wrapper {
-    flex: 0 0 auto;
+    flex: none;
     width: 100%;
     min-width: unset;
     max-width: 100%;
     transition: all 0.3s ease-out;
   }
   
-  /* Full width cards */
+  /* Full width cards span both columns */
   .league-card-wrapper.w-full {
-    width: 100%;
+    grid-column: span 2;
   }
   
-  /* Mobile tap expand behavior - card shows quote panel */
+  /* Mobile tap expand behavior - card shows quote panel and spans full width */
   .league-card-wrapper.is-expanded {
-    width: 100%;
+    grid-column: span 2;
     z-index: 10;
     transform: scale(1.02);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Explanation mode needs more height */
+  .league-card-wrapper.is-explanation {
+    z-index: 15;
   }
   
   /* When a card is expanded, slightly dim other cards */
   .league-row:has(.league-card-wrapper.is-expanded) .league-card-wrapper:not(.is-expanded) {
-    opacity: 0.7;
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+  
+  /* Ensure expanded card content is fully visible */
+  .league-card-wrapper.is-expanded .league-card {
+    min-height: 140px;
+  }
+  
+  /* Explanation mode needs taller card */
+  .league-card-wrapper.is-explanation .league-card {
+    min-height: 180px;
   }
 }
 
 /* Desktop: wrapper expands on hover, siblings shrink */
-/* Quote panel: 200px on sm/md, 260px on lg */
+/* Quote panel: 160px on sm/md, 200px on lg */
 @media (min-width: 640px) {
   .league-row {
     display: flex;
@@ -157,33 +169,38 @@ body {
   
   .league-card-wrapper {
     flex: 1 1 0;
-    min-width: 120px;
-    transition: flex 0.3s ease-out, min-width 0.3s;
+    min-width: 100px;
+    max-width: 180px;
+    transition: flex 0.3s ease-out, min-width 0.3s, max-width 0.3s;
   }
   
   /* CSS :has() approach for modern browsers */
   /* When any card is hovered, shrink all cards first */
   .league-row:has(.league-card-wrapper:hover) .league-card-wrapper {
-    flex: 0.5 1 0;
-    min-width: 70px;
+    flex: 0.6 1 0;
+    min-width: 60px;
+    max-width: 120px;
   }
   
-  /* The hovered card expands to accommodate the quote panel (200px) */
+  /* The hovered card expands to accommodate the quote panel (160px) */
   .league-row .league-card-wrapper:hover {
-    flex: 2.2 1 0;
-    min-width: calc(120px + 200px);
+    flex: 1.8 1 0;
+    min-width: calc(100px + 160px);
+    max-width: none;
     z-index: 10;
   }
   
   /* JavaScript fallback using classes (for browsers without :has() support) */
   .league-row.has-hover .league-card-wrapper {
-    flex: 0.5 1 0;
-    min-width: 70px;
+    flex: 0.6 1 0;
+    min-width: 60px;
+    max-width: 120px;
   }
   
   .league-row.has-hover .league-card-wrapper.is-hovered {
-    flex: 2.2 1 0;
-    min-width: calc(120px + 200px);
+    flex: 1.8 1 0;
+    min-width: calc(100px + 160px);
+    max-width: none;
     z-index: 10;
   }
 }
@@ -194,58 +211,68 @@ body {
   }
   
   .league-card-wrapper {
-    min-width: 140px;
+    min-width: 120px;
+    max-width: 200px;
   }
   
   .league-row:has(.league-card-wrapper:hover) .league-card-wrapper {
-    flex: 0.5 1 0;
-    min-width: 90px;
+    flex: 0.6 1 0;
+    min-width: 75px;
+    max-width: 140px;
   }
   
   .league-row .league-card-wrapper:hover {
-    flex: 2.2 1 0;
-    min-width: calc(140px + 200px);
+    flex: 1.8 1 0;
+    min-width: calc(120px + 160px);
+    max-width: none;
   }
   
   .league-row.has-hover .league-card-wrapper {
-    flex: 0.5 1 0;
-    min-width: 90px;
+    flex: 0.6 1 0;
+    min-width: 75px;
+    max-width: 140px;
   }
   
   .league-row.has-hover .league-card-wrapper.is-hovered {
-    flex: 2.2 1 0;
-    min-width: calc(140px + 200px);
+    flex: 1.8 1 0;
+    min-width: calc(120px + 160px);
+    max-width: none;
   }
 }
 
-/* lg screens: quote panel is 260px */
+/* lg screens: quote panel is 200px */
 @media (min-width: 1024px) {
   .league-row {
     gap: 1.25rem;
   }
   
   .league-card-wrapper {
-    min-width: 160px;
+    min-width: 140px;
+    max-width: 220px;
   }
   
   .league-row:has(.league-card-wrapper:hover) .league-card-wrapper {
-    flex: 0.5 1 0;
-    min-width: 110px;
+    flex: 0.6 1 0;
+    min-width: 90px;
+    max-width: 160px;
   }
   
   .league-row .league-card-wrapper:hover {
-    flex: 2.5 1 0;
-    min-width: calc(160px + 260px);
+    flex: 2 1 0;
+    min-width: calc(140px + 200px);
+    max-width: none;
   }
   
   .league-row.has-hover .league-card-wrapper {
-    flex: 0.5 1 0;
-    min-width: 110px;
+    flex: 0.6 1 0;
+    min-width: 90px;
+    max-width: 160px;
   }
   
   .league-row.has-hover .league-card-wrapper.is-hovered {
-    flex: 2.5 1 0;
-    min-width: calc(160px + 260px);
+    flex: 2 1 0;
+    min-width: calc(140px + 200px);
+    max-width: none;
   }
 }
 
@@ -277,13 +304,13 @@ body {
   
   /* Ensure all containers respect mobile width */
   .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
   
-  /* Better touch targets for mobile - exclude slider dots */
-  button:not(.slider-dot), a, select, input {
-    min-height: 44px;
+  /* Better touch targets for mobile - exclude slider dots and small inline buttons */
+  button:not(.slider-dot):not(.inline-btn), a:not(.inline-link), select, input {
+    min-height: 40px;
   }
   
   /* Slider dots should be small on mobile */
@@ -300,6 +327,35 @@ body {
   /* Mobile-friendly scrollbar */
   ::-webkit-scrollbar {
     width: 4px;
+  }
+}
+
+/* Extra small phone screens (< 375px) */
+@media (max-width: 374px) {
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  /* Reduce font sizes for very small screens */
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  h2 {
+    font-size: 1.25rem !important;
+  }
+  
+  h3 {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Small phones (375px - 414px) */
+@media (min-width: 375px) and (max-width: 414px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 }
 

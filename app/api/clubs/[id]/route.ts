@@ -9,6 +9,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    // Club profiles are publicly accessible (no auth required)
     const club = await prisma.club.findUnique({
       where: { id: params.id },
       include: {

@@ -259,6 +259,16 @@ const handleExportCV = async (language: string) => {
             priority
           />
         )}
+        {/* Background change button (owner only) */}
+        {isOwner && (
+          <button
+            onClick={() => setShowBgModal(true)}
+            className="absolute top-4 right-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition flex items-center gap-2 z-10 text-sm"
+          >
+            <Edit2 className="w-4 h-4" />
+            <span>{t('recruiterProfile.changeBackground') || 'Hintergrund Ändere'}</span>
+          </button>
+        )}
       </div>
 
       {/* Profile Header */}

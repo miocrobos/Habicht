@@ -236,6 +236,10 @@ export default function HybridRegisterPage() {
         setError(t('register.selectPositionRequired'));
         return;
       }
+      if (!formData.coachingLicense) {
+        setError(t('register.coachingLicenseRequired') || 'Coaching license is required');
+        return;
+      }
       setStep(3);
       window.scrollTo(0, 0);
       return;
@@ -636,21 +640,6 @@ export default function HybridRegisterPage() {
                 </div>
               </div>
 
-              {/* Skills */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                  {t('register.skills')}
-                </label>
-                <div className="space-y-3">
-                  <StarRating label={t('register.receiving')} value={formData.skillReceiving} onChange={(v) => setFormData({ ...formData, skillReceiving: v })} />
-                  <StarRating label={t('register.serving')} value={formData.skillServing} onChange={(v) => setFormData({ ...formData, skillServing: v })} />
-                  <StarRating label={t('register.attacking')} value={formData.skillAttacking} onChange={(v) => setFormData({ ...formData, skillAttacking: v })} />
-                  <StarRating label={t('register.blocking')} value={formData.skillBlocking} onChange={(v) => setFormData({ ...formData, skillBlocking: v })} />
-                  <StarRating label={t('register.defense')} value={formData.skillDefense} onChange={(v) => setFormData({ ...formData, skillDefense: v })} />
-                  <StarRating label={t('register.setting')} value={formData.skillSetting} onChange={(v) => setFormData({ ...formData, skillSetting: v })} />
-                </div>
-              </div>
-
               {/* Club History */}
               <div>
                 <div className="flex justify-between items-center mb-3">
@@ -1020,12 +1009,17 @@ export default function HybridRegisterPage() {
                   onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 dark:text-white"
                 />
-                <ImageUpload 
-                  label={t('register.coachingLicense')} 
-                  value={formData.coachingLicense}
-                  onChange={(v) => setFormData({ ...formData, coachingLicense: v })} 
-                  aspectRatio="banner" 
-                />
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {t('register.coachingLicense')} <span className="text-red-500">*</span>
+                  </label>
+                  <ImageUpload 
+                    label="" 
+                    value={formData.coachingLicense}
+                    onChange={(v) => setFormData({ ...formData, coachingLicense: v })} 
+                    aspectRatio="banner" 
+                  />
+                </div>
               </div>
 
               {/* Gender Coached */}

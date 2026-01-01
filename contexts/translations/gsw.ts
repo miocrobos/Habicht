@@ -73,7 +73,13 @@
     'auth.consent.submit': 'Akzeptiere und Fortfahre',
     'auth.consent.processing': 'Wird verarbeitet...',
     'auth.consent.pleaseAcceptAll': 'Bitte akzeptier alli Bedingige',
-    'auth.consent.confirmationText': 'Durch s Klicke uf "Akzeptiere und Fortfahre" bestätisch du, dass du alli obengenannte Bedingige akzeptiersch.',    // Chat
+    'auth.consent.confirmationText': 'Durch s Klicke uf "Akzeptiere und Fortfahre" bestätisch du, dass du alli obengenannte Bedingige akzeptiersch.',
+    // Auth Required Modal
+    'auth.required.title': 'Aamäldig erforderlich',
+    'auth.required.message': 'Bitte mäld dich aa oder registrier dich, um Spielerprofil aazeluege und alli Funktione z nutze.',
+    'auth.required.signIn': 'Aamälde',
+    'auth.required.register': 'Registriere',
+    // Chat
     'chat.writeMessage': 'Nachricht Schriihe...',
     'chat.addEmoji': 'Emoji Hinzuefüege',
     // Leagues
@@ -119,6 +125,7 @@
     'common.next': 'Wiiter',
     'common.submit': 'Abschicke',
     // Navigation
+    'nav.navigation': 'Navigation',
     'nav.home': 'Hei',
     'nav.players': 'Spieler',
     'nav.men': 'Herren',
@@ -137,11 +144,13 @@
     // Home Page
     home: {
       hero: {
-        title: 'Habicht',
+        title: 'Di modärni Scouting-Plattform für Schwiizer Volleyball.',
+        subtitle: 'Entdeck Talänt, lueg Highlights a und vernetze dich mit Scouts.',
         description: 'Di modärni Scouting-Plattform für Schwiizer Volleyball. Entdeck Talänt, lueg Highlights a und vernetze dich mit Scouts.',
         menVolleyball: 'Herren Volleyball',
         womenVolleyball: 'Damen Volleyball',
         searchAllPlayers: 'Alli Spieler duresueche',
+        searchAllClubs: 'Alli Verein duresueche',
         login: 'Aamelde',
         registerNow: 'Jetzt registriere',
       },
@@ -206,6 +215,7 @@
         browsePlayers: 'Spieler durchsüäche',
       },
       slides: {
+        aboutThisLeague: 'Über die Liga',
         nla: {
           title: 'NLA',
           subtitle: '',
@@ -224,11 +234,35 @@
           explanation: 'Di dritti Stufä, bestehend us starche Regionalteams. Vieli Spieler entwickled da ihri Fähigkeite mit em Ziil, i d Nationallige ufzstiegä.',
           quote: '1. Liga: Wo Ehrgiiz uf Chance trifft!',
         },
+        liga2: {
+          title: '2. Liga',
+          subtitle: '',
+          explanation: 'D vierti Stufä vom Schwiizer Volleyball mit engagierte Vereinsteams im regionale Wettkampf. En guete Ort für Spieler, wo ihres Wettkampfspiil entwickled.',
+          quote: 'Champions ufbaue, Spiil für Spiil.',
+        },
+        liga3: {
+          title: '3. Liga',
+          subtitle: '',
+          explanation: 'D fünfti Stufä, wo Leidenschaft uf Wettkampf trifft. Die Lige bieted kompetitives Spiil für Spieler uf mittlerem Niveau.',
+          quote: 'Wo härti Arbet zur Gwohnheit wird.',
+        },
         liga23: {
           title: '2. & 3. Liga',
           subtitle: '',
           explanation: 'Die Lige sind für ufstrebendi Talent und engagierti Vereinsteams. Sie bieted Wettkampf und en Wäg für Spieler, im Schwiizer Volleyball vorazchoo.',
           quote: 'Da fangt jede Champion aa.',
+        },
+        liga4: {
+          title: '4. Liga',
+          subtitle: '',
+          explanation: 'Iistiigs-Wettkampfvolleyball fokussiert uf Entwicklig und Spass. Perfekt für nöieri Spieler, wo organisierts Ligaspiil erläbe wänd.',
+          quote: 'Jedi Reis fangt mit em erschte Ufschlag aa.',
+        },
+        liga5: {
+          title: '5. Liga',
+          subtitle: '',
+          explanation: 'S Fundament vom Schwiizer Volleyball, fokussiert uf Afänger und Freizeitspieler. Die Lige betoned Spass, Lerne und Gmeinschaft.',
+          quote: 'Spiel us Liebi zum Spiil.',
         },
         liga45: {
           title: '4. & 5. Liga',
@@ -636,6 +670,9 @@
       cantonAll: 'Alli',
       leagueLabel: 'Liga',
       leagueAll: 'Alli',
+      lookingForClubLabel: 'Verfüegbarkeit',
+      lookingForClubAll: 'Alli Spieler',
+      lookingForClubActive: 'Suecht Verein',
       loading: 'Lade Spieler...',
       playersFound: 'Spieler gfunde',
       noPlayersFound: 'Kei Spieler gfunde mit dene Filter',
@@ -695,6 +732,7 @@
     },
     // Player Profile
     playerProfile: {
+      backToOverview: 'Abbräche',
       position: 'Position',
       saving: 'Wird gspeicheret...',
       yearsOld: 'Joor alt',
@@ -1141,6 +1179,7 @@
       selectOrganization: 'Bitte wähl de Club',
       selectRoleRequired: 'Bitte wähl mindestens eini Rolle',
       selectGenderCoachedRequired: 'Bitte wähl welches Geschlecht du trainiersch',
+      coachingLicenseRequired: 'Bitte lad dini Trainerlizenz ufe',
       agreeToTerms: 'Ich akzeptiere d',
       terms: 'Nutzigsbedingige',
       and: 'und',

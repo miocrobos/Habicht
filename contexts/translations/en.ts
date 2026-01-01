@@ -76,6 +76,11 @@ export const enTranslations = {
     'auth.consent.processing': 'Processing...',
     'auth.consent.pleaseAcceptAll': 'Please accept all terms',
     'auth.consent.confirmationText': 'By clicking "Accept and Continue", you confirm that you accept all the above terms.',
+    // Auth Required Modal
+    'auth.required.title': 'Sign in required',
+    'auth.required.message': 'Please sign in or register to view player profiles and access all features.',
+    'auth.required.signIn': 'Sign In',
+    'auth.required.register': 'Register',
     // Chat
     'chat.writeMessage': 'Write a message...',
     'chat.addEmoji': 'Add emoji',
@@ -122,6 +127,7 @@ export const enTranslations = {
     'common.next': 'Next',
     'common.submit': 'Submit',
     // Navigation
+    'nav.navigation': 'Navigation',
     'nav.home': 'Home',
     'nav.players': 'Players',
     'nav.men': 'Men',
@@ -140,11 +146,13 @@ export const enTranslations = {
     // Home Page
     home: {
       hero: {
-        title: 'Habicht',
+        title: 'The modern scouting platform for Swiss volleyball.',
+        subtitle: 'Discover talents, watch highlights and connect with scouts.',
         description: 'The modern scouting platform for Swiss volleyball. Discover talents, watch highlights and connect with scouts.',
         menVolleyball: 'Men\'s Volleyball',
         womenVolleyball: 'Women\'s Volleyball',
         searchAllPlayers: 'Search all players',
+        searchAllClubs: 'Search all clubs',
         login: 'Login',
         registerNow: 'Register now',
       },
@@ -209,6 +217,7 @@ export const enTranslations = {
         browsePlayers: 'Browse Players',
       },
       slides: {
+        aboutThisLeague: 'About this League',
         nla: {
           title: 'NLA',
           subtitle: '',
@@ -227,11 +236,35 @@ export const enTranslations = {
           explanation: 'The third tier, made up of strong regional teams. Many players here are developing their skills and aiming to move up to the national leagues.',
           quote: '1. Liga: Where ambition meets opportunity!',
         },
+        liga2: {
+          title: '2. Liga',
+          subtitle: '',
+          explanation: 'The fourth tier of Swiss volleyball, featuring dedicated club teams competing regionally. A great stepping stone for players developing their competitive game.',
+          quote: 'Building champions, one game at a time.',
+        },
+        liga3: {
+          title: '3. Liga',
+          subtitle: '',
+          explanation: 'The fifth tier where passion meets competition. These leagues offer competitive play for intermediate players looking to improve and advance.',
+          quote: 'Where hard work becomes habit.',
+        },
         liga23: {
           title: '2. & 3. Liga',
           subtitle: '',
           explanation: 'These leagues are for up-and-coming talents and dedicated club teams. They offer competitive play and a pathway for players to progress in Swiss volleyball.',
           quote: 'Every champion starts here.',
+        },
+        liga4: {
+          title: '4. Liga',
+          subtitle: '',
+          explanation: 'Entry-level competitive volleyball focused on development and enjoyment. Perfect for newer players looking to experience organized league play.',
+          quote: 'Every journey starts with a first serve.',
+        },
+        liga5: {
+          title: '5. Liga',
+          subtitle: '',
+          explanation: 'The foundation of Swiss volleyball, focused on beginners and recreational players. These leagues emphasize fun, learning, and community.',
+          quote: 'Play for the love of the game.',
         },
         liga45: {
           title: '4. & 5. Liga',
@@ -478,6 +511,7 @@ export const enTranslations = {
         selectOrganization: 'Please select your club',
         selectRoleRequired: 'Please select at least one role',
         selectGenderCoachedRequired: 'Please select which gender you coach',
+        coachingLicenseRequired: 'Please upload your coaching license',
         agreeToTerms: 'I agree to the',
         terms: 'terms of service',
         and: 'and',
@@ -695,6 +729,9 @@ export const enTranslations = {
       cantonAll: 'All',
       leagueLabel: 'League',
       leagueAll: 'All',
+      lookingForClubLabel: 'Availability',
+      lookingForClubAll: 'All Players',
+      lookingForClubActive: 'Looking for Club',
       loading: 'Loading players...',
       playersFound: 'players found',
       noPlayersFound: 'No players found with these filters',
@@ -796,6 +833,7 @@ export const enTranslations = {
     },
     // Player Profile
     playerProfile: {
+      backToOverview: 'Cancel',
       position: 'Position',
       saving: 'Saving...',
       yearsOld: 'years old',
@@ -869,7 +907,6 @@ export const enTranslations = {
       city: 'City',
       loadingProfile: 'Loading profile...',
       playerNotFound: 'Player not found',
-      backToOverview: 'Back to overview',
       loadingPlayers: 'Loading players...',
       menPlayersFound: 'male players found',
       womenPlayersFound: 'female players found',

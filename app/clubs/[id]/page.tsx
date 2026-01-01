@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useParams, useSearchParams } from 'next/navigation'
+import { useParams, useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import axios from 'axios'
+import { useSession } from 'next-auth/react'
 import { MapPin, Users, Trophy, Globe, Mail, Phone, Facebook, Instagram, Twitter, Youtube, Calendar, Award, Filter, X } from 'lucide-react'
 import { FaTiktok } from 'react-icons/fa'
 import CantonFlag from '@/components/shared/CantonFlag'
@@ -15,6 +16,8 @@ import { getCantonInfo } from '@/lib/swissData'
 
 export default function ClubProfilePage() {
   const { t } = useLanguage()
+  const { data: session, status } = useSession()
+  const router = useRouter()
   const params = useParams()
   const searchParams = useSearchParams()
   const clubId = params.id as string
@@ -57,7 +60,7 @@ export default function ClubProfilePage() {
       setLoading(true)
       const response = await axios.get(`/api/clubs/${clubId}`)
       setClub(response.data)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error loading club:', error)
     } finally {
       setLoading(false)
@@ -151,47 +154,41 @@ export default function ClubProfilePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Header with gradient background */}
-      <div 
-        className="relative h-64"
-        style={{ 
-          background: `linear-gradient(135deg, ${cantonInfo.colors.primary} 0%, ${cantonInfo.colors.secondary} 100%)`
-        }}
-      >
-        <div className="absolute top-4 right-4">
-          <CantonFlag canton={club.canton} size="lg" />
-        </div>
-        
-        <div className="container mx-auto px-4 h-full flex items-end pb-8">
-          <div className="flex items-end gap-6">
+      {/* Club Info Section */}
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex items-center gap-6">
             {/* Club Logo */}
-            <div className="w-32 h-32 rounded-2xl border-4 border-white dark:border-gray-800 shadow-xl overflow-hidden bg-white">
+            <div className="w-20 h-20 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden bg-white flex-shrink-0">
               {club.logo ? (
                 <Image
                   src={club.logo}
                   alt={club.name}
-                  width={128}
-                  height={128}
+                  width={80}
+                  height={80}
                   className="w-full h-full object-contain p-2"
                   unoptimized
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-gray-400">
+                <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-gray-400">
                   🏐
                 </div>
               )}
             </div>
 
             {/* Club Info */}
-            <div className="text-white pb-2">
-              <h1 className="text-4xl font-bold mb-2">{club.name}</h1>
-              <div className="flex items-center gap-4 text-white/90">
-                <div className="flex items-center gap-2">
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-2">
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{club.name}</h1>
+                <CantonFlag canton={club.canton} size="sm" />
+              </div>
+              <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 text-sm">
+                <div className="flex items-center gap-1">
                   <MapPin className="w-4 h-4" />
                   <span>{club.town}, {cantonInfo.name}</span>
                 </div>
                 {club.founded && (
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
                     <span>{t('clubProfile.founded')} {club.founded}</span>
                   </div>

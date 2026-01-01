@@ -192,6 +192,7 @@ export default function RecruiterRegisterPage() {
       if (!formData.clubName) { setError(t('register.selectOrganization')); return; }
       if (formData.coachRole.length === 0) { setError(t('register.selectRoleRequired')); return; }
       if (formData.genderCoached.length === 0) { setError(t('register.selectGenderCoachedRequired')); return; }
+      if (!formData.coachingLicense) { setError(t('register.coachingLicenseRequired') || 'Coaching license is required'); return; }
       setStep(3);
       return;
     }
@@ -572,7 +573,7 @@ export default function RecruiterRegisterPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    <Upload className="w-4 h-4 inline mr-1" />{t('register.coachingLicense')} ({t('register.optional')})
+                    <Upload className="w-4 h-4 inline mr-1" />{t('register.coachingLicense')} <span className="text-red-500">*</span>
                   </label>
                   <ImageUpload 
                     label=""

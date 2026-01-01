@@ -18,6 +18,7 @@ export default function PlayersPage() {
     league: '',
     minHeight: '',
     gender: '',
+    lookingForClub: '',
   })
   const [searchDebounce, setSearchDebounce] = useState('')
 
@@ -31,7 +32,7 @@ export default function PlayersPage() {
 
   useEffect(() => {
     loadPlayers()
-  }, [searchDebounce, filters.position, filters.canton, filters.league, filters.minHeight, filters.gender])
+  }, [searchDebounce, filters.position, filters.canton, filters.league, filters.minHeight, filters.gender, filters.lookingForClub])
 
   const loadPlayers = async () => {
     try {
@@ -62,10 +63,11 @@ export default function PlayersPage() {
       league: '',
       minHeight: '',
       gender: '',
+      lookingForClub: '',
     })
   }
 
-  const hasActiveFilters = filters.search || filters.position || filters.canton || filters.league || filters.minHeight || filters.gender
+  const hasActiveFilters = filters.search || filters.position || filters.canton || filters.league || filters.minHeight || filters.gender || filters.lookingForClub
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -223,6 +225,23 @@ export default function PlayersPage() {
                 <option value="YOUTH_U18">{t('leagues.u18')}</option>
               </select>
             </div>
+
+            {/* Looking for Club Toggle */}
+            <div className="col-span-2 sm:col-span-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {t('players.lookingForClubLabel')}
+              </label>
+              <button
+                onClick={() => handleFilterChange('lookingForClub', filters.lookingForClub === 'true' ? '' : 'true')}
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border rounded-lg transition-colors font-medium ${
+                  filters.lookingForClub === 'true'
+                    ? 'bg-green-600 text-white border-green-600 hover:bg-green-700'
+                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
+                }`}
+              >
+                {filters.lookingForClub === 'true' ? t('players.lookingForClubActive') : t('players.lookingForClubAll')}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -238,8 +257,8 @@ export default function PlayersPage() {
               {players.length} {t('players.playersFound')}
             </div>
 
-            {/* Mobile-optimized grid: 1 column on very small, 2 on mobile, 3 on desktop */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+            {/* Mobile-optimized grid: 2 columns on mobile, 3 on tablet, 4 on desktop */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
               {players.map((player: any) => (
                 <PlayerCard key={player.id} player={player} />
               ))}
@@ -249,7 +268,7 @@ export default function PlayersPage() {
               <div className="text-center py-8 sm:py-12 bg-white dark:bg-gray-800 rounded-lg">
                 <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">{t('players.noPlayersFound')}</p>
                 <button
-                  onClick={() => setFilters({ search: '', position: '', canton: '', league: '', minHeight: '', gender: '' })}
+                  onClick={() => setFilters({ search: '', position: '', canton: '', league: '', minHeight: '', gender: '', lookingForClub: '' })}
                   className="mt-3 sm:mt-4 text-sm sm:text-base text-habicht-600 hover:text-habicht-700 font-medium"
                 >
                   {t('players.resetFilters')}

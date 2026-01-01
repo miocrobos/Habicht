@@ -123,6 +123,15 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    // Check authentication - player profiles require login
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Authentication required to view player profiles' },
+        { status: 401 }
+      );
+    }
+
     const player = await prisma.player.findUnique({
       where: { id: params.id },
       include: {

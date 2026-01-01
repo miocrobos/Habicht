@@ -72,7 +72,13 @@
     'auth.consent.submit': 'Akzeptieren und Fortfahren',
     'auth.consent.processing': 'Wird verarbeitet...',
     'auth.consent.pleaseAcceptAll': 'Bitte akzeptiere alle Bedingungen',
-    'auth.consent.confirmationText': 'Durch Klicken auf "Akzeptieren und Fortfahren" bestätigst du, dass du alle oben genannten Bedingungen akzeptierst.',    // Chat
+    'auth.consent.confirmationText': 'Durch Klicken auf "Akzeptieren und Fortfahren" bestätigst du, dass du alle oben genannten Bedingungen akzeptierst.',
+    // Auth Required Modal
+    'auth.required.title': 'Anmeldung erforderlich',
+    'auth.required.message': 'Bitte melde dich an oder registriere dich, um Spielerprofile anzusehen und alle Funktionen zu nutzen.',
+    'auth.required.signIn': 'Anmelden',
+    'auth.required.register': 'Registrieren',
+    // Chat
     'chat.writeMessage': 'Nachricht schreiben...',
     'chat.addEmoji': 'Emoji hinzufügen',
     // Leagues
@@ -118,6 +124,7 @@
     'common.next': 'Weiter',
     'common.submit': 'Absenden',
     // Navigation
+    'nav.navigation': 'Navigation',
     'nav.home': 'Startseite',
     'nav.players': 'Spieler',
     'nav.men': 'Herren',
@@ -134,11 +141,13 @@
     'nav.dashboard': 'Dashboard',    'nav.watchlist': 'Merkliste',    // Home Page
     home: {
       hero: {
-        title: 'Habicht',
+        title: 'Die moderne Scouting-Plattform für Schweizer Volleyball.',
+        subtitle: 'Entdecke Talente, schaue Highlights an und vernetze dich mit Scouts.',
         description: 'Die moderne Scouting-Plattform für Schweizer Volleyball. Entdecke Talente, schaue Highlights an und vernetze dich mit Scouts.',
         menVolleyball: 'Herren Volleyball',
         womenVolleyball: 'Damen Volleyball',
         searchAllPlayers: 'Alle Spieler durchsuchen',
+        searchAllClubs: 'Alle Vereine durchsuchen',
         login: 'Anmelden',
         registerNow: 'Jetzt registrieren',
       },
@@ -203,6 +212,7 @@
         browsePlayers: 'Spieler durchsuchen',
       },
       slides: {
+        aboutThisLeague: 'Über diese Liga',
         nla: {
           title: 'NLA',
           subtitle: '',
@@ -221,11 +231,35 @@
           explanation: 'Die dritte Stufe, bestehend aus starken Regionalteams. Viele Spieler entwickeln hier ihre Fähigkeiten mit dem Ziel, in die Nationalligen aufzusteigen.',
           quote: '1. Liga: Wo Ehrgeiz auf Chancen trifft!',
         },
+        liga2: {
+          title: '2. Liga',
+          subtitle: '',
+          explanation: 'Die vierte Stufe des Schweizer Volleyballs mit engagierten Vereinsteams im regionalen Wettbewerb. Ein guter Ort für Spieler, die ihr Wettkampfspiel entwickeln.',
+          quote: 'Champions aufbauen, Spiel für Spiel.',
+        },
+        liga3: {
+          title: '3. Liga',
+          subtitle: '',
+          explanation: 'Die fünfte Stufe, wo Leidenschaft auf Wettbewerb trifft. Diese Ligen bieten kompetitives Spiel für Spieler auf mittlerem Niveau.',
+          quote: 'Wo harte Arbeit zur Gewohnheit wird.',
+        },
         liga23: {
           title: '2. & 3. Liga',
           subtitle: '',
           explanation: 'Diese Ligen sind für aufstrebende Talente und engagierte Vereinsteams. Sie bieten Wettkampf und einen Weg für Spieler, im Schweizer Volleyball voranzukommen.',
           quote: 'Hier beginnt jeder Champion.',
+        },
+        liga4: {
+          title: '4. Liga',
+          subtitle: '',
+          explanation: 'Einstiegs-Wettkampfvolleyball fokussiert auf Entwicklung und Spass. Perfekt für neuere Spieler, die organisierten Ligasport erleben möchten.',
+          quote: 'Jede Reise beginnt mit dem ersten Aufschlag.',
+        },
+        liga5: {
+          title: '5. Liga',
+          subtitle: '',
+          explanation: 'Das Fundament des Schweizer Volleyballs, fokussiert auf Anfänger und Freizeitspieler. Diese Ligen betonen Spass, Lernen und Gemeinschaft.',
+          quote: 'Spiele aus Liebe zum Spiel.',
         },
         liga45: {
           title: '4. & 5. Liga',
@@ -514,6 +548,9 @@
       cantonAll: 'Alle',
       leagueLabel: 'Liga',
       leagueAll: 'Alle',
+      lookingForClubLabel: 'Verfügbarkeit',
+      lookingForClubAll: 'Alle Spieler',
+      lookingForClubActive: 'Sucht Verein',
       loading: 'Lade Spieler...',
       playersFound: 'Spieler gefunden',
       noPlayersFound: 'Keine Spieler mit diesen Filtern gefunden',
@@ -614,6 +651,7 @@
     },
     // Player Profile
     playerProfile: {
+      backToOverview: 'Abbrechen',
       position: 'Position',
       saving: 'Wird gespeichert...',
       yearsOld: 'Jahre alt',
@@ -1158,6 +1196,7 @@
       selectOrganization: 'Bitte wählen Sie Ihren Club',
       selectRoleRequired: 'Bitte wählen Sie mindestens eine Rolle',
       selectGenderCoachedRequired: 'Bitte wählen Sie, welches Geschlecht Sie trainieren',
+      coachingLicenseRequired: 'Bitte laden Sie Ihre Trainerlizenz hoch',
       agreeToTerms: 'Ich akzeptiere die',
       terms: 'Nutzungsbedingungen',
       and: 'und',

@@ -72,7 +72,13 @@
     'auth.consent.submit': 'Acceptar e cuntinuar',
     'auth.consent.processing': 'Elavurar...',
     'auth.consent.pleaseAcceptAll': 'Per plaschair acceptescha tut las cundiziuns',
-    'auth.consent.confirmationText': 'Cun cliccar sin "Acceptar e cuntinuar" confermas ti che ti accepteschas tut las cundiziuns surmenziunadas.',    // Chat
+    'auth.consent.confirmationText': 'Cun cliccar sin "Acceptar e cuntinuar" confermas ti che ti accepteschas tut las cundiziuns surmenziunadas.',
+    // Auth Required Modal
+    'auth.required.title': 'Annunzia obligatorica',
+    'auth.required.message': 'Annunzia u registrescha per vesair ils profils dals giugaders e acceder a tuttas funcziuns.',
+    'auth.required.signIn': 'S\'annunziar',
+    'auth.required.register': 'Sa registrar',
+    // Chat
     'chat.writeMessage': 'Scriver in messadi...',
     'chat.addEmoji': 'Agiuntar emoji',
     // Leagues
@@ -118,6 +124,7 @@
     'common.next': 'Vinavant',
     'common.submit': 'Trametter',
     // Navigation
+    'nav.navigation': 'Navigaziun',
     'nav.home': 'Pagina principala',
     'nav.players': 'Giugaders',
     'nav.men': 'Umens',
@@ -135,11 +142,13 @@
     // Home Page
     home: {
       hero: {
-        title: 'Habicht',
+        title: 'La plattafurma moderna da scouting per il volleyball svizzer.',
+        subtitle: 'Scuvra talents, guarda highlights e connect cun scouts.',
         description: 'La plattafurma moderna da scouting per il volleyball svizzer. Scuvra talents, guarda highlights e connect cun scouts.',
         menVolleyball: 'Volleyball Umens',
         womenVolleyball: 'Volleyball Dunnas',
         searchAllPlayers: 'Tschertgar tuts giugaders',
+        searchAllClubs: 'Tschertgar tuts clubs',
         login: 'S\'annunziar',
         registerNow: 'S\'annunziar ussa',
       },
@@ -204,6 +213,7 @@
         browsePlayers: 'Tschertgar giugaders',
       },
       slides: {
+        aboutThisLeague: 'Davart questa liga',
         nla: {
           title: 'NLA',
           subtitle: '',
@@ -222,11 +232,35 @@
           explanation: 'Il terz nivel, cumposta dad equipas regiunalas fermas. Blers giugaders sviluppan qua lur abilitads cun il finamira da muntar en la liga naziunala.',
           quote: '1. Liga: Nua che ambiziun enconra pussaivladad!',
         },
+        liga2: {
+          title: '2. Liga',
+          subtitle: '',
+          explanation: 'Il quart nivel dal volleyball svizzer cun equipas da club engaschadas en cumpetenza regiunala. In bun lieu per giugaders che sviluppan lur gieu cumpetitiv.',
+          quote: 'Construir campiuns, gieu per gieu.',
+        },
+        liga3: {
+          title: '3. Liga',
+          subtitle: '',
+          explanation: 'Il tschintgavel nivel nua che passiun enconra cumpetenza. Questas ligas offran gieu cumpetitiv per giugaders da nivel intermediar.',
+          quote: 'Nua che lavur dira daventa uschanza.',
+        },
         liga23: {
           title: '2. & 3. Liga',
           subtitle: '',
           explanation: 'Questas ligas èn per talents che creschan e equipas da club engaschadas. Ellas offran cumpetenza ed ina via per avanzar en il volleyball svizzer.',
           quote: 'Mintga campiun cumenza qua.',
+        },
+        liga4: {
+          title: '4. Liga',
+          subtitle: '',
+          explanation: 'Volleyball cumpetitiv da basa focussà sin svilup e plaschair. Perfect per novs giugaders che scuvran il gieu da liga organisà.',
+          quote: 'Mintga viadi cumenza cun l\'emprim servi.',
+        },
+        liga5: {
+          title: '5. Liga',
+          subtitle: '',
+          explanation: 'Il fundament dal volleyball svizzer, focussà sin principiants e giugaders recreativs. Questas ligas accentueschan plaschair, emprender e cuminanza.',
+          quote: 'Giugar per l\'amur dal gieu.',
         },
         liga45: {
           title: '4. & 5. Liga',
@@ -527,6 +561,9 @@
       cantonAll: 'Tuts',
       leagueLabel: 'Liga',
       leagueAll: 'Tuts',
+      lookingForClubLabel: 'Disponibladad',
+      lookingForClubAll: 'Tuts giugaders',
+      lookingForClubActive: 'Tschertga club',
       loading: 'Chargiar giugaders...',
       playersFound: 'giugaders chattads',
       noPlayersFound: 'Nagins giugaders chattads cun quests filters',
@@ -627,6 +664,7 @@
     },
     // Player Profile
     playerProfile: {
+      backToOverview: 'Annullar',
       position: 'Posiziun',
       saving: 'Archivar...',
       yearsOld: 'onns',
@@ -1167,6 +1205,7 @@
       selectOrganization: 'Tscherna tes club',
       selectRoleRequired: 'Tscherna almain ina rolla',
       selectGenderCoachedRequired: 'Tscherna tge gener ti trenesch',
+      coachingLicenseRequired: 'Chargia la tia licenza da trenader',
       agreeToTerms: 'Jau acceptel las',
       terms: 'cundiziuns da servetsch',
       and: 'e',

@@ -82,6 +82,7 @@ export async function GET(request: NextRequest) {
     const minHeight = searchParams.get('minHeight') || ''
     const gender = searchParams.get('gender') || ''
     const school = searchParams.get('school') || ''
+    const lookingForClub = searchParams.get('lookingForClub') || ''
 
     // Build where clause
     const where: any = {
@@ -146,6 +147,10 @@ export async function GET(request: NextRequest) {
       andConditions.push({ 
         schoolName: { contains: school, mode: 'insensitive' }
       })
+    }
+
+    if (lookingForClub === 'true') {
+      andConditions.push({ lookingForClub: true })
     }
 
     if (andConditions.length > 0) {

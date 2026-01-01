@@ -74,6 +74,11 @@
     'auth.consent.processing': 'Elaborazione...',
     'auth.consent.pleaseAcceptAll': 'Si prega di accettare tutte le condizioni',
     'auth.consent.confirmationText': 'Facendo clic su "Accetta e continua", confermi di accettare tutte le condizioni sopra indicate.',
+    // Auth Required Modal
+    'auth.required.title': 'Accesso richiesto',
+    'auth.required.message': 'Accedi o registrati per visualizzare i profili dei giocatori e accedere a tutte le funzionalità.',
+    'auth.required.signIn': 'Accedi',
+    'auth.required.register': 'Registrati',
     // Chat
     'chat.writeMessage': 'Scrivi un messaggio...',
     'chat.addEmoji': 'Aggiungi emoji',
@@ -120,6 +125,7 @@
     'common.next': 'Avanti',
     'common.submit': 'Invia',
     // Navigation
+    'nav.navigation': 'Navigazione',
     'nav.home': 'Home',
     'nav.players': 'Giocatori',
     'nav.men': 'Uomini',
@@ -138,11 +144,13 @@
     // Home Page
     home: {
       hero: {
-        title: 'Habicht',
+        title: 'La piattaforma moderna di scouting per la pallavolo svizzera.',
+        subtitle: 'Scopri talenti, guarda highlights e connettiti con scout.',
         description: 'La piattaforma moderna di scouting per la pallavolo svizzera. Scopri talenti, guarda highlights e connettiti con scout.',
         menVolleyball: 'Pallavolo Maschile',
         womenVolleyball: 'Pallavolo Femminile',
         searchAllPlayers: 'Cerca tutti i giocatori',
+        searchAllClubs: 'Cerca tutti i club',
         login: 'Accedi',
         registerNow: 'Registrati ora',
       },
@@ -207,6 +215,7 @@
         browsePlayers: 'Sfoglia giocatori',
       },
       slides: {
+        aboutThisLeague: 'Informazioni su questa lega',
         nla: {
           title: 'LNA',
           subtitle: '',
@@ -225,11 +234,35 @@
           explanation: 'Il terzo livello, composto da forti squadre regionali. Molti giocatori sviluppano qui le loro abilità con l\'obiettivo di salire in lega nazionale.',
           quote: '1. Liga: Dove l\'ambizione incontra l\'opportunità!',
         },
+        liga2: {
+          title: '2. Liga',
+          subtitle: '',
+          explanation: 'Il quarto livello della pallavolo svizzera, con squadre di club impegnate in competizione regionale. Un ottimo trampolino per giocatori che sviluppano il loro gioco competitivo.',
+          quote: 'Costruire campioni, partita dopo partita.',
+        },
+        liga3: {
+          title: '3. Liga',
+          subtitle: '',
+          explanation: 'Il quinto livello dove la passione incontra la competizione. Queste leghe offrono gioco competitivo per giocatori di livello intermedio.',
+          quote: 'Dove il duro lavoro diventa abitudine.',
+        },
         liga23: {
           title: '2. & 3. Liga',
           subtitle: '',
           explanation: 'Queste leghe sono per talenti in ascesa e squadre di club impegnate. Offrono competizione e un percorso per progredire nella pallavolo svizzera.',
           quote: 'Ogni campione inizia qui.',
+        },
+        liga4: {
+          title: '4. Liga',
+          subtitle: '',
+          explanation: 'Pallavolo competitiva di base incentrata sullo sviluppo e il divertimento. Perfetta per nuovi giocatori che scoprono il gioco in lega organizzata.',
+          quote: 'Ogni viaggio inizia con il primo servizio.',
+        },
+        liga5: {
+          title: '5. Liga',
+          subtitle: '',
+          explanation: 'Il fondamento della pallavolo svizzera, incentrato su principianti e giocatori ricreativi. Queste leghe enfatizzano divertimento, apprendimento e comunità.',
+          quote: 'Giocare per amore del gioco.',
         },
         liga45: {
           title: '4. & 5. Liga',
@@ -533,6 +566,9 @@
       cantonAll: 'Tutti',
       leagueLabel: 'Lega',
       leagueAll: 'Tutte',
+      lookingForClubLabel: 'Disponibilità',
+      lookingForClubAll: 'Tutti i giocatori',
+      lookingForClubActive: 'Cerca club',
       loading: 'Caricamento giocatori...',
       playersFound: 'giocatori trovati',
       noPlayersFound: 'Nessun giocatore trovato con questi filtri',
@@ -633,6 +669,7 @@
     },
     // Player Profile
     playerProfile: {
+      backToOverview: 'Annulla',
       position: 'Posizione',
       saving: 'Salvataggio in corso...',
       yearsOld: 'anni',
@@ -1171,6 +1208,7 @@
       selectOrganization: 'Seleziona il tuo club',
       selectRoleRequired: 'Seleziona almeno un ruolo',
       selectGenderCoachedRequired: 'Seleziona quale genere alleni',
+      coachingLicenseRequired: 'Carica la tua licenza di allenatore',
       agreeToTerms: 'Accetto i',
       terms: 'termini di servizio',
       and: 'e',

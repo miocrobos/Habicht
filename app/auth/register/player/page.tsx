@@ -926,17 +926,6 @@ export default function PlayerRegisterPage() {
                     onChange={(v) => setFormData({ ...formData, highlightVideo: v })} label={t('register.highlightVideo')} />
                 </div>
 
-                <div className="bg-green-50 dark:bg-gray-700 border border-green-200 dark:border-gray-600 rounded-lg p-5">
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-4">{t('register.skills')}</h4>
-                  <div className="space-y-3">
-                    <StarRating label={t('register.receiving')} value={formData.skillReceiving} onChange={(v) => setFormData({ ...formData, skillReceiving: v })} />
-                    <StarRating label={t('register.serving')} value={formData.skillServing} onChange={(v) => setFormData({ ...formData, skillServing: v })} />
-                    <StarRating label={t('register.attacking')} value={formData.skillAttacking} onChange={(v) => setFormData({ ...formData, skillAttacking: v })} />
-                    <StarRating label={t('register.blocking')} value={formData.skillBlocking} onChange={(v) => setFormData({ ...formData, skillBlocking: v })} />
-                    <StarRating label={t('register.defense')} value={formData.skillDefense} onChange={(v) => setFormData({ ...formData, skillDefense: v })} />
-                  </div>
-                </div>
-
                 <div className="bg-orange-50 dark:bg-gray-700 border border-orange-200 dark:border-gray-600 rounded-lg p-5">
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                     <Award className="w-5 h-5" />{t('register.swissVolleyLicense')} ({t('register.optional')})

@@ -59,6 +59,9 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
   const [showCvLangPopup, setShowCvLangPopup] = useState(false);
   const backgroundLoadedRef = useRef(false);
 
+  // Check if the logged-in user owns this profile
+  const isOwner = session?.user?.id === params.id;
+
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/auth/login");
@@ -194,12 +197,14 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
           </div>
         )}
         {/* Background change button (owner only) */}
-        <button
-          className="px-4 py-2 bg-gray-700 text-white rounded-lg mb-4"
-          onClick={() => setShowBgModal(true)}
-        >
-          {t('hybridProfile.changeBackground') || 'Hintergrund Ändere'}
-        </button>
+        {isOwner && (
+          <button
+            className="px-4 py-2 bg-gray-700 text-white rounded-lg mb-4"
+            onClick={() => setShowBgModal(true)}
+          >
+            {t('hybridProfile.changeBackground') || 'Hintergrund Ändere'}
+          </button>
+        )}
 
         {/* Background Modal */}
         <BackgroundPickerModal

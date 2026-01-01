@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MapPin, Ruler, Scale, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown, Bookmark, BookmarkPlus } from 'lucide-react'
+import { Calendar, MapPin, Ruler, Scale, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown, Bookmark, BookmarkPlus, LogIn, UserPlus } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
 import ClubBadge from '@/components/shared/ClubBadge'
@@ -165,6 +165,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [activeTab, setActiveTab] = useState('overview')
   const [player, setPlayer] = useState<PlayerData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [authRequired, setAuthRequired] = useState(false)
   const [showBgSelector, setShowBgSelector] = useState(false)
   const [selectedBg, setSelectedBg] = useState(BACKGROUND_OPTIONS[0])
   const [customBgImage, setCustomBgImage] = useState<string | null>(null)
@@ -216,10 +217,14 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         if (playerData) {
           setPlayer(playerData)
         }
+        setAuthRequired(false)
 
         await axios.post(`/api/players/${params.id}/view`)
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error fetching player:', error)
+        if (error?.response?.status === 401) {
+          setAuthRequired(true)
+        }
       } finally {
         setLoading(false)
       }
@@ -560,6 +565,47 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     )
   }
 
+  // Show auth required screen for unauthenticated users
+  if (authRequired) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full shadow-2xl text-center">
+          <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <LogIn className="w-8 h-8 text-white" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+            {t('auth.required.title')}
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            {t('auth.required.message')}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link
+              href={`/auth/login?returnUrl=${encodeURIComponent(`/players/${params.id}`)}`}
+              className="flex-1 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+            >
+              <LogIn className="w-5 h-5" />
+              {t('auth.required.signIn')}
+            </Link>
+            <Link
+              href={`/auth/register?returnUrl=${encodeURIComponent(`/players/${params.id}`)}`}
+              className="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-900 dark:text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+            >
+              <UserPlus className="w-5 h-5" />
+              {t('auth.required.register')}
+            </Link>
+          </div>
+          <Link
+            href="/players"
+            className="mt-4 inline-block text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 font-medium transition"
+          >
+            {t('playerProfile.backToOverview')}
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
   if (!player) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
@@ -590,7 +636,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Custom Background Header */}
       <div 
-        className="h-64 relative"
+        className="h-48 sm:h-56 md:h-64 relative"
         style={{ 
           ...(customBgImage || player.coverImage 
             ? {
@@ -627,13 +673,13 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         )}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 pb-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 -mt-24 sm:-mt-28 md:-mt-32 pb-8 sm:pb-12 relative z-10">
         {/* Profile Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 mb-6 relative z-10">
-          <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-4 sm:p-6 mb-4 sm:mb-6 relative z-10">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-6">
             {/* Profile Image */}
             <div className="flex-shrink-0 relative group mx-auto md:mx-0">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-gray-700 shadow-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-gray-700 shadow-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
                 {player.profileImage ? (
                   <Image
                     src={player.profileImage}
@@ -651,7 +697,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               {isOwner && (
                 <button
                   onClick={() => setShowProfilePhotoModal(true)}
-                  className="absolute inset-0 w-32 h-32 md:w-40 md:h-40 rounded-full bg-black bg-opacity-0 hover:bg-opacity-60 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 active:opacity-100"
+                  className="absolute inset-0 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-black bg-opacity-0 hover:bg-opacity-60 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 active:opacity-100"
                   title="Profilbild ändere"
                 >
                   <div className="text-white flex flex-col items-center gap-1">
@@ -666,12 +712,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
             <div className="flex-grow">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 md:gap-4">
                 <div className="flex-grow">
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 text-center md:text-left">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-1.5 sm:mb-2 text-center md:text-left">
                     {player.firstName} {player.lastName}
                   </h1>
-                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-3 md:mb-4">
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-1.5 sm:gap-2 mb-2 sm:mb-3 md:mb-4">
                     {player.positions.map((pos, idx) => (
-                      <span key={idx} className="px-2.5 py-1 md:px-3 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs md:text-sm font-semibold rounded-full">
+                      <span key={idx} className="px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-[10px] sm:text-xs md:text-sm font-semibold rounded-full">
                         {t(`playerProfile.position${pos.charAt(0) + pos.slice(1).toLowerCase().replace(/_([a-z])/g, (m, c) => c.toUpperCase())}`) || pos}
                       </span>
                     ))}
@@ -983,88 +1029,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
           <div className="p-4 sm:p-6">
             {activeTab === 'overview' && (
               <div className="space-y-6">
-                {/* Skills Section */}
-                {(player.skillReceiving > 0 || player.skillServing > 0 || player.skillAttacking > 0 || player.skillBlocking > 0 || player.skillDefense > 0) && (
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                      <TrendingUp className="w-5 h-5" />
-                      {t('playerProfile.skills')}
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {player.skillReceiving > 0 && (
-                        <div>
-                          <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillReceiving')}</span>
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillReceiving}/5</span>
-                          </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div
-                              className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all"
-                              style={{ width: `${(player.skillReceiving / 5) * 100}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {player.skillServing > 0 && (
-                        <div>
-                          <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillServing')}</span>
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillServing}/5</span>
-                          </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div
-                              className="bg-gradient-to-r from-green-500 to-green-600 h-2 rounded-full transition-all"
-                              style={{ width: `${(player.skillServing / 5) * 100}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {player.skillAttacking > 0 && (
-                        <div>
-                          <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillAttacking')}</span>
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillAttacking}/5</span>
-                          </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div
-                              className="bg-gradient-to-r from-red-500 to-red-600 h-2 rounded-full transition-all"
-                              style={{ width: `${(player.skillAttacking / 5) * 100}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {player.skillBlocking > 0 && (
-                        <div>
-                          <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('playerProfile.skillBlocking')}</span>
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillBlocking}/5</span>
-                          </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div
-                              className="bg-gradient-to-r from-purple-500 to-purple-600 h-2 rounded-full transition-all"
-                              style={{ width: `${(player.skillBlocking / 5) * 100}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {player.skillDefense > 0 && (
-                        <div>
-                          <div className="flex justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Verteidige</span>
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">{player.skillDefense}/5</span>
-                          </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div
-                              className="bg-gradient-to-r from-yellow-500 to-yellow-600 h-2 rounded-full transition-all"
-                              style={{ width: `${(player.skillDefense / 5) * 100}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
                 {/* Swiss Volley License Section */}
                 {player.swissVolleyLicense && (
                   <div>

@@ -20,6 +20,7 @@ export default function Header() {
   const { data: session } = useSession()
   const [unreadCount, setUnreadCount] = useState(0)
   const [watchlistCount, setWatchlistCount] = useState(0)
+  const [profileImage, setProfileImage] = useState<string | null>(null)
   const { t } = useLanguage()
   const pathname = usePathname()
   
@@ -47,6 +48,40 @@ export default function Header() {
       document.body.style.overflow = 'unset'
     }
   }, [isMenuOpen])
+
+  // Fetch user profile image
+  useEffect(() => {
+    if (session) {
+      const fetchProfileImage = async () => {
+        try {
+          const role = session.user.role
+          let endpoint = ''
+          
+          if (role === 'PLAYER' && session.user.playerId) {
+            endpoint = `/api/players/${session.user.playerId}`
+          } else if (role === 'RECRUITER' && session.user.recruiterId) {
+            endpoint = `/api/recruiters/${session.user.recruiterId}`
+          } else if (role === 'HYBRID') {
+            // For hybrid, try to get the hybrid profile
+            endpoint = `/api/hybrids/${session.user.id}`
+          }
+          
+          if (endpoint) {
+            const response = await axios.get(endpoint)
+            const data = response.data
+            // Different API responses have different structures
+            const image = data.player?.profileImage || data.recruiter?.profileImage || data.hybrid?.profileImage || data.profileImage
+            if (image) {
+              setProfileImage(image)
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching profile image:', error)
+        }
+      }
+      fetchProfileImage()
+    }
+  }, [session])
 
   useEffect(() => {
     if (session) {
@@ -250,9 +285,21 @@ export default function Header() {
           {session && (
             <div className="p-4 bg-gray-50 dark:bg-gray-800 border-b dark:border-gray-700">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                  {session.user.name?.[0]?.toUpperCase() || 'U'}
-                </div>
+                {profileImage ? (
+                  <div className="w-12 h-12 rounded-full overflow-hidden shadow-lg">
+                    <Image
+                      src={profileImage}
+                      alt={session.user.name || 'User'}
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                    {session.user.name?.[0]?.toUpperCase() || 'U'}
+                  </div>
+                )}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
                     {session.user.name || session.user.email}

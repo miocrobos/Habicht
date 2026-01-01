@@ -175,15 +175,15 @@ body {
   }
   
   /* CSS :has() approach for modern browsers */
-  /* When any card is hovered, shrink all cards first */
-  .league-row:has(.league-card-wrapper:hover) .league-card-wrapper {
+  /* When any card is hovered (and no card is clicked/expanded), shrink all cards first */
+  .league-row:not(:has(.league-card-wrapper.is-expanded)):has(.league-card-wrapper:hover) .league-card-wrapper {
     flex: 0.6 1 0;
     min-width: 60px;
     max-width: 120px;
   }
   
-  /* The hovered card expands to accommodate the quote panel (160px) */
-  .league-row .league-card-wrapper:hover {
+  /* The hovered card expands to accommodate the quote panel (160px) - only if no card is expanded */
+  .league-row:not(:has(.league-card-wrapper.is-expanded)) .league-card-wrapper:hover {
     flex: 1.8 1 0;
     min-width: calc(100px + 160px);
     max-width: none;
@@ -191,17 +191,38 @@ body {
   }
   
   /* JavaScript fallback using classes (for browsers without :has() support) */
-  .league-row.has-hover .league-card-wrapper {
+  .league-row.has-hover:not(:has(.league-card-wrapper.is-expanded)) .league-card-wrapper {
     flex: 0.6 1 0;
     min-width: 60px;
     max-width: 120px;
   }
   
-  .league-row.has-hover .league-card-wrapper.is-hovered {
+  .league-row.has-hover:not(:has(.league-card-wrapper.is-expanded)) .league-card-wrapper.is-hovered {
     flex: 1.8 1 0;
     min-width: calc(100px + 160px);
     max-width: none;
     z-index: 10;
+  }
+  
+  /* Click-based expansion for explanation (is-expanded class) - takes priority over hover */
+  .league-row:has(.league-card-wrapper.is-expanded) .league-card-wrapper:not(.is-expanded) {
+    flex: 0.6 1 0;
+    min-width: 60px;
+    max-width: 120px;
+  }
+  
+  .league-card-wrapper.is-expanded {
+    flex: 2 1 0;
+    min-width: calc(100px + 200px);
+    max-width: none;
+    z-index: 15;
+  }
+  
+  .league-card-wrapper.is-explanation {
+    flex: 2.2 1 0;
+    min-width: calc(100px + 280px);
+    max-width: none;
+    z-index: 15;
   }
 }
 
@@ -215,28 +236,49 @@ body {
     max-width: 200px;
   }
   
-  .league-row:has(.league-card-wrapper:hover) .league-card-wrapper {
+  .league-row:not(:has(.league-card-wrapper.is-expanded)):has(.league-card-wrapper:hover) .league-card-wrapper {
     flex: 0.6 1 0;
     min-width: 75px;
     max-width: 140px;
   }
   
-  .league-row .league-card-wrapper:hover {
+  .league-row:not(:has(.league-card-wrapper.is-expanded)) .league-card-wrapper:hover {
     flex: 1.8 1 0;
     min-width: calc(120px + 160px);
     max-width: none;
   }
   
-  .league-row.has-hover .league-card-wrapper {
+  .league-row.has-hover:not(:has(.league-card-wrapper.is-expanded)) .league-card-wrapper {
     flex: 0.6 1 0;
     min-width: 75px;
     max-width: 140px;
   }
   
-  .league-row.has-hover .league-card-wrapper.is-hovered {
+  .league-row.has-hover:not(:has(.league-card-wrapper.is-expanded)) .league-card-wrapper.is-hovered {
     flex: 1.8 1 0;
     min-width: calc(120px + 160px);
     max-width: none;
+  }
+  
+  /* Click-based expansion for explanation (is-expanded class) */
+  .league-row:has(.league-card-wrapper.is-expanded) .league-card-wrapper:not(.is-expanded) {
+    flex: 0.6 1 0;
+    min-width: 75px;
+    max-width: 140px;
+  }
+  
+  .league-card-wrapper.is-expanded {
+    flex: 2 1 0;
+    min-width: calc(120px + 200px);
+    max-width: none;
+    z-index: 15;
+  }
+  
+  .league-card-wrapper.is-explanation {
+    flex: 2.2 1 0;
+    min-width: calc(120px + 280px);
+    max-width: none;
+    z-index: 15;
   }
 }
 
@@ -251,28 +293,49 @@ body {
     max-width: 220px;
   }
   
-  .league-row:has(.league-card-wrapper:hover) .league-card-wrapper {
+  .league-row:not(:has(.league-card-wrapper.is-expanded)):has(.league-card-wrapper:hover) .league-card-wrapper {
     flex: 0.6 1 0;
     min-width: 90px;
     max-width: 160px;
   }
   
-  .league-row .league-card-wrapper:hover {
+  .league-row:not(:has(.league-card-wrapper.is-expanded)) .league-card-wrapper:hover {
     flex: 2 1 0;
     min-width: calc(140px + 200px);
     max-width: none;
   }
   
-  .league-row.has-hover .league-card-wrapper {
+  .league-row.has-hover:not(:has(.league-card-wrapper.is-expanded)) .league-card-wrapper {
     flex: 0.6 1 0;
     min-width: 90px;
     max-width: 160px;
   }
   
-  .league-row.has-hover .league-card-wrapper.is-hovered {
+  .league-row.has-hover:not(:has(.league-card-wrapper.is-expanded)) .league-card-wrapper.is-hovered {
     flex: 2 1 0;
     min-width: calc(140px + 200px);
     max-width: none;
+  }
+  
+  /* Click-based expansion for explanation (is-expanded class) */
+  .league-row:has(.league-card-wrapper.is-expanded) .league-card-wrapper:not(.is-expanded) {
+    flex: 0.6 1 0;
+    min-width: 90px;
+    max-width: 160px;
+  }
+  
+  .league-card-wrapper.is-expanded {
+    flex: 2.2 1 0;
+    min-width: calc(140px + 200px);
+    max-width: none;
+    z-index: 15;
+  }
+  
+  .league-card-wrapper.is-explanation {
+    flex: 2.5 1 0;
+    min-width: calc(140px + 280px);
+    max-width: none;
+    z-index: 15;
   }
 }
 

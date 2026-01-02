@@ -85,7 +85,7 @@ export default function Home() {
           <div className="flex flex-col justify-end items-start min-h-[420px] sm:min-h-[500px] md:min-h-[550px] lg:min-h-[600px] py-6 sm:py-8 lg:py-12 pb-12 sm:pb-16 md:pb-20 lg:pb-24">
             
             {/* Content - Left aligned */}
-            <div className="max-w-md sm:max-w-lg lg:max-w-xl text-left">
+            <div className="max-w-lg sm:max-w-xl lg:max-w-2xl text-left">
               <h1 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-3 sm:mb-4 md:mb-6 ${theme === 'light' ? 'text-gray-900 drop-shadow-sm' : 'text-white'}`}>
                 {t('home.hero.title')}
               </h1>

@@ -426,6 +426,14 @@ export async function POST(request: NextRequest) {
         return mapping[pos] || pos
       }
 
+      // Normalize coachRole and position to string (schema expects String, not String[])
+      const normalizedCoachRole = Array.isArray(recruiterData.coachRole) 
+        ? recruiterData.coachRole.join(', ') 
+        : (recruiterData.coachRole || '');
+      const normalizedPosition = Array.isArray(recruiterData.position) 
+        ? recruiterData.position.join(', ') 
+        : (recruiterData.position || normalizedCoachRole);
+
       const user = await prisma.user.create({
         data: {
           name,
@@ -444,7 +452,7 @@ export async function POST(request: NextRequest) {
               canton: recruiterData.canton,
               province: recruiterData.province || null,
               clubId: recruiterData.clubId,
-              coachRole: recruiterData.coachRole,
+              coachRole: normalizedCoachRole,
               genderCoached: Array.isArray(recruiterData.genderCoached) 
                 ? recruiterData.genderCoached.map((g: string) => mapGenderToEnum(g)).filter(Boolean)
                 : (recruiterData.genderCoached ? [mapGenderToEnum(recruiterData.genderCoached)].filter(Boolean) : []),
@@ -457,7 +465,7 @@ export async function POST(request: NextRequest) {
               tiktok: recruiterData.tiktok || null,
               youtube: recruiterData.youtube || null,
               organization: recruiterData.organization,
-              position: recruiterData.position,
+              position: normalizedPosition,
               positionsLookingFor: recruiterData.positionsLookingFor?.map(mapPositionToEnum) || [],
               achievements: recruiterData.achievements || [],
               // Create club history if provided
@@ -507,6 +515,33 @@ export async function POST(request: NextRequest) {
     // Create user with HYBRID role (both player and recruiter profiles)
     // NOTE: For now, we only create the player profile. Recruiter profile can be added later.
     if (accountType === 'hybrid' && playerData) {
+      // Validate required hybrid fields
+      if (!playerData.gender) {
+        return NextResponse.json(
+          { error: 'Gender is required' },
+          { status: 400 }
+        )
+      }
+      if (!playerData.canton) {
+        return NextResponse.json(
+          { error: 'Canton is required' },
+          { status: 400 }
+        )
+      }
+      if (!playerData.positions || playerData.positions.length === 0) {
+        return NextResponse.json(
+          { error: 'At least one position is required' },
+          { status: 400 }
+        )
+      }
+      
+      // Helper function to safely parse float
+      const safeParseFloat = (value: any): number | null => {
+        if (value === null || value === undefined || value === '') return null
+        const parsed = typeof value === 'number' ? value : parseFloat(value)
+        return isNaN(parsed) ? null : parsed
+      }
+      
       // Helper function to normalize club name
       const normalizeClubName = (name: string): string => {
         return name
@@ -575,11 +610,11 @@ export async function POST(request: NextRequest) {
             clubName: normalizedClubName,
             clubId: clubId,
             clubLogo: club.logo || null,
-            clubCountry: club.country || null,
+            clubCountry: club.country || 'Switzerland',
             clubWebsiteUrl: club.clubWebsiteUrl || null,
             league: club.league || null,
-            startDate: club.startYear ? new Date(parseInt(club.startYear), 0, 1) : new Date(),
-            endDate: club.currentClub ? null : (club.endYear ? new Date(parseInt(club.endYear), 11, 31) : null),
+            startDate: club.startYear && !isNaN(parseInt(club.startYear)) ? new Date(parseInt(club.startYear), 0, 1) : new Date(),
+            endDate: club.currentClub ? null : (club.endYear && !isNaN(parseInt(club.endYear)) ? new Date(parseInt(club.endYear), 11, 31) : null),
             currentClub: club.currentClub || false,
           }
         }))
@@ -593,6 +628,14 @@ export async function POST(request: NextRequest) {
         if (upperGender === 'OTHER') return 'OTHER' as const
         return 'MALE' as const
       }
+      
+      // Validate positions - filter to only valid enum values
+      const validPositions = ['OUTSIDE_HITTER', 'OPPOSITE', 'MIDDLE_BLOCKER', 'SETTER', 'LIBERO', 'UNIVERSAL']
+      const sanitizedPositions = (playerData.positions || []).filter((p: string) => validPositions.includes(p))
+      
+      // Validate canton - ensure it's a valid canton code
+      const validCantons = ['ZH', 'BE', 'LU', 'UR', 'SZ', 'OW', 'NW', 'GL', 'ZG', 'FR', 'SO', 'BS', 'BL', 'SH', 'AR', 'AI', 'SG', 'GR', 'AG', 'TG', 'TI', 'VD', 'VS', 'NE', 'GE', 'JU']
+      const sanitizedCanton = validCantons.includes(playerData.canton) ? playerData.canton : 'ZH'
 
       // Create hybrid user with player profile
       // Note: Recruiter functionality will be available but recruiter profile created separately
@@ -611,12 +654,12 @@ export async function POST(request: NextRequest) {
               lastName: lastName,
               dateOfBirth: playerData.dateOfBirth ? new Date(playerData.dateOfBirth) : new Date(),
               gender: mapGenderToEnum(playerData.gender),
-              positions: playerData.positions || [],
-              height: playerData.height ? parseFloat(playerData.height) : null,
-              weight: playerData.weight ? parseFloat(playerData.weight) : null,
-              spikeHeight: playerData.spikeHeight ? parseFloat(playerData.spikeHeight) : null,
-              blockHeight: playerData.blockHeight ? parseFloat(playerData.blockHeight) : null,
-              canton: playerData.canton || 'ZH',
+              positions: sanitizedPositions,
+              height: safeParseFloat(playerData.height),
+              weight: safeParseFloat(playerData.weight),
+              spikeHeight: safeParseFloat(playerData.spikeHeight),
+              blockHeight: safeParseFloat(playerData.blockHeight),
+              canton: sanitizedCanton,
               city: playerData.municipality || 'Unknown',
               currentLeague: (playerCurrentLeague || 'FIRST_LEAGUE') as any,
               phone: playerData.phone || null,
@@ -637,7 +680,7 @@ export async function POST(request: NextRequest) {
               employmentStatus: playerData.employmentStatus || null,
               occupation: playerData.occupation || null,
               schoolName: playerData.schoolName || null,
-              achievements: playerData.achievements?.map((a: any) => `${a.title} (${a.year}): ${a.description}`) || [],
+              achievements: playerData.achievements?.filter((a: any) => a && a.title).map((a: any) => `${a.title || ''}${a.year ? ` (${a.year})` : ''}${a.description ? `: ${a.description}` : ''}`).filter(Boolean) || [],
               currentClubId: currentClubId,
               clubHistory: processedPlayerClubHistory.length > 0 ? {
                 create: processedPlayerClubHistory
@@ -704,10 +747,25 @@ export async function POST(request: NextRequest) {
         role: user.role,
       },
     })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Registration error:', error)
+    console.error('Error message:', error?.message)
+    console.error('Error code:', error?.code)
+    
+    // Provide more specific error messages
+    let errorMessage = 'Registration failed'
+    if (error?.code === 'P2002') {
+      errorMessage = 'Email is already registered'
+    } else if (error?.code === 'P2003') {
+      errorMessage = 'Invalid reference data'
+    } else if (error?.message?.includes('Invalid')) {
+      errorMessage = error.message
+    } else if (error?.message?.includes('canton')) {
+      errorMessage = 'Invalid canton value'
+    }
+    
     return NextResponse.json(
-      { error: 'Registration failed' },
+      { error: errorMessage },
       { status: 500 }
     )
   }

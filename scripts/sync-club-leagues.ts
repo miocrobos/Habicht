@@ -14,7 +14,7 @@ async function syncClubLeagues() {
             id: true,
             firstName: true,
             lastName: true,
-            currentLeague: true,
+            currentLeagues: true,
             gender: true,
           }
         }
@@ -54,25 +54,27 @@ async function syncClubLeagues() {
       
       for (const player of club.currentPlayers) {
         const isMale = player.gender === 'MALE'
-        const leagueKey = `${player.currentLeague}_${isMale ? 'MEN' : 'WOMEN'}`
-        leagues.add(leagueKey)
+        // Handle array of leagues - iterate through all current leagues
+        for (const currentLeague of (player.currentLeagues || [])) {
+          const leagueKey = `${currentLeague}_${isMale ? 'MEN' : 'WOMEN'}`
+          leagues.add(leagueKey)
 
-        // Map league and gender to boolean field
-        switch (player.currentLeague) {
-          case 'NLA':
-            if (isMale) updates.hasNLAMen = true
-            else updates.hasNLAWomen = true
-            break
-          case 'NLB':
-            if (isMale) updates.hasNLBMen = true
-            else updates.hasNLBWomen = true
-            break
-          case 'FIRST_LEAGUE':
-            if (isMale) updates.has1LigaMen = true
-            else updates.has1LigaWomen = true
-            break
-          case 'SECOND_LEAGUE':
-            if (isMale) updates.has2LigaMen = true
+          // Map league and gender to boolean field
+          switch (currentLeague) {
+            case 'NLA':
+              if (isMale) updates.hasNLAMen = true
+              else updates.hasNLAWomen = true
+              break
+            case 'NLB':
+              if (isMale) updates.hasNLBMen = true
+              else updates.hasNLBWomen = true
+              break
+            case 'FIRST_LEAGUE':
+              if (isMale) updates.has1LigaMen = true
+              else updates.has1LigaWomen = true
+              break
+            case 'SECOND_LEAGUE':
+              if (isMale) updates.has2LigaMen = true
             else updates.has2LigaWomen = true
             break
           case 'THIRD_LEAGUE':
@@ -99,6 +101,7 @@ async function syncClubLeagues() {
             if (isMale) updates.has5LigaMen = true
             else updates.has5LigaWomen = true
             break
+        }
         }
       }
 

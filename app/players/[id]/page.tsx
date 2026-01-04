@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { toast } from 'react-hot-toast'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MapPin, Ruler, Scale, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown, Bookmark, BookmarkPlus, LogIn, UserPlus } from 'lucide-react'
+import { Calendar, MapPin, Ruler, Scale, Award, TrendingUp, Video as VideoIcon, Instagram, Youtube, Music2, ExternalLink, Eye, Edit2, Upload, GraduationCap, Briefcase, Phone, Mail, Trash2, Camera, MessageCircle, FileDown, Bookmark, BookmarkPlus, LogIn, UserPlus, FileText } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import ClubHistory from '@/components/player/ClubHistory'
 import ClubBadge from '@/components/shared/ClubBadge'
@@ -14,6 +15,8 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { generatePlayerCV } from '@/lib/generateCV'
 import { formatViewCount } from '@/lib/formatViewCount'
 import CVExportLanguagePopup from '@/components/shared/CVExportLanguagePopup'
+import { calculateAge } from '@/lib/ageUtils'
+import { BACKGROUND_OPTIONS } from '@/components/shared/backgroundOptions'
 import axios from 'axios'
 
 interface PlayerProfileProps {
@@ -21,6 +24,7 @@ interface PlayerProfileProps {
     id: string
   }
 }
+
 
 interface PlayerData {
   id: string
@@ -44,7 +48,7 @@ interface PlayerData {
   canton: string
   city: string | null
   municipality: string | null
-  currentLeague: string | null
+  currentLeagues: string[]
   currentClub: {
     id: string
     name: string
@@ -81,6 +85,7 @@ interface PlayerData {
   lookingForClub: boolean
   showEmail: boolean
   showPhone: boolean
+  showLicense: boolean
   createdAt: string
 }
 
@@ -116,35 +121,6 @@ const getLeagueLabel = (league: string, t: any) => {
   const key = leagueMap[league]
   return key ? t(key) : league
 }
-
-const BACKGROUND_OPTIONS = [
-  // Gradients
-  { id: 'gradient1', name: 'Rot Gradient', style: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)' },
-  { id: 'gradient2', name: 'Blau Gradient', style: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)' },
-  { id: 'gradient3', name: 'Grün Gradient', style: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)' },
-  { id: 'gradient4', name: 'Lila Gradient', style: 'linear-gradient(135deg, #9333ea 0%, #7e22ce 100%)' },
-  { id: 'gradient5', name: 'Orange Gradient', style: 'linear-gradient(135deg, #f97316 0%, #c2410c 100%)' },
-  { id: 'gradient6', name: 'Pink Gradient', style: 'linear-gradient(135deg, #ec4899 0%, #be185d 100%)' },
-  { id: 'gradient7', name: 'Gelb Gradient', style: 'linear-gradient(135deg, #eab308 0%, #a16207 100%)' },
-  { id: 'gradient8', name: 'Türkis Gradient', style: 'linear-gradient(135deg, #14b8a6 0%, #0f766e 100%)' },
-  { id: 'gradient9', name: 'Indigo Gradient', style: 'linear-gradient(135deg, #6366f1 0%, #4338ca 100%)' },
-  { id: 'gradient10', name: 'Ozean', style: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%)' },
-  { id: 'gradient11', name: 'Sonnenuntergang', style: 'linear-gradient(135deg, #f97316 0%, #dc2626 50%, #9333ea 100%)' },
-  { id: 'gradient12', name: 'Wald', style: 'linear-gradient(135deg, #16a34a 0%, #15803d 50%, #14532d 100%)' },
-  // Solid Colors
-  { id: 'solid-red', name: 'Rot', style: '#dc2626' },
-  { id: 'solid-blue', name: 'Blau', style: '#2563eb' },
-  { id: 'solid-green', name: 'Grün', style: '#16a34a' },
-  { id: 'solid-purple', name: 'Lila', style: '#9333ea' },
-  { id: 'solid-orange', name: 'Orange', style: '#f97316' },
-  { id: 'solid-pink', name: 'Pink', style: '#ec4899' },
-  { id: 'solid-yellow', name: 'Gelb', style: '#eab308' },
-  { id: 'solid-teal', name: 'Türkis', style: '#14b8a6' },
-  { id: 'solid-indigo', name: 'Indigo', style: '#6366f1' },
-  { id: 'solid-dark', name: 'Dunkel', style: '#1f2937' },
-  { id: 'solid-gray', name: 'Grau', style: '#6b7280' },
-  { id: 'solid-black', name: 'Schwarz', style: '#000000' },
-]
 
 // Get default gradient based on gender and role
 const getDefaultGradient = (gender: string, role: string) => {
@@ -188,6 +164,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [showCVExportPopup, setShowCVExportPopup] = useState(false)
   const [isWatched, setIsWatched] = useState(false)
   const [watchlistLoading, setWatchlistLoading] = useState(false)
+  const [zoomedLicense, setZoomedLicense] = useState<string | null>(null)
   const backgroundLoadedRef = useRef(false)
 
   const isOwner = session?.user?.playerId === params.id
@@ -619,7 +596,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     )
   }
 
-  const playerAge = player.dateOfBirth ? new Date().getFullYear() - new Date(player.dateOfBirth).getFullYear() : null
+  const playerAge = calculateAge(player.dateOfBirth)
   
   // Format birth date with zero-padding (e.g., 06.03.2006)
   const formatBirthDate = (dateString: string | null) => {
@@ -733,10 +710,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       <MapPin className="w-4 h-4" />
                       {player.municipality ? `${player.municipality}, ${player.canton}` : player.canton}
                     </span>
-                    {playerAge && formattedBirthDate && (
-                      <span className="flex items-center gap-1" title={`${t('playerProfile.bornAbbrev')} ${formattedBirthDate}`}>
+                    {playerAge && (
+                      <span className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
-                        {playerAge} {t('playerProfile.yearsOld')} ({t('playerProfile.bornAbbrev')} {formattedBirthDate})
+                        {playerAge} {t('playerProfile.yearsOld')}
                       </span>
                     )}
                     <span className="flex items-center gap-1">
@@ -762,9 +739,9 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                             country={clubCountry}
                           />
                           <span>{player.currentClub.name}</span>
-                          {player.currentLeague && (
+                          {player.currentLeagues && player.currentLeagues.length > 0 && (
                             <span className="text-xs px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full ml-1">
-                              {getLeagueLabel(player.currentLeague, t)}
+                              {player.currentLeagues.map((league: string) => getLeagueLabel(league, t)).join(', ')}
                             </span>
                           )}
                         </Link>
@@ -882,7 +859,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 {isOwner && (
                   <>
                     <Link
-                      href={`/players/${params.id}/edit`}
+                      href={player.user?.role === 'HYBRID' ? `/hybrids/${player.user.id}/edit` : `/players/${params.id}/edit`}
                       className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold text-sm sm:text-base"
                     >
                       <Edit2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -900,8 +877,8 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   </>
                 )}
 
-                {/* Chat Button - Show only to recruiters viewing player profiles */}
-                {!isOwner && session && session.user?.role === 'RECRUITER' && player && (
+                {/* Chat Button - Show only to recruiters and hybrids viewing player profiles */}
+                {!isOwner && session && (session.user?.role === 'RECRUITER' || session.user?.role === 'HYBRID') && player && (
                   <button
                     onClick={handleStartChat}
                     className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold text-sm sm:text-base"
@@ -1012,6 +989,18 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               >
                 Photos
               </button>
+              {(isOwner || player.showLicense) && player.swissVolleyLicense && (
+                <button
+                  onClick={() => setActiveTab('documents')}
+                  className={`px-3 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-sm font-medium border-b-2 transition whitespace-nowrap flex-shrink-0 ${
+                    activeTab === 'documents'
+                      ? 'border-red-600 text-red-600 dark:text-red-400'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                  }`}
+                >
+                  {t('playerProfile.documents') || 'Documents'}
+                </button>
+              )}
             </nav>
           </div>
 
@@ -1160,6 +1149,82 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                 isOwner={isOwner}
                 isVerified={player?.user?.emailVerified !== null}
               />
+            )}
+
+            {activeTab === 'documents' && (isOwner || player.showLicense) && (
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                  <Award className="w-5 h-5 text-yellow-500" />
+                  {t('playerProfile.documents') || 'Documents'}
+                  {isOwner && !player.showLicense && (
+                    <span className="ml-2 text-xs text-gray-400 flex items-center gap-1" title="Only visible to you">
+                      🔒 {t('common.privateToYou') || 'Private'}
+                    </span>
+                  )}
+                </h3>
+                {isOwner && (
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    <Link href="/settings" className="text-red-600 hover:underline">
+                      {t('hybridProfile.changeVisibility') || 'Change visibility in settings'}
+                    </Link>
+                  </p>
+                )}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {player.swissVolleyLicense && (
+                    <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                      <div className="p-3 bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-600">
+                        <h4 className="font-medium text-gray-700 dark:text-gray-300 text-sm flex items-center gap-2">
+                          <Award className="w-4 h-4 text-yellow-500" />
+                          {t('playerProfile.playerLicense') || 'Swiss Volley License'}
+                        </h4>
+                      </div>
+                      <div className="p-2">
+                        {player.swissVolleyLicense.startsWith('data:image') || 
+                         player.swissVolleyLicense.match(/\.(jpg|jpeg|png|gif|webp)($|\?)/i) ||
+                         player.swissVolleyLicense.includes('cloudinary.com') ||
+                         player.swissVolleyLicense.includes('res.cloudinary') ? (
+                          <div 
+                            onClick={() => setZoomedLicense(player.swissVolleyLicense)}
+                            className="block cursor-pointer"
+                          >
+                            <img 
+                              src={player.swissVolleyLicense} 
+                              alt="Player License" 
+                              className="w-full h-48 object-contain rounded cursor-pointer hover:opacity-90 transition bg-gray-100 dark:bg-gray-700"
+                            />
+                            <div className="text-center mt-2 text-xs text-gray-500 dark:text-gray-400">
+                              {t('common.clickToZoom') || 'Click to zoom'}
+                            </div>
+                          </div>
+                        ) : player.swissVolleyLicense.match(/\.pdf($|\?)/i) ? (
+                          <a 
+                            href={player.swissVolleyLicense} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center h-48 bg-gray-100 dark:bg-gray-700 rounded text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition"
+                          >
+                            <div className="text-center">
+                              <FileText className="w-12 h-12 mx-auto mb-2" />
+                              <span className="text-sm font-medium">{t('common.viewDocument') || 'View Document'}</span>
+                            </div>
+                          </a>
+                        ) : (
+                          <div className="flex items-center justify-center h-48 bg-gray-100 dark:bg-gray-700 rounded">
+                            <p className="text-gray-500 dark:text-gray-400 text-center">
+                              {t('playerProfile.noPhotosYet') || 'No photos yet'}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                {!player.swissVolleyLicense && (
+                  <p className="text-gray-500 dark:text-gray-400 text-center py-8">
+                    {t('playerProfile.noDocumentsUploaded') || 'No documents uploaded yet.'}
+                  </p>
+                )}
+              </div>
             )}
           </div>
         </div>
@@ -1377,7 +1442,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           }
                         } catch (error) {
                           console.error('Error updating background:', error)
-                          alert('Failed to save background. Please try again.')
+                          toast.error(t('toast.backgroundError'))
                         }
                       }}
                       className={`h-20 rounded-lg transition-all hover:scale-105 hover:shadow-lg border-2 ${
@@ -1477,6 +1542,34 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
           onExport={handleExportCV}
           userType="player"
         />
+      )}
+
+      {/* License Zoom Modal */}
+      {zoomedLicense && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
+          onClick={() => setZoomedLicense(null)}
+        >
+          <button
+            onClick={() => setZoomedLicense(null)}
+            className="absolute top-4 right-4 text-white hover:text-red-400 bg-black bg-opacity-60 rounded-full p-2 z-50 transition-all duration-300"
+            style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <div 
+            className="relative max-w-4xl max-h-[85vh] flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={zoomedLicense}
+              alt="License"
+              className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+            />
+          </div>
+        </div>
       )}
     </div>
   )

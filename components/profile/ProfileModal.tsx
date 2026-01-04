@@ -25,7 +25,7 @@ interface PlayerProfile {
   jerseyNumber?: number
   canton: string
   city: string
-  currentLeague: string
+  currentLeagues: string[]
   desiredLeague?: string
   interestedClubs?: string[]
   schoolName?: string
@@ -217,7 +217,7 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
                             {getPositionDisplay(profile.position)}
                           </span>
                           <span>•</span>
-                          <span>{getLeagueDisplay(profile.currentLeague)}</span>
+                          <span>{profile.currentLeagues && profile.currentLeagues.length > 0 ? profile.currentLeagues.map((l: string) => getLeagueDisplay(l)).join(', ') : '-'}</span>
                           <span>•</span>
                           <span>{calculateAge(profile.dateOfBirth)} Jahre</span>
                           {profile.height && (

@@ -34,15 +34,19 @@ export async function GET(
         isParticipant = !!conversation
         userId = player.id
       }
-    } else if (session.user.role === 'RECRUITER') {
+    } else if (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') {
       const recruiter = await prisma.recruiter.findFirst({
         where: { userId: session.user.id }
       })
       if (recruiter) {
+        // Check if recruiter is participant (as primary or secondary recruiter)
         const conversation = await prisma.conversation.findFirst({
           where: {
             id: params.id,
-            recruiterId: recruiter.id
+            OR: [
+              { recruiterId: recruiter.id },
+              { secondRecruiterId: recruiter.id }
+            ]
           }
         })
         isParticipant = !!conversation
@@ -111,9 +115,9 @@ export async function POST(
       return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
     }
 
-    const { content, senderType } = await request.json()
+    const { content, senderType, attachmentUrl, attachmentType, attachmentName } = await request.json()
 
-    if (!content || !content.trim()) {
+    if ((!content || !content.trim()) && !attachmentUrl) {
       return NextResponse.json({ error: 'Message cannot be empty' }, { status: 400 })
     }
 
@@ -122,7 +126,7 @@ export async function POST(
     let playerId: string | null = null
     let recruiterId: string | null = null
 
-    if (senderType === 'PLAYER' && session.user.role === 'PLAYER') {
+    if (senderType === 'PLAYER' && (session.user.role === 'PLAYER' || session.user.role === 'HYBRID')) {
       const player = await prisma.player.findFirst({
         where: { userId: session.user.id }
       })
@@ -138,15 +142,19 @@ export async function POST(
           playerId = player.id
         }
       }
-    } else if (senderType === 'RECRUITER' && session.user.role === 'RECRUITER') {
+    } else if (senderType === 'RECRUITER' && (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID')) {
       const recruiter = await prisma.recruiter.findFirst({
         where: { userId: session.user.id }
       })
       if (recruiter) {
+        // Check if recruiter is participant (as primary or secondary recruiter)
         const conversation = await prisma.conversation.findFirst({
           where: {
             id: params.id,
-            recruiterId: recruiter.id
+            OR: [
+              { recruiterId: recruiter.id },
+              { secondRecruiterId: recruiter.id }
+            ]
           }
         })
         if (conversation) {
@@ -168,8 +176,11 @@ export async function POST(
         senderType,
         playerId,
         recruiterId,
-        content: content.trim(),
-        status: 'SENT'
+        content: content?.trim() || '',
+        status: 'SENT',
+        attachmentUrl: attachmentUrl || null,
+        attachmentType: attachmentType || null,
+        attachmentName: attachmentName || null
       }
     })
 
@@ -190,6 +201,11 @@ export async function POST(
             }
           },
           recruiter: {
+            include: {
+              user: true
+            }
+          },
+          secondRecruiter: {
             include: {
               user: true
             }
@@ -225,6 +241,28 @@ export async function POST(
           senderImage = conversation.recruiter?.profileImage || ''
           senderRoleText = 'Recruiter'
           notifyEnabled = conversation.player.user.notifyChatMessages
+        } else if (senderType === 'RECRUITER' && conversation.secondRecruiterId) {
+          // Recruiter-to-recruiter chat
+          const currentRecruiter = await prisma.recruiter.findFirst({
+            where: { userId: session.user.id }
+          })
+          
+          if (currentRecruiter) {
+            // Determine which recruiter is the sender and which is the recipient
+            const isInitiator = conversation.recruiterId === currentRecruiter.id
+            const recipientRecruiter = isInitiator ? conversation.secondRecruiter : conversation.recruiter
+            const senderRecruiter = isInitiator ? conversation.recruiter : conversation.secondRecruiter
+            
+            if (recipientRecruiter?.user) {
+              recipientEmail = recipientRecruiter.user.email || ''
+              recipientName = recipientRecruiter.user.name || 'Recruiter'
+              recipientUserId = recipientRecruiter.user.id
+              senderName = senderRecruiter?.user?.name || 'Recruiter'
+              senderImage = senderRecruiter?.profileImage || ''
+              senderRoleText = 'Recruiter'
+              notifyEnabled = recipientRecruiter.user.notifyChatMessages
+            }
+          }
         }
 
         // Create notification for recipient

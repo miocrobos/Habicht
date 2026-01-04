@@ -7,7 +7,10 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import axios from 'axios'
-import { FileDown } from 'lucide-react'
+import { FileDown, Bookmark, ExternalLink, Trash2, User, MessageCircle } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import ChatWindow from '@/components/chat/ChatWindow'
 import CVTypeModal from '@/components/shared/CVTypeModal'
 import CVExportLanguagePopup from '@/components/shared/CVExportLanguagePopup'
 import { generatePlayerCV } from '@/lib/generateCV'
@@ -18,14 +21,18 @@ export default function SettingsPage() {
   const { language, setLanguage: setLanguageContext, t } = useLanguage()
   const { data: session } = useSession()
   const [saved, setSaved] = useState(false)
-  const [activeTab, setActiveTab] = useState<'appearance' | 'security' | 'language' | 'account' | 'notifications'>('appearance')
+  const [activeTab, setActiveTab] = useState<'appearance' | 'security' | 'language' | 'account' | 'notifications' | 'watchlist' | 'messages'>('appearance')
   const [emailNotifications, setEmailNotifications] = useState(true)
+  const [conversations, setConversations] = useState<any[]>([])
+  const [conversationsLoading, setConversationsLoading] = useState(false)
+  const [activeChat, setActiveChat] = useState<any>(null)
   const [recruiterMessages, setRecruiterMessages] = useState(true)
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showEmail, setShowEmail] = useState(false)
   const [showPhone, setShowPhone] = useState(false)
+  const [showLicense, setShowLicense] = useState(false)
   const [loading, setLoading] = useState(false)
   const [municipality, setMunicipality] = useState('')
   const [notifyChatMessages, setNotifyChatMessages] = useState(true)
@@ -36,6 +43,8 @@ export default function SettingsPage() {
   const [cvExportType, setCvExportType] = useState<'player' | 'recruiter' | 'hybrid'>('player')
   const [playerData, setPlayerData] = useState<any>(null)
   const [recruiterData, setRecruiterData] = useState<any>(null)
+  const [watchlist, setWatchlist] = useState<any[]>([])
+  const [watchlistLoading, setWatchlistLoading] = useState(false)
 
   // Language is now managed by LanguageContext, no need for local state
 
@@ -46,11 +55,100 @@ export default function SettingsPage() {
     }
     if (session?.user?.recruiterId) {
       fetchRecruiterData()
+      fetchWatchlist()
+    }
+    if (session?.user?.role === 'HYBRID') {
+      fetchWatchlist()
     }
     if (session?.user) {
       fetchNotificationSettings()
+      fetchConversations()
     }
   }, [session])
+
+  const fetchWatchlist = async () => {
+    try {
+      setWatchlistLoading(true)
+      const response = await axios.get('/api/watchlist')
+      setWatchlist(response.data || [])
+    } catch (error) {
+      console.error('Error fetching watchlist:', error)
+    } finally {
+      setWatchlistLoading(false)
+    }
+  }
+
+  const removeFromWatchlist = async (playerId: string) => {
+    try {
+      await axios.delete(`/api/watchlist/${playerId}`)
+      setWatchlist(watchlist.filter(w => w.player?.id !== playerId))
+      toast.success(t('settings.watchlist.removed') || 'Removed from watchlist')
+    } catch (error) {
+      console.error('Error removing from watchlist:', error)
+      toast.error(t('settings.watchlist.removeError') || 'Error removing from watchlist')
+    }
+  }
+
+  const fetchConversations = async () => {
+    try {
+      setConversationsLoading(true)
+      const response = await axios.get('/api/chat/conversations')
+      setConversations(response.data.conversations || [])
+    } catch (error) {
+      console.error('Error fetching conversations:', error)
+    } finally {
+      setConversationsLoading(false)
+    }
+  }
+
+  const openChat = (conversation: any) => {
+    // Determine the other participant based on user type
+    const isPlayer = session?.user?.role === 'PLAYER'
+    const isHybrid = session?.user?.role === 'HYBRID'
+    
+    let otherParticipant
+    if (conversation.player && conversation.recruiter) {
+      // Player-Recruiter conversation
+      // Check if current user is the player in this conversation
+      const currentUserIsPlayer = isPlayer || (isHybrid && session?.user?.playerId && conversation.playerId === session?.user?.playerId)
+      
+      if (currentUserIsPlayer) {
+        otherParticipant = {
+          id: conversation.recruiter.id,
+          name: `${conversation.recruiter.firstName} ${conversation.recruiter.lastName}`,
+          type: 'RECRUITER' as const,
+          club: conversation.recruiter.currentClub?.name || conversation.recruiter.clubName || ''
+        }
+      } else {
+        otherParticipant = {
+          id: conversation.player.id,
+          name: `${conversation.player.firstName} ${conversation.player.lastName}`,
+          type: 'PLAYER' as const,
+          position: conversation.player.positions?.[0] || ''
+        }
+      }
+    } else if (conversation.recruiter && conversation.secondRecruiter) {
+      // Recruiter-Recruiter conversation
+      const currentRecruiterId = session?.user?.recruiterId
+      const isFirstRecruiter = conversation.recruiterId === currentRecruiterId
+      const other = isFirstRecruiter ? conversation.secondRecruiter : conversation.recruiter
+      otherParticipant = {
+        id: other.id,
+        name: `${other.firstName} ${other.lastName}`,
+        type: 'RECRUITER' as const,
+        club: other.currentClub?.name || other.clubName || ''
+      }
+    }
+    
+    if (otherParticipant) {
+      setActiveChat({
+        conversationId: conversation.id,
+        otherParticipant,
+        currentUserId: session?.user?.id || '',
+        currentUserType: session?.user?.role as 'PLAYER' | 'RECRUITER' | 'HYBRID'
+      })
+    }
+  }
 
   const fetchPrivacySettings = async () => {
     try {
@@ -58,6 +156,7 @@ export default function SettingsPage() {
       const player = response.data.player
       setShowEmail(player.showEmail || false)
       setShowPhone(player.showPhone || false)
+      setShowLicense(player.showLicense || false)
       setMunicipality(player.municipality || '')
     } catch (error) {
       console.error('Error fetching privacy settings:', error)
@@ -125,7 +224,7 @@ export default function SettingsPage() {
     }
   }
 
-  const updatePrivacySettings = async (field: 'showEmail' | 'showPhone', value: boolean) => {
+  const updatePrivacySettings = async (field: 'showEmail' | 'showPhone' | 'showLicense', value: boolean) => {
     try {
       setLoading(true)
       await axios.put(`/api/players/${session?.user?.playerId}`, {
@@ -135,6 +234,7 @@ export default function SettingsPage() {
       })
       if (field === 'showEmail') setShowEmail(value)
       if (field === 'showPhone') setShowPhone(value)
+      if (field === 'showLicense') setShowLicense(value)
       showSaveConfirmation()
     } catch (error) {
       console.error('Error updating privacy settings:', error)
@@ -293,6 +393,46 @@ export default function SettingsPage() {
                   <span className="sm:hidden">Account</span>
                 </div>
               </button>
+
+              {/* Watchlist tab - only for recruiters and hybrid users */}
+              {(session?.user?.role === 'RECRUITER' || session?.user?.role === 'HYBRID') && (
+                <button
+                  onClick={() => setActiveTab('watchlist')}
+                  className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
+                    activeTab === 'watchlist'
+                      ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
+                    <Bookmark className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="hidden sm:inline">{t('settings.watchlist.title') || 'Watchlist'}</span>
+                    <span className="sm:hidden">Watch</span>
+                    {watchlist.length > 0 && (
+                      <span className="ml-1 px-1.5 py-0.5 text-xs bg-red-600 text-white rounded-full">{watchlist.length}</span>
+                    )}
+                  </div>
+                </button>
+              )}
+
+              {/* Messages tab - for all logged in users */}
+              <button
+                onClick={() => setActiveTab('messages')}
+                className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
+                  activeTab === 'messages'
+                    ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                }`}
+              >
+                <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
+                  <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="hidden sm:inline">{t('settings.messages.title') || 'Messages'}</span>
+                  <span className="sm:hidden">Chat</span>
+                  {conversations.length > 0 && (
+                    <span className="ml-1 px-1.5 py-0.5 text-xs bg-red-600 text-white rounded-full">{conversations.length}</span>
+                  )}
+                </div>
+              </button>
             </div>
           </div>
 
@@ -401,6 +541,27 @@ export default function SettingsPage() {
                           <span
                             className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
                               showPhone ? 'translate-x-7' : 'translate-x-1'
+                            }`}
+                          />
+                        </button>
+                      </div>
+
+                      {/* License Toggle */}
+                      <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                        <div className="flex-1">
+                          <p className="font-medium text-gray-900 dark:text-white">{t('settings.license.show.title') || 'Show Licenses Publicly'}</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.license.show.description') || 'Allow other users to see your uploaded licenses and documents.'}</p>
+                        </div>
+                        <button
+                          onClick={() => updatePrivacySettings('showLicense', !showLicense)}
+                          disabled={loading}
+                          className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 ${
+                            showLicense ? 'bg-red-600' : 'bg-gray-300 dark:bg-gray-600'
+                          } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        >
+                          <span
+                            className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                              showLicense ? 'translate-x-7' : 'translate-x-1'
                             }`}
                           />
                         </button>
@@ -649,9 +810,280 @@ export default function SettingsPage() {
                   </div>
                 </>
               )}
+
+              {/* Watchlist Tab Content */}
+              {activeTab === 'watchlist' && (session?.user?.role === 'RECRUITER' || session?.user?.role === 'HYBRID') && (
+                <>
+                  <div className="border-b border-gray-200 dark:border-gray-700 p-6">
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1 flex items-center gap-2">
+                      <Bookmark className="w-6 h-6" />
+                      {t('settings.watchlist.title') || 'My Watchlist'}
+                    </h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('settings.watchlist.subtitle') || 'Players you are watching. Only you can see this list.'}
+                    </p>
+                  </div>
+                  <div className="p-6">
+                    {watchlistLoading ? (
+                      <div className="flex items-center justify-center py-12">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+                      </div>
+                    ) : watchlist.length === 0 ? (
+                      <div className="text-center py-12">
+                        <Bookmark className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                          {t('settings.watchlist.empty') || 'No players in your watchlist'}
+                        </h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                          {t('settings.watchlist.emptyDescription') || 'Add players to your watchlist to keep track of them here.'}
+                        </p>
+                        <Link
+                          href="/players"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-medium"
+                        >
+                          {t('settings.watchlist.browsePlayers') || 'Browse Players'}
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        {watchlist.map((item) => (
+                          <div
+                            key={item.id || item.player?.id}
+                            className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md transition"
+                          >
+                            {/* Player Photo */}
+                            <div className="flex-shrink-0">
+                              {item.player?.profileImage ? (
+                                <Image
+                                  src={item.player.profileImage}
+                                  alt={`${item.player.firstName} ${item.player.lastName}`}
+                                  width={56}
+                                  height={56}
+                                  className="w-14 h-14 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600"
+                                />
+                              ) : (
+                                <div className="w-14 h-14 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
+                                  <User className="w-7 h-7 text-gray-500 dark:text-gray-400" />
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Player Info */}
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-semibold text-gray-900 dark:text-white truncate">
+                                {item.player?.firstName} {item.player?.lastName}
+                              </h4>
+                              <p className="text-sm text-gray-500 dark:text-gray-400">
+                                {item.player?.positions?.map((pos: string) => 
+                                  t(`playerProfile.position${pos.charAt(0) + pos.slice(1).toLowerCase().replace(/_/g, '')}`) || pos
+                                ).join(', ') || '-'}
+                              </p>
+                              {item.player?.currentClub && (
+                                <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                                  {item.player.currentClub.name}
+                                </p>
+                              )}
+                            </div>
+
+                            {/* Actions */}
+                            <div className="flex items-center gap-2">
+                              <Link
+                                href={`/players/${item.player?.id}`}
+                                className="flex items-center gap-1 px-3 py-1.5 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition"
+                              >
+                                <ExternalLink className="w-4 h-4" />
+                                <span className="hidden sm:inline">{t('common.viewProfile') || 'View'}</span>
+                              </Link>
+                              <button
+                                onClick={() => removeFromWatchlist(item.player?.id)}
+                                className="flex items-center gap-1 px-3 py-1.5 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition"
+                                title={t('settings.watchlist.remove') || 'Remove from watchlist'}
+                              >
+                                <Trash2 className="w-4 h-4" />
+                                <span className="hidden sm:inline">{t('common.remove') || 'Remove'}</span>
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+
+                        <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                            {t('settings.watchlist.total') || 'Total:'} <span className="font-semibold">{watchlist.length}</span> {t('settings.watchlist.players') || 'players'}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+
+              {/* Messages Tab Content */}
+              {activeTab === 'messages' && (
+                <>
+                  <div className="border-b border-gray-200 dark:border-gray-700 p-6">
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1 flex items-center gap-2">
+                      <MessageCircle className="w-6 h-6" />
+                      {t('settings.messages.title') || 'Messages'}
+                    </h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('settings.messages.subtitle') || 'Your conversations with other users'}
+                    </p>
+                    {session?.user?.role === 'PLAYER' && (
+                      <p className="text-xs text-amber-600 dark:text-amber-400 mt-2 flex items-center gap-1">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {t('settings.messages.playerNote') || 'As a player, you can only respond to messages from recruiters'}
+                      </p>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    {conversationsLoading ? (
+                      <div className="flex items-center justify-center py-12">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+                      </div>
+                    ) : conversations.length === 0 ? (
+                      <div className="text-center py-12">
+                        <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                          {t('settings.messages.empty') || 'No conversations yet'}
+                        </h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                          {session?.user?.role === 'PLAYER' 
+                            ? (t('settings.messages.emptyDescriptionPlayer') || 'Wait for recruiters to contact you')
+                            : (t('settings.messages.emptyDescription') || 'Start a conversation by messaging a player or recruiter')
+                          }
+                        </p>
+                        {session?.user?.role !== 'PLAYER' && (
+                          <Link
+                            href="/players"
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-medium"
+                          >
+                            {t('settings.messages.browsePlayers') || 'Browse Players'}
+                          </Link>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        {conversations.map((conversation) => {
+                          // Determine other participant
+                          const isPlayer = session?.user?.role === 'PLAYER'
+                          const isHybrid = session?.user?.role === 'HYBRID'
+                          let otherName = ''
+                          let otherRole = ''
+                          let otherClub = ''
+                          let profileLink = ''
+                          
+                          if (conversation.player && conversation.recruiter) {
+                            if (isPlayer || (isHybrid && session?.user?.playerId && conversation.playerId === session?.user?.playerId)) {
+                              otherName = `${conversation.recruiter.firstName} ${conversation.recruiter.lastName}`
+                              otherRole = conversation.recruiter.coachRole || 'Recruiter'
+                              otherClub = conversation.recruiter.currentClub?.name || conversation.recruiter.clubName || ''
+                              profileLink = `/recruiters/${conversation.recruiter.id}`
+                            } else {
+                              otherName = `${conversation.player.firstName} ${conversation.player.lastName}`
+                              otherRole = conversation.player.positions?.[0] || 'Player'
+                              otherClub = conversation.player.currentClub?.name || ''
+                              profileLink = `/players/${conversation.player.id}`
+                            }
+                          } else if (conversation.recruiter && conversation.secondRecruiter) {
+                            const currentRecruiterId = session?.user?.recruiterId
+                            const isFirst = conversation.recruiterId === currentRecruiterId
+                            const other = isFirst ? conversation.secondRecruiter : conversation.recruiter
+                            otherName = `${other.firstName} ${other.lastName}`
+                            otherRole = other.coachRole || 'Recruiter'
+                            otherClub = other.currentClub?.name || other.clubName || ''
+                            profileLink = `/recruiters/${other.id}`
+                          }
+                          
+                          const lastMessage = conversation.messages?.[0]
+                          
+                          return (
+                            <div
+                              key={conversation.id}
+                              className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md transition cursor-pointer"
+                              onClick={() => openChat(conversation)}
+                            >
+                              {/* Avatar */}
+                              <div className="flex-shrink-0">
+                                <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                                  <span className="text-lg font-bold text-red-600 dark:text-red-400">
+                                    {otherName.charAt(0)}
+                                  </span>
+                                </div>
+                              </div>
+
+                              {/* Conversation Info */}
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <h4 className="font-semibold text-gray-900 dark:text-white truncate">
+                                    {otherName}
+                                  </h4>
+                                  {conversation._count?.messages > 0 && (
+                                    <span className="px-1.5 py-0.5 text-xs bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 rounded">
+                                      {conversation._count.messages}
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">
+                                  {otherRole}{otherClub ? ` • ${otherClub}` : ''}
+                                </p>
+                                {lastMessage && (
+                                  <p className="text-xs text-gray-400 dark:text-gray-500 truncate mt-1">
+                                    {lastMessage.content?.substring(0, 50)}{lastMessage.content?.length > 50 ? '...' : ''}
+                                  </p>
+                                )}
+                              </div>
+
+                              {/* Actions */}
+                              <div className="flex items-center gap-2">
+                                <Link
+                                  href={profileLink}
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="flex items-center gap-1 px-3 py-1.5 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition"
+                                >
+                                  <ExternalLink className="w-4 h-4" />
+                                  <span className="hidden sm:inline">{t('common.viewProfile') || 'Profile'}</span>
+                                </Link>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    openChat(conversation)
+                                  }}
+                                  className="flex items-center gap-1 px-3 py-1.5 text-sm text-white bg-red-600 hover:bg-red-700 rounded-lg transition"
+                                >
+                                  <MessageCircle className="w-4 h-4" />
+                                  <span className="hidden sm:inline">{t('common.chat') || 'Chat'}</span>
+                                </button>
+                              </div>
+                            </div>
+                          )
+                        })}
+
+                        <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                            {t('settings.messages.total') || 'Total:'} <span className="font-semibold">{conversations.length}</span> {t('settings.messages.conversations') || 'conversations'}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
+
+        {/* Active Chat Window */}
+        {activeChat && (
+          <ChatWindow
+            conversationId={activeChat.conversationId}
+            otherParticipant={activeChat.otherParticipant}
+            currentUserId={activeChat.currentUserId}
+            currentUserType={activeChat.currentUserType}
+            onClose={() => setActiveChat(null)}
+          />
+        )}
 
         {saved && (
           <div className="fixed bottom-8 right-8 p-4 bg-green-50 dark:bg-green-900/90 border border-green-200 dark:border-green-800 rounded-lg shadow-lg flex items-center space-x-3 z-50">

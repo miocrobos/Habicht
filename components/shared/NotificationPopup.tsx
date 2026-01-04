@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Bell, X, Eye, MessageCircle, UserPlus, Award } from 'lucide-react'
+import { Bell, X, Eye, MessageCircle, UserPlus, Award, Check, CheckCheck, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 import axios from 'axios'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -31,7 +31,7 @@ export default function NotificationPopup() {
 
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get('/api/auth/user/notifications?limit=5')
+      const response = await axios.get('/api/auth/user/notifications?limit=10')
       const notifs = response.data.notifications || []
       setNotifications(notifs)
       setUnreadCount(notifs.filter((n: Notification) => !n.read).length)
@@ -40,7 +40,10 @@ export default function NotificationPopup() {
     }
   }
 
-  const markAsRead = async (notificationId: string) => {
+  const markAsRead = async (notificationId: string, e?: React.MouseEvent) => {
+    if (e) {
+      e.stopPropagation()
+    }
     try {
       await axios.patch(`/api/auth/user/notifications/${notificationId}/read`)
       setNotifications(prev =>
@@ -51,6 +54,28 @@ export default function NotificationPopup() {
       setUnreadCount(prev => Math.max(0, prev - 1))
     } catch (error) {
       console.error('Error marking notification as read:', error)
+    }
+  }
+
+  const markAllAsRead = async () => {
+    try {
+      await axios.patch('/api/auth/user/notifications/mark-all-read')
+      setNotifications(prev =>
+        prev.map(notif => ({ ...notif, read: true }))
+      )
+      setUnreadCount(0)
+    } catch (error) {
+      console.error('Error marking all notifications as read:', error)
+    }
+  }
+
+  const clearAllNotifications = async () => {
+    try {
+      await axios.delete('/api/auth/user/notifications/clear-all')
+      setNotifications([])
+      setUnreadCount(0)
+    } catch (error) {
+      console.error('Error clearing all notifications:', error)
     }
   }
 
@@ -152,6 +177,27 @@ export default function NotificationPopup() {
               </button>
             </div>
 
+            {/* Bulk Actions */}
+            {notifications.length > 0 && (
+              <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                <button
+                  onClick={markAllAsRead}
+                  disabled={unreadCount === 0}
+                  className="flex items-center gap-1.5 text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                >
+                  <CheckCheck className="w-3.5 h-3.5" />
+                  {t('notifications.markAllRead')}
+                </button>
+                <button
+                  onClick={clearAllNotifications}
+                  className="flex items-center gap-1.5 text-xs font-medium text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  {t('notifications.clearAll')}
+                </button>
+              </div>
+            )}
+
             {/* Notifications List */}
             <div className="max-h-96 overflow-y-auto">
               {notifications.length === 0 ? (
@@ -165,10 +211,9 @@ export default function NotificationPopup() {
                   return (
                   <div
                     key={notification.id}
-                    className={`p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition cursor-pointer ${
+                    className={`p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition ${
                       !notification.read ? 'bg-red-50 dark:bg-red-900/10' : ''
                     }`}
-                    onClick={() => !notification.read && markAsRead(notification.id)}
                   >
                     <div className="flex items-start gap-3">
                       <div className={`p-2 rounded-full ${
@@ -183,9 +228,20 @@ export default function NotificationPopup() {
                           <h4 className="font-semibold text-sm text-gray-900 dark:text-white truncate">
                             {title}
                           </h4>
-                          <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                            {formatTime(notification.createdAt)}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            {!notification.read && (
+                              <button
+                                onClick={(e) => markAsRead(notification.id, e)}
+                                className="p-1 text-green-600 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/30 rounded transition"
+                                title={t('notifications.markAsRead')}
+                              >
+                                <Check className="w-4 h-4" />
+                              </button>
+                            )}
+                            <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                              {formatTime(notification.createdAt)}
+                            </span>
+                          </div>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
                           {message}

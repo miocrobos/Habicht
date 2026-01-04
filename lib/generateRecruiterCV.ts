@@ -273,11 +273,27 @@ export async function generateRecruiterCV(recruiterData: RecruiterData, language
     doc.text('CLUB GSCHICHT', 15, yPos);
     yPos += 8;
 
-    const clubHistoryData = recruiterData.clubHistory.map(club => [
-      club.clubName,
-      club.role || recruiterData.coachRole,
-      `${new Date(club.startDate).getFullYear()} - ${club.endDate ? new Date(club.endDate).getFullYear() : 'Aktuell'}`
-    ]);
+    const clubHistoryData = recruiterData.clubHistory.map(club => {
+      // Safely parse dates to avoid NaN
+      const startYear = club.startDate ? new Date(club.startDate).getFullYear() : null;
+      const endYear = club.endDate ? new Date(club.endDate).getFullYear() : null;
+      
+      // Format period, handling missing dates
+      let periodStr = '';
+      if (startYear && !isNaN(startYear)) {
+        periodStr = `${startYear} - ${endYear && !isNaN(endYear) ? endYear : 'Aktuell'}`;
+      } else if (club.currentClub) {
+        periodStr = 'Aktuell';
+      } else {
+        periodStr = '-';
+      }
+      
+      return [
+        club.clubName,
+        club.role || recruiterData.coachRole,
+        periodStr
+      ];
+    });
 
     autoTable(doc, {
       startY: yPos,

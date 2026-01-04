@@ -9,6 +9,7 @@ import { X, Upload, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import axios from 'axios'
 import ImageUpload from './ImageUpload'
 import { useHeader } from '@/contexts/HeaderContext'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Photo {
   id: string
@@ -23,6 +24,7 @@ interface RecruiterPhotoGalleryProps {
 }
 
 export default function RecruiterPhotoGallery({ recruiterId, isOwner }: RecruiterPhotoGalleryProps) {
+  const { t } = useLanguage()
   const [photos, setPhotos] = useState<Photo[]>([])
   const [loading, setLoading] = useState(true)
   const [showUploadModal, setShowUploadModal] = useState(false)
@@ -49,7 +51,7 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
 
   const handleUploadPhoto = async () => {
     if (!newPhotoUrl) {
-      toast.error('Please select a photo')
+      toast.error(t('toast.selectPhoto'))
       return
     }
 
@@ -64,14 +66,14 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
       await fetchPhotos()
     } catch (error: any) {
       console.error('Error uploading photo:', error)
-      toast.error(error.response?.data?.error || 'Failed to upload photo')
+      toast.error(error.response?.data?.error || t('toast.uploadPhotoError'))
     } finally {
       setUploading(false)
     }
   }
 
   const handleDeletePhoto = async (photoId: string) => {
-    if (!confirm('Are you sure you want to delete this photo?')) {
+    if (!confirm(t('playerProfile.confirmDeletePhoto'))) {
       return
     }
 
@@ -81,7 +83,7 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
       setSelectedIndex(null)
     } catch (error) {
       console.error('Error deleting photo:', error)
-      toast.error('Failed to delete photo')
+      toast.error(t('toast.deletePhotoError'))
     }
   }
 
@@ -199,7 +201,7 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
         <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
           <button
             onClick={() => setSelectedIndex(null)}
-            className="absolute right-4 text-white hover:text-gray-300 bg-black bg-opacity-60 rounded-full p-2 z-50 transition-all duration-300"
+            className="absolute right-20 text-white hover:text-gray-300 bg-black bg-opacity-60 rounded-full p-2 z-50 transition-all duration-300"
             style={{ 
               top: collapsed ? '1rem' : '5rem',
               boxShadow: '0 2px 8px rgba(0,0,0,0.3)' 

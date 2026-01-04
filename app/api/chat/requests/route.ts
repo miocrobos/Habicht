@@ -63,7 +63,7 @@ export async function POST(request: Request) {
             firstName: true,
             lastName: true,
             positions: true,
-            currentLeague: true
+            currentLeagues: true
           }
         },
         recruiter: {
@@ -139,7 +139,7 @@ export async function GET(request: Request) {
                 firstName: true,
                 lastName: true,
                 positions: true,
-                currentLeague: true,
+                currentLeagues: true,
                 height: true,
                 canton: true,
                 city: true,

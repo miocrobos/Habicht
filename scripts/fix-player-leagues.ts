@@ -48,13 +48,14 @@ async function fixPlayerLeagues() {
         // Map the league to the enum value
         const mappedLeague = leagueMap[leagueFromHistory];
         
-        if (mappedLeague && mappedLeague !== player.currentLeague) {
-          console.log(`Updating ${player.firstName} ${player.lastName}: ${player.currentLeague || 'null'} → ${mappedLeague} (${leagueFromHistory})`);
+        const currentLeague = player.currentLeagues?.[0];
+        if (mappedLeague && mappedLeague !== currentLeague) {
+          console.log(`Updating ${player.firstName} ${player.lastName}: ${currentLeague || 'null'} → ${mappedLeague} (${leagueFromHistory})`);
           
           await prisma.player.update({
             where: { id: player.id },
             data: {
-              currentLeague: mappedLeague,
+              currentLeagues: [mappedLeague],
             },
           });
           

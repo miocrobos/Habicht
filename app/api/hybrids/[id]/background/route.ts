@@ -6,8 +6,8 @@ import { authOptions } from '@/lib/auth';
 // POST handler (legacy, not used by frontend)
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
-  // Hybrid users have both playerId and recruiterId, check if either matches
-  if (!session || (session.user?.playerId !== params.id && session.user?.recruiterId !== params.id)) {
+  // Check if the session user is the owner of this hybrid profile
+  if (!session || session.user?.id !== params.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -15,7 +15,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 
   try {
     await prisma.hybrid.update({
-      where: { id: params.id },
+      where: { userId: params.id },
       data: {
         customColor,
         backgroundImage,
@@ -30,23 +30,40 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 // PUT handler (used by frontend)
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
-  // Hybrid users have both playerId and recruiterId, check if either matches
-  if (!session || (session.user?.playerId !== params.id && session.user?.recruiterId !== params.id)) {
+  // Check if the session user is the owner of this hybrid profile
+  if (!session || session.user?.id !== params.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   const body = await req.json();
 
   try {
-    // Accept customColor as JSON string containing all background data
-    await prisma.hybrid.update({
+    // First check if user exists and is HYBRID role
+    const user = await prisma.user.findUnique({
       where: { id: params.id },
-      data: {
+      select: { id: true, name: true, role: true },
+    });
+
+    if (!user || user.role !== 'HYBRID') {
+      return NextResponse.json({ error: 'User is not a hybrid' }, { status: 400 });
+    }
+
+    // Upsert the hybrid record - create if doesn't exist, update if it does
+    await prisma.hybrid.upsert({
+      where: { userId: params.id },
+      update: {
+        customColor: body.customColor,
+      },
+      create: {
+        userId: params.id,
+        firstName: user.name?.split(' ')[0] || 'User',
+        lastName: user.name?.split(' ').slice(1).join(' ') || '',
         customColor: body.customColor,
       },
     });
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error('Error saving hybrid background:', error);
     return NextResponse.json({ error: 'playerProfile.errorSavingPlayerData' }, { status: 500 });
   }
 }

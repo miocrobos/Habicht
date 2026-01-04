@@ -83,6 +83,7 @@ export async function GET(request: NextRequest) {
     const gender = searchParams.get('gender') || ''
     const school = searchParams.get('school') || ''
     const lookingForClub = searchParams.get('lookingForClub') || ''
+    const userType = searchParams.get('userType') || ''
 
     // Build where clause
     const where: any = {
@@ -119,10 +120,10 @@ export async function GET(request: NextRequest) {
     if (league) {
       // Convert league display value to enum
       const leagueEnum = convertLeagueToEnum(league);
-      // Check both currentLeague and clubHistory for league filter
+      // Check both currentLeagues and clubHistory for league filter
       andConditions.push({
         OR: [
-          { currentLeague: leagueEnum },
+          { currentLeagues: { has: leagueEnum } },
           {
             clubHistory: {
               some: {
@@ -153,6 +154,15 @@ export async function GET(request: NextRequest) {
       andConditions.push({ lookingForClub: true })
     }
 
+    // Filter by user type (PLAYER or HYBRID)
+    if (userType) {
+      andConditions.push({
+        user: {
+          role: userType
+        }
+      })
+    }
+
     if (andConditions.length > 0) {
       where.AND = andConditions
     }
@@ -166,6 +176,12 @@ export async function GET(request: NextRequest) {
             id: true,
             name: true,
             logo: true,
+          },
+        },
+        user: {
+          select: {
+            id: true,
+            role: true,
           },
         },
       },

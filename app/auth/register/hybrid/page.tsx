@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 import StarRating from '@/components/shared/StarRating';
 import ImageUpload from '@/components/shared/ImageUpload';
+import MultiLeagueSelector from '@/components/shared/MultiLeagueSelector';
 
 export default function HybridRegisterPage() {
   const { t } = useLanguage();
@@ -32,6 +33,7 @@ export default function HybridRegisterPage() {
     municipality: '',
     phone: '',
     bio: '',
+    profileImage: '',
     
     // Player - Positions & Physical Stats
     positions: [] as string[],
@@ -79,7 +81,7 @@ export default function HybridRegisterPage() {
   const [clubHistory, setClubHistory] = useState<Array<{
     id: string;
     clubName: string;
-    league: string;
+    leagues: string[];
     startYear: string;
     endYear: string;
     position: string;
@@ -152,7 +154,7 @@ export default function HybridRegisterPage() {
   const addClubHistory = () => {
     setClubHistory([
       ...clubHistory,
-      { id: Date.now().toString() + Math.random().toString(36).slice(2), clubName: '', league: '', startYear: '', endYear: '', position: '', currentClub: false }
+      { id: Date.now().toString() + Math.random().toString(36).slice(2), clubName: '', leagues: [], startYear: '', endYear: '', position: '', currentClub: false }
     ]);
   };
 
@@ -160,7 +162,7 @@ export default function HybridRegisterPage() {
     setClubHistory(clubHistory.filter((club) => club.id !== id));
   };
 
-  const updateClubHistory = (id: string, field: string, value: string) => {
+  const updateClubHistory = (id: string, field: string, value: any) => {
     setClubHistory(clubHistory.map(club =>
       club.id === id ? { ...club, [field]: value } : club
     ));
@@ -214,7 +216,7 @@ export default function HybridRegisterPage() {
     // Step 1 validation (Account + Personal Info)
     if (step === 1) {
       if (!formData.email || !formData.password || !formData.confirmPassword) {
-        setError('Please fill in all required fields');
+        setError(t('register.fillRequiredFields'));
         return;
       }
       if (formData.password !== formData.confirmPassword) {
@@ -222,7 +224,7 @@ export default function HybridRegisterPage() {
         return;
       }
       if (!formData.firstName || !formData.lastName || !formData.dateOfBirth || !formData.gender || !formData.canton) {
-        setError('Please fill in all required fields');
+        setError(t('register.fillRequiredFields'));
         return;
       }
       setStep(2);
@@ -250,6 +252,11 @@ export default function HybridRegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.profileImage) {
+      setError(t('register.uploadProfileImage') || 'Profile picture is required');
+      return;
+    }
     
     if (!formData.coachingLicense) {
       setError(t('register.coachingLicenseRequired') || 'Coaching license is required');
@@ -283,6 +290,7 @@ export default function HybridRegisterPage() {
             municipality: formData.municipality,
             phone: formData.phone,
             bio: formData.bio,
+            profileImage: formData.profileImage,
             positions: formData.positions,
             dominantHand: formData.dominantHand || null,
             preferredLanguage: formData.preferredLanguage || null,
@@ -316,6 +324,7 @@ export default function HybridRegisterPage() {
             phone: formData.phone,
             preferredLanguage: formData.preferredLanguage || null,
             bio: formData.bio,
+            profileImage: formData.profileImage,
             coachRole: formData.coachRole,
             organization: formData.organization,
             genderCoached: formData.genderCoached,
@@ -657,19 +666,12 @@ export default function HybridRegisterPage() {
                 </div>
                 {clubHistory.map((club) => (
                   <div key={club.id} className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg mb-3">
-                    <div className="grid md:grid-cols-5 gap-3">
+                    <div className="grid md:grid-cols-4 gap-3">
                       <input
                         type="text"
                         placeholder={t('register.clubName')}
                         value={club.clubName}
                         onChange={(e) => updateClubHistory(club.id, 'clubName', e.target.value)}
-                        className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
-                      />
-                      <input
-                        type="text"
-                        placeholder={t('register.league')}
-                        value={club.league}
-                        onChange={(e) => updateClubHistory(club.id, 'league', e.target.value)}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                       />
                       <input
@@ -701,6 +703,15 @@ export default function HybridRegisterPage() {
                           className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                         />
                       )}
+                    </div>
+                    <div className="mt-3">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        {t('register.leagues') || 'Ligen'}
+                      </label>
+                      <MultiLeagueSelector
+                        selectedLeagues={club.leagues || []}
+                        onChange={(leagues) => updateClubHistory(club.id, 'leagues', leagues)}
+                      />
                     </div>
                     <div className="mt-2">
                       <label className={`flex items-center space-x-2 cursor-pointer p-3 rounded-lg border-2 transition ${
@@ -974,6 +985,20 @@ export default function HybridRegisterPage() {
             {/* STEP 3: Recruiter Information + Terms */}
             {step === 3 && (
               <>
+            {/* Profile Image - Required */}
+            <div className="space-y-6 border-b border-gray-200 dark:border-gray-700 pb-8">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                {t('register.profilePicture')} <span className="text-red-500">*</span>
+              </h3>
+              <ImageUpload 
+                label=""
+                value={formData.profileImage}
+                onChange={(base64) => setFormData({ ...formData, profileImage: base64 })}
+                aspectRatio="square"
+                required
+              />
+            </div>
+            
             {/* SECTION 4: Recruiter Information */}
             <div className="space-y-6 border-b border-gray-200 dark:border-gray-700 pb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">

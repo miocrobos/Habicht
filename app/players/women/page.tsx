@@ -10,6 +10,7 @@ import ClubBadge from '@/components/shared/ClubBadge'
 import ClickableProfilePicture from '@/components/profile/ClickableProfilePicture'
 import { getCantonInfo } from '@/lib/swissData'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { calculateAge } from '@/lib/ageUtils'
 
 export default function WomenPlayersPage() {
   const { t } = useLanguage()
@@ -333,7 +334,7 @@ export default function WomenPlayersPage() {
 function PlayerCard({ player }: { player: any }) {
   const { t } = useLanguage()
   const cantonInfo = getCantonInfo(player.canton)
-  const age = player.dateOfBirth ? Math.floor((new Date().getTime() - new Date(player.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : null
+  const age = calculateAge(player.dateOfBirth)
   
   // Get gradient based on role and gender
   // Get solid color based on role and gender

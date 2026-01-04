@@ -101,6 +101,8 @@ enum NotificationType {
   PLAYER_REQUEST
   RECRUITER_INTEREST
   PROFILE_UPDATE
+  WATCHLIST_ADD         // When a player is added to someone's watchlist
+  WATCHLIST_UPDATE      // When a watched player updates their profile
 }
 
 model User {
@@ -165,7 +167,7 @@ model Player {
   clubName          String?     // Name of current club (if not in our database)
   currentClubId     String?
   currentClub       Club?       @relation("CurrentClub", fields: [currentClubId], references: [id])
-  currentLeague     League?     // Current league - only set if player has current club
+  currentLeagues    League[]    @default([]) // Current leagues - player can play in multiple leagues
   desiredLeague     League?     // Target league level player wants to play in
   interestedClubs   String[]    @default([]) // Array of club IDs player is interested in
   
@@ -214,6 +216,7 @@ model Player {
   // Privacy Settings
   showEmail         Boolean     @default(false)     // Show email publicly
   showPhone         Boolean     @default(false)     // Show phone publicly
+  showLicense       Boolean     @default(false)     // Show license/documents publicly
   
   // Stats
   views             Int         @default(0)
@@ -327,7 +330,8 @@ model ClubHistory {
   clubLogo          String?     // Base64 or URL to uploaded club logo
   clubCountry       String      @default("Switzerland") // Country if club outside Switzerland
   clubWebsiteUrl    String?     // Club website URL - set once during registration, immutable
-  league            String?     // League/Division name
+  league            String?     // Legacy: Single league/Division name
+  leagues           String[]    @default([]) // Multiple leagues per club (e.g., NLA, U23 Elite)
   
   startDate         DateTime
   endDate           DateTime?
@@ -551,6 +555,9 @@ model Recruiter {
   lookingForMembers Boolean     @default(false) // Actively recruiting players
   isActive          Boolean     @default(true)  // Account active status
   
+  // Privacy Settings
+  showLicense       Boolean     @default(false)     // Show coaching license publicly
+  
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
   
@@ -561,6 +568,7 @@ model Recruiter {
   sentMessages      Message[]   @relation("RecruiterMessages")
   chatRequests      ChatRequest[]
   conversations     Conversation[] @relation("RecruiterConversations")
+  secondConversations Conversation[] @relation("SecondRecruiterConversations")
   photos            RecruiterPhoto[]
   videos            RecruiterVideo[]
   
@@ -606,6 +614,7 @@ model RecruiterClubHistory {
   
   role              String[]    // Head Coach, Assistant, Scout, etc. - can have multiple roles
   genderCoached     Gender?     // Which gender team
+  leagues           String[]    @default([]) // Multiple leagues per club (e.g., NLA, U17 Elite)
   startDate         DateTime
   endDate           DateTime?
   currentClub       Boolean     @default(false)
@@ -688,12 +697,18 @@ model ChatRequest {
 model Conversation {
   id                String      @id @default(cuid())
   
-  // Participants
-  playerId          String
-  player            Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  // Participants - can be player-recruiter OR recruiter-recruiter
+  // For player-recruiter chat
+  playerId          String?
+  player            Player?     @relation(fields: [playerId], references: [id], onDelete: Cascade)
   
-  recruiterId       String
-  recruiter         Recruiter   @relation("RecruiterConversations", fields: [recruiterId], references: [id], onDelete: Cascade)
+  // Primary recruiter (always required for recruiter-initiated chats)
+  recruiterId       String?
+  recruiter         Recruiter?  @relation("RecruiterConversations", fields: [recruiterId], references: [id], onDelete: Cascade)
+  
+  // Second recruiter for recruiter-to-recruiter chat
+  secondRecruiterId String?
+  secondRecruiter   Recruiter?  @relation("SecondRecruiterConversations", fields: [secondRecruiterId], references: [id], onDelete: Cascade)
   
   // Status
   isActive          Boolean     @default(true)
@@ -704,9 +719,9 @@ model Conversation {
   
   messages          Message[]
   
-  @@unique([playerId, recruiterId])
   @@index([playerId])
   @@index([recruiterId])
+  @@index([secondRecruiterId])
 }
 
 model Message {
@@ -728,6 +743,11 @@ model Message {
   
   content           String        @db.Text
   status            MessageStatus @default(SENT)
+  
+  // Attachment support for images and PDFs
+  attachmentUrl     String?       // Cloudinary URL
+  attachmentType    String?       // 'image' or 'pdf'
+  attachmentName    String?       // Original filename
   
   createdAt         DateTime      @default(now())
   readAt            DateTime?

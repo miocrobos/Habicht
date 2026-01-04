@@ -3,12 +3,53 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Search, TrendingUp, Users, Video, Award, MapPin, Star, Zap, LogIn, UserPlus, Building2 } from 'lucide-react'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import CantonFlag from '@/components/shared/CantonFlag'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useTheme } from '@/contexts/ThemeContext'
+
+// ScrollFade component for fade in/out animations on scroll
+function ScrollFade({ children, className = '' }: { children: React.ReactNode, className?: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '-50px 0px -50px 0px'
+      }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current)
+      }
+    }
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${
+        isVisible 
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 translate-y-8'
+      } ${className}`}
+    >
+      {children}
+    </div>
+  )
+}
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -124,13 +165,16 @@ export default function Home() {
       {/* League Showcase Section */}
       <section className="py-10 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
         <div className="container mx-auto px-3 sm:px-4">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4">{t('home.leagues.title')}</h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto px-4">
+          <ScrollFade>
+            <div className="text-center mb-8 sm:mb-12 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4">{t('home.leagues.title')}</h2>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto px-4">
               {t('home.leagues.subtitle')}
-            </p>
-          </div>
+              </p>
+            </div>
+          </ScrollFade>
 
+          <ScrollFade>
           {/* First row: NLA to 3rd League */}
           <LeagueRow key={`row1-${language}`} language={language} cards={[
             { league: t('home.leagues.nlaShort'), description: t('home.leagues.nla'), color: "from-blue-600 to-blue-700", emoji: "🏆", playerCount: "120+", fact: t('home.leagueCards.nla.quote'), explanation: t('home.slides.nla.explanation') },
@@ -139,7 +183,9 @@ export default function Home() {
             { league: t('home.leagues.secondLeague'), description: t('home.leagues.secondLeague'), color: "from-pink-600 to-pink-700", emoji: "💪", playerCount: "400+", fact: t('home.leagueCards.liga2.quote'), explanation: t('home.slides.liga2.explanation') },
             { league: t('home.leagues.thirdLeague'), description: t('home.leagues.thirdLeague'), color: "from-green-600 to-green-700", emoji: "⚡", playerCount: "500+", fact: t('home.leagueCards.liga3.quote'), explanation: t('home.slides.liga3.explanation'), widthClass: "w-full" }
           ]} />
+          </ScrollFade>
 
+          <ScrollFade>
           {/* Second row: 4th, 5th, U23, U20, U18 */}
           <LeagueRow key={`row2-${language}`} language={language} cards={[
             { league: t('home.leagues.fourthLeague'), description: t('home.leagues.fourthLeague'), color: "from-teal-600 to-teal-700", emoji: "⭐", playerCount: "600+", fact: t('home.leagueCards.liga4.quote'), explanation: t('home.slides.liga4.explanation') },
@@ -148,7 +194,9 @@ export default function Home() {
             { league: t('home.leagues.u20'), description: t('home.leagues.u20'), color: "from-cyan-600 to-cyan-700", emoji: "🚀", playerCount: "180+", fact: t('home.leagueCards.u20.quote'), explanation: t('home.slides.u20.explanation') },
             { league: t('home.leagues.u18'), description: t('home.leagues.u18'), color: "from-amber-600 to-amber-700", emoji: "✨", playerCount: "200+", fact: t('home.leagueCards.u18.quote'), explanation: t('home.slides.u18.explanation'), widthClass: "w-full" }
           ]} />
+          </ScrollFade>
 
+          <ScrollFade>
           {/* Swiss Regions Highlight */}
           <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-3 sm:p-6 md:p-12">
             <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-center mb-3 sm:mb-6 md:mb-8">🇨🇭 {t('home.leagues.all26Cantons')}</h3>
@@ -165,12 +213,14 @@ export default function Home() {
               ))}
             </div>
           </div>
+          </ScrollFade>
         </div>
       </section>
 
       {/* Features Section */}
       <section className="py-10 sm:py-16 md:py-20 bg-white dark:bg-gray-950">
         <div className="container mx-auto px-3 sm:px-4">
+          <ScrollFade>
           <div className="text-center mb-8 sm:mb-12 md:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4">{t('home.features.title')}</h2>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-400">{t('home.features.subtitle')}</p>
@@ -202,12 +252,14 @@ export default function Home() {
               color="yellow"
             />
           </div>
+          </ScrollFade>
         </div>
       </section>
 
       {/* Stats Section */}
       <section className="py-10 sm:py-16 md:py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
         <div className="container mx-auto px-3 sm:px-4">
+          <ScrollFade>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
             <StatCard 
               number="1,000+" 
@@ -230,12 +282,14 @@ export default function Home() {
               icon="🎥"
             />
           </div>
+          </ScrollFade>
         </div>
       </section>
 
       {/* Gender-Specific Sections */}
       <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-br from-blue-50 to-pink-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-3 sm:px-4">
+          <ScrollFade>
           <div className="grid grid-cols-2 gap-2 sm:gap-4 md:gap-6 lg:gap-8">
             {/* Men's Section */}
             <Link href="/players/men" className="group">
@@ -273,6 +327,7 @@ export default function Home() {
               </div>
             </Link>
           </div>
+          </ScrollFade>
         </div>
       </section>
 
@@ -287,6 +342,7 @@ export default function Home() {
         </div>
         
         <div className="container mx-auto px-3 sm:px-4 text-center relative z-10">
+          <ScrollFade>
           <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-2 sm:mb-3 md:mb-4 lg:mb-6">🏐</div>
           <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 lg:mb-6 px-2">
             {t('home.cta.title')}
@@ -314,6 +370,7 @@ export default function Home() {
               </span>
             </Link>
           </div>
+          </ScrollFade>
         </div>
       </section>
     </div>

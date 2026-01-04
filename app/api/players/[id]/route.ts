@@ -4,12 +4,48 @@ import { getServerSession } from 'next-auth';
 import { sendPlayerLookingNotification, sendWatchlistUpdateNotification } from '@/lib/email';
 import { authOptions } from '@/lib/auth';
 
+// Normalize league display names to ensure consistent format
+function normalizeLeagueDisplay(league: string | null | undefined): string | undefined {
+  if (!league || league === '') return undefined;
+  
+  const trimmed = league.trim();
+  
+  // Convert bare numbers to proper display format
+  const bareNumberMap: { [key: string]: string } = {
+    '1': '1. Liga',
+    '2': '2. Liga',
+    '3': '3. Liga',
+    '4': '4. Liga',
+    '5': '5. Liga',
+  };
+  
+  if (bareNumberMap[trimmed]) {
+    return bareNumberMap[trimmed];
+  }
+  
+  return league;
+}
+
 // Convert display league names to enum values with fault tolerance
 function convertLeagueToEnum(league: string | null | undefined): string | undefined {
   if (!league || league === '') return undefined;
   
+  // Handle bare numbers (e.g., "1", "2", "3" for leagues)
+  const bareNumberMap: { [key: string]: string } = {
+    '1': 'FIRST_LEAGUE',
+    '2': 'SECOND_LEAGUE',
+    '3': 'THIRD_LEAGUE',
+    '4': 'FOURTH_LEAGUE',
+    '5': 'FIFTH_LEAGUE',
+  };
+  
+  const trimmed = league.trim();
+  if (bareNumberMap[trimmed]) {
+    return bareNumberMap[trimmed];
+  }
+  
   // Normalize input: trim, uppercase, remove extra spaces and dots
-  const normalized = league.trim().toUpperCase().replace(/\s+/g, ' ').replace(/\.$/, '');
+  const normalized = trimmed.toUpperCase().replace(/\s+/g, ' ').replace(/\.$/, '');
   
   // Try direct match first
   const leagueMap: { [key: string]: string } = {
@@ -74,7 +110,7 @@ function convertLeagueToEnum(league: string | null | undefined): string | undefi
 }
 
 // Function to detect and describe profile changes
-function detectProfileChanges(oldPlayer: any, newData: any, newLeague: string | undefined): string[] {
+function detectProfileChanges(oldPlayer: any, newData: any, newLeagues: string[] | undefined): string[] {
   const changes: string[] = [];
   
   // Check positions
@@ -84,9 +120,11 @@ function detectProfileChanges(oldPlayer: any, newData: any, newLeague: string | 
     changes.push(`Position changed from ${oldPos} to ${newPos}`);
   }
   
-  // Check current league
-  if (oldPlayer.currentLeague !== newLeague && newLeague) {
-    changes.push(`League changed to ${newLeague}`);
+  // Check current leagues
+  const oldLeagues = (oldPlayer.currentLeagues || []).sort().join(',');
+  const newLeaguesStr = (newLeagues || []).sort().join(',');
+  if (oldLeagues !== newLeaguesStr && newLeagues && newLeagues.length > 0) {
+    changes.push(`League changed to ${newLeagues.join(', ')}`);
   }
   
   // Check club (using currentClubId comparison)
@@ -205,6 +243,14 @@ export async function PUT(
     const body = await request.json();
     const { playerData, clubHistory, achievements } = body;
 
+    // If playerData is not provided, return error
+    if (!playerData) {
+      return NextResponse.json(
+        { error: 'playerData is required' },
+        { status: 400 }
+      );
+    }
+
     // Check if lookingForClub status is changing to true
     const existingPlayer = await prisma.player.findUnique({
       where: { id: params.id },
@@ -220,18 +266,37 @@ export async function PUT(
       );
     }
 
-    const isNewlyLooking = playerData.lookingForClub === true && existingPlayer?.lookingForClub === false;
+    // Authorization check - user must own this player profile
+    // Works for both PLAYER and HYBRID roles
+    if (existingPlayer.userId !== session.user.id) {
+      return NextResponse.json(
+        { error: 'Unauthorized - you can only edit your own profile' },
+        { status: 403 }
+      );
+    }
 
-    // Find current club league from club history if available
-    let currentLeague = playerData.currentLeague || undefined;
+    const isNewlyLooking = playerData?.lookingForClub === true && existingPlayer?.lookingForClub === false;
+
+    // Find current club leagues from club history if available
+    let currentLeagues: string[] = playerData.currentLeagues || [];
     if (clubHistory && clubHistory.length > 0) {
       const currentClubHistory = clubHistory.find((club: any) => club.currentClub === true);
-      if (currentClubHistory && currentClubHistory.league) {
-        currentLeague = currentClubHistory.league;
+      if (currentClubHistory) {
+        // Support both 'leagues' array (preferred) and 'league' string (legacy)
+        if (currentClubHistory.leagues && Array.isArray(currentClubHistory.leagues) && currentClubHistory.leagues.length > 0) {
+          // Use leagues array from current club - this is the player's current leagues
+          currentLeagues = currentClubHistory.leagues.map((l: string) => convertLeagueToEnum(l)).filter(Boolean) as string[];
+        } else if (currentClubHistory.league) {
+          // Fallback to single league for legacy data
+          const leagueEnum = convertLeagueToEnum(currentClubHistory.league);
+          if (leagueEnum) {
+            currentLeagues = [leagueEnum];
+          }
+        }
       }
     }
-    // Convert league display value to enum value and ensure undefined if empty
-    currentLeague = convertLeagueToEnum(currentLeague);
+    // Convert any remaining league display values to enum values
+    currentLeagues = currentLeagues.map(l => convertLeagueToEnum(l)).filter(Boolean) as string[];
 
     // Update user name to match player name
     await prisma.user.update({
@@ -264,7 +329,7 @@ export async function PUT(
         occupation: playerData.occupation,
         schoolName: playerData.schoolName,
         positions: playerData.positions || [],
-        currentLeague: currentLeague,
+        currentLeagues: currentLeagues as any,
         profileImage: playerData.profileImage,
         instagram: playerData.instagram,
         tiktok: playerData.tiktok,
@@ -282,6 +347,7 @@ export async function PUT(
         lookingForClub: playerData.lookingForClub,
         showEmail: playerData.showEmail !== undefined ? playerData.showEmail : undefined,
         showPhone: playerData.showPhone !== undefined ? playerData.showPhone : undefined,
+        showLicense: playerData.showLicense !== undefined ? playerData.showLicense : undefined,
       },
       include: {
         clubHistory: true,
@@ -312,18 +378,23 @@ export async function PUT(
       const currentClubEntry = clubHistory.find((club: any) => club.currentClub === true);
       
       if (currentClubEntry) {
-        // Try to find the club in the database by name
-        const clubInDb = await prisma.club.findFirst({
-          where: {
-            name: {
-              equals: currentClubEntry.clubName,
-              mode: 'insensitive'
+        // First try to use clubId directly if provided
+        if (currentClubEntry.clubId) {
+          currentClubId = currentClubEntry.clubId;
+        } else if (currentClubEntry.clubName) {
+          // Try to find the club in the database by name
+          const clubInDb = await prisma.club.findFirst({
+            where: {
+              name: {
+                equals: currentClubEntry.clubName,
+                mode: 'insensitive'
+              }
             }
+          });
+          
+          if (clubInDb) {
+            currentClubId = clubInDb.id;
           }
-        });
-        
-        if (clubInDb) {
-          currentClubId = clubInDb.id;
         }
       }
 
@@ -348,20 +419,27 @@ export async function PUT(
           const yearFrom = parseYear(club.yearFrom);
           const yearTo = parseYear(club.yearTo);
 
-          // Try to find the club ID in database
-          let clubId: string | null = null;
-          const clubInDb = await prisma.club.findFirst({
-            where: {
-              name: {
-                equals: club.clubName,
-                mode: 'insensitive'
+          // Use clubId directly if provided, otherwise try to find by name
+          let clubId: string | null = club.clubId || null;
+          if (!clubId && club.clubName) {
+            const clubInDb = await prisma.club.findFirst({
+              where: {
+                name: {
+                  equals: club.clubName,
+                  mode: 'insensitive'
+                }
               }
+            });
+            
+            if (clubInDb) {
+              clubId = clubInDb.id;
             }
-          });
-          
-          if (clubInDb) {
-            clubId = clubInDb.id;
           }
+
+          // Ensure leagues are unique and properly normalized (no bare numbers)
+          const rawLeagues = Array.isArray(club.leagues) ? club.leagues : (club.league ? [club.league] : []);
+          const normalizedLeagues = rawLeagues.map((l: string) => normalizeLeagueDisplay(l)).filter(Boolean) as string[];
+          const uniqueLeagues = [...new Set(normalizedLeagues)];
 
           return {
             playerId: params.id,
@@ -372,6 +450,7 @@ export async function PUT(
             // Preserve existing website URL if it was already set, otherwise use new one
             clubWebsiteUrl: existingWebsiteUrls.get(club.clubName) || club.clubWebsiteUrl || null,
             league: club.league || null,
+            leagues: uniqueLeagues, // Multi-league support with unique, normalized values
             startDate: yearFrom ? new Date(yearFrom, 0, 1) : new Date(),
             endDate: club.currentClub === true ? null : (yearTo ? new Date(yearTo, 11, 31) : null),
             currentClub: club.currentClub === true,
@@ -402,7 +481,7 @@ export async function PUT(
 
         // Send notification to each recruiter who has notifications enabled
         const positionText = playerData.positions?.join(', ') || 'Unknown';
-        const leagueText = existingPlayer?.currentLeague || 'N/A';
+        const leagueText = existingPlayer?.currentLeagues?.join(', ') || 'N/A';
 
         for (const recruiter of recruiters) {
           if (recruiter.user.notifyPlayerLooking && recruiter.user.email) {
@@ -425,7 +504,7 @@ export async function PUT(
     // Send watchlist update notifications
     try {
       // Detect changes
-      const changes = detectProfileChanges(existingPlayer, playerData, currentLeague);
+      const changes = detectProfileChanges(existingPlayer, playerData, currentLeagues);
       
       if (changes.length > 0) {
         // Find all watchers for this player
@@ -445,14 +524,17 @@ export async function PUT(
         // Send notification to each watcher
         for (const watchItem of watchers) {
           if (watchItem.watcher.email) {
-            // Create in-app notification
+            // Create in-app notification with WATCHLIST_UPDATE type
             await prisma.notification.create({
               data: {
                 userId: watchItem.watcher.id,
-                type: 'PROFILE_UPDATE',
+                type: 'WATCHLIST_UPDATE',
                 title: `${playerData.firstName} ${playerData.lastName} updated profile`,
                 message: changes.join('; '),
                 actionUrl: `/players/${params.id}`,
+                senderId: existingPlayer.userId,
+                senderName: `${playerData.firstName} ${playerData.lastName}`,
+                senderImage: playerData.profileImage || null,
                 read: false,
               }
             });

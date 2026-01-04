@@ -7,26 +7,54 @@ import CantonFlag from '@/components/shared/CantonFlag'
 import { getCantonInfo } from '@/lib/swissData'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import ChatWindow from '@/components/chat/ChatWindow'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function RecruiterCard({ recruiter }: { recruiter: any }) {
   const { t } = useLanguage()
+  const router = useRouter()
   const { data: session } = useSession()
   const [showChat, setShowChat] = useState(false)
   const [conversationId, setConversationId] = useState<string | null>(null)
+  
+  // Null guards for recruiter data
+  if (!recruiter || !recruiter.firstName || !recruiter.lastName) {
+    return null
+  }
+  
   const cantonInfo = getCantonInfo(recruiter.canton)
   
   // Map gender coached to display text
   const getGenderText = (genders: string[] | string | null) => {
-    if (!genders) return 'ALLE'
+    if (!genders) return t('playerProfile.all')
     const genderArray = Array.isArray(genders) ? genders : [genders]
-    if (genderArray.length === 0) return 'ALLE'
-    if (genderArray.length === 2 || (genderArray.includes('MALE') && genderArray.includes('FEMALE'))) return '♂♀ BEIDE'
+    if (genderArray.length === 0) return t('playerProfile.all')
+    if (genderArray.length === 2 || (genderArray.includes('MALE') && genderArray.includes('FEMALE'))) {
+      return `♂ ${t('playerProfile.men')} / ♀ ${t('playerProfile.women')}`
+    }
     if (genderArray.includes('MALE')) return `♂ ${t('playerProfile.men')}`
     if (genderArray.includes('FEMALE')) return `♀ ${t('playerProfile.women')}`
-    return 'ALLE'
+    return t('playerProfile.all')
+  }
+
+  // Translate coach role from database enum to display text
+  const getCoachRoleText = (role: string | null) => {
+    if (!role) return ''
+    const roleKey = role.toLowerCase() as 'head_coach' | 'assistant_coach' | 'technical_coach' | 'physical_coach' | 'scout' | 'trainer'
+    const translation = t(`coachRole.${roleKey}`)
+    // If translation key is returned (not found), show the original role formatted nicely
+    if (translation === `coachRole.${roleKey}` || !translation) {
+      return role.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+    }
+    return translation
+  }
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const targetUrl = recruiter.user?.role === 'HYBRID' ? `/hybrids/${recruiter.userId}` : `/recruiters/${recruiter.id}`
+    router.push(targetUrl)
   }
 
   const handleStartChat = async (e: React.MouseEvent) => {
@@ -55,22 +83,35 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
       toast.error(`${t('errors.chatStartError')}: ${errorMsg}`)
     }
   }
+
+  // Get solid color based on role
+  const getSolidColor = () => {
+    if (recruiter.user?.role === 'HYBRID') {
+      return '#f97316'; // Orange for HYBRID
+    }
+    return '#9333ea'; // Purple for RECRUITER
+  }
   
   return (
     <>
-      <Link href={`/recruiters/${recruiter.id}`}>
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden cursor-pointer">
+      <div onClick={handleCardClick} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden cursor-pointer relative h-full flex flex-col">
         {/* Header with solid background */}
         <div 
-          className="h-40 relative flex items-center justify-center"
+          className="h-40 relative flex items-center justify-center flex-shrink-0"
           style={{ 
-            background: '#9333ea' // Solid purple for all RECRUITERS
+            background: getSolidColor()
           }}
         >
-          {/* Gender Coached Badge */}
-          <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center gap-2 text-sm font-semibold z-10">
-            <span>{getGenderText(recruiter.genderCoached)}</span>
-          </div>
+          {/* Gender Badge - only show if gender is specified */}
+          {recruiter.gender && (
+            <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center gap-2 text-sm font-semibold z-10">
+              {recruiter.gender === 'MALE' ? (
+                <span className="text-blue-600">♂ {t('playerProfile.men')}</span>
+              ) : recruiter.gender === 'FEMALE' ? (
+                <span className="text-pink-600">♀ {t('playerProfile.women')}</span>
+              ) : null}
+            </div>
+          )}
           
           {/* Canton Flag */}
           <div className="absolute top-3 right-3 z-10">
@@ -96,18 +137,18 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
         </div>
 
         {/* Recruiter Info */}
-        <div className="px-6 py-6 bg-gray-50 dark:bg-gray-900 text-center">
+        <div className="px-6 py-6 bg-gray-50 dark:bg-gray-900 text-center flex-grow flex flex-col">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
             {recruiter.firstName} {recruiter.lastName}
           </h3>
 
           {/* Role & Club */}
           <div className="mb-4">
-            <div className="flex items-center justify-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 mb-1">
-              <Briefcase className="w-4 h-4" />
-              <span>{recruiter.coachRole}</span>
+            <div className="flex items-center justify-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 mb-1 min-h-[20px]">
+              <Briefcase className="w-4 h-4 flex-shrink-0" />
+              <span className="line-clamp-2">{getCoachRoleText(recruiter.coachRole)}</span>
             </div>
-            <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+            <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400 min-h-[20px]">
               {recruiter.club?.logo ? (
                 <Image
                   src={recruiter.club.logo}
@@ -130,19 +171,19 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
               <div className="text-2xl font-bold text-green-600 dark:text-green-400">
                 {recruiter.age || '-'}
               </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">Jahr Alt</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">{t('playerProfile.yearsOld')}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
                 {recruiter.lookingForMembers ? '✓' : '-'}
               </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">Rekrutiert</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">{t('recruiters.recruiting')}</div>
             </div>
           </div>
 
-          {/* Preferred Language */}
-          {recruiter.preferredLanguage && (
-            <div className="mb-4 flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+          {/* Preferred Language - always show container for consistent height */}
+          <div className="mb-4 flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg min-h-[36px]">
+            {recruiter.preferredLanguage ? (
               <span className="text-sm font-semibold text-blue-700 dark:text-blue-300">
                 {recruiter.preferredLanguage === 'gsw' ? t('register.languageSwissGerman') :
                  recruiter.preferredLanguage === 'de' ? t('register.languageGerman') :
@@ -152,8 +193,10 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
                  recruiter.preferredLanguage === 'en' ? t('register.languageEnglish') :
                  recruiter.preferredLanguage.toUpperCase()}
               </span>
-            </div>
-          )}
+            ) : (
+              <span className="text-sm text-gray-400 dark:text-gray-500">-</span>
+            )}
+          </div>
 
           {/* Location */}
           <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
@@ -161,19 +204,21 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
             <span>{recruiter.province ? `${recruiter.province}, ` : ''}{cantonInfo.name}</span>
           </div>
 
-          {/* Chat Button */}
-          {session && session.user && (
+          {/* Spacer to push content up and maintain consistent height */}
+          <div className="flex-grow" />
+
+          {/* Chat Button - Only visible to RECRUITER and HYBRID users, and not on own profile */}
+          {session && session.user && (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') && recruiter.user?.id && session.user.id !== recruiter.user.id && (
             <button
               onClick={handleStartChat}
               className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"
             >
               <MessageCircle className="w-4 h-4" />
-              Nachricht sende
+              {t('chat.sendMessage')}
             </button>
           )}
         </div>
       </div>
-    </Link>
 
       {/* Chat Window */}
       {showChat && conversationId && (
@@ -188,7 +233,7 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
               position: recruiter.coachRole
             }}
             currentUserId={session!.user!.id}
-            currentUserType={session!.user!.role as 'PLAYER' | 'RECRUITER'}
+            currentUserType={session!.user!.role as 'PLAYER' | 'RECRUITER' | 'HYBRID'}
             onClose={() => setShowChat(false)}
           />
         </div>

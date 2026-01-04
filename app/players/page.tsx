@@ -19,6 +19,7 @@ export default function PlayersPage() {
     minHeight: '',
     gender: '',
     lookingForClub: '',
+    userType: '', // Filter by PLAYER, RECRUITER, HYBRID
   })
   const [searchDebounce, setSearchDebounce] = useState('')
 
@@ -32,7 +33,7 @@ export default function PlayersPage() {
 
   useEffect(() => {
     loadPlayers()
-  }, [searchDebounce, filters.position, filters.canton, filters.league, filters.minHeight, filters.gender, filters.lookingForClub])
+  }, [searchDebounce, filters.position, filters.canton, filters.league, filters.minHeight, filters.gender, filters.lookingForClub, filters.userType])
 
   const loadPlayers = async () => {
     try {
@@ -64,10 +65,11 @@ export default function PlayersPage() {
       minHeight: '',
       gender: '',
       lookingForClub: '',
+      userType: '',
     })
   }
 
-  const hasActiveFilters = filters.search || filters.position || filters.canton || filters.league || filters.minHeight || filters.gender || filters.lookingForClub
+  const hasActiveFilters = filters.search || filters.position || filters.canton || filters.league || filters.minHeight || filters.gender || filters.lookingForClub || filters.userType
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -159,6 +161,22 @@ export default function PlayersPage() {
                 <option value="">{t('players.genderAll')}</option>
                 <option value="MALE">{t('players.genderMale')}</option>
                 <option value="FEMALE">{t('players.genderFemale')}</option>
+              </select>
+            </div>
+
+            {/* User Type - Player/Hybrid filter */}
+            <div>
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {t('players.userTypeLabel')}
+              </label>
+              <select
+                value={filters.userType}
+                onChange={(e) => handleFilterChange('userType', e.target.value)}
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+              >
+                <option value="">{t('players.userTypeAll')}</option>
+                <option value="PLAYER">{t('players.userTypePlayer')}</option>
+                <option value="HYBRID">{t('players.userTypeHybrid')}</option>
               </select>
             </div>
 
@@ -268,7 +286,7 @@ export default function PlayersPage() {
               <div className="text-center py-8 sm:py-12 bg-white dark:bg-gray-800 rounded-lg">
                 <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">{t('players.noPlayersFound')}</p>
                 <button
-                  onClick={() => setFilters({ search: '', position: '', canton: '', league: '', minHeight: '', gender: '', lookingForClub: '' })}
+                  onClick={() => setFilters({ search: '', position: '', canton: '', league: '', minHeight: '', gender: '', lookingForClub: '', userType: '' })}
                   className="mt-3 sm:mt-4 text-sm sm:text-base text-habicht-600 hover:text-habicht-700 font-medium"
                 >
                   {t('players.resetFilters')}

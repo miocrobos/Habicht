@@ -5,8 +5,10 @@ import Link from 'next/link';
 import axios from 'axios';
 import { Mail, Lock, User, Calendar, Globe, MapPin, Briefcase, Eye, EyeOff, Upload, Plus, X } from 'lucide-react';
 import ImageUpload from '@/components/shared/ImageUpload';
+import MultiLeagueSelector from '@/components/shared/MultiLeagueSelector';
 import { useLanguage } from '@/contexts/LanguageContext';
 import StepIndicator from '@/components/shared/StepIndicator';
+import { calculateAge } from '@/lib/ageUtils';
 
 const NATIONALITIES = [
   "Afghanistan", "Albanie", "Algerie", "Andorra", "Angola", "Argentinie", "Armenie", "Australie", "Östriich",
@@ -60,6 +62,7 @@ interface ClubAffiliation {
   logo: string;
   role: string[];  // Changed to array to support multiple roles
   genderCoached: string;
+  leagues: string[];  // Leagues coached in this club
   yearFrom: string;
   yearTo: string;
   currentClub: boolean;
@@ -87,6 +90,7 @@ export default function RecruiterRegisterPage() {
     phone: '',
     preferredLanguage: '',
     bio: '',
+    profileImage: '',
     coachingLicense: '',
     ausweiss: '',
     facebook: '',
@@ -132,6 +136,7 @@ export default function RecruiterRegisterPage() {
       logo: '',
       role: [],  // Initialize as empty array
       genderCoached: '',
+      leagues: [],  // Initialize leagues as empty array
       yearFrom: '',
       yearTo: '',
       currentClub: false
@@ -182,7 +187,7 @@ export default function RecruiterRegisterPage() {
         setError(t('register.enterDateOfBirth')); 
         return; 
       }
-      const age = Math.floor((new Date().getTime() - new Date(formData.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+      const age = calculateAge(formData.dateOfBirth) || 0;
       if (age < 18) { 
         setError(t('register.mustBe18')); 
         return; 
@@ -196,7 +201,11 @@ export default function RecruiterRegisterPage() {
       return;
     }
 
-    // Step 3 - Final submission - Check coaching license and terms before submitting
+    // Step 3 - Final submission - Check profile image, coaching license and terms before submitting
+    if (!formData.profileImage) {
+      setError(t('register.uploadProfileImage') || 'Profile picture is required');
+      return;
+    }
     if (!formData.coachingLicense) {
       setError(t('register.coachingLicenseRequired') || 'Coaching license is required');
       return;
@@ -213,7 +222,7 @@ export default function RecruiterRegisterPage() {
       // Find the selected club
       const selectedClub = clubs.find(c => c.name === formData.clubName);
       
-      const age = Math.floor((new Date().getTime() - new Date(formData.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+      const age = calculateAge(formData.dateOfBirth) || 0;
       
       const response = await axios.post('/api/auth/register', {
         email: formData.email,
@@ -234,6 +243,7 @@ export default function RecruiterRegisterPage() {
           phone: formData.phone || null,
           preferredLanguage: formData.preferredLanguage || null,
           bio: formData.bio || null,
+          profileImage: formData.profileImage,
           coachingLicense: formData.coachingLicense || null,
           ausweiss: formData.ausweiss || null,
           facebook: formData.facebook || null,
@@ -530,6 +540,20 @@ export default function RecruiterRegisterPage() {
               <div className="space-y-5">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{t('register.recruiterInfo')}</h3>
                 
+                {/* Profile Image - Required */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <User className="w-4 h-4 inline mr-1" />{t('register.profilePicture')} <span className="text-red-500">*</span>
+                  </label>
+                  <ImageUpload 
+                    label=""
+                    value={formData.profileImage}
+                    onChange={(base64) => setFormData({ ...formData, profileImage: base64 })}
+                    aspectRatio="square"
+                    required
+                  />
+                </div>
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('register.phoneNumber')} ({t('register.optional')})</label>
                   <input 
@@ -769,6 +793,14 @@ export default function RecruiterRegisterPage() {
                             <option value="MALE">{t('register.male')}</option>
                             <option value="FEMALE">{t('register.female')}</option>
                           </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">{t('recruiterProfile.leagues') || 'Ligen'}</label>
+                          <MultiLeagueSelector
+                            selectedLeagues={club.leagues || []}
+                            onChange={(leagues) => updateClubAffiliation(club.id, 'leagues', leagues)}
+                          />
                         </div>
 
                         <div className="grid grid-cols-2 gap-3">

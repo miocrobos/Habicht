@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
-import { Bell, Check, X, Eye, MessageCircle, UserPlus, Award } from 'lucide-react'
+import { Bell, Check, X, Eye, MessageCircle, UserPlus, Award, Bookmark, RefreshCw } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Notification {
@@ -87,6 +87,11 @@ export default function NotificationsPage() {
       case 'CLUB_INTEREST':
       case 'RECRUITER_INTEREST':
         return <Award className="w-5 h-5" />
+      case 'WATCHLIST_ADD':
+        return <Bookmark className="w-5 h-5" />
+      case 'WATCHLIST_UPDATE':
+      case 'PROFILE_UPDATE':
+        return <RefreshCw className="w-5 h-5" />
       default:
         return <Bell className="w-5 h-5" />
     }
@@ -105,6 +110,21 @@ export default function NotificationsPage() {
       // New format: title is senderName, message is the actual message
       return {
         title: t('notifications.messageFrom').replace('{name}', notification.title),
+        message: notification.message
+      }
+    }
+
+    // Handle watchlist notifications
+    if (notification.type === 'WATCHLIST_ADD') {
+      return {
+        title: t('notifications.watchlistAdd'),
+        message: notification.message
+      }
+    }
+
+    if (notification.type === 'WATCHLIST_UPDATE' || notification.type === 'PROFILE_UPDATE') {
+      return {
+        title: notification.title,
         message: notification.message
       }
     }

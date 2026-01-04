@@ -27,19 +27,20 @@ async function fixInvalidLeagues() {
 
     for (const player of players) {
       // Check if player has a league but no current club or valid club history
-      if (player.currentLeague && !player.currentClub && player.clubHistory.length === 0) {
-        console.log(`❌ ${player.firstName} ${player.lastName} - League: ${player.currentLeague}, No current club or history`)
+      const hasLeagues = player.currentLeagues && player.currentLeagues.length > 0;
+      if (hasLeagues && !player.currentClub && player.clubHistory.length === 0) {
+        console.log(`❌ ${player.firstName} ${player.lastName} - League: ${player.currentLeagues.join(', ')}, No current club or history`)
         
-        // Clear the league
+        // Clear the leagues
         await prisma.player.update({
           where: { id: player.id },
           data: {
-            currentLeague: null
+            currentLeagues: []
           }
         })
         
         updatedCount++
-        console.log(`   ✅ Cleared league\n`)
+        console.log(`   ✅ Cleared leagues\n`)
       } else {
         console.log(`✓ ${player.firstName} ${player.lastName} - Valid (has ${player.currentClub ? 'current club' : 'club history'})`)
       }

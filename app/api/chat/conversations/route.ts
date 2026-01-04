@@ -17,6 +17,7 @@ export async function GET(request: Request) {
     let conversations: any[] = []
 
     if (session.user.role === 'PLAYER') {
+      // Players can only see conversations where a recruiter has messaged them
       const player = await prisma.player.findFirst({
         where: { userId: session.user.id }
       })
@@ -56,15 +57,17 @@ export async function GET(request: Request) {
           orderBy: { lastMessageAt: 'desc' }
         })
       }
-    } else if (session.user.role === 'RECRUITER') {
+    } else if (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') {
       const recruiter = await prisma.recruiter.findFirst({
         where: { userId: session.user.id }
       })
 
       if (recruiter) {
-        conversations = await prisma.conversation.findMany({
+        // Get player conversations (where recruiter is primary)
+        const playerConversations = await prisma.conversation.findMany({
           where: { 
             recruiterId: recruiter.id,
+            playerId: { not: null },
             isActive: true
           },
           include: {
@@ -74,8 +77,11 @@ export async function GET(request: Request) {
                 firstName: true,
                 lastName: true,
                 positions: true,
-                currentLeague: true,
-                profileImage: true
+                currentLeagues: true,
+                profileImage: true,
+                user: {
+                  select: { id: true }
+                }
               }
             },
             messages: {
@@ -94,6 +100,92 @@ export async function GET(request: Request) {
             }
           },
           orderBy: { lastMessageAt: 'desc' }
+        })
+
+        // Get recruiter-to-recruiter conversations (as initiator)
+        const recruiterConversationsAsInitiator = await prisma.conversation.findMany({
+          where: { 
+            recruiterId: recruiter.id,
+            secondRecruiterId: { not: null },
+            playerId: null,
+            isActive: true
+          },
+          include: {
+            secondRecruiter: {
+              include: {
+                club: true,
+                user: {
+                  select: {
+                    id: true,
+                    name: true
+                  }
+                }
+              }
+            },
+            messages: {
+              orderBy: { createdAt: 'desc' },
+              take: 1
+            },
+            _count: {
+              select: {
+                messages: {
+                  where: {
+                    recruiterId: { not: recruiter.id },
+                    status: { not: 'READ' }
+                  }
+                }
+              }
+            }
+          },
+          orderBy: { lastMessageAt: 'desc' }
+        })
+
+        // Get recruiter-to-recruiter conversations (as recipient)
+        const recruiterConversationsAsRecipient = await prisma.conversation.findMany({
+          where: { 
+            secondRecruiterId: recruiter.id,
+            playerId: null,
+            isActive: true
+          },
+          include: {
+            recruiter: {
+              include: {
+                club: true,
+                user: {
+                  select: {
+                    id: true,
+                    name: true
+                  }
+                }
+              }
+            },
+            messages: {
+              orderBy: { createdAt: 'desc' },
+              take: 1
+            },
+            _count: {
+              select: {
+                messages: {
+                  where: {
+                    recruiterId: { not: recruiter.id },
+                    status: { not: 'READ' }
+                  }
+                }
+              }
+            }
+          },
+          orderBy: { lastMessageAt: 'desc' }
+        })
+
+        // Combine all conversations
+        conversations = [
+          ...playerConversations,
+          ...recruiterConversationsAsInitiator,
+          ...recruiterConversationsAsRecipient
+        ].sort((a, b) => {
+          const aTime = a.lastMessageAt?.getTime() || 0
+          const bTime = b.lastMessageAt?.getTime() || 0
+          return bTime - aTime
         })
       }
     }
@@ -126,24 +218,9 @@ export async function POST(request: Request) {
       participantType 
     })
 
-    // Chat between players is not allowed - only player-recruiter chats
-    if (session.user.role === 'PLAYER' && participantType === 'PLAYER') {
-      return NextResponse.json({ 
-        error: 'Chat between players is not allowed. Only player-recruiter chat is permitted.' 
-      }, { status: 400 })
-    }
-
-    if (session.user.role === 'RECRUITER' && participantType === 'RECRUITER') {
-      return NextResponse.json({ 
-        error: 'Chat between recruiters is not allowed. Only player-recruiter chat is permitted.' 
-      }, { status: 400 })
-    }
-
-    let playerId: string
-    let recruiterId: string
-
-    // Determine player and recruiter IDs based on current user
+    // Players cannot initiate chats - they can only respond to existing conversations
     if (session.user.role === 'PLAYER') {
+      // Check if a conversation already exists
       const player = await prisma.player.findFirst({
         where: { userId: session.user.id }
       })
@@ -152,72 +229,132 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Player not found' }, { status: 404 })
       }
 
-      playerId = player.id
+      // Players can only chat with recruiters
+      if (participantType === 'PLAYER') {
+        return NextResponse.json({ 
+          error: 'Players cannot chat with other players.' 
+        }, { status: 403 })
+      }
 
-      // Find recruiter by user ID
       const recruiter = await prisma.recruiter.findFirst({
         where: { userId: participantId }
       })
 
       if (!recruiter) {
-        return NextResponse.json({ error: 'Rekrutierer nicht gefunden' }, { status: 404 })
+        return NextResponse.json({ error: 'Recruiter not found' }, { status: 404 })
       }
 
-      recruiterId = recruiter.id
-    } else if (session.user.role === 'RECRUITER') {
-      const recruiter = await prisma.recruiter.findFirst({
-        where: { userId: session.user.id }
-      })
-
-      if (!recruiter) {
-        return NextResponse.json({ error: 'Rekrutierer nicht gefunden' }, { status: 404 })
-      }
-
-      recruiterId = recruiter.id
-
-      // Find player by user ID
-      const player = await prisma.player.findFirst({
-        where: { userId: participantId }
-      })
-
-      if (!player) {
-        return NextResponse.json({ error: 'Player not found' }, { status: 404 })
-      }
-
-      playerId = player.id
-    } else {
-        return NextResponse.json({ error: 'Invalid user role' }, { status: 400 })
-    }
-
-    // Check if conversation already exists
-    let conversation = await prisma.conversation.findFirst({
-      where: {
-        playerId,
-        recruiterId
-      }
-    })
-
-    // If no conversation exists, create one
-    if (!conversation) {
-      conversation = await prisma.conversation.create({
-        data: {
-          playerId,
-          recruiterId,
-          isActive: true,
-          lastMessageAt: new Date()
+      // Check if conversation already exists (recruiter must have started it)
+      const existingConversation = await prisma.conversation.findFirst({
+        where: {
+          playerId: player.id,
+          recruiterId: recruiter.id
         }
       })
-    } else {
-      // Reactivate if it was closed
-      if (!conversation.isActive) {
+
+      if (!existingConversation) {
+        return NextResponse.json({ 
+          error: 'Players cannot initiate chats. Wait for a recruiter to message you first.' 
+        }, { status: 403 })
+      }
+
+      // Return existing conversation
+      return NextResponse.json({ conversationId: existingConversation.id })
+    }
+
+    // Recruiters and Hybrids can initiate chats
+    if (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') {
+      const currentRecruiter = await prisma.recruiter.findFirst({
+        where: { userId: session.user.id }
+      })
+
+      if (!currentRecruiter) {
+        return NextResponse.json({ error: 'Recruiter profile not found' }, { status: 404 })
+      }
+
+      // Recruiter-to-Recruiter chat
+      if (participantType === 'RECRUITER' || participantType === 'HYBRID') {
+        const targetRecruiter = await prisma.recruiter.findFirst({
+          where: { userId: participantId }
+        })
+
+        if (!targetRecruiter) {
+          return NextResponse.json({ error: 'Target recruiter not found' }, { status: 404 })
+        }
+
+        // Can't chat with yourself
+        if (currentRecruiter.id === targetRecruiter.id) {
+          return NextResponse.json({ error: 'Cannot chat with yourself' }, { status: 400 })
+        }
+
+        // Check for existing conversation (in either direction)
+        let conversation = await prisma.conversation.findFirst({
+          where: {
+            OR: [
+              { recruiterId: currentRecruiter.id, secondRecruiterId: targetRecruiter.id },
+              { recruiterId: targetRecruiter.id, secondRecruiterId: currentRecruiter.id }
+            ],
+            playerId: null
+          }
+        })
+
+        if (!conversation) {
+          conversation = await prisma.conversation.create({
+            data: {
+              recruiterId: currentRecruiter.id,
+              secondRecruiterId: targetRecruiter.id,
+              playerId: null,
+              isActive: true,
+              lastMessageAt: new Date()
+            }
+          })
+        } else if (!conversation.isActive) {
+          conversation = await prisma.conversation.update({
+            where: { id: conversation.id },
+            data: { isActive: true }
+          })
+        }
+
+        return NextResponse.json({ conversationId: conversation.id })
+      }
+
+      // Recruiter-to-Player chat
+      const player = await prisma.player.findFirst({
+        where: { userId: participantId }
+      })
+
+      if (!player) {
+        return NextResponse.json({ error: 'Player not found' }, { status: 404 })
+      }
+
+      // Check if conversation already exists
+      let conversation = await prisma.conversation.findFirst({
+        where: {
+          playerId: player.id,
+          recruiterId: currentRecruiter.id
+        }
+      })
+
+      if (!conversation) {
+        conversation = await prisma.conversation.create({
+          data: {
+            playerId: player.id,
+            recruiterId: currentRecruiter.id,
+            isActive: true,
+            lastMessageAt: new Date()
+          }
+        })
+      } else if (!conversation.isActive) {
         conversation = await prisma.conversation.update({
           where: { id: conversation.id },
           data: { isActive: true }
         })
       }
+
+      return NextResponse.json({ conversationId: conversation.id })
     }
 
-    return NextResponse.json({ conversationId: conversation.id })
+    return NextResponse.json({ error: 'Invalid user role' }, { status: 400 })
   } catch (error) {
     console.error('Create conversation error:', error)
     return NextResponse.json(

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { sendAddedToWatchlistNotification } from '@/lib/email'
 
 // GET - Get user's watchlist
 export async function GET(request: Request) {
@@ -44,7 +45,31 @@ export async function GET(request: Request) {
       orderBy: { createdAt: 'desc' }
     })
 
-    return NextResponse.json({ watchlist })
+    // Transform to include firstName/lastName at top level for easier access
+    const transformedWatchlist = watchlist.map(item => ({
+      ...item,
+      player: {
+        ...item.player,
+        firstName: item.player.firstName,
+        lastName: item.player.lastName,
+        profileImage: item.player.profileImage
+      }
+    }))
+
+    // Mark watchlist-related notifications as read when watchlist is viewed
+    await prisma.notification.updateMany({
+      where: {
+        userId: session.user.id,
+        type: { in: ['WATCHLIST_UPDATE'] },
+        read: false
+      },
+      data: {
+        read: true,
+        readAt: new Date()
+      }
+    })
+
+    return NextResponse.json({ watchlist: transformedWatchlist })
   } catch (error) {
     console.error('Get watchlist error:', error)
     return NextResponse.json(
@@ -74,9 +99,18 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Player ID required' }, { status: 400 })
     }
 
-    // Check if player exists
+    // Check if player exists and get their info
     const player = await prisma.player.findUnique({
-      where: { id: playerId }
+      where: { id: playerId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            email: true,
+            name: true
+          }
+        }
+      }
     })
 
     if (!player) {
@@ -104,6 +138,45 @@ export async function POST(request: Request) {
         watcherId: session.user.id
       }
     })
+
+    // Get watcher's name for notification
+    const watcher = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { name: true, role: true }
+    })
+
+    const watcherName = watcher?.name || 'Someone'
+
+    // Create in-app notification for the player
+    try {
+      await prisma.notification.create({
+        data: {
+          userId: player.user.id,
+          type: 'WATCHLIST_ADD',
+          title: 'Added to Watchlist',
+          message: `${watcherName} has added you to their watchlist`,
+          actionUrl: '/settings',
+          senderId: session.user.id,
+          senderName: watcherName,
+          read: false
+        }
+      })
+
+      // Send email notification to the player
+      if (player.user.email) {
+        await sendAddedToWatchlistNotification({
+          recipientEmail: player.user.email,
+          recipientName: player.firstName || player.user.name || 'Player',
+          watcherName: watcherName,
+          watcherRole: session.user.role
+        })
+      }
+
+      console.log(`✅ Watchlist add notification sent to player ${playerId}`)
+    } catch (notifError) {
+      console.error('Error sending watchlist add notification:', notifError)
+      // Don't fail the request if notification fails
+    }
 
     return NextResponse.json({ success: true, watchlistEntry }, { status: 201 })
   } catch (error) {

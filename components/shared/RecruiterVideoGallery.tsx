@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { useState, useEffect } from 'react'
 import { X, Upload, Plus, Trash2 } from 'lucide-react'
 import axios from 'axios'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Video {
   id: string
@@ -20,6 +21,7 @@ interface RecruiterVideoGalleryProps {
 }
 
 export default function RecruiterVideoGallery({ recruiterId, isOwner }: RecruiterVideoGalleryProps) {
+  const { t } = useLanguage()
   const [videos, setVideos] = useState<Video[]>([])
   const [loading, setLoading] = useState(true)
   const [showUploadModal, setShowUploadModal] = useState(false)
@@ -45,7 +47,7 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
 
   const handleUploadVideo = async () => {
     if (!newVideoUrl) {
-      toast.error('Please enter a video URL')
+      toast.error(t('toast.enterVideoUrl'))
       return
     }
 
@@ -62,14 +64,14 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
       await fetchVideos()
     } catch (error: any) {
       console.error('Error uploading video:', error)
-      toast.error(error.response?.data?.error || 'Failed to upload video')
+      toast.error(error.response?.data?.error || t('toast.uploadVideoError'))
     } finally {
       setUploading(false)
     }
   }
 
   const handleDeleteVideo = async (videoId: string) => {
-    if (!confirm('Are you sure you want to delete this video?')) {
+    if (!confirm(t('playerProfile.confirmDeleteVideo'))) {
       return
     }
 
@@ -78,7 +80,7 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
       await fetchVideos()
     } catch (error) {
       console.error('Error deleting video:', error)
-      toast.error('Failed to delete video')
+      toast.error(t('toast.deleteVideoError'))
     }
   }
 

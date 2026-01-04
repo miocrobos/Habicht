@@ -8,6 +8,7 @@ import ImageUpload from '@/components/shared/ImageUpload';
 import VideoUpload from '@/components/shared/VideoUpload';
 import StarRating from '@/components/shared/StarRating';
 import CountrySelect from '@/components/shared/CountrySelect';
+import MultiLeagueSelector from '@/components/shared/MultiLeagueSelector';
 import { useLanguage } from '@/contexts/LanguageContext';
 import StepIndicator from '@/components/shared/StepIndicator';
 
@@ -301,7 +302,7 @@ interface ClubExperience {
   logo: string;
   country: string;
   clubWebsiteUrl: string;
-  league: string;
+  leagues: string[];
   yearFrom: string;
   yearTo: string;
   currentClub: boolean;
@@ -348,7 +349,7 @@ export default function PlayerRegisterPage() {
       logo: '',
       country: 'Switzerland',
       clubWebsiteUrl: '',
-      league: '',
+      leagues: [],
       yearFrom: '',
       yearTo: '',
       currentClub: false
@@ -1096,28 +1097,18 @@ export default function PlayerRegisterPage() {
 
                             <div>
                               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                <Trophy className="w-4 h-4 inline mr-1" />{t('register.league')} *
+                                <Trophy className="w-4 h-4 inline mr-1" />{t('register.leagues') || 'Ligen'} *
                               </label>
                               {club.country === 'Switzerland' ? (
-                                <select
-                                  value={club.league}
-                                  onChange={(e) => updateClubExperience(club.id, 'league', e.target.value)}
-                                  required
-                                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
-                                >
-                                  <option value="">{t('register.selectLeague')}</option>
-                                  {SWISS_LEAGUES.map(league => (
-                                    <option key={league.value} value={league.value}>
-                                      {league.label}
-                                    </option>
-                                  ))}
-                                </select>
+                                <MultiLeagueSelector
+                                  selectedLeagues={club.leagues || []}
+                                  onChange={(leagues) => updateClubExperience(club.id, 'leagues', leagues)}
+                                />
                               ) : (
                                 <input
                                   type="text"
-                                  value={club.league}
-                                  onChange={(e) => updateClubExperience(club.id, 'league', e.target.value)}
-                                  required
+                                  value={club.leagues?.join(', ') || ''}
+                                  onChange={(e) => updateClubExperience(club.id, 'leagues', e.target.value.split(',').map(s => s.trim()).filter(Boolean))}
                                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                                   placeholder={t('placeholders.exampleLeague')}
                                 />

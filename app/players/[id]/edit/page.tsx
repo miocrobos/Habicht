@@ -10,6 +10,7 @@ import { Canton } from '@prisma/client';
 import { getAllSchools } from '@/lib/schoolData';
 import ImageUpload from '@/components/shared/ImageUpload';
 import CountrySelect from '@/components/shared/CountrySelect';
+import MultiLeagueSelector from '@/components/shared/MultiLeagueSelector';
 
 const cantons = [
   { code: 'ZH' as Canton, name: 'Züri' },
@@ -40,21 +41,7 @@ const cantons = [
   { code: 'JU' as Canton, name: 'Jura' },
 ];
 
-const employmentStatusOptions = [
-  { value: 'STUDENT_FULL_TIME', label: 'Student/in (Vollziit)' },
-  { value: 'STUDENT_PART_TIME', label: 'Student/in (Teilziit)' },
-  { value: 'WORKING_FULL_TIME', label: 'Beruefstätig (Vollziit)' },
-  { value: 'WORKING_PART_TIME', label: 'Beruefstätig (Teilziit)' },
-];
-
-const positions = [
-  { value: 'SETTER', label: 'Zuespieler/in' },
-  { value: 'OUTSIDE_HITTER', label: 'Aussenagreifer/in' },
-  { value: 'MIDDLE_BLOCKER', label: 'Mittelblöcker/in' },
-  { value: 'OPPOSITE', label: 'Diagonal' },
-  { value: 'LIBERO', label: 'Libero' },
-  { value: 'UNIVERSAL', label: 'Universal' },
-];
+// Employment status and position arrays are now inside the component to support translations
 
 export default function EditPlayerProfilePage({ params }: { params: { id: string } }) {
   const { t } = useLanguage();
@@ -70,9 +57,29 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
   const [achievements, setAchievements] = useState<any[]>([]);
   const [allClubs, setAllClubs] = useState<any[]>([]);
   const [clubSuggestions, setClubSuggestions] = useState<Record<string, any[]>>({});
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
   // Background picker logic removed as per requirements
 
   const schools = getAllSchools();
+
+  // Translated employment status options
+  const employmentStatusOptions = [
+    { value: 'STUDENT_FULL_TIME', label: t('playerProfile.edit.studentFullTime') },
+    { value: 'STUDENT_PART_TIME', label: t('playerProfile.edit.studentPartTime') },
+    { value: 'WORKING_FULL_TIME', label: t('playerProfile.edit.workingFullTime') },
+    { value: 'WORKING_PART_TIME', label: t('playerProfile.edit.workingPartTime') },
+  ];
+
+  // Translated positions
+  const positions = [
+    { value: 'SETTER', label: t('positions.setter') },
+    { value: 'OUTSIDE_HITTER', label: t('positions.outsideHitter') },
+    { value: 'MIDDLE_BLOCKER', label: t('positions.middleBlocker') },
+    { value: 'OPPOSITE', label: t('positions.opposite') },
+    { value: 'LIBERO', label: t('positions.libero') },
+    { value: 'UNIVERSAL', label: t('positions.universal') },
+  ];
 
   // Helper function to get available leagues for a club based on player's gender
   const getAvailableLeagues = (clubEntry: any): { value: string; label: string }[] => {
@@ -147,6 +154,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
       ...club,
       // Clean up empty strings to null/undefined for proper database handling
       league: club.league && club.league.trim() !== '' ? club.league : '',
+      leagues: Array.isArray(club.leagues) ? club.leagues : (club.league ? [club.league] : []), // Multi-league support
       yearFrom: club.yearFrom && club.yearFrom.trim() !== '' ? club.yearFrom : '',
       yearTo: club.currentClub ? '' : (club.yearTo && club.yearTo.trim() !== '' ? club.yearTo : ''),
     }));
@@ -168,7 +176,12 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
       setSuccess(true);
       setTimeout(() => {
-        router.push(`/players/${params.id}`);
+        // Redirect to hybrid profile if user is HYBRID, otherwise to player profile
+        if (userRole === 'HYBRID' && userId) {
+          router.push(`/hybrids/${userId}`);
+        } else {
+          router.push(`/players/${params.id}`);
+        }
       }, 1500);
     } catch (err) {
       console.error('Save error:', err);
@@ -224,6 +237,8 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         occupation: player.occupation || '',
         schoolName: player.schoolName || '',
         positions: player.positions || [],
+        dominantHand: player.dominantHand || '',
+        preferredLanguage: player.preferredLanguage || '',
         height: player.height || '',
         weight: player.weight || '',
         spikeHeight: player.spikeHeight || '',
@@ -262,7 +277,11 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         text,
       })));
 
-      // ...existing code...
+      // Store user role and userId for redirect logic
+      if (player.user?.role) {
+        setUserRole(player.user.role);
+        setUserId(player.user.id);
+      }
     } catch (err) {
       console.error('Error loading player data:', err);
       setError('Fehler bim Lade vo Spielerdate.');
@@ -337,7 +356,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
             <Link
-              href={`/players/${params.id}`}
+              href={userRole === 'HYBRID' && userId ? `/hybrids/${userId}` : `/players/${params.id}`}
               className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition text-sm sm:text-base"
             >
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -382,6 +401,35 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
               </p>
             </div>
           )}
+        </div>
+
+        {/* Profile Photo */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <User className="w-6 h-6 text-habicht-600" />
+            Profilbild
+          </h2>
+          <div className="flex flex-col items-center gap-4">
+            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
+              {formData.profileImage ? (
+                <img
+                  src={formData.profileImage}
+                  alt="Profilbild"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-gray-400">
+                  <User className="w-16 h-16" />
+                </div>
+              )}
+            </div>
+            <ImageUpload
+              label="Neus Profilbild Ufelad"
+              value={formData.profileImage}
+              onChange={(v: string) => setFormData({ ...formData, profileImage: v })}
+              aspectRatio="square"
+            />
+          </div>
         </div>
 
         {/* Personal Information */}
@@ -651,6 +699,40 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Dominanti Hand
+                </label>
+                <select
+                  value={formData.dominantHand || ''}
+                  onChange={(e) => setFormData({ ...formData, dominantHand: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="">Wähl Hand</option>
+                  <option value="RIGHT">Rächts</option>
+                  <option value="LEFT">Links</option>
+                  <option value="AMBIDEXTROUS">Beidhändig</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Bevorzugti Sprach
+                </label>
+                <select
+                  value={formData.preferredLanguage || ''}
+                  onChange={(e) => setFormData({ ...formData, preferredLanguage: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="">Wähl Sprach</option>
+                  <option value="gsw">Schwiizerdütsch</option>
+                  <option value="de">Hochdütsch</option>
+                  <option value="fr">Französisch</option>
+                  <option value="it">Italienisch</option>
+                  <option value="en">Englisch</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -773,30 +855,24 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                         </div>
                       )}
                     </div>
+                  </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Liga *
-                      </label>
-                      <select
-                        value={club.league}
-                        onChange={(e) => {
-                          const updated = clubHistory.map((c) =>
-                            c.id === club.id ? { ...c, league: e.target.value } : c
-                          );
-                          setClubHistory(updated);
-                        }}
-                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                      >
-                        <option value="">Wähl Liga üs</option>
-                        {getAvailableLeagues(club).map((league) => (
-                          <option key={league.value} value={league.value}>
-                            {league.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                  <div className="mt-4">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Liga(s) * (mehrfache Auswahl möglich)
+                    </label>
+                    <MultiLeagueSelector
+                      selectedLeagues={club.leagues || (club.league ? [club.league] : [])}
+                      onChange={(leagues) => {
+                        const updated = clubHistory.map((c) =>
+                          c.id === club.id ? { ...c, leagues, league: leagues[0] || '' } : c
+                        );
+                        setClubHistory(updated);
+                      }}
+                    />
+                  </div>
 
+                  <div className="mt-4 grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Land / Country
@@ -943,10 +1019,10 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
           )}
         </div>
 
-        {/* Documents */}
+        {/* Media */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-            Dokumänt
+            Media
           </h2>
 
           <div className="space-y-6">

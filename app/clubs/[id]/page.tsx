@@ -263,7 +263,7 @@ export default function ClubProfilePage() {
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('clubProfile.teamsLeagues')}</h2>
                 <div className="flex flex-wrap gap-3">
-                  {[...new Set(players.map(p => p.currentLeague).filter(Boolean))].map((league, idx) => (
+                  {[...new Set(players.flatMap(p => p.currentLeagues || []).filter(Boolean))].map((league, idx) => (
                     <div key={idx} className="px-4 py-2 bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg border border-red-200 dark:border-red-800 font-semibold text-gray-900 dark:text-white cursor-pointer">
                       {league}
                     </div>

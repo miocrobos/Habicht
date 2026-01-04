@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
 
       // Find current club and get its ID before creating player
       let currentClubId: string | null = null
-      let playerCurrentLeague: string | null = null
+      let playerCurrentLeagues: string[] = []
       if (playerData.clubHistory && playerData.clubHistory.length > 0) {
         const currentClubEntry = playerData.clubHistory.find((club: any) => club.currentClub)
         if (currentClubEntry && currentClubEntry.clubName) {
@@ -116,7 +116,10 @@ export async function POST(request: NextRequest) {
             'U19': 'U19',
             'U17': 'U17'
           }
-          playerCurrentLeague = leagueMap[currentClubEntry.league] || null
+          const mappedLeague = leagueMap[currentClubEntry.league]
+          if (mappedLeague) {
+            playerCurrentLeagues = [mappedLeague]
+          }
           
           // Try to find or create the current club
           let existingClub = await prisma.club.findFirst({
@@ -307,6 +310,7 @@ export async function POST(request: NextRequest) {
                     clubCountry: club.country || null,
                     clubWebsiteUrl: club.clubWebsiteUrl || null,
                     league: club.league || null,
+                    leagues: Array.isArray(club.leagues) ? club.leagues : (club.league ? [club.league] : []), // Multi-league support
                     startDate: club.yearFrom ? new Date(club.yearFrom, 0, 1) : new Date(),
                     endDate: club.currentClub ? null : (club.yearTo ? new Date(club.yearTo, 11, 31) : null),
                     currentClub: club.currentClub || false,
@@ -339,7 +343,7 @@ export async function POST(request: NextRequest) {
               preferredLanguage: playerData.preferredLanguage,
               canton: playerData.canton,
               city: playerData.city || 'Unknown',
-              currentLeague: playerCurrentLeague || playerData.currentLeague || 'FIRST_LEAGUE',
+              currentLeagues: (playerCurrentLeagues.length > 0 ? playerCurrentLeagues : (playerData.currentLeagues || playerData.currentLeague ? [playerData.currentLeagues?.[0] || playerData.currentLeague || 'FIRST_LEAGUE'] : ['FIRST_LEAGUE'])) as any,
               desiredLeague: playerData.desiredLeague,
               interestedClubs: playerData.interestedClubs || [],
               achievements: playerData.achievements || [],
@@ -475,6 +479,7 @@ export async function POST(request: NextRequest) {
                   clubLogo: club.logo || null,
                   role: club.role,
                   genderCoached: mapGenderToEnum(club.genderCoached),
+                  leagues: Array.isArray(club.leagues) ? club.leagues : [], // Multi-league support
                   startDate: club.yearFrom ? new Date(club.yearFrom, 0, 1) : new Date(),
                   endDate: club.currentClub ? null : (club.yearTo ? new Date(club.yearTo, 11, 31) : null),
                   currentClub: club.currentClub || false,
@@ -553,7 +558,7 @@ export async function POST(request: NextRequest) {
 
       // Process player club history first
       let currentClubId: string | null = null
-      let playerCurrentLeague: string | null = null
+      let playerCurrentLeagues: string[] = []
       let processedPlayerClubHistory: any[] = []
 
       if (playerData.clubHistory && playerData.clubHistory.length > 0) {
@@ -575,7 +580,10 @@ export async function POST(request: NextRequest) {
             'U19': 'U19',
             'U17': 'U17',
           }
-          playerCurrentLeague = leagueMap[currentClubEntry.league] || null
+          const mappedLeague = leagueMap[currentClubEntry.league]
+          if (mappedLeague) {
+            playerCurrentLeagues = [mappedLeague]
+          }
           
           // Try to find or create the current club
           let existingClub = await prisma.club.findFirst({
@@ -613,6 +621,7 @@ export async function POST(request: NextRequest) {
             clubCountry: club.country || 'Switzerland',
             clubWebsiteUrl: club.clubWebsiteUrl || null,
             league: club.league || null,
+            leagues: Array.isArray(club.leagues) ? club.leagues : (club.league ? [club.league] : []), // Multi-league support
             startDate: club.startYear && !isNaN(parseInt(club.startYear)) ? new Date(parseInt(club.startYear), 0, 1) : new Date(),
             endDate: club.currentClub ? null : (club.endYear && !isNaN(parseInt(club.endYear)) ? new Date(parseInt(club.endYear), 11, 31) : null),
             currentClub: club.currentClub || false,
@@ -638,7 +647,7 @@ export async function POST(request: NextRequest) {
       const sanitizedCanton = validCantons.includes(playerData.canton) ? playerData.canton : 'ZH'
 
       // Create hybrid user with player profile
-      // Note: Recruiter functionality will be available but recruiter profile created separately
+      // Note: Recruiter profile will also be created for hybrid users
       const user = await prisma.user.create({
         data: {
           name: `${firstName} ${lastName}`,
@@ -661,7 +670,7 @@ export async function POST(request: NextRequest) {
               blockHeight: safeParseFloat(playerData.blockHeight),
               canton: sanitizedCanton,
               city: playerData.municipality || 'Unknown',
-              currentLeague: (playerCurrentLeague || 'FIRST_LEAGUE') as any,
+              currentLeagues: (playerCurrentLeagues.length > 0 ? playerCurrentLeagues : ['FIRST_LEAGUE']) as any,
               phone: playerData.phone || null,
               instagram: playerData.instagram || null,
               tiktok: playerData.tiktok || null,
@@ -673,7 +682,7 @@ export async function POST(request: NextRequest) {
               skillAttacking: playerData.skillAttacking || 0,
               skillBlocking: playerData.skillBlocking || 0,
               skillDefense: playerData.skillDefense || 0,
-              profileImage: '/images/default-avatar.png',
+              profileImage: playerData.profileImage || '/images/default-avatar.png',
               bio: playerData.bio || null,
               lookingForClub: playerData.lookingForClub || false,
               nationality: playerData.nationality || 'Swiss',
@@ -687,6 +696,30 @@ export async function POST(request: NextRequest) {
               } : undefined,
             },
           },
+          // Also create recruiter profile for hybrid users (if clubId is available)
+          recruiter: (recruiterData && currentClubId) ? {
+            create: {
+              firstName: firstName,
+              lastName: lastName,
+              nationality: recruiterData.nationality || playerData.nationality || 'Swiss',
+              canton: sanitizedCanton,
+              province: recruiterData.province || playerData.municipality || null,
+              phone: recruiterData.phone || playerData.phone || null,
+              preferredLanguage: recruiterData.preferredLanguage || null,
+              bio: recruiterData.bio || playerData.bio || null,
+              profileImage: recruiterData.profileImage || playerData.profileImage || '/images/default-avatar.png',
+              coachRole: Array.isArray(recruiterData.coachRole) ? recruiterData.coachRole.join(', ') : (recruiterData.coachRole || 'Coach'),
+              organization: recruiterData.organization || '',
+              position: Array.isArray(recruiterData.coachRole) ? recruiterData.coachRole.join(', ') : (recruiterData.coachRole || 'Coach'),
+              genderCoached: recruiterData.genderCoached || [],
+              coachingLicense: recruiterData.coachingLicense || null,
+              positionsLookingFor: recruiterData.positionsLookingFor || [],
+              lookingForMembers: recruiterData.lookingForMembers || false,
+              achievements: recruiterData.achievements?.filter((a: any) => a && a.title).map((a: any) => `${a.title || ''}${a.year ? ` (${a.year})` : ''}${a.description ? `: ${a.description}` : ''}`).filter(Boolean) || [],
+              age: playerData.dateOfBirth ? Math.floor((Date.now() - new Date(playerData.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : 0,
+              clubId: currentClubId,
+            },
+          } : undefined,
         },
         include: {
           player: {
@@ -694,6 +727,28 @@ export async function POST(request: NextRequest) {
               clubHistory: true,
             },
           },
+          recruiter: true,
+        },
+      })
+
+      // Create the Hybrid profile record as well
+      await prisma.hybrid.create({
+        data: {
+          userId: user.id,
+          firstName: firstName,
+          lastName: lastName,
+          dateOfBirth: playerData.dateOfBirth ? new Date(playerData.dateOfBirth) : null,
+          gender: mapGenderToEnum(playerData.gender),
+          nationality: playerData.nationality || 'Swiss',
+          canton: sanitizedCanton,
+          municipality: playerData.municipality || null,
+          phone: playerData.phone || null,
+          bio: playerData.bio || recruiterData?.bio || null,
+          profileImage: playerData.profileImage || recruiterData?.profileImage || null,
+          instagram: playerData.instagram || null,
+          tiktok: playerData.tiktok || null,
+          youtube: playerData.youtube || null,
+          achievements: [],
         },
       })
 

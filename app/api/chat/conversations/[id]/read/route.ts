@@ -17,7 +17,8 @@ export async function PATCH(
 
     // Verify user is participant
     let canMarkAsRead = false
-    let oppositeType: 'PLAYER' | 'RECRUITER' | null = null
+    let currentUserId: string | null = null
+    let isRecruiterChat = false
 
     if (session.user.role === 'PLAYER') {
       const player = await prisma.player.findFirst({
@@ -32,10 +33,10 @@ export async function PATCH(
         })
         if (conversation) {
           canMarkAsRead = true
-          oppositeType = 'RECRUITER'
+          currentUserId = player.id
         }
       }
-    } else if (session.user.role === 'RECRUITER') {
+    } else if (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') {
       const recruiter = await prisma.recruiter.findFirst({
         where: { userId: session.user.id }
       })
@@ -43,32 +44,55 @@ export async function PATCH(
         const conversation = await prisma.conversation.findFirst({
           where: {
             id: params.id,
-            recruiterId: recruiter.id
+            OR: [
+              { recruiterId: recruiter.id },
+              { secondRecruiterId: recruiter.id }
+            ]
           }
         })
         if (conversation) {
           canMarkAsRead = true
-          oppositeType = 'PLAYER'
+          currentUserId = recruiter.id
+          // Check if this is a recruiter-to-recruiter chat
+          isRecruiterChat = conversation.playerId === null && conversation.secondRecruiterId !== null
         }
       }
     }
 
-    if (!canMarkAsRead || !oppositeType) {
+    if (!canMarkAsRead || !currentUserId) {
       return NextResponse.json({ error: 'Zugriff verweigert' }, { status: 403 })
     }
 
-    // Mark all unread messages from opponent as read
-    const result = await prisma.message.updateMany({
-      where: {
-        conversationId: params.id,
-        senderType: oppositeType,
-        status: { not: 'READ' }
-      },
-      data: {
-        status: 'READ',
-        readAt: new Date()
-      }
-    })
+    // Mark all unread messages from opponent(s) as read
+    let result
+    if (isRecruiterChat) {
+      // For recruiter-to-recruiter chat, mark messages not from current user
+      result = await prisma.message.updateMany({
+        where: {
+          conversationId: params.id,
+          senderId: { not: currentUserId },
+          status: { not: 'READ' }
+        },
+        data: {
+          status: 'READ',
+          readAt: new Date()
+        }
+      })
+    } else {
+      // For player-recruiter chat, use sender type
+      const oppositeType = session.user.role === 'PLAYER' ? 'RECRUITER' : 'PLAYER'
+      result = await prisma.message.updateMany({
+        where: {
+          conversationId: params.id,
+          senderType: oppositeType,
+          status: { not: 'READ' }
+        },
+        data: {
+          status: 'READ',
+          readAt: new Date()
+        }
+      })
+    }
 
     return NextResponse.json({ 
       success: true, 

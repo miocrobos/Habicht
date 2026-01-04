@@ -133,7 +133,7 @@ async function importPlayers() {
             positions: [mapPosition(player.position)], // Changed from position to positions array
             jerseyNumber: player.jerseyNumber,
             currentClubId: club.id,
-            currentLeague: mapLeague(team.league),
+            currentLeagues: [mapLeague(team.league)],
             profileImage: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(player.name),
             isActive: true,
             lookingForClub: false,

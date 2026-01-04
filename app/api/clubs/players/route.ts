@@ -108,7 +108,7 @@ export async function GET(request: Request) {
     }
     if (league) {
       // Convert league display value to enum
-      playerWhere.currentLeague = convertLeagueToEnum(league)
+      playerWhere.currentLeagues = { has: convertLeagueToEnum(league) }
     }
     if (position) {
       // Filter by position (array contains)
@@ -144,7 +144,7 @@ export async function GET(request: Request) {
             canton: true,
             municipality: true,
             profileImage: true,
-            currentLeague: true,
+            currentLeagues: true,
             isActive: true,
             lookingForClub: true,
             user: {

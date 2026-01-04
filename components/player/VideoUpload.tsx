@@ -59,7 +59,7 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
       setUploadProgress(0)
       onUploadComplete?.()
       
-      toast.success('Video erfolgreich hochgeladen!')
+      toast.success(t('toast.videoUploaded'))
     } catch (error) {
       console.error('Upload error:', error)
       toast.error(t('errors.videoUploadError'))
@@ -97,7 +97,7 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
       setExternalUrl('')
       onUploadComplete?.()
       
-      toast.success('Video erfolgreich hinzugefügt!')
+      toast.success(t('toast.videoAdded'))
     } catch (error) {
       console.error('Error adding video:', error)
       toast.error(t('errors.videoAddError'))

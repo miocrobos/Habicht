@@ -16,7 +16,8 @@ export default function RecruitersPage() {
     canton: '',
     genderCoached: '',
     positionLookingFor: '',
-    lookingForMembers: ''
+    lookingForMembers: '',
+    userType: '', // Filter by RECRUITER or HYBRID
   })
   const [searchDebounce, setSearchDebounce] = useState('')
 
@@ -30,7 +31,7 @@ export default function RecruitersPage() {
 
   useEffect(() => {
     loadRecruiters()
-  }, [searchDebounce, filters.canton, filters.genderCoached, filters.positionLookingFor, filters.lookingForMembers])
+  }, [searchDebounce, filters.canton, filters.genderCoached, filters.positionLookingFor, filters.lookingForMembers, filters.userType])
 
   const loadRecruiters = async () => {
     try {
@@ -60,11 +61,12 @@ export default function RecruitersPage() {
       canton: '',
       genderCoached: '',
       positionLookingFor: '',
-      lookingForMembers: ''
+      lookingForMembers: '',
+      userType: '',
     })
   }
 
-  const hasActiveFilters = filters.search || filters.canton || filters.genderCoached || filters.positionLookingFor || filters.lookingForMembers
+  const hasActiveFilters = filters.search || filters.canton || filters.genderCoached || filters.positionLookingFor || filters.lookingForMembers || filters.userType
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -174,6 +176,22 @@ export default function RecruitersPage() {
                 <option value="">{t('playerProfile.all')}</option>
                 <option value="MALE">{t('playerProfile.men')}</option>
                 <option value="FEMALE">{t('playerProfile.women')}</option>
+              </select>
+            </div>
+
+            {/* User Type - Recruiter/Hybrid filter */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {t('recruiters.userTypeLabel')}
+              </label>
+              <select
+                value={filters.userType}
+                onChange={(e) => handleFilterChange('userType', e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+              >
+                <option value="">{t('recruiters.userTypeAll')}</option>
+                <option value="RECRUITER">{t('recruiters.userTypeRecruiter')}</option>
+                <option value="HYBRID">{t('recruiters.userTypeHybrid')}</option>
               </select>
             </div>
 

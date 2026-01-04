@@ -127,7 +127,7 @@ async function importData() {
                 positions: playerData.position ? [mapPosition(playerData.position)] : [],
                 jerseyNumber: playerData.jerseyNumber,
                 currentClubId: club.id,
-                currentLeague: mappedLeague,
+                currentLeagues: [mappedLeague],
               }
             })
             console.log(`  ↻ Updated: ${playerData.name}`)
@@ -171,7 +171,7 @@ async function importData() {
                 canton: teamData.canton as Canton,
                 city: teamData.town,
                 currentClubId: club.id,
-                currentLeague: mappedLeague,
+                currentLeagues: [mappedLeague],
                 bio: `Professional volleyball player from ${playerData.nationality}`,
                 profileImage: '/players/default.jpg',
               }

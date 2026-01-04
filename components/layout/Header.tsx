@@ -96,12 +96,16 @@ export default function Header() {
       fetchUnreadCount()
       const interval = setInterval(fetchUnreadCount, 30000)
       
-      // Fetch watchlist count for recruiters and hybrids
+      // Fetch watchlist notification count (unread WATCHLIST_UPDATE notifications) for recruiters and hybrids
       const fetchWatchlistCount = async () => {
         if (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') {
           try {
-            const response = await axios.get('/api/watchlist')
-            setWatchlistCount(response.data.watchlist?.length || 0)
+            // Fetch unread watchlist notifications count
+            const response = await axios.get('/api/auth/user/notifications?limit=100')
+            const unreadWatchlistNotifications = (response.data.notifications || []).filter(
+              (n: any) => n.type === 'WATCHLIST_UPDATE' && !n.read
+            )
+            setWatchlistCount(unreadWatchlistNotifications.length)
           } catch (error) {
             console.error('Error fetching watchlist count:', error)
           }
@@ -175,6 +179,16 @@ export default function Header() {
                 {t('nav.myProfile')}
               </Link>
             )}
+            {session?.user.role === 'HYBRID' && (
+              <Link href={`/hybrids/${session.user.id}`} className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition text-sm xl:text-base whitespace-nowrap">
+                {t('nav.myProfile')}
+              </Link>
+            )}
+            {session?.user.role === 'RECRUITER' && session?.user.recruiterId && (
+              <Link href={`/recruiters/${session.user.recruiterId}`} className="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition text-sm xl:text-base whitespace-nowrap">
+                {t('nav.myProfile')}
+              </Link>
+            )}
           </nav>
 
           {/* Right side buttons */}
@@ -185,6 +199,7 @@ export default function Header() {
                 href="/watchlist" 
                 className="flex items-center justify-center w-10 h-10 text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition relative"
                 title={t('nav.watchlist')}
+                onClick={() => setWatchlistCount(0)}
               >
                 <Bookmark className="w-5 h-5" />
                 {watchlistCount > 0 && (
@@ -417,12 +432,32 @@ export default function Header() {
                       <span className="whitespace-nowrap">{t('nav.myProfile')}</span>
                     </Link>
                   )}
+                  {session.user.role === 'HYBRID' && (
+                    <Link 
+                      href={`/hybrids/${session.user.id}`} 
+                      className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition font-medium"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <UserCircle className="w-5 h-5 flex-shrink-0" />
+                      <span className="whitespace-nowrap">{t('nav.myProfile')}</span>
+                    </Link>
+                  )}
+                  {session.user.role === 'RECRUITER' && session.user.recruiterId && (
+                    <Link 
+                      href={`/recruiters/${session.user.recruiterId}`} 
+                      className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 transition font-medium"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <UserCircle className="w-5 h-5 flex-shrink-0" />
+                      <span className="whitespace-nowrap">{t('nav.myProfile')}</span>
+                    </Link>
+                  )}
                   
                   {(session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') && (
                     <Link 
                       href="/watchlist" 
                       className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={() => { setIsMenuOpen(false); setWatchlistCount(0); }}
                     >
                       <Bookmark className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
                       <span className="whitespace-nowrap">{t('nav.watchlist')}</span>

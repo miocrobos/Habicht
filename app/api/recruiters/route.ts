@@ -11,13 +11,11 @@ export async function GET(request: NextRequest) {
     const genderCoached = searchParams.get('genderCoached') || ''
     const positionLookingFor = searchParams.get('positionLookingFor') || ''
     const lookingForMembers = searchParams.get('lookingForMembers') === 'true'
+    const userType = searchParams.get('userType') || ''
 
-    // Build where clause
+    // Build where clause - show all active recruiters (users with Recruiter profiles)
     const where: any = {
       isActive: true,
-      user: {
-        emailVerified: true, // Only show verified recruiters
-      },
     }
 
     // Search filter
@@ -53,14 +51,23 @@ export async function GET(request: NextRequest) {
       where.lookingForMembers = true
     }
 
+    // User type filter (RECRUITER or HYBRID) - only apply if explicitly requested
+    if (userType) {
+      where.user = {
+        role: userType,
+      }
+    }
+
     // Fetch recruiters
     const recruiters = await prisma.recruiter.findMany({
       where,
       include: {
         user: {
           select: {
+            id: true,
             email: true,
             emailVerified: true,
+            role: true,
           },
         },
         club: {

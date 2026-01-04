@@ -3,13 +3,17 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { MapPin } from 'lucide-react'
+import { MapPin, MessageCircle } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 import CantonFlag from '@/components/shared/CantonFlag'
 import AuthRequiredModal from '@/components/shared/AuthRequiredModal'
+import ChatWindow from '@/components/chat/ChatWindow'
 import { getCantonInfo } from '@/lib/swissData'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { calculateAge } from '@/lib/ageUtils'
+import { toast } from 'react-hot-toast'
 
 // League translation helper
 const getLeagueLabel = (league: string, t: (key: string) => string) => {
@@ -37,8 +41,10 @@ export default function PlayerCard({ player }: { player: any }) {
   const { data: session } = useSession()
   const router = useRouter()
   const [showAuthModal, setShowAuthModal] = useState(false)
+  const [showChat, setShowChat] = useState(false)
+  const [conversationId, setConversationId] = useState<string | null>(null)
   const cantonInfo = getCantonInfo(player.canton)
-  const age = player.dateOfBirth ? Math.floor((new Date().getTime() - new Date(player.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : null
+  const age = calculateAge(player.dateOfBirth)
   
   // Handle card click - check auth before navigation
   const handleCardClick = (e: React.MouseEvent) => {
@@ -46,7 +52,27 @@ export default function PlayerCard({ player }: { player: any }) {
     if (!session) {
       setShowAuthModal(true)
     } else {
-      router.push(`/players/${player.id}`)
+      // Route to hybrid profile for HYBRID users, player profile otherwise
+      const targetUrl = player.user?.role === 'HYBRID' ? `/hybrids/${player.user.id}` : `/players/${player.id}`
+      router.push(targetUrl)
+    }
+  }
+
+  // Start chat with this player (for recruiters/hybrids)
+  const handleStartChat = async (e: React.MouseEvent) => {
+    e.stopPropagation() // Prevent card click navigation
+    if (!session || !player.user?.id) return
+    
+    try {
+      // Try to find existing conversation or create a new one
+      const response = await axios.post('/api/chat/conversations', {
+        participantId: player.user.id
+      })
+      setConversationId(response.data.conversationId)
+      setShowChat(true)
+    } catch (error: any) {
+      console.error('Error starting chat:', error)
+      toast.error(t('chat.errorStarting') || 'Fehler beim Starten des Chats')
     }
   }
 
@@ -131,24 +157,53 @@ export default function PlayerCard({ player }: { player: any }) {
               <MapPin className="w-2.5 h-2.5 sm:w-4 sm:h-4 flex-shrink-0" />
               <span className="truncate max-w-[120px] sm:max-w-none">{player.municipality ? `${player.municipality}, ` : ''}{cantonInfo.name}</span>
             </div>
-            {player.currentLeague && player.currentClub && (
+            {player.currentLeagues && player.currentLeagues.length > 0 && player.currentClub && (
               <span
                 className="inline-block mt-0.5 px-1.5 sm:px-3 py-0.5 sm:py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-[9px] sm:text-xs font-semibold truncate max-w-full"
-                title={getLeagueLabel(player.currentLeague, t)}
+                title={player.currentLeagues.map((league: string) => getLeagueLabel(league, t)).join(', ')}
               >
-                {getLeagueLabel(player.currentLeague, t)}
+                {player.currentLeagues.map((league: string) => getLeagueLabel(league, t)).join(', ')}
               </span>
             )}
           </div>
+
+          {/* Chat Button - Only visible to RECRUITER and HYBRID users */}
+          {session && session.user && (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') && player.user?.id && session.user.id !== player.user.id && (
+            <button
+              onClick={handleStartChat}
+              className="mt-2 w-full flex items-center justify-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold text-xs sm:text-sm"
+            >
+              <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              {t('chat.sendMessage') || 'Nachricht'}
+            </button>
+          )}
         </div>
       </div>
     </div>
+    
+    {/* Chat Window */}
+    {showChat && conversationId && session && (
+      <div className="fixed bottom-4 right-4 z-50">
+        <ChatWindow
+          conversationId={conversationId}
+          otherParticipant={{
+            id: player.user.id,
+            name: `${player.firstName} ${player.lastName}`,
+            type: 'PLAYER',
+            position: player.positions?.[0] || undefined
+          }}
+          currentUserId={session.user.id}
+          currentUserType={session.user.role as 'PLAYER' | 'RECRUITER' | 'HYBRID'}
+          onClose={() => setShowChat(false)}
+        />
+      </div>
+    )}
     
     {/* Auth Required Modal */}
     <AuthRequiredModal 
       isOpen={showAuthModal} 
       onClose={() => setShowAuthModal(false)}
-      returnUrl={`/players/${player.id}`}
+      returnUrl={player.user?.role === 'HYBRID' ? `/hybrids/${player.user.id}` : `/players/${player.id}`}
     />
   </>
   )

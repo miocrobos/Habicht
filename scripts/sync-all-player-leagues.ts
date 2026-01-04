@@ -48,15 +48,16 @@ async function syncAllPlayerLeagues() {
         const leagueString = currentClubHistory.league
         const leagueFromHistory = leagueMap[leagueString] || leagueString as League
         
-        // Only update if different from current league
-        if (player.currentLeague !== leagueFromHistory) {
+        // Only update if different from current leagues
+        const currentLeague = player.currentLeagues?.[0];
+        if (currentLeague !== leagueFromHistory) {
           await prisma.player.update({
             where: { id: player.id },
-            data: { currentLeague: leagueFromHistory }
+            data: { currentLeagues: [leagueFromHistory] }
           })
           
           console.log(`✓ Updated ${player.firstName} ${player.lastName}`)
-          console.log(`  Old League: ${player.currentLeague || 'None'}`)
+          console.log(`  Old League: ${currentLeague || 'None'}`)
           console.log(`  New League: ${leagueFromHistory}`)
           console.log(`  Club: ${currentClubHistory.clubName}\n`)
           updated++

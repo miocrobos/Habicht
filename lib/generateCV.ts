@@ -1,5 +1,6 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { calculateAge } from '@/lib/ageUtils';
 
 interface PlayerData {
   firstName: string;
@@ -17,7 +18,7 @@ interface PlayerData {
   municipality?: string | null;
   phone?: string | null;
   positions: string[];
-  currentLeague?: string | null;
+  currentLeagues?: string[];
   bio?: string | null;
   achievements?: string[];
   profileImage?: string | null;
@@ -558,7 +559,7 @@ export async function generatePlayerCV(playerData: PlayerData, language: string 
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
 
-  const age = playerData.dateOfBirth ? new Date().getFullYear() - new Date(playerData.dateOfBirth).getFullYear() : null;
+  const age = calculateAge(playerData.dateOfBirth);
   
   // Build narrative text instead of table
   const genderText = playerData.gender === 'MALE' ? translations.male as string : translations.female as string;

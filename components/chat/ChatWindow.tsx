@@ -249,16 +249,16 @@ export default function ChatWindow({
   }
 
   return (
-    <div className="fixed bottom-4 right-4 w-96 max-w-[calc(100vw-2rem)] h-[500px] max-h-[calc(100vh-2rem)] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden border-2 border-gray-200 dark:border-gray-700" style={{ zIndex: 9999 }}>
+    <div className="fixed inset-0 sm:inset-auto sm:bottom-4 sm:right-4 w-full sm:w-96 sm:max-w-[calc(100vw-2rem)] h-full sm:h-[500px] sm:max-h-[calc(100vh-2rem)] bg-white dark:bg-gray-800 sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden border-0 sm:border-2 border-gray-200 dark:border-gray-700" style={{ zIndex: 9999 }}>
       {/* Header */}
-      <div className="flex-shrink-0 bg-red-700 dark:bg-red-800 text-white px-4 py-3 rounded-t-2xl flex items-center justify-between">
+      <div className="flex-shrink-0 bg-red-700 dark:bg-red-800 text-white px-4 py-3 sm:rounded-t-2xl flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center font-bold">
             {otherParticipant.name.charAt(0)}
           </div>
           <div>
-            <h3 className="font-bold">{otherParticipant.name}</h3>
-            <p className="text-xs text-white/80">
+            <h3 className="font-bold text-sm sm:text-base truncate max-w-[180px] sm:max-w-none">{otherParticipant.name}</h3>
+            <p className="text-xs text-white/80 truncate max-w-[180px] sm:max-w-none">
               {otherParticipant.type === 'RECRUITER' ? `Coach • ${otherParticipant.club}` : otherParticipant.position}
             </p>
           </div>
@@ -368,7 +368,7 @@ export default function ChatWindow({
       </div>
 
       {/* Input */}
-      <form onSubmit={sendMessage} className="flex-shrink-0 p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-b-2xl">
+      <form onSubmit={sendMessage} className="flex-shrink-0 p-3 sm:p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 sm:rounded-b-2xl pb-safe">
         {/* File Preview */}
         {selectedFile && (
           <div className="mb-3 p-2 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center gap-2">

@@ -941,7 +941,7 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                     const currentUserIsPlayer = session?.user?.playerId && conversation.playerId === session?.user?.playerId;
                     if (currentUserIsPlayer) {
                       otherName = `${conversation.recruiter.firstName} ${conversation.recruiter.lastName}`;
-                      otherRole = conversation.recruiter.coachRole || t('common.recruiter') || 'Recruiter';
+                      otherRole = getTranslatedCoachRole(conversation.recruiter.coachRole, t) || t('common.recruiter') || 'Recruiter';
                       otherClub = conversation.recruiter.club?.name || '';
                       profileLink = `/recruiters/${conversation.recruiter.id}`;
                       profileImage = conversation.recruiter.profileImage || '';
@@ -957,7 +957,7 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                     const isFirst = conversation.recruiterId === currentRecruiterId;
                     const other = isFirst ? conversation.secondRecruiter : conversation.recruiter;
                     otherName = `${other.firstName} ${other.lastName}`;
-                    otherRole = other.coachRole || t('common.recruiter') || 'Recruiter';
+                    otherRole = getTranslatedCoachRole(other.coachRole, t) || t('common.recruiter') || 'Recruiter';
                     otherClub = other.club?.name || '';
                     profileLink = `/recruiters/${other.id}`;
                     profileImage = other.profileImage || '';
@@ -968,7 +968,7 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                   return (
                     <div
                       key={conversation.id}
-                      className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md transition cursor-pointer"
+                      className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md transition cursor-pointer active:bg-gray-100 dark:active:bg-gray-600/50"
                       onClick={() => openChat(conversation)}
                     >
                       {/* Avatar */}
@@ -977,11 +977,11 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                           <img 
                             src={profileImage} 
                             alt={otherName}
-                            className="w-12 h-12 rounded-full object-cover"
+                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
                           />
                         ) : (
-                          <div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
-                            <span className="text-lg font-bold text-orange-600 dark:text-orange-400">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+                            <span className="text-base sm:text-lg font-bold text-orange-600 dark:text-orange-400">
                               {otherName.charAt(0)}
                             </span>
                           </div>
@@ -991,20 +991,20 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                       {/* Conversation Info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2">
-                          <h4 className="font-semibold text-gray-900 dark:text-white truncate">
+                          <h4 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-white truncate">
                             {otherName}
                           </h4>
                           {lastMessage && (
-                            <span className="text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">
+                            <span className="text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">
                               {new Date(lastMessage.createdAt).toLocaleDateString()}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                        <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 truncate">
                           {otherRole}{otherClub ? ` • ${otherClub}` : ''}
                         </p>
                         {lastMessage && (
-                          <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-1">
+                          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate mt-0.5 sm:mt-1">
                             {lastMessage.content}
                           </p>
                         )}

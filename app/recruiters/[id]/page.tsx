@@ -1108,12 +1108,12 @@ const handleExportCV = async (language: string) => {
           {/* Messages Tab Content - Only visible to owner */}
           {activeTab === 'messages' && isOwner && (
             <div>
-              <div className="mb-4">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                  <MessageCircle className="w-5 h-5 text-purple-500" />
+              <div className="mb-3 sm:mb-4">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                  <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500" />
                   {t('settings.messages.title') || 'Messages'}
                 </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
                   {t('settings.messages.subtitle') || 'Your conversations with other users'}
                 </p>
               </div>
@@ -1159,7 +1159,7 @@ const handleExportCV = async (language: string) => {
                       const isFirst = conversation.recruiterId === currentRecruiterId;
                       const other = isFirst ? conversation.secondRecruiter : conversation.recruiter;
                       otherName = `${other.firstName} ${other.lastName}`;
-                      otherRole = other.coachRole || t('common.recruiter') || 'Recruiter';
+                      otherRole = getTranslatedCoachRole(other.coachRole, t) || t('common.recruiter') || 'Recruiter';
                       otherClub = other.club?.name || '';
                       profileLink = `/recruiters/${other.id}`;
                       profileImage = other.profileImage || '';
@@ -1170,7 +1170,7 @@ const handleExportCV = async (language: string) => {
                     return (
                       <div
                         key={conversation.id}
-                        className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md transition cursor-pointer"
+                        className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md transition cursor-pointer active:bg-gray-100 dark:active:bg-gray-600/50"
                         onClick={() => openChatFromList(conversation)}
                       >
                         <div className="flex-shrink-0">
@@ -1178,11 +1178,11 @@ const handleExportCV = async (language: string) => {
                             <img 
                               src={profileImage} 
                               alt={otherName}
-                              className="w-12 h-12 rounded-full object-cover"
+                              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
                             />
                           ) : (
-                            <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                              <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                              <span className="text-base sm:text-lg font-bold text-purple-600 dark:text-purple-400">
                                 {otherName.charAt(0)}
                               </span>
                             </div>
@@ -1190,18 +1190,18 @@ const handleExportCV = async (language: string) => {
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-2">
-                            <h4 className="font-semibold text-gray-900 dark:text-white truncate">{otherName}</h4>
+                            <h4 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-white truncate">{otherName}</h4>
                             {lastMessage && (
-                              <span className="text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">
+                              <span className="text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">
                                 {new Date(lastMessage.createdAt).toLocaleDateString()}
                               </span>
                             )}
                           </div>
-                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                          <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 truncate">
                             {otherRole}{otherClub ? ` • ${otherClub}` : ''}
                           </p>
                           {lastMessage && (
-                            <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-1">
+                            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate mt-0.5 sm:mt-1">
                               {lastMessage.content}
                             </p>
                           )}

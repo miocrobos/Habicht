@@ -71,150 +71,252 @@ export async function GET(request: Request) {
         where: { userId: session.user.id }
       })
 
-      if (recruiter) {
-        // Get player conversations (where recruiter is primary)
-        const playerConversations = await prisma.conversation.findMany({
-          where: { 
-            recruiterId: recruiter.id,
-            playerId: { not: null },
-            isActive: true
+      // For HYBRID users, also get their player profile
+      const player = session.user.role === 'HYBRID' ? await prisma.player.findFirst({
+        where: { userId: session.user.id }
+      }) : null
+
+      // Get player conversations (where recruiter is primary)
+      const playerConversations = recruiter ? await prisma.conversation.findMany({
+        where: { 
+          recruiterId: recruiter.id,
+          playerId: { not: null },
+          isActive: true
+        },
+        include: {
+          player: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              positions: true,
+              currentLeagues: true,
+              profileImage: true,
+              currentClub: {
+                select: { name: true }
+              },
+              user: {
+                select: { id: true }
+              }
+            }
           },
-          include: {
-            player: {
-              select: {
-                id: true,
-                firstName: true,
-                lastName: true,
-                positions: true,
-                currentLeagues: true,
-                profileImage: true,
-                user: {
-                  select: { id: true }
+          recruiter: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              coachRole: true,
+              profileImage: true,
+              club: {
+                select: { name: true }
+              }
+            }
+          },
+          messages: {
+            orderBy: { createdAt: 'desc' },
+            take: 1
+          },
+          _count: {
+            select: {
+              messages: {
+                where: {
+                  senderType: 'PLAYER',
+                  status: { not: 'READ' }
                 }
               }
-            },
-            messages: {
-              orderBy: { createdAt: 'desc' },
-              take: 1
-            },
-            _count: {
-              select: {
-                messages: {
-                  where: {
-                    senderType: 'PLAYER',
-                    status: { not: 'READ' }
-                  }
+            }
+          }
+        },
+        orderBy: { lastMessageAt: 'desc' }
+      }) : []
+
+      // For HYBRID users - get conversations where they are the PLAYER
+      const hybridAsPlayerConversations = player ? await prisma.conversation.findMany({
+        where: { 
+          playerId: player.id,
+          isActive: true
+        },
+        include: {
+          player: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              positions: true,
+              currentLeagues: true,
+              profileImage: true,
+              currentClub: {
+                select: { name: true }
+              },
+              user: {
+                select: { id: true }
+              }
+            }
+          },
+          recruiter: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              coachRole: true,
+              profileImage: true,
+              club: {
+                select: { name: true }
+              },
+              user: {
+                select: { name: true }
+              }
+            }
+          },
+          messages: {
+            orderBy: { createdAt: 'desc' },
+            take: 1
+          },
+          _count: {
+            select: {
+              messages: {
+                where: {
+                  senderType: 'RECRUITER',
+                  status: { not: 'READ' }
+                }
+              }
+            }
+          }
+        },
+        orderBy: { lastMessageAt: 'desc' }
+      }) : []
+
+      // Get recruiter-to-recruiter conversations (as initiator)
+      const recruiterConversationsAsInitiator = recruiter ? await prisma.conversation.findMany({
+        where: { 
+          recruiterId: recruiter.id,
+          secondRecruiterId: { not: null },
+          playerId: null,
+          isActive: true
+        },
+        include: {
+          recruiter: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              coachRole: true,
+              profileImage: true,
+              club: {
+                select: { name: true }
+              }
+            }
+          },
+          secondRecruiter: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              coachRole: true,
+              profileImage: true,
+              club: {
+                select: { name: true }
+              },
+              user: {
+                select: {
+                  id: true,
+                  name: true
                 }
               }
             }
           },
-          orderBy: { lastMessageAt: 'desc' }
-        })
-
-        // Get recruiter-to-recruiter conversations (as initiator)
-        const recruiterConversationsAsInitiator = await prisma.conversation.findMany({
-          where: { 
-            recruiterId: recruiter.id,
-            secondRecruiterId: { not: null },
-            playerId: null,
-            isActive: true
+          messages: {
+            orderBy: { createdAt: 'desc' },
+            take: 1
           },
-          include: {
-            secondRecruiter: {
-              select: {
-                id: true,
-                firstName: true,
-                lastName: true,
-                coachRole: true,
-                profileImage: true,
-                club: {
-                  select: {
-                    name: true
-                  }
-                },
-                user: {
-                  select: {
-                    id: true,
-                    name: true
-                  }
+          _count: {
+            select: {
+              messages: {
+                where: {
+                  recruiterId: { not: recruiter.id },
+                  status: { not: 'READ' }
                 }
               }
-            },
-            messages: {
-              orderBy: { createdAt: 'desc' },
-              take: 1
-            },
-            _count: {
-              select: {
-                messages: {
-                  where: {
-                    recruiterId: { not: recruiter.id },
-                    status: { not: 'READ' }
-                  }
+            }
+          }
+        },
+        orderBy: { lastMessageAt: 'desc' }
+      }) : []
+
+      // Get recruiter-to-recruiter conversations (as recipient)
+      const recruiterConversationsAsRecipient = recruiter ? await prisma.conversation.findMany({
+        where: { 
+          secondRecruiterId: recruiter.id,
+          playerId: null,
+          isActive: true
+        },
+        include: {
+          recruiter: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              coachRole: true,
+              profileImage: true,
+              club: {
+                select: { name: true }
+              },
+              user: {
+                select: {
+                  id: true,
+                  name: true
                 }
               }
             }
           },
-          orderBy: { lastMessageAt: 'desc' }
-        })
-
-        // Get recruiter-to-recruiter conversations (as recipient)
-        const recruiterConversationsAsRecipient = await prisma.conversation.findMany({
-          where: { 
-            secondRecruiterId: recruiter.id,
-            playerId: null,
-            isActive: true
-          },
-          include: {
-            recruiter: {
-              select: {
-                id: true,
-                firstName: true,
-                lastName: true,
-                coachRole: true,
-                profileImage: true,
-                club: {
-                  select: {
-                    name: true
-                  }
-                },
-                user: {
-                  select: {
-                    id: true,
-                    name: true
-                  }
-                }
-              }
-            },
-            messages: {
-              orderBy: { createdAt: 'desc' },
-              take: 1
-            },
-            _count: {
-              select: {
-                messages: {
-                  where: {
-                    recruiterId: { not: recruiter.id },
-                    status: { not: 'READ' }
-                  }
-                }
+          secondRecruiter: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              coachRole: true,
+              profileImage: true,
+              club: {
+                select: { name: true }
               }
             }
           },
-          orderBy: { lastMessageAt: 'desc' }
-        })
+          messages: {
+            orderBy: { createdAt: 'desc' },
+            take: 1
+          },
+          _count: {
+            select: {
+              messages: {
+                where: {
+                  recruiterId: recruiter.id,
+                  status: { not: 'READ' }
+                }
+              }
+            }
+          }
+        },
+        orderBy: { lastMessageAt: 'desc' }
+      }) : []
 
-        // Combine all conversations
-        conversations = [
-          ...playerConversations,
-          ...recruiterConversationsAsInitiator,
-          ...recruiterConversationsAsRecipient
-        ].sort((a, b) => {
-          const aTime = a.lastMessageAt?.getTime() || 0
-          const bTime = b.lastMessageAt?.getTime() || 0
-          return bTime - aTime
-        })
-      }
+      // Combine all conversations, removing duplicates for hybrids
+      const allConversations = [
+        ...playerConversations,
+        ...hybridAsPlayerConversations,
+        ...recruiterConversationsAsInitiator,
+        ...recruiterConversationsAsRecipient
+      ]
+      
+      // Remove duplicates (a hybrid might see same conversation twice)
+      const uniqueConversations = allConversations.filter((conv, index, self) => 
+        index === self.findIndex(c => c.id === conv.id)
+      )
+      
+      conversations = uniqueConversations.sort((a, b) => {
+        const aTime = a.lastMessageAt?.getTime() || 0
+        const bTime = b.lastMessageAt?.getTime() || 0
+        return bTime - aTime
+      })
     }
 
     return NextResponse.json({ conversations })

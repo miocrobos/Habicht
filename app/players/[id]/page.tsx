@@ -19,6 +19,18 @@ import { calculateAge } from '@/lib/ageUtils'
 import { BACKGROUND_OPTIONS } from '@/components/shared/backgroundOptions'
 import axios from 'axios'
 
+// Helper function to translate coach role
+const getTranslatedCoachRole = (role: string, t: any) => {
+  if (!role) return '';
+  // Handle comma-separated roles
+  const roles = role.split(',').map(r => r.trim());
+  return roles.map(r => {
+    const roleKey = r.toLowerCase().replace(/ /g, '_') as 'head_coach' | 'assistant_coach' | 'technical_coach' | 'physical_coach' | 'scout' | 'trainer' | 'team_manager';
+    const translation = t(`coachRole.${roleKey}`);
+    return translation && translation !== `coachRole.${roleKey}` ? translation : r.replace(/_/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase());
+  }).join(', ');
+};
+
 interface PlayerProfileProps {
   params: {
     id: string
@@ -1348,7 +1360,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                       if (!recruiter) return null
                       
                       const otherName = `${recruiter.firstName} ${recruiter.lastName}`
-                      const otherRole = recruiter.coachRole || t('common.recruiter') || 'Recruiter'
+                      const otherRole = getTranslatedCoachRole(recruiter.coachRole, t) || t('common.recruiter') || 'Recruiter'
                       const otherClub = recruiter.club?.name || ''
                       const lastMessage = conversation.messages?.[0]
                       const profileImage = recruiter.profileImage

@@ -969,7 +969,7 @@ const handleExportCV = async (language: string) => {
                       <Briefcase className="w-5 h-5 text-purple-500 mt-0.5" />
                       <div>
                         <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t('recruiterProfile.position') || 'Position'}</p>
-                        <p className="font-semibold text-gray-900 dark:text-white">{recruiter.position}</p>
+                        <p className="font-semibold text-gray-900 dark:text-white">{getTranslatedCoachRole(recruiter.position || recruiter.coachRole, t) || recruiter.position}</p>
                       </div>
                     </div>
                   </div>

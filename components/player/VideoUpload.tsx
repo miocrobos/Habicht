@@ -207,14 +207,14 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
             <input {...getInputProps()} />
             <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
             {isDragActive ? (
-              <p className="text-lg text-habicht-600">Drop video here...</p>
+              <p className="text-lg text-habicht-600">{t('playerProfile.dropVideoHere') || 'Drop video here...'}</p>
             ) : (
               <>
                 <p className="text-lg mb-2">
-                  Drag & drop dini Video hier, oder klick zum Usewähle
+                  {t('playerProfile.dragDropVideo') || 'Drag & drop your video here, or click to select'}
                 </p>
                 <p className="text-sm text-gray-500">
-                  MP4, MOV, AVI oder MKV (max. 500MB)
+                  {t('playerProfile.videoFormats') || 'MP4, MOV, AVI or MKV (max. 500MB)'}
                 </p>
               </>
             )}
@@ -223,7 +223,7 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
           {uploading && (
             <div className="mt-4">
               <div className="flex justify-between text-sm mb-1">
-                <span>Uploading...</span>
+                <span>{t('playerProfile.uploading') || 'Uploading...'}</span>
                 <span>{uploadProgress}%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
@@ -265,7 +265,7 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
             disabled={uploading || !title || !externalUrl}
             className="w-full bg-habicht-600 text-white py-3 rounded-lg font-semibold hover:bg-habicht-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {uploading ? 'Wird hinzugefügt...' : 'Video hinzufügen'}
+            {uploading ? (t('playerProfile.addingVideo') || 'Adding...') : (t('playerProfile.addVideo') || 'Add Video')}
           </button>
         </form>
       )}

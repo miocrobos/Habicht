@@ -375,27 +375,27 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
 
                     {activeTab === 'stats' && isPlayer(profile) && (
                       <div className="bg-gray-50 rounded-xl p-6">
-                        <h3 className="font-semibold text-gray-900 mb-4">Statistiken</h3>
+                        <h3 className="font-semibold text-gray-900 mb-4">{t('playerProfile.physicalStats') || 'Statistics'}</h3>
                         {profile.stats && profile.stats.length > 0 ? (
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             {/* Stats display here */}
-                            <p className="col-span-full text-gray-600">Statistiken werden geladen...</p>
+                            <p className="col-span-full text-gray-600">{t('playerProfile.loadingProfile') || 'Loading...'}</p>
                           </div>
                         ) : (
-                          <p className="text-gray-600">Noch keine Statistiken verfügbar</p>
+                          <p className="text-gray-600">{t('playerProfile.noAchievements') || 'No statistics available yet'}</p>
                         )}
                       </div>
                     )}
 
                     {activeTab === 'videos' && isPlayer(profile) && (
                       <div className="bg-gray-50 rounded-xl p-6">
-                        <h3 className="font-semibold text-gray-900 mb-4">Videos</h3>
+                        <h3 className="font-semibold text-gray-900 mb-4">{t('playerProfile.videos') || 'Videos'}</h3>
                         {profile.videos && profile.videos.length > 0 ? (
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {/* Videos display here */}
                           </div>
                         ) : (
-                          <p className="text-gray-600">Noch keine Videos hochgeladen</p>
+                          <p className="text-gray-600">{t('playerProfile.noVideos') || 'No videos uploaded yet'}</p>
                         )}
                       </div>
                     )}
@@ -405,7 +405,7 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
             </>
           ) : (
             <div className="p-8 text-center text-gray-600">
-              Profil nicht gefunden
+              {t('playerProfile.playerNotFound') || 'Profile not found'}
             </div>
           )}
         </div>

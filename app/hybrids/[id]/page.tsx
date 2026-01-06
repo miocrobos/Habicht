@@ -2,7 +2,7 @@
 "use client";
 import { toast } from 'react-hot-toast';
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import { Trophy, FileText, User, Briefcase, MapPin, Phone, Mail, Award, Globe, Bookmark, BookmarkPlus, Edit2, Loader2, Upload, Eye, MessageCircle } from "lucide-react";
@@ -48,6 +48,18 @@ const getPositionLabel = (position: string, t: any) => {
   return t(positionMap[position] || position);
 };
 
+// Helper function to translate coach role (handles comma-separated roles)
+const getTranslatedCoachRole = (role: string | null | undefined, t: any) => {
+  if (!role) return '';
+  // Handle comma-separated roles
+  const roles = role.split(',').map(r => r.trim());
+  return roles.map(r => {
+    const roleKey = r.toLowerCase().replace(/ /g, '_') as 'head_coach' | 'assistant_coach' | 'technical_coach' | 'physical_coach' | 'scout' | 'trainer' | 'team_manager';
+    const translation = t(`coachRole.${roleKey}`);
+    return translation && translation !== `coachRole.${roleKey}` ? translation : r.replace(/_/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase());
+  }).join(', ');
+};
+
 // Helper function to calculate age from date of birth
 const calculateAge = (dateOfBirth: string | null | undefined): number | null => {
   if (!dateOfBirth) return null;
@@ -74,6 +86,7 @@ const formatBirthDate = (dateString: string | null | undefined): string | null =
 export default function HybridProfilePage({ params }: { params: { id: string } }) {
   const { t } = useLanguage();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -82,7 +95,9 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
   const [cvExportLang, setCvExportLang] = useState<string | null>(null);
   const [showCvTypePopup, setShowCvTypePopup] = useState(false);
   const [showCvLangPopup, setShowCvLangPopup] = useState(false);
-  const [activeTab, setActiveTab] = useState<'player' | 'recruiter' | 'messages'>('player');
+  // Check URL param for initial tab - recruiter view from recruiter listing
+  const viewParam = searchParams.get('view');
+  const [activeTab, setActiveTab] = useState<'player' | 'recruiter' | 'messages'>(viewParam === 'recruiter' ? 'recruiter' : 'player');
   const [exportingCV, setExportingCV] = useState(false);
   const [zoomedLicense, setZoomedLicense] = useState<string | null>(null);
   const [isWatched, setIsWatched] = useState(false);
@@ -725,7 +740,7 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
             {/* Role Badge */}
             <div className="mb-4">
               <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-sm font-semibold rounded-full">
-                {profile.recruiter.coachRole || 'Recruiter'}
+                {getTranslatedCoachRole(profile.recruiter.coachRole, t) || t('common.recruiter') || 'Recruiter'}
               </span>
             </div>
             
@@ -1309,8 +1324,6 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                               customColor: backgroundData,
                             });
                           }
-                          
-                          toast.success(t('playerProfile.backgroundUpdated') || 'Background updated!');
                         } catch (error) {
                           console.error('Error updating background:', error);
                           toast.error(t('playerProfile.errorUpdatingBackground') || 'Error updating background');
@@ -1406,7 +1419,6 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                             });
                           }
                           
-                          toast.success(t('playerProfile.backgroundUpdated') || 'Background updated!');
                           setNewBackgroundImage('');
                         } catch (error) {
                           console.error('Error updating background:', error);

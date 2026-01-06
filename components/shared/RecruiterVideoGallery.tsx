@@ -107,7 +107,7 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
           className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
         >
           <Plus className="w-4 h-4" />
-          Add Video
+          {t('playerProfile.addVideo') || 'Add Video'}
         </button>
       )}
 
@@ -129,20 +129,20 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
                   </div>
                 ) : (
                   <div className="aspect-video bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                    <p className="text-gray-500 dark:text-gray-400">Invalid video URL</p>
+                    <p className="text-gray-500 dark:text-gray-400">{t('playerProfile.invalidVideoUrl') || 'Invalid video URL'}</p>
                   </div>
                 )}
                 
                 <div className="p-4">
                   <div className="flex items-start justify-between gap-2">
                     <h4 className="font-semibold text-gray-900 dark:text-white line-clamp-2">
-                      {video.title || 'Untitled Video'}
+                      {video.title || t('playerProfile.untitledVideo') || 'Untitled Video'}
                     </h4>
                     {isOwner && (
                       <button
                         onClick={() => handleDeleteVideo(video.id)}
                         className="flex-shrink-0 p-1 text-red-600 hover:text-red-700 transition"
-                        title="Delete video"
+                        title={t('playerProfile.deleteVideo') || 'Delete video'}
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -158,7 +158,7 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
         </div>
       ) : (
         <div className="text-center py-12 bg-gray-50 dark:bg-gray-900 rounded-lg">
-          <p className="text-gray-500 dark:text-gray-400">No videos uploaded yet</p>
+          <p className="text-gray-500 dark:text-gray-400">{t('playerProfile.noVideos') || 'No videos uploaded yet'}</p>
         </div>
       )}
 
@@ -167,7 +167,7 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 rounded-lg max-w-md w-full p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white">Add Video</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">{t('playerProfile.addVideo') || 'Add Video'}</h3>
               <button
                 onClick={() => setShowUploadModal(false)}
                 className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -179,13 +179,13 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Video Title
+                  {t('playerProfile.videoTitle') || 'Video Title'}
                 </label>
                 <input
                   type="text"
                   value={newVideoTitle}
                   onChange={(e) => setNewVideoTitle(e.target.value)}
-                  placeholder="Enter video title"
+                  placeholder={t('playerProfile.enterVideoTitle') || 'Enter video title'}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 bg-white dark:bg-gray-700 dark:text-white"
                 />
               </div>
@@ -202,7 +202,7 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 bg-white dark:bg-gray-700 dark:text-white"
                 />
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  Paste a YouTube video URL
+                  {t('playerProfile.pasteYoutubeUrl') || 'Paste a YouTube video URL'}
                 </p>
               </div>
 
@@ -211,14 +211,14 @@ export default function RecruiterVideoGallery({ recruiterId, isOwner }: Recruite
                   onClick={() => setShowUploadModal(false)}
                   className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition"
                 >
-                  Cancel
+                  {t('common.cancel') || 'Cancel'}
                 </button>
                 <button
                   onClick={handleUploadVideo}
                   disabled={!newVideoUrl || uploading}
                   className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {uploading ? 'Adding...' : 'Add Video'}
+                  {uploading ? (t('playerProfile.addingVideo') || 'Adding...') : (t('playerProfile.addVideo') || 'Add Video')}
                 </button>
               </div>
             </div>

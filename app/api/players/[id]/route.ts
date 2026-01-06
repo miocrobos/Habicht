@@ -4,6 +4,54 @@ import { getServerSession } from 'next-auth';
 import { sendPlayerLookingNotification, sendWatchlistUpdateNotification } from '@/lib/email';
 import { authOptions } from '@/lib/auth';
 
+// Sync player leagues to club's league flags
+async function syncPlayerLeaguesToClub(clubId: string, leagues: string[], gender: string | null | undefined) {
+  if (!clubId || !leagues.length) return;
+  
+  // Map league enum to club flag field name
+  const leagueToFlag: { [key: string]: { men: string; women: string } } = {
+    'NLA': { men: 'hasNLAMen', women: 'hasNLAWomen' },
+    'NLB': { men: 'hasNLBMen', women: 'hasNLBWomen' },
+    'FIRST_LEAGUE': { men: 'has1LigaMen', women: 'has1LigaWomen' },
+    'SECOND_LEAGUE': { men: 'has2LigaMen', women: 'has2LigaWomen' },
+    'THIRD_LEAGUE': { men: 'has3LigaMen', women: 'has3LigaWomen' },
+    'FOURTH_LEAGUE': { men: 'has4LigaMen', women: 'has4LigaWomen' },
+    'FIFTH_LEAGUE': { men: 'has5LigaMen', women: 'has5LigaWomen' },
+    'YOUTH_U23': { men: 'hasU23Men', women: 'hasU23Women' },
+    'YOUTH_U20': { men: 'hasU20Men', women: 'hasU20Women' },
+    'YOUTH_U18': { men: 'hasU18Men', women: 'hasU18Women' },
+  };
+  
+  // Build update data based on player's leagues and gender
+  const updateData: { [key: string]: boolean } = {};
+  
+  for (const league of leagues) {
+    const mapping = leagueToFlag[league];
+    if (mapping) {
+      // Set the appropriate flag based on gender
+      if (gender === 'MALE') {
+        updateData[mapping.men] = true;
+      } else if (gender === 'FEMALE') {
+        updateData[mapping.women] = true;
+      }
+      // If gender is not set, we can't determine which flag to set
+    }
+  }
+  
+  if (Object.keys(updateData).length > 0) {
+    try {
+      await prisma.club.update({
+        where: { id: clubId },
+        data: updateData,
+      });
+      console.log(`✅ Synced player leagues to club ${clubId}:`, updateData);
+    } catch (error) {
+      console.error('Error syncing player leagues to club:', error);
+      // Don't fail the request if club sync fails
+    }
+  }
+}
+
 // Normalize league display names to ensure consistent format
 function normalizeLeagueDisplay(league: string | null | undefined): string | undefined {
   if (!league || league === '') return undefined;
@@ -147,8 +195,7 @@ function detectProfileChanges(oldPlayer: any, newData: any, newLeagues: string[]
   if (skillChanges.length > 0) {
     changes.push(`Skill ratings updated: ${skillChanges.join(', ')}`);
   }
-  
-  // Check looking for club status
+    // Check looking for club status
   if (oldPlayer.lookingForClub !== newData.lookingForClub && newData.lookingForClub) {
     changes.push('Now looking for a club');
   }
@@ -405,6 +452,11 @@ export async function PUT(
           currentClubId: currentClubId
         }
       });
+
+      // Sync player's leagues to the club's league flags
+      if (currentClubId && currentLeagues.length > 0) {
+        await syncPlayerLeaguesToClub(currentClubId, currentLeagues, playerData.gender);
+      }
 
       // Create new club history entries, preserving existing website URLs
       if (clubHistory.length > 0) {

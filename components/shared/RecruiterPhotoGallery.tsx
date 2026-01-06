@@ -116,7 +116,7 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
           className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
         >
           <Plus className="w-4 h-4" />
-          Upload Photo
+          {t('common.uploadPhoto') || 'Upload Photo'}
         </button>
       )}
 
@@ -151,7 +151,7 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
         </div>
       ) : (
         <div className="text-center py-12 bg-gray-50 dark:bg-gray-900 rounded-lg">
-          <p className="text-gray-500 dark:text-gray-400">No photos uploaded yet</p>
+          <p className="text-gray-500 dark:text-gray-400">{t('common.noPhotosYet') || 'No photos yet'}</p>
         </div>
       )}
 
@@ -160,7 +160,7 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 rounded-lg max-w-md w-full p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white">Upload Photo</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">{t('common.uploadPhoto') || 'Upload Photo'}</h3>
               <button
                 onClick={() => setShowUploadModal(false)}
                 className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -171,7 +171,7 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
 
             <div className="space-y-4">
               <ImageUpload
-                label="Select Photo"
+                label={t('common.selectPhoto') || 'Select Photo'}
                 value={newPhotoUrl}
                 onChange={setNewPhotoUrl}
               />
@@ -181,14 +181,14 @@ export default function RecruiterPhotoGallery({ recruiterId, isOwner }: Recruite
                   onClick={() => setShowUploadModal(false)}
                   className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition"
                 >
-                  Cancel
+                  {t('common.cancel') || 'Cancel'}
                 </button>
                 <button
                   onClick={handleUploadPhoto}
                   disabled={!newPhotoUrl || uploading}
                   className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {uploading ? 'Uploading...' : 'Upload'}
+                  {uploading ? (t('common.uploading') || 'Uploading...') : (t('common.upload') || 'Upload')}
                 </button>
               </div>
             </div>

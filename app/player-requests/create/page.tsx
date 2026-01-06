@@ -15,45 +15,49 @@ interface Club {
   town: string
 }
 
-const positions = [
-  { value: 'OUTSIDE_HITTER', label: 'Aussespieler' },
-  { value: 'OPPOSITE', label: 'Diagonalspieler' },
-  { value: 'MIDDLE_BLOCKER', label: 'Mittelblocker' },
-  { value: 'SETTER', label: 'Zuspieler' },
-  { value: 'LIBERO', label: 'Libero' },
-  { value: 'UNIVERSAL', label: 'Universal' }
-]
-
-const contractTypes = [
-  { value: 'PROFESSIONAL', label: 'Professionell' },
-  { value: 'SEMI_PROFESSIONAL', label: 'Semi-Professionell' },
-  { value: 'AMATEUR', label: 'Amateur' },
-  { value: 'VOLUNTEER', label: 'Freiwillig' },
-  { value: 'INTERNSHIP', label: 'Praktikum' }
-]
-
-const leagues = [
-  { value: 'NLA', label: 'NLA' },
-  { value: 'NLB', label: 'NLB' },
-  { value: 'FIRST_LEAGUE', label: '1. Liga' },
-  { value: 'SECOND_LEAGUE', label: '2. Liga' },
-  { value: 'THIRD_LEAGUE', label: '3. Liga' },
-  { value: 'FOURTH_LEAGUE', label: '4. Liga' },
-  { value: 'FIFTH_LEAGUE', label: '5. Liga' },
-  { value: 'YOUTH_U23', label: 'U23' },
-  { value: 'YOUTH_U20', label: 'U20' },
-  { value: 'YOUTH_U18', label: 'U18' }
-]
-
-const genders = [
-  { value: 'MALE', label: 'Männer' },
-  { value: 'FEMALE', label: 'Fraue' }
-]
-
 export default function CreatePlayerRequestPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const { t } = useLanguage()
+
+  // Define positions with translation keys
+  const positions = [
+    { value: 'OUTSIDE_HITTER', labelKey: 'outsideHitter' },
+    { value: 'OPPOSITE', labelKey: 'opposite' },
+    { value: 'MIDDLE_BLOCKER', labelKey: 'middleBlocker' },
+    { value: 'SETTER', labelKey: 'setter' },
+    { value: 'LIBERO', labelKey: 'libero' },
+    { value: 'UNIVERSAL', labelKey: 'universal' }
+  ]
+
+  // Define contract types with translation keys
+  const contractTypes = [
+    { value: 'PROFESSIONAL', labelKey: 'professional' },
+    { value: 'SEMI_PROFESSIONAL', labelKey: 'semiProfessional' },
+    { value: 'AMATEUR', labelKey: 'amateur' },
+    { value: 'VOLUNTEER', labelKey: 'volunteer' },
+    { value: 'INTERNSHIP', labelKey: 'internship' }
+  ]
+
+  // Define leagues with translation keys
+  const leagues = [
+    { value: 'NLA', labelKey: 'nla' },
+    { value: 'NLB', labelKey: 'nlb' },
+    { value: 'FIRST_LEAGUE', labelKey: 'league1' },
+    { value: 'SECOND_LEAGUE', labelKey: 'league2' },
+    { value: 'THIRD_LEAGUE', labelKey: 'league3' },
+    { value: 'FOURTH_LEAGUE', labelKey: 'league4' },
+    { value: 'FIFTH_LEAGUE', labelKey: 'league5' },
+    { value: 'YOUTH_U23', labelKey: 'youthU23' },
+    { value: 'YOUTH_U20', labelKey: 'youthU20' },
+    { value: 'YOUTH_U18', labelKey: 'youthU18' }
+  ]
+
+  // Define genders with translation keys
+  const genders = [
+    { value: 'MALE', labelKey: 'male' },
+    { value: 'FEMALE', labelKey: 'female' }
+  ]
   
   const [clubs, setClubs] = useState<Club[]>([])
   const [filteredClubs, setFilteredClubs] = useState<Club[]>([])
@@ -140,23 +144,23 @@ export default function CreatePlayerRequestPage() {
 
   const validateForm = () => {
     if (!formData.clubId) {
-      setError('Bitte wähl en Club us der Datebamk us.')
+      setError(t('playerRequests.errorClubRequired') || 'Please select a club')
       return false
     }
     if (!formData.title.trim()) {
-      setError('Bitte gib en Titel ii.')
+      setError(t('playerRequests.errorTitleRequired') || 'Please enter a title')
       return false
     }
     if (!formData.description.trim()) {
-      setError('Bitte gib e Beschriibig ii.')
+      setError(t('playerRequests.errorDescriptionRequired') || 'Please enter a description')
       return false
     }
     if (!formData.positionNeeded) {
-      setError('Bitte wähl e Position us.')
+      setError(t('playerRequests.errorPositionRequired') || 'Please select a position')
       return false
     }
     if (!formData.contractType) {
-      setError('Bitte wähl en Vertragstyp us.')
+      setError(t('playerRequests.errorContractRequired') || 'Please select a contract type')
       return false
     }
     return true
@@ -194,7 +198,7 @@ export default function CreatePlayerRequestPage() {
       }, 2000)
     } catch (error: any) {
       console.error('Error creating player request:', error)
-      setError(error.response?.data?.error || 'Es isch en Fehler passiert. Bitte probier nochmal.')
+      setError(error.response?.data?.error || t('playerRequests.errorSubmit') || 'Error creating request')
     } finally {
       setSubmitting(false)
     }
@@ -205,7 +209,7 @@ export default function CreatePlayerRequestPage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">{t('playerRequests.loading') || 'Loading...'}</p>
         </div>
       </div>
     )
@@ -217,10 +221,10 @@ export default function CreatePlayerRequestPage() {
         <div className="text-center">
           <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-            Aafrog erfolgriich erstellt!
+            {t('playerRequests.successMessage') || 'Request created successfully!'}
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Alli Spieler wärde benachrichtigt...
+            {t('playerRequests.notificationInfo') || 'All players will be notified...'}
           </p>
         </div>
       </div>
@@ -236,17 +240,17 @@ export default function CreatePlayerRequestPage() {
           className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
-          {t('playerRequests.backToList') || 'Zrugg zur Lischte'}
+          {t('playerRequests.backToList') || 'Back to List'}
         </Link>
 
         {/* Form Card */}
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6">
             <h1 className="text-2xl font-bold text-white">
-              {t('playerRequests.createTitle') || 'Neui Spieler-Aafrog erstelle'}
+              {t('playerRequests.createTitle') || 'Create New Player Request'}
             </h1>
             <p className="text-white/80 mt-1">
-              {t('playerRequests.createSubtitle') || 'Find de perfekte Spieler für din Club'}
+              {t('playerRequests.createSubtitle') || 'Find the perfect player for your club'}
             </p>
           </div>
 
@@ -262,7 +266,7 @@ export default function CreatePlayerRequestPage() {
             {/* Club Selection */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Club * <span className="text-gray-500 font-normal">(muss i der Datebamk sii)</span>
+                {t('playerRequests.clubLabel') || 'Club'} *
               </label>
               <div className="relative">
                 <div className="relative">
@@ -277,7 +281,7 @@ export default function CreatePlayerRequestPage() {
                       }
                     }}
                     onFocus={() => clubSearch && setShowClubDropdown(true)}
-                    placeholder="Club sueche..."
+                    placeholder={t('playerRequests.searchClub') || 'Search club...'}
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white"
                   />
                 </div>
@@ -305,7 +309,7 @@ export default function CreatePlayerRequestPage() {
               {formData.clubId && (
                 <p className="mt-2 text-sm text-green-600 dark:text-green-400 flex items-center gap-1">
                   <CheckCircle className="w-4 h-4" />
-                  Club usgwählt: {formData.clubName}
+                  {formData.clubName}
                 </p>
               )}
             </div>
@@ -313,14 +317,14 @@ export default function CreatePlayerRequestPage() {
             {/* Title */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Titel *
+                {t('playerRequests.titleLabel') || 'Title'} *
               </label>
               <input
                 type="text"
                 name="title"
                 value={formData.title}
                 onChange={handleInputChange}
-                placeholder="z.B. Suche Aussespieler für NLA Team"
+                placeholder={t('playerRequests.titlePlaceholder') || 'e.g. Looking for Outside Hitter for NLA Team'}
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white"
               />
             </div>
@@ -329,7 +333,7 @@ export default function CreatePlayerRequestPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Position gsuecht *
+                  {t('playerRequests.positionSought') || 'Position Sought'} *
                 </label>
                 <select
                   name="positionNeeded"
@@ -337,16 +341,19 @@ export default function CreatePlayerRequestPage() {
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white"
                 >
-                  <option value="">Wähl Position...</option>
+                  <option value="">{t('playerRequests.selectPosition') || 'Select position...'}</option>
                   {positions.map(pos => (
-                    <option key={pos.value} value={pos.value}>{pos.label}</option>
+                    <option key={pos.value} value={pos.value}>
+                      {pos.labelKey ? t(`playerRequests.positionOptions.${pos.labelKey}`) : pos.value}
+                    </option>
                   ))}
                 </select>
               </div>
 
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Vertragstyp *
+                  {t('playerRequests.contractType') || 'Contract Type'} *
                 </label>
                 <select
                   name="contractType"
@@ -354,9 +361,11 @@ export default function CreatePlayerRequestPage() {
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white"
                 >
-                  <option value="">Wähl Vertragstyp...</option>
+                  <option value="">{t('playerRequests.selectContractType') || 'Select contract type...'}</option>
                   {contractTypes.map(ct => (
-                    <option key={ct.value} value={ct.value}>{ct.label}</option>
+                    <option key={ct.value} value={ct.value}>
+                      {ct.labelKey ? t(`playerRequests.contractTypes.${ct.labelKey}`) : ct.value}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -366,7 +375,7 @@ export default function CreatePlayerRequestPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Gschlächt
+                  {t('playerRequests.gender') || 'Gender'}
                 </label>
                 <select
                   name="gender"
@@ -374,16 +383,18 @@ export default function CreatePlayerRequestPage() {
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white"
                 >
-                  <option value="">Egal</option>
+                  <option value="">{t('playerRequests.genderAny') || 'Any'}</option>
                   {genders.map(g => (
-                    <option key={g.value} value={g.value}>{g.label}</option>
+                    <option key={g.value} value={g.value}>
+                      {g.labelKey ? t(`playerRequests.genderOptions.${g.labelKey}`) : g.value}
+                    </option>
                   ))}
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Liga
+                  {t('playerRequests.league') || 'League'}
                 </label>
                 <select
                   name="league"
@@ -391,9 +402,11 @@ export default function CreatePlayerRequestPage() {
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white"
                 >
-                  <option value="">Wähl Liga...</option>
+                  <option value="">{t('playerRequests.selectLeague') || 'Select league...'}</option>
                   {leagues.map(l => (
-                    <option key={l.value} value={l.value}>{l.label}</option>
+                    <option key={l.value} value={l.value}>
+                      {t(`playerRequests.leagueOptions.${l.labelKey}`) || l.labelKey}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -402,14 +415,14 @@ export default function CreatePlayerRequestPage() {
             {/* Description */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Beschriibig *
+                {t('playerRequests.descriptionLabel') || 'Description'} *
               </label>
               <textarea
                 name="description"
                 value={formData.description}
                 onChange={handleInputChange}
                 rows={4}
-                placeholder="Beschriib d'Stelle und was du suechsch..."
+                placeholder={t('playerRequests.descriptionPlaceholder') || 'Describe the position and what you are looking for...'}
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white resize-none"
               />
             </div>
@@ -417,14 +430,14 @@ export default function CreatePlayerRequestPage() {
             {/* Requirements */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Aaforderige
+                {t('playerRequests.requirementsLabel') || 'Requirements'}
               </label>
               <textarea
                 name="requirements"
                 value={formData.requirements}
                 onChange={handleInputChange}
                 rows={3}
-                placeholder="Spezifischi Aaforderige (optional)..."
+                placeholder={t('playerRequests.requirementsPlaceholder') || 'Specific requirements (optional)...'}
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white resize-none"
               />
             </div>
@@ -433,21 +446,21 @@ export default function CreatePlayerRequestPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Lohn / Vergüetig
+                  {t('playerRequests.salary') || 'Salary / Compensation'}
                 </label>
                 <input
                   type="text"
                   name="salary"
                   value={formData.salary}
                   onChange={handleInputChange}
-                  placeholder="z.B. CHF 2'000-3'000/Monet"
+                  placeholder={t('playerRequests.salaryPlaceholder') || 'e.g. CHF 2,000-3,000/month'}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Startdatum
+                  {t('playerRequests.startDate') || 'Start Date'}
                 </label>
                 <input
                   type="date"
@@ -469,17 +482,17 @@ export default function CreatePlayerRequestPage() {
                 {submitting ? (
                   <>
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                    Wird gsendet...
+                    {t('playerRequests.submitting') || 'Submitting...'}
                   </>
                 ) : (
                   <>
                     <Send className="w-5 h-5" />
-                    Aafrog sende
+                    {t('playerRequests.submitButton') || 'Submit Request'}
                   </>
                 )}
               </button>
               <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-3">
-                Alli Spieler wärde per E-Mail und Benachrichtigung informiert.
+                {t('playerRequests.notificationInfo') || 'All players will be notified by email and notification.'}
               </p>
             </div>
           </form>

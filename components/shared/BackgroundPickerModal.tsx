@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 type BackgroundOption = { id: string; name: string; style: string };
 
@@ -15,6 +16,7 @@ interface Props {
 
 const BackgroundPickerModal: React.FC<Props> = React.memo(
   ({ onClose, onSave, backgroundOptions, initialBg, initialCustomColor, initialImage, loading, onSavedBg }) => {
+    const { t } = useLanguage();
     const [selectedBg, setSelectedBg] = useState<BackgroundOption>(initialBg);
     const [customColor, setCustomColor] = useState(initialCustomColor);
     const [backgroundImage, setBackgroundImage] = useState(initialImage);
@@ -82,7 +84,7 @@ const BackgroundPickerModal: React.FC<Props> = React.memo(
         // Note: localStorage is now handled by parent components with profile-specific keys
         // Show popup notification
         const popup = document.createElement('div');
-        popup.textContent = 'Hintergrund gespeichert!';
+        popup.textContent = t('playerProfile.backgroundSaved') || 'Background saved!';
         popup.className = 'fixed top-6 right-6 bg-green-600 text-white px-4 py-2 rounded shadow-lg z-[100] transition-all animate-fade-in';
         document.body.appendChild(popup);
         setTimeout(() => popup.remove(), 2000);
@@ -118,16 +120,16 @@ const BackgroundPickerModal: React.FC<Props> = React.memo(
           <button
             className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 text-3xl leading-none z-10"
             onClick={onClose}
-            aria-label="Schließen"
+            aria-label={t('playerProfile.close') || 'Close'}
             tabIndex={0}
           >
             &times;
           </button>
-          <h2 className="text-lg font-bold mb-4 dark:text-white pr-8">Profilhintergrund wählen</h2>
+          <h2 className="text-lg font-bold mb-4 dark:text-white pr-8">{t('playerProfile.chooseProfileBackground') || 'Choose Profile Background'}</h2>
           
           {/* Solid Color Swatches */}
           <div className="mb-4">
-            <label className="text-sm dark:text-gray-300 block mb-2">Farbe wählen:</label>
+            <label className="text-sm dark:text-gray-300 block mb-2">{t('playerProfile.selectColor') || 'Select Color'}:</label>
             <div className="flex flex-wrap gap-2">
               {backgroundOptions.map((option) => (
                 <button
@@ -153,7 +155,7 @@ const BackgroundPickerModal: React.FC<Props> = React.memo(
           {/* Image Upload */}
           <div className="mb-2">
             <label htmlFor="imageUpload" className="text-sm dark:text-gray-300 block mb-1">
-              Oder Bild hochladen:
+              {t('playerProfile.orUploadImage') || 'Or upload image:'}
             </label>
             <input
               id="imageUpload"
@@ -179,7 +181,7 @@ const BackgroundPickerModal: React.FC<Props> = React.memo(
           
           {/* Live Preview */}
           <div className="mb-4">
-            <label className="text-sm dark:text-gray-300 block mb-1">Vorschau:</label>
+            <label className="text-sm dark:text-gray-300 block mb-1">{t('playerProfile.preview') || 'Preview:'}</label>
             <div 
               style={{ 
                 background: getPreviewBackground(),
@@ -191,7 +193,7 @@ const BackgroundPickerModal: React.FC<Props> = React.memo(
             >
               <div className="absolute inset-0 bg-black/10 dark:bg-black/20" style={{ pointerEvents: 'none' }} />
               <span className="relative z-10 text-white text-sm font-semibold drop-shadow-lg">
-                Live Vorschau
+                {t('playerProfile.livePreview') || 'Live Preview'}
               </span>
             </div>
           </div>
@@ -216,10 +218,10 @@ const BackgroundPickerModal: React.FC<Props> = React.memo(
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Speichern...
+                {t('playerProfile.saving') || 'Saving...'}
               </>
             ) : (
-              'Speichern'
+              t('playerProfile.save') || 'Save'
             )}
           </button>
         </div>

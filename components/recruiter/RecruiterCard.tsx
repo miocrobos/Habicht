@@ -53,7 +53,8 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
 
   const handleCardClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    const targetUrl = recruiter.user?.role === 'HYBRID' ? `/hybrids/${recruiter.userId}` : `/recruiters/${recruiter.id}`
+    // For hybrid users, go to hybrid profile with recruiter view param
+    const targetUrl = recruiter.user?.role === 'HYBRID' ? `/hybrids/${recruiter.userId}?view=recruiter` : `/recruiters/${recruiter.id}`
     router.push(targetUrl)
   }
 
@@ -79,7 +80,7 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
     } catch (error: any) {
       console.error('Error starting chat:', error)
       console.error('Error response:', error.response?.data)
-      const errorMsg = error.response?.data?.error || error.message || 'Unbekannte Fehler'
+      const errorMsg = error.response?.data?.error || error.message || t('errors.unknownError') || 'Unknown error'
       toast.error(`${t('errors.chatStartError')}: ${errorMsg}`)
     }
   }

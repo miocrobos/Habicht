@@ -258,20 +258,6 @@ export default function ClubProfilePage() {
         {activeTab === 'info' && (
           <div className="space-y-6">
 
-            {/* Dynamic Leagues from Players */}
-            {players && players.length > 0 && (
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('clubProfile.teamsLeagues')}</h2>
-                <div className="flex flex-wrap gap-3">
-                  {[...new Set(players.flatMap(p => p.currentLeagues || []).filter(Boolean))].map((league, idx) => (
-                    <div key={idx} className="px-4 py-2 bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg border border-red-200 dark:border-red-800 font-semibold text-gray-900 dark:text-white cursor-pointer">
-                      {league}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
             <div className="grid md:grid-cols-2 gap-6">
               {/* Contact & Social Media */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">

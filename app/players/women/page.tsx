@@ -24,6 +24,7 @@ export default function WomenPlayersPage() {
     minHeight: '',
     school: '',
     gender: 'FEMALE',
+    userType: '',
   })
   const [searchDebounce, setSearchDebounce] = useState('')
 
@@ -37,7 +38,7 @@ export default function WomenPlayersPage() {
 
   useEffect(() => {
     loadPlayers()
-  }, [searchDebounce, filters.position, filters.canton, filters.league, filters.minHeight, filters.school])
+  }, [searchDebounce, filters.position, filters.canton, filters.league, filters.minHeight, filters.school, filters.userType])
 
   const loadPlayers = async () => {
     try {
@@ -69,10 +70,11 @@ export default function WomenPlayersPage() {
       minHeight: '',
       school: '',
       gender: 'FEMALE',
+      userType: '',
     })
   }
 
-  const hasActiveFilters = filters.search || filters.position || filters.canton || filters.league || filters.minHeight || filters.school
+  const hasActiveFilters = filters.search || filters.position || filters.canton || filters.league || filters.minHeight || filters.school || filters.userType
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -280,6 +282,22 @@ export default function WomenPlayersPage() {
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
                 placeholder="ETH, Uni Zürich..."
               />
+            </div>
+
+            {/* User Type - Player/Hybrid filter */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {t('players.userTypeLabel') || 'User Type'}
+              </label>
+              <select
+                value={filters.userType}
+                onChange={(e) => handleFilterChange('userType', e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+              >
+                <option value="">{t('players.userTypeAll') || 'All'}</option>
+                <option value="PLAYER">{t('players.userTypePlayer') || 'Players Only'}</option>
+                <option value="HYBRID">{t('players.userTypeHybrid') || 'Hybrids Only'}</option>
+              </select>
             </div>
           </div>
         </div>

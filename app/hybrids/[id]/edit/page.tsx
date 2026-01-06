@@ -305,8 +305,11 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
     setSuccess(false);
 
     try {
+      // Prepare all API calls to run in parallel
+      const apiCalls: Promise<any>[] = [];
+      
       // Update hybrid profile with shared data (this is the main source for hybrid profile page)
-      await axios.put(`/api/hybrids/${params.id}`, {
+      apiCalls.push(axios.put(`/api/hybrids/${params.id}`, {
         firstName: sharedData.firstName,
         lastName: sharedData.lastName,
         profileImage: sharedData.profileImage,
@@ -315,7 +318,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
         canton: sharedData.canton || null,
         municipality: sharedData.municipality,
         bio: playerData.bio || recruiterData.bio,
-      });
+      }));
 
       // Update player profile with shared data + player-specific data
       if (playerData.playerId) {
@@ -323,7 +326,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
         const playerCurrentClub = playerClubHistory.find(c => c.currentClub);
         const playerCurrentLeagues = playerCurrentClub?.leagues || [];
         
-        await axios.put(`/api/players/${playerData.playerId}`, {
+        apiCalls.push(axios.put(`/api/players/${playerData.playerId}`, {
           playerData: {
             firstName: sharedData.firstName,
             lastName: sharedData.lastName,
@@ -369,7 +372,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
             endDate: club.currentClub ? null : (club.yearTo ? new Date(`${club.yearTo}-12-31`).toISOString() : null),
             currentClub: club.currentClub || false,
           })),
-        });
+        }));
       }
 
       // Update recruiter profile with shared data + recruiter-specific data
@@ -377,7 +380,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
         // Calculate age from shared dateOfBirth for the recruiter profile
         const ageFromDOB = sharedData.dateOfBirth ? calculateAge(sharedData.dateOfBirth) : null;
         
-        await axios.put(`/api/recruiters/${recruiterData.recruiterId}`, {
+        apiCalls.push(axios.put(`/api/recruiters/${recruiterData.recruiterId}`, {
           firstName: sharedData.firstName,
           lastName: sharedData.lastName,
           profileImage: sharedData.profileImage,
@@ -411,12 +414,16 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
             endDate: club.currentClub ? null : (club.yearTo ? new Date(`${club.yearTo}-12-31`).toISOString() : null),
             currentClub: club.currentClub || false,
           })),
-        });
+        }));
       }
+
+      // Run all API calls in parallel for faster save
+      await Promise.all(apiCalls);
 
       setSuccess(true);
       toast.success(t('playerProfile.profileUpdated') || 'Profil aktualisiert!');
-      setTimeout(() => router.push(`/hybrids/${params.id}`), 1500);
+      // Redirect immediately after success (reduced from 1500ms)
+      setTimeout(() => router.push(`/hybrids/${params.id}`), 300);
     } catch (error: any) {
       console.error('Error saving profile:', error);
       setError(error.response?.data?.error || 'Error saving profile');

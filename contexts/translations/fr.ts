@@ -1073,7 +1073,7 @@
       messages: {
         title: 'Messages',
         subtitle: 'Vos conversations avec d\'autres utilisateurs',
-        playerNote: 'En tant que joueur, vous ne pouvez répondre qu\'aux messages des recruteurs',
+        playerNote: 'Les recruteurs vous contacteront. Vous pouvez répondre librement une fois qu\'ils vous écrivent.',
         empty: 'Pas encore de conversations',
         emptyDescription: 'Commencez une conversation en envoyant un message à un joueur ou recruteur',
         emptyDescriptionPlayer: 'Attendez que les recruteurs vous contactent',

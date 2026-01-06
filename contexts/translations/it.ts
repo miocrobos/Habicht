@@ -852,7 +852,6 @@
       selectNewProfilePhoto: 'Seleziona Nuova Foto Profilo',
       save: 'Salva',
       description: 'Descrizione',
-      videoTitlePlaceholder: 'es. Highlights Partita NLA vs Lausanne',
       describeVideo: 'Descrivi il tuo video',
       optional: 'Opzionale',
       men: 'UOMINI',
@@ -1062,7 +1061,7 @@
       messages: {
         title: 'Messaggi',
         subtitle: 'Le tue conversazioni con altri utenti',
-        playerNote: 'Come giocatore, puoi solo rispondere ai messaggi dei reclutatori',
+        playerNote: 'I reclutatori ti contatteranno. Puoi rispondere liberamente una volta che ti scrivono.',
         empty: 'Nessuna conversazione',
         emptyDescription: 'Inizia una conversazione inviando un messaggio a un giocatore o reclutatore',
         emptyDescriptionPlayer: 'Aspetta che i reclutatori ti contattino',

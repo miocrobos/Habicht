@@ -850,7 +850,6 @@
       selectNewProfilePhoto: 'Selecziunar Nova Foto dal Profil',
       save: 'Memorisar',
       description: 'Descripziun',
-      videoTitlePlaceholder: 'p.ex. Highlights Partida NLA cunter Lausanne',
       describeVideo: 'Descriva tes video',
       optional: 'Opziunal',
       men: 'UMENS',
@@ -1061,7 +1060,7 @@
       messages: {
         title: 'Messadis',
         subtitle: 'Tias conversaziuns cun auters utilisaders',
-        playerNote: 'Sco giugader, pos ti be respunder a messadis da recrutaders',
+        playerNote: 'Recrutaders vegnan a ta contactar. Ti pos respunder libramain uschespert ch\'els ta scrivan.',
         empty: 'Anc naginas conversaziuns',
         emptyDescription: 'Cumenza ina conversaziun cun trametter in messadi ad in giugader u recrutader',
         emptyDescriptionPlayer: 'Spetga che recrutaders ta contacteschian',

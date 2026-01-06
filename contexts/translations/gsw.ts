@@ -930,6 +930,7 @@
       selectNewProfilePhoto: 'Wähl Es Neus Profilbild',
       save: 'Speichere',
       description: 'Beschriibig',
+      videoTitlePlaceholder: 'z.B. Highlights NLA Match gäge Lausanne',
       describeVideo: 'Beschriib dis Video',
       optional: 'Optional',
       men: 'HERREN',

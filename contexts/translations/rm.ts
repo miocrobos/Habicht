@@ -850,6 +850,7 @@
       selectNewProfilePhoto: 'Selecziunar Nova Foto dal Profil',
       save: 'Memorisar',
       description: 'Descripziun',
+      videoTitlePlaceholder: 'p.ex. Highlights Partida NLA cunter Lausanne',
       describeVideo: 'Descriva tes video',
       optional: 'Opziunal',
       men: 'UMENS',

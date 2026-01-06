@@ -1035,6 +1035,7 @@
       selectNewProfilePhoto: 'Select New Profile Photo',
       save: 'Save',
       description: 'Description',
+      videoTitlePlaceholder: 'e.g. Highlights NLA Match vs Lausanne',
       describeVideo: 'Describe your video',
       optional: 'Optional',
       men: 'MEN',

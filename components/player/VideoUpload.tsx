@@ -107,11 +107,11 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-2xl font-bold mb-6">{t('video.addVideo')}</h2>
+    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">{t('video.addVideo')}</h2>
 
       {/* Upload Type Selection */}
-      <div className="flex gap-2 mb-6 overflow-x-auto">
+      <div className="flex gap-1 sm:gap-2 mb-4 sm:mb-6 overflow-x-auto pb-2">
         <TypeButton
           active={uploadType === 'file'}
           onClick={() => setUploadType('file')}
@@ -153,21 +153,21 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
-            placeholder="z.B. Highlights NLA Match vs Lausanne"
+            placeholder={t('playerProfile.videoTitlePlaceholder') || 'e.g. Highlights NLA Match vs Lausanne'}
             required
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Beschreibung
+            {t('playerProfile.description') || 'Description'}
           </label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={3}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent"
-            placeholder="Beschreib dini best Szene..."
+            placeholder={t('playerProfile.describeVideo') || 'Describe your best scenes...'}
           />
         </div>
 
@@ -198,22 +198,22 @@ export default function VideoUpload({ playerId, onUploadComplete }: VideoUploadP
         <div>
           <div
             {...getRootProps()}
-            className={`border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition ${
+            className={`border-2 border-dashed rounded-lg p-6 sm:p-12 text-center cursor-pointer transition ${
               isDragActive
                 ? 'border-habicht-500 bg-habicht-50'
                 : 'border-gray-300 hover:border-habicht-400'
             }`}
           >
             <input {...getInputProps()} />
-            <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+            <Upload className="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 text-gray-400" />
             {isDragActive ? (
-              <p className="text-lg text-habicht-600">{t('playerProfile.dropVideoHere') || 'Drop video here...'}</p>
+              <p className="text-base sm:text-lg text-habicht-600">{t('playerProfile.dropVideoHere') || 'Drop video here...'}</p>
             ) : (
               <>
-                <p className="text-lg mb-2">
+                <p className="text-sm sm:text-lg mb-2">
                   {t('playerProfile.dragDropVideo') || 'Drag & drop your video here, or click to select'}
                 </p>
-                <p className="text-sm text-gray-500">
+                <p className="text-xs sm:text-sm text-gray-500">
                   {t('playerProfile.videoFormats') || 'MP4, MOV, AVI or MKV (max. 500MB)'}
                 </p>
               </>
@@ -287,14 +287,14 @@ function TypeButton({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition whitespace-nowrap ${
+      className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg text-sm sm:text-base font-medium transition whitespace-nowrap ${
         active
           ? 'bg-habicht-600 text-white'
           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
       }`}
     >
       {icon}
-      {children}
+      <span className="hidden xs:inline sm:inline">{children}</span>
     </button>
   )
 }

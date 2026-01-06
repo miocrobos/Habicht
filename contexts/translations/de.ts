@@ -831,6 +831,7 @@
       selectNewProfilePhoto: 'Wählen Sie ein Neues Profilbild',
       save: 'Speichern',
       description: 'Beschreibung',
+      videoTitlePlaceholder: 'z.B. Highlights NLA Match vs Lausanne',
       describeVideo: 'Beschreiben Sie Ihr Video',
       optional: 'Optional',
       men: 'HERREN',

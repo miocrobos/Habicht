@@ -111,16 +111,17 @@ export default function PhotoGallery({ playerId, isOwner, isVerified }: PhotoGal
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white">Photo Gallery</h3>
+    <div className="space-y-3 sm:space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Photo Gallery</h3>
         {isOwner && isVerified && photos.length < 10 && (
           <button
             onClick={() => setShowUploadModal(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-swiss-red text-white rounded-lg hover:bg-red-700 transition"
+            className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 text-sm sm:text-base bg-swiss-red text-white rounded-lg hover:bg-red-700 transition"
           >
             <Plus className="w-4 h-4" />
-            Add Photo ({photos.length}/10)
+            <span className="hidden sm:inline">Add Photo ({photos.length}/10)</span>
+            <span className="sm:hidden">{photos.length}/10</span>
           </button>
         )}
       </div>
@@ -211,25 +212,25 @@ export default function PhotoGallery({ playerId, isOwner, isVerified }: PhotoGal
         <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
           <button
             onClick={() => setSelectedIndex(null)}
-            className="absolute right-20 text-white hover:text-red-400 bg-black bg-opacity-60 rounded-full p-2 z-50 transition-all duration-300"
+            className="absolute right-4 sm:right-20 text-white hover:text-red-400 bg-black bg-opacity-60 rounded-full p-2 z-50 transition-all duration-300"
             style={{ 
               top: collapsed ? '1rem' : '5rem',
               boxShadow: '0 2px 8px rgba(0,0,0,0.3)' 
             }}
           >
-            <X className="w-10 h-10" />
+            <X className="w-6 h-6 sm:w-10 sm:h-10" />
           </button>
 
           <button
             onClick={prevPhoto}
             disabled={selectedIndex === 0}
-            className="absolute left-4 text-white hover:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="absolute left-2 sm:left-4 text-white hover:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            <ChevronLeft className="w-12 h-12" />
+            <ChevronLeft className="w-8 h-8 sm:w-12 sm:h-12" />
           </button>
 
           <div 
-            className="relative w-full max-w-4xl h-full flex items-center justify-center p-4 transition-all duration-300"
+            className="relative w-full max-w-4xl h-full flex items-center justify-center p-2 sm:p-4 transition-all duration-300"
             style={{
               maxHeight: collapsed ? '80vh' : 'calc(80vh - 4rem)',
               marginTop: collapsed ? '0' : '4rem'
@@ -246,9 +247,9 @@ export default function PhotoGallery({ playerId, isOwner, isVerified }: PhotoGal
           <button
             onClick={nextPhoto}
             disabled={selectedIndex === photos.length - 1}
-            className="absolute right-4 text-white hover:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="absolute right-2 sm:right-4 text-white hover:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            <ChevronRight className="w-12 h-12" />
+            <ChevronRight className="w-8 h-8 sm:w-12 sm:h-12" />
           </button>
 
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm">

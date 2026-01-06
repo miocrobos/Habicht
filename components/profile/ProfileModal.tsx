@@ -168,7 +168,7 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
           ) : profile ? (
             <>
               {/* Cover Image / Backdrop */}
-              <div className="relative h-64 bg-red-700">
+              <div className="relative h-32 sm:h-48 md:h-64 bg-red-700">
                 {profile.coverImage ? (
                   <img
                     src={profile.coverImage}
@@ -182,18 +182,18 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
               </div>
 
               {/* Profile Picture & Basic Info */}
-              <div className="relative px-8 pb-6">
+              <div className="relative px-4 sm:px-6 md:px-8 pb-4 sm:pb-6">
                 {/* Profile Picture */}
-                <div className="absolute -top-24 left-8">
+                <div className="absolute -top-12 sm:-top-16 md:-top-24 left-4 sm:left-6 md:left-8">
                   <div className="relative">
                     <img
                       src={profile.profileImage}
                       alt={isPlayer(profile) ? `${profile.firstName} ${profile.lastName}` : profile.user.name}
-                      className="w-48 h-48 rounded-2xl border-8 border-white shadow-2xl object-cover"
+                      className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 rounded-xl sm:rounded-2xl border-4 sm:border-6 md:border-8 border-white shadow-2xl object-cover"
                     />
                     {isPlayer(profile) && (
-                      <div className="absolute bottom-2 right-2 bg-white px-4 py-2 rounded-xl shadow-lg">
-                        <span className="text-2xl font-bold text-red-600">
+                      <div className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 bg-white px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-lg sm:rounded-xl shadow-lg">
+                        <span className="text-sm sm:text-lg md:text-2xl font-bold text-red-600">
                           {profile.jerseyNumber || '—'}
                         </span>
                       </div>
@@ -202,23 +202,23 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
                 </div>
 
                 {/* Name & Title */}
-                <div className="pt-28">
+                <div className="pt-16 sm:pt-20 md:pt-28">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h2 className="text-4xl font-bold text-gray-900 mb-2">
+                      <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
                         {isPlayer(profile) 
                           ? `${profile.firstName} ${profile.lastName}`
                           : profile.user.name
                         }
                       </h2>
                       {isPlayer(profile) ? (
-                        <div className="flex items-center gap-4 text-lg text-gray-600 mb-4">
+                        <div className="flex flex-wrap items-center gap-1 sm:gap-2 md:gap-4 text-xs sm:text-sm md:text-lg text-gray-600 mb-2 sm:mb-4">
                           <span className="font-semibold text-red-600">
                             {getPositionDisplay(profile.position)}
                           </span>
-                          <span>•</span>
-                          <span>{profile.currentLeagues && profile.currentLeagues.length > 0 ? profile.currentLeagues.map((l: string) => getLeagueDisplay(l)).join(', ') : '-'}</span>
-                          <span>•</span>
+                          <span className="hidden sm:inline">•</span>
+                          <span className="hidden sm:inline">{profile.currentLeagues && profile.currentLeagues.length > 0 ? profile.currentLeagues.map((l: string) => getLeagueDisplay(l)).join(', ') : '-'}</span>
+                          <span className="hidden sm:inline">•</span>
                           <span>{calculateAge(profile.dateOfBirth)} Jahre</span>
                           {profile.height && (
                             <>
@@ -228,11 +228,11 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
                           )}
                         </div>
                       ) : (
-                        <div className="flex items-center gap-3 text-lg text-gray-600 mb-4">
+                        <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-sm sm:text-base md:text-lg text-gray-600 mb-2 sm:mb-4">
                           <span className="font-semibold text-red-600">{profile.coachRole}</span>
                           {profile.club && (
                             <>
-                              <span>•</span>
+                              <span className="hidden sm:inline">•</span>
                               <span>{profile.club.name}</span>
                             </>
                           )}
@@ -240,8 +240,8 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
                       )}
 
                       {/* Location */}
-                      <div className="flex items-center gap-2 text-gray-600 mb-4">
-                        <MapPin className="w-4 h-4" />
+                      <div className="flex items-center gap-2 text-sm sm:text-base text-gray-600 mb-2 sm:mb-4">
+                        <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
                         <span>
                           {isPlayer(profile) 
                             ? `${profile.city}, ${profile.canton}`
@@ -263,12 +263,12 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
 
                   {/* Tabs */}
                   {isPlayer(profile) && (
-                    <div className="flex gap-2 mb-6 mt-6 border-b border-gray-200">
+                    <div className="flex gap-1 sm:gap-2 mb-4 sm:mb-6 mt-4 sm:mt-6 border-b border-gray-200 overflow-x-auto">
                       {['info', 'stats', 'videos'].map(tab => (
                         <button
                           key={tab}
                           onClick={() => setActiveTab(tab as any)}
-                          className={`px-6 py-3 font-semibold transition-colors ${
+                          className={`px-3 sm:px-4 md:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold transition-colors whitespace-nowrap ${
                             activeTab === tab
                               ? 'text-red-600 border-b-2 border-red-600'
                               : 'text-gray-500 hover:text-gray-700'
@@ -283,34 +283,34 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
                   )}
 
                   {/* Content */}
-                  <div className="space-y-6">
+                  <div className="space-y-4 sm:space-y-6">
                     {activeTab === 'info' && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         {/* Bio */}
                         {profile.bio && (
-                          <div className="md:col-span-2 bg-gray-50 rounded-xl p-6">
-                            <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                              <Award className="w-5 h-5 text-red-600" />
+                          <div className="md:col-span-2 bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-6">
+                            <h3 className="font-semibold text-gray-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                              <Award className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
                               Über mich
                             </h3>
-                            <p className="text-gray-700 whitespace-pre-wrap">{profile.bio}</p>
+                            <p className="text-sm sm:text-base text-gray-700 whitespace-pre-wrap">{profile.bio}</p>
                           </div>
                         )}
 
                         {/* Contact Info */}
-                        <div className="bg-gray-50 rounded-xl p-6">
-                          <h3 className="font-semibold text-gray-900 mb-4">Kontakt</h3>
-                          <div className="space-y-3">
+                        <div className="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-6">
+                          <h3 className="font-semibold text-gray-900 mb-3 sm:mb-4 text-sm sm:text-base">Kontakt</h3>
+                          <div className="space-y-2 sm:space-y-3">
                             {profile.phone && (
-                              <div className="flex items-center gap-3 text-gray-700">
-                                <Phone className="w-5 h-5 text-gray-400" />
-                                <span>{profile.phone}</span>
+                              <div className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-700">
+                                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
+                                <span className="break-all">{profile.phone}</span>
                               </div>
                             )}
                             {isPlayer(profile) && profile.instagramHandle && (
-                              <div className="flex items-center gap-3 text-gray-700">
-                                <Instagram className="w-5 h-5 text-gray-400" />
-                                <span>{profile.instagramHandle}</span>
+                              <div className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-700">
+                                <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
+                                <span className="break-all">{profile.instagramHandle}</span>
                               </div>
                             )}
                             {isPlayer(profile) && profile.dominantHand && (
@@ -342,15 +342,15 @@ export default function ProfileModal({ playerId, recruiterId, isOpen, onClose }:
 
                         {/* Career Goals (Players) */}
                         {isPlayer(profile) && profile.desiredLeague && (
-                          <div className="bg-red-100 rounded-xl p-6 border border-red-200">
-                            <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                              <Target className="w-5 h-5 text-red-600" />
+                          <div className="bg-red-100 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-red-200">
+                            <h3 className="font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
+                              <Target className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
                               Karriereziele
                             </h3>
-                            <div className="space-y-3">
+                            <div className="space-y-2 sm:space-y-3">
                               <div>
-                                <span className="text-sm text-gray-600">Ziel-Liga:</span>
-                                <p className="text-lg font-semibold text-red-600">{profile.desiredLeague}</p>
+                                <span className="text-xs sm:text-sm text-gray-600">Ziel-Liga:</span>
+                                <p className="text-base sm:text-lg font-semibold text-red-600">{profile.desiredLeague}</p>
                               </div>
                               {profile.interestedClubs && profile.interestedClubs.length > 0 && (
                                 <div>

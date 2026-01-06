@@ -4,10 +4,11 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { X, Search, Bookmark, Bell, RefreshCw } from 'lucide-react'
+import { X, Search, Bookmark, Bell, RefreshCw, CheckCheck } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useHeader } from '@/contexts/HeaderContext'
 
 // League translation helper
 const getLeagueLabel = (league: string, t: (key: string) => string) => {
@@ -69,6 +70,7 @@ export default function WatchlistPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const { t } = useLanguage()
+  const { setWatchlistCount } = useHeader()
   const [watchlist, setWatchlist] = useState<WatchlistPlayer[]>([])
   const [notifications, setNotifications] = useState<WatchlistNotification[]>([])
   const [loading, setLoading] = useState(true)
@@ -160,8 +162,23 @@ export default function WatchlistPage() {
           : item
       ))
       setNotifications(prev => prev.filter(n => n.id !== notificationId))
+      // Decrement the header watchlist count
+      setWatchlistCount(prev => Math.max(0, prev - 1))
     } catch (error) {
       console.error('Error dismissing notification:', error)
+    }
+  }
+
+  const markAllAsViewed = async () => {
+    try {
+      await axios.post('/api/watchlist/mark-viewed')
+      // Clear all recentUpdate entries from local state
+      setWatchlist(prev => prev.map(item => ({ ...item, recentUpdate: null })))
+      setNotifications([])
+      // Update the header watchlist count to 0
+      setWatchlistCount(0)
+    } catch (error) {
+      console.error('Error marking all as viewed:', error)
     }
   }
 
@@ -210,19 +227,30 @@ export default function WatchlistPage() {
               )}
             </p>
           </div>
-          {unreadUpdateCount > 0 && (
-            <button
-              onClick={() => setShowUpdatesOnly(!showUpdatesOnly)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
-                showUpdatesOnly
-                  ? 'bg-swiss-red text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-              }`}
-            >
-              <Bell className="w-4 h-4" />
-              {showUpdatesOnly ? t('watchlist.showAll') || 'Show All' : t('watchlist.showUpdatesOnly') || 'Show Updates Only'}
-            </button>
-          )}
+          <div className="flex flex-wrap gap-2">
+            {unreadUpdateCount > 0 && (
+              <>
+                <button
+                  onClick={markAllAsViewed}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg transition bg-green-600 hover:bg-green-700 text-white"
+                >
+                  <CheckCheck className="w-4 h-4" />
+                  {t('watchlist.markAllAsViewed') || 'Mark All as Viewed'}
+                </button>
+                <button
+                  onClick={() => setShowUpdatesOnly(!showUpdatesOnly)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
+                    showUpdatesOnly
+                      ? 'bg-swiss-red text-white'
+                      : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                  }`}
+                >
+                  <Bell className="w-4 h-4" />
+                  {showUpdatesOnly ? t('watchlist.showAll') || 'Show All' : t('watchlist.showUpdatesOnly') || 'Show Updates Only'}
+                </button>
+              </>
+            )}
+          </div>
         </div>
 
         {/* Search Bar */}

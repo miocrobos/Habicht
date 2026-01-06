@@ -166,6 +166,11 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [watchlistLoading, setWatchlistLoading] = useState(false)
   const [zoomedLicense, setZoomedLicense] = useState<string | null>(null)
   const backgroundLoadedRef = useRef(false)
+  
+  // Messages state
+  const [conversations, setConversations] = useState<any[]>([])
+  const [conversationsLoading, setConversationsLoading] = useState(false)
+  const [activeChat, setActiveChat] = useState<any>(null)
 
   const isOwner = session?.user?.playerId === params.id
 
@@ -183,6 +188,51 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
     }
     checkWatchlist()
   }, [session, params.id, isOwner])
+
+  // Fetch conversations for messages tab
+  const fetchConversations = async () => {
+    if (!isOwner) return
+    try {
+      setConversationsLoading(true)
+      const response = await axios.get('/api/chat/conversations')
+      setConversations(response.data.conversations || [])
+    } catch (error) {
+      console.error('Error fetching conversations:', error)
+    } finally {
+      setConversationsLoading(false)
+    }
+  }
+
+  // Load conversations when messages tab is active
+  useEffect(() => {
+    if (isOwner && activeTab === 'messages') {
+      fetchConversations()
+    }
+  }, [isOwner, activeTab])
+
+  // Open chat from messages list
+  const openChatFromList = (conversation: any) => {
+    let otherParticipant
+    
+    if (conversation.player && conversation.recruiter) {
+      // As a player, the other participant is always the recruiter
+      otherParticipant = {
+        id: conversation.recruiter.id,
+        name: `${conversation.recruiter.firstName} ${conversation.recruiter.lastName}`,
+        type: 'RECRUITER' as const,
+        club: conversation.recruiter.club?.name || ''
+      }
+    }
+    
+    if (otherParticipant) {
+      setActiveChat({
+        conversationId: conversation.id,
+        otherParticipant,
+        currentUserId: session?.user?.id || '',
+        currentUserType: 'PLAYER' as const
+      })
+    }
+  }
 
   useEffect(() => {
     const fetchPlayer = async () => {
@@ -989,7 +1039,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               >
                 Photos
               </button>
-              {(isOwner || player.showLicense) && player.swissVolleyLicense && (
+              {(isOwner || (player.showLicense && player.swissVolleyLicense)) && (
                 <button
                   onClick={() => setActiveTab('documents')}
                   className={`px-3 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-sm font-medium border-b-2 transition whitespace-nowrap flex-shrink-0 ${
@@ -999,6 +1049,20 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   }`}
                 >
                   {t('playerProfile.documents') || 'Documents'}
+                </button>
+              )}
+              {/* Messages Tab - Only visible to owner */}
+              {isOwner && (
+                <button
+                  onClick={() => setActiveTab('messages')}
+                  className={`px-3 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-sm font-medium border-b-2 transition whitespace-nowrap flex-shrink-0 flex items-center gap-1 ${
+                    activeTab === 'messages'
+                      ? 'border-red-600 text-red-600 dark:text-red-400'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                  }`}
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  {t('settings.messages.title') || 'Messages'}
                 </button>
               )}
             </nav>
@@ -1151,7 +1215,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               />
             )}
 
-            {activeTab === 'documents' && (isOwner || player.showLicense) && (
+            {activeTab === 'documents' && (isOwner || (player.showLicense && player.swissVolleyLicense)) && (
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                   <Award className="w-5 h-5 text-yellow-500" />
@@ -1219,16 +1283,136 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                     </div>
                   )}
                 </div>
-                {!player.swissVolleyLicense && (
+                {!player.swissVolleyLicense && isOwner && (
+                  <div className="text-center py-8 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
+                    <Award className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">
+                      {t('playerProfile.noDocumentsUploaded') || 'No documents uploaded yet.'}
+                    </p>
+                    <Link
+                      href={`/players/${player.id}/edit`}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      </svg>
+                      {t('playerProfile.uploadLicense') || 'Upload License'}
+                    </Link>
+                  </div>
+                )}
+                {!player.swissVolleyLicense && !isOwner && (
                   <p className="text-gray-500 dark:text-gray-400 text-center py-8">
                     {t('playerProfile.noDocumentsUploaded') || 'No documents uploaded yet.'}
                   </p>
                 )}
               </div>
             )}
+
+            {/* Messages Tab Content - Only visible to owner */}
+            {activeTab === 'messages' && isOwner && (
+              <div>
+                <div className="mb-4">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                    <MessageCircle className="w-5 h-5 text-red-500" />
+                    {t('settings.messages.title') || 'Messages'}
+                  </h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    {t('settings.messages.subtitle') || 'Your conversations with other users'}
+                  </p>
+                  <p className="text-xs text-amber-600 dark:text-amber-400 mt-2 flex items-center gap-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {t('settings.messages.playerNote') || 'As a player, you can only respond to messages from recruiters'}
+                  </p>
+                </div>
+                
+                {conversationsLoading ? (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+                  </div>
+                ) : conversations.length === 0 ? (
+                  <div className="text-center py-12">
+                    <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                    <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      {t('settings.messages.empty') || 'No conversations yet'}
+                    </h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('settings.messages.emptyDescriptionPlayer') || 'Wait for recruiters to contact you'}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {conversations.map((conversation) => {
+                      const recruiter = conversation.recruiter
+                      if (!recruiter) return null
+                      
+                      const otherName = `${recruiter.firstName} ${recruiter.lastName}`
+                      const otherRole = recruiter.coachRole || t('common.recruiter') || 'Recruiter'
+                      const otherClub = recruiter.club?.name || ''
+                      const lastMessage = conversation.messages?.[0]
+                      const profileImage = recruiter.profileImage
+                      
+                      return (
+                        <div
+                          key={conversation.id}
+                          className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md transition cursor-pointer"
+                          onClick={() => openChatFromList(conversation)}
+                        >
+                          <div className="flex-shrink-0">
+                            {profileImage ? (
+                              <img 
+                                src={profileImage} 
+                                alt={otherName}
+                                className="w-12 h-12 rounded-full object-cover"
+                              />
+                            ) : (
+                              <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                                <span className="text-lg font-bold text-red-600 dark:text-red-400">
+                                  {otherName.charAt(0)}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between gap-2">
+                              <h4 className="font-semibold text-gray-900 dark:text-white truncate">{otherName}</h4>
+                              {lastMessage && (
+                                <span className="text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">
+                                  {new Date(lastMessage.createdAt).toLocaleDateString()}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                              {otherRole}{otherClub ? ` • ${otherClub}` : ''}
+                            </p>
+                            {lastMessage && (
+                              <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-1">
+                                {lastMessage.content}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Chat Window Modal from Messages Tab */}
+      {activeChat && (
+        <ChatWindow
+          conversationId={activeChat.conversationId}
+          otherParticipant={activeChat.otherParticipant}
+          currentUserId={activeChat.currentUserId}
+          currentUserType={activeChat.currentUserType}
+          onClose={() => setActiveChat(null)}
+        />
+      )}
 
       {/* Video Upload Modal */}
       {showVideoUpload && (

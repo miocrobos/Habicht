@@ -135,6 +135,9 @@
     'common.submit': 'Invia',
     'common.clickToZoom': 'Clicca per ingrandire',
     'common.privateToYou': 'Privato',
+    'common.viewProfile': 'Visualizza profilo',
+    'common.player': 'Giocatore',
+    'common.recruiter': 'Reclutatore',
     // Toast messages
     'toast.backgroundSaved': 'Sfondo salvato',
     'toast.backgroundError': 'Errore durante il salvataggio dello sfondo',
@@ -353,6 +356,7 @@
       physical_coach: 'Preparatore atletico',
       scout: 'Scout',
       trainer: 'Allenatore',
+      team_manager: 'Team manager',
     },
     // About Page
     about: {
@@ -449,6 +453,7 @@
       dismissNotification: 'Ignora notifica',
       showUpdatesOnly: 'Mostra solo aggiornamenti',
       showAll: 'Mostra tutto',
+      markAllAsViewed: 'Segna tutto come visto',
       noUpdates: 'Nessun aggiornamento del profilo',
       noUpdatesDescription: 'I giocatori nella tua lista non hanno aggiornato il loro profilo di recente.',
     },
@@ -467,6 +472,9 @@
       all: 'Tutte',
       unreadOnly: 'Non lette',
       profileViews: 'Visualizzazioni profilo',
+      messages: 'Messaggi',
+      watchlist: 'Lista osservati',
+      clickToReply: '(clicca per rispondere)',
       cvExport: 'Esporta CV',
       cvChooseType: 'Scegli il tipo di CV che desideri:',
       cvPlayerTitle: 'CV Giocatore',
@@ -481,7 +489,6 @@
       cvLanguageRomansh: 'Romancio',
       cvLanguageEnglish: 'Inglese',
       cvLanguageSwissGerman: 'Tedesco Svizzero',
-      messages: 'Messaggi',
       profileViewed: 'Profilo visualizzato',
       profileViewedMessage: '{name} ha visualizzato il tuo profilo',
       messageFrom: 'Messaggio da {name}',
@@ -742,6 +749,7 @@
       positionLibero: 'Libero',
       positionUniversal: 'Universale',
       lookingForClubBadge: 'Cerca squadra',
+      lookingShort: 'Club',
       editProfile: 'Modifica Profilo',
       exportCV: 'Esporta CV',
       sendMessage: 'Invia Messaggio',
@@ -854,6 +862,7 @@
       idCard: 'Documento d\'identità',
       noDocumentsUploaded: 'Nessun documento caricato.',
       noPhotosYet: 'Ancora nessuna foto',
+      documents: 'Documenti',
       documentsTab: 'Documenti',
       clubNumber: 'Club',
       enterClubName: 'Inserisci il nome del club',
@@ -937,6 +946,16 @@
         show: {
           title: 'Mostra telefono',
           description: 'Permetti agli altri di vedere il tuo numero di telefono',
+        },
+      },
+      license: {
+        show: {
+          title: 'Mostra licenze pubblicamente',
+          description: 'Permetti agli altri di vedere le tue licenze e documenti caricati',
+          playerTitle: 'Mostra licenza giocatore pubblicamente',
+          playerDescription: 'Permetti agli altri di vedere la tua licenza Swiss Volley caricata',
+          recruiterTitle: 'Mostra licenza allenatore pubblicamente',
+          recruiterDescription: 'Permetti agli altri di vedere la tua licenza allenatore caricata',
         },
       },
       privacy: {
@@ -1028,6 +1047,7 @@
         browsePlayers: 'Sfoglia Giocatori',
         total: 'Totale',
         conversations: 'conversazioni',
+        noMessages: 'Nessun messaggio ancora',
       },
     },
     countries: {
@@ -1171,6 +1191,7 @@
       viewDocument: 'Visualizza documento',
       changeVisibility: 'Modifica la visibilità nelle impostazioni',
       clubAffiliations: 'Affiliazioni ai club',
+      uploadLicense: 'Carica licenze',
     },
     // Recruiter Profile
     recruiterProfile: {
@@ -1190,6 +1211,7 @@
       positionsLookingFor: 'Cerca posizioni',
       genderCoached: 'Reclutamento per (Uomini/Donne)',
       lookingForMembers: 'Cerca nuovi membri',
+      lookingShort: 'Cerca',
       clubAffiliations: 'Affiliazioni ai Club',
       achievements: 'Risultati di Coaching',
       bio: 'Chi sono',
@@ -1207,6 +1229,7 @@
       tabDocuments: 'Documenti',
       noDocumentsUploaded: 'Nessun documento caricato.',
       noPhotosYet: 'Ancora nessuna foto',
+      uploadLicense: 'Carica licenza',
       aboutMe: 'Su di me',
       associatedClubs: 'Club Associati',
       contact: 'Contatto',

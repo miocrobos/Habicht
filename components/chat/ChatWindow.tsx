@@ -203,15 +203,11 @@ export default function ChatWindow({
   const getActualSenderType = (): 'PLAYER' | 'RECRUITER' => {
     if (currentUserType === 'PLAYER') return 'PLAYER'
     if (currentUserType === 'RECRUITER') return 'RECRUITER'
-    // For HYBRID users, determine based on conversation context
-    // If chatting with a player or recruiter, hybrid acts as RECRUITER
-    // If they are the player in a player-recruiter conversation, they act as PLAYER
-    // Since hybrids initiate chats as recruiters, they typically chat as RECRUITER
-    // The otherParticipant.type helps determine this:
-    // - If other is PLAYER, we're acting as RECRUITER
-    // - If other is RECRUITER/HYBRID, we're acting as RECRUITER (recruiter-to-recruiter chat)
-    if (otherParticipant.type === 'PLAYER') return 'RECRUITER'
-    return 'RECRUITER' // Default to RECRUITER for hybrid users
+    // For HYBRID users, determine based on who the other participant is:
+    // - If other is RECRUITER, we're the player in this conversation → send as PLAYER
+    // - If other is PLAYER, we're the recruiter in this conversation → send as RECRUITER
+    if (otherParticipant.type === 'RECRUITER') return 'PLAYER'
+    return 'RECRUITER' // Default to RECRUITER for hybrid users chatting with players
   }
 
   const sendMessage = async (e: React.FormEvent) => {

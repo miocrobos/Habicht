@@ -157,7 +157,7 @@ export default function PlayerCard({ player }: { player: any }) {
               <MapPin className="w-2.5 h-2.5 sm:w-4 sm:h-4 flex-shrink-0" />
               <span className="truncate max-w-[120px] sm:max-w-none">{player.municipality ? `${player.municipality}, ` : ''}{cantonInfo.name}</span>
             </div>
-            {player.currentLeagues && player.currentLeagues.length > 0 && player.currentClub && (
+            {player.user?.role !== 'HYBRID' && player.currentLeagues && player.currentLeagues.length > 0 && player.currentClub && (
               <span
                 className="inline-block mt-0.5 px-1.5 sm:px-3 py-0.5 sm:py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-[9px] sm:text-xs font-semibold truncate max-w-full"
                 title={player.currentLeagues.map((league: string) => getLeagueLabel(league, t)).join(', ')}

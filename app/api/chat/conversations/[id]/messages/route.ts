@@ -20,7 +20,8 @@ export async function GET(
     let isParticipant = false
     let userId: string | null = null
 
-    if (session.user.role === 'PLAYER') {
+    // Check if user is the player in this conversation (for PLAYER or HYBRID users)
+    if (session.user.role === 'PLAYER' || session.user.role === 'HYBRID') {
       const player = await prisma.player.findFirst({
         where: { userId: session.user.id }
       })
@@ -31,10 +32,15 @@ export async function GET(
             playerId: player.id
           }
         })
-        isParticipant = !!conversation
-        userId = player.id
+        if (conversation) {
+          isParticipant = true
+          userId = player.id
+        }
       }
-    } else if (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID') {
+    }
+    
+    // Check if user is a recruiter in this conversation (for RECRUITER or HYBRID users)
+    if (!isParticipant && (session.user.role === 'RECRUITER' || session.user.role === 'HYBRID')) {
       const recruiter = await prisma.recruiter.findFirst({
         where: { userId: session.user.id }
       })
@@ -49,8 +55,10 @@ export async function GET(
             ]
           }
         })
-        isParticipant = !!conversation
-        userId = recruiter.id
+        if (conversation) {
+          isParticipant = true
+          userId = recruiter.id
+        }
       }
     }
 

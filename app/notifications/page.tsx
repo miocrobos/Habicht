@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { Bell, Check, X, Eye, MessageCircle, UserPlus, Award, Bookmark, RefreshCw } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ChatWindow from '@/components/chat/ChatWindow'
 
 interface Notification {
   id: string
@@ -15,6 +16,21 @@ interface Notification {
   read: boolean
   createdAt: string
   relatedId?: string
+  actionUrl?: string
+  senderId?: string
+  senderName?: string
+  senderImage?: string
+}
+
+interface ChatData {
+  conversationId: string
+  otherParticipant: {
+    id: string
+    name: string
+    type: 'PLAYER' | 'RECRUITER' | 'HYBRID'
+    club?: string
+    position?: string
+  }
 }
 
 export default function NotificationsPage() {
@@ -24,7 +40,9 @@ export default function NotificationsPage() {
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<'all' | 'unread'>('all')
-  const [typeFilter, setTypeFilter] = useState<'all' | 'PROFILE_VIEW' | 'MESSAGE'>('all')
+  const [typeFilter, setTypeFilter] = useState<'all' | 'PROFILE_VIEW' | 'MESSAGE' | 'WATCHLIST_ADD'>('all')
+  const [chatData, setChatData] = useState<ChatData | null>(null)
+  const [showChat, setShowChat] = useState(false)
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -74,6 +92,104 @@ export default function NotificationsPage() {
     } catch (error) {
       console.error('Error deleting notification:', error)
     }
+  }
+
+  const handleNotificationClick = async (notification: Notification) => {
+    // Mark as read first
+    if (!notification.read) {
+      await markAsRead(notification.id)
+    }
+
+    // If it's a message notification, open the chat
+    if (notification.type === 'MESSAGE' && notification.actionUrl) {
+      // Extract conversation ID from actionUrl (format: /chat/{conversationId})
+      const conversationId = notification.actionUrl.replace('/chat/', '')
+      
+      try {
+        // Fetch conversation details to get other participant info
+        const response = await axios.get(`/api/chat/conversations/${conversationId}`)
+        const conversation = response.data.conversation
+        
+        if (conversation) {
+          // Determine other participant based on current user role and conversation type
+          let otherParticipant: ChatData['otherParticipant']
+          
+          // For HYBRID users, we need to check if they're the player or recruiter in this conversation
+          const isHybridAsPlayer = session?.user?.role === 'HYBRID' && 
+            conversation.playerId && 
+            conversation.player?.user?.id === session.user.id
+          
+          if (session?.user?.role === 'PLAYER' || isHybridAsPlayer) {
+            // User is the player in this conversation, so other participant is the recruiter
+            otherParticipant = {
+              id: conversation.recruiter?.id || '',
+              name: conversation.recruiter?.user?.name || notification.senderName || 'Recruiter',
+              type: 'RECRUITER',
+              club: conversation.recruiter?.club?.name || ''
+            }
+          } else if (session?.user?.role === 'RECRUITER' || session?.user?.role === 'HYBRID') {
+            // Check if this is a recruiter-to-recruiter conversation
+            if (conversation.secondRecruiterId && !conversation.playerId) {
+              // Recruiter-to-recruiter chat - find the other recruiter
+              const isInitiator = notification.senderId !== session.user.id
+              const otherRecruiter = isInitiator 
+                ? conversation.recruiter 
+                : conversation.secondRecruiter
+              
+              otherParticipant = {
+                id: otherRecruiter?.id || '',
+                name: otherRecruiter?.user?.name || notification.senderName || 'Recruiter',
+                type: 'RECRUITER',
+                club: otherRecruiter?.club?.name || ''
+              }
+            } else {
+              // Recruiter/Hybrid is viewing player conversation (they are the recruiter)
+              otherParticipant = {
+                id: conversation.player?.id || '',
+                name: conversation.player ? `${conversation.player.firstName} ${conversation.player.lastName}` : notification.senderName || 'Player',
+                type: 'PLAYER',
+                position: conversation.player?.positions?.join(', ') || ''
+              }
+            }
+          } else {
+            // Fallback for any other role
+            otherParticipant = {
+              id: notification.senderId || '',
+              name: notification.senderName || 'User',
+              type: 'PLAYER',
+              position: ''
+            }
+          }
+
+          setChatData({
+            conversationId,
+            otherParticipant
+          })
+          setShowChat(true)
+        }
+      } catch (error) {
+        console.error('Error fetching conversation:', error)
+        // Fallback: use notification data directly
+        // Determine fallback type based on user role
+        const fallbackType: 'PLAYER' | 'RECRUITER' = session?.user?.role === 'PLAYER' ? 'RECRUITER' : 'PLAYER'
+        
+        setChatData({
+          conversationId,
+          otherParticipant: {
+            id: notification.senderId || '',
+            name: notification.senderName || notification.title.replace('Message from ', ''),
+            type: fallbackType,
+            club: ''
+          }
+        })
+        setShowChat(true)
+      }
+    }
+  }
+
+  const closeChat = () => {
+    setShowChat(false)
+    setChatData(null)
   }
 
   const getIcon = (type: string) => {
@@ -241,6 +357,17 @@ export default function NotificationsPage() {
                 <MessageCircle className="w-4 h-4" />
                 {t('notifications.messages')} ({notifications.filter(n => n.type === 'MESSAGE').length})
               </button>
+              <button
+                onClick={() => setTypeFilter('WATCHLIST_ADD')}
+                className={`px-4 py-2 rounded-lg transition flex items-center gap-2 ${
+                  typeFilter === 'WATCHLIST_ADD'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                }`}
+              >
+                <Bookmark className="w-4 h-4" />
+                {t('notifications.watchlist')} ({notifications.filter(n => n.type === 'WATCHLIST_ADD').length})
+              </button>
             </div>
           </div>
         </div>
@@ -257,12 +384,14 @@ export default function NotificationsPage() {
           <div className="space-y-3">
             {filteredNotifications.map(notification => {
               const { title, message } = getNotificationText(notification)
+              const isClickable = notification.type === 'MESSAGE' && notification.actionUrl
               return (
               <div
                 key={notification.id}
+                onClick={isClickable ? () => handleNotificationClick(notification) : undefined}
                 className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 transition hover:shadow-xl ${
                   !notification.read ? 'border-l-4 border-red-600' : ''
-                }`}
+                } ${isClickable ? 'cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-750' : ''}`}
               >
                 <div className="flex items-start gap-4">
                   <div className={`p-3 rounded-full ${
@@ -275,9 +404,16 @@ export default function NotificationsPage() {
                   
                   <div className="flex-1">
                     <div className="flex items-start justify-between mb-1">
-                      <h3 className="font-semibold text-gray-900 dark:text-white">
-                        {title}
-                      </h3>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-semibold text-gray-900 dark:text-white">
+                          {title}
+                        </h3>
+                        {isClickable && (
+                          <span className="text-xs text-blue-600 dark:text-blue-400">
+                            {t('notifications.clickToReply')}
+                          </span>
+                        )}
+                      </div>
                       <span className="text-xs text-gray-500 dark:text-gray-400">
                         {new Date(notification.createdAt).toLocaleString('de-CH')}
                       </span>
@@ -287,7 +423,7 @@ export default function NotificationsPage() {
                     </p>
                   </div>
 
-                  <div className="flex gap-2">
+                  <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
                     {!notification.read && (
                       <button
                         onClick={() => markAsRead(notification.id)}
@@ -312,6 +448,17 @@ export default function NotificationsPage() {
           </div>
         )}
       </div>
+
+      {/* Chat Window */}
+      {showChat && chatData && session?.user && (
+        <ChatWindow
+          conversationId={chatData.conversationId}
+          otherParticipant={chatData.otherParticipant}
+          currentUserId={session.user.id}
+          currentUserType={session.user.role as 'PLAYER' | 'RECRUITER' | 'HYBRID'}
+          onClose={closeChat}
+        />
+      )}
     </div>
   )
 }

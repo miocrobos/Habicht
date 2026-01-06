@@ -146,6 +146,9 @@
     'common.previousClub': 'Früeherä Club',
     'common.from': 'Vo',
     'common.to': 'Bis',
+    'common.viewProfile': 'Profil aaluege',
+    'common.player': 'Spieler',
+    'common.recruiter': 'Rekrutierer',
     // Toast messages
     'toast.backgroundSaved': 'Hintergrund gspicheret',
     'toast.backgroundError': 'Fehler bim Spichere vom Hintergrund',
@@ -362,6 +365,7 @@
       physical_coach: 'Fitnesstrainer',
       scout: 'Scout',
       trainer: 'Trainer',
+      team_manager: 'Teammanager',
     },
     // About Page
     about: {
@@ -410,6 +414,7 @@
       dismissNotification: 'Benachrichtigung usbläge',
       showUpdatesOnly: 'Nur Aktualisierige',
       showAll: 'Alli zeige',
+      markAllAsViewed: 'Alli als gseh markiere',
       noUpdates: 'Kei Profiländerige',
       noUpdatesDescription: 'Spieler i dinere Merklischte hei ihre Profile kürtzlich nid aktualisiert.',
     },
@@ -431,6 +436,9 @@
       all: 'Alli',
       unreadOnly: 'Ungleseni',
       profileViews: 'Profil-Aaluege',
+      messages: 'Nachrichta',
+      watchlist: 'Merklischte',
+      clickToReply: '(klick zum Antworte)',
       cvExport: 'CV Exportierä',
       cvChooseType: 'Wähl us, welli Art vo CV du häsch Möchtest:',
       cvPlayerTitle: 'Spieler CV',
@@ -445,7 +453,6 @@
       cvLanguageRomansh: 'Rumantsch',
       cvLanguageEnglish: 'Englisch',
       cvLanguageSwissGerman: 'Schwiizerdütsch',
-      messages: 'Nachrichta',
       profileViewed: 'Profil aagluegt',
       profileViewedMessage: '{name} het din Profil aagluegt',
       messageFrom: 'Nachricht vo {name}',
@@ -818,6 +825,7 @@
       positionLibero: 'Libero',
       positionUniversal: 'Universalspieler',
       lookingForClubBadge: 'Suecht Club',
+      lookingShort: 'Club',
       editProfile: 'Profil Bearbeite',
       exportCV: 'Läbeslaauf Exportiere',
       sendMessage: 'Nachricht sende',
@@ -958,6 +966,7 @@
       idCard: 'ID-Charte',
       noDocumentsUploaded: 'No kei Dokumänt ufeglad\u00e4.',
       noPhotosYet: 'No kei Föteli',
+      documents: 'Dokumänt',
       documentsTab: 'Dokumänt',
     },
     // Settings
@@ -1019,6 +1028,16 @@
         show: {
           title: 'Telefon Aazeige',
           description: 'Erlaube Andere Dini Telefonnummer Z Gseh',
+        },
+      },
+      license: {
+        show: {
+          title: 'Lizänze öffentlich aazeige',
+          description: 'Erlaube Andere Dini ufegladeni Lizänze und Dokumänt z gseh',
+          playerTitle: 'Spieler-Lizänz öffentlich aazeige',
+          playerDescription: 'Erlaube Andere Dini ufegladeni Swiss Volley Lizänz z gseh',
+          recruiterTitle: 'Trainer-Lizänz öffentlich aazeige',
+          recruiterDescription: 'Erlaube Andere Dini ufegladeni Trainer-Lizänz z gseh',
         },
       },
       privacy: {
@@ -1110,6 +1129,7 @@
         browsePlayers: 'Spieler Sueche',
         total: 'Total',
         conversations: 'Unterhaltunge',
+        noMessages: 'Nonig Nachrichte',
       },
     },
     // Hybrid Profile
@@ -1157,6 +1177,7 @@
       viewDocument: 'Dokumänt aazeige',
       changeVisibility: 'Sichtbarkeit i de Iistellige ändere',
       clubAffiliations: 'Club-Zugehörigkeite',
+      uploadLicense: 'Lizänze uflade',
     },
     // Recruiter Profile
     recruiterProfile: {
@@ -1176,6 +1197,7 @@
       positionsLookingFor: 'Gsuechtii Positione',
       genderCoached: 'Rekrutiere für (Herren/Damen)',
       lookingForMembers: 'Suecht nöii Mitglieder',
+      lookingShort: 'Suecht',
       clubAffiliations: 'Club-Zugehörigkeite',
       achievements: 'Coaching Erfolg',
       bio: 'Über mich',
@@ -1193,6 +1215,7 @@
       tabDocuments: 'Dokumänt',
       noDocumentsUploaded: 'Nonig Dokumänt ufeglade.',
       noPhotosYet: 'No kei Föteli',
+      uploadLicense: 'Lizänz uflade',
       aboutMe: 'Über mich',
       associatedClubs: 'Zuegheörigi Verein',
       contact: 'Kontakt',

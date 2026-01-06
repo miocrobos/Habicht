@@ -134,6 +134,9 @@
     'common.submit': 'Trametter',
     'common.clickToZoom': 'Cliccar per engrondir',
     'common.privateToYou': 'Privat',
+    'common.viewProfile': 'Vesair profil',
+    'common.player': 'Giugader',
+    'common.recruiter': 'Recrutader',
     // Toast messages
     'toast.backgroundSaved': 'Fund memorisà',
     'toast.backgroundError': 'Errur cun memorisar il fund',
@@ -349,6 +352,7 @@
       physical_coach: 'Trenader da fitness',
       scout: 'Scout',
       trainer: 'Trenader',
+      team_manager: 'Manager da team',
     },
     // About Page
     about: {
@@ -445,6 +449,7 @@
       dismissNotification: 'Ignorar notificaziun',
       showUpdatesOnly: 'Mussar mo actualisaziuns',
       showAll: 'Mussar tut',
+      markAllAsViewed: 'Marcar tut sco vis',
       noUpdates: 'Naginas actualisaziuns dal profil',
       noUpdatesDescription: 'Ils giugadurs en tia glista n\'han betg actualisà lur profil ultimamain.',
     },
@@ -463,6 +468,9 @@
       all: 'Tut',
       unreadOnly: 'Betg legidas',
       profileViews: 'Vistas dal profil',
+      messages: 'Messadis',
+      watchlist: 'Glista d\'observaziun',
+      clickToReply: '(cliccar per respunder)',
       cvExport: 'Exportar CV',
       cvChooseType: 'Tscherna il tip da CV che ti vuls:',
       cvPlayerTitle: 'CV da Giugader',
@@ -477,7 +485,6 @@
       cvLanguageRomansh: 'Rumantsch',
       cvLanguageEnglish: 'Englais',
       cvLanguageSwissGerman: 'Tudestg Svizzer',
-      messages: 'Messadis',
       profileViewed: 'Profil vistà',
       profileViewedMessage: '{name} ha tschertgà tes profil',
       messageFrom: 'Messadi da {name}',
@@ -738,6 +745,7 @@
       positionLibero: 'Libero',
       positionUniversal: 'Universal',
       lookingForClubBadge: 'Tschertga club',
+      lookingShort: 'Club',
       editProfile: 'Modifitgar Profil',
       exportCV: 'Exportar CV',
       sendMessage: 'Trametter Messadi',
@@ -856,7 +864,7 @@
       clubAffiliation: 'Club',
       clubNamePlaceholder: 'Num dal club',
       clubLogoUpload: 'Logo dal club',
-      uploadLicense: 'Chargiar foto da licenza',
+      uploadLicense: 'Chargiar licenza',
       uploadId: 'Chargiar foto da carta d\'identitad',
       logoAlreadyUploaded: 'Il logo è gia chargia. Per chargiar in nov logo, allontanescha il logo existent.',
       removeLogo: 'Allontanar logo',
@@ -877,6 +885,7 @@
       idCard: 'Carta d\'identitad',
       noDocumentsUploaded: 'Nagins documents chargiads.',
       noPhotosYet: 'Anc naginas fotografias',
+      documents: 'Documents',
       documentsTab: 'Documents',
     },
     // Settings
@@ -936,6 +945,16 @@
         show: {
           title: 'Mussar telefon',
           description: 'Permetter als auters da vesair tes numer da telefon',
+        },
+      },
+      license: {
+        show: {
+          title: 'Mussar licenzas publicamain',
+          description: 'Permetter als auters da vesair tias licenzas e documents chargiads',
+          playerTitle: 'Mussar licenza da giugader publicamain',
+          playerDescription: 'Permetter als auters da vesair tia licenza Swiss Volley chargiada',
+          recruiterTitle: 'Mussar licenza da trenader publicamain',
+          recruiterDescription: 'Permetter als auters da vesair tia licenza da trenader chargiada',
         },
       },
       privacy: {
@@ -1027,6 +1046,7 @@
         browsePlayers: 'Tschertgar Giugaders',
         total: 'Total',
         conversations: 'conversaziuns',
+        noMessages: 'Anc nagins messadis',
       },
     },
     countries: {
@@ -1170,6 +1190,7 @@
       viewDocument: 'Vesair document',
       changeVisibility: 'Midar la visibilitad en las configuraziuns',
       clubAffiliations: 'Affiliaziuns al Club',
+      uploadLicense: 'Chargiar licenzas',
     },
     // Recruiter Profile
     recruiterProfile: {
@@ -1189,6 +1210,7 @@
       positionsLookingFor: 'Posiziuns tschertgadas',
       genderCoached: 'Recrutament per (Umens/Dunnas)',
       lookingForMembers: 'Tschertga commembers novs',
+      lookingShort: 'Tschertga',
       clubAffiliations: 'Affiliaziuns al Club',
       achievements: 'Resultats da Coaching',
       bio: 'Davart mai',
@@ -1206,6 +1228,7 @@
       tabDocuments: 'Documents',
       noDocumentsUploaded: 'Anc nagins documents chargiads.',
       noPhotosYet: 'Anc naginas fotografias',
+      uploadLicense: 'Chargiar licenza',
       aboutMe: 'Davart mai',
       associatedClubs: 'Clubs Associads',
       contact: 'Contact',

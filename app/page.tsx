@@ -437,15 +437,15 @@ function LeagueCard({ league, description, color, emoji, playerCount, fact, expl
             }`}>
               {isExplanationMode ? (
                 <>
-                  <p className="text-[8px] sm:text-xs lg:text-sm text-white/70 font-semibold uppercase tracking-wide mb-1">
+                  <p className="text-[10px] sm:text-xs lg:text-sm text-white/70 font-semibold uppercase tracking-wide mb-1">
                     {t('home.slides.aboutThisLeague') || 'About this League'}
                   </p>
-                  <p className="text-[9px] sm:text-xs lg:text-sm text-white font-medium leading-snug">
+                  <p className="text-[11px] sm:text-xs lg:text-sm text-white font-medium leading-snug">
                     {panelContent}
                   </p>
                 </>
               ) : (
-                <p className="text-[9px] sm:text-xs lg:text-sm text-white font-medium italic leading-snug">
+                <p className="text-[11px] sm:text-xs lg:text-sm text-white font-medium italic leading-snug">
                   "{panelContent}"
                 </p>
               )}

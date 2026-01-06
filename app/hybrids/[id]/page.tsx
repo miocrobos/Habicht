@@ -1,15 +1,17 @@
 
 "use client";
 import { toast } from 'react-hot-toast';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import { Trophy, FileText, User, Briefcase, MapPin, Phone, Mail, Award, Globe, Bookmark, BookmarkPlus, Edit2, Loader2 } from "lucide-react";
+import { Trophy, FileText, User, Briefcase, MapPin, Phone, Mail, Award, Globe, Bookmark, BookmarkPlus, Edit2, Loader2, Upload, Eye, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
 import Link from "next/link";
 import { generatePlayerCV } from "@/lib/generateCV";
+import { BACKGROUND_OPTIONS } from '@/components/shared/backgroundOptions';
+import ChatWindow from '@/components/chat/ChatWindow';
 import { generateRecruiterCV } from "@/lib/generateRecruiterCV";
 
 // Helper function to get translated league label
@@ -80,11 +82,24 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
   const [cvExportLang, setCvExportLang] = useState<string | null>(null);
   const [showCvTypePopup, setShowCvTypePopup] = useState(false);
   const [showCvLangPopup, setShowCvLangPopup] = useState(false);
-  const [activeTab, setActiveTab] = useState<'player' | 'recruiter'>('player');
+  const [activeTab, setActiveTab] = useState<'player' | 'recruiter' | 'messages'>('player');
   const [exportingCV, setExportingCV] = useState(false);
   const [zoomedLicense, setZoomedLicense] = useState<string | null>(null);
   const [isWatched, setIsWatched] = useState(false);
   const [watchlistLoading, setWatchlistLoading] = useState(false);
+  
+  // Background state
+  const [showBackgroundModal, setShowBackgroundModal] = useState(false);
+  const [selectedBg, setSelectedBg] = useState(BACKGROUND_OPTIONS[0]);
+  const [customBgImage, setCustomBgImage] = useState<string | null>(null);
+  const [newBackgroundImage, setNewBackgroundImage] = useState('');
+  const [uploadingBackground, setUploadingBackground] = useState(false);
+  const backgroundLoadedRef = useRef(false);
+  
+  // Messages/Chat state
+  const [conversations, setConversations] = useState<any[]>([]);
+  const [conversationsLoading, setConversationsLoading] = useState(false);
+  const [activeChat, setActiveChat] = useState<any>(null);
 
   // Check if the logged-in user owns this profile
   const isOwner = session?.user?.id === params.id;
@@ -146,9 +161,109 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
       const hybrid = response.data.hybrid;
       setProfile(hybrid);
       setLoading(false);
+      
+      // Load background if it's the owner
+      if (!backgroundLoadedRef.current) {
+        loadBackground(hybrid);
+        backgroundLoadedRef.current = true;
+      }
     } catch (err) {
       setError(t("hybridProfile.errorLoadingHybridData"));
       setLoading(false);
+    }
+  };
+
+  // Load background from localStorage or server
+  const loadBackground = (hybrid: any) => {
+    try {
+      // First try localStorage
+      const savedBg = localStorage.getItem(`profileBackground_hybrid_${params.id}`);
+      if (savedBg) {
+        const parsed = JSON.parse(savedBg);
+        if (parsed.backgroundImage) {
+          setCustomBgImage(parsed.backgroundImage);
+        } else if (parsed.selectedBg) {
+          const found = BACKGROUND_OPTIONS.find(bg => bg.id === parsed.selectedBg);
+          if (found) setSelectedBg(found);
+        }
+        return;
+      }
+      
+      // Fall back to server data if available
+      if (hybrid?.player?.coverImage) {
+        setCustomBgImage(hybrid.player.coverImage);
+      } else if (hybrid?.player?.backgroundGradient) {
+        const found = BACKGROUND_OPTIONS.find(bg => bg.id === hybrid.player.backgroundGradient);
+        if (found) setSelectedBg(found);
+      }
+    } catch (e) {
+      console.error('Error loading background:', e);
+    }
+  };
+
+  // Fetch conversations when user is owner
+  const fetchConversations = async () => {
+    if (!isOwner) return;
+    try {
+      setConversationsLoading(true);
+      const response = await axios.get('/api/chat/conversations');
+      setConversations(response.data.conversations || []);
+    } catch (error) {
+      console.error('Error fetching conversations:', error);
+    } finally {
+      setConversationsLoading(false);
+    }
+  };
+
+  // Load conversations when tab is messages and user is owner
+  useEffect(() => {
+    if (isOwner && activeTab === 'messages') {
+      fetchConversations();
+    }
+  }, [isOwner, activeTab]);
+
+  // Open chat function
+  const openChat = (conversation: any) => {
+    let otherParticipant;
+    
+    if (conversation.player && conversation.recruiter) {
+      // Check if current user is the player in this conversation
+      const currentUserIsPlayer = session?.user?.playerId && conversation.playerId === session?.user?.playerId;
+      
+      if (currentUserIsPlayer) {
+        otherParticipant = {
+          id: conversation.recruiter.id,
+          name: `${conversation.recruiter.firstName} ${conversation.recruiter.lastName}`,
+          type: 'RECRUITER' as const,
+          club: conversation.recruiter.club?.name || ''
+        };
+      } else {
+        otherParticipant = {
+          id: conversation.player.id,
+          name: `${conversation.player.firstName} ${conversation.player.lastName}`,
+          type: 'PLAYER' as const,
+          position: conversation.player.positions?.[0] || ''
+        };
+      }
+    } else if (conversation.recruiter && conversation.secondRecruiter) {
+      const currentRecruiterId = session?.user?.recruiterId;
+      const isFirstRecruiter = conversation.recruiterId === currentRecruiterId;
+      const other = isFirstRecruiter ? conversation.secondRecruiter : conversation.recruiter;
+      otherParticipant = {
+        id: other.id,
+        name: `${other.firstName} ${other.lastName}`,
+        type: 'RECRUITER' as const,
+        club: other.club?.name || ''
+      };
+    }
+    
+    if (otherParticipant) {
+      setActiveChat({
+        conversationId: conversation.id,
+        otherParticipant,
+        currentUserId: session?.user?.id || '',
+        currentUserType: 'HYBRID' as const
+      });
     }
   };
 
@@ -276,28 +391,49 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Static Background Header */}
+      {/* Dynamic Background Header */}
       <div 
-        className="h-48 sm:h-56 md:h-64 relative"
-        style={{
-          background: 'linear-gradient(135deg, #f97316 0%, #ea580c 50%, #c2410c 100%)'
-        }}
-      />
+        className="h-36 sm:h-48 md:h-56 lg:h-64 relative"
+        style={
+          customBgImage
+            ? {
+                backgroundImage: `url(${customBgImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }
+            : {
+                background: selectedBg.style
+              }
+        }
+      >
+        {/* Background change button (owner only) */}
+        {isOwner && (
+          <button
+            onClick={() => setShowBackgroundModal(true)}
+            className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg shadow-lg hover:shadow-xl transition flex items-center gap-1 sm:gap-2 z-10 text-xs sm:text-sm"
+          >
+            <Upload className="w-3 h-3 sm:w-4 sm:h-4" />
+            <span className="hidden xs:inline">{t('playerProfile.changeBackgroundButton') || 'Change background'}</span>
+            <span className="xs:hidden">{t('common.change') || 'Change'}</span>
+          </button>
+        )}
+      </div>
 
       {/* Profile Header */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 -mt-16 sm:-mt-20 relative z-10">
         {error && (
-          <div className="mb-4 bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-800 dark:text-red-200 px-4 py-3 rounded-lg">
+          <div className="mb-3 sm:mb-4 bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-800 dark:text-red-200 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-sm">
             {t(error)}
           </div>
         )}
 
         {/* UNIFIED PROFILE HEADER - Shared info for both player & recruiter */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 mb-6 border border-gray-100 dark:border-gray-700">
-          <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3 sm:p-6 mb-4 sm:mb-6 border border-gray-100 dark:border-gray-700">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-6">
             {/* Profile Image */}
             <div className="flex-shrink-0 mx-auto md:mx-0">
-              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-orange-500 dark:border-orange-400 shadow-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
+              <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full border-4 border-orange-500 dark:border-orange-400 shadow-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
                 {(profile.profileImage || profile.player?.profileImage || profile.recruiter?.profileImage) ? (
                   <Image
                     src={profile.profileImage || profile.player?.profileImage || profile.recruiter?.profileImage}
@@ -307,7 +443,7 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-orange-600 to-orange-800">
+                  <div className="w-full h-full flex items-center justify-center text-white text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-br from-orange-600 to-orange-800">
                     {profile.firstName?.[0]}{profile.lastName?.[0]}
                   </div>
                 )}
@@ -316,32 +452,32 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
 
             {/* Shared Info Section */}
             <div className="flex-grow text-center md:text-left">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">
                 {profile.firstName} {profile.lastName}
               </h2>
               
               {/* Hybrid Badge */}
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-3">
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-semibold rounded-full flex items-center gap-1">
-                  <User className="w-4 h-4" /> + <Briefcase className="w-4 h-4" /> Hybrid
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+                <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs sm:text-sm font-semibold rounded-full flex items-center gap-1">
+                  <User className="w-3 h-3 sm:w-4 sm:h-4" /> + <Briefcase className="w-3 h-3 sm:w-4 sm:h-4" /> Hybrid
                 </span>
                 {profile.player?.lookingForClub && (
-                  <span className="px-2.5 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs sm:text-sm font-semibold rounded-full flex items-center gap-1">
-                    ✓ {t('playerProfile.lookingForClubBadge') || 'Sucht Club'}
+                  <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-[10px] sm:text-xs md:text-sm font-semibold rounded-full flex items-center gap-1">
+                    ✓ <span className="hidden xs:inline">{t('playerProfile.lookingForClubBadge') || 'Sucht Club'}</span><span className="xs:hidden">{t('playerProfile.lookingShort') || 'Club'}</span>
                   </span>
                 )}
                 {profile.recruiter?.lookingForMembers && (
-                  <span className="px-2.5 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs sm:text-sm font-semibold rounded-full flex items-center gap-1">
-                    ✓ {t('recruiterProfile.lookingForMembers') || 'Sucht Spieler'}
+                  <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-[10px] sm:text-xs md:text-sm font-semibold rounded-full flex items-center gap-1">
+                    ✓ <span className="hidden xs:inline">{t('recruiterProfile.lookingForMembers') || 'Sucht Spieler'}</span><span className="xs:hidden">{t('recruiterProfile.lookingShort') || 'Spieler'}</span>
                   </span>
                 )}
               </div>
               
               {/* Location, Age, Nationality */}
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 text-[10px] sm:text-xs md:text-sm text-gray-600 dark:text-gray-400 mb-2 sm:mb-3">
                 {(profile.player?.municipality || profile.player?.canton || profile.recruiter?.canton) && (
                   <span className="flex items-center gap-1">
-                    <MapPin className="w-4 h-4" />
+                    <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
                     {profile.player?.municipality ? `${profile.player.municipality}, ${profile.player.canton}` : 
                      profile.player?.city ? `${profile.player.city}, ${profile.player.canton}` : 
                      profile.recruiter?.province ? `${profile.recruiter.province}, ${profile.recruiter.canton}` :
@@ -359,17 +495,17 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
               </div>
               
               {/* Contact Info */}
-              <div className="flex flex-wrap gap-3 justify-center md:justify-start text-sm mb-4">
+              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center md:justify-start text-[10px] sm:text-xs md:text-sm mb-3 sm:mb-4">
                 {(profile.player?.phone || profile.recruiter?.phone) && (
                   <a href={`tel:${profile.player?.phone || profile.recruiter?.phone}`} className="flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-purple-600">
-                    <Phone className="w-4 h-4" />
+                    <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
                     <span>{profile.player?.phone || profile.recruiter?.phone}</span>
                   </a>
                 )}
                 {profile.user?.email && (
                   <a href={`mailto:${profile.user.email}`} className="flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-purple-600">
-                    <Mail className="w-4 h-4" />
-                    <span>{profile.user.email}</span>
+                    <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <span className="truncate max-w-[120px] sm:max-w-none">{profile.user.email}</span>
                   </a>
                 )}
               </div>
@@ -410,38 +546,55 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
         </div>
 
         {/* Profile Tabs - Player / Recruiter role-specific info */}
-        <div className="mb-6">
-          <div className="flex gap-2 bg-white dark:bg-gray-800 rounded-xl p-2 shadow-lg border border-gray-100 dark:border-gray-700">
+        <div className="mb-4 sm:mb-6">
+          <div className="flex gap-1 sm:gap-2 bg-white dark:bg-gray-800 rounded-xl p-1.5 sm:p-2 shadow-lg border border-gray-100 dark:border-gray-700">
             <button
               onClick={() => setActiveTab('player')}
-              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold transition ${
+              className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold transition text-xs sm:text-sm md:text-base ${
                 activeTab === 'player'
                   ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
-              <User className="w-5 h-5" />
-              {t('hybridProfile.playerSection') || 'Spieler Profil'}
+              <User className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="hidden sm:inline">{t('hybridProfile.playerSection') || 'Spieler Profil'}</span>
+              <span className="sm:hidden">{t('hybridProfile.playerShort') || 'Spieler'}</span>
             </button>
             <button
               onClick={() => setActiveTab('recruiter')}
-              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold transition ${
+              className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold transition text-xs sm:text-sm md:text-base ${
                 activeTab === 'recruiter'
                   ? 'bg-gradient-to-r from-green-600 to-green-700 text-white shadow-md'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
-              <Briefcase className="w-5 h-5" />
-              {t('hybridProfile.recruiterSection') || 'Rekrutierer Profil'}
+              <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="hidden sm:inline">{t('hybridProfile.recruiterSection') || 'Rekrutierer Profil'}</span>
+              <span className="sm:hidden">{t('hybridProfile.recruiterShort') || 'Trainer'}</span>
             </button>
+            {/* Messages Tab - Only visible to owner */}
+            {isOwner && (
+              <button
+                onClick={() => setActiveTab('messages')}
+                className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold transition text-xs sm:text-sm md:text-base ${
+                  activeTab === 'messages'
+                    ? 'bg-gradient-to-r from-orange-600 to-orange-700 text-white shadow-md'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">{t('settings.messages.title') || 'Messages'}</span>
+                <span className="sm:hidden">{t('hybridProfile.chatShort') || 'Chat'}</span>
+              </button>
+            )}
           </div>
         </div>
 
         {/* Player Tab Content - Role-specific info only */}
         {activeTab === 'player' && profile.player && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 mb-6 border border-gray-100 dark:border-gray-700">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <User className="w-5 h-5 text-blue-600" />
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3 sm:p-6 mb-4 sm:mb-6 border border-gray-100 dark:border-gray-700">
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center gap-2">
+              <User className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
               {t('hybridProfile.playerDetails') || 'Spieler Details'}
             </h3>
             
@@ -630,7 +783,11 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                       )}
                       {club.role && club.role.length > 0 && (
                         <span className="text-xs text-gray-500 dark:text-gray-400">
-                          ({club.role.join(', ')})
+                          ({club.role.map((r: string) => {
+                            const roleKey = r.toLowerCase() as 'head_coach' | 'assistant_coach' | 'technical_coach' | 'physical_coach' | 'scout' | 'trainer' | 'team_manager';
+                            const translation = t(`coachRole.${roleKey}`);
+                            return translation === `coachRole.${roleKey}` ? r.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : translation;
+                          }).join(', ')})
                         </span>
                       )}
                     </div>
@@ -722,8 +879,142 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
           </div>
         )}
 
-        {/* Documents/Media Section - Visible to owner always, or to others if showLicense is true */}
-        {(isOwner || profile.player?.showLicense || profile.recruiter?.showLicense) && (profile.recruiter?.coachingLicense || profile.player?.swissVolleyLicense) && (
+        {/* Messages Tab Content - Only visible to owner */}
+        {activeTab === 'messages' && isOwner && (
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 mb-6 border border-gray-100 dark:border-gray-700">
+            <div className="border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
+              <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-1 flex items-center gap-2">
+                <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" />
+                {t('settings.messages.title') || 'Messages'}
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {t('settings.messages.subtitle') || 'Your conversations with other users'}
+              </p>
+            </div>
+            
+            {conversationsLoading ? (
+              <div className="flex items-center justify-center py-12">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
+              </div>
+            ) : conversations.length === 0 ? (
+              <div className="text-center py-12">
+                <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  {t('settings.messages.empty') || 'No conversations yet'}
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  {t('settings.messages.emptyDescription') || 'Start a conversation by messaging a player or recruiter'}
+                </p>
+                <Link
+                  href="/players"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition font-medium"
+                >
+                  {t('settings.messages.browsePlayers') || 'Browse Players'}
+                </Link>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {conversations.map((conversation) => {
+                  // Determine other participant
+                  let otherName = '';
+                  let otherRole = '';
+                  let otherClub = '';
+                  let profileLink = '';
+                  let profileImage = '';
+                  
+                  if (conversation.player && conversation.recruiter) {
+                    const currentUserIsPlayer = session?.user?.playerId && conversation.playerId === session?.user?.playerId;
+                    if (currentUserIsPlayer) {
+                      otherName = `${conversation.recruiter.firstName} ${conversation.recruiter.lastName}`;
+                      otherRole = conversation.recruiter.coachRole || t('common.recruiter') || 'Recruiter';
+                      otherClub = conversation.recruiter.club?.name || '';
+                      profileLink = `/recruiters/${conversation.recruiter.id}`;
+                      profileImage = conversation.recruiter.profileImage || '';
+                    } else {
+                      otherName = `${conversation.player.firstName} ${conversation.player.lastName}`;
+                      otherRole = conversation.player.positions?.[0] || t('common.player') || 'Player';
+                      otherClub = conversation.player.currentClub?.name || '';
+                      profileLink = `/players/${conversation.player.id}`;
+                      profileImage = conversation.player.profileImage || '';
+                    }
+                  } else if (conversation.recruiter && conversation.secondRecruiter) {
+                    const currentRecruiterId = session?.user?.recruiterId;
+                    const isFirst = conversation.recruiterId === currentRecruiterId;
+                    const other = isFirst ? conversation.secondRecruiter : conversation.recruiter;
+                    otherName = `${other.firstName} ${other.lastName}`;
+                    otherRole = other.coachRole || t('common.recruiter') || 'Recruiter';
+                    otherClub = other.club?.name || '';
+                    profileLink = `/recruiters/${other.id}`;
+                    profileImage = other.profileImage || '';
+                  }
+                  
+                  const lastMessage = conversation.messages?.[0];
+                  
+                  return (
+                    <div
+                      key={conversation.id}
+                      className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md transition cursor-pointer"
+                      onClick={() => openChat(conversation)}
+                    >
+                      {/* Avatar */}
+                      <div className="flex-shrink-0">
+                        {profileImage ? (
+                          <img 
+                            src={profileImage} 
+                            alt={otherName}
+                            className="w-12 h-12 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+                            <span className="text-lg font-bold text-orange-600 dark:text-orange-400">
+                              {otherName.charAt(0)}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Conversation Info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <h4 className="font-semibold text-gray-900 dark:text-white truncate">
+                            {otherName}
+                          </h4>
+                          {lastMessage && (
+                            <span className="text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">
+                              {new Date(lastMessage.createdAt).toLocaleDateString()}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          {otherRole}{otherClub ? ` • ${otherClub}` : ''}
+                        </p>
+                        {lastMessage && (
+                          <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-1">
+                            {lastMessage.content}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Chat Window Modal */}
+        {activeChat && (
+          <ChatWindow
+            conversationId={activeChat.conversationId}
+            otherParticipant={activeChat.otherParticipant}
+            currentUserId={activeChat.currentUserId}
+            currentUserType={activeChat.currentUserType}
+            onClose={() => setActiveChat(null)}
+          />
+        )}
+
+        {/* Documents/Media Section - Visible to owner always, or to others if showLicense is true and documents exist */}
+        {(isOwner || ((profile.player?.showLicense && profile.player?.swissVolleyLicense) || (profile.recruiter?.showLicense && profile.recruiter?.coachingLicense))) && (
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6 border border-gray-100 dark:border-gray-700">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
@@ -843,6 +1134,24 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                   </div>
                 </div>
               )}
+              {/* Upload prompt when no licenses exist for owner */}
+              {isOwner && !profile.player?.swissVolleyLicense && !profile.recruiter?.coachingLicense && (
+                <div className="text-center py-8 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
+                  <Award className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                  <p className="text-gray-500 dark:text-gray-400 mb-4">
+                    {t('hybridProfile.noDocumentsUploaded') || 'No documents uploaded yet.'}
+                  </p>
+                  <Link
+                    href={`/hybrids/${profile.user.id}/edit`}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition-colors font-medium"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                    {t('hybridProfile.uploadLicense') || 'Upload Licenses'}
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -944,6 +1253,176 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
               alt="License"
               className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
             />
+          </div>
+        </div>
+      )}
+
+      {/* Background Image Modal */}
+      {showBackgroundModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t('playerProfile.changeBackground') || 'Change Background'}</h3>
+              <button
+                onClick={() => {
+                  setShowBackgroundModal(false);
+                  setNewBackgroundImage('');
+                }}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="space-y-6">
+              {/* Color Selector */}
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('playerProfile.selectColor') || 'Select Color'}</h4>
+                <div className="grid grid-cols-4 gap-3">
+                  {BACKGROUND_OPTIONS.map((option) => (
+                    <button
+                      key={option.id}
+                      onClick={async () => {
+                        try {
+                          // Update UI immediately
+                          setSelectedBg(option);
+                          setCustomBgImage(null);
+                          setShowBackgroundModal(false);
+                          
+                          // Save to localStorage
+                          localStorage.setItem(`profileBackground_hybrid_${params.id}`, JSON.stringify({
+                            selectedBg: option.id,
+                            customColor: option.style,
+                            backgroundImage: ''
+                          }));
+                          
+                          // Save to server (using player endpoint)
+                          if (profile?.player?.id) {
+                            const backgroundData = JSON.stringify({
+                              backgroundGradient: option.id,
+                              customColor: option.style,
+                              backgroundImage: '',
+                            });
+                            await axios.put(`/api/players/${profile.player.id}/background`, {
+                              customColor: backgroundData,
+                            });
+                          }
+                          
+                          toast.success(t('playerProfile.backgroundUpdated') || 'Background updated!');
+                        } catch (error) {
+                          console.error('Error updating background:', error);
+                          toast.error(t('playerProfile.errorUpdatingBackground') || 'Error updating background');
+                        }
+                      }}
+                      className={`h-20 rounded-lg transition-all hover:scale-105 hover:shadow-lg border-2 ${
+                        selectedBg.id === option.id && !customBgImage
+                          ? 'border-orange-600 ring-2 ring-orange-600 ring-offset-2 dark:ring-offset-gray-800'
+                          : 'border-gray-200 dark:border-gray-600'
+                      }`}
+                      style={{ background: option.style }}
+                      title={option.name}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Custom Image Upload */}
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('playerProfile.or') || 'Or'}</h4>
+                <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('playerProfile.selectNewBackground') || 'Upload Custom Image'}</h4>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setUploadingBackground(true);
+                      try {
+                        const formData = new FormData();
+                        formData.append('file', file);
+                        formData.append('upload_preset', 'player_uploads');
+                        
+                        const cloudRes = await fetch(
+                          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+                          { method: 'POST', body: formData }
+                        );
+                        const cloudData = await cloudRes.json();
+                        
+                        if (cloudData.secure_url) {
+                          setNewBackgroundImage(cloudData.secure_url);
+                        }
+                      } catch (error) {
+                        console.error('Error uploading image:', error);
+                        toast.error(t('toast.uploadError') || 'Error uploading image');
+                      } finally {
+                        setUploadingBackground(false);
+                      }
+                    }
+                  }}
+                  className="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-orange-50 dark:file:bg-orange-900/30 file:text-orange-700 dark:file:text-orange-300 hover:file:bg-orange-100 dark:hover:file:bg-orange-900/50 cursor-pointer"
+                />
+                
+                {uploadingBackground && (
+                  <div className="mt-2 flex items-center gap-2 text-sm text-gray-500">
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    {t('playerProfile.backgroundUpdating') || 'Uploading...'}
+                  </div>
+                )}
+                
+                {newBackgroundImage && (
+                  <div className="mt-4">
+                    <img
+                      src={newBackgroundImage}
+                      alt="New background preview"
+                      className="w-full h-32 object-cover rounded-lg"
+                    />
+                    <button
+                      onClick={async () => {
+                        try {
+                          setUploadingBackground(true);
+                          
+                          // Update UI
+                          setCustomBgImage(newBackgroundImage);
+                          setShowBackgroundModal(false);
+                          
+                          // Save to localStorage
+                          localStorage.setItem(`profileBackground_hybrid_${params.id}`, JSON.stringify({
+                            selectedBg: 'image',
+                            customColor: '',
+                            backgroundImage: newBackgroundImage
+                          }));
+                          
+                          // Save to server
+                          if (profile?.player?.id) {
+                            const backgroundData = JSON.stringify({
+                              backgroundGradient: '',
+                              customColor: '',
+                              backgroundImage: newBackgroundImage,
+                            });
+                            await axios.put(`/api/players/${profile.player.id}/background`, {
+                              customColor: backgroundData,
+                            });
+                          }
+                          
+                          toast.success(t('playerProfile.backgroundUpdated') || 'Background updated!');
+                          setNewBackgroundImage('');
+                        } catch (error) {
+                          console.error('Error updating background:', error);
+                          toast.error(t('playerProfile.errorUpdatingBackground') || 'Error updating background');
+                        } finally {
+                          setUploadingBackground(false);
+                        }
+                      }}
+                      className="mt-3 w-full px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition font-semibold"
+                    >
+                      {t('playerProfile.save') || 'Save'}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       )}

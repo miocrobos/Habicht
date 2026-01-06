@@ -140,6 +140,7 @@ export async function PUT(
         lookingForMembers: data.lookingForMembers,
         profileImage: data.profileImage,
         customColor: data.customColor,
+        showLicense: data.showLicense !== undefined ? data.showLicense : undefined,
         achievements: data.achievements !== undefined ? 
           (Array.isArray(data.achievements) ? data.achievements.map((a: any) => typeof a === 'string' ? a : a.text) : []) 
           : undefined,

@@ -150,6 +150,9 @@
     'common.previousClub': 'Previous Club',
     'common.from': 'From',
     'common.to': 'To',
+    'common.viewProfile': 'View Profile',
+    'common.player': 'Player',
+    'common.recruiter': 'Recruiter',
     // Toast messages
     'toast.backgroundSaved': 'Background saved',
     'toast.backgroundError': 'Error saving background',
@@ -368,6 +371,7 @@
       physical_coach: 'Physical Coach',
       scout: 'Scout',
       trainer: 'Trainer',
+      team_manager: 'Team Manager',
     },
     // About Page
     about: {
@@ -626,6 +630,7 @@
       dismissNotification: 'Dismiss notification',
       showUpdatesOnly: 'Show Updates Only',
       showAll: 'Show All',
+      markAllAsViewed: 'Mark All as Viewed',
       noUpdates: 'No profile updates',
       noUpdatesDescription: 'Players in your watchlist haven\'t updated their profiles recently.',
     },
@@ -638,6 +643,9 @@
       all: 'All',
       unreadOnly: 'Unread',
       profileViews: 'Profile views',
+      messages: 'Messages',
+      watchlist: 'Watchlist',
+      clickToReply: '(click to reply)',
       cvExport: 'Export CV',
       cvChooseType: 'Choose the type of CV you want:',
       cvPlayerTitle: 'Player CV',
@@ -652,7 +660,6 @@
       cvLanguageRomansh: 'Romansh',
       cvLanguageEnglish: 'English',
       cvLanguageSwissGerman: 'Swiss German',
-      messages: 'Messages',
       profileViewed: 'Profile Viewed',
       profileViewedMessage: '{name} has viewed your profile',
       messageFrom: 'Message from {name}',
@@ -922,6 +929,7 @@
       positionLibero: 'Libero',
       positionUniversal: 'Universal',
       lookingForClubBadge: 'Looking for club',
+      lookingShort: 'Club',
       editProfile: 'Edit Profile',
       exportCV: 'Export CV',
       sendMessage: 'Send Message',
@@ -1040,7 +1048,7 @@
       clubAffiliation: 'Club',
       clubNamePlaceholder: 'Club name',
       clubLogoUpload: 'Club logo',
-      uploadLicense: 'Upload license photo',
+      uploadLicense: 'Upload License',
       uploadId: 'Upload ID photo',
       logoAlreadyUploaded: 'Logo is already uploaded. To upload a new logo, remove the existing one first.',
       removeLogo: 'Remove logo',
@@ -1085,6 +1093,7 @@
       idCard: 'ID Card',
       noDocumentsUploaded: 'No documents uploaded yet.',
       noPhotosYet: 'No photos yet',
+      documents: 'Documents',
       documentsTab: 'Documents',
     },
     // Club Submit Page
@@ -1184,6 +1193,10 @@
         show: {
           title: 'Show Licenses Publicly',
           description: 'Allow other users to see your uploaded licenses and documents',
+          playerTitle: 'Show Player License Publicly',
+          playerDescription: 'Allow other users to see your uploaded Swiss Volley license',
+          recruiterTitle: 'Show Coaching License Publicly',
+          recruiterDescription: 'Allow other users to see your uploaded coaching license',
         },
       },
       privacy: {
@@ -1275,6 +1288,7 @@
         browsePlayers: 'Browse Players',
         total: 'Total',
         conversations: 'conversations',
+        noMessages: 'No messages yet',
       },
     },
     // Hybrid Profile
@@ -1321,6 +1335,7 @@
       noPhotosYet: 'No photos yet',
       viewDocument: 'View Document',
       changeVisibility: 'Change visibility in settings',
+      clubAffiliations: 'Club Affiliations',
     },
     // Recruiter Profile
     recruiterProfile: {
@@ -1340,6 +1355,7 @@
       positionsLookingFor: 'Looking for positions',
       genderCoached: 'Recruiting for (Men/Women)',
       lookingForMembers: 'Looking for new members',
+      lookingShort: 'Searching',
       clubAffiliations: 'Club Affiliations',
       achievements: 'Coaching Achievements',
       bio: 'About',
@@ -1357,6 +1373,7 @@
       tabDocuments: 'Documents',
       noDocumentsUploaded: 'No documents uploaded yet.',
       noPhotosYet: 'No photos yet',
+      uploadLicense: 'Upload License',
       aboutMe: 'About Me',
       associatedClubs: 'Associated Clubs',
       contact: 'Contact',

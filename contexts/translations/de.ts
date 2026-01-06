@@ -136,6 +136,9 @@
     'common.privateToYou': 'Nur für dich sichtbar',
     'common.next': 'Weiter',
     'common.submit': 'Absenden',
+    'common.viewProfile': 'Profil ansehen',
+    'common.player': 'Spieler',
+    'common.recruiter': 'Rekrutierer',
     // Toast messages
     'toast.backgroundSaved': 'Hintergrund gespeichert',
     'toast.backgroundError': 'Fehler beim Speichern des Hintergrunds',
@@ -352,6 +355,7 @@
       physical_coach: 'Fitnesstrainer',
       scout: 'Scout',
       trainer: 'Trainer',
+      team_manager: 'Teammanager',
     },
     // About Page
     about: {
@@ -448,6 +452,7 @@
       dismissNotification: 'Benachrichtigung ausblenden',
       showUpdatesOnly: 'Nur Aktualisierungen',
       showAll: 'Alle anzeigen',
+      markAllAsViewed: 'Alle als gelesen markieren',
       noUpdates: 'Keine Profilaktualisierungen',
       noUpdatesDescription: 'Spieler in Ihrer Merkliste haben ihre Profile kürzlich nicht aktualisiert.',
     },
@@ -467,6 +472,8 @@
       unreadOnly: 'Ungelesen',
       profileViews: 'Profil-Ansichten',
       messages: 'Nachrichten',
+      watchlist: 'Merkliste',
+      clickToReply: '(klicken zum Antworten)',
       profileViewed: 'Profil angesehen',
       profileViewedMessage: '{name} hat Ihr Profil angesehen',
       messageFrom: 'Nachricht von {name}',
@@ -719,6 +726,7 @@
       positionLibero: 'Libero',
       positionUniversal: 'Universalspieler',
       lookingForClubBadge: 'Sucht Verein',
+      lookingShort: 'Club',
       editProfile: 'Profil Bearbeiten',
       exportCV: 'Lebenslauf Exportieren',
       sendMessage: 'Nachricht senden',
@@ -833,7 +841,9 @@
       idCard: 'Ausweis/ID',
       noDocumentsUploaded: 'Noch keine Dokumente hochgeladen.',
       noPhotosYet: 'Noch keine Fotos',
+      documents: 'Dokumente',
       documentsTab: 'Dokumente',
+      uploadLicense: 'Lizenz hochladen',
       clubNumber: 'Verein',
       enterClubName: 'Vereinsname eingeben',
       clubLogoOptional: 'Vereinslogo (optional)',
@@ -843,7 +853,6 @@
       clubAffiliation: 'Verein',
       clubNamePlaceholder: 'Vereinsname',
       clubLogoUpload: 'Vereinslogo',
-      uploadLicense: 'Lizenzfoto hochladen',
       uploadId: 'ID-Foto hochladen',
       logoAlreadyUploaded: 'Logo ist bereits hochgeladen. Um ein neues Logo hochzuladen, entfernen Sie zuerst das bestehende.',
       removeLogo: 'Logo entfernen',
@@ -930,6 +939,10 @@
         show: {
           title: 'Lizenzen öffentlich anzeigen',
           description: 'Erlauben Sie anderen Ihre hochgeladenen Lizenzen und Dokumente zu sehen',
+          playerTitle: 'Spieler-Lizenz öffentlich anzeigen',
+          playerDescription: 'Erlauben Sie anderen Ihre hochgeladene Swiss Volley Lizenz zu sehen',
+          recruiterTitle: 'Trainerlizenz öffentlich anzeigen',
+          recruiterDescription: 'Erlauben Sie anderen Ihre hochgeladene Trainerlizenz zu sehen',
         },
       },
       privacy: {
@@ -1021,6 +1034,7 @@
         browsePlayers: 'Spieler durchsuchen',
         total: 'Gesamt',
         conversations: 'Unterhaltungen',
+        noMessages: 'Noch keine Nachrichten',
       },
     },
     countries: {
@@ -1164,6 +1178,7 @@
       viewDocument: 'Dokument anzeigen',
       changeVisibility: 'Sichtbarkeit in Einstellungen ändern',
       clubAffiliations: 'Club-Zugehörigkeiten',
+      uploadLicense: 'Lizenzen hochladen',
     },
     // Recruiter Profile
     recruiterProfile: {
@@ -1183,6 +1198,7 @@
       positionsLookingFor: 'Gesuchte Positionen',
       genderCoached: 'Gecoachtes Geschlecht',
       lookingForMembers: 'Sucht neue Mitglieder',
+      lookingShort: 'Sucht',
       clubAffiliations: 'Club-Zugehörigkeiten',
       achievements: 'Coaching Erfolge',
       bio: 'Über mich',
@@ -1200,6 +1216,7 @@
       tabDocuments: 'Dokumente',
       noDocumentsUploaded: 'Noch keine Dokumente hochgeladen.',
       noPhotosYet: 'Noch keine Fotos',
+      uploadLicense: 'Lizenz hochladen',
       aboutMe: 'Über mich',
       associatedClubs: 'Zugehörige Vereine',
       contact: 'Kontakt',

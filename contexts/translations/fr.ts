@@ -135,6 +135,9 @@
     'common.submit': 'Soumettre',
     'common.clickToZoom': 'Cliquer pour agrandir',
     'common.privateToYou': 'Privé',
+    'common.viewProfile': 'Voir le profil',
+    'common.player': 'Joueur',
+    'common.recruiter': 'Recruteur',
     // Toast messages
     'toast.backgroundSaved': 'Arrière-plan enregistré',
     'toast.backgroundError': 'Erreur lors de l\'enregistrement de l\'arrière-plan',
@@ -351,6 +354,7 @@
       physical_coach: 'Préparateur physique',
       scout: 'Recruteur',
       trainer: 'EntraÎneur',
+      team_manager: 'Manager d\'équipe',
     },
     // About Page
     about: {
@@ -447,6 +451,7 @@
       dismissNotification: 'Ignorer la notification',
       showUpdatesOnly: 'Afficher les mises à jour uniquement',
       showAll: 'Afficher tout',
+      markAllAsViewed: 'Tout marquer comme vu',
       noUpdates: 'Pas de mises à jour de profil',
       noUpdatesDescription: 'Les joueurs de votre liste n\'ont pas mis à jour leur profil récemment.',
     },
@@ -465,6 +470,9 @@
       all: 'Toutes',
       unreadOnly: 'Non lues',
       profileViews: 'Vues du profil',
+      messages: 'Messages',
+      watchlist: 'Liste de suivi',
+      clickToReply: '(cliquer pour répondre)',
       cvExport: 'Exporter le CV',
       cvChooseType: 'Choisissez le type de CV que vous souhaitez:',
       cvPlayerTitle: 'CV Joueur',
@@ -479,7 +487,6 @@
       cvLanguageRomansh: 'Romanche',
       cvLanguageEnglish: 'Anglais',
       cvLanguageSwissGerman: 'Suisse Allemand',
-      messages: 'Messages',
       profileViewed: 'Profil consulté',
       profileViewedMessage: '{name} a consulté votre profil',
       messageFrom: 'Message de {name}',
@@ -740,6 +747,7 @@
       positionLibero: 'Libéro',
       positionUniversal: 'Universel',
       lookingForClubBadge: 'Cherche club',
+      lookingShort: 'Club',
       editProfile: 'Modifier le Profil',
       exportCV: 'Exporter le CV',
       sendMessage: 'Envoyer un Message',
@@ -854,7 +862,9 @@
       idCard: 'Pièce d\'identité',
       noDocumentsUploaded: 'Aucun document téléchargé.',
       noPhotosYet: 'Pas encore de photos',
+      documents: 'Documents',
       documentsTab: 'Documents',
+      uploadLicense: 'Télécharger la licence',
       clubNumber: 'Club',
       enterClubName: 'Entrer le nom du club',
       clubLogoOptional: 'Logo du club (optionnel)',
@@ -864,7 +874,6 @@
       clubAffiliation: 'Club',
       clubNamePlaceholder: 'Nom du club',
       clubLogoUpload: 'Logo du club',
-      uploadLicense: 'Télécharger la photo de licence',
       uploadId: 'Télécharger la photo d\'identité',
       logoAlreadyUploaded: 'Le logo est déjà téléchargé. Pour télécharger un nouveau logo, supprimez d\'abord celui existant.',
       removeLogo: 'Supprimer le logo',
@@ -949,6 +958,16 @@
         show: {
           title: 'Afficher le téléphone',
           description: 'Permettre aux autres de voir votre numéro de téléphone',
+        },
+      },
+      license: {
+        show: {
+          title: 'Afficher les licences publiquement',
+          description: 'Permettre aux autres de voir vos licences et documents téléchargés',
+          playerTitle: 'Afficher la licence joueur publiquement',
+          playerDescription: 'Permettre aux autres de voir votre licence Swiss Volley téléchargée',
+          recruiterTitle: 'Afficher la licence d\'entraîneur publiquement',
+          recruiterDescription: 'Permettre aux autres de voir votre licence d\'entraîneur téléchargée',
         },
       },
       privacy: {
@@ -1040,6 +1059,7 @@
         browsePlayers: 'Parcourir les Joueurs',
         total: 'Total',
         conversations: 'conversations',
+        noMessages: 'Pas encore de messages',
       },
     },
     countries: {
@@ -1183,6 +1203,7 @@
       viewDocument: 'Voir le document',
       changeVisibility: 'Modifier la visibilité dans les paramètres',
       clubAffiliations: 'Affiliations aux clubs',
+      uploadLicense: 'Télécharger les licences',
     },
     // Recruiter Profile
     recruiterProfile: {
@@ -1202,6 +1223,7 @@
       positionsLookingFor: 'Cherche des positions',
       genderCoached: 'Recrutement pour (Hommes/Femmes)',
       lookingForMembers: 'Cherche de nouveaux membres',
+      lookingShort: 'Cherche',
       clubAffiliations: 'Affiliations aux Clubs',
       achievements: 'Réalisations en Coaching',
       bio: 'À propos',
@@ -1219,6 +1241,7 @@
       tabDocuments: 'Documents',
       noDocumentsUploaded: 'Aucun document téléchargé.',
       noPhotosYet: 'Pas encore de photos',
+      uploadLicense: 'Télécharger la licence',
       aboutMe: 'À propos de moi',
       associatedClubs: 'Clubs Associés',
       contact: 'Contact',

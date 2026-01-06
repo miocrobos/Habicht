@@ -30,8 +30,17 @@ export async function GET(request: Request) {
           },
           include: {
             recruiter: {
-              include: {
-                club: true,
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                coachRole: true,
+                profileImage: true,
+                club: {
+                  select: {
+                    name: true
+                  }
+                },
                 user: {
                   select: {
                     name: true
@@ -112,8 +121,17 @@ export async function GET(request: Request) {
           },
           include: {
             secondRecruiter: {
-              include: {
-                club: true,
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                coachRole: true,
+                profileImage: true,
+                club: {
+                  select: {
+                    name: true
+                  }
+                },
                 user: {
                   select: {
                     id: true,
@@ -149,8 +167,17 @@ export async function GET(request: Request) {
           },
           include: {
             recruiter: {
-              include: {
-                club: true,
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                coachRole: true,
+                profileImage: true,
+                club: {
+                  select: {
+                    name: true
+                  }
+                },
                 user: {
                   select: {
                     id: true,

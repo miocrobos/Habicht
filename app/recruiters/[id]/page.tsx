@@ -16,8 +16,42 @@ import CVTypeModal from '@/components/shared/CVTypeModal'
 import CVExportLanguagePopup from '@/components/shared/CVExportLanguagePopup'
 import { generateRecruiterCV } from '@/lib/generateRecruiterCV'
 import ImageUpload from '@/components/shared/ImageUpload'
+import ChatWindow from '@/components/chat/ChatWindow'
 import axios from 'axios'
 import ErrorBoundary from 'next/dist/client/components/error-boundary'
+
+// Helper function to get translated league label
+const getLeagueLabel = (league: string, t: any) => {
+  const leagueMap: { [key: string]: string } = {
+    'NLA': 'home.leagues.nla',
+    'NLB': 'home.leagues.nlb',
+    'FIRST_LEAGUE': 'home.leagues.firstLeague',
+    'SECOND_LEAGUE': 'home.leagues.secondLeague',
+    'THIRD_LEAGUE': 'home.leagues.thirdLeague',
+    'FOURTH_LEAGUE': 'home.leagues.fourthLeague',
+    'FIFTH_LEAGUE': 'home.leagues.fifthLeague',
+    'U23': 'leagues.u23',
+    'U20': 'leagues.u20',
+    'U18': 'leagues.u18',
+    'YOUTH_U23': 'leagues.u23',
+    'YOUTH_U20': 'leagues.u20',
+    'YOUTH_U18': 'leagues.u18'
+  };
+  const key = leagueMap[league];
+  return key ? t(key) : league;
+};
+
+// Helper function to translate coach role
+const getTranslatedCoachRole = (role: string, t: any) => {
+  if (!role) return '';
+  // Handle comma-separated roles
+  const roles = role.split(',').map(r => r.trim());
+  return roles.map(r => {
+    const roleKey = r.toLowerCase().replace(/ /g, '_') as 'head_coach' | 'assistant_coach' | 'technical_coach' | 'physical_coach' | 'scout' | 'trainer' | 'team_manager';
+    const translation = t(`coachRole.${roleKey}`);
+    return translation && translation !== `coachRole.${roleKey}` ? translation : r.replace(/_/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase());
+  }).join(', ');
+};
 
 type PageProps = {
   params: { id: string }
@@ -32,7 +66,7 @@ export default function RecruiterProfilePage({ params }: PageProps) {
   const [showCVLangPopup, setShowCVLangPopup] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
   const [isOwner, setIsOwner] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<'info' | 'photos' | 'videos' | 'documents'>('info');
+  const [activeTab, setActiveTab] = useState<'info' | 'photos' | 'videos' | 'documents' | 'messages'>('info');
   const [selectedBg, setSelectedBg] = useState<string>('solid-blue');
   const [customColor, setCustomColor] = useState<string>('#2563eb');
   const [backgroundImage, setBackgroundImage] = useState<string>('');
@@ -44,6 +78,11 @@ export default function RecruiterProfilePage({ params }: PageProps) {
   const backgroundLoadedRef = useRef(false);
   const { data: session } = useSession();
   const { t } = useLanguage();
+  
+  // Messages state
+  const [conversations, setConversations] = useState<any[]>([]);
+  const [conversationsLoading, setConversationsLoading] = useState<boolean>(false);
+  const [activeChat, setActiveChat] = useState<any>(null);
 
 // ...rest of your component logic and JSX
 
@@ -251,13 +290,70 @@ const handleExportCV = async (language: string) => {
       }
     };
     fetchRecruiterData();
-  }, [params.id, t]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.id]);
 
   useEffect(() => {
     if (recruiter && session?.user) {
       setIsOwner(recruiter.user.id === session.user.id);
     }
   }, [recruiter, session]);
+
+  // Fetch conversations for messages tab
+  const fetchConversations = async () => {
+    if (!isOwner) return;
+    try {
+      setConversationsLoading(true);
+      const response = await axios.get('/api/chat/conversations');
+      setConversations(response.data.conversations || []);
+    } catch (error) {
+      console.error('Error fetching conversations:', error);
+    } finally {
+      setConversationsLoading(false);
+    }
+  };
+
+  // Load conversations when messages tab is active
+  useEffect(() => {
+    if (isOwner && activeTab === 'messages') {
+      fetchConversations();
+    }
+  }, [isOwner, activeTab]);
+
+  // Open chat from messages list
+  const openChatFromList = (conversation: any) => {
+    let otherParticipant;
+    
+    if (conversation.player && conversation.recruiter) {
+      // As a recruiter, the other participant is the player
+      otherParticipant = {
+        id: conversation.player.id,
+        name: `${conversation.player.firstName} ${conversation.player.lastName}`,
+        type: 'PLAYER' as const,
+        position: conversation.player.positions?.[0] || ''
+      };
+    } else if (conversation.recruiter && conversation.secondRecruiter) {
+      // Recruiter-to-recruiter conversation
+      const currentRecruiterId = session?.user?.recruiterId;
+      const isFirst = conversation.recruiterId === currentRecruiterId;
+      const other = isFirst ? conversation.secondRecruiter : conversation.recruiter;
+      otherParticipant = {
+        id: other.id,
+        name: `${other.firstName} ${other.lastName}`,
+        type: 'RECRUITER' as const,
+        club: other.club?.name || ''
+      };
+    }
+    
+    if (otherParticipant) {
+      setActiveChat({
+        conversationId: conversation.id,
+        otherParticipant,
+        currentUserId: session?.user?.id || '',
+        currentUserType: 'RECRUITER' as const
+      });
+    }
+  };
 
   // Handle profile photo update
   const handleProfilePhotoUpdate = async () => {
@@ -310,7 +406,7 @@ const handleExportCV = async (language: string) => {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       {/* Cover Image */}
       <div 
-        className="relative h-64"
+        className="relative h-40 sm:h-52 md:h-64"
         style={{
           background: backgroundImage 
             ? `url(${backgroundImage}) center/cover no-repeat` 
@@ -332,22 +428,23 @@ const handleExportCV = async (language: string) => {
         {isOwner && (
           <button
             onClick={() => setShowBgModal(true)}
-            className="absolute top-4 right-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition flex items-center gap-2 z-10 text-sm"
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg shadow-lg hover:shadow-xl transition flex items-center gap-1.5 sm:gap-2 z-10 text-xs sm:text-sm"
           >
-            <Edit2 className="w-4 h-4" />
-            <span>{t('recruiterProfile.changeBackground') || 'Hintergrund Ändere'}</span>
+            <Edit2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <span className="hidden sm:inline">{t('recruiterProfile.changeBackground') || 'Hintergrund Ändere'}</span>
+            <span className="sm:hidden">{t('common.change') || 'Ändern'}</span>
           </button>
         )}
       </div>
 
       {/* Profile Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         {/* Profile Card - Similar to Player Profile */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg -mt-20 relative z-10 p-4 sm:p-6 mb-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-end gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg -mt-16 sm:-mt-20 relative z-10 p-3 sm:p-6 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
             {/* Profile Image */}
-            <div className="relative group">
-              <div className="relative w-40 h-40 rounded-full border-4 border-white dark:border-gray-900 bg-white dark:bg-gray-800 overflow-hidden shadow-xl">
+            <div className="relative group flex-shrink-0">
+              <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-gray-900 bg-white dark:bg-gray-800 overflow-hidden shadow-xl">
                 {recruiter.profileImage ? (
                   <Image
                     src={recruiter.profileImage}
@@ -364,41 +461,41 @@ const handleExportCV = async (language: string) => {
               {isOwner && (
                 <button
                   onClick={() => setShowProfilePhotoModal(true)}
-                  className="absolute inset-0 w-40 h-40 rounded-full bg-black bg-opacity-0 hover:bg-opacity-60 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
+                  className="absolute inset-0 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-black bg-opacity-0 hover:bg-opacity-60 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
                   title={t('recruiterProfile.changePhoto') || 'Profilbild ändere'}
                 >
                   <div className="text-white flex flex-col items-center gap-1">
-                    <Camera className="w-6 h-6" />
-                    <span className="text-xs font-medium">{t('common.change') || 'Ändere'}</span>
+                    <Camera className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <span className="text-[10px] sm:text-xs font-medium">{t('common.change') || 'Ändere'}</span>
                   </div>
                 </button>
               )}
             </div>
 
             {/* Profile Info */}
-            <div className="flex-1">
-              <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+            <div className="flex-1 text-center sm:text-left w-full">
+              <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3 sm:gap-4">
                 <div className="flex-grow">
-                  <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
                     {recruiter.firstName} {recruiter.lastName}
                   </h1>
-                  <div className="flex flex-wrap items-center gap-2 mt-2 mb-3">
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 mt-2 mb-2 sm:mb-3">
                     {/* Gender badge for hybrid users */}
                     {recruiter.user?.role === 'HYBRID' && recruiter.user?.player?.gender && (
-                      <span className="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 text-sm font-semibold rounded-full">
+                      <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 text-xs sm:text-sm font-semibold rounded-full">
                         {recruiter.user.player.gender === 'MALE' ? `♂ ${t('playerProfile.men') || 'Männlich'}` : `♀ ${t('playerProfile.women') || 'Weiblich'}`}
                       </span>
                     )}
-                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-semibold rounded-full">
-                      {recruiter.coachRole || recruiter.position || 'Recruiter'}
+                    <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs sm:text-sm font-semibold rounded-full">
+                      {recruiter.coachRole ? getTranslatedCoachRole(recruiter.coachRole, t) : (recruiter.position || t('common.recruiter') || 'Recruiter')}
                     </span>
                     {recruiter.lookingForMembers && (
-                      <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-sm font-semibold rounded-full flex items-center gap-1">
-                        ✓ {t('recruiterProfile.lookingForMembers') || 'Looking for players'}
+                      <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs sm:text-sm font-semibold rounded-full flex items-center gap-1">
+                        ✓ <span className="hidden xs:inline">{t('recruiterProfile.lookingForMembers') || 'Looking for players'}</span><span className="xs:hidden">{t('recruiterProfile.lookingShort') || 'Searching'}</span>
                       </span>
                     )}
                   </div>
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-2 sm:mb-3">
                     {(recruiter.city || recruiter.province) && (
                       <span className="flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
@@ -418,18 +515,18 @@ const handleExportCV = async (language: string) => {
                     )}
                   </div>
                   {/* Contact Info */}
-                  <div className="flex flex-wrap gap-3 text-sm mb-4">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start text-xs sm:text-sm mb-3 sm:mb-4">
                     {(recruiter.showPhone || isOwner) && recruiter.phone && (
                       <a href={`tel:${recruiter.phone}`} className="flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-purple-600">
-                        <Phone className="w-4 h-4" />
+                        <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         <span>{recruiter.phone}</span>
                         {isOwner && !recruiter.showPhone && <span className="text-xs text-gray-400">🔒</span>}
                       </a>
                     )}
                     {(recruiter.showEmail || isOwner) && recruiter.user?.email && (
                       <a href={`mailto:${recruiter.user.email}`} className="flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-purple-600">
-                        <Mail className="w-4 h-4" />
-                        <span>{recruiter.user.email}</span>
+                        <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                        <span className="truncate max-w-[150px] sm:max-w-none">{recruiter.user.email}</span>
                         {isOwner && !recruiter.showEmail && <span className="text-xs text-gray-400">🔒</span>}
                       </a>
                     )}
@@ -437,7 +534,7 @@ const handleExportCV = async (language: string) => {
                 </div>
 
                 {/* Stats Boxes - Similar to Player Profile */}
-                <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 md:gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full lg:w-auto lg:flex lg:flex-wrap lg:gap-3 mt-2 sm:mt-0">
                   {recruiter.age && (
                     <div className="bg-gray-50 dark:bg-gray-800 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px] border border-gray-200 dark:border-gray-700">
                       <div className="text-xl md:text-2xl font-bold text-purple-600 dark:text-purple-400">{recruiter.age}</div>
@@ -445,16 +542,16 @@ const handleExportCV = async (language: string) => {
                     </div>
                   )}
                   {recruiter.genderCoached && recruiter.genderCoached.length > 0 && (
-                    <div className="bg-gray-50 dark:bg-gray-800 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px] border border-gray-200 dark:border-gray-700">
-                      <div className="text-lg md:text-xl font-bold text-blue-600 dark:text-blue-400">
+                    <div className="bg-gray-50 dark:bg-gray-800 px-2.5 py-2 sm:px-3 md:px-4 md:py-3 rounded-lg text-center min-w-0 sm:min-w-[80px] md:min-w-[90px] border border-gray-200 dark:border-gray-700">
+                      <div className="text-base sm:text-lg md:text-xl font-bold text-blue-600 dark:text-blue-400">
                         {recruiter.genderCoached.map((g: string) => g === 'MALE' ? '♂' : '♀').join(' / ')}
                       </div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('recruiterProfile.searchingFor') || 'Sucht'}</div>
+                      <div className="text-[9px] sm:text-[10px] md:text-xs text-gray-600 dark:text-gray-400 truncate">{t('recruiterProfile.searchingFor') || 'Sucht'}</div>
                     </div>
                   )}
                   {recruiter.preferredLanguage && (
-                    <div className="bg-gray-50 dark:bg-gray-800 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px] border border-gray-200 dark:border-gray-700">
-                      <div className="text-lg md:text-xl font-bold text-green-600 dark:text-green-400">
+                    <div className="bg-gray-50 dark:bg-gray-800 px-2.5 py-2 sm:px-3 md:px-4 md:py-3 rounded-lg text-center min-w-0 sm:min-w-[80px] md:min-w-[90px] border border-gray-200 dark:border-gray-700">
+                      <div className="text-xs sm:text-lg md:text-xl font-bold text-green-600 dark:text-green-400 truncate">
                         {recruiter.preferredLanguage === 'gsw' ? t('register.languageSwissGerman') || 'Schwiizerdütsch' :
                          recruiter.preferredLanguage === 'de' ? t('register.languageGerman') || 'Deutsch' :
                          recruiter.preferredLanguage === 'fr' ? t('register.languageFrench') || 'Français' :
@@ -462,13 +559,13 @@ const handleExportCV = async (language: string) => {
                          recruiter.preferredLanguage === 'en' ? t('register.languageEnglish') || 'English' :
                          recruiter.preferredLanguage.toUpperCase()}
                       </div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('playerProfile.languageLabel') || 'Sprache'}</div>
+                      <div className="text-[9px] sm:text-[10px] md:text-xs text-gray-600 dark:text-gray-400 truncate">{t('playerProfile.languageLabel') || 'Sprache'}</div>
                     </div>
                   )}
                   {recruiter.positionsLookingFor && recruiter.positionsLookingFor.length > 0 && (
-                    <div className="bg-gray-50 dark:bg-gray-800 px-3 py-2 md:px-4 md:py-3 rounded-lg text-center min-w-[80px] md:min-w-[90px] border border-gray-200 dark:border-gray-700">
-                      <div className="text-lg md:text-xl font-bold text-orange-600 dark:text-orange-400">{recruiter.positionsLookingFor.length}</div>
-                      <div className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">{t('recruiterProfile.positionsCount') || 'Positionen'}</div>
+                    <div className="bg-gray-50 dark:bg-gray-800 px-2.5 py-2 sm:px-3 md:px-4 md:py-3 rounded-lg text-center min-w-0 sm:min-w-[80px] md:min-w-[90px] border border-gray-200 dark:border-gray-700">
+                      <div className="text-base sm:text-lg md:text-xl font-bold text-orange-600 dark:text-orange-400">{recruiter.positionsLookingFor.length}</div>
+                      <div className="text-[9px] sm:text-[10px] md:text-xs text-gray-600 dark:text-gray-400 truncate">{t('recruiterProfile.positionsCount') || 'Positionen'}</div>
                     </div>
                   )}
                 </div>
@@ -476,18 +573,18 @@ const handleExportCV = async (language: string) => {
 
               {/* Bio Section - Inside Profile Card */}
               {recruiter.bio && (
-                <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                  <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{recruiter.bio}</p>
+                <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{recruiter.bio}</p>
                 </div>
               )}
 
               {/* Positions Looking For - Badges */}
               {recruiter.positionsLookingFor && recruiter.positionsLookingFor.length > 0 && (
-                <div className="mt-4">
-                  <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{t('recruiterProfile.positionsLookingFor') || 'Looking for positions'}:</h3>
-                  <div className="flex flex-wrap gap-2">
+                <div className="mt-3 sm:mt-4">
+                  <h3 className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{t('recruiterProfile.positionsLookingFor') || 'Looking for positions'}:</h3>
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {recruiter.positionsLookingFor.map((pos: string, idx: number) => (
-                      <span key={idx} className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-semibold rounded-full">
+                      <span key={idx} className="px-2 sm:px-3 py-0.5 sm:py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs sm:text-sm font-semibold rounded-full">
                         {t(`playerProfile.position${pos.charAt(0) + pos.slice(1).toLowerCase().replace(/_([a-z])/g, (m: string, c: string) => c.toUpperCase())}`) || pos.replace(/_/g, ' ')}
                       </span>
                     ))}
@@ -496,7 +593,7 @@ const handleExportCV = async (language: string) => {
               )}
 
               {/* Action Buttons Row */}
-              <div className="mt-4 sm:mt-6 flex flex-wrap gap-2 sm:gap-3">
+              <div className="mt-3 sm:mt-6 flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-3">
                 {isOwner && (
                   <>
                     <Link
@@ -622,7 +719,7 @@ const handleExportCV = async (language: string) => {
               >
                 {t('recruiterProfile.tabVideos') || 'Videos'}
               </button>
-              {(isOwner || recruiter.showLicense) && recruiter.coachingLicense && (
+              {(isOwner || (recruiter.showLicense && recruiter.coachingLicense)) && (
                 <button
                   onClick={() => setActiveTab('documents')}
                   className={`px-3 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-sm font-medium border-b-2 transition whitespace-nowrap flex-shrink-0 ${
@@ -632,6 +729,20 @@ const handleExportCV = async (language: string) => {
                   }`}
                 >
                   {t('recruiterProfile.tabDocuments') || 'Documents'}
+                </button>
+              )}
+              {/* Messages Tab - Only visible to owner */}
+              {isOwner && (
+                <button
+                  onClick={() => setActiveTab('messages')}
+                  className={`px-3 sm:px-6 py-3 sm:py-4 text-[11px] sm:text-sm font-medium border-b-2 transition whitespace-nowrap flex-shrink-0 flex items-center gap-1 ${
+                    activeTab === 'messages'
+                      ? 'border-purple-600 text-purple-600 dark:text-purple-400'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                  }`}
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  {t('settings.messages.title') || 'Messages'}
                 </button>
               )}
             </nav>
@@ -656,8 +767,8 @@ const handleExportCV = async (language: string) => {
                   </div>
                 )}
 
-                {/* Linked Clubs */}
-                {recruiter.linkedClubs && recruiter.linkedClubs.length > 0 && (
+                {/* Linked Clubs with Leagues */}
+                {recruiter.clubHistory && recruiter.clubHistory.length > 0 && (
                   <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                     <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                       <span className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
@@ -665,23 +776,65 @@ const handleExportCV = async (language: string) => {
                       </span>
                       {t('recruiterProfile.associatedClubs') || 'Associated Clubs'}
                     </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {recruiter.linkedClubs.map((club: any) => (
-                        <Link
-                          key={club.id}
-                          href={`/clubs/${club.id}`}
-                          className="flex items-center gap-3 p-4 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-800/50 rounded-xl hover:shadow-md transition group border border-gray-200 dark:border-gray-700"
+                    <div className="space-y-3">
+                      {recruiter.clubHistory.map((clubEntry: any, idx: number) => (
+                        <div
+                          key={clubEntry.id || idx}
+                          className="flex flex-wrap items-center gap-3 p-4 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700"
                         >
-                          <ClubBadge
-                            clubName={club.name}
-                            uploadedLogo={club.logo}
-                            size="md"
-                          />
-                          <div className="flex-1 min-w-0">
-                            <p className="font-semibold text-gray-900 dark:text-white truncate group-hover:text-purple-600 dark:group-hover:text-purple-400 transition">{club.name}</p>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">{club.town}, {club.canton}</p>
-                          </div>
-                        </Link>
+                          {clubEntry.club?.id ? (
+                            <Link 
+                              href={`/clubs/${clubEntry.club.id}`}
+                              className="flex items-center gap-3 hover:opacity-80 transition"
+                            >
+                              <ClubBadge
+                                clubName={clubEntry.clubName || clubEntry.club?.name}
+                                uploadedLogo={clubEntry.clubLogo || clubEntry.club?.logo}
+                                size="md"
+                              />
+                              <span className="font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition">
+                                {clubEntry.clubName || clubEntry.club?.name}
+                              </span>
+                            </Link>
+                          ) : (
+                            <div className="flex items-center gap-3">
+                              <ClubBadge
+                                clubName={clubEntry.clubName}
+                                uploadedLogo={clubEntry.clubLogo}
+                                size="md"
+                              />
+                              <span className="font-semibold text-gray-900 dark:text-white">
+                                {clubEntry.clubName}
+                              </span>
+                            </div>
+                          )}
+                          
+                          {/* Current Club Badge */}
+                          {clubEntry.currentClub && (
+                            <span className="px-2 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs font-semibold rounded-full">
+                              {t('common.current') || 'Current'}
+                            </span>
+                          )}
+                          
+                          {/* Leagues Badge */}
+                          {clubEntry.leagues && clubEntry.leagues.length > 0 && (
+                            <span className="px-2.5 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 text-xs font-semibold rounded-full flex items-center gap-1">
+                              <Trophy className="w-3.5 h-3.5" />
+                              {clubEntry.leagues.map((league: string) => getLeagueLabel(league, t)).join(', ')}
+                            </span>
+                          )}
+                          
+                          {/* Role Badge */}
+                          {clubEntry.role && clubEntry.role.length > 0 && (
+                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                              ({clubEntry.role.map((r: string) => {
+                                const roleKey = r.toLowerCase() as 'head_coach' | 'assistant_coach' | 'technical_coach' | 'physical_coach' | 'scout' | 'trainer' | 'team_manager';
+                                const translation = t(`coachRole.${roleKey}`);
+                                return translation === `coachRole.${roleKey}` ? r.replace(/_/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) : translation;
+                              }).join(', ')})
+                            </span>
+                          )}
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -859,7 +1012,7 @@ const handleExportCV = async (language: string) => {
             <RecruiterVideoGallery recruiterId={params.id} isOwner={isOwner} />
           )}
 
-          {activeTab === 'documents' && (isOwner || recruiter.showLicense) && (
+          {activeTab === 'documents' && (isOwner || (recruiter.showLicense && recruiter.coachingLicense)) && (
             <div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <Award className="w-5 h-5 text-purple-600 dark:text-purple-400" />
@@ -927,16 +1080,153 @@ const handleExportCV = async (language: string) => {
                   </div>
                 )}
               </div>
-              {!recruiter.coachingLicense && (
+              {!recruiter.coachingLicense && isOwner && (
+                <div className="text-center py-8 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
+                  <Award className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                  <p className="text-gray-500 dark:text-gray-400 mb-4">
+                    {t('recruiterProfile.noDocumentsUploaded') || 'No documents uploaded yet.'}
+                  </p>
+                  <Link
+                    href={`/recruiters/${recruiter.id}/edit`}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors font-medium"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                    {t('recruiterProfile.uploadLicense') || 'Upload License'}
+                  </Link>
+                </div>
+              )}
+              {!recruiter.coachingLicense && !isOwner && (
                 <p className="text-gray-500 dark:text-gray-400 text-center py-8">
                   {t('recruiterProfile.noDocumentsUploaded') || 'No documents uploaded yet.'}
                 </p>
               )}
             </div>
           )}
+
+          {/* Messages Tab Content - Only visible to owner */}
+          {activeTab === 'messages' && isOwner && (
+            <div>
+              <div className="mb-4">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                  <MessageCircle className="w-5 h-5 text-purple-500" />
+                  {t('settings.messages.title') || 'Messages'}
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                  {t('settings.messages.subtitle') || 'Your conversations with other users'}
+                </p>
+              </div>
+              
+              {conversationsLoading ? (
+                <div className="flex items-center justify-center py-12">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+                </div>
+              ) : conversations.length === 0 ? (
+                <div className="text-center py-12">
+                  <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                    {t('settings.messages.empty') || 'No conversations yet'}
+                  </h4>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    {t('settings.messages.emptyDescription') || 'Start a conversation by messaging a player or recruiter'}
+                  </p>
+                  <Link
+                    href="/players"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-medium"
+                  >
+                    {t('settings.messages.browsePlayers') || 'Browse Players'}
+                  </Link>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {conversations.map((conversation) => {
+                    let otherName = '';
+                    let otherRole = '';
+                    let otherClub = '';
+                    let profileLink = '';
+                    let profileImage = '';
+                    
+                    if (conversation.player && conversation.recruiter) {
+                      // As a recruiter, other is the player
+                      otherName = `${conversation.player.firstName} ${conversation.player.lastName}`;
+                      otherRole = conversation.player.positions?.[0] || t('common.player') || 'Player';
+                      otherClub = conversation.player.currentClub?.name || '';
+                      profileLink = `/players/${conversation.player.id}`;
+                      profileImage = conversation.player.profileImage || '';
+                    } else if (conversation.recruiter && conversation.secondRecruiter) {
+                      const currentRecruiterId = session?.user?.recruiterId;
+                      const isFirst = conversation.recruiterId === currentRecruiterId;
+                      const other = isFirst ? conversation.secondRecruiter : conversation.recruiter;
+                      otherName = `${other.firstName} ${other.lastName}`;
+                      otherRole = other.coachRole || t('common.recruiter') || 'Recruiter';
+                      otherClub = other.club?.name || '';
+                      profileLink = `/recruiters/${other.id}`;
+                      profileImage = other.profileImage || '';
+                    }
+                    
+                    const lastMessage = conversation.messages?.[0];
+                    
+                    return (
+                      <div
+                        key={conversation.id}
+                        className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md transition cursor-pointer"
+                        onClick={() => openChatFromList(conversation)}
+                      >
+                        <div className="flex-shrink-0">
+                          {profileImage ? (
+                            <img 
+                              src={profileImage} 
+                              alt={otherName}
+                              className="w-12 h-12 rounded-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                              <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
+                                {otherName.charAt(0)}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between gap-2">
+                            <h4 className="font-semibold text-gray-900 dark:text-white truncate">{otherName}</h4>
+                            {lastMessage && (
+                              <span className="text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">
+                                {new Date(lastMessage.createdAt).toLocaleDateString()}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            {otherRole}{otherClub ? ` • ${otherClub}` : ''}
+                          </p>
+                          {lastMessage && (
+                            <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-1">
+                              {lastMessage.content}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
         </div>
         </div>
       </div>
+
+      {/* Chat Window Modal from Messages Tab */}
+      {activeChat && (
+        <ChatWindow
+          conversationId={activeChat.conversationId}
+          otherParticipant={activeChat.otherParticipant}
+          currentUserId={activeChat.currentUserId}
+          currentUserType={activeChat.currentUserType}
+          onClose={() => setActiveChat(null)}
+        />
+      )}
 
       {/* Background Change Modal - Inline style like player profile */}
       {showBgModal && (

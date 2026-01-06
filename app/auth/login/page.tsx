@@ -46,7 +46,10 @@ export default function LoginPage() {
   useEffect(() => {
     // If already logged in, redirect to profile
     if (session?.user) {
-      if (session.user.playerId) {
+      if (session.user.role === 'HYBRID') {
+        // Redirect hybrid users to their hybrid profile
+        router.push(`/hybrids/${session.user.id}`)
+      } else if (session.user.playerId) {
         router.push(`/players/${session.user.playerId}`)
       } else if (session.user.recruiterId) {
         router.push(`/recruiters`)
@@ -82,7 +85,10 @@ export default function LoginPage() {
         const response = await fetch('/api/auth/session')
         const data = await response.json()
         
-        if (data?.user?.playerId) {
+        if (data?.user?.role === 'HYBRID') {
+          // Redirect hybrid user to their hybrid profile
+          router.push(`/hybrids/${data.user.id}`)
+        } else if (data?.user?.playerId) {
           // Redirect player to their profile
           router.push(`/players/${data.user.playerId}`)
         } else if (data?.user?.recruiterId) {

@@ -41,18 +41,18 @@ export async function GET(request: NextRequest) {
     })
 
     // Redirect to appropriate profile based on role
-    if (user.role === 'PLAYER' && user.player) {
+    if (user.role === 'HYBRID') {
+      // For hybrid users, redirect to their hybrid profile
+      return NextResponse.redirect(
+        new URL(`/hybrids/${user.id}?verified=true`, request.url)
+      )
+    } else if (user.role === 'PLAYER' && user.player) {
       return NextResponse.redirect(
         new URL(`/players/${user.player.id}?verified=true`, request.url)
       )
     } else if (user.role === 'RECRUITER' && user.recruiter) {
       return NextResponse.redirect(
         new URL(`/recruiters?verified=true`, request.url)
-      )
-    } else if (user.role === 'HYBRID' && user.player) {
-      // For hybrid users, redirect to their player profile
-      return NextResponse.redirect(
-        new URL(`/players/${user.player.id}?verified=true`, request.url)
       )
     }
 

@@ -33,6 +33,7 @@ export default function SettingsPage() {
   const [showEmail, setShowEmail] = useState(false)
   const [showPhone, setShowPhone] = useState(false)
   const [showLicense, setShowLicense] = useState(false)
+  const [showRecruiterLicense, setShowRecruiterLicense] = useState(false)
   const [loading, setLoading] = useState(false)
   const [municipality, setMunicipality] = useState('')
   const [notifyChatMessages, setNotifyChatMessages] = useState(true)
@@ -117,7 +118,7 @@ export default function SettingsPage() {
           id: conversation.recruiter.id,
           name: `${conversation.recruiter.firstName} ${conversation.recruiter.lastName}`,
           type: 'RECRUITER' as const,
-          club: conversation.recruiter.currentClub?.name || conversation.recruiter.clubName || ''
+          club: conversation.recruiter.club?.name || ''
         }
       } else {
         otherParticipant = {
@@ -136,7 +137,7 @@ export default function SettingsPage() {
         id: other.id,
         name: `${other.firstName} ${other.lastName}`,
         type: 'RECRUITER' as const,
-        club: other.currentClub?.name || other.clubName || ''
+        club: other.club?.name || ''
       }
     }
     
@@ -187,7 +188,8 @@ export default function SettingsPage() {
   const fetchRecruiterData = async () => {
     try {
       const response = await axios.get(`/api/recruiters/${session?.user?.recruiterId}`)
-      setRecruiterData(response.data)
+      setRecruiterData(response.data.recruiter || response.data)
+      setShowRecruiterLicense(response.data.recruiter?.showLicense || response.data?.showLicense || false)
     } catch (error) {
       console.error('Error fetching recruiter data:', error)
     }
@@ -238,6 +240,21 @@ export default function SettingsPage() {
       showSaveConfirmation()
     } catch (error) {
       console.error('Error updating privacy settings:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const updateRecruiterPrivacySettings = async (field: 'showLicense', value: boolean) => {
+    try {
+      setLoading(true)
+      await axios.put(`/api/recruiters/${session?.user?.recruiterId}`, {
+        showLicense: value
+      })
+      if (field === 'showLicense') setShowRecruiterLicense(value)
+      showSaveConfirmation()
+    } catch (error) {
+      console.error('Error updating recruiter privacy settings:', error)
     } finally {
       setLoading(false)
     }
@@ -326,22 +343,25 @@ export default function SettingsPage() {
                 </div>
               </button>
               
-              <button
-                onClick={() => setActiveTab('security')}
-                className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
-                  activeTab === 'security'
-                    ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
-                }`}
-              >
-                <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                  </svg>
-                  <span className="hidden sm:inline">{t('settings.security.title')}</span>
-                  <span className="sm:hidden">Security</span>
-                </div>
-              </button>
+              {/* Login & Security tab - only for logged in users */}
+              {session?.user && (
+                <button
+                  onClick={() => setActiveTab('security')}
+                  className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
+                    activeTab === 'security'
+                      ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <span className="hidden sm:inline">{t('settings.security.title')}</span>
+                    <span className="sm:hidden">Security</span>
+                  </div>
+                </button>
+              )}
 
               <button
                 onClick={() => setActiveTab('language')}
@@ -360,25 +380,30 @@ export default function SettingsPage() {
                 </div>
               </button>
 
-              <button
-                onClick={() => setActiveTab('notifications')}
-                className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
-                  activeTab === 'notifications'
-                    ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
-                }`}
-              >
-                <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                  </svg>
-                  <span className="hidden sm:inline">{t('settings.notifications.title')}</span>
-                  <span className="sm:hidden">Notif</span>
-                </div>
-              </button>
+              {/* Notifications tab - only for logged in users */}
+              {session?.user && (
+                <button
+                  onClick={() => setActiveTab('notifications')}
+                  className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
+                    activeTab === 'notifications'
+                      ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    <span className="hidden sm:inline">{t('settings.notifications.title')}</span>
+                    <span className="sm:hidden">Notif</span>
+                  </div>
+                </button>
+              )}
 
-              <button
-                onClick={() => setActiveTab('account')}
+              {/* Account Management tab - only for logged in users */}
+              {session?.user && (
+                <button
+                  onClick={() => setActiveTab('account')}
                 className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
                   activeTab === 'account'
                     ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
@@ -389,10 +414,11 @@ export default function SettingsPage() {
                   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                  <span className="hidden sm:inline">{t('settings.account.title')}</span>
-                  <span className="sm:hidden">Account</span>
-                </div>
-              </button>
+                    <span className="hidden sm:inline">{t('settings.account.title')}</span>
+                    <span className="sm:hidden">Account</span>
+                  </div>
+                </button>
+              )}
 
               {/* Watchlist tab - only for recruiters and hybrid users */}
               {(session?.user?.role === 'RECRUITER' || session?.user?.role === 'HYBRID') && (
@@ -416,23 +442,25 @@ export default function SettingsPage() {
               )}
 
               {/* Messages tab - for all logged in users */}
-              <button
-                onClick={() => setActiveTab('messages')}
-                className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
-                  activeTab === 'messages'
-                    ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
-                }`}
-              >
-                <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
-                  <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
-                  <span className="hidden sm:inline">{t('settings.messages.title') || 'Messages'}</span>
-                  <span className="sm:hidden">Chat</span>
-                  {conversations.length > 0 && (
-                    <span className="ml-1 px-1.5 py-0.5 text-xs bg-red-600 text-white rounded-full">{conversations.length}</span>
-                  )}
-                </div>
-              </button>
+              {session?.user && (
+                <button
+                  onClick={() => setActiveTab('messages')}
+                  className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
+                    activeTab === 'messages'
+                      ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
+                    <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="hidden sm:inline">{t('settings.messages.title') || 'Messages'}</span>
+                    <span className="sm:hidden">Chat</span>
+                    {conversations.length > 0 && (
+                      <span className="ml-1 px-1.5 py-0.5 text-xs bg-red-600 text-white rounded-full">{conversations.length}</span>
+                    )}
+                  </div>
+                </button>
+              )}
             </div>
           </div>
 
@@ -546,26 +574,51 @@ export default function SettingsPage() {
                         </button>
                       </div>
 
-                      {/* License Toggle */}
-                      <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                        <div className="flex-1">
-                          <p className="font-medium text-gray-900 dark:text-white">{t('settings.license.show.title') || 'Show Licenses Publicly'}</p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.license.show.description') || 'Allow other users to see your uploaded licenses and documents.'}</p>
+                      {/* License Toggle - Player License */}
+                      {(session?.user?.role === 'PLAYER' || session?.user?.role === 'HYBRID') && (
+                        <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                          <div className="flex-1">
+                            <p className="font-medium text-gray-900 dark:text-white">{t('settings.license.show.playerTitle') || 'Show Player License Publicly'}</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.license.show.playerDescription') || 'Allow other users to see your uploaded Swiss Volley license.'}</p>
+                          </div>
+                          <button
+                            onClick={() => updatePrivacySettings('showLicense', !showLicense)}
+                            disabled={loading}
+                            className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 ${
+                              showLicense ? 'bg-red-600' : 'bg-gray-300 dark:bg-gray-600'
+                            } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                          >
+                            <span
+                              className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                                showLicense ? 'translate-x-7' : 'translate-x-1'
+                              }`}
+                            />
+                          </button>
                         </div>
-                        <button
-                          onClick={() => updatePrivacySettings('showLicense', !showLicense)}
-                          disabled={loading}
-                          className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 ${
-                            showLicense ? 'bg-red-600' : 'bg-gray-300 dark:bg-gray-600'
-                          } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                        >
-                          <span
-                            className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
-                              showLicense ? 'translate-x-7' : 'translate-x-1'
-                            }`}
-                          />
-                        </button>
-                      </div>
+                      )}
+
+                      {/* License Toggle - Coaching License */}
+                      {(session?.user?.role === 'RECRUITER' || session?.user?.role === 'HYBRID') && (
+                        <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                          <div className="flex-1">
+                            <p className="font-medium text-gray-900 dark:text-white">{t('settings.license.show.recruiterTitle') || 'Show Coaching License Publicly'}</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.license.show.recruiterDescription') || 'Allow other users to see your uploaded coaching license.'}</p>
+                          </div>
+                          <button
+                            onClick={() => updateRecruiterPrivacySettings('showLicense', !showRecruiterLicense)}
+                            disabled={loading}
+                            className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+                              showRecruiterLicense ? 'bg-purple-600' : 'bg-gray-300 dark:bg-gray-600'
+                            } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                          >
+                            <span
+                              className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                                showRecruiterLicense ? 'translate-x-7' : 'translate-x-1'
+                              }`}
+                            />
+                          </button>
+                        </div>
+                      )}
                     </div>
 
                     <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
@@ -973,27 +1026,31 @@ export default function SettingsPage() {
                           let otherRole = ''
                           let otherClub = ''
                           let profileLink = ''
+                          let profileImage = ''
                           
                           if (conversation.player && conversation.recruiter) {
                             if (isPlayer || (isHybrid && session?.user?.playerId && conversation.playerId === session?.user?.playerId)) {
                               otherName = `${conversation.recruiter.firstName} ${conversation.recruiter.lastName}`
-                              otherRole = conversation.recruiter.coachRole || 'Recruiter'
-                              otherClub = conversation.recruiter.currentClub?.name || conversation.recruiter.clubName || ''
+                              otherRole = conversation.recruiter.coachRole || t('common.recruiter') || 'Recruiter'
+                              otherClub = conversation.recruiter.club?.name || ''
                               profileLink = `/recruiters/${conversation.recruiter.id}`
+                              profileImage = conversation.recruiter.profileImage || ''
                             } else {
                               otherName = `${conversation.player.firstName} ${conversation.player.lastName}`
-                              otherRole = conversation.player.positions?.[0] || 'Player'
+                              otherRole = conversation.player.positions?.[0] || t('common.player') || 'Player'
                               otherClub = conversation.player.currentClub?.name || ''
                               profileLink = `/players/${conversation.player.id}`
+                              profileImage = conversation.player.profileImage || ''
                             }
                           } else if (conversation.recruiter && conversation.secondRecruiter) {
                             const currentRecruiterId = session?.user?.recruiterId
                             const isFirst = conversation.recruiterId === currentRecruiterId
                             const other = isFirst ? conversation.secondRecruiter : conversation.recruiter
                             otherName = `${other.firstName} ${other.lastName}`
-                            otherRole = other.coachRole || 'Recruiter'
-                            otherClub = other.currentClub?.name || other.clubName || ''
+                            otherRole = other.coachRole || t('common.recruiter') || 'Recruiter'
+                            otherClub = other.club?.name || ''
                             profileLink = `/recruiters/${other.id}`
+                            profileImage = other.profileImage || ''
                           }
                           
                           const lastMessage = conversation.messages?.[0]
@@ -1006,55 +1063,41 @@ export default function SettingsPage() {
                             >
                               {/* Avatar */}
                               <div className="flex-shrink-0">
-                                <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
-                                  <span className="text-lg font-bold text-red-600 dark:text-red-400">
-                                    {otherName.charAt(0)}
-                                  </span>
-                                </div>
+                                {profileImage ? (
+                                  <img 
+                                    src={profileImage} 
+                                    alt={otherName}
+                                    className="w-12 h-12 rounded-full object-cover"
+                                  />
+                                ) : (
+                                  <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                                    <span className="text-lg font-bold text-red-600 dark:text-red-400">
+                                      {otherName.charAt(0)}
+                                    </span>
+                                  </div>
+                                )}
                               </div>
 
                               {/* Conversation Info */}
                               <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center justify-between gap-2">
                                   <h4 className="font-semibold text-gray-900 dark:text-white truncate">
                                     {otherName}
                                   </h4>
-                                  {conversation._count?.messages > 0 && (
-                                    <span className="px-1.5 py-0.5 text-xs bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 rounded">
-                                      {conversation._count.messages}
+                                  {lastMessage && (
+                                    <span className="text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">
+                                      {new Date(lastMessage.createdAt).toLocaleDateString()}
                                     </span>
                                   )}
                                 </div>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">
+                                <p className="text-xs text-gray-500 dark:text-gray-400">
                                   {otherRole}{otherClub ? ` • ${otherClub}` : ''}
                                 </p>
                                 {lastMessage && (
-                                  <p className="text-xs text-gray-400 dark:text-gray-500 truncate mt-1">
-                                    {lastMessage.content?.substring(0, 50)}{lastMessage.content?.length > 50 ? '...' : ''}
+                                  <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-1">
+                                    {lastMessage.content}
                                   </p>
                                 )}
-                              </div>
-
-                              {/* Actions */}
-                              <div className="flex items-center gap-2">
-                                <Link
-                                  href={profileLink}
-                                  onClick={(e) => e.stopPropagation()}
-                                  className="flex items-center gap-1 px-3 py-1.5 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition"
-                                >
-                                  <ExternalLink className="w-4 h-4" />
-                                  <span className="hidden sm:inline">{t('common.viewProfile') || 'Profile'}</span>
-                                </Link>
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation()
-                                    openChat(conversation)
-                                  }}
-                                  className="flex items-center gap-1 px-3 py-1.5 text-sm text-white bg-red-600 hover:bg-red-700 rounded-lg transition"
-                                >
-                                  <MessageCircle className="w-4 h-4" />
-                                  <span className="hidden sm:inline">{t('common.chat') || 'Chat'}</span>
-                                </button>
                               </div>
                             </div>
                           )

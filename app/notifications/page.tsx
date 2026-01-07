@@ -270,13 +270,13 @@ export default function NotificationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-12">
+      <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div className="flex items-center gap-3">
-              <Bell className="w-8 h-8 text-red-600" />
+              <Bell className="w-6 h-6 sm:w-8 sm:h-8 text-red-600" />
               <div>
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
                   {t('notifications.title')}
@@ -299,10 +299,10 @@ export default function NotificationsPage() {
 
           {/* Filter */}
           <div className="flex flex-col gap-3">
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => setFilter('all')}
-                className={`px-4 py-2 rounded-lg transition ${
+                className={`px-3 sm:px-4 py-2 rounded-lg transition text-sm sm:text-base ${
                   filter === 'all'
                     ? 'bg-red-600 text-white'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
@@ -312,7 +312,7 @@ export default function NotificationsPage() {
               </button>
               <button
                 onClick={() => setFilter('unread')}
-                className={`px-4 py-2 rounded-lg transition ${
+                className={`px-3 sm:px-4 py-2 rounded-lg transition text-sm sm:text-base ${
                   filter === 'unread'
                     ? 'bg-red-600 text-white'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
@@ -323,50 +323,53 @@ export default function NotificationsPage() {
             </div>
 
             {/* Type Filter */}
-            <div className="flex gap-2 flex-wrap">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
               <button
                 onClick={() => setTypeFilter('all')}
-                className={`px-4 py-2 rounded-lg transition flex items-center gap-2 ${
+                className={`px-3 sm:px-4 py-2 rounded-lg transition flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm ${
                   typeFilter === 'all'
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                 }`}
               >
-                <Bell className="w-4 h-4" />
-                {t('notifications.all')}
+                <Bell className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="truncate">{t('notifications.all')}</span>
               </button>
               <button
                 onClick={() => setTypeFilter('PROFILE_VIEW')}
-                className={`px-4 py-2 rounded-lg transition flex items-center gap-2 ${
+                className={`px-3 sm:px-4 py-2 rounded-lg transition flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm ${
                   typeFilter === 'PROFILE_VIEW'
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                 }`}
               >
-                <Eye className="w-4 h-4" />
-                {t('notifications.profileViews')} ({notifications.filter(n => n.type === 'PROFILE_VIEW').length})
+                <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="truncate">{t('notifications.profileViews')}</span>
+                <span className="hidden sm:inline">({notifications.filter(n => n.type === 'PROFILE_VIEW').length})</span>
               </button>
               <button
                 onClick={() => setTypeFilter('MESSAGE')}
-                className={`px-4 py-2 rounded-lg transition flex items-center gap-2 ${
+                className={`px-3 sm:px-4 py-2 rounded-lg transition flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm ${
                   typeFilter === 'MESSAGE'
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                 }`}
               >
-                <MessageCircle className="w-4 h-4" />
-                {t('notifications.messages')} ({notifications.filter(n => n.type === 'MESSAGE').length})
+                <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="truncate">{t('notifications.messages')}</span>
+                <span className="hidden sm:inline">({notifications.filter(n => n.type === 'MESSAGE').length})</span>
               </button>
               <button
                 onClick={() => setTypeFilter('WATCHLIST_ADD')}
-                className={`px-4 py-2 rounded-lg transition flex items-center gap-2 ${
+                className={`px-3 sm:px-4 py-2 rounded-lg transition flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm ${
                   typeFilter === 'WATCHLIST_ADD'
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                 }`}
               >
-                <Bookmark className="w-4 h-4" />
-                {t('notifications.watchlist')} ({notifications.filter(n => n.type === 'WATCHLIST_ADD').length})
+                <Bookmark className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="truncate">{t('notifications.watchlist')}</span>
+                <span className="hidden sm:inline">({notifications.filter(n => n.type === 'WATCHLIST_ADD').length})</span>
               </button>
             </div>
           </div>
@@ -389,12 +392,12 @@ export default function NotificationsPage() {
               <div
                 key={notification.id}
                 onClick={isClickable ? () => handleNotificationClick(notification) : undefined}
-                className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 transition hover:shadow-xl ${
+                className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3 sm:p-4 transition hover:shadow-xl ${
                   !notification.read ? 'border-l-4 border-red-600' : ''
                 } ${isClickable ? 'cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-750' : ''}`}
               >
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-full ${
+                <div className="flex items-start gap-2 sm:gap-4">
+                  <div className={`p-2 sm:p-3 rounded-full flex-shrink-0 ${
                     !notification.read
                       ? 'bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400'
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
@@ -402,43 +405,43 @@ export default function NotificationsPage() {
                     {getIcon(notification.type)}
                   </div>
                   
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between mb-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-semibold text-gray-900 dark:text-white">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-1">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+                        <h3 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base break-words">
                           {title}
                         </h3>
                         {isClickable && (
-                          <span className="text-xs text-blue-600 dark:text-blue-400">
+                          <span className="text-xs text-blue-600 dark:text-blue-400 whitespace-nowrap">
                             {t('notifications.clickToReply')}
                           </span>
                         )}
                       </div>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                      <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
                         {new Date(notification.createdAt).toLocaleString('de-CH')}
                       </span>
                     </div>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm break-words">
                       {message}
                     </p>
                   </div>
 
-                  <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+                  <div className="flex flex-col sm:flex-row gap-1 sm:gap-2 flex-shrink-0" onClick={(e) => e.stopPropagation()}>
                     {!notification.read && (
                       <button
                         onClick={() => markAsRead(notification.id)}
-                        className="p-2 text-green-600 hover:bg-green-50 dark:hover:bg-green-900 rounded-lg transition"
+                        className="p-1.5 sm:p-2 text-green-600 hover:bg-green-50 dark:hover:bg-green-900 rounded-lg transition"
                         title={t('notifications.markRead')}
                       >
-                        <Check className="w-5 h-5" />
+                        <Check className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
                     )}
                     <button
                       onClick={() => deleteNotification(notification.id)}
-                      className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900 rounded-lg transition"
+                      className="p-1.5 sm:p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900 rounded-lg transition"
                       title={t('notifications.delete')}
                     >
-                      <X className="w-5 h-5" />
+                      <X className="w-4 h-4 sm:w-5 sm:h-5" />
                     </button>
                   </div>
                 </div>

@@ -1175,7 +1175,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                 value={recruiterData.coachingLicense}
                 onChange={(base64) => setRecruiterData({ ...recruiterData, coachingLicense: base64 })}
                 allowPdf={true}
-                helpText="Upload deiner Coaching-Lizänz (Bild oder PDF)"
+                helpText={t('recruiterProfile.coachingLicenseHelpText') || 'Upload your coaching license (image or PDF)'}
               />
             </div>
 

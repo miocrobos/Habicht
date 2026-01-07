@@ -157,7 +157,7 @@ export default function NotificationPopup() {
           />
           
           {/* Popup Content */}
-          <div className="absolute right-0 top-12 z-50 w-96 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div className="fixed right-2 left-2 sm:left-auto sm:absolute sm:right-0 top-16 sm:top-12 z-50 sm:w-96 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden max-h-[80vh]">
             {/* Header */}
             <div className="bg-red-600 text-white px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2">

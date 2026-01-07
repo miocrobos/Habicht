@@ -168,11 +168,6 @@ export default function Header() {
             <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition text-sm xl:text-base whitespace-nowrap">
               {t('nav.about')}
             </Link>
-            {session?.user.role === 'RECRUITER' && (
-              <Link href="/dashboard/recruiter" className="text-gray-700 hover:text-swiss-red transition text-sm xl:text-base whitespace-nowrap">
-                {t('nav.dashboard')}
-              </Link>
-            )}
             {session?.user.role === 'PLAYER' && session?.user.playerId && (
               <Link href={`/players/${session.user.playerId}`} className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition text-sm xl:text-base whitespace-nowrap">
                 {t('nav.myProfile')}

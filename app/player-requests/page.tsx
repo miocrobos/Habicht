@@ -7,6 +7,8 @@ import axios from 'axios'
 import { Search, Filter, MapPin, Briefcase, Users, Clock, X, Plus, CheckCircle, XCircle } from 'lucide-react'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
+import InterestButton from '@/components/shared/InterestButton'
+import InterestedPlayersModal from '@/components/shared/InterestedPlayersModal'
 
 interface PlayerRequest {
   id: string
@@ -97,8 +99,10 @@ export default function PlayerRequestsPage() {
     status: 'OPEN'
   })
   const [showMyRequests, setShowMyRequests] = useState(false)
+  const [selectedRequest, setSelectedRequest] = useState<{ id: string, title: string } | null>(null)
 
   const isRecruiterOrHybrid = session?.user?.role === 'RECRUITER' || session?.user?.role === 'HYBRID'
+  const isPlayerOrHybrid = session?.user?.role === 'PLAYER' || session?.user?.role === 'HYBRID'
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -393,7 +397,17 @@ export default function PlayerRequestsPage() {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex lg:flex-col gap-2">
+                  <div className="flex lg:flex-col gap-2 items-end">
+                    {/* Interest Button - Only for open requests */}
+                    {request.status === 'OPEN' && (
+                      <InterestButton
+                        requestId={request.id}
+                        isPlayerOrHybrid={isPlayerOrHybrid}
+                        isCreator={request.creatorId === session?.user?.id}
+                        onShowInterestedPlayers={() => setSelectedRequest({ id: request.id, title: request.title })}
+                      />
+                    )}
+                    
                     <Link
                       href={`/player-requests/${request.id}`}
                       className="flex-1 lg:flex-none px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg text-center transition-colors"
@@ -417,6 +431,16 @@ export default function PlayerRequestsPage() {
           </div>
         )}
       </div>
+
+      {/* Interested Players Modal */}
+      {selectedRequest && (
+        <InterestedPlayersModal
+          isOpen={!!selectedRequest}
+          onClose={() => setSelectedRequest(null)}
+          requestId={selectedRequest.id}
+          requestTitle={selectedRequest.title}
+        />
+      )}
     </div>
   )
 }

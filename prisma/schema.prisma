@@ -917,10 +917,35 @@ model PlayerRequest {
   updatedAt         DateTime            @updatedAt
   closedAt          DateTime?
   
+  // Relations
+  interests         PlayerRequestInterest[]
+  
   @@index([creatorId])
   @@index([clubId])
   @@index([status])
   @@index([createdAt])
   @@index([positionNeeded])
   @@index([canton])
+}
+
+// Player Request Interest - Players and Hybrids can express interest in requests
+model PlayerRequestInterest {
+  id                String              @id @default(cuid())
+  
+  // The request they're interested in
+  requestId         String
+  request           PlayerRequest       @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  
+  // The user expressing interest (Player or Hybrid)
+  userId            String
+  userType          UserRole            // PLAYER or HYBRID
+  userName          String              // Name for display
+  userImage         String?             // Profile image for display
+  
+  // Timestamps
+  createdAt         DateTime            @default(now())
+  
+  @@unique([requestId, userId])
+  @@index([requestId])
+  @@index([userId])
 }

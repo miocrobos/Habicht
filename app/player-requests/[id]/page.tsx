@@ -7,6 +7,8 @@ import axios from 'axios'
 import { ArrowLeft, MapPin, Briefcase, Calendar, Users, Clock, ExternalLink, CheckCircle, XCircle, Building2 } from 'lucide-react'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
+import InterestButton from '@/components/shared/InterestButton'
+import InterestedPlayersModal from '@/components/shared/InterestedPlayersModal'
 
 interface PlayerRequest {
   id: string
@@ -92,9 +94,11 @@ export default function PlayerRequestDetailPage() {
   const [request, setRequest] = useState<PlayerRequest | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [showInterestedModal, setShowInterestedModal] = useState(false)
 
   const requestId = params.id as string
   const isOwner = request?.creatorId === session?.user?.id
+  const isPlayerOrHybrid = session?.user?.role === 'PLAYER' || session?.user?.role === 'HYBRID'
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -234,6 +238,18 @@ export default function PlayerRequestDetailPage() {
                   <span>{request.canton}</span>
                 </div>
               </div>
+              
+              {/* Interest Button in Header */}
+              {request.status === 'OPEN' && (
+                <div className="flex-shrink-0">
+                  <InterestButton
+                    requestId={request.id}
+                    isPlayerOrHybrid={isPlayerOrHybrid}
+                    isCreator={isOwner}
+                    onShowInterestedPlayers={() => setShowInterestedModal(true)}
+                  />
+                </div>
+              )}
             </div>
           </div>
 
@@ -384,6 +400,16 @@ export default function PlayerRequestDetailPage() {
           )}
         </div>
       </div>
+
+      {/* Interested Players Modal */}
+      {request && (
+        <InterestedPlayersModal
+          isOpen={showInterestedModal}
+          onClose={() => setShowInterestedModal(false)}
+          requestId={request.id}
+          requestTitle={request.title}
+        />
+      )}
     </div>
   )
 }

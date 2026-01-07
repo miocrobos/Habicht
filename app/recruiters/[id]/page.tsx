@@ -597,7 +597,7 @@ const handleExportCV = async (language: string) => {
                 {isOwner && (
                   <>
                     <Link
-                      href={recruiter.user?.role === 'HYBRID' ? `/hybrids/${recruiter.user.id}/edit` : '/settings/profile'}
+                      href={recruiter.user?.role === 'HYBRID' ? `/hybrids/${recruiter.user.id}/edit` : `/recruiters/${params.id}/edit`}
                       className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold text-sm sm:text-base"
                     >
                       <Edit2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />

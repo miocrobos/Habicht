@@ -507,14 +507,53 @@ const handleExportCV = async (language: string) => {
                     {recruiter.nationality && (
                       <span>🏳 {t('playerProfile.nationality') || 'Nationality'}: {recruiter.nationality}</span>
                     )}
-                    {recruiter.club && (
-                      <Link href={`/clubs/${recruiter.club.id}`} className="flex items-center gap-2 hover:text-purple-600">
-                        {recruiter.club.logo && (
-                          <Image src={recruiter.club.logo} alt={recruiter.club.name} width={16} height={16} className="w-4 h-4 rounded object-contain bg-white" />
-                        )}
-                        <span>{recruiter.club.name}</span>
-                      </Link>
-                    )}
+                    {(() => {
+                      // Find current club from clubHistory for logo and leagues
+                      const currentClubEntry = recruiter.clubHistory?.find((ch: any) => ch.currentClub === true);
+                      const clubData = currentClubEntry || (recruiter.club ? { 
+                        club: recruiter.club,
+                        clubName: recruiter.club.name,
+                        clubLogo: recruiter.club.logo,
+                        leagues: []
+                      } : null);
+                      
+                      if (!clubData) return null;
+                      
+                      const clubId = clubData.club?.id || clubData.clubId;
+                      const clubName = clubData.clubName || clubData.club?.name;
+                      const clubLogo = clubData.clubLogo || clubData.club?.logo;
+                      const leagues = currentClubEntry?.leagues || [];
+                      
+                      return clubId ? (
+                        <Link href={`/clubs/${clubId}`} className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition">
+                          <ClubBadge 
+                            clubName={clubName}
+                            size="sm"
+                            uploadedLogo={clubLogo}
+                          />
+                          <span>{clubName}</span>
+                          {leagues.length > 0 && (
+                            <span className="text-xs px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full ml-1">
+                              {leagues.map((league: string) => getLeagueLabel(league, t)).join(', ')}
+                            </span>
+                          )}
+                        </Link>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <ClubBadge 
+                            clubName={clubName}
+                            size="sm"
+                            uploadedLogo={clubLogo}
+                          />
+                          <span>{clubName}</span>
+                          {leagues.length > 0 && (
+                            <span className="text-xs px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full ml-1">
+                              {leagues.map((league: string) => getLeagueLabel(league, t)).join(', ')}
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })()}
                   </div>
                   {/* Contact Info */}
                   <div className="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start text-xs sm:text-sm mb-3 sm:mb-4">

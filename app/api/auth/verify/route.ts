@@ -51,8 +51,9 @@ export async function GET(request: NextRequest) {
         new URL(`/players/${user.player.id}?verified=true`, request.url)
       )
     } else if (user.role === 'RECRUITER' && user.recruiter) {
+      // Redirect recruiter to their profile page
       return NextResponse.redirect(
-        new URL(`/recruiters?verified=true`, request.url)
+        new URL(`/recruiters/${user.recruiter.id}?verified=true`, request.url)
       )
     }
 

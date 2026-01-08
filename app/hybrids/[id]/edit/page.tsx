@@ -470,7 +470,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
           <p className="mt-4 text-gray-600 dark:text-gray-400">{t('hybridProfile.loadingProfile') || 'Loading profile...'}</p>
         </div>
       </div>
@@ -478,219 +478,252 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-8">
-      <div className="container mx-auto px-4 max-w-4xl">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-3 sm:py-6 md:py-12 px-3 sm:px-4">
+      <div className="max-w-4xl mx-auto">
+        {/* Mobile-Optimized Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 sm:mb-6">
           <Link
             href={`/hybrids/${params.id}`}
-            className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition"
+            className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition text-sm"
           >
-            <ArrowLeft className="w-5 h-5" />
-            {t('common.back') || 'Zurück'}
+            <ArrowLeft className="w-4 h-4" />
+            {t('common.backToProfile') || 'Zurück'}
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            {t('hybridProfile.editProfile') || 'Hybrid Profil bearbeiten'}
-          </h1>
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-purple-600 text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-purple-700 transition disabled:opacity-50 text-sm shadow-md"
+          >
+            {saving ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                {t('common.saving') || 'Speichere...'}
+              </>
+            ) : (
+              <>
+                <Save className="w-4 h-4" />
+                {t('common.saveChanges') || 'Speichern'}
+              </>
+            )}
+          </button>
         </div>
 
-        {/* Error/Success Messages */}
+        {/* Title */}
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">
+          {t('hybridProfile.editProfile') || 'Hybrid Profil bearbeiten'}
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 text-xs sm:text-sm">
+          {t('hybridProfile.updateInfo') || 'Aktualisiere deine Spieler- und Rekrutierer-Informationen'}
+        </p>
+
         {error && (
-          <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-lg text-red-700 dark:text-red-300">
+          <div className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-lg text-red-700 dark:text-red-300 text-xs sm:text-sm">
             {error}
           </div>
         )}
         {success && (
-          <div className="mb-6 p-4 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-lg text-green-700 dark:text-green-300">
-            {t('playerProfile.profileUpdated') || 'Profil aktualisiert!'}
+          <div className="mb-4 p-3 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-lg text-green-700 dark:text-green-300 text-xs sm:text-sm">
+            ✓ {t('playerProfile.profileUpdated') || 'Profil aktualisiert!'}
           </div>
         )}
 
-        {/* Section Tabs */}
-        <div className="mb-6 flex gap-2 bg-white dark:bg-gray-800 rounded-xl p-2 shadow-lg">
+        {/* Section Tabs - Mobile Responsive */}
+        <div className="mb-4 sm:mb-6 flex gap-1 sm:gap-2 bg-white dark:bg-gray-800 rounded-xl p-1.5 sm:p-2 shadow-lg">
           <button
             onClick={() => setActiveSection('shared')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold transition ${
+            className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold transition text-xs sm:text-sm ${
               activeSection === 'shared'
                 ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white'
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
-            <User className="w-5 h-5" />
-            {t('hybridProfile.sharedInfo') || 'Gemeinsam'}
+            <User className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="hidden sm:inline">{t('hybridProfile.sharedInfo') || 'Gemeinsam'}</span>
+            <span className="sm:hidden">{t('hybridProfile.shared') || 'Info'}</span>
           </button>
           <button
             onClick={() => setActiveSection('player')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold transition ${
+            className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold transition text-xs sm:text-sm ${
               activeSection === 'player'
                 ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white'
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
-            <User className="w-5 h-5" />
-            {t('hybridProfile.playerSection') || 'Spieler'}
+            <User className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="hidden sm:inline">{t('hybridProfile.playerSection') || 'Spieler'}</span>
+            <span className="sm:hidden">{t('hybridProfile.player') || 'Spieler'}</span>
           </button>
           <button
             onClick={() => setActiveSection('recruiter')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold transition ${
+            className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold transition text-xs sm:text-sm ${
               activeSection === 'recruiter'
                 ? 'bg-gradient-to-r from-green-600 to-green-700 text-white'
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
-            <Briefcase className="w-5 h-5" />
-            {t('hybridProfile.recruiterSection') || 'Rekrutierer'}
+            <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="hidden sm:inline">{t('hybridProfile.recruiterSection') || 'Rekrutierer'}</span>
+            <span className="sm:hidden">{t('hybridProfile.recruiter') || 'Coach'}</span>
           </button>
         </div>
 
         {/* Shared Info Section */}
         {activeSection === 'shared' && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-              <User className="w-6 h-6 text-purple-600" />
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 flex items-center gap-2">
+              <User className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
               {t('hybridProfile.sharedInfo') || 'Gemeinsame Informationen'}
             </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-4 sm:mb-6">
               {t('hybridProfile.sharedInfoDesc') || 'Diese Informationen werden für beide Profile (Spieler & Rekrutierer) verwendet.'}
             </p>
 
-            {/* Profile Image */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                {t('playerProfile.profileImage') || 'Profilbild'}
-              </label>
-              <ImageUpload
-                value={sharedData.profileImage}
-                onChange={(url) => setSharedData({ ...sharedData, profileImage: url })}
-                label=""
-              />
+            {/* Profile Image - Mobile Centered */}
+            <div className="mb-4 sm:mb-6">
+              <div className="flex flex-col items-center gap-3 sm:gap-4">
+                <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 ring-4 ring-gray-100 dark:ring-gray-600">
+                  {sharedData.profileImage ? (
+                    <img src={sharedData.profileImage} alt="Profil" className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-purple-600 text-white text-2xl sm:text-4xl font-bold">
+                      {sharedData.firstName?.[0]}{sharedData.lastName?.[0]}
+                    </div>
+                  )}
+                </div>
+                <ImageUpload
+                  label={t('playerProfile.uploadNewImage') || 'Bild Hochladen'}
+                  value={sharedData.profileImage}
+                  onChange={(url) => setSharedData({ ...sharedData, profileImage: url })}
+                  aspectRatio="square"
+                />
+              </div>
             </div>
 
             {/* Name */}
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('register.firstName') || 'Vorname'}
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.firstName') || 'Vorname'} *
                 </label>
                 <input
                   type="text"
                   value={sharedData.firstName}
                   onChange={(e) => setSharedData({ ...sharedData, firstName: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('register.lastName') || 'Nachname'}
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.lastName') || 'Nachname'} *
                 </label>
                 <input
                   type="text"
                   value={sharedData.lastName}
                   onChange={(e) => setSharedData({ ...sharedData, lastName: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
             </div>
 
             {/* Nationality & Phone */}
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   {t('playerProfile.nationality') || 'Nationalität'}
                 </label>
                 <CountrySelect
                   value={sharedData.nationality}
                   onChange={(val) => setSharedData({ ...sharedData, nationality: val })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   {t('register.phone') || 'Telefon'}
                 </label>
                 <input
                   type="tel"
                   value={sharedData.phone}
                   onChange={(e) => setSharedData({ ...sharedData, phone: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
             </div>
 
             {/* Canton & Municipality */}
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   {t('register.canton') || 'Kanton'}
                 </label>
                 <select
                   value={sharedData.canton}
                   onChange={(e) => setSharedData({ ...sharedData, canton: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
-                  <option value="">{t('common.select') || 'Auswählen'}</option>
+                  <option value="">{t('common.select') || 'Wählen'}</option>
                   {cantons.map((c) => (
                     <option key={c.code} value={c.code}>{c.name}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('register.municipality') || 'Gemeinde/Ort'}
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.municipality') || 'Ort'}
                 </label>
                 <input
                   type="text"
                   value={sharedData.municipality}
                   onChange={(e) => setSharedData({ ...sharedData, municipality: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
             </div>
 
             {/* Preferred Language */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                {t('register.preferredLanguage') || 'Bevorzugte Sprache'}
+            <div className="mb-3 sm:mb-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                {t('register.preferredLanguage') || 'Sprache'}
               </label>
               <select
                 value={sharedData.preferredLanguage}
                 onChange={(e) => setSharedData({ ...sharedData, preferredLanguage: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <option value="">{t('common.select') || 'Auswählen'}</option>
+                <option value="">{t('common.select') || 'Wählen'}</option>
                 <option value="gsw">{t('register.languageSwissGerman') || 'Schwiizerdütsch'}</option>
                 <option value="de">{t('register.languageGerman') || 'Deutsch'}</option>
-                <option value="fr">{t('register.languageFrench') || 'Französisch'}</option>
-                <option value="it">{t('register.languageItalian') || 'Italienisch'}</option>
+                <option value="fr">{t('register.languageFrench') || 'Français'}</option>
+                <option value="it">{t('register.languageItalian') || 'Italiano'}</option>
                 <option value="en">{t('register.languageEnglish') || 'English'}</option>
               </select>
             </div>
 
             {/* Gender & Date of Birth */}
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   {t('register.gender') || 'Geschlecht'}
                 </label>
                 <select
                   value={sharedData.gender}
                   onChange={(e) => setSharedData({ ...sharedData, gender: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
-                  <option value="">{t('common.select') || 'Auswählen'}</option>
+                  <option value="">{t('common.select') || 'Wählen'}</option>
                   <option value="MALE">{t('playerProfile.men') || 'Männlich'}</option>
                   <option value="FEMALE">{t('playerProfile.women') || 'Weiblich'}</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   {t('register.dateOfBirth') || 'Geburtsdatum'}
                 </label>
                 <input
                   type="date"
                   value={sharedData.dateOfBirth}
                   onChange={(e) => setSharedData({ ...sharedData, dateOfBirth: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
             </div>

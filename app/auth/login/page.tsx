@@ -52,7 +52,8 @@ export default function LoginPage() {
       } else if (session.user.playerId) {
         router.push(`/players/${session.user.playerId}`)
       } else if (session.user.recruiterId) {
-        router.push(`/recruiters`)
+        // Redirect recruiter to their profile page
+        router.push(`/recruiters/${session.user.recruiterId}`)
       }
     }
   }, [session, router])
@@ -92,8 +93,8 @@ export default function LoginPage() {
           // Redirect player to their profile
           router.push(`/players/${data.user.playerId}`)
         } else if (data?.user?.recruiterId) {
-          // Redirect recruiter to recruiters page
-          router.push(`/recruiters`)
+          // Redirect recruiter to their profile page
+          router.push(`/recruiters/${data.user.recruiterId}`)
         } else {
           // Fallback to home page if no profile found
           router.push('/')

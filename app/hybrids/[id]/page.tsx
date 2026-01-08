@@ -9,6 +9,7 @@ import { Trophy, FileText, User, Briefcase, MapPin, Phone, Mail, Award, Globe, B
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
 import Link from "next/link";
+import ClubBadge from "@/components/shared/ClubBadge";
 import { generatePlayerCV } from "@/lib/generateCV";
 import { BACKGROUND_OPTIONS } from '@/components/shared/backgroundOptions';
 import ChatWindow from '@/components/chat/ChatWindow';
@@ -491,7 +492,7 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                 )}
               </div>
               
-              {/* Location, Age, Nationality */}
+              {/* Location, Age, Nationality, Club */}
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 text-[10px] sm:text-xs md:text-sm text-gray-600 dark:text-gray-400 mb-2 sm:mb-3">
                 {(profile.player?.municipality || profile.player?.canton || profile.recruiter?.canton) && (
                   <span className="flex items-center gap-1">
@@ -510,6 +511,31 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                 {(profile.player?.nationality || profile.recruiter?.nationality) && (
                   <span>🏳 {profile.player?.nationality || profile.recruiter?.nationality}</span>
                 )}
+                {profile.player?.currentClub && (() => {
+                  // Find the current club in club history to get the country
+                  const currentClubHistory = profile.player?.clubHistory?.find((ch: any) => ch.currentClub === true)
+                  const clubCountry = currentClubHistory?.clubCountry || null
+                  
+                  return (
+                    <Link 
+                      href={`/clubs/${profile.player.currentClub.id}`}
+                      className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition"
+                    >
+                      <ClubBadge 
+                        clubName={profile.player.currentClub.name}
+                        size="sm"
+                        uploadedLogo={profile.player.currentClub.logo}
+                        country={clubCountry}
+                      />
+                      <span>{profile.player.currentClub.name}</span>
+                      {profile.player.currentLeagues && profile.player.currentLeagues.length > 0 && (
+                        <span className="text-xs px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full ml-1">
+                          {profile.player.currentLeagues.map((league: string) => getLeagueLabel(league, t)).join(', ')}
+                        </span>
+                      )}
+                    </Link>
+                  )
+                })()}
               </div>
               
               {/* Contact Info */}
@@ -1327,6 +1353,9 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                               customColor: backgroundData,
                             });
                           }
+                          
+                          // Show background saved popup
+                          toast.success(t('playerProfile.backgroundSaved') || 'Background saved!');
                         } catch (error) {
                           console.error('Error updating background:', error);
                           toast.error(t('playerProfile.errorUpdatingBackground') || 'Error updating background');
@@ -1423,6 +1452,9 @@ export default function HybridProfilePage({ params }: { params: { id: string } }
                           }
                           
                           setNewBackgroundImage('');
+                          
+                          // Show background saved popup
+                          toast.success(t('playerProfile.backgroundSaved') || 'Background saved!');
                         } catch (error) {
                           console.error('Error updating background:', error);
                           toast.error(t('playerProfile.errorUpdatingBackground') || 'Error updating background');

@@ -388,7 +388,7 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
                 <CountrySelect
                   value={formData.nationality}
                   onChange={(v) => setFormData({ ...formData, nationality: v })}
-                  className="w-full"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
 

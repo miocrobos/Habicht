@@ -188,24 +188,24 @@ export default function ClubsPage() {
           <>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {filteredClubs.map((club: any) => (
-                <div key={club.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition p-4 sm:p-6">
-                  <div className="flex items-center gap-4 mb-4">
+                <div key={club.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition p-3 sm:p-4 md:p-6">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
                     {/* Club badge links to profile page */}
-                    <Link href={`/clubs/${club.id}`} className="hover:scale-110 transition-transform">
+                    <Link href={`/clubs/${club.id}`} className="hover:scale-110 transition-transform flex-shrink-0">
                       <ClubBadge clubName={club.name} size="lg" uploadedLogo={club.logo} />
                     </Link>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <Link href={`/clubs/${club.id}`} className="hover:underline">
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{club.name}</h3>
+                        <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1 truncate">{club.name}</h3>
                       </Link>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
                         <CantonFlag canton={club.canton} size="sm" />
-                        <p className="text-sm text-gray-600 dark:text-gray-400">{club.town}, {club.canton}</p>
+                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 truncate">{club.town}, {club.canton}</p>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
                     <span className="font-medium">{club.playerCount}</span>
                     <span>{t('clubs.playersRegistered')}</span>
                   </div>
@@ -213,7 +213,7 @@ export default function ClubsPage() {
                   <div className="flex gap-2">
                     <Link
                       href={`/clubs/${club.id}`}
-                      className="flex-1 inline-block bg-habicht-600 text-white px-4 py-2 rounded-lg hover:bg-habicht-700 transition text-sm font-medium text-center"
+                      className="flex-1 inline-block bg-habicht-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-habicht-700 transition text-xs sm:text-sm font-medium text-center"
                     >
                       {t('clubs.viewPlayers')}
                     </Link>
@@ -222,7 +222,7 @@ export default function ClubsPage() {
                         href={club.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 inline-block bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white px-4 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition text-sm font-medium text-center"
+                        className="flex-1 inline-block bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition text-xs sm:text-sm font-medium text-center truncate"
                       >
                         {t('clubs.website')}
                       </a>
@@ -233,21 +233,21 @@ export default function ClubsPage() {
             </div>
 
             {filteredClubs.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-gray-500 dark:text-gray-400 text-lg">{t('clubs.noClubsFound')}</p>
+              <div className="text-center py-8 sm:py-12">
+                <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-lg">{t('clubs.noClubsFound')}</p>
               </div>
             )}
           </>
         )}
 
-        <div className="mt-12 bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-semibold dark:text-white mb-4">{t('clubs.missingClub')}</h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
+        <div className="mt-8 sm:mt-12 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sm:p-8">
+          <h2 className="text-lg sm:text-2xl font-semibold dark:text-white mb-2 sm:mb-4">{t('clubs.missingClub')}</h2>
+          <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
             {t('clubs.missingClubText')}
           </p>
           <Link
             href="/clubs/submit"
-            className="inline-block bg-swiss-red text-white px-6 py-3 rounded-lg hover:bg-red-700 transition font-medium text-center"
+            className="inline-block bg-swiss-red text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-red-700 transition font-medium text-center text-sm sm:text-base"
           >
             {t('clubs.submitClub')}
           </Link>

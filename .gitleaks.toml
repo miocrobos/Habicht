@@ -1,0 +1,31 @@
+# Gitleaks configuration for UniSports/Habicht
+# https://github.com/gitleaks/gitleaks
+
+title = "UniSports Gitleaks Config"
+
+[extend]
+# Use the default gitleaks rules as a base
+useDefault = true
+
+# Allow specific files that are known to be safe
+[allowlist]
+description = "Global allowlist"
+paths = [
+  '''\.env\.example$''',
+  '''package-lock\.json$''',
+  '''\.md$''',
+  '''node_modules/''',
+]
+
+# Custom rules for this project
+[[rules]]
+id = "cloudinary-preset"
+description = "Cloudinary upload preset (public, not secret)"
+regex = '''upload_preset.*habicht_(videos|uploads)'''
+allowlist = { description = "Cloudinary presets are public", regexes = ['''habicht_videos''', '''habicht_uploads'''] }
+
+[[rules]]
+id = "example-credentials"
+description = "Example/placeholder credentials in documentation"
+regex = '''(user:password|your-.*-key|your-.*-secret|your-.*-token)'''
+allowlist = { paths = ['''\.env\.example$''', '''README\.md$''', '''SETUP\.md$''', '''QUICK_REFERENCE\.md$'''] }

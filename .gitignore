@@ -22,10 +22,64 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Local env files
-.env*.local
+# ============================================
+# SENSITIVE FILES - Never commit these!
+# ============================================
+
+# Environment variables (contains secrets, API keys, database credentials)
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# Keep the example file for reference
+!.env.example
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+
+# API keys and tokens (if accidentally saved to files)
+**/secrets/
+**/credentials/
+**/.secrets
+**/api-keys.json
+**/tokens.json
+
+# Database files (might contain sensitive data)
+*.db
+*.sqlite
+*.sqlite3
+
+# Backup files that might contain secrets
+*.bak
+*.backup
+*.sql.gz
+
+# IDE and editor secrets
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Documentation that might contain sensitive info
 ENV_FILES_DOCUMENTATION.txt
+
+# ============================================
 
 # Vercel
 .vercel
@@ -36,3 +90,11 @@ next-env.d.ts
 
 # Prisma
 prisma/migrations/
+
+# Logs
+logs/
+*.log
+
+# Build artifacts
+dist/
+.turbo/

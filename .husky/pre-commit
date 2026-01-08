@@ -1,0 +1,35 @@
+# Prevent commits containing secrets or sensitive data
+echo "🔐 Checking for secrets in staged files..."
+
+# Check if any .env files (except .env.example) are being committed
+ENV_FILES=$(git diff --cached --name-only | grep -E "^\.env" | grep -v "\.env\.example$" || true)
+if [ -n "$ENV_FILES" ]; then
+  echo "❌ Attempting to commit .env file(s): $ENV_FILES"
+  echo "   These files should never be committed!"
+  exit 1
+fi
+
+# Check for common secret patterns in staged files (excluding hooks and config)
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -v "\.env\.example$" | grep -v "node_modules" | grep -v "\.lock$" | grep -v "\.husky/" | grep -v "\.gitleaks" || true)
+
+for file in $STAGED_FILES; do
+  if [ -f "$file" ]; then
+    # Check for AWS keys
+    if grep -qE "AKIA[0-9A-Z]{16}" "$file" 2>/dev/null; then
+      echo "❌ Potential AWS key found in: $file"
+      exit 1
+    fi
+    # Check for private key files (actual keys, not references)
+    if grep -q "BEGIN.*PRIVATE" "$file" 2>/dev/null; then
+      echo "❌ Private key found in: $file"
+      exit 1
+    fi
+    # Check for Stripe keys
+    if grep -qE "sk_(live|test)_[a-zA-Z0-9]+" "$file" 2>/dev/null; then
+      echo "❌ Stripe key found in: $file"
+      exit 1
+    fi
+  fi
+done
+
+echo "✅ No secrets detected. Proceeding with commit..."

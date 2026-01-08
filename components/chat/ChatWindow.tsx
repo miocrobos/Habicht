@@ -179,11 +179,18 @@ export default function ChatWindow({
 
   const uploadFile = async (file: File): Promise<{ url: string; type: 'image' | 'pdf'; name: string } | null> => {
     try {
+      const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+      const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+      
+      if (!cloudName || !uploadPreset) {
+        console.error('Cloudinary configuration missing. Please set NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME and NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET environment variables.')
+        return null
+      }
+      
       const formData = new FormData()
       formData.append('file', file)
-      formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || 'habicht_uploads')
+      formData.append('upload_preset', uploadPreset)
       
-      const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dlyqfgvmb'
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
         formData

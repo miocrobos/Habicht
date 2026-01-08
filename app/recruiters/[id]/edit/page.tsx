@@ -52,7 +52,6 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
   const [success, setSuccess] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
-  const [activeSection, setActiveSection] = useState<'personal' | 'professional' | 'social'>('personal');
 
   // Translated positions
   const positions = [
@@ -326,45 +325,10 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
           </div>
         )}
 
-        {/* Mobile-Optimized Section Tabs */}
-        <div className="mb-4 sm:mb-6 grid grid-cols-3 gap-1.5 sm:gap-2 bg-white dark:bg-gray-800 rounded-xl p-1.5 shadow-lg">
-          <button
-            onClick={() => setActiveSection('personal')}
-            className={`flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2.5 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold transition text-[10px] xs:text-xs sm:text-sm ${
-              activeSection === 'personal'
-                ? 'bg-gradient-to-r from-red-600 to-red-700 text-white shadow-md'
-                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-            }`}
-          >
-            <User className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="leading-tight">{t('recruiterProfile.personal') || 'Persönlich'}</span>
-          </button>
-          <button
-            onClick={() => setActiveSection('professional')}
-            className={`flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2.5 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold transition text-[10px] xs:text-xs sm:text-sm ${
-              activeSection === 'professional'
-                ? 'bg-gradient-to-r from-red-600 to-red-700 text-white shadow-md'
-                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-            }`}
-          >
-            <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="leading-tight">{t('recruiterProfile.professional') || 'Beruflich'}</span>
-          </button>
-          <button
-            onClick={() => setActiveSection('social')}
-            className={`flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2.5 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold transition text-[10px] xs:text-xs sm:text-sm ${
-              activeSection === 'social'
-                ? 'bg-gradient-to-r from-red-600 to-red-700 text-white shadow-md'
-                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-            }`}
-          >
-            <Trophy className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="leading-tight">{t('recruiterProfile.social') || 'Erfolge'}</span>
-          </button>
-        </div>
-
-        {/* Personal Section - Mobile Optimized */}
-        {activeSection === 'personal' && (
+        {/* All Sections - Single Page Layout */}
+        <div className="space-y-6">
+        
+        {/* Personal Section */}
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
             <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 flex items-center gap-2">
               <User className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
@@ -515,12 +479,9 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
               />
             </div>
           </div>
-        )}
 
-        {/* Professional Section - Mobile Optimized */}
-        {activeSection === 'professional' && (
-          <div className="space-y-4">
-            {/* Organization & Role */}
+        {/* Professional Section */}
+          {/* Organization & Role */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
               <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
@@ -811,12 +772,8 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
                 </div>
               )}
             </div>
-          </div>
-        )}
 
-        {/* Social & Achievements Section - Mobile Optimized */}
-        {activeSection === 'social' && (
-          <div className="space-y-4">
+        {/* Social & Achievements Section */}
             {/* Achievements */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
               <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
@@ -924,8 +881,7 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
                 </div>
               </div>
             </div>
-          </div>
-        )}
+        </div>
 
         {/* Bottom Save Button - Mobile Sticky */}
         <div className="mt-4 sm:mt-6 sticky bottom-3 sm:relative sm:bottom-auto flex justify-end">

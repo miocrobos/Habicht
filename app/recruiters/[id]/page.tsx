@@ -951,26 +951,28 @@ const handleExportCV = async (language: string) => {
                   </div>
                 </div>
 
-                {/* Organization Info */}
+                {/* Club Affiliations Info */}
                 <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                   <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                     <span className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
                       <Briefcase className="w-4 h-4 text-orange-600 dark:text-orange-400" />
                     </span>
-                    {t('recruiterProfile.organization') || 'Organization'}
+                    {t('recruiterProfile.clubAffiliations') || 'Club Affiliations'}
                   </h2>
                   <div className="space-y-4">
-                    <div className="flex items-start gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                      <Building2 className="w-5 h-5 text-orange-500 mt-0.5" />
-                      <div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t('recruiterProfile.organization') || 'Organization'}</p>
-                        <p className="font-semibold text-gray-900 dark:text-white">{recruiter.organization}</p>
+                    {recruiter.organization && (
+                      <div className="flex items-start gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <Building2 className="w-5 h-5 text-orange-500 mt-0.5" />
+                        <div>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t('recruiterProfile.organization') || 'Organization'}</p>
+                          <p className="font-semibold text-gray-900 dark:text-white">{recruiter.organization}</p>
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <div className="flex items-start gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
                       <Briefcase className="w-5 h-5 text-purple-500 mt-0.5" />
                       <div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t('recruiterProfile.position') || 'Position'}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t('recruiterProfile.coachRole') || 'Coach Role'}</p>
                         <p className="font-semibold text-gray-900 dark:text-white">{getTranslatedCoachRole(recruiter.position || recruiter.coachRole, t) || recruiter.position}</p>
                       </div>
                     </div>

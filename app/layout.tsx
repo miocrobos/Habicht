@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Habicht - Swiss Volleyball Scouting Platform',
-  description: 'Scouting platform for Swiss volleyball athletes from high school to university. Find talented players, view highlights, and connect with recruits.',
+  description: 'Scouting platform for Swiss volleyball athletes. Find talented players, view highlights, and connect with recruits.',
   keywords: ['volleyball', 'swiss volleyball', 'scouting', 'recruitment', 'athletes', 'swiss volley', 'schweizer volleyball', 'volleyball schweiz'],
   icons: {
     icon: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Habicht – Swiss Volleyball Scouting Platform',
-    description: 'Scouting platform for Swiss volleyball athletes from high school to university. Find talented players, view highlights, and connect with recruits.',
+    description: 'Scouting platform for Swiss volleyball athletes. Find talented players, view highlights, and connect with recruits.',
     images: [{ url: 'https://www.habicht-volleyball.ch/og-image.png' }],
     url: 'https://www.habicht-volleyball.ch/',
     type: 'website',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Habicht – Swiss Volleyball Scouting Platform',
-    description: 'Scouting platform for Swiss volleyball athletes from high school to university. Find talented players, view highlights, and connect with recruits.',
+    description: 'Scouting platform for Swiss volleyball athletes. Find talented players, view highlights, and connect with recruits.',
     images: ['https://www.habicht-volleyball.ch/og-image.png'],
   },
 }

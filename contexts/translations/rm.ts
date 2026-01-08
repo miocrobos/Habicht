@@ -1062,7 +1062,6 @@
       messages: {
         title: 'Messadis',
         subtitle: 'Tias conversaziuns cun auters utilisaders',
-        playerNote: 'Recrutaders vegnan a ta contactar. Ti pos respunder libramain uschespert ch\'els ta scrivan.',
         empty: 'Anc naginas conversaziuns',
         emptyDescription: 'Cumenza ina conversaziun cun trametter in messadi ad in giugader u recrutader',
         emptyDescriptionPlayer: 'Spetga che recrutaders ta contacteschian',

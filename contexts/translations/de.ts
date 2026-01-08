@@ -1055,7 +1055,6 @@
       messages: {
         title: 'Nachrichten',
         subtitle: 'Deine Unterhaltungen mit anderen Nutzern',
-        playerNote: 'Scouts werden dich kontaktieren. Du kannst frei antworten, sobald sie dir schreiben.',
         empty: 'Noch keine Unterhaltungen',
         emptyDescription: 'Starte eine Unterhaltung, indem du einem Spieler oder Scout schreibst',
         emptyDescriptionPlayer: 'Warte darauf, dass Scouts dich kontaktieren',

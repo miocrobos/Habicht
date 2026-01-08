@@ -993,14 +993,6 @@ export default function SettingsPage() {
                     <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                       {t('settings.messages.subtitle') || 'Your conversations with other users'}
                     </p>
-                    {session?.user?.role === 'PLAYER' && (
-                      <p className="text-[11px] sm:text-xs text-amber-600 dark:text-amber-400 mt-2 flex items-start sm:items-center gap-1">
-                        <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 mt-0.5 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span>{t('settings.messages.playerNote') || 'As a player, you can only respond to messages from recruiters'}</span>
-                      </p>
-                    )}
                   </div>
                   <div className="p-4 sm:p-6">
                     {conversationsLoading ? (

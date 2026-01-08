@@ -1303,7 +1303,6 @@
       messages: {
         title: 'Messages',
         subtitle: 'Your conversations with other users',
-        playerNote: 'Recruiters will initiate contact with you. You can reply freely once they message you.',
         empty: 'No conversations yet',
         emptyDescription: 'Start a conversation by messaging a player or recruiter',
         emptyDescriptionPlayer: 'Wait for recruiters to contact you',

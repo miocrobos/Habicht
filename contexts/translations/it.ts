@@ -1063,7 +1063,6 @@
       messages: {
         title: 'Messaggi',
         subtitle: 'Le tue conversazioni con altri utenti',
-        playerNote: 'I reclutatori ti contatteranno. Puoi rispondere liberamente una volta che ti scrivono.',
         empty: 'Nessuna conversazione',
         emptyDescription: 'Inizia una conversazione inviando un messaggio a un giocatore o reclutatore',
         emptyDescriptionPlayer: 'Aspetta che i reclutatori ti contattino',

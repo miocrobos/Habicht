@@ -184,6 +184,11 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
   const [conversationsLoading, setConversationsLoading] = useState(false)
   const [activeChat, setActiveChat] = useState<any>(null)
 
+  // Debug activeChat changes
+  useEffect(() => {
+    console.log('Active chat changed:', activeChat)
+  }, [activeChat])
+
   const isOwner = session?.user?.playerId === params.id
 
   // Check if player is in watchlist
@@ -224,9 +229,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
   // Open chat from messages list
   const openChatFromList = (conversation: any) => {
+    console.log('Opening chat from list:', conversation)
     let otherParticipant
     
-    if (conversation.player && conversation.recruiter) {
+    if (conversation.recruiter) {
       // As a player, the other participant is always the recruiter
       otherParticipant = {
         id: conversation.recruiter.id,
@@ -234,15 +240,22 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         type: 'RECRUITER' as const,
         club: conversation.recruiter.club?.name || ''
       }
-    }
-    
-    if (otherParticipant) {
+      
+      console.log('Setting active chat with:', {
+        conversationId: conversation.id,
+        otherParticipant,
+        currentUserId: session?.user?.id,
+        currentUserType: 'PLAYER'
+      })
+      
       setActiveChat({
         conversationId: conversation.id,
         otherParticipant,
         currentUserId: session?.user?.id || '',
         currentUserType: 'PLAYER' as const
       })
+    } else {
+      console.error('No recruiter found in conversation:', conversation)
     }
   }
 
@@ -1331,12 +1344,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                   <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
                     {t('settings.messages.subtitle') || 'Your conversations with other users'}
                   </p>
-                  <p className="text-[11px] sm:text-xs text-amber-600 dark:text-amber-400 mt-2 flex items-start sm:items-center gap-1">
-                    <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 mt-0.5 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{t('settings.messages.playerNote') || 'As a player, you can only respond to messages from recruiters'}</span>
-                  </p>
                 </div>
                 
                 {conversationsLoading ? (
@@ -1417,13 +1424,18 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
       {/* Chat Window Modal from Messages Tab */}
       {activeChat && (
-        <ChatWindow
-          conversationId={activeChat.conversationId}
-          otherParticipant={activeChat.otherParticipant}
-          currentUserId={activeChat.currentUserId}
-          currentUserType={activeChat.currentUserType}
-          onClose={() => setActiveChat(null)}
-        />
+        <>
+          <div className="fixed top-4 left-4 bg-green-500 text-white px-4 py-2 rounded z-[10000]">
+            Chat Window Rendering
+          </div>
+          <ChatWindow
+            conversationId={activeChat.conversationId}
+            otherParticipant={activeChat.otherParticipant}
+            currentUserId={activeChat.currentUserId}
+            currentUserType={activeChat.currentUserType}
+            onClose={() => setActiveChat(null)}
+          />
+        </>
       )}
 
       {/* Video Upload Modal */}

@@ -15,12 +15,12 @@ export default function CVExportLanguagePopup({ onClose, onExport, userType }: C
   const [selectedLang, setSelectedLang] = useState<string>('')
 
   const languages = [
-    { code: 'en', name: t('notifications.cvLanguageEnglish'), flag: '🇬🇧' },
-    { code: 'de', name: t('notifications.cvLanguageGerman'), flag: '🇩🇪' },
-    { code: 'fr', name: t('notifications.cvLanguageFrench'), flag: '🇫🇷' },
-    { code: 'gsw', name: t('notifications.cvLanguageSwissGerman'), flag: '🇨🇭' },
-    { code: 'it', name: t('notifications.cvLanguageItalian'), flag: '🇮🇹' },
-    { code: 'rm', name: t('notifications.cvLanguageRomansh'), flag: '🇨🇭' },
+    { code: 'en', name: t('playerProfile.cvLanguageEnglish'), flag: '🇬🇧' },
+    { code: 'de', name: t('playerProfile.cvLanguageGerman'), flag: '🇩🇪' },
+    { code: 'fr', name: t('playerProfile.cvLanguageFrench'), flag: '🇫🇷' },
+    { code: 'gsw', name: t('playerProfile.cvLanguageSwissGerman'), flag: '🇨🇭' },
+    { code: 'it', name: t('playerProfile.cvLanguageItalian'), flag: '🇮🇹' },
+    { code: 'rm', name: t('playerProfile.cvLanguageRomansh'), flag: '🇨🇭' },
   ]
 
   const handleExport = () => {
@@ -47,7 +47,7 @@ export default function CVExportLanguagePopup({ onClose, onExport, userType }: C
             <div className="flex items-center gap-3">
               <FileText className="w-6 h-6 text-red-600" />
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                {t('notifications.cvExport')}
+                {t('playerProfile.cvExport')}
               </h3>
             </div>
             <button
@@ -61,29 +61,29 @@ export default function CVExportLanguagePopup({ onClose, onExport, userType }: C
           {/* Content */}
           <div className="p-6">
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              {t('notifications.cvChooseType')}
+              {t('playerProfile.cvChooseType')}
             </p>
 
             {userType === 'hybrid' && (
               <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                 <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('notifications.cvPlayerTitle')}
+                  {t('playerProfile.cvPlayerTitle')}
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-                  {t('notifications.cvPlayerDesc')}
+                  {t('playerProfile.cvPlayerDesc')}
                 </p>
                 <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('notifications.cvRecruiterTitle')}
+                  {t('playerProfile.cvRecruiterTitle')}
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {t('notifications.cvRecruiterDesc')}
+                  {t('playerProfile.cvRecruiterDesc')}
                 </p>
               </div>
             )}
 
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                {t('notifications.cvLanguageSelect')}
+                {t('playerProfile.cvLanguageSelect')}
               </label>
               <div className="grid grid-cols-2 gap-3">
                 {languages.map((lang) => (

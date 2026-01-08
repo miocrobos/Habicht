@@ -1144,7 +1144,6 @@
       messages: {
         title: 'Nachrichte',
         subtitle: 'Dini Unterhaltunge mit andere Benutzer',
-        playerNote: 'Scouts wärded dich kontaktiere. Du chasch frei antworte, sobald sie dir schribed.',
         empty: 'Noni Unterhaltunge',
         emptyDescription: 'Fang e Unterhaltung aa, indem du eme Spieler oder Scout schribsch',
         emptyDescriptionPlayer: 'Wart druf, dass Scouts di kontaktiere',

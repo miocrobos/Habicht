@@ -229,24 +229,14 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
   // Open chat from messages list
   const openChatFromList = (conversation: any) => {
-    console.log('Opening chat from list:', conversation)
-    let otherParticipant
-    
     if (conversation.recruiter) {
-      // As a player, the other participant is always the recruiter
-      otherParticipant = {
+      const otherParticipant = {
         id: conversation.recruiter.id,
         name: `${conversation.recruiter.firstName} ${conversation.recruiter.lastName}`,
         type: 'RECRUITER' as const,
-        club: conversation.recruiter.club?.name || ''
+        club: conversation.recruiter.club?.name || '',
+        profileImage: conversation.recruiter.profileImage || ''
       }
-      
-      console.log('Setting active chat with:', {
-        conversationId: conversation.id,
-        otherParticipant,
-        currentUserId: session?.user?.id,
-        currentUserType: 'PLAYER'
-      })
       
       setActiveChat({
         conversationId: conversation.id,
@@ -254,8 +244,6 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         currentUserId: session?.user?.id || '',
         currentUserType: 'PLAYER' as const
       })
-    } else {
-      console.error('No recruiter found in conversation:', conversation)
     }
   }
 
@@ -1424,18 +1412,13 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
       {/* Chat Window Modal from Messages Tab */}
       {activeChat && (
-        <>
-          <div className="fixed top-4 left-4 bg-green-500 text-white px-4 py-2 rounded z-[10000]">
-            Chat Window Rendering
-          </div>
-          <ChatWindow
-            conversationId={activeChat.conversationId}
-            otherParticipant={activeChat.otherParticipant}
-            currentUserId={activeChat.currentUserId}
-            currentUserType={activeChat.currentUserType}
-            onClose={() => setActiveChat(null)}
-          />
-        </>
+        <ChatWindow
+          conversationId={activeChat.conversationId}
+          otherParticipant={activeChat.otherParticipant}
+          currentUserId={activeChat.currentUserId}
+          currentUserType={activeChat.currentUserType}
+          onClose={() => setActiveChat(null)}
+        />
       )}
 
       {/* Video Upload Modal */}
@@ -1734,7 +1717,8 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
               name: `${player.firstName} ${player.lastName}`,
               type: 'PLAYER',
               club: player.currentClub?.name,
-              position: player.positions[0] ? getPositionLabel(player.positions[0], t) : undefined
+              position: player.positions[0] ? getPositionLabel(player.positions[0], t) : undefined,
+              profileImage: player.profileImage || ''
             }}
             currentUserId={session.user.id}
             currentUserType={session.user.role as 'PLAYER' | 'RECRUITER'}

@@ -231,7 +231,8 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
               name: `${recruiter.firstName} ${recruiter.lastName}`,
               type: 'RECRUITER',
               club: recruiter.club?.name || recruiter.organization,
-              position: recruiter.coachRole
+              position: recruiter.coachRole,
+              profileImage: recruiter.profileImage || ''
             }}
             currentUserId={session!.user!.id}
             currentUserType={session!.user!.role as 'PLAYER' | 'RECRUITER' | 'HYBRID'}

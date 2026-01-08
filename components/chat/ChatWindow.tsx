@@ -32,6 +32,7 @@ interface ChatWindowProps {
     type: 'PLAYER' | 'RECRUITER' | 'HYBRID'
     club?: string
     position?: string
+    profileImage?: string
   }
   currentUserId: string
   currentUserType: 'PLAYER' | 'RECRUITER' | 'HYBRID'
@@ -253,9 +254,17 @@ export default function ChatWindow({
       {/* Header */}
       <div className="flex-shrink-0 bg-red-700 dark:bg-red-800 text-white px-4 py-3 sm:rounded-t-2xl flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center font-bold">
-            {otherParticipant.name.charAt(0)}
-          </div>
+          {otherParticipant.profileImage ? (
+            <img 
+              src={otherParticipant.profileImage} 
+              alt={otherParticipant.name}
+              className="w-10 h-10 rounded-full object-cover"
+            />
+          ) : (
+            <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center font-bold">
+              {otherParticipant.name.charAt(0)}
+            </div>
+          )}
           <div>
             <h3 className="font-bold text-sm sm:text-base truncate max-w-[180px] sm:max-w-none">{otherParticipant.name}</h3>
             <p className="text-xs text-white/80 truncate max-w-[180px] sm:max-w-none">

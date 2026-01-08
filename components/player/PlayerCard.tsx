@@ -190,7 +190,8 @@ export default function PlayerCard({ player }: { player: any }) {
             id: player.user.id,
             name: `${player.firstName} ${player.lastName}`,
             type: 'PLAYER',
-            position: player.positions?.[0] || undefined
+            position: player.positions?.[0] || undefined,
+            profileImage: player.profileImage || ''
           }}
           currentUserId={session.user.id}
           currentUserType={session.user.role as 'PLAYER' | 'RECRUITER' | 'HYBRID'}

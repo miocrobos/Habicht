@@ -330,7 +330,8 @@ const handleExportCV = async (language: string) => {
         id: conversation.player.id,
         name: `${conversation.player.firstName} ${conversation.player.lastName}`,
         type: 'PLAYER' as const,
-        position: conversation.player.positions?.[0] || ''
+        position: conversation.player.positions?.[0] || '',
+        profileImage: conversation.player.profileImage || ''
       };
     } else if (conversation.recruiter && conversation.secondRecruiter) {
       // Recruiter-to-recruiter conversation
@@ -341,7 +342,8 @@ const handleExportCV = async (language: string) => {
         id: other.id,
         name: `${other.firstName} ${other.lastName}`,
         type: 'RECRUITER' as const,
-        club: other.club?.name || ''
+        club: other.club?.name || '',
+        profileImage: other.profileImage || ''
       };
     }
     

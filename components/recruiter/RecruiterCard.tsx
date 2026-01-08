@@ -92,6 +92,9 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
     }
     return '#9333ea'; // Purple for RECRUITER
   }
+
+  // Get the actual gender of the user (for hybrids, check player profile as fallback)
+  const userGender = recruiter.gender || recruiter.user?.player?.gender
   
   return (
     <>
@@ -104,11 +107,11 @@ export default function RecruiterCard({ recruiter }: { recruiter: any }) {
           }}
         >
           {/* Gender Badge - only show if gender is specified */}
-          {recruiter.gender && (
+          {userGender && (
             <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center gap-2 text-sm font-semibold z-10">
-              {recruiter.gender === 'MALE' ? (
+              {userGender === 'MALE' ? (
                 <span className="text-blue-600">♂ {t('playerProfile.men')}</span>
-              ) : recruiter.gender === 'FEMALE' ? (
+              ) : userGender === 'FEMALE' ? (
                 <span className="text-pink-600">♀ {t('playerProfile.women')}</span>
               ) : null}
             </div>

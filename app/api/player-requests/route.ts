@@ -192,8 +192,29 @@ export async function POST(request: NextRequest) {
       }
     })
 
+    // Get all hybrid users with player profiles to notify
+    const hybrids = await prisma.hybrid.findMany({
+      where: {
+        user: {
+          notifyRecruiterSearching: true,
+          role: 'HYBRID'
+        },
+        // Optionally filter by gender if specified for hybrids
+        ...(gender ? { gender } : {})
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            email: true,
+            name: true
+          }
+        }
+      }
+    })
+
     // Create notifications for all matching players
-    const notificationPromises = players.map(player => 
+    const playerNotificationPromises = players.map(player => 
       prisma.notification.create({
         data: {
           userId: player.user.id,
@@ -213,8 +234,29 @@ export async function POST(request: NextRequest) {
       })
     )
 
+    // Create notifications for all matching hybrid users
+    const hybridNotificationPromises = hybrids.map(hybrid => 
+      prisma.notification.create({
+        data: {
+          userId: hybrid.user.id,
+          type: 'PLAYER_REQUEST',
+          title: 'notifications.newPlayerRequest',
+          message: JSON.stringify({
+            clubName: club.name,
+            position: positionNeeded,
+            canton: club.canton,
+            contractType,
+            creatorName
+          }),
+          senderId: session.user.id,
+          senderName: creatorName,
+          actionUrl: `/player-requests/${playerRequest.id}`
+        }
+      })
+    )
+
     // Send email notifications to all players (in batches to avoid overwhelming the email service)
-    const emailPromises = players.map(async player => {
+    const playerEmailPromises = players.map(async player => {
       try {
         await sendPlayerRequestNotification({
           recipientEmail: player.user.email,
@@ -233,18 +275,41 @@ export async function POST(request: NextRequest) {
       }
     })
 
+    // Send email notifications to all hybrid users
+    const hybridEmailPromises = hybrids.map(async hybrid => {
+      try {
+        await sendPlayerRequestNotification({
+          recipientEmail: hybrid.user.email,
+          recipientName: `${hybrid.firstName} ${hybrid.lastName}`,
+          creatorName,
+          clubName: club.name,
+          canton: club.canton,
+          position: positionNeeded,
+          contractType,
+          title,
+          description,
+          requestUrl: `/player-requests/${playerRequest.id}`
+        })
+      } catch (emailError) {
+        console.error(`Failed to send email to ${hybrid.user.email}:`, emailError)
+      }
+    })
+
     // Execute all notifications and emails
     await Promise.all([
-      ...notificationPromises,
-      ...emailPromises
+      ...playerNotificationPromises,
+      ...hybridNotificationPromises,
+      ...playerEmailPromises,
+      ...hybridEmailPromises
     ])
 
-    console.log(`Player request created and ${players.length} players notified`)
+    const totalNotified = players.length + hybrids.length
+    console.log(`Player request created and ${totalNotified} users notified (${players.length} players, ${hybrids.length} hybrids)`)
 
     return NextResponse.json({ 
       success: true, 
       request: playerRequest,
-      notifiedCount: players.length
+      notifiedCount: totalNotified
     })
   } catch (error) {
     console.error('Error creating player request:', error)

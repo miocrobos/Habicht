@@ -744,8 +744,8 @@ export default function SettingsPage() {
                       </div>
                     )}
 
-                    {/* Recruiter Searching */}
-                    {session?.user?.role === 'PLAYER' && (
+                    {/* Recruiter Searching - for Players and Hybrids */}
+                    {(session?.user?.role === 'PLAYER' || session?.user?.role === 'HYBRID') && (
                       <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                         <div className="flex-1">
                           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.recruiterSearching.title')}</h3>
@@ -930,8 +930,10 @@ export default function SettingsPage() {
                                   className="w-14 h-14 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600"
                                 />
                               ) : (
-                                <div className="w-14 h-14 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
-                                  <User className="w-7 h-7 text-gray-500 dark:text-gray-400" />
+                                <div className="w-14 h-14 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                                  <span className="text-lg font-bold text-red-600 dark:text-red-400">
+                                    {item.player?.firstName?.[0]}{item.player?.lastName?.[0]}
+                                  </span>
                                 </div>
                               )}
                             </div>

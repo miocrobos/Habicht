@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { Upload, X, Image as ImageIcon, FileText } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface ImageUploadProps {
   label: string
@@ -22,6 +23,7 @@ export default function ImageUpload({
   helpText,
   allowPdf = false
 }: ImageUploadProps) {
+  const { t } = useLanguage()
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState('')
   const [isPdf, setIsPdf] = useState(false)
@@ -38,14 +40,14 @@ export default function ImageUpload({
     const isPdfFile = file.type === 'application/pdf'
     
     if (!isImage && !(allowPdf && isPdfFile)) {
-      setError(allowPdf ? 'Please select an image or PDF file' : 'Please select an image file')
+      setError(allowPdf ? t('imageUpload.selectImageOrPdf') : t('imageUpload.selectImage'))
       return
     }
 
     // Validate file size (max 10MB for PDFs, 5MB for images)
     const maxSize = isPdfFile ? 10 * 1024 * 1024 : 5 * 1024 * 1024
     if (file.size > maxSize) {
-      setError(isPdfFile ? 'PDF must be max 10MB' : 'Image must be max 5MB')
+      setError(isPdfFile ? t('imageUpload.pdfMaxSize') : t('imageUpload.imageMaxSize'))
       return
     }
 
@@ -59,7 +61,7 @@ export default function ImageUpload({
       }
       reader.readAsDataURL(file)
     } catch (err) {
-      setError('Error uploading file')
+      setError(t('imageUpload.uploadError'))
     }
   }
 
@@ -109,7 +111,7 @@ export default function ImageUpload({
             // PDF Preview
             <div className={`w-full ${aspectClasses} rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center`}>
               <FileText className="w-16 h-16 text-red-500 dark:text-red-400 mb-2" />
-              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">PDF Document</p>
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('imageUpload.pdfDocument')}</p>
               <a 
                 href={value} 
                 target="_blank" 
@@ -117,7 +119,7 @@ export default function ImageUpload({
                 className="text-xs text-blue-600 dark:text-blue-400 hover:underline mt-1"
                 onClick={(e) => e.stopPropagation()}
               >
-                View PDF
+                {t('imageUpload.viewPdf')}
               </a>
             </div>
           ) : (
@@ -143,7 +145,7 @@ export default function ImageUpload({
             className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
           >
             <span className="bg-white dark:bg-gray-800 px-4 py-2 rounded-lg font-medium text-gray-900 dark:text-gray-100 shadow-lg">
-              {isCurrentValuePdf ? 'Change file' : 'Change image'}
+              {isCurrentValuePdf ? t('imageUpload.changeFile') : t('imageUpload.changeImage')}
             </span>
           </button>
         </div>
@@ -174,12 +176,12 @@ export default function ImageUpload({
           )}
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             {isDragging 
-              ? (allowPdf ? 'Drop file here' : 'Drop image here')
-              : (allowPdf ? 'Click or drag image/PDF here' : 'Click or drag image here')
+              ? (allowPdf ? t('imageUpload.dropFileHere') : t('imageUpload.dropImageHere'))
+              : (allowPdf ? t('imageUpload.clickOrDragFile') : t('imageUpload.clickOrDragImage'))
             }
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            {allowPdf ? 'PNG, JPG, WEBP (max 5MB) or PDF (max 10MB)' : 'PNG, JPG or WEBP (max 5MB)'}
+            {allowPdf ? t('imageUpload.fileSizeInfoWithPdf') : t('imageUpload.fileSizeInfo')}
           </p>
         </div>
       )}

@@ -4,8 +4,9 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Search, Filter, MapPin, Briefcase, Users, Clock, X, Plus, CheckCircle, XCircle } from 'lucide-react'
+import { Search, Filter, MapPin, Briefcase, Users, Clock, X, Plus, CheckCircle, XCircle, Star } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useLanguage } from '@/contexts/LanguageContext'
 import InterestButton from '@/components/shared/InterestButton'
 import InterestedPlayersModal from '@/components/shared/InterestedPlayersModal'
@@ -99,6 +100,7 @@ export default function PlayerRequestsPage() {
     status: 'OPEN'
   })
   const [showMyRequests, setShowMyRequests] = useState(false)
+  const [showStarredRequests, setShowStarredRequests] = useState(false)
   const [selectedRequest, setSelectedRequest] = useState<{ id: string, title: string } | null>(null)
 
   const isRecruiterOrHybrid = session?.user?.role === 'RECRUITER' || session?.user?.role === 'HYBRID'
@@ -113,7 +115,7 @@ export default function PlayerRequestsPage() {
     if (session) {
       fetchRequests()
     }
-  }, [session, status, router, showMyRequests, filters.status])
+  }, [session, status, router, showMyRequests, showStarredRequests, filters.status])
 
   const fetchRequests = async () => {
     try {
@@ -121,6 +123,7 @@ export default function PlayerRequestsPage() {
       const params = new URLSearchParams()
       if (filters.status) params.append('status', filters.status)
       if (showMyRequests && isRecruiterOrHybrid) params.append('myRequests', 'true')
+      if (showStarredRequests && isPlayerOrHybrid) params.append('starredRequests', 'true')
       
       const response = await axios.get(`/api/player-requests?${params}`)
       setRequests(response.data.requests || [])
@@ -304,6 +307,24 @@ export default function PlayerRequestsPage() {
               </label>
             </div>
           )}
+
+          {/* Starred Requests Toggle (for players/hybrids) */}
+          {isPlayerOrHybrid && (
+            <div className={`mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 ${isRecruiterOrHybrid ? 'mt-2 pt-2 border-t-0' : ''}`}>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={showStarredRequests}
+                  onChange={(e) => setShowStarredRequests(e.target.checked)}
+                  className="w-4 h-4 text-yellow-500 rounded focus:ring-yellow-500"
+                />
+                <Star className={`w-4 h-4 ${showStarredRequests ? 'text-yellow-500 fill-yellow-500' : 'text-gray-400'}`} />
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  {t('playerRequests.showStarredRequests') || 'Nur gsternte Aafroge zeige'}
+                </span>
+              </label>
+            </div>
+          )}
         </div>
 
         {/* Results Count */}
@@ -335,9 +356,19 @@ export default function PlayerRequestsPage() {
                   {/* Main Content */}
                   <div className="flex-1">
                     <div className="flex items-start gap-3 mb-3">
-                      {/* Club Logo Placeholder */}
-                      <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Briefcase className="w-6 h-6 text-gray-500" />
+                      {/* Club Logo */}
+                      <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        {request.club?.logo && request.club.logo.startsWith('http') ? (
+                          <Image
+                            src={request.club.logo}
+                            alt={request.club.name || request.clubName}
+                            width={48}
+                            height={48}
+                            className="w-full h-full object-contain"
+                          />
+                        ) : (
+                          <Briefcase className="w-6 h-6 text-gray-500" />
+                        )}
                       </div>
                       
                       <div className="flex-1 min-w-0">

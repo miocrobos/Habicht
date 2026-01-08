@@ -511,6 +511,7 @@ model Recruiter {
   firstName         String
   lastName          String
   age               Int
+  gender            Gender?     // Gender of the recruiter/coach
   nationality       String      @default("Swiss")
   
   // Location

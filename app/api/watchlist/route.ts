@@ -153,8 +153,8 @@ export async function POST(request: Request) {
         data: {
           userId: player.user.id,
           type: 'WATCHLIST_ADD',
-          title: 'Added to Watchlist',
-          message: `${watcherName} has added you to their watchlist`,
+          title: 'notifications.watchlistAdd',
+          message: watcherName, // Store just the name, translation will format the message
           actionUrl: '/settings',
           senderId: session.user.id,
           senderName: watcherName,

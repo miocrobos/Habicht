@@ -269,8 +269,11 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <Loader2 className="w-8 h-8 animate-spin text-red-600" />
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">{t('recruiterProfile.loadingProfile')}</p>
+        </div>
       </div>
     );
   }
@@ -342,8 +345,8 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
                   {formData.profileImage ? (
                     <img src={formData.profileImage} alt="Profil" className="w-full h-full object-cover" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400">
-                      <User className="w-10 h-10 sm:w-16 sm:h-16" />
+                    <div className="w-full h-full flex items-center justify-center bg-purple-600 text-white text-2xl sm:text-4xl font-bold">
+                      {formData.firstName?.[0]}{formData.lastName?.[0]}
                     </div>
                   )}
                 </div>

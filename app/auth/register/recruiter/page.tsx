@@ -81,6 +81,7 @@ export default function RecruiterRegisterPage() {
     firstName: '',
     lastName: '',
     dateOfBirth: '',
+    gender: '',
     nationality: '',
     canton: '',
     province: '',
@@ -192,6 +193,7 @@ export default function RecruiterRegisterPage() {
         setError(t('register.mustBe18')); 
         return; 
       }
+      if (!formData.gender) { setError(t('register.selectGenderRequired') || 'Please select your gender'); return; }
       if (!formData.nationality) { setError(t('register.selectNationality')); return; }
       if (!formData.canton) { setError(t('register.selectCantonRequired')); return; }
       if (!formData.clubName) { setError(t('register.selectOrganization')); return; }
@@ -233,6 +235,7 @@ export default function RecruiterRegisterPage() {
           firstName: formData.firstName,
           lastName: formData.lastName,
           age: age,
+          gender: formData.gender,
           dateOfBirth: formData.dateOfBirth,
           nationality: formData.nationality,
           canton: formData.canton,
@@ -385,6 +388,23 @@ export default function RecruiterRegisterPage() {
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white" 
                     placeholder={t('placeholders.dateFormat')}
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <User className="w-4 h-4 inline mr-1" />{t('register.gender')} <span className="text-red-500">*</span>
+                  </label>
+                  <select 
+                    name="gender" 
+                    required 
+                    value={formData.gender} 
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
+                  >
+                    <option value="">{t('register.selectGender')}</option>
+                    <option value="MALE">♂ {t('register.male')}</option>
+                    <option value="FEMALE">♀ {t('register.female')}</option>
+                  </select>
                 </div>
 
                 <div>

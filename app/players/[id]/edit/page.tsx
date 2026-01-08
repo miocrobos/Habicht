@@ -327,10 +327,10 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
 
   if (loading || status === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 animate-spin text-habicht-600 mx-auto mb-4" />
-          <p className="text-gray-600 dark:text-gray-400">Lade Profil...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">{t('playerProfile.loadingProfile')}</p>
         </div>
       </div>
     );
@@ -418,8 +418,8 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-gray-400">
-                  <User className="w-16 h-16" />
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-600 to-red-800 text-white text-4xl font-bold">
+                  {formData.firstName?.[0]}{formData.lastName?.[0]}
                 </div>
               )}
             </div>

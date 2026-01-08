@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ArrowLeft, MapPin, Briefcase, Calendar, Users, Clock, ExternalLink, CheckCircle, XCircle, Building2 } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useLanguage } from '@/contexts/LanguageContext'
 import InterestButton from '@/components/shared/InterestButton'
 import InterestedPlayersModal from '@/components/shared/InterestedPlayersModal'
@@ -323,8 +324,18 @@ export default function PlayerRequestDetailPage() {
                 {t('playerRequests.clubInfo') || 'Club Information'}
               </h2>
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                  <Building2 className="w-8 h-8 text-gray-500" />
+                <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center overflow-hidden">
+                  {request.club?.logo && request.club.logo.startsWith('http') ? (
+                    <Image
+                      src={request.club.logo}
+                      alt={request.club.name}
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <Building2 className="w-8 h-8 text-gray-500" />
+                  )}
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 dark:text-white">{request.club.name}</h3>

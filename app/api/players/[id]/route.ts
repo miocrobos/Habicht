@@ -581,8 +581,11 @@ export async function PUT(
               data: {
                 userId: watchItem.watcher.id,
                 type: 'WATCHLIST_UPDATE',
-                title: `${playerData.firstName} ${playerData.lastName} updated profile`,
-                message: changes.join('; '),
+                title: 'notifications.watchlistUpdate',
+                message: JSON.stringify({
+                  playerName: `${playerData.firstName} ${playerData.lastName}`,
+                  changes: changes.join('; ')
+                }),
                 actionUrl: `/players/${params.id}`,
                 senderId: existingPlayer.userId,
                 senderName: `${playerData.firstName} ${playerData.lastName}`,

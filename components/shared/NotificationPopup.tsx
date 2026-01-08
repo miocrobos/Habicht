@@ -14,6 +14,8 @@ interface Notification {
   read: boolean
   createdAt: string
   relatedId?: string
+  senderId?: string
+  senderName?: string
 }
 
 export default function NotificationPopup() {
@@ -87,6 +89,12 @@ export default function NotificationPopup() {
       case 'message':
       case 'MESSAGE':
         return <MessageCircle className="w-4 h-4" />
+      case 'PLAYER_REQUEST':
+        return <UserPlus className="w-4 h-4" />
+      case 'WATCHLIST_ADD':
+      case 'WATCHLIST_UPDATE':
+      case 'PROFILE_UPDATE':
+        return <Award className="w-4 h-4" />
       case 'connection':
         return <UserPlus className="w-4 h-4" />
       case 'achievement':
@@ -97,7 +105,28 @@ export default function NotificationPopup() {
   }
 
   const getNotificationText = (notification: Notification) => {
-    // Handle new translation key format
+    // Handle PLAYER_REQUEST notifications
+    if (notification.type === 'PLAYER_REQUEST') {
+      try {
+        const data = JSON.parse(notification.message)
+        const positionKey = `positions.${data.position?.toLowerCase().replace(/_/g, '')}`
+        const translatedPosition = t(positionKey) || data.position
+        return {
+          title: t('notifications.newPlayerRequest'),
+          message: t('notifications.playerRequestMessage')
+            .replace('{clubName}', data.clubName || '')
+            .replace('{position}', translatedPosition || '')
+            .replace('{canton}', data.canton || '')
+        }
+      } catch {
+        return {
+          title: t('notifications.newPlayerRequest'),
+          message: notification.message
+        }
+      }
+    }
+
+    // Handle PROFILE_VIEW notifications
     if (notification.type === 'PROFILE_VIEW' && notification.title === 'notifications.profileViewed') {
       return {
         title: t('notifications.profileViewed'),
@@ -105,6 +134,7 @@ export default function NotificationPopup() {
       }
     }
     
+    // Handle MESSAGE notifications
     if (notification.type === 'MESSAGE' && !notification.title.includes('vo ')) {
       // New format: title is senderName, message is the actual message
       return {
@@ -112,10 +142,61 @@ export default function NotificationPopup() {
         message: notification.message
       }
     }
+
+    // Handle WATCHLIST_ADD notifications
+    if (notification.type === 'WATCHLIST_ADD') {
+      // New format: message is just the sender name
+      // Legacy format: message is "{name} has added you to their watchlist"
+      const senderName = notification.message?.includes(' has added you') 
+        ? notification.message?.match(/^(.+?) has added you/)?.[1] 
+        : notification.senderName || notification.message || 'Someone'
+      return {
+        title: t('notifications.watchlistAdd'),
+        message: t('notifications.watchlistAddMessage').replace('{name}', senderName || 'Someone')
+      }
+    }
+
+    // Handle WATCHLIST_UPDATE notifications
+    if (notification.type === 'WATCHLIST_UPDATE' || notification.type === 'PROFILE_UPDATE') {
+      // New format: message is JSON with playerName and changes
+      try {
+        const data = JSON.parse(notification.message)
+        if (data.playerName) {
+          return {
+            title: t('notifications.watchlistUpdate'),
+            message: t('notifications.watchlistUpdateMessage').replace('{name}', data.playerName)
+          }
+        }
+      } catch {
+        // Legacy format: Title contains player name, message contains changes
+        const playerNameMatch = notification.title?.match(/^(.+?) updated profile$/)
+        if (playerNameMatch) {
+          return {
+            title: t('notifications.watchlistUpdate'),
+            message: t('notifications.watchlistUpdateMessage').replace('{name}', playerNameMatch[1])
+          }
+        }
+        // If senderName is available, use it
+        if (notification.senderName) {
+          return {
+            title: t('notifications.watchlistUpdate'),
+            message: t('notifications.watchlistUpdateMessage').replace('{name}', notification.senderName)
+          }
+        }
+      }
+      return {
+        title: t('notifications.watchlistUpdate'),
+        message: notification.message
+      }
+    }
     
-    // Legacy format: use as-is
+    // Legacy format: use as-is (but try to translate if it looks like a translation key)
+    let title = notification.title
+    if (notification.title?.startsWith('notifications.')) {
+      title = t(notification.title) || notification.title
+    }
     return {
-      title: notification.title,
+      title,
       message: notification.message
     }
   }
@@ -157,9 +238,12 @@ export default function NotificationPopup() {
           />
           
           {/* Popup Content */}
-          <div className="fixed right-2 left-2 sm:left-auto sm:absolute sm:right-0 top-16 sm:top-12 z-50 sm:w-96 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden max-h-[80vh]">
+          <div 
+            className="fixed right-2 left-2 sm:left-auto sm:absolute sm:right-0 top-16 sm:top-12 z-50 sm:w-96 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden max-h-[80vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Header */}
-            <div className="bg-red-600 text-white px-4 py-3 flex items-center justify-between">
+            <div className="flex-shrink-0 bg-red-600 text-white px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Bell className="w-5 h-5" />
                 <h3 className="font-semibold">{t('notifications.title')}</h3>
@@ -179,9 +263,12 @@ export default function NotificationPopup() {
 
             {/* Bulk Actions */}
             {notifications.length > 0 && (
-              <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+              <div className="flex-shrink-0 flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  onClick={markAllAsRead}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    markAllAsRead()
+                  }}
                   disabled={unreadCount === 0}
                   className="flex items-center gap-1.5 text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 disabled:opacity-50 disabled:cursor-not-allowed transition"
                 >
@@ -189,7 +276,10 @@ export default function NotificationPopup() {
                   {t('notifications.markAllRead')}
                 </button>
                 <button
-                  onClick={clearAllNotifications}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    clearAllNotifications()
+                  }}
                   className="flex items-center gap-1.5 text-xs font-medium text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -199,7 +289,7 @@ export default function NotificationPopup() {
             )}
 
             {/* Notifications List */}
-            <div className="max-h-96 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto max-h-80">
               {notifications.length === 0 ? (
                 <div className="p-8 text-center text-gray-500 dark:text-gray-400">
                   <Bell className="w-12 h-12 mx-auto mb-2 opacity-50" />
@@ -254,10 +344,10 @@ export default function NotificationPopup() {
               )}
             </div>
 
-            {/* Footer */}
+            {/* Footer - Always visible */}
             <Link
               href="/notifications"
-              className="block p-3 text-center text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-700 font-semibold text-sm transition border-t border-gray-200 dark:border-gray-700"
+              className="flex-shrink-0 block p-3 text-center text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-700 font-semibold text-sm transition border-t border-gray-200 dark:border-gray-700"
               onClick={() => setShowPopup(false)}
             >
               {t('notifications.viewAll')}

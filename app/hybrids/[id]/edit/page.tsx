@@ -1069,49 +1069,49 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Instagram
+                    {t('socialMedia.instagram') || 'Instagram'}
                   </label>
                   <input
                     type="text"
                     value={playerData.instagram}
                     onChange={(e) => setPlayerData({ ...playerData, instagram: e.target.value })}
-                    placeholder="@username"
+                    placeholder={t('socialMedia.usernamePlaceholder') || '@username'}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    TikTok
+                    {t('socialMedia.tiktok') || 'TikTok'}
                   </label>
                   <input
                     type="text"
                     value={playerData.tiktok}
                     onChange={(e) => setPlayerData({ ...playerData, tiktok: e.target.value })}
-                    placeholder="@username"
+                    placeholder={t('socialMedia.usernamePlaceholder') || '@username'}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    YouTube
+                    {t('socialMedia.youtube') || 'YouTube'}
                   </label>
                   <input
                     type="text"
                     value={playerData.youtube}
                     onChange={(e) => setPlayerData({ ...playerData, youtube: e.target.value })}
-                    placeholder="Channel URL"
+                    placeholder={t('socialMedia.channelUrlPlaceholder') || 'Channel URL'}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Facebook
+                    {t('socialMedia.facebook') || 'Facebook'}
                   </label>
                   <input
                     type="text"
                     value={playerData.facebook}
                     onChange={(e) => setPlayerData({ ...playerData, facebook: e.target.value })}
-                    placeholder="Profile URL"
+                    placeholder={t('socialMedia.profileUrlPlaceholder') || 'Profile URL'}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
@@ -1469,49 +1469,49 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Instagram
+                    {t('socialMedia.instagram') || 'Instagram'}
                   </label>
                   <input
                     type="text"
                     value={recruiterData.instagram}
                     onChange={(e) => setRecruiterData({ ...recruiterData, instagram: e.target.value })}
-                    placeholder="@username"
+                    placeholder={t('socialMedia.usernamePlaceholder') || '@username'}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    TikTok
+                    {t('socialMedia.tiktok') || 'TikTok'}
                   </label>
                   <input
                     type="text"
                     value={recruiterData.tiktok}
                     onChange={(e) => setRecruiterData({ ...recruiterData, tiktok: e.target.value })}
-                    placeholder="@username"
+                    placeholder={t('socialMedia.usernamePlaceholder') || '@username'}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    YouTube
+                    {t('socialMedia.youtube') || 'YouTube'}
                   </label>
                   <input
                     type="text"
                     value={recruiterData.youtube}
                     onChange={(e) => setRecruiterData({ ...recruiterData, youtube: e.target.value })}
-                    placeholder="Channel URL"
+                    placeholder={t('socialMedia.channelUrlPlaceholder') || 'Channel URL'}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Facebook
+                    {t('socialMedia.facebook') || 'Facebook'}
                   </label>
                   <input
                     type="text"
                     value={recruiterData.facebook}
                     onChange={(e) => setRecruiterData({ ...recruiterData, facebook: e.target.value })}
-                    placeholder="Profile URL"
+                    placeholder={t('socialMedia.profileUrlPlaceholder') || 'Profile URL'}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>

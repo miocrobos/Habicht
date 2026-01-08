@@ -115,6 +115,45 @@ function getResendClient() {
   }
 }
 
+// Helper function to get a valid image URL for emails
+// Email clients don't support base64 data URIs, so we need to use a proper URL
+function getEmailSafeImageUrl(imageUrl: string | null | undefined, fallbackName?: string): string {
+  const defaultAvatar = 'https://www.habicht-volleyball.ch/default-avatar.png';
+  
+  // If no image, return default
+  if (!imageUrl) {
+    // If we have a name, use UI Avatars service
+    if (fallbackName) {
+      return `https://ui-avatars.com/api/?name=${encodeURIComponent(fallbackName)}&background=dc2626&color=ffffff&size=160&bold=true`;
+    }
+    return defaultAvatar;
+  }
+  
+  // If it's a base64 data URI, use UI Avatars or default
+  if (imageUrl.startsWith('data:')) {
+    if (fallbackName) {
+      return `https://ui-avatars.com/api/?name=${encodeURIComponent(fallbackName)}&background=dc2626&color=ffffff&size=160&bold=true`;
+    }
+    return defaultAvatar;
+  }
+  
+  // If it's a relative URL, make it absolute
+  if (imageUrl.startsWith('/')) {
+    return `https://www.habicht-volleyball.ch${imageUrl}`;
+  }
+  
+  // If it's already an absolute URL (http/https), return as is
+  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+    return imageUrl;
+  }
+  
+  // Fallback to default
+  if (fallbackName) {
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(fallbackName)}&background=dc2626&color=ffffff&size=160&bold=true`;
+  }
+  return defaultAvatar;
+}
+
 interface SendVerificationEmailParams {
   email: string;
   name: string;
@@ -728,8 +767,8 @@ export async function sendProfileViewNotification({
     }
     
     const roleLabel = viewerRole === 'player' ? 'Spieler' : viewerRole === 'recruiter' ? 'Scout' : 'Benutzer';
-    const defaultAvatar = 'https://www.habicht-volleyball.ch/default-avatar.png';
-    const avatarUrl = viewerImage || defaultAvatar;
+    // Use email-safe image URL helper to handle base64 and other unsupported formats
+    const avatarUrl = getEmailSafeImageUrl(viewerImage, viewerName);
 
     await resendClient.emails.send({
       from: 'Habicht Volleyball <noreply@habicht-volleyball.ch>',

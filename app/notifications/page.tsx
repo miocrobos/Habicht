@@ -199,6 +199,7 @@ export default function NotificationsPage() {
       case 'MESSAGE':
         return <MessageCircle className="w-5 h-5" />
       case 'CHAT_REQUEST':
+      case 'PLAYER_REQUEST':
         return <UserPlus className="w-5 h-5" />
       case 'CLUB_INTEREST':
       case 'RECRUITER_INTEREST':
@@ -230,24 +231,103 @@ export default function NotificationsPage() {
       }
     }
 
+    // Handle player request notifications
+    if (notification.type === 'PLAYER_REQUEST' && notification.title === 'notifications.newPlayerRequest') {
+      try {
+        const data = JSON.parse(notification.message)
+        const positionKey = `positions.${data.position?.toLowerCase()?.replace(/_/g, '')}` || ''
+        const translatedPosition = t(positionKey) || data.position || ''
+        return {
+          title: t('notifications.newPlayerRequest'),
+          message: t('notifications.playerRequestMessage')
+            .replace('{clubName}', data.clubName || '')
+            .replace('{position}', translatedPosition)
+            .replace('{canton}', data.canton || '')
+        }
+      } catch {
+        return {
+          title: t('notifications.newPlayerRequest'),
+          message: notification.message
+        }
+      }
+    }
+
+    // Handle player request notifications
+    if (notification.type === 'PLAYER_REQUEST') {
+      // Parse the JSON message to get the details
+      try {
+        const data = JSON.parse(notification.message)
+        const positionKey = `positions.${data.position?.toLowerCase()?.replace('_', '')}` || ''
+        const positionTranslated = t(positionKey) || data.position || ''
+        return {
+          title: t('notifications.newPlayerRequest'),
+          message: t('notifications.playerRequestMessage')
+            .replace('{clubName}', data.clubName || '')
+            .replace('{position}', positionTranslated)
+            .replace('{canton}', data.canton || '')
+        }
+      } catch (e) {
+        // Fallback if JSON parsing fails
+        return {
+          title: t('notifications.newPlayerRequest'),
+          message: notification.message
+        }
+      }
+    }
+
     // Handle watchlist notifications
     if (notification.type === 'WATCHLIST_ADD') {
+      // New format: message is just the sender name
+      // Legacy format: message is "{name} has added you to their watchlist"
+      const senderName = notification.message?.includes(' has added you') 
+        ? notification.message?.match(/^(.+?) has added you/)?.[1] 
+        : notification.senderName || notification.message || 'Someone'
       return {
         title: t('notifications.watchlistAdd'),
-        message: notification.message
+        message: t('notifications.watchlistAddMessage').replace('{name}', senderName || 'Someone')
       }
     }
 
     if (notification.type === 'WATCHLIST_UPDATE' || notification.type === 'PROFILE_UPDATE') {
+      // New format: message is JSON with playerName and changes
+      try {
+        const data = JSON.parse(notification.message)
+        if (data.playerName) {
+          return {
+            title: t('notifications.watchlistUpdate'),
+            message: t('notifications.watchlistUpdateMessage').replace('{name}', data.playerName)
+          }
+        }
+      } catch {
+        // Legacy format: Title contains player name, message contains changes
+        const playerNameMatch = notification.title?.match(/^(.+?) updated profile$/)
+        if (playerNameMatch) {
+          return {
+            title: t('notifications.watchlistUpdate'),
+            message: t('notifications.watchlistUpdateMessage').replace('{name}', playerNameMatch[1])
+          }
+        }
+        // If senderName is available, use it
+        if (notification.senderName) {
+          return {
+            title: t('notifications.watchlistUpdate'),
+            message: t('notifications.watchlistUpdateMessage').replace('{name}', notification.senderName)
+          }
+        }
+      }
       return {
-        title: notification.title,
+        title: t('notifications.watchlistUpdate'),
         message: notification.message
       }
     }
     
-    // Legacy format: use as-is
+    // Legacy format: use as-is (but try to translate if it looks like a translation key)
+    let title = notification.title
+    if (notification.title?.startsWith('notifications.')) {
+      title = t(notification.title) || notification.title
+    }
     return {
-      title: notification.title,
+      title,
       message: notification.message
     }
   }

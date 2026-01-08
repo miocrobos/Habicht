@@ -481,30 +481,17 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
           </div>
 
         {/* Professional Section */}
-          {/* Organization & Role */}
+          {/* Role & License */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
               <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
-                {t('recruiterProfile.organization') || 'Club Affiliation'}
+                {t('recruiterProfile.role') || 'Rolle & Lizenz'}
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                    {t('recruiterProfile.organizationName') || 'Club'}
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.organization}
-                    onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    placeholder="z.B. Volley Amriswil"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                    {t('recruiterProfile.role') || 'Rolle'}
+                    {t('recruiterProfile.coachRole') || 'Coach Rolle'}
                   </label>
                   <select
                     value={formData.coachRole}
@@ -522,7 +509,7 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
                   </select>
                 </div>
 
-                <div className="sm:col-span-2">
+                <div>
                   <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                     {t('recruiterProfile.coachingLicense') || 'Lizenz'}
                   </label>

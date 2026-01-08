@@ -89,6 +89,7 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
 
   const [clubHistory, setClubHistory] = useState<any[]>([]);
   const [achievements, setAchievements] = useState<{ id: string; text: string }[]>([]);
+  const [allClubs, setAllClubs] = useState<any[]>([]);
 
   useEffect(() => {
     if (status === 'loading') return;
@@ -98,7 +99,17 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
     }
 
     loadRecruiterData();
+    loadAllClubs();
   }, [session, status]);
+
+  const loadAllClubs = async () => {
+    try {
+      const response = await axios.get('/api/clubs?all=true');
+      setAllClubs(response.data.clubs || []);
+    } catch (error) {
+      console.error('Error loading clubs:', error);
+    }
+  };
 
   const loadRecruiterData = async () => {
     try {
@@ -138,10 +149,12 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
       if (recruiter.clubHistory && Array.isArray(recruiter.clubHistory)) {
         const formattedHistory = recruiter.clubHistory.map((club: any) => ({
           id: club.id,
+          clubId: club.club?.id || club.clubId || '',
           clubName: club.clubName || club.club?.name || '',
           logo: club.club?.logo || '',
           country: club.country || 'Switzerland',
           clubWebsiteUrl: club.clubWebsiteUrl || '',
+          coachRole: club.coachRole || '',
           leagues: club.leagues || (club.league ? [club.league] : []),
           yearFrom: club.startDate ? new Date(club.startDate).getFullYear().toString() : '',
           yearTo: club.endDate ? new Date(club.endDate).getFullYear().toString() : '',
@@ -206,10 +219,12 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
       ...clubHistory,
       {
         id: `new-${Date.now()}`,
+        clubId: '',
         clubName: '',
         logo: '',
         country: 'Switzerland',
         clubWebsiteUrl: '',
+        coachRole: '',
         leagues: [],
         yearFrom: '',
         yearTo: '',
@@ -625,108 +640,168 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
 
             {/* Club History - Mobile Optimized */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
-              <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
-                {t('recruiterProfile.clubHistory') || 'Club-Geschichte'}
-              </h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
+                  {t('recruiterProfile.clubAffiliations') || 'Club-Zugehörigkeiten'}
+                </h2>
+                <button
+                  type="button"
+                  onClick={handleAddClub}
+                  className="flex items-center gap-1 px-3 py-1.5 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition"
+                >
+                  <Plus className="w-4 h-4" />
+                  {t('common.addClub') || 'Club hinzufügen'}
+                </button>
+              </div>
 
               {clubHistory.length === 0 ? (
-                <p className="text-gray-500 dark:text-gray-400 italic mb-4 text-xs sm:text-sm text-center py-4">
-                  {t('recruiterProfile.noClubHistory') || 'Noch keine Clubs hinzugefügt'}
+                <p className="text-gray-500 dark:text-gray-400 italic text-xs sm:text-sm text-center py-4">
+                  {t('recruiterProfile.noClubsYet') || 'Noch keine Clubs hinzugefügt. Klicke auf "Club hinzufügen" um deine Club-Zugehörigkeiten zu verwalten.'}
                 </p>
               ) : (
-                <div className="space-y-3 sm:space-y-4 mb-4">
+                <div className="space-y-3 sm:space-y-4">
                   {clubHistory.map((club, index) => (
-                    <div key={club.id} className="border border-gray-300 dark:border-gray-600 rounded-lg p-3 sm:p-4">
-                      <div className="flex items-start justify-between mb-3">
-                        <h3 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-white">
-                          Club {index + 1}
-                        </h3>
+                    <div key={club.id} className="p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                      <div className="flex justify-between items-start mb-3">
+                        <span className="text-sm font-semibold text-red-600">
+                          {club.currentClub ? (t('common.currentClub') || 'Aktueller Club') : (t('common.previousClub') || 'Früherer Club')}
+                        </span>
                         <button
+                          type="button"
                           onClick={() => setClubHistory(clubHistory.filter((_, i) => i !== index))}
-                          className="text-red-600 hover:text-red-700 p-1"
+                          className="p-1 text-red-500 hover:bg-red-100 dark:hover:bg-red-900/30 rounded"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div className="sm:col-span-2">
-                          <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                            Club Name *
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                            {t('recruiterProfile.clubName') || 'Club Name'}
                           </label>
-                          <input
-                            type="text"
-                            value={club.clubName}
+                          <select
+                            value={club.clubId || ''}
                             onChange={(e) => {
+                              const selectedClub = allClubs.find(c => c.id === e.target.value);
                               const updated = clubHistory.map((c, i) =>
-                                i === index ? { ...c, clubName: e.target.value } : c
+                                i === index ? { ...c, clubId: e.target.value, clubName: selectedClub?.name || '' } : c
                               );
                               setClubHistory(updated);
                             }}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                            placeholder="z.B. Volley Amriswil"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                            Von
-                          </label>
+                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-800 dark:text-white"
+                          >
+                            <option value="">{t('common.selectClub') || 'Club auswählen'}</option>
+                            {allClubs.map((c) => (
+                              <option key={c.id} value={c.id}>{c.name}</option>
+                            ))}
+                          </select>
                           <input
                             type="text"
-                            value={club.yearFrom}
+                            value={club.clubName || ''}
+                            onChange={(e) => {
+                              const updated = clubHistory.map((c, i) =>
+                                i === index ? { ...c, clubName: e.target.value, clubId: '' } : c
+                              );
+                              setClubHistory(updated);
+                            }}
+                            className="w-full mt-2 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-800 dark:text-white"
+                            placeholder={t('recruiterProfile.orEnterManually') || 'oder manuell eingeben'}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                            {t('recruiterProfile.coachRole') || 'Trainer-Rolle'}
+                          </label>
+                          <select
+                            value={club.coachRole || ''}
+                            onChange={(e) => {
+                              const updated = clubHistory.map((c, i) =>
+                                i === index ? { ...c, coachRole: e.target.value } : c
+                              );
+                              setClubHistory(updated);
+                            }}
+                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-800 dark:text-white"
+                          >
+                            <option value="">{t('common.select') || 'Auswählen'}</option>
+                            <option value="HEAD_COACH">{t('coachRole.head_coach') || 'Headcoach'}</option>
+                            <option value="ASSISTANT_COACH">{t('coachRole.assistant_coach') || 'Assistenztrainer'}</option>
+                            <option value="TECHNICAL_COACH">{t('coachRole.technical_coach') || 'Technischer Trainer'}</option>
+                            <option value="PHYSICAL_COACH">{t('coachRole.physical_coach') || 'Athletiktrainer'}</option>
+                            <option value="SCOUT">{t('coachRole.scout') || 'Scout'}</option>
+                            <option value="TRAINER">{t('coachRole.trainer') || 'Trainer'}</option>
+                            <option value="TEAM_MANAGER">{t('coachRole.team_manager') || 'Manager'}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="mb-3">
+                        <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                          {t('recruiterProfile.leagues') || 'Ligen'}
+                        </label>
+                        <MultiLeagueSelector
+                          selectedLeagues={club.leagues || []}
+                          onChange={(leagues) => {
+                            const updated = clubHistory.map((c, i) =>
+                              i === index ? { ...c, leagues } : c
+                            );
+                            setClubHistory(updated);
+                          }}
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-3">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                            {t('common.from') || 'Von'}
+                          </label>
+                          <input
+                            type="number"
+                            value={club.yearFrom || ''}
                             onChange={(e) => {
                               const updated = clubHistory.map((c, i) =>
                                 i === index ? { ...c, yearFrom: e.target.value } : c
                               );
                               setClubHistory(updated);
                             }}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                             placeholder="2020"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-800 dark:text-white"
                           />
                         </div>
-
                         <div>
-                          <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                            Bis
+                          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                            {t('common.to') || 'Bis'}
                           </label>
-                          {club.currentClub ? (
-                            <div className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
-                              <span className="text-green-600 dark:text-green-400 font-semibold text-xs">✓ Aktuell</span>
-                            </div>
-                          ) : (
+                          <input
+                            type="number"
+                            value={club.yearTo || ''}
+                            onChange={(e) => {
+                              const updated = clubHistory.map((c, i) =>
+                                i === index ? { ...c, yearTo: e.target.value } : c
+                              );
+                              setClubHistory(updated);
+                            }}
+                            placeholder="2024"
+                            disabled={club.currentClub}
+                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-800 dark:text-white disabled:opacity-50"
+                          />
+                        </div>
+                        <div className="flex items-end">
+                          <label className="flex items-center gap-2 pb-2">
                             <input
-                              type="text"
-                              value={club.yearTo}
+                              type="checkbox"
+                              checked={club.currentClub || false}
                               onChange={(e) => {
                                 const updated = clubHistory.map((c, i) =>
-                                  i === index ? { ...c, yearTo: e.target.value } : c
+                                  i === index ? { ...c, currentClub: e.target.checked, yearTo: e.target.checked ? '' : c.yearTo } : c
                                 );
                                 setClubHistory(updated);
                               }}
-                              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                              placeholder="2023"
+                              className="w-4 h-4 rounded border-gray-300 text-red-600 focus:ring-red-500"
                             />
-                          )}
-                        </div>
-
-                        <div className="sm:col-span-2">
-                          <label className="flex items-center gap-2 cursor-pointer p-2.5 rounded-lg border-2 bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600">
-                            <input
-                              type="checkbox"
-                              checked={!!club.currentClub}
-                              onChange={(e) => {
-                                setClubHistory(prev => prev.map((c, i) =>
-                                  i === index
-                                    ? { ...c, currentClub: e.target.checked, yearTo: e.target.checked ? '' : c.yearTo }
-                                    : { ...c, currentClub: false }
-                                ));
-                              }}
-                              className="rounded text-red-600 focus:ring-red-500"
-                            />
-                            <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
-                              Aktueller Club
+                            <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                              {t('common.current') || 'Aktuell'}
                             </span>
                           </label>
                         </div>
@@ -735,14 +810,6 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
                   ))}
                 </div>
               )}
-
-              <button
-                onClick={handleAddClub}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 text-red-600 hover:text-red-700 font-medium bg-red-50 dark:bg-red-900/20 px-4 py-2.5 rounded-lg transition text-sm"
-              >
-                <Plus className="w-4 h-4" />
-                Club Hinzufügen
-              </button>
             </div>
           </div>
         )}

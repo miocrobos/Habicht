@@ -124,7 +124,7 @@ export default function CVExportLanguagePopup({ onClose, onExport, userType }: C
               }`}
             >
               <Download className="w-4 h-4" />
-              {t('notifications.cvExporting')}
+              {t('playerProfile.cvExport')}
             </button>
           </div>
         </div>

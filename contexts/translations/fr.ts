@@ -979,6 +979,14 @@
           title: 'Recruteur en Recherche',
           description: 'Notifications des recruteurs',
         },
+        profileViews: {
+          title: 'Vues du profil',
+          description: 'Notifications quand quelqu\'un consulte votre profil',
+        },
+        watchlistAdd: {
+          title: 'Ajouté à la liste de suivi',
+          description: 'Notifications quand un recruteur vous ajoute à sa liste de suivi',
+        },
         note: {
           title: 'Note',
           description: 'Les notifications par e-mail sont actuellement désactivées',

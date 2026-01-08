@@ -7,37 +7,21 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import axios from 'axios'
-import { FileDown, Bookmark, ExternalLink, Trash2, User, MessageCircle } from 'lucide-react'
+import { FileDown, Bookmark, ExternalLink, Trash2, User } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import ChatWindow from '@/components/chat/ChatWindow'
 import CVTypeModal from '@/components/shared/CVTypeModal'
 import CVExportLanguagePopup from '@/components/shared/CVExportLanguagePopup'
 import { generatePlayerCV } from '@/lib/generateCV'
 import { generateRecruiterCV } from '@/lib/generateRecruiterCV'
-
-// Helper function to translate coach role
-const getTranslatedCoachRole = (role: string, t: any) => {
-  if (!role) return '';
-  // Handle comma-separated roles
-  const roles = role.split(',').map(r => r.trim());
-  return roles.map(r => {
-    const roleKey = r.toLowerCase().replace(/ /g, '_') as 'head_coach' | 'assistant_coach' | 'technical_coach' | 'physical_coach' | 'scout' | 'trainer' | 'team_manager';
-    const translation = t(`coachRole.${roleKey}`);
-    return translation && translation !== `coachRole.${roleKey}` ? translation : r.replace(/_/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase());
-  }).join(', ');
-};
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme()
   const { language, setLanguage: setLanguageContext, t } = useLanguage()
   const { data: session } = useSession()
   const [saved, setSaved] = useState(false)
-  const [activeTab, setActiveTab] = useState<'appearance' | 'security' | 'language' | 'account' | 'notifications' | 'watchlist' | 'messages'>('appearance')
+  const [activeTab, setActiveTab] = useState<'appearance' | 'security' | 'language' | 'account' | 'notifications' | 'watchlist'>('appearance')
   const [emailNotifications, setEmailNotifications] = useState(true)
-  const [conversations, setConversations] = useState<any[]>([])
-  const [conversationsLoading, setConversationsLoading] = useState(false)
-  const [activeChat, setActiveChat] = useState<any>(null)
   const [recruiterMessages, setRecruiterMessages] = useState(true)
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
@@ -51,6 +35,8 @@ export default function SettingsPage() {
   const [notifyChatMessages, setNotifyChatMessages] = useState(true)
   const [notifyPlayerLooking, setNotifyPlayerLooking] = useState(true)
   const [notifyRecruiterSearching, setNotifyRecruiterSearching] = useState(true)
+  const [notifyProfileViews, setNotifyProfileViews] = useState(true)
+  const [notifyWatchlistAdd, setNotifyWatchlistAdd] = useState(true)
   const [showCVModal, setShowCVModal] = useState(false)
   const [showCVLanguagePopup, setShowCVLanguagePopup] = useState(false)
   const [cvExportType, setCvExportType] = useState<'player' | 'recruiter' | 'hybrid'>('player')
@@ -75,7 +61,6 @@ export default function SettingsPage() {
     }
     if (session?.user) {
       fetchNotificationSettings()
-      fetchConversations()
     }
   }, [session])
 
@@ -102,70 +87,6 @@ export default function SettingsPage() {
     }
   }
 
-  const fetchConversations = async () => {
-    try {
-      setConversationsLoading(true)
-      const response = await axios.get('/api/chat/conversations')
-      setConversations(response.data.conversations || [])
-    } catch (error) {
-      console.error('Error fetching conversations:', error)
-    } finally {
-      setConversationsLoading(false)
-    }
-  }
-
-  const openChat = (conversation: any) => {
-    // Determine the other participant based on user type
-    const isPlayer = session?.user?.role === 'PLAYER'
-    const isHybrid = session?.user?.role === 'HYBRID'
-    
-    let otherParticipant
-    if (conversation.player && conversation.recruiter) {
-      // Player-Recruiter conversation
-      // Check if current user is the player in this conversation
-      const currentUserIsPlayer = isPlayer || (isHybrid && session?.user?.playerId && conversation.playerId === session?.user?.playerId)
-      
-      if (currentUserIsPlayer) {
-        otherParticipant = {
-          id: conversation.recruiter.id,
-          name: `${conversation.recruiter.firstName} ${conversation.recruiter.lastName}`,
-          type: 'RECRUITER' as const,
-          club: conversation.recruiter.club?.name || '',
-          profileImage: conversation.recruiter.profileImage || ''
-        }
-      } else {
-        otherParticipant = {
-          id: conversation.player.id,
-          name: `${conversation.player.firstName} ${conversation.player.lastName}`,
-          type: 'PLAYER' as const,
-          position: conversation.player.positions?.[0] || '',
-          profileImage: conversation.player.profileImage || ''
-        }
-      }
-    } else if (conversation.recruiter && conversation.secondRecruiter) {
-      // Recruiter-Recruiter conversation
-      const currentRecruiterId = session?.user?.recruiterId
-      const isFirstRecruiter = conversation.recruiterId === currentRecruiterId
-      const other = isFirstRecruiter ? conversation.secondRecruiter : conversation.recruiter
-      otherParticipant = {
-        id: other.id,
-        name: `${other.firstName} ${other.lastName}`,
-        type: 'RECRUITER' as const,
-        club: other.club?.name || '',
-        profileImage: other.profileImage || ''
-      }
-    }
-    
-    if (otherParticipant) {
-      setActiveChat({
-        conversationId: conversation.id,
-        otherParticipant,
-        currentUserId: session?.user?.id || '',
-        currentUserType: session?.user?.role as 'PLAYER' | 'RECRUITER' | 'HYBRID'
-      })
-    }
-  }
-
   const fetchPrivacySettings = async () => {
     try {
       const response = await axios.get(`/api/players/${session?.user?.playerId}`)
@@ -186,6 +107,8 @@ export default function SettingsPage() {
       setNotifyChatMessages(user.notifyChatMessages ?? true)
       setNotifyPlayerLooking(user.notifyPlayerLooking ?? true)
       setNotifyRecruiterSearching(user.notifyRecruiterSearching ?? true)
+      setNotifyProfileViews(user.notifyProfileViews ?? true)
+      setNotifyWatchlistAdd(user.notifyWatchlistAdd ?? true)
     } catch (error) {
       console.error('Error fetching notification settings:', error)
     }
@@ -291,7 +214,7 @@ export default function SettingsPage() {
     showSaveConfirmation()
   }
 
-  const updateNotificationSettings = async (field: 'notifyChatMessages' | 'notifyPlayerLooking' | 'notifyRecruiterSearching', value: boolean) => {
+  const updateNotificationSettings = async (field: 'notifyChatMessages' | 'notifyPlayerLooking' | 'notifyRecruiterSearching' | 'notifyProfileViews' | 'notifyWatchlistAdd', value: boolean) => {
     try {
       setLoading(true)
       await axios.put('/api/auth/user/notifications', { [field]: value })
@@ -299,6 +222,8 @@ export default function SettingsPage() {
       if (field === 'notifyChatMessages') setNotifyChatMessages(value)
       if (field === 'notifyPlayerLooking') setNotifyPlayerLooking(value)
       if (field === 'notifyRecruiterSearching') setNotifyRecruiterSearching(value)
+      if (field === 'notifyProfileViews') setNotifyProfileViews(value)
+      if (field === 'notifyWatchlistAdd') setNotifyWatchlistAdd(value)
       
       showSaveConfirmation()
     } catch (error) {
@@ -456,26 +381,6 @@ export default function SettingsPage() {
                 </button>
               )}
 
-              {/* Messages tab - for all logged in users */}
-              {session?.user && (
-                <button
-                  onClick={() => setActiveTab('messages')}
-                  className={`flex-shrink-0 lg:w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base ${
-                    activeTab === 'messages'
-                      ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
-                  }`}
-                >
-                  <div className="flex items-center space-x-2 sm:space-x-3 whitespace-nowrap">
-                    <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span className="hidden sm:inline">{t('settings.messages.title') || 'Messages'}</span>
-                    <span className="sm:hidden">Chat</span>
-                    {conversations.length > 0 && (
-                      <span className="ml-1 px-1.5 py-0.5 text-xs bg-red-600 text-white rounded-full">{conversations.length}</span>
-                    )}
-                  </div>
-                </button>
-              )}
             </div>
           </div>
 
@@ -764,6 +669,46 @@ export default function SettingsPage() {
                       </div>
                     )}
 
+                    {/* Profile Views - for Players and Hybrids */}
+                    {(session?.user?.role === 'PLAYER' || session?.user?.role === 'HYBRID') && (
+                      <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.profileViews.title')}</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.notifications.profileViews.description')}</p>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={notifyProfileViews}
+                            onChange={(e) => updateNotificationSettings('notifyProfileViews', e.target.checked)}
+                            disabled={loading}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
+                        </label>
+                      </div>
+                    )}
+
+                    {/* Watchlist Add - for Players and Hybrids */}
+                    {(session?.user?.role === 'PLAYER' || session?.user?.role === 'HYBRID') && (
+                      <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{t('settings.notifications.watchlistAdd.title')}</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.notifications.watchlistAdd.description')}</p>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={notifyWatchlistAdd}
+                            onChange={(e) => updateNotificationSettings('notifyWatchlistAdd', e.target.checked)}
+                            disabled={loading}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
+                        </label>
+                      </div>
+                    )}
+
                     <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
                       <p className="text-sm text-blue-700 dark:text-blue-300">
                         <strong>ℹ️ {t('settings.notifications.note.title')}</strong> {t('settings.notifications.note.description')}
@@ -986,156 +931,9 @@ export default function SettingsPage() {
                   </div>
                 </>
               )}
-
-              {/* Messages Tab Content */}
-              {activeTab === 'messages' && (
-                <>
-                  <div className="border-b border-gray-200 dark:border-gray-700 p-4 sm:p-6">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-1 flex items-center gap-2">
-                      <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-                      {t('settings.messages.title') || 'Messages'}
-                    </h2>
-                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                      {t('settings.messages.subtitle') || 'Your conversations with other users'}
-                    </p>
-                  </div>
-                  <div className="p-4 sm:p-6">
-                    {conversationsLoading ? (
-                      <div className="flex items-center justify-center py-12">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
-                      </div>
-                    ) : conversations.length === 0 ? (
-                      <div className="text-center py-12">
-                        <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                          {t('settings.messages.empty') || 'No conversations yet'}
-                        </h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                          {session?.user?.role === 'PLAYER' 
-                            ? (t('settings.messages.emptyDescriptionPlayer') || 'Wait for recruiters to contact you')
-                            : (t('settings.messages.emptyDescription') || 'Start a conversation by messaging a player or recruiter')
-                          }
-                        </p>
-                        {session?.user?.role !== 'PLAYER' && (
-                          <Link
-                            href="/players"
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-medium"
-                          >
-                            {t('settings.messages.browsePlayers') || 'Browse Players'}
-                          </Link>
-                        )}
-                      </div>
-                    ) : (
-                      <div className="space-y-3">
-                        {conversations.map((conversation) => {
-                          // Determine other participant
-                          const isPlayer = session?.user?.role === 'PLAYER'
-                          const isHybrid = session?.user?.role === 'HYBRID'
-                          let otherName = ''
-                          let otherRole = ''
-                          let otherClub = ''
-                          let profileLink = ''
-                          let profileImage = ''
-                          
-                          if (conversation.player && conversation.recruiter) {
-                            if (isPlayer || (isHybrid && session?.user?.playerId && conversation.playerId === session?.user?.playerId)) {
-                              otherName = `${conversation.recruiter.firstName} ${conversation.recruiter.lastName}`
-                              otherRole = getTranslatedCoachRole(conversation.recruiter.coachRole, t) || t('common.recruiter') || 'Recruiter'
-                              otherClub = conversation.recruiter.club?.name || ''
-                              profileLink = `/recruiters/${conversation.recruiter.id}`
-                              profileImage = conversation.recruiter.profileImage || ''
-                            } else {
-                              otherName = `${conversation.player.firstName} ${conversation.player.lastName}`
-                              otherRole = conversation.player.positions?.[0] || t('common.player') || 'Player'
-                              otherClub = conversation.player.currentClub?.name || ''
-                              profileLink = `/players/${conversation.player.id}`
-                              profileImage = conversation.player.profileImage || ''
-                            }
-                          } else if (conversation.recruiter && conversation.secondRecruiter) {
-                            const currentRecruiterId = session?.user?.recruiterId
-                            const isFirst = conversation.recruiterId === currentRecruiterId
-                            const other = isFirst ? conversation.secondRecruiter : conversation.recruiter
-                            otherName = `${other.firstName} ${other.lastName}`
-                            otherRole = getTranslatedCoachRole(other.coachRole, t) || t('common.recruiter') || 'Recruiter'
-                            otherClub = other.club?.name || ''
-                            profileLink = `/recruiters/${other.id}`
-                            profileImage = other.profileImage || ''
-                          }
-                          
-                          const lastMessage = conversation.messages?.[0]
-                          
-                          return (
-                            <div
-                              key={conversation.id}
-                              className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md transition cursor-pointer active:bg-gray-100 dark:active:bg-gray-600/50"
-                              onClick={() => openChat(conversation)}
-                            >
-                              {/* Avatar */}
-                              <div className="flex-shrink-0">
-                                {profileImage ? (
-                                  <img 
-                                    src={profileImage} 
-                                    alt={otherName}
-                                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
-                                  />
-                                ) : (
-                                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
-                                    <span className="text-base sm:text-lg font-bold text-red-600 dark:text-red-400">
-                                      {otherName.charAt(0)}
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
-
-                              {/* Conversation Info */}
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center justify-between gap-2">
-                                  <h4 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-white truncate">
-                                    {otherName}
-                                  </h4>
-                                  {lastMessage && (
-                                    <span className="text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">
-                                      {new Date(lastMessage.createdAt).toLocaleDateString()}
-                                    </span>
-                                  )}
-                                </div>
-                                <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 truncate">
-                                  {otherRole}{otherClub ? ` • ${otherClub}` : ''}
-                                </p>
-                                {lastMessage && (
-                                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate mt-0.5 sm:mt-1">
-                                    {lastMessage.content}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-                          )
-                        })}
-
-                        <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
-                            {t('settings.messages.total') || 'Total:'} <span className="font-semibold">{conversations.length}</span> {t('settings.messages.conversations') || 'conversations'}
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </>
-              )}
             </div>
           </div>
         </div>
-
-        {/* Active Chat Window */}
-        {activeChat && (
-          <ChatWindow
-            conversationId={activeChat.conversationId}
-            otherParticipant={activeChat.otherParticipant}
-            currentUserId={activeChat.currentUserId}
-            currentUserType={activeChat.currentUserType}
-            onClose={() => setActiveChat(null)}
-          />
-        )}
 
         {saved && (
           <div className="fixed bottom-8 right-8 p-4 bg-green-50 dark:bg-green-900/90 border border-green-200 dark:border-green-800 rounded-lg shadow-lg flex items-center space-x-3 z-50">

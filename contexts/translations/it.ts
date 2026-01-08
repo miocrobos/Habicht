@@ -967,6 +967,14 @@
           title: 'Reclutatore in Ricerca',
           description: 'Notifiche dai reclutatori',
         },
+        profileViews: {
+          title: 'Visualizzazioni profilo',
+          description: 'Notifiche quando qualcuno visualizza il tuo profilo',
+        },
+        watchlistAdd: {
+          title: 'Aggiunto alla watchlist',
+          description: 'Notifiche quando un reclutatore ti aggiunge alla sua watchlist',
+        },
         note: {
           title: 'Nota',
           description: 'Le notifiche via e-mail sono attualmente disattivate',

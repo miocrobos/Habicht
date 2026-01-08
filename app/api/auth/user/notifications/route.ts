@@ -38,14 +38,16 @@ export async function PUT(request: Request) {
     }
 
     const data = await request.json()
-    const { notifyChatMessages, notifyPlayerLooking, notifyRecruiterSearching } = data
+    const { notifyChatMessages, notifyPlayerLooking, notifyRecruiterSearching, notifyProfileViews, notifyWatchlistAdd } = data
 
     await prisma.user.update({
       where: { id: session.user.id },
       data: {
         ...(notifyChatMessages !== undefined && { notifyChatMessages }),
         ...(notifyPlayerLooking !== undefined && { notifyPlayerLooking }),
-        ...(notifyRecruiterSearching !== undefined && { notifyRecruiterSearching })
+        ...(notifyRecruiterSearching !== undefined && { notifyRecruiterSearching }),
+        ...(notifyProfileViews !== undefined && { notifyProfileViews }),
+        ...(notifyWatchlistAdd !== undefined && { notifyWatchlistAdd })
       }
     })
 

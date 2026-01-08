@@ -121,6 +121,8 @@ model User {
   notifyChatMessages Boolean @default(true)
   notifyPlayerLooking Boolean @default(true)
   notifyRecruiterSearching Boolean @default(true)
+  notifyProfileViews Boolean @default(true)
+  notifyWatchlistAdd Boolean @default(true)
   
   player        Player?
   recruiter     Recruiter?

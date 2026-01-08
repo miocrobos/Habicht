@@ -1198,6 +1198,14 @@
           title: 'Recruiter searching',
           description: 'Notifications from recruiters',
         },
+        profileViews: {
+          title: 'Profile views',
+          description: 'Notifications when someone views your profile',
+        },
+        watchlistAdd: {
+          title: 'Added to watchlist',
+          description: 'Notifications when a recruiter adds you to their watchlist',
+        },
         note: {
           title: 'Note:',
           description: 'Email notifications are currently disabled',

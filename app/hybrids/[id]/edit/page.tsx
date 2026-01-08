@@ -732,18 +732,18 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
 
         {/* Player Section */}
         {activeSection === 'player' && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-              <User className="w-6 h-6 text-blue-600" />
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 flex items-center gap-2">
+              <User className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
               {t('hybridProfile.playerDetails') || 'Spieler Informationen'}
             </h2>
 
             {/* Positions */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <div className="mb-3 sm:mb-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t('register.positions') || 'Positionen'}
               </label>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {positions.map((pos) => (
                   <button
                     key={pos.value}
@@ -754,7 +754,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                         : [...playerData.positions, pos.value];
                       setPlayerData({ ...playerData, positions: newPositions });
                     }}
-                    className={`px-3 py-1.5 rounded-full text-sm font-semibold transition ${
+                    className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold transition ${
                       playerData.positions.includes(pos.value)
                         ? 'bg-blue-600 text-white'
                         : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
@@ -767,64 +767,64 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
             </div>
 
             {/* Physical Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-3 sm:mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   {t('playerProfile.heightLabel') || 'Grösse (cm)'}
                 </label>
                 <input
                   type="number"
                   value={playerData.height}
                   onChange={(e) => setPlayerData({ ...playerData, height: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   {t('playerProfile.weightLabel') || 'Gewicht (kg)'}
                 </label>
                 <input
                   type="number"
                   value={playerData.weight}
                   onChange={(e) => setPlayerData({ ...playerData, weight: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   {t('playerProfile.spikeLabel') || 'Angriff (cm)'}
                 </label>
                 <input
                   type="number"
                   value={playerData.spikeHeight}
                   onChange={(e) => setPlayerData({ ...playerData, spikeHeight: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   {t('playerProfile.blockLabel') || 'Block (cm)'}
                 </label>
                 <input
                   type="number"
                   value={playerData.blockHeight}
                   onChange={(e) => setPlayerData({ ...playerData, blockHeight: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
             </div>
 
             {/* Dominant Hand */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <div className="mb-3 sm:mb-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 {t('register.dominantHand') || 'Dominante Hand'}
               </label>
               <select
                 value={playerData.dominantHand}
                 onChange={(e) => setPlayerData({ ...playerData, dominantHand: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <option value="">{t('common.select') || 'Auswählen'}</option>
+                <option value="">{t('common.select') || 'Wählen'}</option>
                 <option value="RIGHT">{t('register.rightHanded') || 'Rechts'}</option>
                 <option value="LEFT">{t('register.leftHanded') || 'Links'}</option>
                 <option value="BOTH">{t('register.ambidextrous') || 'Beidhändig'}</option>
@@ -832,39 +832,39 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
             </div>
 
             {/* Looking for Club */}
-            <div className="mb-4">
-              <label className="flex items-center gap-2">
+            <div className="mb-3 sm:mb-4">
+              <label className="flex items-center gap-2 cursor-pointer p-2.5 sm:p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                 <input
                   type="checkbox"
                   checked={playerData.lookingForClub}
                   onChange={(e) => setPlayerData({ ...playerData, lookingForClub: e.target.checked })}
-                  className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  className="rounded text-blue-600 focus:ring-blue-500"
                 />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('playerProfile.lookingForClub') || 'Sucht Club'}
+                <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {t('playerProfile.lookingForClub') || 'Aktiv auf Clubsuche'}
                 </span>
               </label>
             </div>
 
             {/* Employment Status & School */}
-            <div className="mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center gap-2">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 {t('playerProfile.employment') || 'Beschäftigung'}
               </h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                     {t('register.employmentStatus') || 'Beschäftigungsstatus'}
                   </label>
                   <select
                     value={playerData.employmentStatus}
                     onChange={(e) => setPlayerData({ ...playerData, employmentStatus: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   >
-                    <option value="">{t('common.select') || 'Auswählen'}</option>
+                    <option value="">{t('common.select') || 'Wählen'}</option>
                     {employmentStatusOptions.map((opt) => (
                       <option key={opt.value} value={opt.value}>{opt.label}</option>
                     ))}
@@ -872,15 +872,15 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                 </div>
                 {playerData.employmentStatus?.includes('STUDENT') && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                       {t('register.school') || 'Schule/Universität'}
                     </label>
                     <select
                       value={playerData.school}
                       onChange={(e) => setPlayerData({ ...playerData, school: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     >
-                      <option value="">{t('common.select') || 'Auswählen'}</option>
+                      <option value="">{t('common.select') || 'Wählen'}</option>
                       {schools.map((s) => (
                         <option key={s.value} value={s.value}>{s.label}</option>
                       ))}
@@ -891,32 +891,33 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
             </div>
 
             {/* Player Club History */}
-            <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Building className="w-5 h-5 text-blue-600" />
+            <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                  <Building className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                   {t('playerProfile.clubHistory') || 'Club Geschichte'}
                 </h3>
                 <button
                   type="button"
                   onClick={addPlayerClubHistory}
-                  className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition"
+                  className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-blue-700 transition"
                 >
-                  <Plus className="w-4 h-4" />
-                  {t('common.addClub') || 'Club hinzufügen'}
+                  <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">{t('common.addClub') || 'Club hinzufügen'}</span>
+                  <span className="sm:hidden">{t('common.add') || '+'}</span>
                 </button>
               </div>
               
               {playerClubHistory.length === 0 ? (
-                <p className="text-gray-500 dark:text-gray-400 text-sm italic">
+                <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm italic text-center py-4">
                   {t('playerProfile.noClubHistory') || 'Noch keine Clubs hinzugefügt.'}
                 </p>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {playerClubHistory.map((club, idx) => (
-                    <div key={club.id} className="p-4 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <div key={club.id} className="p-3 sm:p-4 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
                       <div className="flex justify-between items-start mb-3">
-                        <span className="text-sm font-semibold text-blue-600">
+                        <span className="text-xs sm:text-sm font-semibold text-blue-600">
                           {club.currentClub ? (t('common.currentClub') || 'Aktueller Club') : (t('common.previousClub') || 'Früherer Club')}
                         </span>
                         <button
@@ -928,7 +929,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                         </button>
                       </div>
                       
-                      <div className="grid grid-cols-2 gap-3 mb-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                         <div>
                           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
                             {t('playerProfile.clubName') || 'Club Name'}
@@ -942,7 +943,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                               newHistory[idx].clubName = selectedClub?.name || '';
                               setPlayerClubHistory(newHistory);
                             }}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 dark:text-white"
                           >
                             <option value="">{t('common.selectClub') || 'Club auswählen'}</option>
                             {allClubs.map((c) => (
@@ -958,7 +959,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                               newHistory[idx].clubId = '';
                               setPlayerClubHistory(newHistory);
                             }}
-                            className="w-full mt-2 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
+                            className="w-full mt-2 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 dark:text-white"
                             placeholder={t('playerProfile.orEnterManually') || 'oder manuell eingeben'}
                           />
                         </div>
@@ -991,7 +992,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                               setPlayerClubHistory(newHistory);
                             }}
                             placeholder="2020"
-                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 dark:text-white"
                           />
                         </div>
                         <div>
@@ -1008,7 +1009,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                             }}
                             placeholder="2024"
                             disabled={club.currentClub}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white disabled:opacity-50"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 dark:text-white disabled:opacity-50"
                           />
                         </div>
                         <div className="flex items-end">
@@ -1039,130 +1040,139 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
             </div>
 
             {/* Bio */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <div className="mb-3 sm:mb-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 {t('playerProfile.bio') || 'Bio'}
               </label>
               <textarea
                 value={playerData.bio}
                 onChange={(e) => setPlayerData({ ...playerData, bio: e.target.value })}
                 rows={4}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                placeholder={t('playerProfile.bioPlaceholder') || 'Schriib öppis über di...'}
               />
             </div>
 
             {/* Player Achievements */}
-            <div className="mb-4">
+            <div className="mb-3 sm:mb-4">
               <div className="flex items-center justify-between mb-2">
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                <label className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
                   <Trophy className="w-4 h-4 text-yellow-500" />
                   {t('playerProfile.achievements') || 'Erfolge'}
                 </label>
                 <button
                   type="button"
                   onClick={addPlayerAchievement}
-                  className="flex items-center gap-1 text-blue-600 hover:text-blue-700 text-sm font-medium"
+                  className="flex items-center gap-1 text-blue-600 hover:text-blue-700 text-xs sm:text-sm font-medium"
                 >
                   <Plus className="w-4 h-4" />
                   {t('common.add') || 'Hinzufügen'}
                 </button>
               </div>
-              {playerAchievements.map((ach, idx) => (
-                <div key={ach.id} className="flex items-center gap-2 mb-2">
-                  <input
-                    type="text"
-                    value={ach.text}
-                    onChange={(e) => {
-                      const newAchievements = [...playerAchievements];
-                      newAchievements[idx].text = e.target.value;
-                      setPlayerAchievements(newAchievements);
-                    }}
-                    className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                    placeholder={t('playerProfile.achievementPlaceholder') || 'z.B. Schweizermeister 2023'}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setPlayerAchievements(playerAchievements.filter((_, i) => i !== idx))}
-                    className="p-2 text-red-500 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+              {playerAchievements.length === 0 ? (
+                <p className="text-gray-500 dark:text-gray-400 italic text-xs sm:text-sm text-center py-4">
+                  {t('playerProfile.noAchievementsYet') || 'Noch keine Erfolge hinzugefügt'}
+                </p>
+              ) : (
+                <div className="space-y-2.5">
+                  {playerAchievements.map((ach, idx) => (
+                    <div key={ach.id} className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={ach.text}
+                        onChange={(e) => {
+                          const newAchievements = [...playerAchievements];
+                          newAchievements[idx].text = e.target.value;
+                          setPlayerAchievements(newAchievements);
+                        }}
+                        className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        placeholder={t('playerProfile.achievementPlaceholder') || 'z.B. Schweizermeister 2023'}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setPlayerAchievements(playerAchievements.filter((_, i) => i !== idx))}
+                        className="text-red-600 hover:text-red-700 p-2"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
 
             {/* Social Media */}
-            <div className="mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center gap-2">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                 </svg>
                 {t('playerProfile.socialMedia') || 'Social Media'}
               </h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('socialMedia.instagram') || 'Instagram'}
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    Instagram
                   </label>
                   <input
                     type="text"
                     value={playerData.instagram}
                     onChange={(e) => setPlayerData({ ...playerData, instagram: e.target.value })}
-                    placeholder={t('socialMedia.usernamePlaceholder') || '@username'}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                    placeholder="@username"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('socialMedia.tiktok') || 'TikTok'}
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    TikTok
                   </label>
                   <input
                     type="text"
                     value={playerData.tiktok}
                     onChange={(e) => setPlayerData({ ...playerData, tiktok: e.target.value })}
-                    placeholder={t('socialMedia.usernamePlaceholder') || '@username'}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                    placeholder="@username"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('socialMedia.youtube') || 'YouTube'}
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    YouTube
                   </label>
                   <input
                     type="text"
                     value={playerData.youtube}
                     onChange={(e) => setPlayerData({ ...playerData, youtube: e.target.value })}
-                    placeholder={t('socialMedia.channelUrlPlaceholder') || 'Channel URL'}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                    placeholder="https://youtube.com/..."
+                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('socialMedia.facebook') || 'Facebook'}
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    Facebook
                   </label>
                   <input
                     type="text"
                     value={playerData.facebook}
                     onChange={(e) => setPlayerData({ ...playerData, facebook: e.target.value })}
-                    placeholder={t('socialMedia.profileUrlPlaceholder') || 'Profile URL'}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                    placeholder="https://facebook.com/..."
+                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
               </div>
             </div>
 
             {/* Media Section */}
-            <div className="mb-4 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-200 dark:border-orange-800">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-200 dark:border-orange-800">
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center gap-2">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 {t('playerProfile.media') || 'Media'}
               </h3>
               
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     {t('playerProfile.playerLicense') || 'Swiss Volley Lizenz'} ({t('register.optional') || 'Optional'})
                   </label>
                   <ImageUpload
@@ -1175,7 +1185,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     {t('playerProfile.idCard') || 'Ausweiss/ID'} ({t('register.optional') || 'Optional'})
                   </label>
                   <ImageUpload
@@ -1193,15 +1203,15 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
 
         {/* Recruiter Section */}
         {activeSection === 'recruiter' && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-              <Briefcase className="w-6 h-6 text-green-600" />
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 flex items-center gap-2">
+              <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
               {t('hybridProfile.recruiterDetails') || 'Rekrutierer Informationen'}
             </h2>
 
             {/* Coaching License */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <div className="mb-3 sm:mb-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 {t('recruiterProfile.coachingLicense') || 'Trainerlizenz'}
               </label>
               <ImageUpload
@@ -1214,32 +1224,33 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
             </div>
 
             {/* Club Affiliations */}
-            <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Building className="w-5 h-5 text-green-600" />
+            <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                  <Building className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
                   {t('recruiterProfile.clubAffiliations') || 'Club Zugehörigkeiten'}
                 </h3>
                 <button
                   type="button"
                   onClick={addRecruiterClubHistory}
-                  className="flex items-center gap-1 px-3 py-1.5 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 transition"
+                  className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 bg-green-600 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-green-700 transition"
                 >
-                  <Plus className="w-4 h-4" />
-                  {t('common.addClub') || 'Club hinzufügen'}
+                  <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">{t('common.addClub') || 'Club hinzufügen'}</span>
+                  <span className="sm:hidden">{t('common.add') || '+'}</span>
                 </button>
               </div>
               
               {recruiterClubHistory.length === 0 ? (
-                <p className="text-gray-500 dark:text-gray-400 text-sm italic">
+                <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm italic text-center py-4">
                   {t('recruiterProfile.noClubsYet') || 'Noch keine Clubs hinzugefügt. Klicke auf "Club hinzufügen" um deine Club-Zugehörigkeiten zu verwalten.'}
                 </p>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {recruiterClubHistory.map((club, idx) => (
-                    <div key={club.id} className="p-4 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <div key={club.id} className="p-3 sm:p-4 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
                       <div className="flex justify-between items-start mb-3">
-                        <span className="text-sm font-semibold text-green-600">
+                        <span className="text-xs sm:text-sm font-semibold text-green-600">
                           {club.currentClub ? (t('common.currentClub') || 'Aktueller Club') : (t('common.previousClub') || 'Früherer Club')}
                         </span>
                         <button
@@ -1251,7 +1262,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                         </button>
                       </div>
                       
-                      <div className="grid grid-cols-2 gap-3 mb-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                         <div>
                           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
                             {t('recruiterProfile.clubName') || 'Club Name'}
@@ -1265,7 +1276,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                               newHistory[idx].clubName = selectedClub?.name || '';
                               setRecruiterClubHistory(newHistory);
                             }}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-800 dark:text-white"
                           >
                             <option value="">{t('common.selectClub') || 'Club auswählen'}</option>
                             {allClubs.map((c) => (
@@ -1281,7 +1292,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                               newHistory[idx].clubId = '';
                               setRecruiterClubHistory(newHistory);
                             }}
-                            className="w-full mt-2 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white"
+                            className="w-full mt-2 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-800 dark:text-white"
                             placeholder={t('recruiterProfile.orEnterManually') || 'oder manuell eingeben'}
                           />
                         </div>
@@ -1296,7 +1307,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                               newHistory[idx].coachRole = e.target.value;
                               setRecruiterClubHistory(newHistory);
                             }}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-800 dark:text-white"
                           >
                             <option value="">{t('common.select') || 'Auswählen'}</option>
                             <option value="HEAD_COACH">{t('coachRole.head_coach') || 'Headcoach'}</option>
@@ -1385,88 +1396,75 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
             </div>
 
             {/* Gender Coached */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <div className="mb-3 sm:mb-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t('recruiterProfile.genderCoached') || 'Trainierte Geschlechter'}
               </label>
-              <div className="flex gap-4">
-                <label className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={recruiterData.genderCoached.includes('MALE')}
-                    onChange={(e) => {
-                      const newGenders = e.target.checked
-                        ? [...recruiterData.genderCoached, 'MALE']
-                        : recruiterData.genderCoached.filter(g => g !== 'MALE');
-                      setRecruiterData({ ...recruiterData, genderCoached: newGenders });
-                    }}
-                    className="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">♂ {t('playerProfile.men') || 'Männer'}</span>
-                </label>
-                <label className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={recruiterData.genderCoached.includes('FEMALE')}
-                    onChange={(e) => {
-                      const newGenders = e.target.checked
-                        ? [...recruiterData.genderCoached, 'FEMALE']
-                        : recruiterData.genderCoached.filter(g => g !== 'FEMALE');
-                      setRecruiterData({ ...recruiterData, genderCoached: newGenders });
-                    }}
-                    className="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">♀ {t('playerProfile.women') || 'Frauen'}</span>
-                </label>
+              <div className="flex flex-wrap gap-2">
+                {['MALE', 'FEMALE'].map((gender) => (
+                  <label key={gender} className="flex items-center gap-2 cursor-pointer bg-gray-50 dark:bg-gray-700/50 px-3 py-2 rounded-lg">
+                    <input
+                      type="checkbox"
+                      checked={recruiterData.genderCoached.includes(gender)}
+                      onChange={(e) => {
+                        const newGenders = e.target.checked
+                          ? [...recruiterData.genderCoached, gender]
+                          : recruiterData.genderCoached.filter(g => g !== gender);
+                        setRecruiterData({ ...recruiterData, genderCoached: newGenders });
+                      }}
+                      className="rounded text-green-600 focus:ring-green-500"
+                    />
+                    <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                      {gender === 'MALE' ? ('♂ ' + (t('playerProfile.men') || 'Männer')) : ('♀ ' + (t('playerProfile.women') || 'Frauen'))}
+                    </span>
+                  </label>
+                ))}
               </div>
             </div>
 
             {/* Positions Looking For */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <div className="mb-3 sm:mb-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t('recruiterProfile.positionsLookingFor') || 'Gesuchte Positionen'}
               </label>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {positions.map((pos) => (
-                  <button
-                    key={pos.value}
-                    type="button"
-                    onClick={() => {
-                      const newPositions = recruiterData.positionsLookingFor.includes(pos.value)
-                        ? recruiterData.positionsLookingFor.filter(p => p !== pos.value)
-                        : [...recruiterData.positionsLookingFor, pos.value];
-                      setRecruiterData({ ...recruiterData, positionsLookingFor: newPositions });
-                    }}
-                    className={`px-3 py-1.5 rounded-full text-sm font-semibold transition ${
-                      recruiterData.positionsLookingFor.includes(pos.value)
-                        ? 'bg-green-600 text-white'
-                        : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                    }`}
-                  >
-                    {pos.label}
-                  </button>
+                  <label key={pos.value} className="flex items-center gap-1.5 cursor-pointer bg-gray-50 dark:bg-gray-700/50 px-2.5 py-2 rounded-lg text-xs sm:text-sm">
+                    <input
+                      type="checkbox"
+                      checked={recruiterData.positionsLookingFor.includes(pos.value)}
+                      onChange={() => {
+                        const newPositions = recruiterData.positionsLookingFor.includes(pos.value)
+                          ? recruiterData.positionsLookingFor.filter(p => p !== pos.value)
+                          : [...recruiterData.positionsLookingFor, pos.value];
+                        setRecruiterData({ ...recruiterData, positionsLookingFor: newPositions });
+                      }}
+                      className="rounded text-green-600 focus:ring-green-500 flex-shrink-0"
+                    />
+                    <span className="text-gray-700 dark:text-gray-300 truncate">{pos.label}</span>
+                  </label>
                 ))}
               </div>
             </div>
 
             {/* Looking for Members */}
-            <div className="mb-4">
-              <label className="flex items-center gap-2">
+            <div className="mb-3 sm:mb-4">
+              <label className="flex items-center gap-2 cursor-pointer p-2.5 sm:p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                 <input
                   type="checkbox"
                   checked={recruiterData.lookingForMembers}
                   onChange={(e) => setRecruiterData({ ...recruiterData, lookingForMembers: e.target.checked })}
-                  className="w-5 h-5 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                  className="rounded text-green-600 focus:ring-green-500"
                 />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('recruiterProfile.lookingForMembers') || 'Sucht Spieler'}
+                <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {t('recruiterProfile.activelyLooking') || 'Aktiv auf Spielersuche'}
                 </span>
               </label>
             </div>
 
             {/* Organization */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <div className="mb-3 sm:mb-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 {t('recruiterProfile.organization') || 'Club Affiliation'}
               </label>
               <input
@@ -1474,140 +1472,152 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
                 value={recruiterData.organization}
                 onChange={(e) => setRecruiterData({ ...recruiterData, organization: e.target.value })}
                 placeholder={t('recruiterProfile.organizationPlaceholder') || 'z.B. Swiss Volley, Verband, etc.'}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
 
             {/* Bio */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <div className="mb-3 sm:mb-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 {t('recruiterProfile.bio') || 'Bio'}
               </label>
               <textarea
                 value={recruiterData.bio}
                 onChange={(e) => setRecruiterData({ ...recruiterData, bio: e.target.value })}
                 rows={4}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                placeholder={t('recruiterProfile.bioPlaceholder') || 'Schriib öppis über di...'}
               />
             </div>
 
             {/* Social Media */}
-            <div className="mb-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center gap-2">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                 </svg>
                 {t('recruiterProfile.socialMedia') || 'Social Media'}
               </h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('socialMedia.instagram') || 'Instagram'}
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    Instagram
                   </label>
                   <input
                     type="text"
                     value={recruiterData.instagram}
                     onChange={(e) => setRecruiterData({ ...recruiterData, instagram: e.target.value })}
-                    placeholder={t('socialMedia.usernamePlaceholder') || '@username'}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
+                    placeholder="@username"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('socialMedia.tiktok') || 'TikTok'}
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    TikTok
                   </label>
                   <input
                     type="text"
                     value={recruiterData.tiktok}
                     onChange={(e) => setRecruiterData({ ...recruiterData, tiktok: e.target.value })}
-                    placeholder={t('socialMedia.usernamePlaceholder') || '@username'}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
+                    placeholder="@username"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('socialMedia.youtube') || 'YouTube'}
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    YouTube
                   </label>
                   <input
                     type="text"
                     value={recruiterData.youtube}
                     onChange={(e) => setRecruiterData({ ...recruiterData, youtube: e.target.value })}
-                    placeholder={t('socialMedia.channelUrlPlaceholder') || 'Channel URL'}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
+                    placeholder="https://youtube.com/..."
+                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('socialMedia.facebook') || 'Facebook'}
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    Facebook
                   </label>
                   <input
                     type="text"
                     value={recruiterData.facebook}
                     onChange={(e) => setRecruiterData({ ...recruiterData, facebook: e.target.value })}
-                    placeholder={t('socialMedia.profileUrlPlaceholder') || 'Profile URL'}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
+                    placeholder="https://facebook.com/..."
+                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
               </div>
             </div>
 
             {/* Recruiter Achievements */}
-            <div className="mb-4">
+            <div className="mb-3 sm:mb-4">
               <div className="flex items-center justify-between mb-2">
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                <label className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
                   <Trophy className="w-4 h-4 text-yellow-500" />
                   {t('recruiterProfile.achievements') || 'Erfolge'}
                 </label>
                 <button
                   type="button"
                   onClick={addRecruiterAchievement}
-                  className="flex items-center gap-1 text-green-600 hover:text-green-700 text-sm font-medium"
+                  className="flex items-center gap-1 text-green-600 hover:text-green-700 text-xs sm:text-sm font-medium"
                 >
                   <Plus className="w-4 h-4" />
                   {t('common.add') || 'Hinzufügen'}
                 </button>
               </div>
-              {recruiterAchievements.map((ach, idx) => (
-                <div key={ach.id} className="flex items-center gap-2 mb-2">
-                  <input
-                    type="text"
-                    value={ach.text}
-                    onChange={(e) => {
-                      const newAchievements = [...recruiterAchievements];
-                      newAchievements[idx].text = e.target.value;
-                      setRecruiterAchievements(newAchievements);
-                    }}
-                    className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
-                    placeholder={t('recruiterProfile.achievementPlaceholder') || 'z.B. Aufstieg in NLA 2023'}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setRecruiterAchievements(recruiterAchievements.filter((_, i) => i !== idx))}
-                    className="p-2 text-red-500 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+              {recruiterAchievements.length === 0 ? (
+                <p className="text-gray-500 dark:text-gray-400 italic text-xs sm:text-sm text-center py-4">
+                  {t('recruiterProfile.noAchievementsYet') || 'Noch keine Erfolge hinzugefügt'}
+                </p>
+              ) : (
+                <div className="space-y-2.5">
+                  {recruiterAchievements.map((ach, idx) => (
+                    <div key={ach.id} className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={ach.text}
+                        onChange={(e) => {
+                          const newAchievements = [...recruiterAchievements];
+                          newAchievements[idx].text = e.target.value;
+                          setRecruiterAchievements(newAchievements);
+                        }}
+                        className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        placeholder={t('recruiterProfile.achievementPlaceholder') || 'z.B. Aufstieg in NLA 2023'}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setRecruiterAchievements(recruiterAchievements.filter((_, i) => i !== idx))}
+                        className="text-red-600 hover:text-red-700 p-2"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
           </div>
         )}
 
-        {/* Save Button */}
-        <div className="flex justify-end gap-4">
-          <Link
-            href={`/hybrids/${params.id}`}
-            className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition"
-          >
-            {t('common.cancel') || 'Abbrechen'}
-          </Link>
+        {/* Bottom Save Button - Mobile Sticky */}
+        <div className="mt-4 sm:mt-6 sticky bottom-3 sm:relative sm:bottom-auto flex justify-end">
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition disabled:opacity-50"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition disabled:opacity-50 shadow-lg sm:shadow-none text-sm sm:text-base"
           >
-            {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
-            {t('common.save') || 'Speichern'}
+            {saving ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                {t('common.saving') || 'Speichere...'}
+              </>
+            ) : (
+              <>
+                <Save className="w-5 h-5" />
+                {t('common.saveChanges') || 'Änderungen speichern'}
+              </>
+            )}
           </button>
         </div>
       </div>

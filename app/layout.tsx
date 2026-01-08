@@ -13,8 +13,8 @@ import SettingsPopup from '@/components/shared/SettingsPopup'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Habicht – Swiss Volleyball Scouting Platform',
-  description: 'Discover and connect with Swiss volleyball talent. Player profiles, highlights, and scouting tools.',
+  title: 'Habicht - Swiss Volleyball Scouting Platform',
+  description: 'Scouting platform for Swiss volleyball athletes from high school to university. Find talented players, view highlights, and connect with recruits.',
   keywords: ['volleyball', 'swiss volleyball', 'scouting', 'recruitment', 'athletes', 'swiss volley', 'schweizer volleyball', 'volleyball schweiz'],
   icons: {
     icon: [
@@ -26,16 +26,16 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Habicht – Swiss Volleyball Scouting Platform',
-    description: 'Discover and connect with Swiss volleyball talent. Player profiles, highlights, and scouting tools.',
-    images: [{ url: 'https://habicht-volleyball.ch/og-image.png' }],
-    url: 'https://habicht-volleyball.ch/',
+    description: 'Scouting platform for Swiss volleyball athletes from high school to university. Find talented players, view highlights, and connect with recruits.',
+    images: [{ url: 'https://www.habicht-volleyball.ch/og-image.png' }],
+    url: 'https://www.habicht-volleyball.ch/',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Habicht – Swiss Volleyball Scouting Platform',
-    description: 'Swiss volleyball scouting made simple. Players, stats, and highlights.',
-    images: ['https://habicht-volleyball.ch/og-image.png'],
+    description: 'Scouting platform for Swiss volleyball athletes from high school to university. Find talented players, view highlights, and connect with recruits.',
+    images: ['https://www.habicht-volleyball.ch/og-image.png'],
   },
 }
 

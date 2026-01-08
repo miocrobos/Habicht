@@ -1039,6 +1039,14 @@
           title: 'Rekrutierer Am Sueche',
           description: 'Benachrichtigunge vo Rekrutierern',
         },
+        profileViews: {
+          title: 'Profil-Aasichte',
+          description: 'Benachrichtigunge wänn öpper Dis Profil aaluegt',
+        },
+        watchlistAdd: {
+          title: 'Zur Watchlist hinzuegfüegt',
+          description: 'Benachrichtigunge wänn en Rekrutierer Dich uf sini Watchlist tuet',
+        },
         note: {
           title: 'Hinwis',
           description: 'E-Mail-Benachrichtigunge si derzit deaktiviert',

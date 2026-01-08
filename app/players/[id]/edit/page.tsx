@@ -330,7 +330,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">{t('playerProfile.loadingProfile')}</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">{t('playerProfile.loadingProfile') || 'Profil wird geladen...'}</p>
         </div>
       </div>
     );
@@ -350,447 +350,440 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-12 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-3 sm:py-6 md:py-12 px-3 sm:px-4">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
-            <Link
-              href={userRole === 'HYBRID' && userId ? `/hybrids/${userId}` : `/players/${params.id}`}
-              className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition text-sm sm:text-base"
-            >
-              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-              Zurück Zum Profil
-            </Link>
-            <button
-              onClick={handleSave}
-              disabled={saving}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-habicht-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-habicht-700 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
-            >
-              {saving ? (
-                <>
-                  <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
-                  Speichere...
-                </>
-              ) : (
-                <>
-                  <Save className="w-4 h-4 sm:w-5 sm:h-5" />
-                  Änderige Speichere
-                </>
-              )}
-            </button>
-          </div>
-
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-            Profil Bearbeite
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm sm:text-base">
-            Aktualisier Dini Informatione
-          </p>
-
-          {error && (
-            <div className="mt-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 sm:p-4">
-              <p className="text-red-800 dark:text-red-200 text-sm sm:text-base">{error}</p>
-            </div>
-          )}
-
-          {success && (
-            <div className="mt-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3 sm:p-4">
-              <p className="text-green-800 dark:text-green-200 text-sm sm:text-base">
-                ✓ Erfolgriich Gespeichert! Wiiterläitig...
-              </p>
-            </div>
-          )}
+        {/* Mobile-Optimized Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 sm:mb-6">
+          <Link
+            href={userRole === 'HYBRID' && userId ? `/hybrids/${userId}` : `/players/${params.id}`}
+            className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition text-sm"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            {t('common.backToProfile') || 'Zurück'}
+          </Link>
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-red-600 text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-red-700 transition disabled:opacity-50 text-sm shadow-md"
+          >
+            {saving ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                {t('common.saving') || 'Speichere...'}
+              </>
+            ) : (
+              <>
+                <Save className="w-4 h-4" />
+                {t('common.saveChanges') || 'Speichern'}
+              </>
+            )}
+          </button>
         </div>
 
-        {/* Profile Photo */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-            <User className="w-6 h-6 text-habicht-600" />
-            Profilbild
-          </h2>
-          <div className="flex flex-col items-center gap-4">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
-              {formData.profileImage ? (
-                <img
-                  src={formData.profileImage}
-                  alt="Profilbild"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-600 to-red-800 text-white text-4xl font-bold">
-                  {formData.firstName?.[0]}{formData.lastName?.[0]}
+        {/* Title */}
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">
+          {t('playerProfile.editProfile') || 'Profil Bearbeiten'}
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 text-xs sm:text-sm">
+          {t('playerProfile.updateInfo') || 'Aktualisiere deine Informationen'}
+        </p>
+
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-lg text-red-700 dark:text-red-300 text-xs sm:text-sm">
+            {error}
+          </div>
+        )}
+        {success && (
+          <div className="mb-4 p-3 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-lg text-green-700 dark:text-green-300 text-xs sm:text-sm">
+            ✓ {t('playerProfile.profileUpdated') || 'Profil aktualisiert!'}
+          </div>
+        )}
+
+        {/* All Sections - Single Page Layout */}
+        <div className="space-y-6">
+
+        {/* Personal Section */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 flex items-center gap-2">
+              <User className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
+              {t('playerProfile.personalInfo') || 'Persönliche Informationen'}
+            </h2>
+
+            {/* Profile Image - Mobile Centered */}
+            <div className="mb-6">
+              <div className="flex flex-col items-center gap-3 sm:gap-4">
+                <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 ring-4 ring-gray-100 dark:ring-gray-600">
+                  {formData.profileImage ? (
+                    <img src={formData.profileImage} alt="Profil" className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-red-600 text-white text-2xl sm:text-4xl font-bold">
+                      {formData.firstName?.[0]}{formData.lastName?.[0]}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            <ImageUpload
-              label="Neus Profilbild Ufelad"
-              value={formData.profileImage}
-              onChange={(v: string) => setFormData({ ...formData, profileImage: v })}
-              aspectRatio="square"
-            />
-          </div>
-        </div>
-
-        {/* Personal Information */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-            <User className="w-6 h-6 text-habicht-600" />
-            Persönlichi Informatione
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Vorname *
-              </label>
-              <input
-                type="text"
-                value={formData.firstName}
-                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
+                <ImageUpload
+                  label={t('playerProfile.uploadNewImage') || 'Bild Hochladen'}
+                  value={formData.profileImage}
+                  onChange={(v: string) => setFormData({ ...formData, profileImage: v })}
+                  aspectRatio="square"
+                />
+              </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Nachname *
-              </label>
-              <input
-                type="text"
-                value={formData.lastName}
-                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
-            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.firstName') || 'Vorname'} *
+                </label>
+                <input
+                  type="text"
+                  value={formData.firstName}
+                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Geburtsdatum *
-              </label>
-              <input
-                type="date"
-                value={formData.dateOfBirth}
-                onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
-            </div>
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.lastName') || 'Nachname'} *
+                </label>
+                <input
+                  type="text"
+                  value={formData.lastName}
+                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Geschlecht *
-              </label>
-              <select
-                value={formData.gender}
-                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              >
-                <option value="">Wähl üs</option>
-                <option value="MALE">Männlich</option>
-                <option value="FEMALE">Wiiblich</option>
-                <option value="OTHER">Anderi</option>
-              </select>
-            </div>
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.dateOfBirth') || 'Geburtsdatum'} *
+                </label>
+                <input
+                  type="date"
+                  value={formData.dateOfBirth}
+                  onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Nationalität *
-              </label>
-              <input
-                type="text"
-                value={formData.nationality}
-                onChange={(e) => setFormData({ ...formData, nationality: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Telefon
-              </label>
-              <input
-                type="tel"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Location & Employment */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-            <MapPin className="w-6 h-6 text-habicht-600" />
-            Wohnort & Beschäftigung
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Kanton *
-              </label>
-              <select
-                value={formData.canton}
-                onChange={(e) => setFormData({ ...formData, canton: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              >
-                <option value="">Wähl Kanton</option>
-                {cantons.map((canton) => (
-                  <option key={canton.code} value={canton.code}>
-                    {canton.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Gmaind / Municipality
-              </label>
-              <input
-                type="text"
-                value={formData.municipality || ''}
-                onChange={(e) => setFormData({ ...formData, municipality: e.target.value })}
-                placeholder="z.B. Winterthur, Bern, Luzern"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Beschäftigungsstatus
-              </label>
-              <select
-                value={formData.employmentStatus}
-                onChange={(e) => setFormData({ ...formData, employmentStatus: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              >
-                <option value="">Wähl Status</option>
-                {employmentStatusOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {isStudent && (
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Schuel / Universität
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.gender') || 'Geschlecht'} *
                 </label>
                 <select
-                  value={formData.schoolName}
-                  onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  value={formData.gender}
+                  onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
-                  <option value="">Wähl Schuel</option>
-                  {schools.map((school) => (
-                    <option key={school.value} value={school.value}>
-                      {school.label}
+                  <option value="">{t('common.select') || 'Wählen'}</option>
+                  <option value="MALE">{t('playerProfile.men') || 'Männlich'}</option>
+                  <option value="FEMALE">{t('playerProfile.women') || 'Weiblich'}</option>
+                  <option value="OTHER">{t('playerProfile.other') || 'Andere'}</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('playerProfile.nationality') || 'Nationalität'} *
+                </label>
+                <input
+                    type="text"
+                  value={formData.nationality}
+                  onChange={(e) => setFormData({ ...formData, nationality: e.target.value })}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.phone') || 'Telefon'}
+                </label>
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
+            </div>
+          </div>
+
+        {/* Location & Employment */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
+              {t('playerProfile.locationEmployment') || 'Wohnort & Beschäftigung'}
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.canton') || 'Kanton'} *
+                </label>
+                <select
+                  value={formData.canton}
+                  onChange={(e) => setFormData({ ...formData, canton: e.target.value })}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="">{t('common.select') || 'Wählen'}</option>
+                  {cantons.map((canton) => (
+                    <option key={canton.code} value={canton.code}>
+                      {canton.name}
                     </option>
                   ))}
                 </select>
               </div>
-            )}
 
-            {isWorking && (
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Beruf
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.municipality') || 'Ort'}
                 </label>
                 <input
                   type="text"
-                  value={formData.occupation}
-                  onChange={(e) => setFormData({ ...formData, occupation: e.target.value })}
-                  placeholder="z.B. Marketing Manager, Softwareentwickler"
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  value={formData.municipality || ''}
+                  onChange={(e) => setFormData({ ...formData, municipality: e.target.value })}
+                  placeholder="z.B. Winterthur, Bern, Luzern"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
-            )}
+
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.employmentStatus') || 'Beschäftigungsstatus'}
+                </label>
+                <select
+                  value={formData.employmentStatus}
+                  onChange={(e) => setFormData({ ...formData, employmentStatus: e.target.value })}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="">{t('common.select') || 'Wählen'}</option>
+                  {employmentStatusOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {isStudent && (
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    {t('register.school') || 'Schule/Universität'}
+                  </label>
+                  <select
+                    value={formData.schoolName}
+                    onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
+                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  >
+                    <option value="">{t('common.select') || 'Wählen'}</option>
+                    {schools.map((school) => (
+                      <option key={school.value} value={school.value}>
+                        {school.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              {isWorking && (
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    {t('playerProfile.occupation') || 'Beruf'}
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.occupation}
+                    onChange={(e) => setFormData({ ...formData, occupation: e.target.value })}
+                    placeholder="z.B. Marketing Manager, Softwareentwickler"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  />
+                </div>
+              )}
+            </div>
           </div>
-        </div>
 
         {/* Volleyball Skills */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-            <Trophy className="w-6 h-6 text-habicht-600" />
-            Volleyball Informatione
-          </h2>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
+              {t('playerProfile.volleyballInfo') || 'Volleyball Informationen'}
+            </h2>
 
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Positione
+            <div className="mb-3 sm:mb-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {t('register.positions') || 'Positionen'}
               </label>
-              <div className="space-y-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {positions.map((pos) => (
-                  <label key={pos.value} className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={formData.positions.includes(pos.value)}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setFormData({
-                            ...formData,
-                            positions: [...formData.positions, pos.value],
-                          });
-                        } else {
-                          setFormData({
-                            ...formData,
-                            positions: formData.positions.filter((p: string) => p !== pos.value),
-                          });
-                        }
-                      }}
-                      className="rounded text-habicht-600 focus:ring-habicht-500"
-                    />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">{pos.label}</span>
-                  </label>
+                  <button
+                    key={pos.value}
+                    type="button"
+                    onClick={() => {
+                      const newPositions = formData.positions.includes(pos.value)
+                        ? formData.positions.filter((p: string) => p !== pos.value)
+                        : [...formData.positions, pos.value];
+                      setFormData({ ...formData, positions: newPositions });
+                    }}
+                    className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold transition ${
+                      formData.positions.includes(pos.value)
+                        ? 'bg-red-600 text-white'
+                        : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                    }`}
+                  >
+                    {pos.label}
+                  </button>
                 ))}
               </div>
             </div>
 
-            <div className="space-y-4">
+            {/* Physical Stats */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-3 sm:mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Grösse (cm)
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('playerProfile.heightLabel') || 'Grösse (cm)'}
                 </label>
                 <input
                   type="number"
                   value={formData.height}
                   onChange={(e) => setFormData({ ...formData, height: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Gewicht (kg)
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('playerProfile.weightLabel') || 'Gewicht (kg)'}
                 </label>
                 <input
                   type="number"
                   value={formData.weight}
                   onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Angriffshöchi (cm)
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('playerProfile.spikeLabel') || 'Angriff (cm)'}
                 </label>
                 <input
                   type="number"
                   value={formData.spikeHeight}
                   onChange={(e) => setFormData({ ...formData, spikeHeight: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Blockhöchi (cm)
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('playerProfile.blockLabel') || 'Block (cm)'}
                 </label>
                 <input
                   type="number"
                   value={formData.blockHeight}
                   onChange={(e) => setFormData({ ...formData, blockHeight: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
+            </div>
 
+            {/* Dominant Hand & Preferred Language */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Dominanti Hand
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.dominantHand') || 'Dominante Hand'}
                 </label>
                 <select
                   value={formData.dominantHand || ''}
                   onChange={(e) => setFormData({ ...formData, dominantHand: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
-                  <option value="">Wähl Hand</option>
-                  <option value="RIGHT">Rächts</option>
-                  <option value="LEFT">Links</option>
-                  <option value="AMBIDEXTROUS">Beidhändig</option>
+                  <option value="">{t('common.select') || 'Wählen'}</option>
+                  <option value="RIGHT">{t('register.rightHanded') || 'Rechts'}</option>
+                  <option value="LEFT">{t('register.leftHanded') || 'Links'}</option>
+                  <option value="AMBIDEXTROUS">{t('register.ambidextrous') || 'Beidhändig'}</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Bevorzugti Sprach
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('register.preferredLanguage') || 'Sprache'}
                 </label>
                 <select
                   value={formData.preferredLanguage || ''}
                   onChange={(e) => setFormData({ ...formData, preferredLanguage: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
-                  <option value="">Wähl Sprach</option>
-                  <option value="gsw">Schwiizerdütsch</option>
-                  <option value="de">Hochdütsch</option>
-                  <option value="fr">Französisch</option>
-                  <option value="it">Italienisch</option>
-                  <option value="en">Englisch</option>
+                  <option value="">{t('common.select') || 'Wählen'}</option>
+                  <option value="gsw">{t('register.languageSwissGerman') || 'Schwiizerdütsch'}</option>
+                  <option value="de">{t('register.languageGerman') || 'Deutsch'}</option>
+                  <option value="fr">{t('register.languageFrench') || 'Français'}</option>
+                  <option value="it">{t('register.languageItalian') || 'Italiano'}</option>
+                  <option value="en">{t('register.languageEnglish') || 'English'}</option>
                 </select>
               </div>
             </div>
-          </div>
 
-          {/* Swiss Volley Lizenz upload moved to Documents section below, only shown once */}
-
-          <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Bio / Beschriibig
-            </label>
-            <textarea
-              value={formData.bio}
-              onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-              rows={4}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            />
+            {/* Bio */}
+            <div className="mt-3 sm:mt-4">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                {t('playerProfile.bio') || 'Bio'}
+              </label>
+              <textarea
+                value={formData.bio}
+                onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+                rows={4}
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                placeholder={t('playerProfile.bioPlaceholder') || 'Schriib öppis über di...'}
+              />
+            </div>
           </div>
-        </div>
 
         {/* Club History */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-              <Trophy className="w-6 h-6 text-habicht-600" />
-              Club-Gschicht
-            </h2>
-            <button
-              onClick={handleAddClub}
-              className="flex items-center gap-2 bg-habicht-600 text-white px-4 py-2 rounded-lg hover:bg-habicht-700 transition"
-            >
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
+                {t('playerProfile.clubHistory') || 'Club Geschichte'}
+              </h2>
+              <button
+                onClick={handleAddClub}
+                className="flex items-center gap-1 px-3 py-1.5 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition"
+              >
               <Plus className="w-4 h-4" />
-              Club Hinzuefüege
+              {t('common.addClub') || 'Club hinzufügen'}
             </button>
           </div>
 
           {clubHistory.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400 italic">Kei Club-Gschicht hinzugefüegt</p>
+            <p className="text-gray-500 dark:text-gray-400 italic text-xs sm:text-sm text-center py-4">
+              {t('playerProfile.noClubHistory') || 'Noch keine Clubs hinzugefügt.'}
+            </p>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {clubHistory.map((club, index) => {
                 // Check if this club is invalid (has name but no yearTo and not current)
                 const isInvalid = club.clubName && club.clubName.trim() !== '' && !club.currentClub && (!club.yearTo || club.yearTo.trim() === '');
                 
                 return (
-                <div key={club.id} className={`border rounded-lg p-4 ${isInvalid ? 'border-red-500 dark:border-red-400 bg-red-50 dark:bg-red-900/10' : 'border-gray-300 dark:border-gray-600'}`}>
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="font-semibold text-gray-900 dark:text-white">Club {index + 1}</h3>
+                <div key={club.id} className={`p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border ${isInvalid ? 'border-red-500 dark:border-red-400' : 'border-gray-200 dark:border-gray-600'}`}>
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="text-xs sm:text-sm font-semibold text-red-600">
+                      {club.currentClub ? (t('common.currentClub') || 'Aktueller Club') : (t('common.previousClub') || 'Früherer Club')}
+                    </span>
                     <button
                       onClick={() => handleRemoveClub(club.id)}
-                      className="text-red-600 hover:text-red-700 transition"
+                      className="p-1 text-red-500 hover:bg-red-100 dark:hover:bg-red-900/30 rounded"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
 
-                  <div className="grid md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                     <div className="relative">
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Club Name *
+                      <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                        {t('playerProfile.clubName') || 'Club Name'}
                       </label>
                       <input
                         type="text"
@@ -819,7 +812,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                             setClubSuggestions({ ...clubSuggestions, [club.id]: [] });
                           }, 200);
                         }}
-                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-800 dark:text-white"
                         placeholder="z.B. Volley Amriswil"
                       />
                       {clubSuggestions[club.id]?.length > 0 && (
@@ -855,48 +848,29 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                         </div>
                       )}
                     </div>
-                  </div>
-
-                  <div className="mt-4">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Liga(s) * (mehrfache Auswahl möglich)
-                    </label>
-                    <MultiLeagueSelector
-                      selectedLeagues={club.leagues || (club.league ? [club.league] : [])}
-                      onChange={(leagues) => {
-                        const updated = clubHistory.map((c) =>
-                          c.id === club.id ? { ...c, leagues, league: leagues[0] || '' } : c
-                        );
-                        setClubHistory(updated);
-                      }}
-                    />
-                  </div>
-
-                  <div className="mt-4 grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Land / Country
+                      <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                        {t('playerProfile.leagues') || 'Ligen'}
                       </label>
-                      <CountrySelect
-                        value={club.country || ''}
-                        onChange={v => {
+                      <MultiLeagueSelector
+                        selectedLeagues={club.leagues || (club.league ? [club.league] : [])}
+                        onChange={(leagues) => {
                           const updated = clubHistory.map((c) =>
-                            c.id === club.id ? { ...c, country: v } : c
+                            c.id === club.id ? { ...c, leagues, league: leagues[0] || '' } : c
                           );
                           setClubHistory(updated);
                         }}
-                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       />
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-3 gap-3 mt-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Von Jahr *
+                      <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                        {t('common.from') || 'Von'}
                       </label>
                       <input
-                        type="text"
+                        type="number"
                         value={club.yearFrom}
                         onChange={(e) => {
                           const updated = clubHistory.map((c) =>
@@ -904,65 +878,54 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                           );
                           setClubHistory(updated);
                         }}
-                        placeholder="z.B. 2020"
-                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        placeholder="2020"
+                        className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-800 dark:text-white"
                       />
                     </div>
-
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Bis Jahr {!club.currentClub && <span className="text-red-600">*</span>}
+                      <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                        {t('common.to') || 'Bis'}
                       </label>
-                      {club.currentClub ? (
-                        <div className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
-                          <span className="text-green-600 dark:text-green-400 font-semibold flex items-center gap-1">
-                            ✓ Aktuell
-                          </span>
-                        </div>
-                      ) : (
-                        <input
-                          type="text"
-                          value={club.yearTo}
-                          onChange={(e) => {
-                            const updated = clubHistory.map((c) =>
-                              c.id === club.id ? { ...c, yearTo: e.target.value } : c
-                            );
-                            setClubHistory(updated);
-                          }}
-                          placeholder="z.B. 2023"
-                          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                            isInvalid ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
-                          }`}
-                        />
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="mt-4">
-                    <label className="flex items-center gap-2">
                       <input
-                        type="checkbox"
-                        checked={club.currentClub}
+                        type="number"
+                        value={club.yearTo || ''}
                         onChange={(e) => {
                           const updated = clubHistory.map((c) =>
-                            c.id === club.id 
-                              ? { ...c, currentClub: e.target.checked, yearTo: e.target.checked ? '' : c.yearTo } 
-                              : { ...c, currentClub: false } // Uncheck all other clubs
+                            c.id === club.id ? { ...c, yearTo: e.target.value } : c
                           );
                           setClubHistory(updated);
                         }}
-                        className="rounded text-habicht-600 focus:ring-habicht-500"
+                        placeholder="2024"
+                        disabled={club.currentClub}
+                        className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-800 dark:text-white disabled:opacity-50"
                       />
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                        Aktuellä Club
-                      </span>
-                    </label>
+                    </div>
+                    <div className="flex items-end">
+                      <label className="flex items-center gap-2 pb-2">
+                        <input
+                          type="checkbox"
+                          checked={club.currentClub}
+                          onChange={(e) => {
+                            const updated = clubHistory.map((c) =>
+                              c.id === club.id 
+                                ? { ...c, currentClub: e.target.checked, yearTo: e.target.checked ? '' : c.yearTo } 
+                                : { ...c, currentClub: false }
+                            );
+                            setClubHistory(updated);
+                          }}
+                          className="w-4 h-4 rounded border-gray-300 text-red-600 focus:ring-red-500"
+                        />
+                        <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                          {t('common.current') || 'Aktuell'}
+                        </span>
+                      </label>
+                    </div>
                   </div>
 
                   {isInvalid && (
                     <div className="mt-3 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-lg p-3">
-                      <p className="text-sm text-red-800 dark:text-red-200">
-                        ⚠️ Bitte füll "Bis Jahr" üs oder markier dä Club als "Aktuellä Club"
+                      <p className="text-xs sm:text-sm text-red-800 dark:text-red-200">
+                        ⚠️ {t('playerProfile.clubYearRequired') || 'Bitte füll "Bis Jahr" aus oder markier den Club als "Aktueller Club"'}
                       </p>
                     </div>
                   )}
@@ -974,172 +937,169 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         </div>
 
         {/* Achievements */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-              <Trophy className="w-6 h-6 text-habicht-600" />
-              Erfolge & Uszeichnige
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
+              {t('playerProfile.achievements') || 'Erfolge'}
             </h2>
+
+            {achievements.length === 0 ? (
+              <p className="text-gray-500 dark:text-gray-400 italic mb-4 text-xs sm:text-sm text-center py-4">
+                {t('playerProfile.noAchievementsYet') || 'Noch keine Erfolge hinzugefügt'}
+              </p>
+            ) : (
+              <div className="space-y-2.5 mb-4">
+                {achievements.map((achievement) => (
+                  <div key={achievement.id} className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={achievement.text}
+                      onChange={(e) => {
+                        const updated = achievements.map((a) =>
+                          a.id === achievement.id ? { ...a, text: e.target.value } : a
+                        );
+                        setAchievements(updated);
+                      }}
+                      placeholder={t('playerProfile.achievementPlaceholder') || 'z.B. U17 Schweizermeister 2021'}
+                      className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    />
+                    <button
+                      onClick={() => handleRemoveAchievement(achievement.id)}
+                      className="text-red-600 hover:text-red-700 p-2"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <button
               onClick={handleAddAchievement}
-              className="flex items-center gap-2 bg-habicht-600 text-white px-4 py-2 rounded-lg hover:bg-habicht-700 transition"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 text-red-600 hover:text-red-700 font-medium bg-red-50 dark:bg-red-900/20 px-4 py-2.5 rounded-lg transition text-sm"
             >
               <Plus className="w-4 h-4" />
-              Erfolg Hinzuefüege
+              {t('playerProfile.addAchievement') || 'Erfolg hinzufügen'}
             </button>
           </div>
 
-          {achievements.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400 italic">Kei Erfolg hinzugefüegt</p>
-          ) : (
-            <div className="space-y-3">
-              {achievements.map((achievement) => (
-                <div key={achievement.id} className="flex items-center gap-3">
-                  <input
-                    type="text"
-                    value={achievement.text}
-                    onChange={(e) => {
-                      const updated = achievements.map((a) =>
-                        a.id === achievement.id ? { ...a, text: e.target.value } : a
-                      );
-                      setAchievements(updated);
-                    }}
-                    placeholder="z.B. U17 Schwiizermeister 2021"
-                    className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                  />
-                  <button
-                    onClick={() => handleRemoveAchievement(achievement.id)}
-                    className="text-red-600 hover:text-red-700 transition"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
         {/* Media */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-            Media
-          </h2>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4">
+              {t('playerProfile.documents') || 'Dokumente'}
+            </h2>
 
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Swiss Volley Lizenz (Optional)
-              </label>
-              <ImageUpload
-                label="Lad Lizenz-Foto Ufe"
-                value={formData.swissVolleyLicense}
-                onChange={(v: string) => setFormData({ ...formData, swissVolleyLicense: v })}
-                aspectRatio="banner"
-                allowPdf={true}
-              />
-            </div>
+            <div className="space-y-4 sm:space-y-6">
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('playerProfile.swissVolleyLicense') || 'Swiss Volley Lizenz'} ({t('common.optional') || 'Optional'})
+                </label>
+                <ImageUpload
+                  label={t('playerProfile.uploadLicense') || 'Lizenz hochladen'}
+                  value={formData.swissVolleyLicense}
+                  onChange={(v: string) => setFormData({ ...formData, swissVolleyLicense: v })}
+                  aspectRatio="banner"
+                  allowPdf={true}
+                />
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Ausweiss/ID (Optional)
-              </label>
-              <ImageUpload
-                label="Lad Ausweiss-Foto Ufe"
-                value={formData.ausweiss}
-                onChange={(v: string) => setFormData({ ...formData, ausweiss: v })}
-                aspectRatio="banner"
-                allowPdf={true}
-              />
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  {t('playerProfile.idDocument') || 'Ausweis/ID'} ({t('common.optional') || 'Optional'})
+                </label>
+                <ImageUpload
+                  label={t('playerProfile.uploadId') || 'Ausweis hochladen'}
+                  value={formData.ausweiss}
+                  onChange={(v: string) => setFormData({ ...formData, ausweiss: v })}
+                  aspectRatio="banner"
+                  allowPdf={true}
+                />
+              </div>
             </div>
           </div>
-        </div>
 
         {/* Social Media */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-            Social Media
-          </h2>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4">
+              {t('playerProfile.socialMedia') || 'Social Media'}
+            </h2>
 
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Instagram Handle
-              </label>
-              <input
-                type="text"
-                value={formData.instagram}
-                onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
-                placeholder="@username"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  Instagram
+                </label>
+                <input
+                  type="text"
+                  value={formData.instagram}
+                  onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
+                  placeholder="@username"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  TikTok
+                </label>
+                <input
+                  type="text"
+                  value={formData.tiktok}
+                  onChange={(e) => setFormData({ ...formData, tiktok: e.target.value })}
+                  placeholder="@username"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  YouTube
+                </label>
+                <input
+                  type="text"
+                  value={formData.youtube}
+                  onChange={(e) => setFormData({ ...formData, youtube: e.target.value })}
+                  placeholder="https://youtube.com/..."
+                  className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                />
+              </div>
             </div>
+          </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                TikTok Handle
+        {/* Looking for Club */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
+            <div className="mb-4">
+              <label className="flex items-center gap-2 cursor-pointer p-2.5 sm:p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                <input
+                  type="checkbox"
+                  checked={formData.lookingForClub}
+                  onChange={(e) => setFormData({ ...formData, lookingForClub: e.target.checked })}
+                  className="rounded text-red-600 focus:ring-red-500"
+                />
+                <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {t('playerProfile.lookingForClub') || 'Aktiv auf Clubsuche'}
+                </span>
               </label>
-              <input
-                type="text"
-                value={formData.tiktok}
-                onChange={(e) => setFormData({ ...formData, tiktok: e.target.value })}
-                placeholder="@username"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                YouTube Channel
-              </label>
-              <input
-                type="text"
-                value={formData.youtube}
-                onChange={(e) => setFormData({ ...formData, youtube: e.target.value })}
-                placeholder="@channelname"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-habicht-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
-            </div>
-
-            {/* Highlight Video URL removed from editing page as requested */}
           </div>
         </div>
 
-        {/* Looking for Club */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-          <label className="flex items-start gap-3">
-            <input
-              type="checkbox"
-              checked={formData.lookingForClub}
-              onChange={(e) => setFormData({ ...formData, lookingForClub: e.target.checked })}
-              className="mt-1 rounded text-habicht-600 focus:ring-habicht-500"
-            />
-            <div>
-              <span className="block font-semibold text-gray-900 dark:text-white">
-                Ich sueche en neue Club
-              </span>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                Aktivier das, wenn du für Verein Afrage offe bisch
-              </span>
-            </div>
-          </label>
-        </div>
-
-        {/* Save Button */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        {/* Bottom Save Button - Mobile Sticky */}
+        <div className="mt-4 sm:mt-6 sticky bottom-3 sm:relative sm:bottom-auto flex justify-end">
           <button
             onClick={handleSave}
             disabled={saving}
-            className="w-full flex items-center justify-center gap-2 bg-habicht-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-habicht-700 transition disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition disabled:opacity-50 shadow-lg sm:shadow-none text-sm sm:text-base"
           >
             {saving ? (
               <>
-                <Loader2 className="w-6 h-6 animate-spin" />
-                Speichere...
+                <Loader2 className="w-5 h-5 animate-spin" />
+                {t('common.saving') || 'Speichere...'}
               </>
             ) : (
               <>
-                <Save className="w-6 h-6" />
-                Alli Änderige Speichere
+                <Save className="w-5 h-5" />
+                {t('common.saveChanges') || 'Änderungen speichern'}
               </>
             )}
           </button>

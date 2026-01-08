@@ -966,6 +966,14 @@
           title: 'Recrutader en Tschertga',
           description: 'Notificaziuns dals recrutaders',
         },
+        profileViews: {
+          title: 'Vistas dal profil',
+          description: 'Notificaziuns cur che insatgi guarda tes profil',
+        },
+        watchlistAdd: {
+          title: 'Agiuntà a la watchlist',
+          description: 'Notificaziuns cur ch\'in recrutader ta agiunta a sia watchlist',
+        },
         note: {
           title: 'Remartga',
           description: 'Notificaziuns via e-mail èn actualmain deactivadas',

@@ -959,6 +959,14 @@
           title: 'Rekrutierer am Suchen',
           description: 'Benachrichtigungen von Rekrutierern',
         },
+        profileViews: {
+          title: 'Profilansichten',
+          description: 'Benachrichtigungen wenn jemand Ihr Profil ansieht',
+        },
+        watchlistAdd: {
+          title: 'Zur Watchlist hinzugefügt',
+          description: 'Benachrichtigungen wenn ein Rekrutierer Sie zu seiner Watchlist hinzufügt',
+        },
         note: {
           title: 'Hinweis',
           description: 'E-Mail-Benachrichtigungen sind derzeit deaktiviert',

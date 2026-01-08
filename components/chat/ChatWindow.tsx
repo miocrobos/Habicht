@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import dynamic from 'next/dynamic'
 import { useLanguage } from '@/contexts/LanguageContext'
 import Image from 'next/image'
+import { toast } from 'react-hot-toast'
 
 // Dynamically import emoji picker to avoid SSR issues
 const EmojiPicker = dynamic(() => import('emoji-picker-react'), { ssr: false })
@@ -144,13 +145,13 @@ export default function ChatWindow({
     const isPdf = file.type === 'application/pdf'
     
     if (!isImage && !isPdf) {
-      alert(t('chat.invalidFileType') || 'Only images and PDFs are allowed')
+      toast.error(t('chat.invalidFileType') || 'Only images and PDFs are allowed')
       return
     }
 
     // Check file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      alert(t('chat.fileTooLarge') || 'File is too large (max 10MB)')
+      toast.error(t('chat.fileTooLarge') || 'File is too large (max 10MB)')
       return
     }
 

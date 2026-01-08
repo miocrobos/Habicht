@@ -354,7 +354,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
 
   const handleVideoUpload = async () => {
     if (!videoFile) {
-      alert(t('playerProfile.selectVideoFile'))
+      toast.error(t('playerProfile.selectVideoFile'))
       return
     }
 
@@ -382,10 +382,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       setVideoFile(null)
       setVideoTitle('')
       setVideoDescription('')
-      alert(t('playerProfile.uploadedVideo'))
+      toast.success(t('playerProfile.uploadedVideo'))
     } catch (error: any) {
       console.error('Error uploading video:', error)
-      alert(t('playerProfile.errorUploadingVideo'))
+      toast.error(t('playerProfile.errorUploadingVideo'))
     } finally {
       setUploadingVideo(false)
     }
@@ -403,10 +403,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       const playerResponse = await axios.get(`/api/players/${params.id}`)
       setPlayer(playerResponse.data.player)
       
-      alert(t('playerProfile.uploadedVideo'))
+      toast.success(t('playerProfile.videoDeleted') || 'Video deleted!')
     } catch (error) {
       console.error('Error deleting video:', error)
-      alert(t('playerProfile.errorUploadingVideo'))
+      toast.error(t('playerProfile.errorDeletingVideo') || 'Error deleting video')
     } finally {
       setDeletingVideoId(null)
     }
@@ -426,7 +426,7 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       setShowChat(true)
     } catch (error) {
       console.error('Error starting chat:', error)
-      alert(t('playerProfile.errorStartingChat'))
+      toast.error(t('playerProfile.errorStartingChat'))
     }
   }
 
@@ -440,16 +440,16 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
         // Remove from watchlist
         await axios.delete(`/api/watchlist?playerId=${params.id}`)
         setIsWatched(false)
-        alert(t('watchlist.removedFromWatchlist'))
+        toast.success(t('watchlist.removedFromWatchlist'))
       } else {
         // Add to watchlist
         await axios.post('/api/watchlist', { playerId: params.id })
         setIsWatched(true)
-        alert(t('watchlist.addedToWatchlist'))
+        toast.success(t('watchlist.addedToWatchlist'))
       }
     } catch (error) {
       console.error('Error toggling watchlist:', error)
-      alert('Error updating watchlist')
+      toast.error(t('toast.watchlistError') || 'Error updating watchlist')
     } finally {
       setWatchlistLoading(false)
     }
@@ -477,13 +477,13 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       console.log('CV downloaded successfully')
     } catch (error) {
       console.error('Error exporting CV:', error)
-      alert(t('playerProfile.errorExportingCV'))
+      toast.error(t('playerProfile.errorExportingCV'))
     }
   }
 
   const handleProfilePhotoUpdate = async () => {
     if (!newProfilePhoto) {
-      alert(t('playerProfile.selectImage'))
+      toast.error(t('playerProfile.selectImage'))
       return
     }
 
@@ -541,10 +541,10 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       // Reset and close modal
       setShowProfilePhotoModal(false)
       setNewProfilePhoto('')
-      alert(t('playerProfile.photoUpdated'))
+      toast.success(t('playerProfile.photoUpdated'))
     } catch (error: any) {
       console.error('Error updating profile photo:', error)
-      alert(t('playerProfile.errorUpdatingPhoto'))
+      toast.error(t('playerProfile.errorUpdatingPhoto'))
     } finally {
       setUploadingPhoto(false)
     }
@@ -586,9 +586,12 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
       // Reset and close modal
       setShowBackgroundModal(false)
       setNewBackgroundImage('')
+      
+      // Show background saved popup
+      toast.success(t('playerProfile.backgroundSaved') || 'Background saved!')
     } catch (error: any) {
       console.error('Error updating background:', error)
-      alert(t('playerProfile.errorUpdatingBackground'))
+      toast.error(t('playerProfile.errorUpdatingBackground') || 'Error updating background')
     } finally {
       setUploadingBackground(false)
     }
@@ -1631,6 +1634,9 @@ export default function PlayerProfile({ params }: PlayerProfileProps) {
                           } catch (e) {
                             console.error('Failed to save background to localStorage:', e);
                           }
+                          
+                          // Show background saved popup
+                          toast.success(t('playerProfile.backgroundSaved') || 'Background saved!')
                         } catch (error) {
                           console.error('Error updating background:', error)
                           toast.error(t('toast.backgroundError'))

@@ -422,8 +422,8 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
 
       setSuccess(true);
       toast.success(t('playerProfile.profileUpdated') || 'Profil aktualisiert!');
-      // Redirect immediately after success (reduced from 1500ms)
-      setTimeout(() => router.push(`/hybrids/${params.id}`), 300);
+      // Redirect after success
+      setTimeout(() => router.push(`/hybrids/${params.id}`), 1000);
     } catch (error: any) {
       console.error('Error saving profile:', error);
       setError(error.response?.data?.error || 'Error saving profile');

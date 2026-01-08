@@ -11,6 +11,7 @@ import { getAllSchools } from '@/lib/schoolData';
 import ImageUpload from '@/components/shared/ImageUpload';
 import CountrySelect from '@/components/shared/CountrySelect';
 import MultiLeagueSelector from '@/components/shared/MultiLeagueSelector';
+import { toast } from 'react-hot-toast';
 
 const cantons = [
   { code: 'ZH' as Canton, name: 'Züri' },
@@ -175,6 +176,7 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
       console.log('Save response:', response.data);
 
       setSuccess(true);
+      toast.success(t('playerProfile.profileUpdated') || 'Profil aktualisiert!');
       setTimeout(() => {
         // Redirect to hybrid profile if user is HYBRID, otherwise to player profile
         if (userRole === 'HYBRID' && userId) {
@@ -182,15 +184,16 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
         } else {
           router.push(`/players/${params.id}`);
         }
-      }, 1500);
-    } catch (err) {
+      }, 1000);
+    } catch (err: any) {
       console.error('Save error:', err);
-      // @ts-ignore
       const apiError = err.response?.data?.error;
       if (apiError && apiError.startsWith('playerProfile.')) {
         setError(t(apiError));
+        toast.error(t(apiError));
       } else {
         setError(apiError || 'Fehler Bim Speichere');
+        toast.error(apiError || t('playerProfile.updateError') || 'Fehler beim Speichern');
       }
     } finally {
       setSaving(false);

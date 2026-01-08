@@ -1,0 +1,87 @@
+UNISPORTS/HABICHT PROPRIETARY LICENSE
+Copyright (c) 2026 Adrian Habicht. All Rights Reserved.
+
+================================================================================
+                              SOURCE-AVAILABLE LICENSE
+================================================================================
+
+This software and associated documentation files (the "Software") are the
+exclusive property of Adrian Habicht ("Owner"). By accessing this repository,
+you agree to the following terms:
+
+--------------------------------------------------------------------------------
+1. PERMITTED USES
+--------------------------------------------------------------------------------
+
+You MAY:
+  ✓ View and read the source code for educational and reference purposes
+  ✓ Fork this repository on GitHub for personal, non-commercial learning
+  ✓ Report bugs and suggest improvements via GitHub Issues
+  ✓ Reference small code snippets (under 50 lines) with proper attribution
+
+--------------------------------------------------------------------------------
+2. PROHIBITED USES
+--------------------------------------------------------------------------------
+
+You MAY NOT without explicit written permission from the Owner:
+  ✗ Copy, reproduce, or distribute the Software or substantial portions thereof
+  ✗ Use the Software or its code for any commercial purpose
+  ✗ Create derivative works based on this Software
+  ✗ Deploy, host, or run the Software on any server (public or private)
+  ✗ Use the Software to compete with UniSports/Habicht
+  ✗ Remove or alter any copyright notices or this license
+  ✗ Sell, sublicense, lease, or transfer the Software to any third party
+  ✗ Use automated tools to scrape, copy, or extract code from this repository
+
+--------------------------------------------------------------------------------
+3. DATA PROTECTION
+--------------------------------------------------------------------------------
+
+The Swiss volleyball club data, player information structures, and Swiss-specific
+integrations contained in this repository are proprietary assets. You may NOT:
+  ✗ Extract, copy, or repurpose any data files (JSON, databases, etc.)
+  ✗ Use the data for any commercial or non-commercial project
+  ✗ Scrape or aggregate information from the live platform
+
+Any use of data must comply with the Swiss Federal Act on Data Protection (FADP)
+and European GDPR regulations.
+
+--------------------------------------------------------------------------------
+4. TRADEMARKS
+--------------------------------------------------------------------------------
+
+"UniSports", "Habicht", and all associated logos, branding, and visual designs
+are trademarks of the Owner. You may NOT use these marks without explicit
+written permission.
+
+--------------------------------------------------------------------------------
+5. NO WARRANTY
+--------------------------------------------------------------------------------
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. THE OWNER SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY ARISING FROM THE USE OR INABILITY TO USE THE SOFTWARE.
+
+--------------------------------------------------------------------------------
+6. ENFORCEMENT
+--------------------------------------------------------------------------------
+
+Violation of this license may result in:
+  • Immediate termination of your access rights
+  • Legal action under applicable copyright and intellectual property laws
+  • Claims for damages and injunctive relief
+
+--------------------------------------------------------------------------------
+7. CONTACT FOR LICENSING
+--------------------------------------------------------------------------------
+
+For commercial licensing, partnership inquiries, or permission requests:
+  Email: kamsiyochukwuuugoji@gmail.com
+  GitHub: @miocrobos
+
+================================================================================
+
+By accessing this repository, you acknowledge that you have read, understood,
+and agree to be bound by the terms of this license.
+
+Last updated: January 8, 2026

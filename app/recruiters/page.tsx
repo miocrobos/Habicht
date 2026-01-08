@@ -70,52 +70,53 @@ export default function RecruitersPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">{t('recruiters.title')}</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+        <div className="mb-4 sm:mb-8">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">{t('recruiters.title')}</h1>
+          <p className="text-sm sm:text-lg text-gray-600 dark:text-gray-400">
             {t('recruiters.subtitle')}
           </p>
         </div>
 
         {/* Filters */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sm:p-6 mb-4 sm:mb-8">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
             <div className="flex items-center gap-2">
-              <Filter className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('recruiters.filtersTitle')}</h3>
+              <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400" />
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">{t('recruiters.filtersTitle')}</h3>
             </div>
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition"
+                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition"
               >
-                <X className="w-4 h-4" />
-                {t('recruiters.clearAllFilters')}
+                <X className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">{t('recruiters.clearAllFilters')}</span>
+                <span className="sm:hidden">Clear</span>
               </button>
             )}
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4">
             {/* Search */}
-            <div className="lg:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <div className="col-span-2 sm:col-span-2 lg:col-span-2">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('recruiters.searchLabel')}
               </label>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                 <input
                   type="text"
                   value={filters.search}
                   onChange={(e) => handleFilterChange('search', e.target.value)}
-                  className="w-full pl-10 pr-10 py-2 text-sm leading-normal border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white placeholder:leading-normal"
+                  className="w-full pl-9 sm:pl-10 pr-9 sm:pr-10 py-2.5 sm:py-2 text-sm leading-normal border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white placeholder:leading-normal"
                   placeholder={t('recruiters.searchPlaceholder')}
                 />
                 {filters.search && (
                   <button
                     onClick={() => handleFilterChange('search', '')}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -125,13 +126,13 @@ export default function RecruitersPage() {
 
             {/* Canton */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('recruiters.cantonLabel')}
               </label>
               <select
                 value={filters.canton}
                 onChange={(e) => handleFilterChange('canton', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">{t('cantons.allCantons')}</option>
                 <option value="AG">{t('cantons.AG')}</option>
@@ -165,13 +166,13 @@ export default function RecruitersPage() {
 
             {/* Gender Coached */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('recruiters.teamGenderLabel')}
               </label>
               <select
                 value={filters.genderCoached}
                 onChange={(e) => handleFilterChange('genderCoached', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">{t('playerProfile.all')}</option>
                 <option value="MALE">{t('playerProfile.men')}</option>
@@ -181,13 +182,13 @@ export default function RecruitersPage() {
 
             {/* User Type - Recruiter/Hybrid filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('recruiters.userTypeLabel')}
               </label>
               <select
                 value={filters.userType}
                 onChange={(e) => handleFilterChange('userType', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">{t('recruiters.userTypeAll')}</option>
                 <option value="RECRUITER">{t('recruiters.userTypeRecruiter')}</option>
@@ -197,13 +198,13 @@ export default function RecruitersPage() {
 
             {/* Position Looking For */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('recruiters.lookingForPositionLabel')}
               </label>
               <select
                 value={filters.positionLookingFor}
                 onChange={(e) => handleFilterChange('positionLookingFor', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
               >
                 <option value="">{t('playerProfile.all')}</option>
                 <option value="OUTSIDE_HITTER">{t('playerProfile.positionOutsideHitter')}</option>
@@ -216,13 +217,13 @@ export default function RecruitersPage() {
             </div>
 
             {/* Active Recruiting Toggle */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <div className="col-span-2 sm:col-span-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('recruiters.recruitingStatusLabel')}
               </label>
               <button
                 onClick={() => handleFilterChange('lookingForMembers', filters.lookingForMembers === 'true' ? '' : 'true')}
-                className={`w-full px-4 py-2 text-sm border rounded-lg transition-colors font-medium ${
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm border rounded-lg transition-colors font-medium ${
                   filters.lookingForMembers === 'true'
                     ? 'bg-green-600 text-white border-green-600 hover:bg-green-700'
                     : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
@@ -235,15 +236,15 @@ export default function RecruitersPage() {
         </div>
 
         {/* Results */}
-        <div className="mb-6">
-          <p className="text-gray-600 dark:text-gray-400">
+        <div className="mb-3 sm:mb-6">
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
             {loading ? t('recruiters.loading') : `${recruiters.length} ${t('recruiters.recruitersFound')}`}
           </p>
         </div>
 
         {/* Recruiters Grid */}
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg h-80 animate-pulse">
                 <div className="h-40 bg-gray-300 dark:bg-gray-700" />
@@ -255,7 +256,7 @@ export default function RecruitersPage() {
             ))}
           </div>
         ) : recruiters.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
             {recruiters.map((recruiter: any) => (
               <RecruiterCard key={recruiter.id} recruiter={recruiter} />
             ))}

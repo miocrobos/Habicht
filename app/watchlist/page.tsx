@@ -209,18 +209,18 @@ export default function WatchlistPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-4 sm:py-8">
+      <div className="container mx-auto px-3 sm:px-4">
         {/* Header */}
-        <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="mb-4 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">
               {t('watchlist.title')}
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
               {watchlist.length} {t('watchlist.playerCount')}
               {unreadUpdateCount > 0 && (
-                <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-swiss-red text-white">
+                <span className="ml-2 inline-flex items-center px-1.5 sm:px-2 py-0.5 rounded-full text-xs font-medium bg-swiss-red text-white">
                   <RefreshCw className="w-3 h-3 mr-1" />
                   {unreadUpdateCount} {t('watchlist.profileUpdates') || 'updates'}
                 </span>
@@ -232,21 +232,23 @@ export default function WatchlistPage() {
               <>
                 <button
                   onClick={markAllAsViewed}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg transition bg-green-600 hover:bg-green-700 text-white"
+                  className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg transition bg-green-600 hover:bg-green-700 text-white text-sm sm:text-base"
                 >
                   <CheckCheck className="w-4 h-4" />
-                  {t('watchlist.markAllAsViewed') || 'Mark All as Viewed'}
+                  <span className="hidden sm:inline">{t('watchlist.markAllAsViewed') || 'Mark All as Viewed'}</span>
+                  <span className="sm:hidden">Alle</span>
                 </button>
                 <button
                   onClick={() => setShowUpdatesOnly(!showUpdatesOnly)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
+                  className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg transition text-sm sm:text-base ${
                     showUpdatesOnly
                       ? 'bg-swiss-red text-white'
                       : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                   }`}
                 >
                   <Bell className="w-4 h-4" />
-                  {showUpdatesOnly ? t('watchlist.showAll') || 'Show All' : t('watchlist.showUpdatesOnly') || 'Show Updates Only'}
+                  <span className="hidden sm:inline">{showUpdatesOnly ? t('watchlist.showAll') || 'Show All' : t('watchlist.showUpdatesOnly') || 'Show Updates Only'}</span>
+                  <span className="sm:hidden">{showUpdatesOnly ? 'Alle' : 'Updates'}</span>
                 </button>
               </>
             )}
@@ -254,27 +256,27 @@ export default function WatchlistPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
             <input
               type="text"
               placeholder={t('watchlist.search')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-swiss-red dark:bg-gray-800 dark:text-white"
+              className="w-full pl-9 sm:pl-10 pr-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-swiss-red dark:bg-gray-800 dark:text-white"
             />
           </div>
         </div>
 
         {/* Watchlist Grid */}
         {filteredWatchlist.length === 0 ? (
-          <div className="text-center py-16">
-            <Bookmark className="w-16 h-16 text-gray-300 dark:text-gray-700 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          <div className="text-center py-10 sm:py-16">
+            <Bookmark className="w-12 h-12 sm:w-16 sm:h-16 text-gray-300 dark:text-gray-700 mx-auto mb-3 sm:mb-4" />
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">
               {showUpdatesOnly ? (t('watchlist.noUpdates') || 'No profile updates') : t('watchlist.empty')}
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 px-4">
               {showUpdatesOnly 
                 ? (t('watchlist.noUpdatesDescription') || 'Players in your watchlist haven\'t updated their profiles recently.')
                 : t('watchlist.emptyDescription')}
@@ -282,21 +284,21 @@ export default function WatchlistPage() {
             {showUpdatesOnly ? (
               <button
                 onClick={() => setShowUpdatesOnly(false)}
-                className="inline-block bg-swiss-red text-white px-6 py-3 rounded-lg hover:bg-red-700 transition"
+                className="inline-block bg-swiss-red text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-red-700 transition text-sm sm:text-base"
               >
                 {t('watchlist.showAll') || 'Show All Players'}
               </button>
             ) : (
               <Link
                 href="/players"
-                className="inline-block bg-swiss-red text-white px-6 py-3 rounded-lg hover:bg-red-700 transition"
+                className="inline-block bg-swiss-red text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-red-700 transition text-sm sm:text-base"
               >
                 {t('nav.players')}
               </Link>
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
             {filteredWatchlist.map((item) => (
               <div
                 key={item.id}
@@ -306,16 +308,16 @@ export default function WatchlistPage() {
               >
                 {/* Update Badge */}
                 {item.recentUpdate && (
-                  <div className="absolute top-0 right-0 bg-swiss-red text-white text-xs font-bold px-3 py-1 rounded-bl-lg flex items-center gap-1">
+                  <div className="absolute top-0 right-0 bg-swiss-red text-white text-[10px] sm:text-xs font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-bl-lg flex items-center gap-1">
                     <RefreshCw className="w-3 h-3" />
                     {t('watchlist.updated') || 'Updated'}
                   </div>
                 )}
 
-                <div className="p-6">
+                <div className="p-3 sm:p-6">
                   {/* Player Image & Name */}
-                  <div className="flex items-center mb-4">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex-shrink-0">
+                  <div className="flex items-center mb-3 sm:mb-4">
+                    <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex-shrink-0">
                       {item.player.profileImage || item.player.user.image ? (
                         <Image
                           src={item.player.profileImage || item.player.user.image || ''}
@@ -324,17 +326,17 @@ export default function WatchlistPage() {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-2xl text-gray-400">
+                        <div className="w-full h-full flex items-center justify-center text-xl sm:text-2xl text-gray-400">
                           {item.player.gender === 'MALE' ? '♂' : '♀'}
                         </div>
                       )}
                     </div>
-                    <div className="ml-4 flex-1">
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <div className="ml-3 sm:ml-4 flex-1 min-w-0">
+                      <h3 className="text-sm sm:text-lg font-semibold text-gray-900 dark:text-white truncate">
                         {item.player.firstName} {item.player.lastName}
                       </h3>
                       {item.player.currentClub && (
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 truncate">
                           {item.player.currentClub.name}
                         </p>
                       )}
@@ -343,10 +345,10 @@ export default function WatchlistPage() {
 
                   {/* Profile Update Notification */}
                   {item.recentUpdate && (
-                    <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                    <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
                       <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mb-1">
                             {new Date(item.recentUpdate.createdAt).toLocaleDateString('de-CH', {
                               day: 'numeric',
                               month: 'short',
@@ -355,12 +357,12 @@ export default function WatchlistPage() {
                               minute: '2-digit'
                             })}
                           </p>
-                          <p className="text-sm text-gray-700 dark:text-gray-300 font-medium">
+                          <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 font-medium">
                             {t('watchlist.profileChanges') || 'Profile Changes:'}
                           </p>
-                          <ul className="mt-1 text-sm text-gray-600 dark:text-gray-400 list-disc list-inside">
+                          <ul className="mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400 list-disc list-inside">
                             {item.recentUpdate.message.split('; ').map((change, idx) => (
-                              <li key={idx} className="text-xs">{change}</li>
+                              <li key={idx} className="text-[10px] sm:text-xs">{change}</li>
                             ))}
                           </ul>
                         </div>
@@ -376,15 +378,15 @@ export default function WatchlistPage() {
                   )}
 
                   {/* Player Info */}
-                  <div className="space-y-2 mb-4">
+                  <div className="space-y-1 sm:space-y-2 mb-3 sm:mb-4">
                     {item.player.primaryPosition && (
-                      <p className="text-sm text-gray-700 dark:text-gray-300">
+                      <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">
                         <span className="font-medium">{t('playerProfile.primaryPosition')}:</span>{' '}
                         {t(`positions.${item.player.primaryPosition.toLowerCase().replace(' ', '_')}`)}
                       </p>
                     )}
                     {item.player.currentLeagues && item.player.currentLeagues.length > 0 && (
-                      <p className="text-sm text-gray-700 dark:text-gray-300">
+                      <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">
                         <span className="font-medium">{t('playerProfile.league')}:</span>{' '}
                         {item.player.currentLeagues.map((league: string) => getLeagueLabel(league, t)).join(', ')}
                       </p>
@@ -392,19 +394,19 @@ export default function WatchlistPage() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-3">
+                  <div className="flex gap-2 sm:gap-3">
                     <Link
                       href={`/players/${item.player.id}`}
-                      className="flex-1 bg-swiss-red text-white px-4 py-2 rounded-lg hover:bg-red-700 transition text-center"
+                      className="flex-1 bg-swiss-red text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-red-700 transition text-center text-xs sm:text-sm"
                     >
                       {t('watchlist.viewProfile')}
                     </Link>
                     <button
                       onClick={() => removeFromWatchlist(item.player.id)}
-                      className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                      className="px-3 sm:px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition"
                       title={t('watchlist.removeFromWatchlist')}
                     >
-                      <X className="w-5 h-5" />
+                      <X className="w-4 h-4 sm:w-5 sm:h-5" />
                     </button>
                   </div>
                 </div>

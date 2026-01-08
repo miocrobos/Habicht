@@ -214,21 +214,23 @@ export default function RecruitersPage() {
                 <option value="UNIVERSAL">{t('playerProfile.positionUniversal')}</option>
               </select>
             </div>
-          </div>
 
-          {/* Active Recruiting Toggle */}
-          <div className="mt-4 flex items-center gap-3">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={filters.lookingForMembers === 'true'}
-                onChange={(e) => handleFilterChange('lookingForMembers', e.target.checked ? 'true' : '')}
-                className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
-              />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {t('recruiters.activeRecruitingOnly')}
-              </span>
-            </label>
+            {/* Active Recruiting Toggle */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {t('recruiters.recruitingStatusLabel')}
+              </label>
+              <button
+                onClick={() => handleFilterChange('lookingForMembers', filters.lookingForMembers === 'true' ? '' : 'true')}
+                className={`w-full px-4 py-2 text-sm border rounded-lg transition-colors font-medium ${
+                  filters.lookingForMembers === 'true'
+                    ? 'bg-green-600 text-white border-green-600 hover:bg-green-700'
+                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
+                }`}
+              >
+                {filters.lookingForMembers === 'true' ? t('recruiters.recruitingStatusActive') : t('recruiters.recruitingStatusAll')}
+              </button>
+            </div>
           </div>
         </div>
 

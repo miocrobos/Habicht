@@ -1285,6 +1285,8 @@
       // General
       achievements: 'Réalisations en Coaching',
       achievementPlaceholder: 'ex. Promu en NLA 2023',
+      noAchievementsYet: 'Aucune réalisation ajoutée',
+      addAchievement: 'Ajouter une réalisation',
       bio: 'À propos',
       contactInfo: 'Informations de Contact',
       socialMedia: 'Réseaux Sociaux',

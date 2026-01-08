@@ -1249,6 +1249,8 @@
       // General
       achievements: 'Coaching Erfolg',
       achievementPlaceholder: 'z.B. Ufstiig i NLA 2023',
+      noAchievementsYet: 'No kei Erfolg hinzuegfüegt',
+      addAchievement: 'Erfolg hinzuefüege',
       bio: 'Über mich',
       contactInfo: 'Kontaktinformatione',
       socialMedia: 'Social Media',

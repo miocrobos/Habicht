@@ -1407,6 +1407,8 @@
       // General
       achievements: 'Coaching Achievements',
       achievementPlaceholder: 'e.g. Promoted to NLA 2023',
+      noAchievementsYet: 'No achievements added yet',
+      addAchievement: 'Add Achievement',
       bio: 'About',
       contactInfo: 'Contact Information',
       socialMedia: 'Social Media',

@@ -770,7 +770,7 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
 
               {achievements.length === 0 ? (
                 <p className="text-gray-500 dark:text-gray-400 italic mb-4 text-xs sm:text-sm text-center py-4">
-                  Noch keine Erfolge hinzugefügt
+                  {t('recruiterProfile.noAchievementsYet') || 'Noch keine Erfolge hinzugefügt'}
                 </p>
               ) : (
                 <div className="space-y-2.5 mb-4">
@@ -786,7 +786,7 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
                           setAchievements(updated);
                         }}
                         className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                        placeholder="z.B. J+S Leiter, 10 Jahre Erfahrung"
+                        placeholder={t('recruiterProfile.achievementPlaceholder') || 'z.B. J+S Leiter, 10 Jahre Erfahrung'}
                       />
                       <button
                         onClick={() => setAchievements(achievements.filter((_, i) => i !== index))}
@@ -804,14 +804,14 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
                 className="w-full sm:w-auto flex items-center justify-center gap-2 text-red-600 hover:text-red-700 font-medium bg-red-50 dark:bg-red-900/20 px-4 py-2.5 rounded-lg transition text-sm"
               >
                 <Plus className="w-4 h-4" />
-                Erfolg Hinzufügen
+                {t('recruiterProfile.addAchievement') || 'Erfolg hinzufügen'}
               </button>
             </div>
 
             {/* Social Media */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
               <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-4">
-                Social Media
+                {t('playerProfile.socialMedia') || 'Social Media'}
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -880,12 +880,12 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
             {saving ? (
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
-                Speichere...
+                {t('common.saving') || 'Speichere...'}
               </>
             ) : (
               <>
                 <Save className="w-5 h-5" />
-                Änderungen Speichern
+                {t('common.saveChanges') || 'Änderungen speichern'}
               </>
             )}
           </button>

@@ -1272,6 +1272,8 @@
       // General
       achievements: 'Resultats da Coaching',
       achievementPlaceholder: 'p.ex. Promoziun en NLA 2023',
+      noAchievementsYet: 'Anc nagins resultats agiuntads',
+      addAchievement: 'Agiuntar resultat',
       bio: 'Davart mai',
       contactInfo: 'Infurmaziuns da Contact',
       socialMedia: 'Social Media',

@@ -1273,6 +1273,8 @@
       // General
       achievements: 'Risultati di Coaching',
       achievementPlaceholder: 'es. Promosso in NLA 2023',
+      noAchievementsYet: 'Nessun risultato aggiunto',
+      addAchievement: 'Aggiungi risultato',
       bio: 'Chi sono',
       contactInfo: 'Informazioni di Contatto',
       socialMedia: 'Social Media',

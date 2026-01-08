@@ -485,13 +485,13 @@ export default function RecruiterEditPage({ params }: { params: { id: string } }
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
               <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
-                {t('recruiterProfile.organization') || 'Organisation'}
+                {t('recruiterProfile.organization') || 'Club Affiliation'}
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                    {t('recruiterProfile.organization') || 'Club'}
+                    {t('recruiterProfile.organizationName') || 'Club'}
                   </label>
                   <input
                     type="text"

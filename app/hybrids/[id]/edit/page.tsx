@@ -1433,7 +1433,7 @@ export default function HybridEditPage({ params }: { params: { id: string } }) {
             {/* Organization */}
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                {t('recruiterProfile.organization') || 'Organisation'}
+                {t('recruiterProfile.organization') || 'Club Affiliation'}
               </label>
               <input
                 type="text"

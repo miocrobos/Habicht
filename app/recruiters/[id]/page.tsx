@@ -964,7 +964,7 @@ const handleExportCV = async (language: string) => {
                       <div className="flex items-start gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
                         <Building2 className="w-5 h-5 text-orange-500 mt-0.5" />
                         <div>
-                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t('recruiterProfile.organization') || 'Organization'}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t('recruiterProfile.organizationName') || 'Club'}</p>
                           <p className="font-semibold text-gray-900 dark:text-white">{recruiter.organization}</p>
                         </div>
                       </div>

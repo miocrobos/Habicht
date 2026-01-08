@@ -1398,7 +1398,7 @@
       fitnessCoach: 'Fitnesstrainer',
       videoAnalyst: 'Videoanalyst',
       teamManager: 'Teammanager',
-      organization: 'Organisation',
+      organization: 'Club-Zugehörigkeit',
       genderCoached: 'Gecoachtes Geschlecht',
       coachingLicense: 'Coaching Lizenz',
       positionsLookingFor: 'Gesuchte Positionen',

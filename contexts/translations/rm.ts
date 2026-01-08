@@ -1405,7 +1405,7 @@
       fitnessCoach: 'Trenader da fitness',
       videoAnalyst: 'Analist da video',
       teamManager: 'Manager da team',
-      organization: 'Organisaziun',
+      organization: 'Affiliaziun da club',
       genderCoached: 'Recrutament per (Umens/Dunnas)',
       coachingLicense: 'Licenza da coaching',
       positionsLookingFor: 'Posiziuns tschertgadas',

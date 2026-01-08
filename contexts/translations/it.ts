@@ -1406,7 +1406,7 @@
       fitnessCoach: 'Preparatore atletico',
       videoAnalyst: 'Analista video',
       teamManager: 'Team manager',
-      organization: 'Organizzazione',
+      organization: 'Affiliazione al club',
       genderCoached: 'Reclutamento per (Uomini/Donne)',
       coachingLicense: 'Licenza di coaching',
       positionsLookingFor: 'Posizioni ricercate',

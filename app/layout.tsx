@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Habicht – Swiss Volleyball Scouting Platform',
     description: 'Scouting platform for Swiss volleyball athletes. Find talented players, view highlights, and connect with recruits.',
-    images: [{ url: 'https://www.habicht-volleyball.ch/og-image.png' }],
+    images: [{ url: 'https://www.habicht-volleyball.ch/og-image.jpg?v=2', width: 1200, height: 630, type: 'image/jpeg' }],
     url: 'https://www.habicht-volleyball.ch/',
     type: 'website',
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Habicht – Swiss Volleyball Scouting Platform',
     description: 'Scouting platform for Swiss volleyball athletes. Find talented players, view highlights, and connect with recruits.',
-    images: ['https://www.habicht-volleyball.ch/og-image.png'],
+    images: ['https://www.habicht-volleyball.ch/og-image.jpg?v=2'],
   },
 }
 

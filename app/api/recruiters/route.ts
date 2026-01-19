@@ -12,10 +12,16 @@ export async function GET(request: NextRequest) {
     const positionLookingFor = searchParams.get('positionLookingFor') || ''
     const lookingForMembers = searchParams.get('lookingForMembers') === 'true'
     const userType = searchParams.get('userType') || ''
+    const clubId = searchParams.get('clubId') || ''
 
     // Build where clause - show all active recruiters (users with Recruiter profiles)
     const where: any = {
       isActive: true,
+    }
+
+    // Filter by club - show only recruiters currently affiliated with this club
+    if (clubId) {
+      where.clubId = clubId
     }
 
     // Search filter

@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Plus, X, Edit2, Save, Video as VideoIcon, ExternalLink, Loader2 } from 'lucide-react';
+import { Plus, X, Video as VideoIcon, ExternalLink, Loader2 } from 'lucide-react';
 import axios from 'axios';
 
 interface Video {

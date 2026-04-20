@@ -208,10 +208,6 @@ export default function RecruiterRegisterPage() {
       setError(t('register.uploadProfileImage') || 'Profile picture is required');
       return;
     }
-    if (!formData.coachingLicense) {
-      setError(t('register.coachingLicenseRequired') || 'Coaching license is required');
-      return;
-    }
     if (!agreedToTerms) {
       setError(t('register.agreeToTermsRequired'));
       return;
@@ -620,7 +616,7 @@ export default function RecruiterRegisterPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    <Upload className="w-4 h-4 inline mr-1" />{t('register.coachingLicense')} <span className="text-red-500">*</span>
+                    <Upload className="w-4 h-4 inline mr-1" />{t('register.coachingLicense')} <span className="text-gray-400 text-xs">({t('common.optional') || 'Optional'})</span>
                   </label>
                   <ImageUpload 
                     label=""

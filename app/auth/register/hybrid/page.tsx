@@ -261,11 +261,6 @@ export default function HybridRegisterPage() {
       return;
     }
     
-    if (!formData.coachingLicense) {
-      setError(t('register.coachingLicenseRequired') || 'Coaching license is required');
-      return;
-    }
-    
     if (!agreedToTerms) {
       setError(t('register.agreeToTermsRequired'));
       return;
@@ -1060,7 +1055,7 @@ export default function HybridRegisterPage() {
                 />
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    {t('register.coachingLicense')} <span className="text-red-500">*</span>
+                    {t('register.coachingLicense')} <span className="text-gray-400 text-xs">({t('common.optional') || 'Optional'})</span>
                   </label>
                   <ImageUpload 
                     label="" 

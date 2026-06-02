@@ -11,6 +11,10 @@
 import { PrismaClient, Canton } from '@prisma/client'
 import * as fs from 'fs'
 import * as path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const prisma = new PrismaClient()
 
@@ -67,7 +71,7 @@ function normalizeUrl(url: string | undefined): string | null {
 }
 
 async function importClubs() {
-  const dataPath = path.join(__dirname, '../data/swiss-volleyball-clubs-bs4.json')
+  const dataPath = path.join(__dirname, '..', 'data', 'swiss-volleyball-clubs-bs4.json')
   if (!fs.existsSync(dataPath)) {
     console.error('❌ Data file not found:', dataPath)
     console.error('   Run: python scripts/scrape_clubs_beautifulsoup.py first')

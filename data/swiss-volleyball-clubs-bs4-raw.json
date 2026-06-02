@@ -1,0 +1,1347 @@
+{
+  "apiHits": [
+    {
+      "objectID": "904060",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "2013",
+      "juniorteamsWomen": [
+        "U23"
+      ],
+      "offers": [
+        "kidsVolley",
+        "additionalOffersAdults"
+      ],
+      "website": "www.colombiervolley.ch",
+      "city": "Colombier",
+      "plusCode": "8FR8XV85+XV",
+      "caption": "Colombier Volley",
+      "activeLeaguesWomen": [
+        "2L",
+        "3L"
+      ],
+      "juniorteamsMen": [
+        "U18",
+        "U16"
+      ],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/9761ace3239aeac9777a8999c6ccd6389e24780e/20041_Colombier%20Volley.png?v=1692617638",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U23"
+          ],
+          "activeLeaguesWomen": [
+            "2L",
+            "3L"
+          ],
+          "additionalOffersAdults": [],
+          "activeLeaguesMen": [
+            "NLA",
+            "1L",
+            "2L",
+            "3L",
+            "4L"
+          ],
+          "juniorteamsMen": [
+            "U18",
+            "U16"
+          ],
+          "kidsVolley": []
+        }
+      ],
+      "id": 904060,
+      "activeLeaguesMen": [
+        "NLA",
+        "1L",
+        "2L",
+        "3L",
+        "4L"
+      ],
+      "email": "info@colombiervolley.ch"
+    },
+    {
+      "objectID": "912015",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "8810",
+      "juniorteamsWomen": [],
+      "offers": [],
+      "website": "https://www.lakeside-volleyball.ch",
+      "city": "Horgen",
+      "plusCode": "8FVC6JX5+85",
+      "caption": "Lakeside Volleyball",
+      "activeLeaguesWomen": [],
+      "juniorteamsMen": [
+        "U16"
+      ],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/6b93207e9b95095c024e1a3e911ba73420ae42a7/57598_Lakeside%20Volleyball.png?v=1779880592",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsMen": [
+            "U16"
+          ]
+        }
+      ],
+      "id": 912015,
+      "activeLeaguesMen": [],
+      "email": "kontakt@lakeside-volleyball.ch"
+    },
+    {
+      "objectID": "911065",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "6018",
+      "juniorteamsWomen": [
+        "U23",
+        "U18",
+        "U16",
+        "U14"
+      ],
+      "offers": [
+        "kidsVolley"
+      ],
+      "website": "https://volley-buttisholz.ch/",
+      "city": "Buttisholz",
+      "plusCode": "8FVC437R+MX",
+      "caption": "STV Buttisholz",
+      "activeLeaguesWomen": [
+        "5L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/8b3ab905b5f0c9bdddcefcc9a6eaa377ee3cc219/21484_STV%20Buttisholz.png?v=1723729450",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U23",
+            "U18",
+            "U16",
+            "U14"
+          ],
+          "activeLeaguesWomen": [
+            "5L"
+          ],
+          "kidsVolley": []
+        }
+      ],
+      "id": 911065,
+      "activeLeaguesMen": [],
+      "email": "alina.erni@volley-buttisholz.ch"
+    },
+    {
+      "objectID": "907750",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "3600",
+      "juniorteamsWomen": [
+        "U20"
+      ],
+      "offers": [],
+      "website": "https://www.svthun-straettligen.ch",
+      "city": "Thun",
+      "plusCode": "8FR9QJ3C+CX",
+      "caption": "SV Strättligen",
+      "activeLeaguesWomen": [
+        "4L",
+        "5L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/bd8779d231e50eed81c45c059b038deeafcad224/20588_SV%20Str%C3%A4ttligen.png?v=1724061786",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U20"
+          ],
+          "activeLeaguesWomen": [
+            "4L",
+            "5L"
+          ]
+        }
+      ],
+      "id": 907750,
+      "activeLeaguesMen": [],
+      "email": "info@svthun-straettligen.ch"
+    },
+    {
+      "objectID": "909740",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "",
+      "juniorteamsWomen": [],
+      "offers": [
+        "activeBeachWomen",
+        "activeBeachMen",
+        "juniorteamsBeachWomen",
+        "juniorteamsBeachMen"
+      ],
+      "website": "www.volleyballtherwil.ch",
+      "city": "",
+      "plusCode": "",
+      "caption": "VB Therwil",
+      "activeLeaguesWomen": [],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/69f601ce1a9913443271d760ac59ddea49dca29a/21083_VB%20Therwil.png?v=1653472371",
+      "offersToShowOnClubCard": [
+        {
+          "activeBeachWomen": [],
+          "juniorteamsBeachMen": [],
+          "activeBeachMen": [],
+          "juniorteamsBeachWomen": []
+        }
+      ],
+      "id": 909740,
+      "activeLeaguesMen": [],
+      "email": "office@volleyballtherwil.ch"
+    },
+    {
+      "objectID": "907200",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "3400",
+      "juniorteamsWomen": [
+        "U23",
+        "U20",
+        "U18",
+        "U17",
+        "U16",
+        "U14"
+      ],
+      "offers": [
+        "kidsVolley",
+        "additionalOffersAdults"
+      ],
+      "website": "https://vbcburgdorf.com",
+      "city": "Burgdorf",
+      "plusCode": "8FV93J39+G2",
+      "caption": "VBC Burgdorf",
+      "activeLeaguesWomen": [
+        "1L",
+        "3L",
+        "4L",
+        "5L"
+      ],
+      "juniorteamsMen": [
+        "U20",
+        "U18"
+      ],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/0f9c2d6c12fc8eb9a92cb3ac92b63823efd9b2e9/20400_VBC%20Burgdorf.png?v=1733953589",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U23",
+            "U20",
+            "U18",
+            "U17",
+            "U16",
+            "U14"
+          ],
+          "activeLeaguesWomen": [
+            "1L",
+            "3L",
+            "4L",
+            "5L"
+          ],
+          "additionalOffersAdults": [],
+          "activeLeaguesMen": [
+            "3L",
+            "4L"
+          ],
+          "juniorteamsMen": [
+            "U20",
+            "U18"
+          ],
+          "kidsVolley": []
+        }
+      ],
+      "id": 907200,
+      "activeLeaguesMen": [
+        "3L",
+        "4L"
+      ],
+      "email": ""
+    },
+    {
+      "objectID": "902200",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "1024",
+      "juniorteamsWomen": [
+        "U23",
+        "U20"
+      ],
+      "offers": [
+        "additionalOffersAdults"
+      ],
+      "website": "https://www.vbcecublens.ch",
+      "city": "Ecublens",
+      "plusCode": "8FR8GHH6+C6",
+      "caption": "VBC Ecublens",
+      "activeLeaguesWomen": [
+        "2L",
+        "5L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/7015ca68944fae8d0b0c3a6fb6d28d37041b3e4a/19787_Ecublens%20VBC.png?v=1756740951",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U23",
+            "U20"
+          ],
+          "activeLeaguesWomen": [
+            "2L",
+            "5L"
+          ],
+          "additionalOffersAdults": [],
+          "activeLeaguesMen": [
+            "2L",
+            "3L"
+          ]
+        }
+      ],
+      "id": 902200,
+      "activeLeaguesMen": [
+        "2L",
+        "3L"
+      ],
+      "email": "info@vbcecublens.ch"
+    },
+    {
+      "objectID": "902210",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "1066",
+      "juniorteamsWomen": [
+        "U20"
+      ],
+      "offers": [
+        "kidsVolley"
+      ],
+      "website": "www.vbcepalinges.ch",
+      "city": "Epalinges",
+      "plusCode": "8FR8GMX8+J3",
+      "caption": "VBC Epalinges",
+      "activeLeaguesWomen": [
+        "1L",
+        "2L",
+        "4L",
+        "5L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/29799a1d41b83d3c153daf0080616ca5157fe14f/19806_Epalinges%20VBC.png?v=1653829938",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U20"
+          ],
+          "activeLeaguesWomen": [
+            "1L",
+            "2L",
+            "4L",
+            "5L"
+          ],
+          "kidsVolley": []
+        }
+      ],
+      "id": 902210,
+      "activeLeaguesMen": [],
+      "email": ""
+    },
+    {
+      "objectID": "911150",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "6218",
+      "juniorteamsWomen": [
+        "U18",
+        "U14"
+      ],
+      "offers": [
+        "kidsVolley"
+      ],
+      "website": "",
+      "city": "Ettiswil",
+      "plusCode": "8FVC42WC+G7",
+      "caption": "VBC Ettiswil",
+      "activeLeaguesWomen": [
+        "5L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U18",
+            "U14"
+          ],
+          "activeLeaguesWomen": [
+            "5L"
+          ],
+          "kidsVolley": []
+        }
+      ],
+      "id": 911150,
+      "activeLeaguesMen": [],
+      "email": ""
+    },
+    {
+      "objectID": "903060",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "",
+      "juniorteamsWomen": [
+        "U23"
+      ],
+      "offers": [
+        "kidsVolley"
+      ],
+      "website": "http://vbcfully.ch/",
+      "city": "",
+      "plusCode": "",
+      "caption": "VBC Fully",
+      "activeLeaguesWomen": [],
+      "juniorteamsMen": [
+        "U23",
+        "U20"
+      ],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/51227ce5e4a6b68804f74325a3984f5c68f8e7c2/19934_VBC%20Fully.png?v=1655756428",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U23"
+          ],
+          "activeLeaguesMen": [
+            "1L",
+            "2L"
+          ],
+          "juniorteamsMen": [
+            "U23",
+            "U20"
+          ],
+          "kidsVolley": []
+        }
+      ],
+      "id": 903060,
+      "activeLeaguesMen": [
+        "1L",
+        "2L"
+      ],
+      "email": "info@vbcfully.ch"
+    },
+    {
+      "objectID": "911290",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "6014",
+      "juniorteamsWomen": [
+        "U20",
+        "U14"
+      ],
+      "offers": [],
+      "website": "https://vbc-littau.ch/",
+      "city": "Luzern",
+      "plusCode": "8FVC3752+G2",
+      "caption": "VBC Littau",
+      "activeLeaguesWomen": [
+        "4L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/631bb81cf7f12e07543dc5ba98c385b5ccd28e97/21559_VBC%20Littau.png?v=1722876691",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U20",
+            "U14"
+          ],
+          "activeLeaguesWomen": [
+            "4L"
+          ],
+          "activeLeaguesMen": [
+            "5L"
+          ],
+          "juniorteamsMen": []
+        }
+      ],
+      "id": 911290,
+      "activeLeaguesMen": [
+        "5L"
+      ],
+      "email": "vbc-littau@gmx.ch"
+    },
+    {
+      "objectID": "904140",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "2001",
+      "juniorteamsWomen": [],
+      "offers": [
+        "activeBeachWomen",
+        "activeBeachMen",
+        "juniorteamsBeachWomen",
+        "juniorteamsBeachMen"
+      ],
+      "website": "www.nucvolleyball.ch",
+      "city": "Neuchâtel",
+      "plusCode": "8FR8XWRF+2R",
+      "caption": "VBC NUC",
+      "activeLeaguesWomen": [],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/47696599cd4d034a3d81427e310c6c550f8ac298/20065_VBC%20NUC.png?v=1653922305",
+      "offersToShowOnClubCard": [
+        {
+          "activeBeachWomen": [],
+          "juniorteamsBeachMen": [],
+          "activeBeachMen": [],
+          "juniorteamsBeachWomen": []
+        }
+      ],
+      "id": 904140,
+      "activeLeaguesMen": [],
+      "email": "info@nucvolleyball.ch"
+    },
+    {
+      "objectID": "906350",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "1733",
+      "juniorteamsWomen": [
+        "U18"
+      ],
+      "offers": [
+        "kidsVolley"
+      ],
+      "website": "https://www.vbcsmile.ch",
+      "city": "Treyvaux",
+      "plusCode": "8FR9P4FW+F3",
+      "caption": "VBC Smile",
+      "activeLeaguesWomen": [
+        "4L",
+        "5L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/0078a87547090bc4c8a06df46e4ce8a707e60213/20359_VBC%20Smile.png?v=1723039494",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U18"
+          ],
+          "activeLeaguesWomen": [
+            "4L",
+            "5L"
+          ],
+          "kidsVolley": []
+        }
+      ],
+      "id": 906350,
+      "activeLeaguesMen": [],
+      "email": "presidente@vbcsmile.ch"
+    },
+    {
+      "objectID": "902455",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "1043",
+      "juniorteamsWomen": [],
+      "offers": [
+        "additionalOffersAdults"
+      ],
+      "website": "https://www.vbcsugnens.com",
+      "city": "Sugnens",
+      "plusCode": "8FR8MM3G+23",
+      "caption": "VBC Sugnens-Cugy",
+      "activeLeaguesWomen": [
+        "2L",
+        "5L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/02ca7f2db9bb04ee44e985a8dfc1ec9d116d7124/19874_Sugnens-Cugy%20VBC.png?v=1725487224",
+      "offersToShowOnClubCard": [
+        {
+          "activeLeaguesWomen": [
+            "2L",
+            "5L"
+          ],
+          "additionalOffersAdults": [],
+          "activeLeaguesMen": [
+            "3L"
+          ]
+        }
+      ],
+      "id": 902455,
+      "activeLeaguesMen": [
+        "3L"
+      ],
+      "email": "secretariat@vbcsugnens.com"
+    },
+    {
+      "objectID": "911580",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "6430",
+      "juniorteamsWomen": [
+        "U23",
+        "U20",
+        "U18"
+      ],
+      "offers": [
+        "additionalOffersAdults"
+      ],
+      "website": "https://www.suito.ch",
+      "city": "Schwyz",
+      "plusCode": "8FVC2MM9+3P",
+      "caption": "VBC Suito Schwyz",
+      "activeLeaguesWomen": [
+        "5L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/75bc15659fcc786ee62fc3978a4415916a7faf93/21672_VBC%20Suito%20Schwyz.png?v=1724093495",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U23",
+            "U20",
+            "U18"
+          ],
+          "activeLeaguesWomen": [
+            "5L"
+          ],
+          "additionalOffersAdults": []
+        }
+      ],
+      "id": 911580,
+      "activeLeaguesMen": [],
+      "email": ""
+    },
+    {
+      "objectID": "910203",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "5610",
+      "juniorteamsWomen": [
+        "U23"
+      ],
+      "offers": [],
+      "website": "https://www.volebo.ch/",
+      "city": "Wohlen",
+      "plusCode": "8FVC972P+9R",
+      "caption": "VBC Volebo",
+      "activeLeaguesWomen": [
+        "5L"
+      ],
+      "juniorteamsMen": [
+        "U23",
+        "U20"
+      ],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/953bf25a25a3b0ee0653128616bb006aea4472b4/28502_VBC%20Volebo%20Freiamt.png?v=1748528486",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U23"
+          ],
+          "activeLeaguesWomen": [
+            "5L"
+          ],
+          "activeLeaguesMen": [
+            "2L",
+            "3L",
+            "4L"
+          ],
+          "juniorteamsMen": [
+            "U23",
+            "U20"
+          ]
+        }
+      ],
+      "id": 910203,
+      "activeLeaguesMen": [
+        "2L",
+        "3L",
+        "4L"
+      ],
+      "email": ""
+    },
+    {
+      "objectID": "903195",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "3924",
+      "juniorteamsWomen": [],
+      "offers": [
+        "kidsVolley"
+      ],
+      "website": "https://www.vbczaniglas.ch",
+      "city": "St. Niklaus VS",
+      "plusCode": "8FR95R6G+Q7",
+      "caption": "VBC Zaniglas",
+      "activeLeaguesWomen": [
+        "1L",
+        "2L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/6100b9ba8d6e6a7a117bb312461a6a4c7436a461/19997_VBC%20St.%20Niklaus.png?v=1725547080",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [],
+          "activeLeaguesWomen": [
+            "1L",
+            "2L"
+          ],
+          "kidsVolley": []
+        }
+      ],
+      "id": 903195,
+      "activeLeaguesMen": [],
+      "email": ""
+    },
+    {
+      "objectID": "913245",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "8222",
+      "juniorteamsWomen": [],
+      "offers": [],
+      "website": "",
+      "city": "Beringen",
+      "plusCode": "8FVCPH4G+45",
+      "caption": "VBG Klettgau",
+      "activeLeaguesWomen": [],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/49bbec8e63ab10219877fae07cca48e0ba82d760/22151_VBG%20Klettgau.png?v=1653569026",
+      "offersToShowOnClubCard": [
+        {
+          "activeLeaguesMen": [
+            "2L"
+          ]
+        }
+      ],
+      "id": 913245,
+      "activeLeaguesMen": [
+        "2L"
+      ],
+      "email": ""
+    },
+    {
+      "objectID": "912420",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "8134",
+      "juniorteamsWomen": [],
+      "offers": [
+        "kidsVolley"
+      ],
+      "website": "https://www.vctornado.ch/",
+      "city": "Adliswil",
+      "plusCode": "8FVC8G79+MC",
+      "caption": "VC Tornado Adliswil",
+      "activeLeaguesWomen": [
+        "2L",
+        "3L",
+        "5L"
+      ],
+      "juniorteamsMen": [
+        "U23",
+        "U20",
+        "U18",
+        "U16"
+      ],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/8d42ab84b806d006b729cd71da2d2acba6f8d0dd/21903_VC%20Tornado%20Adliswil.png?v=1694508407",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [],
+          "activeLeaguesWomen": [
+            "2L",
+            "3L",
+            "5L"
+          ],
+          "activeLeaguesMen": [
+            "3L",
+            "4L"
+          ],
+          "juniorteamsMen": [
+            "U23",
+            "U20",
+            "U18",
+            "U16"
+          ],
+          "kidsVolley": []
+        }
+      ],
+      "id": 912420,
+      "activeLeaguesMen": [
+        "3L",
+        "4L"
+      ],
+      "email": "sport@vctornado.ch"
+    },
+    {
+      "objectID": "913475",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "8400",
+      "juniorteamsWomen": [
+        "U23",
+        "U20",
+        "U18",
+        "U16",
+        "U14"
+      ],
+      "offers": [
+        "kidsVolley"
+      ],
+      "website": "https://www.vc-vivax.ch/",
+      "city": "Winterthur",
+      "plusCode": "8FVCFPPH+7P",
+      "caption": "VC Vivax Winterthur",
+      "activeLeaguesWomen": [
+        "3L",
+        "4L",
+        "5L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/5d7693a7f0e93359c99cceb8426a9453b3bd2b39/22275_VC%20Vivax%20Winterthur.png?v=1727968445",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U23",
+            "U20",
+            "U18",
+            "U16",
+            "U14"
+          ],
+          "activeLeaguesWomen": [
+            "3L",
+            "4L",
+            "5L"
+          ],
+          "activeLeaguesMen": [
+            "4L"
+          ],
+          "kidsVolley": []
+        }
+      ],
+      "id": 913475,
+      "activeLeaguesMen": [
+        "4L"
+      ],
+      "email": ""
+    },
+    {
+      "objectID": "905280",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "",
+      "juniorteamsWomen": [
+        "U18",
+        "U16",
+        "U14"
+      ],
+      "offers": [
+        "kidsVolley"
+      ],
+      "website": "https://www.vfm.ch/fr",
+      "city": "",
+      "plusCode": "",
+      "caption": "VFM - Volleyball Franches-Montagnes",
+      "activeLeaguesWomen": [
+        "NLA",
+        "1L",
+        "2L",
+        "3L",
+        "5L"
+      ],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/21f32d31ba1ae9668219bc1c782019e712169c44/20171_VFM%20-%20Volleyball%20Franches-Montagnes.png?v=1655023610",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U18",
+            "U16",
+            "U14"
+          ],
+          "activeLeaguesWomen": [
+            "NLA",
+            "1L",
+            "2L",
+            "3L",
+            "5L"
+          ],
+          "kidsVolley": []
+        }
+      ],
+      "id": 905280,
+      "activeLeaguesMen": [],
+      "email": ""
+    },
+    {
+      "objectID": "913520",
+      "_index": "clubs-0-1780358412",
+      "_score": null,
+      "zip": "9205",
+      "juniorteamsWomen": [
+        "U16"
+      ],
+      "offers": [
+        "additionalOffersAdults",
+        "additionalOffersJuniors"
+      ],
+      "website": "https://www.volleywaldkirch.ch/",
+      "city": "Waldkirch",
+      "plusCode": "8FVFF76Q+G5",
+      "caption": "Volley Waldkirch",
+      "activeLeaguesWomen": [],
+      "juniorteamsMen": [],
+      "logo": "https://volleymanager.volleyball.ch/_Resources/Persistent/35d750fca87ce67f680d2a0a75df0d1239be4dbb/23610_Volley%20Waldkirch.png?v=1728067447",
+      "offersToShowOnClubCard": [
+        {
+          "juniorteamsWomen": [
+            "U16"
+          ],
+          "additionalOffersJuniors": [],
+          "additionalOffersAdults": []
+        }
+      ],
+      "id": 913520,
+      "activeLeaguesMen": [],
+      "email": ""
+    }
+  ],
+  "gameCenter": [
+    {
+      "swissVolleyClubId": "905280",
+      "name": "BIWI VFM",
+      "logo": "https://www.volleyball.ch/_images-volleymanager/E-eMw2ea2qdH17uvN2ZQWf_ctKY=/200x0/filters:format(webp):quality(80)/_Resources%252FPersistent%252F21f32d31ba1ae9668219bc1c782019e712169c44%252F20171_VFM%252520-%252520Volleyball%252520Franches-Montagnes.png",
+      "teamIds": [
+        "91"
+      ],
+      "gcHasNLAMen": false,
+      "gcHasNLAWomen": true,
+      "gcHasNLBMen": false,
+      "gcHasNLBWomen": false,
+      "gcHas1LigaMen": false,
+      "gcHas1LigaWomen": false
+    },
+    {
+      "swissVolleyClubId": "901085",
+      "name": "Infomaniak Genève Volley",
+      "logo": "https://www.volleyball.ch/_images-volleymanager/9r16mLvyHCgUYKXJvT_0ZqcZ3Q8=/200x0/filters:format(webp):quality(80)/_Resources%252FPersistent%252F3fe637242fa12aa1069639b7b1e069cd035e8946%252F19709_Gen%2525C3%2525A8ve%252520Volley.png",
+      "teamIds": [
+        "107"
+      ],
+      "gcHasNLAMen": false,
+      "gcHasNLAWomen": true,
+      "gcHasNLBMen": false,
+      "gcHasNLBWomen": false,
+      "gcHas1LigaMen": false,
+      "gcHas1LigaWomen": false
+    },
+    {
+      "swissVolleyClubId": "912472",
+      "name": "NLZ Volleyball Academy",
+      "logo": "https://www.volleyball.ch/_images-volleymanager/0Y4tAPOzERN8EjIrw8xCwZRnVBc=/200x0/filters:format(webp):quality(80)/_Resources%252FPersistent%252Fd748d306fd4e34bc18c178a20024ac0e1aa7e402%252F30415_Volleyball%252520Academy.png",
+      "teamIds": [
+        "13942"
+      ],
+      "gcHasNLAMen": false,
+      "gcHasNLAWomen": true,
+      "gcHasNLBMen": false,
+      "gcHasNLBWomen": false,
+      "gcHas1LigaMen": false,
+      "gcHas1LigaWomen": false
+    },
+    {
+      "swissVolleyClubId": "913510",
+      "name": "Raiffeisen Volley Toggenburg",
+      "logo": "https://www.volleyball.ch/_images-volleymanager/Lhpr3g4bPPyrVUt_SLRQlJXanS0=/200x0/filters:format(webp):quality(80)/_Resources%252FPersistent%252F6044e2df2c8c8e6cced67697a46adbbb8b2b50b3%252F22285_Volley%252520Toggenburg.png",
+      "teamIds": [
+        "97"
+      ],
+      "gcHasNLAMen": false,
+      "gcHasNLAWomen": true,
+      "gcHasNLBMen": false,
+      "gcHasNLBWomen": false,
+      "gcHas1LigaMen": false,
+      "gcHas1LigaWomen": false
+    },
+    {
+      "swissVolleyClubId": "909660",
+      "name": "Sm`Aesch Pfeffingen",
+      "logo": "https://www.volleyball.ch/_images-volleymanager/TpFFD4DR3LDDKhp99hG_Oxmwibo=/200x0/filters:format(webp):quality(80)/_Resources%252FPersistent%252F1689844be562c9ce42e340ce354e315941385160%252F21061_Sm%252560Aesch%252520Pfeffingen.png",
+      "teamIds": [
+        "98"
+      ],
+      "gcHasNLAMen": false,
+      "gcHasNLAWomen": true,
+      "gcHasNLBMen": false,
+      "gcHasNLBWomen": false,
+      "gcHas1LigaMen": false,
+      "gcHas1LigaWomen": false
+    },
+    {
+      "swissVolleyClubId": "902150",
+      "name": "VBC Cheseaux",
+      "logo": "https://www.volleyball.ch/_images-volleymanager/MrsS4S2G6YWSqtdcnHNa4q_eBxs=/200x0/filters:format(webp):quality(80)/_Resources%252FPersistent%252Fca6fd65b5b23a1375557c24cd025ba38424beb4e%252F19777_Cheseaux%252520VBC.png",
+      "teamIds": [
+        "105"
+      ],
+      "gcHasNLAMen": false,
+      "gcHasNLAWomen": true,
+      "gcHasNLBMen": false,
+      "gcHasNLBWomen": false,
+      "gcHas1LigaMen": false,
+      "gcHas1LigaWomen": false
+    },
+    {
+      "swissVolleyClubId": "913310",
+      "name": "VC Kanti Schaffhausen",
+      "logo": "https://www.volleyball.ch/_images-volleymanager/elPZ0ZDK4RN6Ush-3oZ7COD7VLk=/200x0/filters:format(webp):quality(80)/_Resources%252FPersistent%252F6a718e7970b63dd33d86cc5250f4a0fc8ea39ef5%252F22190_VC%252520Kanti%252520Schaffhausen.png",
+      "teamIds": [
+        "94"
+      ],
+      "gcHasNLAMen": false,
+      "gcHasNLAWomen": true,
+      "gcHasNLBMen": false,
+      "gcHasNLBWomen": false,
+      "gcHas1LigaMen": false,
+      "gcHas1LigaWomen": false
+    },
+    {
+      "swissVolleyClubId": "904140",
+      "name": "Viteos NUC",
+      "logo": "https://www.volleyball.ch/_images-volleymanager/NLFrJRKS9ys1QBOkdRV7Mv7Rzqs=/200x0/filters:format(webp):quality(80)/_Resources%252FPersistent%252F47696599cd4d034a3d81427e310c6c550f8ac298%252F20065_VBC%252520NUC.png",
+      "teamIds": [
+        "110"
+      ],
+      "gcHasNLAMen": false,
+      "gcHasNLAWomen": true,
+      "gcHasNLBMen": false,
+      "gcHasNLBWomen": false,
+      "gcHas1LigaMen": false,
+      "gcHas1LigaWomen": false
+    },
+    {
+      "swissVolleyClubId": "906100",
+      "name": "Volley Düdingen",
+      "logo": "https://www.volleyball.ch/_images-volleymanager/fPY1C61bzw4bbcKPFYCcxF4DKgE=/200x0/filters:format(webp):quality(80)/_Resources%252FPersistent%252F2903d5a06daf6c77aca3dc3fa80a9717dba30282%252F20265_Volley%252520D%2525C3%2525BCdingen.png",
+      "teamIds": [
+        "111"
+      ],
+      "gcHasNLAMen": false,
+      "gcHasNLAWomen": true,
+      "gcHasNLBMen": false,
+      "gcHasNLBWomen": false,
+      "gcHas1LigaMen": false,
+      "gcHas1LigaWomen": false
+    },
+    {
+      "swissVolleyClubId": "915038",
+      "name": "Volley Lugano",
+      "logo": "https://www.volleyball.ch/_images-volleymanager/V3j8EKPdcsan5xD1aElqCoTnies=/200x0/filters:format(webp):quality(80)/_Resources%252FPersistent%252F92238962214d215dff5e77bb7b48fa1ce3517873%252F22462_Volley%252520Lugano.png",
+      "teamIds": [
+        "1518"
+      ],
+      "gcHasNLAMen": false,
+      "gcHasNLAWomen": true,
+      "gcHasNLBMen": false,
+      "gcHasNLBWomen": false,
+      "gcHas1LigaMen": false,
+      "gcHas1LigaWomen": false
+    }
+  ],
+  "verifiedTeams": [
+    {
+      "swissVolleyClubId": "905280",
+      "name": "BIWI VFM",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": true,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "901085",
+      "name": "Infomaniak Genève Volley",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": true,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "912472",
+      "name": "NLZ Volleyball Academy",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": true,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "913510",
+      "name": "Raiffeisen Volley Toggenburg",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": true,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "909660",
+      "name": "Sm`Aesch Pfeffingen",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": true,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "902150",
+      "name": "VBC Cheseaux",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": true,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "913310",
+      "name": "VC Kanti Schaffhausen",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": true,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "904140",
+      "name": "Viteos NUC",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": true,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "906100",
+      "name": "Volley Düdingen",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": true,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "915038",
+      "name": "Volley Lugano",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": true,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "910010",
+      "name": "BTV Aarau",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "915040",
+      "name": "Bellinzona Volley",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "902250",
+      "name": "Lausanne UC",
+      "vtHasNLAMen": true,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "910012",
+      "name": "NNV Eaglets Volley Aarau",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "914120",
+      "name": "Raiffeisen Volley Glaronia",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "910054",
+      "name": "VBC Kanti Baden",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "901170",
+      "name": "VBC Servette Star-Onex",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "903300",
+      "name": "VBC Visp",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "913010",
+      "name": "Volley Aadorf",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "907345",
+      "name": "Volley Köniz",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "911355",
+      "name": "Volley Luzern",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "907465",
+      "name": "Volley Oberdiessbach",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": true
+    },
+    {
+      "swissVolleyClubId": "901060",
+      "name": "Chênois Genève Volleyball",
+      "vtHasNLAMen": true,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "904060",
+      "name": "Colombier Volley",
+      "vtHasNLAMen": true,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "913420",
+      "name": "STV St.Gallen Volleyball",
+      "vtHasNLAMen": true,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "914130",
+      "name": "TSV Jona Volleyball",
+      "vtHasNLAMen": true,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "913030",
+      "name": "Volley Amriswil",
+      "vtHasNLAMen": true,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "914190",
+      "name": "Volley Näfels",
+      "vtHasNLAMen": true,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "910580",
+      "name": "Volley Schönenwerd",
+      "vtHasNLAMen": true,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": false,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "907009",
+      "name": "Auswahlmannschaft Swiss Volley",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "909130",
+      "name": "City Volley Basel",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "902290",
+      "name": "Lutry-Lavaux Volleyball",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "907921",
+      "name": "VBC Aeschi",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "911590",
+      "name": "VBC Sursee",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "907820",
+      "name": "VBC Uni Bern",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "912470",
+      "name": "VBC Voléro Zürich",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": false
+    },
+    {
+      "swissVolleyClubId": "907620",
+      "name": "Volleyball Papiermühle",
+      "vtHasNLAMen": false,
+      "vtHasNLAWomen": false,
+      "vtHasNLBMen": true,
+      "vtHasNLBWomen": false
+    }
+  ]
+}

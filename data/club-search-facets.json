@@ -1,0 +1,41 @@
+{
+  "offers": {
+    "kidsVolley": 11,
+    "additionalOffersAdults": 6,
+    "activeBeachMen": 2,
+    "activeBeachWomen": 2,
+    "juniorteamsBeachMen": 2,
+    "juniorteamsBeachWomen": 2,
+    "additionalOffersJuniors": 1
+  },
+  "juniorteamsWomen": {
+    "U23": 8,
+    "U18": 7,
+    "U20": 7,
+    "U14": 6,
+    "U16": 5,
+    "U17": 1
+  },
+  "activeLeaguesWomen": {
+    "5L": 13,
+    "2L": 7,
+    "4L": 6,
+    "3L": 5,
+    "1L": 4,
+    "NLA": 1
+  },
+  "juniorteamsMen": {
+    "U20": 4,
+    "U16": 3,
+    "U18": 3,
+    "U23": 3
+  },
+  "activeLeaguesMen": {
+    "3L": 6,
+    "2L": 5,
+    "4L": 5,
+    "1L": 2,
+    "5L": 1,
+    "NLA": 1
+  }
+}

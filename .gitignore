@@ -98,3 +98,14 @@ logs/
 # Build artifacts
 dist/
 .turbo/
+
+# Python (scraper scripts)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Scraper debug artifacts
+scripts/debug_*.py
+data/verein-suchen-*.html

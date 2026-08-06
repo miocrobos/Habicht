@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
-import { Menu, X, User, Search, Settings, Bell, Bookmark, ChevronDown, Home, Users, UserCircle, LogIn, UserPlus, LogOut, Info, Building2 } from 'lucide-react'
+import { Menu, X, User, Search, Settings, Bell, Bookmark, ChevronDown, Home, Users, UserCircle, LogIn, UserPlus, LogOut, Info, Building2, MapPin, Newspaper } from 'lucide-react'
 import SettingsPopup from '@/components/shared/SettingsPopup'
 import { useSession, signOut } from 'next-auth/react'
 import axios from 'axios'
@@ -163,10 +163,10 @@ export default function Header() {
               {t('nav.clubs')}
             </Link>
             <Link href="/courts" className="text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
-              {t('nav.courts') === 'nav.courts' ? 'Courts' : t('nav.courts')}
+              {t('nav.courts')}
             </Link>
             <Link href="/news" className="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
-              {t('nav.news') === 'nav.news' ? 'News' : t('nav.news')}
+              {t('nav.news')}
             </Link>
             <Link href="/recruiters" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
               {t('nav.recruiters')}
@@ -384,6 +384,24 @@ export default function Header() {
               >
                 <Building2 className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
                 <span className="whitespace-nowrap">{t('nav.clubs')}</span>
+              </Link>
+              
+              <Link 
+                href="/courts" 
+                className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <MapPin className="w-5 h-5 flex-shrink-0 text-emerald-600 dark:text-emerald-400" />
+                <span className="whitespace-nowrap">{t('nav.courts')}</span>
+              </Link>
+              
+              <Link 
+                href="/news" 
+                className="flex items-center gap-3 px-4 py-3 mx-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-orange-900/30 transition font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Newspaper className="w-5 h-5 flex-shrink-0 text-orange-600 dark:text-orange-400" />
+                <span className="whitespace-nowrap">{t('nav.news')}</span>
               </Link>
               
               <Link 

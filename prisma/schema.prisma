@@ -952,3 +952,39 @@ model PlayerRequestInterest {
   @@index([requestId])
   @@index([userId])
 }
+
+// Community news / announcements shown on the home page and /news
+model News {
+  id          String   @id @default(cuid())
+  title       String
+  excerpt     String   @db.Text
+  content     String   @db.Text
+  imageUrl    String?
+  category    String   @default("GENERAL") // GENERAL, EVENT, TOURNAMENT, CLUB, ANNOUNCEMENT
+  authorName  String   @default("Habicht")
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([published, createdAt])
+}
+
+// Indoor court / venue locations (Standorte) shown on the community map
+model Court {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  address     String
+  city        String
+  canton      Canton
+  latitude    Float
+  longitude   Float
+  indoor      Boolean  @default(true)
+  courtsCount Int      @default(1)
+  website     String?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([canton])
+}

@@ -6,7 +6,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Sun, Moon, Globe2 } from 'lucide-react';
 
 const LANGUAGES = [
-  { code: 'gsw', label: 'Schwiizerd.' },
   { code: 'de', label: 'Deutsch' },
   { code: 'fr', label: 'Français' },
   { code: 'it', label: 'Italiano' },

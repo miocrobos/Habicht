@@ -415,13 +415,13 @@ function translateEmploymentStatus(status: string | null | undefined, translatio
   return translationKey ? (translations[translationKey] as string) : status;
 }
 
-export async function generatePlayerCV(playerData: PlayerData, language: string = 'gsw'): Promise<Blob> {
+export async function generatePlayerCV(playerData: PlayerData, language: string = 'de'): Promise<Blob> {
   console.log('🎯 CV Generation v2.0 - Professional Format Starting...');
   console.log('Player:', playerData.firstName, playerData.lastName);
   console.log('Language:', language);
   
   // Get translations for selected language
-  const translations = pdfTranslations[language] || pdfTranslations['gsw'];
+  const translations = pdfTranslations[language] || pdfTranslations['de'];
   const positions = translations.positions as { [key: string]: string };
   
   const doc = new jsPDF();

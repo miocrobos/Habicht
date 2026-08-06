@@ -19,7 +19,7 @@ interface CVTypeModalProps {
 export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData, userName }: CVTypeModalProps) {
   const { t } = useLanguage()
   const [exporting, setExporting] = useState(false)
-  const [selectedLanguage, setSelectedLanguage] = useState('gsw') // Default to Swiss German
+  const [selectedLanguage, setSelectedLanguage] = useState('de') // Default to German
 
   if (!isOpen) return null
 
@@ -114,7 +114,6 @@ export default function CVTypeModal({ isOpen, onClose, playerData, recruiterData
             onChange={(e) => setSelectedLanguage(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 dark:text-white"
           >
-            <option value="gsw">{t('playerProfile.cvLanguageSwissGerman')}</option>
             <option value="de">{t('playerProfile.cvLanguageGerman')}</option>
             <option value="fr">{t('playerProfile.cvLanguageFrench')}</option>
             <option value="it">{t('playerProfile.cvLanguageItalian')}</option>

@@ -2,14 +2,13 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { translateText, getGoogleLanguageCode } from '@/lib/translate'
-import { gswTranslations } from './translations/gsw'
 import { deTranslations } from './translations/de'
 import { frTranslations } from './translations/fr'
 import { itTranslations } from './translations/it'
 import { rmTranslations } from './translations/rm'
 import { enTranslations } from './translations/en'
 
-type Language = 'gsw' | 'de' | 'fr' | 'it' | 'rm' | 'en'
+type Language = 'de' | 'fr' | 'it' | 'rm' | 'en'
 
 interface LanguageContextType {
   language: Language
@@ -21,7 +20,6 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 const translations = {
-  gsw: gswTranslations,
   de: deTranslations,
   fr: frTranslations,
   it: itTranslations,
@@ -35,7 +33,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     // Load language from localStorage on mount
     const savedLanguage = localStorage.getItem('language') as Language
-    if (savedLanguage && ['gsw', 'de', 'fr', 'it', 'rm', 'en'].includes(savedLanguage)) {
+    if (savedLanguage && ['de', 'fr', 'it', 'rm', 'en'].includes(savedLanguage)) {
       setLanguageState(savedLanguage)
     }
   }, [])
@@ -68,7 +66,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }
 
   // Dynamic translation using Google Translate API
-  const translate = async (text: string, sourceLanguage: string = 'gsw'): Promise<string> => {
+  const translate = async (text: string, sourceLanguage: string = 'de'): Promise<string> => {
     const targetLanguageCode = getGoogleLanguageCode(language)
     return await translateText(text, targetLanguageCode, sourceLanguage)
   }

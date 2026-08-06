@@ -17,15 +17,15 @@ export default function SubmitClubPage() {
     // Try to get lang from URL (e.g., /de/clubs/submit or ?lang=de)
     let urlLang = undefined;
     // Check for /[lang]/ in pathname
-    const match = pathname.match(/^\/(gsw|de|fr|it|rm|en)(\/|$)/);
+    const match = pathname.match(/^\/(de|fr|it|rm|en)(\/|$)/);
     if (match) {
       urlLang = match[1];
     } else if (searchParams && searchParams.get('lang')) {
       urlLang = searchParams.get('lang');
     }
     // Only set if different and valid
-    if (urlLang && urlLang !== language && ['gsw','de','fr','it','rm','en'].includes(urlLang)) {
-      setLanguage(urlLang as 'gsw' | 'de' | 'fr' | 'it' | 'rm' | 'en');
+    if (urlLang && urlLang !== language && ['de','fr','it','rm','en'].includes(urlLang)) {
+      setLanguage(urlLang as 'de' | 'fr' | 'it' | 'rm' | 'en');
     }
     // If no URL lang, fallback to localStorage (handled by LanguageProvider on mount)
   }, [pathname, searchParams, language, setLanguage]);

@@ -719,7 +719,6 @@ export default function EditPlayerProfilePage({ params }: { params: { id: string
                   className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                   <option value="">{t('common.select') || 'Wählen'}</option>
-                  <option value="gsw">{t('register.languageSwissGerman') || 'Schwiizerdütsch'}</option>
                   <option value="de">{t('register.languageGerman') || 'Deutsch'}</option>
                   <option value="fr">{t('register.languageFrench') || 'Français'}</option>
                   <option value="it">{t('register.languageItalian') || 'Italiano'}</option>

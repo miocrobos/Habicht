@@ -7,6 +7,8 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import CantonFlag from '@/components/shared/CantonFlag'
+import MembersCount from '@/components/shared/MembersCount'
+import NewsSection from '@/components/news/NewsSection'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useTheme } from '@/contexts/ThemeContext'
 
@@ -120,6 +122,11 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-r from-gray-950/95 via-gray-950/80 to-gray-950/40" />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent" />
           </div>
+        </div>
+
+        {/* Members count — home page only, top-left */}
+        <div className="absolute top-3 left-3 sm:top-4 sm:left-6 lg:left-8 z-20">
+          <MembersCount />
         </div>
         
         <div className="container mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
@@ -328,6 +335,39 @@ export default function Home() {
             </Link>
           </div>
           </ScrollFade>
+        </div>
+      </section>
+
+      {/* Community News */}
+      <NewsSection />
+
+      {/* Find a Court band */}
+      <section className="py-10 sm:py-16 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-800 dark:to-gray-950 px-6 py-10 sm:px-10 sm:py-14">
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
+            <div className="relative z-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="max-w-xl">
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white mb-3">
+                  <MapPin className="h-4 w-4" />
+                  {(() => { const v = t('home.courts.badge'); return v === 'home.courts.badge' ? 'Standorte' : v })()}
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white">
+                  {(() => { const v = t('home.courts.title'); return v === 'home.courts.title' ? 'Find an indoor court to play' : v })()}
+                </h2>
+                <p className="mt-2 text-sm sm:text-base text-gray-300">
+                  {(() => { const v = t('home.courts.subtitle'); return v === 'home.courts.subtitle' ? 'Explore volleyball venues across Switzerland on an interactive map — a community for players, not just recruiters.' : v })()}
+                </p>
+              </div>
+              <Link
+                href="/courts"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm sm:text-base font-semibold text-gray-900 shadow-lg transition-all hover:scale-105 active:scale-95"
+              >
+                <MapPin className="h-5 w-5" />
+                {(() => { const v = t('home.courts.cta'); return v === 'home.courts.cta' ? 'Open the map' : v })()}
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

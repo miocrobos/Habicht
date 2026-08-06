@@ -18,7 +18,6 @@ export default function CVExportLanguagePopup({ onClose, onExport, userType }: C
     { code: 'en', name: t('playerProfile.cvLanguageEnglish'), flag: '🇬🇧' },
     { code: 'de', name: t('playerProfile.cvLanguageGerman'), flag: '🇩🇪' },
     { code: 'fr', name: t('playerProfile.cvLanguageFrench'), flag: '🇫🇷' },
-    { code: 'gsw', name: t('playerProfile.cvLanguageSwissGerman'), flag: '🇨🇭' },
     { code: 'it', name: t('playerProfile.cvLanguageItalian'), flag: '🇮🇹' },
     { code: 'rm', name: t('playerProfile.cvLanguageRomansh'), flag: '🇨🇭' },
   ]

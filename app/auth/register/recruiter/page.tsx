@@ -593,7 +593,6 @@ export default function RecruiterRegisterPage() {
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-white"
                   >
                     <option value="">{t('register.selectPreferredLanguage')}</option>
-                    <option value="gsw">{t('register.languageSwissGerman')}</option>
                     <option value="de">{t('register.languageGerman')}</option>
                     <option value="fr">{t('register.languageFrench')}</option>
                     <option value="it">{t('register.languageItalian')}</option>

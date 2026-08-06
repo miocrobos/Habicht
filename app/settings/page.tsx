@@ -204,7 +204,7 @@ export default function SettingsPage() {
   }
 
   const handleLanguageChange = (newLanguage: string) => {
-    setLanguageContext(newLanguage as 'gsw' | 'de' | 'fr' | 'it' | 'rm' | 'en')
+    setLanguageContext(newLanguage as 'de' | 'fr' | 'it' | 'rm' | 'en')
     showSaveConfirmation()
   }
 
@@ -576,7 +576,6 @@ export default function SettingsPage() {
                   <div className="p-6">
                     <div className="space-y-3">
                       {[
-                        { code: 'gsw', name: 'Schwiizerdütsch', flag: '🇨🇭' },
                         { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
                         { code: 'fr', name: 'Français', flag: '🇫🇷' },
                         { code: 'it', name: 'Italiano', flag: '🇮🇹' },

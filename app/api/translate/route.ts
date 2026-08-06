@@ -5,7 +5,7 @@ const GOOGLE_TRANSLATE_API_URL = 'https://translation.googleapis.com/language/tr
 
 export async function POST(request: NextRequest) {
   try {
-    const { text, targetLanguage, sourceLanguage = 'gsw' } = await request.json()
+    const { text, targetLanguage, sourceLanguage = 'de' } = await request.json()
 
     if (!text || !targetLanguage) {
       return NextResponse.json(

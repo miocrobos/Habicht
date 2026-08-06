@@ -162,6 +162,12 @@ export default function Header() {
             <Link href="/clubs" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
               {t('nav.clubs')}
             </Link>
+            <Link href="/courts" className="text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
+              {t('nav.courts') === 'nav.courts' ? 'Courts' : t('nav.courts')}
+            </Link>
+            <Link href="/news" className="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
+              {t('nav.news') === 'nav.news' ? 'News' : t('nav.news')}
+            </Link>
             <Link href="/recruiters" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
               {t('nav.recruiters')}
             </Link>

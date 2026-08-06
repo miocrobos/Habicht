@@ -10,7 +10,7 @@ const translationCache = new Map<string, string>();
 export async function translateText(
   text: string,
   targetLanguage: string,
-  sourceLanguage: string = 'gsw'
+  sourceLanguage: string = 'de'
 ): Promise<string> {
   // Create cache key
   const cacheKey = `${sourceLanguage}:${targetLanguage}:${text}`;
@@ -58,7 +58,6 @@ export async function translateText(
 
 // Map language codes to Google Translate API codes
 export const languageCodeMap: { [key: string]: string } = {
-  'gsw': 'de', // Swiss German -> German (closest match)
   'de': 'de',
   'fr': 'fr',
   'it': 'it',

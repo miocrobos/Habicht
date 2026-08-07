@@ -169,20 +169,20 @@ export default function ClubAdminPage() {
   )
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-12">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white">
               Club Verwaltung
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mt-2">
+            <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mt-1 sm:mt-2">
               Verwalte Clubs, Websites und Logos
             </p>
           </div>
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition font-medium flex items-center gap-2"
+            className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition font-medium flex items-center justify-center gap-2 shrink-0"
           >
             <Plus className="w-5 h-5" />
             {showAddForm ? 'Abbrechen' : 'Neuer Club'}

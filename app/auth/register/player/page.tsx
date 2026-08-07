@@ -508,11 +508,11 @@ export default function PlayerRegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4">
       <div className="max-w-2xl w-full space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{t('register.playerTitle')}</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{t('register.playerTitle')}</h2>
           <p className="mt-2 text-gray-600 dark:text-gray-400">{t('register.playerSubtitle')}</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-5 sm:p-8">
           <StepIndicator step={step} total={3} color="red" />
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -899,7 +899,7 @@ export default function PlayerRegisterPage() {
 
                 <div className="bg-pink-50 dark:bg-gray-700 border border-pink-200 dark:border-gray-600 rounded-lg p-5">
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-3">{t('register.socialMedia')}</h4>
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Instagram</label>
                       <input name="instagram" value={formData.instagram} onChange={handleChange}

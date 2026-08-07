@@ -274,11 +274,11 @@ export default function RecruiterRegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4">
       <div className="max-w-2xl w-full space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{t('register.recruiterTitle')}</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{t('register.recruiterTitle')}</h2>
           <p className="mt-2 text-gray-600 dark:text-gray-400">{t('register.recruiterSubtitle')}</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-5 sm:p-8">
           <StepIndicator step={step} total={3} color="blue" />
 
           <form onSubmit={handleSubmit} className="space-y-6">

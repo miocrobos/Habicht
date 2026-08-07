@@ -963,10 +963,16 @@ model News {
   category    String   @default("GENERAL") // GENERAL, EVENT, TOURNAMENT, CLUB, ANNOUNCEMENT
   authorName  String   @default("Habicht")
   published   Boolean  @default(true)
+  // External source metadata (FIVB, Volleyball World, Swiss Volley, ...)
+  sourceName  String?  // e.g. "FIVB", "Volleyball World", "Swiss Volley"
+  sourceUrl   String?  @unique // original article link (used for external open + dedupe)
+  scope       String   @default("LOCAL") // INTERNATIONAL | LOCAL
+  publishedAt DateTime @default(now()) // real article publication date (used for year filter)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  @@index([published, createdAt])
+  @@index([published, publishedAt])
+  @@index([scope])
 }
 
 // Indoor court / venue locations (Standorte) shown on the community map

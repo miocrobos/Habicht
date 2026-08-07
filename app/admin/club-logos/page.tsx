@@ -114,18 +114,18 @@ export default function ManageClubLogosPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 py-6 sm:py-12">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="mb-8 flex items-center justify-between">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Club Logos verwalten</h1>
-            <p className="text-lg text-gray-600">
+            <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">Club Logos verwalten</h1>
+            <p className="text-base sm:text-lg text-gray-600">
               Lade Logos für die Volleyball Clubs hoch
             </p>
           </div>
           <button
             onClick={() => setShowAddClub(true)}
-            className="flex items-center gap-2 bg-habicht-600 text-white px-6 py-3 rounded-lg hover:bg-habicht-700 transition font-medium"
+            className="flex items-center justify-center gap-2 bg-habicht-600 text-white px-6 py-3 rounded-lg hover:bg-habicht-700 transition font-medium shrink-0"
           >
             <Plus className="w-5 h-5" />
             Neuer Club

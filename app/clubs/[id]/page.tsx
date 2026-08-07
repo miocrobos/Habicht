@@ -166,9 +166,9 @@ export default function ClubProfilePage() {
         </div>
 
         <div className="container mx-auto px-4 h-full flex items-end pb-8">
-          <div className="flex items-end gap-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4 sm:gap-6">
             {/* Club Logo */}
-            <div className="w-32 h-32 rounded-2xl border-4 border-white dark:border-gray-800 shadow-xl overflow-hidden bg-white">
+            <div className="w-20 h-20 sm:w-32 sm:h-32 rounded-2xl border-4 border-white dark:border-gray-800 shadow-xl overflow-hidden bg-white">
               {club.logo ? (
                 <Image
                   src={club.logo}
@@ -187,7 +187,7 @@ export default function ClubProfilePage() {
 
             {/* Club Info */}
             <div className="text-white pb-2">
-              <h1 className="text-4xl font-bold mb-2">{club.name}</h1>
+              <h1 className="text-2xl sm:text-4xl font-bold mb-2">{club.name}</h1>
               <div className="flex items-center gap-4 text-white/90">
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />

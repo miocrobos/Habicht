@@ -3,6 +3,9 @@ import { getServerSession } from 'next-auth'
 import { prisma } from '@/lib/prisma'
 import { authOptions } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 // GET - Fetch user's notifications
 export async function GET(request: Request) {
   try {

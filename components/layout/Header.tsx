@@ -156,6 +156,12 @@ export default function Header() {
             <Link href="/players/women" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
               {t('nav.women')}
             </Link>
+            <Link href="/volleyball-schweiz" className="text-gray-700 dark:text-gray-300 hover:text-swiss-red dark:hover:text-red-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
+              Volleyball Schweiz
+            </Link>
+            <Link href="/volleyball-training" className="text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
+              Training
+            </Link>
             <Link href="/player-requests" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition font-medium text-sm xl:text-base whitespace-nowrap">
               {t('nav.playerRequests') || 'Aafroge'}
             </Link>

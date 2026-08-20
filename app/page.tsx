@@ -53,6 +53,37 @@ function ScrollFade({ children, className = '' }: { children: React.ReactNode, c
   )
 }
 
+const faqItems = [
+  {
+    question: 'Wie finde ich Volleyball-Teams und Clubs in der Schweiz?',
+    answer:
+      'Habicht hilft dabei, Spieler, Clubs und Talentprofile in der Schweizer Volleyballszene schnell zu finden. Die Plattform macht die Suche nach passenden Teams, Ligen und Profilen einfacher und transparenter.',
+  },
+  {
+    question: 'Ist die Plattform für Scouts und Vereine nutzbar?',
+    answer:
+      'Ja. Habicht richtet sich an Vereine, Scouts und talentierte Volleyballspieler, die sich im Schweizer Volleyball-Netzwerk vernetzen und auf sich aufmerksam machen möchten.',
+  },
+  {
+    question: 'Kann ich nach Volleyball-Spielern und Profilen in der Schweiz suchen?',
+    answer:
+      'Ja. Die Plattform zeigt relevante Profile, Teams und Leistungsdaten an, damit Spieler und Clubs gezielt zueinanderfinden und passende Möglichkeiten entdecken.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
 export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -101,6 +132,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* Hero Section with Full-Bleed Background Image */}
       <section className="relative min-h-[420px] sm:min-h-[500px] md:min-h-[550px] lg:min-h-[600px] overflow-hidden">
         {/* Background Image with Blend Effect - switches based on theme */}
@@ -367,6 +403,35 @@ export default function Home() {
                 {(() => { const v = t('home.courts.cta'); return v === 'home.courts.cta' ? 'Open the map' : v })()}
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-10 sm:py-16 bg-white dark:bg-gray-950">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="mb-8 text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600 dark:text-red-400 mb-3">
+              FAQ
+            </p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+              Häufige Fragen zur Schweizer Volleyball-Suche
+            </h2>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {faqItems.map((item) => (
+              <div
+                key={item.question}
+                className="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-900"
+              >
+                <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-white">
+                  {item.question}
+                </h3>
+                <p className="text-sm leading-7 text-gray-700 dark:text-gray-300">
+                  {item.answer}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

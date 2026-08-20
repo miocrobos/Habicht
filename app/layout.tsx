@@ -13,9 +13,44 @@ import SettingsPopup from '@/components/shared/SettingsPopup'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Habicht - Swiss Volleyball Scouting Platform',
-  description: 'Scouting platform for Swiss volleyball athletes. Find talented players, view highlights, and connect with recruits.',
-  keywords: ['volleyball', 'swiss volleyball', 'scouting', 'recruitment', 'athletes', 'swiss volley', 'schweizer volleyball', 'volleyball schweiz'],
+  metadataBase: new URL('https://www.habicht-volleyball.ch'),
+  title: 'Habicht | Swiss Volleyball Scouting & Talent Platform',
+  description: 'Discover Swiss volleyball talent, club opportunities, player profiles, and scouting insights across Switzerland with Habicht.',
+  keywords: [
+    'Swiss volleyball',
+    'volleyball Switzerland',
+    'volleyball Schweiz',
+    'schweizer volleyball',
+    'volleyball scouting',
+    'volleyball talent Switzerland',
+    'volleyball clubs Switzerland',
+    'volleyball players Switzerland',
+    'volleyball recruiting Swiss',
+    'Habicht volleyball',
+    'volleyball talent platform',
+    'volleyball Switzerland clubs',
+    'Swiss volleyball players',
+    'Swiss volleyball scouting platform',
+  ],
+  alternates: {
+    canonical: '/',
+    languages: {
+      'de-CH': '/',
+      'fr-CH': '/',
+      'en-CH': '/',
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -25,17 +60,19 @@ export const metadata: Metadata = {
     apple: '/eagle-logo.png',
   },
   openGraph: {
-    title: 'Habicht – Swiss Volleyball Scouting Platform',
-    description: 'Scouting platform for Swiss volleyball athletes. Find talented players, view highlights, and connect with recruits.',
-    images: [{ url: 'https://www.habicht-volleyball.ch/og-image.jpg?v=2', width: 1200, height: 630, type: 'image/jpeg' }],
+    title: 'Habicht | Swiss Volleyball Scouting & Talent Platform',
+    description: 'Discover Swiss volleyball talent, club opportunities, player profiles, and scouting insights across Switzerland with Habicht.',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, type: 'image/jpeg' }],
     url: 'https://www.habicht-volleyball.ch/',
+    siteName: 'Habicht',
+    locale: 'de_CH',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Habicht – Swiss Volleyball Scouting Platform',
-    description: 'Scouting platform for Swiss volleyball athletes. Find talented players, view highlights, and connect with recruits.',
-    images: ['https://www.habicht-volleyball.ch/og-image.jpg?v=2'],
+    title: 'Habicht | Swiss Volleyball Scouting & Talent Platform',
+    description: 'Discover Swiss volleyball talent, club opportunities, player profiles, and scouting insights across Switzerland with Habicht.',
+    images: ['/og-image.jpg'],
   },
 }
 

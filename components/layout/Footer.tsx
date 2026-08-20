@@ -22,6 +22,8 @@ export default function Footer() {
             <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
               <li><Link href="/players" className="hover:text-white dark:hover:text-gray-100 transition">Spieler</Link></li>
               <li><Link href="/clubs" className="hover:text-white dark:hover:text-gray-100 transition">Clubs</Link></li>
+              <li><Link href="/volleyball-schweiz" className="hover:text-white dark:hover:text-gray-100 transition">Volleyball Schweiz</Link></li>
+              <li><Link href="/volleyball-training" className="hover:text-white dark:hover:text-gray-100 transition">Volleyball Training</Link></li>
               <li><Link href="/about" className="hover:text-white dark:hover:text-gray-100 transition">Über uns</Link></li>
               <li><Link href="/contact" className="hover:text-white dark:hover:text-gray-100 transition">Kontakt</Link></li>
             </ul>
@@ -51,16 +53,16 @@ export default function Footer() {
           <div className="col-span-2 sm:col-span-1">
             <h3 className="text-white dark:text-gray-100 font-bold text-base sm:text-lg mb-3 sm:mb-4">Folg üs</h3>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-white dark:hover:text-gray-100 transition p-2 -m-2" aria-label="Facebook">
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white dark:hover:text-gray-100 transition p-2 -m-2" aria-label="Facebook">
                 <Facebook className="w-5 h-5 sm:w-6 sm:h-6" />
               </a>
-              <a href="#" className="hover:text-white dark:hover:text-gray-100 transition p-2 -m-2" aria-label="Instagram">
+              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white dark:hover:text-gray-100 transition p-2 -m-2" aria-label="Instagram">
                 <Instagram className="w-5 h-5 sm:w-6 sm:h-6" />
               </a>
-              <a href="#" className="hover:text-white dark:hover:text-gray-100 transition p-2 -m-2" aria-label="Twitter">
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="hover:text-white dark:hover:text-gray-100 transition p-2 -m-2" aria-label="Twitter">
                 <Twitter className="w-5 h-5 sm:w-6 sm:h-6" />
               </a>
-              <a href="#" className="hover:text-white dark:hover:text-gray-100 transition p-2 -m-2" aria-label="Youtube">
+              <a href="https://www.youtube.com/results?search_query=volleyball+schweiz" target="_blank" rel="noopener noreferrer" className="hover:text-white dark:hover:text-gray-100 transition p-2 -m-2" aria-label="Youtube">
                 <Youtube className="w-5 h-5 sm:w-6 sm:h-6" />
               </a>
             </div>

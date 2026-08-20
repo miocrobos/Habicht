@@ -31,6 +31,9 @@ export default function PrivacyPolicy() {
               Schwiiz<br />
               {t('privacy.section1Contact')} <a href="mailto:support@habicht-volleyball.ch" className="text-blue-600 hover:text-blue-700 dark:text-blue-400">support@habicht-volleyball.ch</a>
             </p>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              Weitere Informationen findest du auf <Link href="/about" className="text-blue-600 hover:text-blue-700 underline">About</Link>, <Link href="/contact" className="text-blue-600 hover:text-blue-700 underline">Kontakt</Link> und in der <Link href="/faq" className="text-blue-600 hover:text-blue-700 underline">FAQ</Link>.
+            </p>
           </section>
 
           <section className="mb-8">
@@ -171,6 +174,15 @@ export default function PrivacyPolicy() {
                 www.edoeb.admin.ch
               </a>
             </p>
+          </section>
+
+          <section className="mb-8 rounded-xl border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-900/60">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Mehr lesen</h2>
+            <div className="flex flex-wrap gap-3 text-sm">
+              <Link href="/terms" className="rounded-full bg-red-600 px-4 py-2 font-medium text-white hover:bg-red-700">AGB</Link>
+              <Link href="/contact" className="rounded-full border border-gray-300 bg-white px-4 py-2 font-medium text-gray-800 hover:border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100">Kontakt</Link>
+              <Link href="/about" className="rounded-full border border-gray-300 bg-white px-4 py-2 font-medium text-gray-800 hover:border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100">Über Habicht</Link>
+            </div>
           </section>
         </div>
       </div>

@@ -817,6 +817,30 @@ model Notification {
   @@index([createdAt])
 }
 
+model News {
+  id          String   @id @default(cuid())
+  title       String
+  excerpt     String   @db.Text
+  content     String   @db.Text
+  imageUrl    String?
+  category    String   @default("GENERAL")
+  authorName  String?
+  sourceName  String?
+  sourceUrl   String?  @unique
+  keywords    String[] @default([])
+  publisher   String?
+  scope       String   @default("LOCAL")
+  published   Boolean  @default(true)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([published])
+  @@index([scope])
+  @@index([publishedAt])
+  @@index([sourceName])
+}
+
 // Watchlist - for recruiters and hybrid users to track players
 model Watchlist {
   id              String    @id @default(cuid())
@@ -951,28 +975,6 @@ model PlayerRequestInterest {
   @@unique([requestId, userId])
   @@index([requestId])
   @@index([userId])
-}
-
-// Community news / announcements shown on the home page and /news
-model News {
-  id          String   @id @default(cuid())
-  title       String
-  excerpt     String   @db.Text
-  content     String   @db.Text
-  imageUrl    String?
-  category    String   @default("GENERAL") // GENERAL, EVENT, TOURNAMENT, CLUB, ANNOUNCEMENT
-  authorName  String   @default("Habicht")
-  published   Boolean  @default(true)
-  // External source metadata (FIVB, Volleyball World, Swiss Volley, ...)
-  sourceName  String?  // e.g. "FIVB", "Volleyball World", "Swiss Volley"
-  sourceUrl   String?  @unique // original article link (used for external open + dedupe)
-  scope       String   @default("LOCAL") // INTERNATIONAL | LOCAL
-  publishedAt DateTime @default(now()) // real article publication date (used for year filter)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([published, publishedAt])
-  @@index([scope])
 }
 
 // Indoor court / venue locations (Standorte) shown on the community map

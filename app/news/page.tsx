@@ -29,6 +29,8 @@ interface NewsItem {
   authorName: string
   sourceName: string | null
   sourceUrl: string | null
+  publisher?: string | null
+  keywords?: string[]
   scope: string
   publishedAt: string
   createdAt: string
@@ -48,12 +50,13 @@ export default function NewsPage() {
   const { t } = useLanguage()
   const [news, setNews] = useState<NewsItem[]>([])
   const [years, setYears] = useState<number[]>([])
+  const [publishers, setPublishers] = useState<string[]>([])
   const [loaded, setLoaded] = useState(false)
 
-  // Filters
   const [query, setQuery] = useState('')
   const [scope, setScope] = useState<ScopeFilter>('ALL')
   const [year, setYear] = useState<string>('')
+  const [publisher, setPublisher] = useState<string>('')
 
   const tr = (key: string, fallback: string) => {
     const v = t(key)
@@ -66,26 +69,42 @@ export default function NewsPage() {
       .then((data) => {
         setNews(data.news || [])
         setYears(data.years || [])
+        setPublishers(data.publishers || [])
       })
       .catch(() => setNews([]))
       .finally(() => setLoaded(true))
   }, [])
 
-  // Client-side filtering keeps the UI instant (dataset is small).
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
+
     return news.filter((item) => {
-      if (q && !item.title.toLowerCase().includes(q)) return false
+      const searchable = [
+        item.title || '',
+        item.excerpt || '',
+        item.content || '',
+        (item.keywords || []).join(' '),
+        item.publisher || item.sourceName || '',
+      ].join(' ').toLowerCase()
+
+      if (q && !searchable.includes(q)) return false
       if (scope !== 'ALL' && (item.scope || 'LOCAL') !== scope) return false
+
       if (year) {
         const y = new Date(item.publishedAt || item.createdAt).getFullYear()
         if (String(y) !== year) return false
       }
+
+      if (publisher) {
+        const itemPublisher = (item.publisher || item.sourceName || '').toLowerCase()
+        if (!itemPublisher.includes(publisher.toLowerCase())) return false
+      }
+
       return true
     })
-  }, [news, query, scope, year])
+  }, [news, query, scope, year, publisher])
 
-  const hasActiveFilters = query.trim() !== '' || scope !== 'ALL' || year !== ''
+  const hasActiveFilters = query.trim() !== '' || scope !== 'ALL' || year !== '' || publisher !== ''
 
   const scopeTabs: { key: ScopeFilter; label: string; icon: typeof Globe }[] = [
     { key: 'ALL', label: tr('news.filter.all', 'All'), icon: Newspaper },
@@ -107,16 +126,14 @@ export default function NewsPage() {
           <p className="mt-3 max-w-2xl text-sm sm:text-base text-white/90">
             {tr(
               'news.subtitle',
-              'The latest from FIVB, Volleyball World and Swiss Volley \u2013 international and local.'
+              'The latest from FIVB, Volleyball World and Swiss Volley – international and local.'
             )}
           </p>
         </div>
       </div>
 
       <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-10">
-        {/* Filters */}
         <div className="mb-6 sm:mb-8 space-y-3">
-          {/* Search */}
           <div className="relative">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
             <input
@@ -124,7 +141,7 @@ export default function NewsPage() {
               inputMode="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder={tr('news.filter.searchPlaceholder', 'Search by headline...')}
+              placeholder={tr('news.filter.searchPlaceholder', 'Search by keyword, title or publisher...')}
               className="w-full rounded-lg border border-gray-200 bg-white py-2.5 pl-10 pr-10 text-sm text-gray-900 shadow-sm outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
             />
             {query && (
@@ -138,8 +155,7 @@ export default function NewsPage() {
             )}
           </div>
 
-          {/* Scope + year */}
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap gap-2">
               {scopeTabs.map((tab) => {
                 const Icon = tab.icon
@@ -161,7 +177,20 @@ export default function NewsPage() {
               })}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+              <select
+                value={publisher}
+                onChange={(e) => setPublisher(e.target.value)}
+                className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs sm:text-sm text-gray-900 outline-none focus:border-red-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+              >
+                <option value="">{tr('news.filter.allPublishers', 'All publishers')}</option>
+                {publishers.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+
               <select
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
@@ -174,12 +203,14 @@ export default function NewsPage() {
                   </option>
                 ))}
               </select>
+
               {hasActiveFilters && (
                 <button
                   onClick={() => {
                     setQuery('')
                     setScope('ALL')
                     setYear('')
+                    setPublisher('')
                   }}
                   className="inline-flex items-center gap-1 rounded-lg px-2.5 py-2 text-xs font-medium text-gray-500 hover:text-red-600 dark:text-gray-400"
                 >
@@ -193,9 +224,7 @@ export default function NewsPage() {
           {loaded && (
             <p className="text-xs text-gray-500 dark:text-gray-400">
               {filtered.length}{' '}
-              {filtered.length === 1
-                ? tr('news.filter.result', 'article')
-                : tr('news.filter.results', 'articles')}
+              {filtered.length === 1 ? tr('news.filter.result', 'article') : tr('news.filter.results', 'articles')}
             </p>
           )}
         </div>
@@ -215,20 +244,22 @@ export default function NewsPage() {
               const meta = categoryMeta[item.category] || categoryMeta.GENERAL
               const Icon = meta.icon
               const isInternational = (item.scope || 'LOCAL') === 'INTERNATIONAL'
+              const cardImage = item.imageUrl || 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80'
+
               const CardInner = (
                 <Card
                   id={item.id}
                   className="flex h-full flex-col overflow-hidden scroll-mt-24 transition-all hover:shadow-md hover:-translate-y-0.5"
                 >
-                  {item.imageUrl ? (
-                    <div className="relative h-40 sm:h-48 w-full">
-                      <Image src={item.imageUrl} alt={item.title} fill className="object-cover" />
-                    </div>
-                  ) : (
-                    <div className="flex h-40 sm:h-48 w-full items-center justify-center bg-gradient-to-br from-red-500 to-orange-500">
-                      <Icon className="h-12 w-12 text-white/90" />
-                    </div>
-                  )}
+                  <div className="relative h-40 sm:h-48 w-full">
+                    <Image
+                      src={cardImage}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                      unoptimized={cardImage.startsWith('http')}
+                    />
+                  </div>
                   <CardHeader className="pb-2">
                     <div className="flex flex-wrap items-center gap-1.5">
                       <Badge variant="secondary" className="gap-1">
@@ -244,22 +275,18 @@ export default function NewsPage() {
                         }`}
                       >
                         {isInternational ? <Globe className="h-3 w-3" /> : <MapPin className="h-3 w-3" />}
-                        {isInternational
-                          ? tr('news.filter.international', 'International')
-                          : tr('news.filter.local', 'Local')}
+                        {isInternational ? tr('news.filter.international', 'International') : tr('news.filter.local', 'Local')}
                       </Badge>
                     </div>
-                    <CardTitle className="mt-2 line-clamp-2 text-base sm:text-lg">
-                      {item.title}
-                    </CardTitle>
+                    <CardTitle className="mt-2 line-clamp-2 text-base sm:text-lg">{item.title}</CardTitle>
                     <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500 dark:text-gray-400">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
                         {new Date(item.publishedAt || item.createdAt).toLocaleDateString('de-CH')}
                       </span>
-                      {item.sourceName && (
+                      {(item.publisher || item.sourceName) && (
                         <span className="font-medium text-gray-600 dark:text-gray-300">
-                          {item.sourceName}
+                          {item.publisher || item.sourceName}
                         </span>
                       )}
                     </div>

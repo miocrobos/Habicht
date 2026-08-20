@@ -4,23 +4,36 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
 // GET published community news (most recent first)
-// Supports filtering by title search (q), year, and scope (INTERNATIONAL | LOCAL).
+// Supports filtering by keyword, publisher, year, and scope.
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const limit = Math.min(Number(searchParams.get('limit')) || 20, 100)
-    const q = searchParams.get('q')?.trim()
+    const q = searchParams.get('q')?.trim() || searchParams.get('keyword')?.trim()
     const scope = searchParams.get('scope')?.trim().toUpperCase()
-    const year = Number(searchParams.get('year'))
+    const year = Number(searchParams.get('year') || searchParams.get('date'))
+    const publisher = searchParams.get('publisher')?.trim()
 
     const where: any = { published: true }
 
     if (q) {
-      where.title = { contains: q, mode: 'insensitive' }
+      where.OR = [
+        { title: { contains: q, mode: 'insensitive' } },
+        { excerpt: { contains: q, mode: 'insensitive' } },
+        { content: { contains: q, mode: 'insensitive' } },
+        { sourceName: { contains: q, mode: 'insensitive' } },
+        { keywords: { hasSome: [q] } },
+      ]
     }
+
     if (scope === 'INTERNATIONAL' || scope === 'LOCAL') {
       where.scope = scope
     }
+
+    if (publisher) {
+      where.sourceName = { contains: publisher, mode: 'insensitive' }
+    }
+
     if (year && !Number.isNaN(year)) {
       where.publishedAt = {
         gte: new Date(Date.UTC(year, 0, 1)),
@@ -34,7 +47,6 @@ export async function GET(request: NextRequest) {
       take: limit,
     })
 
-    // Distinct years available for the year filter dropdown.
     const allDates = await prisma.news.findMany({
       where: { published: true },
       select: { publishedAt: true },
@@ -43,10 +55,21 @@ export async function GET(request: NextRequest) {
       new Set(allDates.map((n) => new Date(n.publishedAt).getUTCFullYear()))
     ).sort((a, b) => b - a)
 
-    return NextResponse.json({ news, years })
+    const publishers = Array.from(
+      new Set(
+        (await prisma.news.findMany({
+          where: { published: true },
+          select: { sourceName: true },
+        }))
+          .map((n) => n.sourceName)
+          .filter(Boolean) as string[]
+      )
+    ).sort((a, b) => a.localeCompare(b))
+
+    return NextResponse.json({ news, years, publishers })
   } catch (error) {
     console.error('Error fetching news:', error)
-    return NextResponse.json({ news: [], years: [] }, { status: 500 })
+    return NextResponse.json({ news: [], years: [], publishers: [] }, { status: 500 })
   }
 }
 
@@ -59,7 +82,21 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { title, excerpt, content, imageUrl, category, authorName, published, sourceName, sourceUrl, scope, publishedAt } = body
+    const {
+      title,
+      excerpt,
+      content,
+      imageUrl,
+      category,
+      authorName,
+      published,
+      sourceName,
+      sourceUrl,
+      scope,
+      publishedAt,
+      keywords,
+      publisher,
+    } = body
 
     if (!title || !excerpt || !content) {
       return NextResponse.json(
@@ -73,13 +110,15 @@ export async function POST(request: NextRequest) {
         title,
         excerpt,
         content,
-        imageUrl: imageUrl || null,
+        imageUrl: imageUrl || 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80',
         category: category || 'GENERAL',
         authorName: authorName || session.user.name || 'Habicht',
         published: published !== false,
-        sourceName: sourceName || null,
+        sourceName: sourceName || publisher || null,
         sourceUrl: sourceUrl || null,
+        publisher: publisher || sourceName || null,
         scope: scope === 'INTERNATIONAL' ? 'INTERNATIONAL' : 'LOCAL',
+        keywords: Array.isArray(keywords) ? keywords : [],
         publishedAt: publishedAt ? new Date(publishedAt) : new Date(),
       },
     })

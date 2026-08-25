@@ -20,7 +20,6 @@ const entries: Entry[] = [
   { path: '/volleyball-training', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/volleyball-clubs-schweiz', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/recruiters', changeFrequency: 'weekly', priority: 0.7 },
-  { path: '/player-requests', changeFrequency: 'weekly', priority: 0.7 },
   { path: '/about', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/contact', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/faq', changeFrequency: 'monthly', priority: 0.6 },

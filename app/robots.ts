@@ -1,13 +1,15 @@
 import type { MetadataRoute } from 'next';
 
+import { SITE_URL } from '@/lib/site';
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/admin/', '/api/', '/auth/', '/settings/', '/dashboard'],
+      disallow: ['/admin/', '/api/', '/auth/', '/settings/', '/notifications/', '/watchlist/'],
     },
-    sitemap: 'https://www.habicht-volleyball.ch/sitemap.xml',
-    host: 'https://www.habicht-volleyball.ch',
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

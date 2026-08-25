@@ -46,6 +46,16 @@ const nextConfig = {
     ],
   },
   reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.habicht-volleyball.ch' }],
+        destination: 'https://habicht-volleyball.ch/:path*',
+        permanent: true,
+      },
+    ]
+  },
   // Exclude backup and temp files from compilation
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'].filter(ext => !ext.includes('backup') && !ext.includes('_full') && !ext.includes('-new')),
   webpack: (config) => {

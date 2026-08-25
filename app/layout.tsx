@@ -9,11 +9,12 @@ import { HeaderProvider } from '@/contexts/HeaderContext'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import SettingsPopup from '@/components/shared/SettingsPopup'
+import { SITE_URL } from '@/lib/site'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.habicht-volleyball.ch'),
+  metadataBase: new URL(SITE_URL),
   title: 'Habicht | Swiss Volleyball Scouting & Talent Platform',
   description: 'Discover Swiss volleyball talent, club opportunities, player profiles, and scouting insights across Switzerland with Habicht.',
   keywords: [
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     title: 'Habicht | Swiss Volleyball Scouting & Talent Platform',
     description: 'Discover Swiss volleyball talent, club opportunities, player profiles, and scouting insights across Switzerland with Habicht.',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, type: 'image/jpeg' }],
-    url: 'https://www.habicht-volleyball.ch/',
+    url: `${SITE_URL}/`,
     siteName: 'Habicht',
     locale: 'de_CH',
     type: 'website',

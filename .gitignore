@@ -109,3 +109,4 @@ venv/
 # Scraper debug artifacts
 scripts/debug_*.py
 data/verein-suchen-*.html
+.env*

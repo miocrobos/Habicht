@@ -1,0 +1,12 @@
+{
+  "name": "Habicht - Swiss Volleyball Scouting Platform",
+  "user": "ubuntu",
+  "install": "bash .cursor/install.sh",
+  "start": "bash .cursor/start.sh",
+  "terminals": [
+    {
+      "name": "next-dev",
+      "command": "npx next dev"
+    }
+  ]
+}
